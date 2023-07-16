@@ -1,5 +1,6 @@
 {
   "name": "mhz",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -15,5 +16,9 @@
     "apps/mhz-admin",
     "apps/mhz-back",
     "packages/mhz-types"
-  ]
+  ],
+  "engines": {
+    "npm": "9",
+    "node": "18"
+  }
 }
