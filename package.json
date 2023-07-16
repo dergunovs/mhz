@@ -1,7 +1,14 @@
 {
   "name": "mhz",
+  "description": "",
   "version": "0.0.0",
+  "author": "",
+  "license": "ISC",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dergunovs/mhz"
+  },
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",

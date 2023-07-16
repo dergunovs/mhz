@@ -1,0 +1,6 @@
+{
+  "ignore": ["node_modules", "public"],
+  "watch": ["src"],
+  "exec": "tsc && node -r tsconfig-paths/register -r ts-node/register build/index.js",
+  "ext": "ts, js"
+}

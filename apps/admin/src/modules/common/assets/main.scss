@@ -1,0 +1,51 @@
+:root {
+  --color-primary: #111bbb;
+  --color-primary-dark: #0f0f66;
+  --color-primary-light: #7b99db;
+
+  --color-success: #3aa636;
+  --color-success-dark: #20811d;
+  --color-error: #cb0000;
+  --color-error-dark: #830a0a;
+
+  --color-black: #000;
+  --color-gray-dark: #444;
+  --color-gray: #ccc;
+  --color-gray-light: #eee;
+  --color-white: #fff;
+}
+
+@font-face {
+  font-family: 'font';
+  font-weight: 400;
+  src: url('/fonts/400.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'font';
+  font-weight: 700;
+  src: url('/fonts/700.woff2') format('woff2');
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'font', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+h1 {
+  margin: 24px 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
