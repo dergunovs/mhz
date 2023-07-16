@@ -12,7 +12,8 @@
   },
   "packageManager": "npm@9.6.4",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/mhz-admin",
+    "apps/mhz-back",
+    "packages/mhz-types"
   ]
 }
