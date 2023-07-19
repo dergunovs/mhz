@@ -1,15 +1,20 @@
 <template>
-  <div :class="$style.main">
+  <div :class="$style.container">
     <TheHeader v-if="isAuth" />
 
-    <Suspense>
-      <RouterView :class="$style.content" />
-    </Suspense>
+    <main :class="$style.main">
+      <TheNav v-if="isAuth" />
+
+      <Suspense>
+        <RouterView :class="$style.content" />
+      </Suspense>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
 import TheHeader from '@/layout/components/TheHeader.vue';
+import TheNav from '@/layout/components/TheNav.vue';
 
 import { getCheckAuth } from '@/auth/services';
 import { getCookieToken, isAuth, setAuth } from '@/auth/composables';
@@ -32,15 +37,19 @@ if (!isLoginPageAfterLogout && token) {
 </script>
 
 <style module lang="scss">
-.main {
+.container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  gap: 32px;
 }
 
 .content {
   flex: 1;
-  padding: 0 64px;
+  padding: 32px;
 }
 </style>
