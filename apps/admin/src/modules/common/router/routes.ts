@@ -1,10 +1,23 @@
 import { RouteRecordRaw } from 'vue-router';
 
 import { authRoutes } from '@/auth/routes';
+import { categoryRoutes } from '@/category/routes';
+import { manufacturerRoutes } from '@/manufacturer/routes';
+import { orderRoutes } from '@/order/routes';
+import { productRoutes } from '@/product/routes';
+import { shipmentRoutes } from '@/shipment/routes';
+import { userRoutes } from '@/user/routes';
+
 import { URL_MAIN, URL_ERROR } from '@/common/constants';
 
 export const routes: RouteRecordRaw[] = [
   ...authRoutes,
+  ...categoryRoutes,
+  ...manufacturerRoutes,
+  ...orderRoutes,
+  ...productRoutes,
+  ...shipmentRoutes,
+  ...userRoutes,
 
   { path: URL_MAIN, name: 'Main', component: () => import('@/common/pages/MainPage.vue') },
 

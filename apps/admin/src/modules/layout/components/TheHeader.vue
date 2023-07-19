@@ -16,7 +16,7 @@ import { logout } from '@/auth/composables';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding: 16px 32px;
   background-color: var(--color-primary-light);
 }
 </style>
