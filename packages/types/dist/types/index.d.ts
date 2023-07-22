@@ -11,11 +11,19 @@ export interface IAdress {
   room: string;
 }
 
-export interface IUser extends IEntity {
+export interface IManager extends IEntity {
+  first_name?: string;
+  last_name?: string;
+  password: string;
+  email: string;
+  date_logged_in?: Date;
+  date_updated?: Date;
+}
+
+export interface ICustomer extends IEntity {
   first_name?: string;
   last_name?: string;
   phone?: string;
-  role: "user" | "admin";
   password: string;
   email: string;
   isEmailConfirmed?: boolean;
@@ -33,7 +41,7 @@ export interface IUser extends IEntity {
 export interface ICart extends IEntity {
   products: { product: IProduct; count: number }[];
   isShared: boolean;
-  user: number | IUser;
+  user: number | ICustomer;
 }
 
 export interface IShipment extends IEntity {
@@ -77,20 +85,20 @@ export interface IProduct extends IEntity {
 export interface IOrder extends IEntity {
   products: { product: IProduct; count: number }[];
   shipment: number | IShipment;
-  user: number | IUser;
+  user: number | ICustomer;
   status: "payment" | "delivery" | "done" | "canceled";
 }
 
 export interface IComparison extends IEntity {
   products: IProduct[];
   category: number | ICategory;
-  user: number | IUser;
+  user: number | ICustomer;
 }
 
 export interface IConfiguration extends IEntity {
   title: string;
   isShared: boolean;
-  user: number | IUser;
+  user: number | ICustomer;
   processor: IProduct;
   cooler: IProduct;
   mainboard: IProduct;

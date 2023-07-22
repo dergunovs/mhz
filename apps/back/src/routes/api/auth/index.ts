@@ -1,48 +1,46 @@
 import bcrypt from 'bcryptjs';
 
 import { IFastifyInstance } from '../../../interface/index.js';
-import User from '../../../models/user.js';
+import Manager from '../../../models/manager.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Body: { email: string; password: string } }>('/login', async function (request, reply) {
     const { email, password } = request.body;
 
-    const isUsers = !!(await User.find()).length;
+    const isManagers = !!(await Manager.find()).length;
 
-    if (!isUsers) {
+    if (!isManagers) {
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const user = new User({
+      const manager = new Manager({
         email,
         password: hashedPassword,
         role: 'admin',
       });
 
-      await user.save();
+      await manager.save();
 
       return;
     }
 
-    const foundUser = await User.findOne({ email });
+    const foundManager = await Manager.findOne({ email });
 
-    if (foundUser) {
+    if (foundManager) {
       try {
-        const valid = await bcrypt.compare(password, foundUser.password);
+        const valid = await bcrypt.compare(password, foundManager.password);
         if (!valid) reply.code(401).send({ message: 'Пароль неправильный' });
 
-        const userInfo = {
-          _id: foundUser._id,
-          first_name: foundUser.first_name,
-          last_name: foundUser.last_name,
-          role: foundUser.role,
-          email: foundUser.email,
-          isEmailConfirmed: foundUser.isEmailConfirmed,
+        const managerInfo = {
+          _id: foundManager._id,
+          first_name: foundManager.first_name,
+          last_name: foundManager.last_name,
+          email: foundManager.email,
         };
 
-        const token = fastify.jwt.sign(userInfo, { expiresIn: '9h' });
-        const user = { ...userInfo, token };
+        const token = fastify.jwt.sign(managerInfo, { expiresIn: '9h' });
+        const manager = { ...managerInfo, token };
 
-        reply.code(200).send(user);
+        reply.code(200).send(manager);
       } catch (err) {
         reply.code(500).send({ message: err });
       }

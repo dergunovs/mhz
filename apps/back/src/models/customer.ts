@@ -1,12 +1,11 @@
 import { Schema, model } from 'mongoose';
 
-import { IUser } from 'mhz-types';
+import { ICustomer } from 'mhz-types';
 
-const userSchema = new Schema<IUser>({
+const customerSchema = new Schema<ICustomer>({
   first_name: { type: String },
   last_name: { type: String },
   phone: { type: String },
-  role: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   isEmailConfirmed: { type: Boolean, default: false },
@@ -28,4 +27,4 @@ const userSchema = new Schema<IUser>({
   date_updated: { type: Date },
 });
 
-export default model('User', userSchema);
+export default model('Customer', customerSchema);
