@@ -8,7 +8,7 @@ env:
   SECRET: "THISISFAKESECRET8f6df7btdf8bdf8dfb8dfbd7fbt398t349thgjfber9ub9b"
 
 jobs:
-  deploy:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,5 +23,3 @@ jobs:
         run: npm run lint
       - name: TS check
         run: npm run ts
-      - name: Build
-        run: npm run build
