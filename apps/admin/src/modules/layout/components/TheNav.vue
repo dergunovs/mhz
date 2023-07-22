@@ -1,12 +1,12 @@
 <template>
   <nav :class="$style.nav">
-    <RouterLink v-for="item in NAV_ITEMS" :key="item._id" :to="item.url" :class="$style.navItem">
-      {{ item.title }}
-    </RouterLink>
+    <NavItem v-for="item in NAV_ITEMS" :key="item._id" :navItem="item" />
   </nav>
 </template>
 
 <script setup lang="ts">
+import NavItem from '@/layout/components/NavItem.vue';
+
 import { NAV_ITEMS } from '@/layout/constants';
 </script>
 
@@ -14,10 +14,9 @@ import { NAV_ITEMS } from '@/layout/constants';
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   width: 216px;
   height: calc(100vh - 64px);
   padding: 32px;
-  background-color: var(--color-gray-light);
 }
 </style>

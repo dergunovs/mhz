@@ -51,5 +51,6 @@ if (!isLoginPageAfterLogout && token) {
 .content {
   flex: 1;
   padding: 32px;
+  background-color: var(--color-gray-light);
 }
 </style>
