@@ -2,11 +2,6 @@ name: CI
 
 on: [push]
 
-env:
-  VITE_API: "https://9000mhz.ru/api/"
-  DATABASE: "mhz"
-  SECRET: "THISISFAKESECRET8f6df7btdf8bdf8dfb8dfbd7fbt398t349thgjfber9ub9b"
-
 jobs:
   check:
     runs-on: ubuntu-latest
