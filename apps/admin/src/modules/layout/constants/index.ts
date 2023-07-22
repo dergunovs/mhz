@@ -9,13 +9,15 @@ import { URL_CUSTOMER } from '@/customer/constants';
 
 import { INavItem } from '@/layout/interface';
 
+import IconNavProducts from '@/layout/icons/nav-products.svg?component';
+
 export const NAV_ITEMS: INavItem[] = [
-  { _id: 1, url: URL_MAIN, title: 'Главная' },
-  { _id: 2, url: URL_MANAGER, title: 'Менеджеры' },
-  { _id: 3, url: URL_SHIPMENT, title: 'Доставка' },
-  { _id: 4, url: URL_ORDER, title: 'Заказы' },
-  { _id: 5, url: URL_CATEGORY, title: 'Категории' },
-  { _id: 6, url: URL_PRODUCT, title: 'Товары' },
-  { _id: 7, url: URL_MANUFACTURER, title: 'Производители' },
-  { _id: 8, url: URL_CUSTOMER, title: 'Покупатели' },
+  { _id: 1, url: URL_MAIN, title: 'Главная', icon: IconNavProducts },
+  { _id: 2, url: URL_MANAGER, title: 'Менеджеры', icon: IconNavProducts },
+  { _id: 3, url: URL_SHIPMENT, title: 'Доставка', icon: IconNavProducts },
+  { _id: 4, url: URL_ORDER, title: 'Заказы', icon: IconNavProducts },
+  { _id: 5, url: URL_CATEGORY, title: 'Категории', icon: IconNavProducts },
+  { _id: 6, url: URL_PRODUCT, title: 'Товары', icon: IconNavProducts },
+  { _id: 7, url: URL_MANUFACTURER, title: 'Производители', icon: IconNavProducts },
+  { _id: 8, url: URL_CUSTOMER, title: 'Покупатели', icon: IconNavProducts },
 ];
