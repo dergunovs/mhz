@@ -10,9 +10,10 @@
     "url": "git+https://github.com/dergunovs/mhz"
   },
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --no-daemon",
     "dev": "turbo run dev --no-daemon",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint --no-daemon",
+    "ts": "turbo run ts --no-daemon"
   },
   "devDependencies": {
     "@turbo/gen": "1.10.9",

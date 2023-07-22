@@ -14,7 +14,8 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development TS_NODE_BASEURL=./dist && concurrently -k -p \"[{name}]\" \"tsc -w\" \"nodemon\"",
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "ts": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@fastify/autoload": "5.7.1",

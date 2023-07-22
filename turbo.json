@@ -6,6 +6,7 @@
       "outputs": ["dist/**", "storybook-static/**"]
     },
     "lint": {},
+    "ts": {},
     "dev": {
       "cache": false,
       "persistent": true

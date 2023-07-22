@@ -5,9 +5,7 @@ import { UiButton } from '@/components';
 
 const meta = {
   component: UiButton,
-  args: {
-    slot: 'Текст кнопки',
-  },
+  args: {},
   parameters: {
     docs: {
       description: {
@@ -31,7 +29,7 @@ export const Primary: Story = {
     components: { UiButton },
     setup: () => ({ args, argTypes }),
 
-    template: html` <UiButton v-bind="args">{{args.slot}}</UiButton>`,
+    template: html` <UiButton v-bind="args">Текст кнопки</UiButton>`,
   }),
   argTypes,
 };

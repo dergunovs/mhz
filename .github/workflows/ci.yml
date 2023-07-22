@@ -1,0 +1,27 @@
+name: CI
+
+on: [push]
+
+env:
+  VITE_API: "https://9000mhz.ru/api/"
+  DATABASE: "mhz"
+  SECRET: "THISISFAKESECRET8f6df7btdf8bdf8dfb8dfbd7fbt398t349thgjfber9ub9b"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.16.1"
+      - name: Install
+        run: npm i --legacy-peer-deps
+      - name: Lint check
+        run: npm run lint
+      - name: TS check
+        run: npm run ts
+      - name: Build
+        run: npm run build
