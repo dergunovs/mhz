@@ -1,8 +1,8 @@
 {
   "name": "mhz-types",
-  "description": "",
   "version": "0.0.1",
-  "author": "",
+  "description": "mhz-types",
+  "author": "dergunov.com",
   "license": "ISC",
   "type": "module",
   "sideEffects": false,

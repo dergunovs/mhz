@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+
+  &::selection {
+    color: var(--color-white);
+    background-color: var(--color-primary-dark);
+  }
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-primary);
+
+  &:hover {
+    color: var(--color-primary-dark);
+  }
+}
+
+h1,
+h2,
+h3 {
+  margin: 24px 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+section {
+  margin: 0;
+}
+
+section + section {
+  margin: 64px 0;
+}
+
+p {
+  margin: 0;
+}
+
+p + p {
+  margin: 12px 0;
+}
+
+ul {
+  padding-left: 20px;
+  margin: 0;
+}
