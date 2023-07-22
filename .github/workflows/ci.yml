@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: "18.16.1"
       - name: Install
-        run: npm i --legacy-peer-deps
+        run: npm i
       - name: Lint check
         run: npm run lint
       - name: TS check

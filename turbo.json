@@ -5,8 +5,12 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "storybook-static/**"]
     },
-    "lint": {},
-    "ts": {},
+    "lint": {
+      "outputs": []
+    },
+    "ts": {
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true
