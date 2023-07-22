@@ -1,22 +1,21 @@
 <template>
-  <Form @submit="submit" layout="vertical">
-    <FormItem label="E-mail" v-bind="validateInfos.email" required>
-      <Input v-model:value="formData.email" />
-    </FormItem>
+  <form @submit.prevent="submit" :class="$style.form">
+    <UiField label="E-mail" isRequired>
+      <UiInput v-model="formData.email" />
+    </UiField>
 
-    <FormItem label="Пароль" v-bind="validateInfos.password" required>
-      <InputPassword v-model:value="formData.password" />
-    </FormItem>
+    <UiField label="Пароль" isRequired>
+      <UiInput v-model="formData.password" />
+    </UiField>
 
-    <Button htmlType="submit" type="primary">Войти</Button>
-  </Form>
+    <UiButton type="submit">Войти</UiButton>
+  </form>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { Button, Form, FormItem, Input, InputPassword } from 'ant-design-vue';
-import type { Rule } from 'ant-design-vue/es/form';
+import { UiButton, UiField, UiInput } from 'mhz-ui';
 
 import { postLogin } from '@/auth/services';
 import { useAuth } from '@/auth/composables';
@@ -28,15 +27,6 @@ const formData = ref({
   password: '',
 });
 
-const rules = ref<{ [key: string]: Rule[] }>({
-  email: [{ required: true, type: 'email' }],
-  password: [{ required: true }],
-});
-
-const useForm = Form.useForm;
-
-const { validate, validateInfos } = useForm(formData, rules);
-
 const { mutate } = postLogin(formData, {
   onSuccess: (token?: string) => {
     if (token) login(token);
@@ -45,10 +35,18 @@ const { mutate } = postLogin(formData, {
 
 async function submit() {
   try {
-    await validate();
     mutate();
   } catch (error) {
     alert(`Исправьте ошибки валидации`);
   }
 }
 </script>
+
+<style module lang="scss">
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 300px;
+}
+</style>

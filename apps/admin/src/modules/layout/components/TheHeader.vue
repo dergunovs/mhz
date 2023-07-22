@@ -4,12 +4,12 @@
       <ImageLogo :class="$style.logo" />
     </RouterLink>
 
-    <Button @click="logout">Выйти</Button>
+    <UiButton @click="logout">Выйти</UiButton>
   </header>
 </template>
 
 <script setup lang="ts">
-import { Button } from 'ant-design-vue';
+import { UiButton } from 'mhz-ui';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { URL_MAIN } from '@/common/constants';
@@ -21,6 +21,7 @@ import { logout } from '@/auth/composables';
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 80px;
   padding: 16px 32px;
   border-bottom: 1px solid var(--color-gray-light);
 }

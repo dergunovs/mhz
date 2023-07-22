@@ -45,7 +45,6 @@ if (!isLoginPageAfterLogout && token) {
 
 .main {
   display: flex;
-  gap: 32px;
 }
 
 .content {

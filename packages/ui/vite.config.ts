@@ -50,6 +50,7 @@ export default defineConfig({
     vue(),
     svgLoader(),
     dts({
+      entryRoot: './src/components',
       cleanVueFileName: true,
       include: ['./src/**/Ui*.vue'],
       exclude: ['./src/utils'],
@@ -57,12 +58,12 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'src/components/index.js',
+          src: 'src/components/index.ts',
           dest: '',
           transform: (contents) => contents.toString().replace(/.(vue|ts)/g, '.js'),
         },
         {
-          src: 'src/components/index.js',
+          src: 'src/components/index.ts',
           dest: '',
           rename: 'index.d.ts',
           transform: (contents) => contents.toString().replace(/.(vue|ts)/g, ''),

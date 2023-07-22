@@ -14,9 +14,9 @@ import { NAV_ITEMS } from '@/layout/constants';
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   width: 216px;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 80px);
   padding: 32px;
 }
 </style>

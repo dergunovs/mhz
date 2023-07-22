@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@tanstack/vue-query": "4.32.0",
-    "ant-design-vue": "4.0.0",
     "axios": "1.4.0",
     "mhz-types": "*",
     "mhz-ui": "*",
