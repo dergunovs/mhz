@@ -17,8 +17,8 @@
     "directory": "packages/ui"
   },
   "scripts": {
-    "build": "storybook build",
-    "build:lib": "vite build",
+    "build": "vite build",
+    "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006 --no-open",
     "lint": "eslint '**/*.{js,ts,vue}' && stylelint 'src/**/*.{css,scss,vue}'",
     "ts": "vue-tsc --noEmit"

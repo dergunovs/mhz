@@ -20,7 +20,7 @@ const props = defineProps<IProps>();
   display: flex;
   gap: 8px;
   align-items: center;
-  color: var(--color-gray-dark-extra);
+  color: var(--color-black);
   text-decoration: none;
 
   &:hover,
