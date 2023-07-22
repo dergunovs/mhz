@@ -20,7 +20,7 @@
     "@fastify/autoload": "5.7.1",
     "@fastify/cors": "8.3.0",
     "@fastify/jwt": "7.2.0",
-    "@fastify/multipart": "7.7.1",
+    "@fastify/multipart": "7.7.2",
     "@fastify/static": "6.10.2",
     "bcryptjs": "2.4.3",
     "dotenv": "16.3.1",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
-    "@types/node": "20.4.2",
+    "@types/node": "20.4.3",
     "concurrently": "8.2.0",
     "cross-env": "7.0.3",
     "nodemon": "3.0.1",
