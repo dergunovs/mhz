@@ -14,11 +14,14 @@
     "dev": "turbo run dev --no-daemon",
     "lint": "turbo run lint --no-daemon",
     "ts": "turbo run ts --no-daemon",
-    "pub": "turbo run build && changeset version && changeset publish"
+    "checkchange": "beachball check",
+    "change": "beachball change",
+    "release": "beachball publish"
   },
   "devDependencies": {
     "@turbo/gen": "1.10.9",
-    "turbo": "1.10.9"
+    "turbo": "1.10.9",
+    "beachball": "2.35.0"
   },
   "packageManager": "npm@9.6.4",
   "workspaces": [
@@ -28,8 +31,5 @@
   "engines": {
     "npm": "9",
     "node": "18"
-  },
-  "dependencies": {
-    "@changesets/cli": "2.26.2"
   }
 }
