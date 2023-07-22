@@ -5,7 +5,6 @@
   "author": "dergunov.com",
   "license": "ISC",
   "main": "app.js",
-  "private": true,
   "type": "module",
   "repository": {
     "type": "git",
