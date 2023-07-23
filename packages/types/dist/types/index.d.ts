@@ -60,7 +60,7 @@ export interface ICategoryField extends IEntity {
 export interface ICategory extends IEntity {
   title: string;
   description: string;
-  iconURL: string;
+  iconUrl: string;
   fields?: number[] | ICategoryField[];
 }
 
@@ -68,7 +68,7 @@ export interface IManufacturer extends IEntity {
   title: string;
   description: string;
   country: string;
-  logoURL: string;
+  logoUrl: string;
 }
 
 export interface IProduct extends IEntity {
@@ -76,7 +76,7 @@ export interface IProduct extends IEntity {
   description: string;
   price: number;
   isInStock: boolean;
-  imageURLs: string[];
+  imageUrls: string[];
   category: number | ICategory;
   manufacturer: number | IManufacturer;
   fields?: number[] | ICategoryField[];
