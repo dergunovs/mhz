@@ -16,7 +16,7 @@ import { useInvalidate } from '@/common/composables';
 
 const { data: manufacturers } = getManufacturers();
 
-const { invalidate } = useInvalidate(API_MANUFACTURER);
+const { invalidateCheck } = useInvalidate();
 
-invalidate();
+invalidateCheck(API_MANUFACTURER);
 </script>
