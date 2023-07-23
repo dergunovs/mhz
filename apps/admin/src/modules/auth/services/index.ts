@@ -1,4 +1,3 @@
-import { Ref } from 'vue';
 import { useMutation, useQuery } from '@tanstack/vue-query';
 
 import { ILoginFormData } from '@/auth/interface';
@@ -6,15 +5,15 @@ import { API_GET_CHECK_AUTH, API_POST_LOGIN } from '@/auth/constants';
 
 import { api } from '@/common/services/api';
 
-export function postLogin(formData: Ref<ILoginFormData>, options: object) {
-  async function fn(): Promise<string | undefined> {
-    const { data } = await api.post(API_POST_LOGIN, formData.value);
+export function postLogin(options: object) {
+  async function fn(formData: ILoginFormData): Promise<string | undefined> {
+    const { data } = await api.post(API_POST_LOGIN, formData);
 
     return data.token;
   }
 
   return useMutation({
-    mutationKey: [API_POST_LOGIN, formData],
+    mutationKey: [API_POST_LOGIN],
     mutationFn: fn,
     ...options,
   });
@@ -22,9 +21,7 @@ export function postLogin(formData: Ref<ILoginFormData>, options: object) {
 
 export function getCheckAuth(options: object) {
   async function fn() {
-    const { data } = await api.get(API_GET_CHECK_AUTH);
-
-    return data;
+    await api.get(API_GET_CHECK_AUTH);
   }
 
   return useQuery({

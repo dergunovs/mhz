@@ -28,7 +28,7 @@ const formData = ref({
   password: '',
 });
 
-const { mutate } = postLogin(formData, {
+const { mutate } = postLogin({
   onSuccess: (token?: string) => {
     if (token) login(token);
   },
@@ -44,7 +44,7 @@ const rules = computed(() => {
 const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
-  if (isValid()) mutate();
+  if (isValid()) mutate(formData.value);
 }
 </script>
 

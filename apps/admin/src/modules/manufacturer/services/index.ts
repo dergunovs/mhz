@@ -1,4 +1,3 @@
-import { Ref } from 'vue';
 import { useMutation, useQuery } from '@tanstack/vue-query';
 
 import { IManufacturer } from 'mhz-types';
@@ -19,13 +18,25 @@ export function getManufacturers() {
   });
 }
 
-export function postManufacturer(formData: Ref<IManufacturer>, options: object) {
-  async function fn(): Promise<void> {
-    await api.post(API_MANUFACTURER, formData.value);
+export function postManufacturer(options: object) {
+  async function fn(formData: IManufacturer) {
+    await api.post(API_MANUFACTURER, formData);
   }
 
   return useMutation({
-    mutationKey: [API_MANUFACTURER, formData],
+    mutationKey: [API_MANUFACTURER],
+    mutationFn: fn,
+    ...options,
+  });
+}
+
+export function deleteManufacturer(options: object) {
+  async function fn(id?: number) {
+    await api.delete(`${API_MANUFACTURER}/${id}`);
+  }
+
+  return useMutation({
+    mutationKey: [API_MANUFACTURER],
     mutationFn: fn,
     ...options,
   });

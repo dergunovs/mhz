@@ -16,7 +16,7 @@
       <UiInput v-model="formData.country" />
     </UiField>
 
-    <UiButton type="submit">Отправить</UiButton>
+    <UiButton type="submit" :isDisabled="isLoading">Отправить</UiButton>
   </form>
 </template>
 
@@ -44,9 +44,9 @@ const formData = ref<IManufacturer>({
   country: '',
 });
 
-const { mutate } = postManufacturer(formData, {
-  onSuccess: () => {
-    queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
+const { mutate, isLoading } = postManufacturer({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
     router.push(URL_MANUFACTURER);
   },
 });
@@ -63,7 +63,7 @@ const rules = computed(() => {
 const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
-  if (isValid()) mutate();
+  if (isValid()) mutate(formData.value);
 }
 </script>
 

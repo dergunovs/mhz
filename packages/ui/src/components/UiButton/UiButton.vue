@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 interface IProps {
-  layout?: 'primary' | 'secondary';
+  layout?: 'primary' | 'secondary' | 'plain';
   type?: 'submit' | 'button';
   isDisabled?: boolean;
 }
@@ -65,6 +65,23 @@ const props = withDefaults(defineProps<IProps>(), {
       color: var(--color-gray-dark-extra);
       background: var(--color-white);
       border-color: var(--color-gray-light-extra);
+    }
+  }
+
+  &[data-layout='plain'] {
+    height: auto;
+    padding: 0;
+    color: var(--color-primary);
+    text-decoration: underline;
+    background: none;
+    border: none;
+
+    &:hover {
+      color: var(--color-primary-dark);
+    }
+
+    &:disabled {
+      color: var(--color-gray-dark-extra);
     }
   }
 }

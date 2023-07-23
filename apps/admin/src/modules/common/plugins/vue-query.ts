@@ -6,7 +6,6 @@ export const vueQueryOptions: VueQueryPluginOptions = {
   queryClientConfig: {
     defaultOptions: {
       queries: {
-        refetchOnWindowFocus: false,
         refetchOnMount: false,
         onError: (error) => {
           handleError(error);

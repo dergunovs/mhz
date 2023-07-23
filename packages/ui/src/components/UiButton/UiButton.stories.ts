@@ -16,7 +16,7 @@ const meta = {
 } satisfies Meta<typeof UiButton>;
 
 const argTypes = {
-  layout: { control: 'select', options: ['primary', 'secondary'], description: 'primary | secondary' },
+  layout: { control: 'select', options: ['primary', 'secondary', 'plain'], description: 'primary | secondary | plain' },
   type: { control: 'select', options: ['submit', 'button'], description: 'submit | button' },
 };
 

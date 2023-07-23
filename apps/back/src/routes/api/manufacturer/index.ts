@@ -1,5 +1,6 @@
 import Manufacturer from '../../../models/manufacturer.js';
 import { IFastifyInstance } from '../../../interface/index.js';
+import { IManufacturer } from 'mhz-types';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get('/', async function (request, reply) {
@@ -11,7 +12,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.post('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
+  fastify.post<{ Body: IManufacturer }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
     try {
       const manufacturer = new Manufacturer(request.body);
       await manufacturer.save();
@@ -20,4 +21,17 @@ export default async function (fastify: IFastifyInstance) {
       reply.code(500).send({ message: err });
     }
   });
+
+  fastify.delete<{ Params: { id: string } }>(
+    '/:id',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        await Manufacturer.findOneAndDelete({ _id: request.params.id });
+        reply.code(200).send({ message: 'ok' });
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
 }
