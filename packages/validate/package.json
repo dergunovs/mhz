@@ -1,30 +1,25 @@
 {
-  "name": "mhz-admin",
-  "description": "mhz-admin",
+  "name": "mhz-validate",
   "version": "0.0.1",
+  "description": "mhz-validate",
   "author": "dergunov.com",
-  "license": "ISC",
   "type": "module",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dergunovs/mhz",
-    "directory": "apps/admin"
-  },
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "ts": "vue-tsc --noEmit",
-    "lint": "eslint **/*.{js,ts,vue} && stylelint **/*.{scss,vue}"
+    "lint": "eslint src/index.ts",
+    "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/vue-query": "4.32.0",
-    "axios": "1.4.0",
-    "mhz-types": "*",
-    "mhz-ui": "*",
-    "mhz-validate": "*",
-    "vue": "3.3.4",
-    "vue-router": "4.2.4"
+    "@vueuse/core": "10.2.1",
+    "@vueuse/integrations": "10.2.1",
+    "async-validator": "4.2.5",
+    "vue": "3.3.4"
   },
   "devDependencies": {
     "@types/node": "20.4.4",
@@ -39,7 +34,6 @@
     "eslint-plugin-vue": "9.15.1",
     "postcss-html": "1.5.0",
     "prettier": "3.0.0",
-    "sass": "1.64.1",
     "stylelint": "15.10.2",
     "stylelint-config-recess-order": "4.3.0",
     "stylelint-config-recommended-scss": "12.0.0",
@@ -47,8 +41,15 @@
     "stylelint-prettier": "4.0.0",
     "typescript": "5.1.6",
     "vite": "4.4.6",
-    "vite-svg-loader": "4.0.0",
+    "vite-plugin-dts": "3.3.1",
     "vue-linters-config": "0.1.6",
     "vue-tsc": "1.8.6"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "10.2.1",
+    "vue": "3.3.4"
+  },
+  "engines": {
+    "node": "18"
   }
 }

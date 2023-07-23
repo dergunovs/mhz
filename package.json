@@ -15,9 +15,13 @@
     "ts": "turbo run ts --no-daemon",
     "pub": "turbo run build --no-daemon && changeset version && changeset publish"
   },
+  "dependencies": {
+    "@changesets/cli": "2.26.2"
+  },
   "devDependencies": {
     "@turbo/gen": "1.10.9",
-    "turbo": "1.10.9"
+    "turbo": "1.10.9",
+    "prettier": "3.0.0"
   },
   "packageManager": "npm@9.6.4",
   "workspaces": [
@@ -27,8 +31,5 @@
   "engines": {
     "npm": "9",
     "node": "18"
-  },
-  "dependencies": {
-    "@changesets/cli": "2.26.2"
   }
 }
