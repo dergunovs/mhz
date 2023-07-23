@@ -11,12 +11,7 @@
 
 <script setup lang="ts">
 import { getManufacturers } from '@/manufacturer/services';
-import { URL_MANUFACTURER_CREATE, API_MANUFACTURER } from '@/manufacturer/constants';
-import { useInvalidate } from '@/common/composables';
+import { URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
 
 const { data: manufacturers } = getManufacturers();
-
-const { invalidateCheck } = useInvalidate();
-
-invalidateCheck(API_MANUFACTURER);
 </script>
