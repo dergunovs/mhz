@@ -19,7 +19,7 @@ export function getManufacturers() {
   });
 }
 
-export function postManufacturer(formData: Ref<IManufacturer>) {
+export function postManufacturer(formData: Ref<IManufacturer>, options: object) {
   async function fn(): Promise<void> {
     await api.post(API_MANUFACTURER, formData.value);
   }
@@ -27,5 +27,6 @@ export function postManufacturer(formData: Ref<IManufacturer>) {
   return useMutation({
     mutationKey: [API_MANUFACTURER, formData],
     mutationFn: fn,
+    ...options,
   });
 }

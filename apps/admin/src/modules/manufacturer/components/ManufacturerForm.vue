@@ -22,12 +22,16 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiButton } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 
 import { postManufacturer } from '@/manufacturer/services';
+import { URL_MANUFACTURER } from '@/manufacturer/constants';
+
+const router = useRouter();
 
 const formData = ref<IManufacturer>({
   title: '',
@@ -36,7 +40,11 @@ const formData = ref<IManufacturer>({
   country: '',
 });
 
-const { mutate } = postManufacturer(formData);
+const { mutate } = postManufacturer(formData, {
+  onSuccess: () => {
+    router.push(`${URL_MANUFACTURER}?create=1`);
+  },
+});
 
 const rules = computed(() => {
   return {
