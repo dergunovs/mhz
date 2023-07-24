@@ -18,5 +18,6 @@ import { NAV_ITEMS } from '@/layout/constants';
   width: 216px;
   height: calc(100vh - 80px);
   padding: 32px;
+  background-color: var(--color-gray-light-extra);
 }
 </style>

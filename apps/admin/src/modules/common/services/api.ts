@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { toast } from 'mhz-ui';
+
 import { logout } from '@/auth/composables';
 
 axios.defaults.baseURL = import.meta.env.VITE_API;
@@ -17,6 +19,6 @@ export function deleteAuthHeader() {
 export function handleError(error: unknown) {
   if (axios.isAxiosError(error)) {
     if (error.response?.status === 403) logout();
-    alert(error.response?.data.message);
+    toast.error(error.response?.data.message);
   }
 }

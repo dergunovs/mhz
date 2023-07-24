@@ -22,6 +22,8 @@ export function postLogin(options: object) {
 export function getCheckAuth(options: object) {
   async function fn() {
     await api.get(API_GET_CHECK_AUTH);
+
+    return true;
   }
 
   return useQuery({

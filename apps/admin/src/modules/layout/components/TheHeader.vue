@@ -23,7 +23,7 @@ import { logout } from '@/auth/composables';
   justify-content: space-between;
   height: 80px;
   padding: 16px 32px;
-  border-bottom: 1px solid var(--color-gray-light);
+  border-bottom: 1px solid var(--color-gray);
 }
 
 .logo {

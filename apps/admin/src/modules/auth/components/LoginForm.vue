@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
-import { UiButton, UiField, UiInput } from 'mhz-ui';
+import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email } from 'mhz-validate';
 
 import { postLogin } from '@/auth/services';
@@ -31,6 +31,7 @@ const formData = ref({
 const { mutate } = postLogin({
   onSuccess: (token?: string) => {
     if (token) login(token);
+    toast.success('Добро пожаловать!');
   },
 });
 

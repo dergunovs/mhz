@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h1>Добавить производителя</h1>
+
     <div :class="$style.form">
       <ManufacturerForm />
     </div>

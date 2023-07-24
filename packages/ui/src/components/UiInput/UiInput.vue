@@ -33,7 +33,7 @@ function handleInput(target: EventTarget | null) {
 
 .input {
   width: 100%;
-  height: 48px;
+  height: 44px;
   padding: 0 24px;
   font-size: 1rem;
   border: 1px solid var(--color-gray);

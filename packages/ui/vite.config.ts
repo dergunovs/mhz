@@ -14,6 +14,8 @@ const components = files.reduce<{ [key: string]: string }>((obj, component) => {
   return obj;
 }, {});
 
+components['toast'] = `src/components/toast/toast.ts`;
+
 export default defineConfig({
   server: { port: 8080 },
 
@@ -52,7 +54,7 @@ export default defineConfig({
     dts({
       entryRoot: './src/components',
       cleanVueFileName: true,
-      include: ['./src/**/Ui*.vue'],
+      include: ['./src/**/Ui*.vue', './src/components/toast/toast.ts'],
       exclude: ['./src/utils'],
     }),
     viteStaticCopy({

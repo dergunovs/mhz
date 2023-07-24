@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<IProps>(), {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  height: 44px;
   padding: 16px 32px;
   overflow: hidden;
   font-size: 0.875rem;

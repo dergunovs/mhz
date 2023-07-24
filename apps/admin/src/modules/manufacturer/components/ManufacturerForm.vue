@@ -16,7 +16,10 @@
       <UiInput v-model="formData.country" />
     </UiField>
 
-    <UiButton type="submit" :isDisabled="isLoading">Отправить</UiButton>
+    <div :class="$style.buttons">
+      <UiButton type="submit" :isDisabled="isLoading">Отправить</UiButton>
+      <UiButton @click="$router.go(-1)" layout="secondary" :isDisabled="isLoading">Назад</UiButton>
+    </div>
   </form>
 </template>
 
@@ -26,7 +29,7 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton } from 'mhz-ui';
+import { UiField, UiInput, UiButton, toast } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 
@@ -48,6 +51,7 @@ const { mutate, isLoading } = postManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
     router.push(URL_MANUFACTURER);
+    toast.success('Производитель добавлен');
   },
 });
 
@@ -72,5 +76,10 @@ function submit() {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
