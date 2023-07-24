@@ -27,7 +27,7 @@
     "fastify": "4.20.0",
     "fastify-plugin": "4.5.1",
     "mhz-types": "*",
-    "mongoose": "7.4.0",
+    "mongoose": "7.4.1",
     "nodemailer": "6.9.4",
     "xmlbuilder2": "3.1.1"
   },
