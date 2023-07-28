@@ -1,19 +1,25 @@
 <template>
   <button :class="$style.button" :data-layout="props.layout" :type="props.type" :disabled="props.isDisabled">
+    <component v-if="props.icon" :is="props.icon" />
+
     <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts">
+import { FunctionalComponent } from 'vue';
+
 interface IProps {
   layout?: 'primary' | 'secondary' | 'plain';
   type?: 'submit' | 'button';
   isDisabled?: boolean;
+  icon?: FunctionalComponent;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   layout: 'primary',
   type: 'button',
+  icon: undefined,
 });
 </script>
 
@@ -22,6 +28,7 @@ const props = withDefaults(defineProps<IProps>(), {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
+  gap: 12px;
   align-items: center;
   justify-content: center;
   height: 44px;
