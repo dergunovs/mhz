@@ -8,13 +8,25 @@
       <UiInput v-model="formData.description" />
     </UiField>
 
-    <UiField label="Логотип" isRequired :error="error('logoUrl')">
-      <UiInput v-model="formData.logoUrl" />
-    </UiField>
-
     <UiField label="Страна" isRequired :error="error('country')">
       <UiInput v-model="formData.country" />
     </UiField>
+
+    <UiUpload
+      label="Логотип"
+      :files="logoFile"
+      isSingle
+      isRequired
+      :isDisabled="!!formData.logoUrl"
+      :error="error('logoUrl')"
+      @add="addLogoFile"
+      @remove="removeLogoFile"
+      @upload="uploadLogoFile"
+    />
+
+    <div v-if="formData.logoUrl">
+      {{ formData.logoUrl }} <UiButton @click="formData.logoUrl = ''" layout="plain">Удалить</UiButton>
+    </div>
 
     <div :class="$style.buttons">
       <UiButton type="submit" :isDisabled="isLoading">Отправить</UiButton>
@@ -29,7 +41,7 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, toast } from 'mhz-ui';
+import { UiField, UiInput, UiButton, UiUpload, toast } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 
@@ -68,6 +80,21 @@ const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutate(formData.value);
+}
+
+const logoFile = ref<File[]>([]);
+
+function addLogoFile(file: File) {
+  logoFile.value = [file];
+}
+
+function removeLogoFile() {
+  logoFile.value = [];
+}
+
+function uploadLogoFile() {
+  formData.value.logoUrl = logoFile.value[0].name;
+  removeLogoFile();
 }
 </script>
 

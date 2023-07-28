@@ -9,6 +9,7 @@ let files: File[] = [];
 const meta = {
   component: UiUpload,
   args: {
+    label: 'Заголовок',
     files,
   },
   parameters: {
