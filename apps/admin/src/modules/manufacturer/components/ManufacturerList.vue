@@ -5,7 +5,7 @@
         {{ manufacturer.title }}
       </td>
       <td>
-        {{ manufacturer.logoUrl }}
+        {{ PATH_UPLOAD + manufacturer.logoUrl }}
       </td>
       <td>
         {{ manufacturer.date_created }}
@@ -25,6 +25,7 @@ import { UiTable, UiButton, toast } from 'mhz-ui';
 
 import { deleteManufacturer } from '@/manufacturer/services';
 import { API_MANUFACTURER } from '@/manufacturer/constants';
+import { PATH_UPLOAD } from '@/common/constants';
 
 interface IProps {
   manufacturers: IManufacturer[];

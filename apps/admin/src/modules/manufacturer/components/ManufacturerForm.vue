@@ -14,14 +14,14 @@
 
     <UiUpload
       label="Логотип"
-      :files="logoFile"
+      :files="logoFiles"
       isSingle
       isRequired
       :isDisabled="!!formData.logoUrl"
       :error="error('logoUrl')"
       @add="addLogoFile"
       @remove="removeLogoFile"
-      @upload="uploadLogoFile"
+      @upload="upload(logoFiles)"
     />
 
     <div v-if="formData.logoUrl">
@@ -47,6 +47,7 @@ import { useValidator, required } from 'mhz-validate';
 
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer } from '@/manufacturer/services';
+import { uploadFiles } from '@/common/services';
 
 const queryClient = useQueryClient();
 
@@ -82,19 +83,22 @@ function submit() {
   if (isValid()) mutate(formData.value);
 }
 
-const logoFile = ref<File[]>([]);
+const { mutate: upload } = uploadFiles({
+  onSuccess: (data: string[]) => {
+    formData.value.logoUrl = data[0];
+    removeLogoFile();
+    toast.success('Логотип добавлен');
+  },
+});
+
+const logoFiles = ref<File[]>([]);
 
 function addLogoFile(file: File) {
-  logoFile.value = [file];
+  logoFiles.value = [file];
 }
 
 function removeLogoFile() {
-  logoFile.value = [];
-}
-
-function uploadLogoFile() {
-  formData.value.logoUrl = logoFile.value[0].name;
-  removeLogoFile();
+  logoFiles.value = [];
 }
 </script>
 

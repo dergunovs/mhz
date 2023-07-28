@@ -93,7 +93,7 @@ function handleFileChange(target: EventTarget | null) {
 .upload {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .addButton {
@@ -135,7 +135,7 @@ function handleFileChange(target: EventTarget | null) {
 
 .uploadButton {
   &[data-label='true'] {
-    margin-top: 32px;
+    margin-top: 28px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 .env
 .turbo
-public/uploads
+public/upload
 node_modules
 build
