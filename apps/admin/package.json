@@ -20,6 +20,7 @@
   "dependencies": {
     "@tanstack/vue-query": "4.32.0",
     "axios": "1.4.0",
+    "mhz-countries": "*",
     "mhz-types": "*",
     "mhz-ui": "*",
     "mhz-validate": "*",
