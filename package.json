@@ -19,8 +19,8 @@
     "@changesets/cli": "2.26.2"
   },
   "devDependencies": {
-    "@turbo/gen": "1.10.9",
-    "turbo": "1.10.9",
+    "@turbo/gen": "1.10.12",
+    "turbo": "1.10.12",
     "prettier": "3.0.0"
   },
   "packageManager": "npm@9.6.4",
