@@ -46,6 +46,6 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd ${{ secrets.SSH_PATH_BACKEND }}
-            nvm use 18
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             node -v
-            npm i
