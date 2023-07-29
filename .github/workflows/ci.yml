@@ -58,5 +58,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
+            ${{ secrets.NODE_SET_PATH }}
+            ${{ secrets.NPM_SET_USER }}
             cd ${{ secrets.SSH_PATH_BACKEND }}
-            pm2 reload mhz
+            node -v
+            npm i
