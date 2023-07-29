@@ -13,6 +13,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development TS_NODE_BASEURL=./dist && concurrently -k -p \"[{name}]\" \"tsc -w\" \"nodemon\"",
+    "start": "node build/index.js",
     "build": "tsc -p tsconfig.json",
     "ts": "tsc -p tsconfig.json --noEmit"
   },

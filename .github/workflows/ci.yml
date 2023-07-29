@@ -39,7 +39,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          rm: false
+          rm: true
           source: apps/admin/dist/
           target: ${{ secrets.SSH_PATH }}
       - name: Deploy Back
