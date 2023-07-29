@@ -11,4 +11,10 @@ export default defineConfig({
   resolve: { alias: { '@': resolve(__dirname, './src/modules') } },
 
   plugins: [vue(), svgLoader()],
+
+  css: {
+    preprocessorOptions: {
+      scss: { additionalData: `@import "mhz-ui/dist/breakpoints";` },
+    },
+  },
 });

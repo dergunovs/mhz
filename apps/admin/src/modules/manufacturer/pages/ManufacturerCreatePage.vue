@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Добавить производителя</h1>
+    <PageTitle>Добавить производителя</PageTitle>
 
     <div :class="$style.form">
       <ManufacturerForm />
@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerForm from '@/manufacturer/components/ManufacturerForm.vue';
 </script>
 

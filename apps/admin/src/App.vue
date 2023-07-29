@@ -1,25 +1,27 @@
 <template>
-  <div :class="$style.container">
-    <TheHeader v-if="isAuth" />
-
-    <main :class="$style.main">
-      <TheNav v-if="isAuth" />
-
-      <Suspense>
-        <RouterView :class="$style.content" />
-      </Suspense>
-    </main>
+  <div>
+    <component v-if="isLoaded" :is="layoutComponent" />
   </div>
 </template>
 
 <script setup lang="ts">
-import TheHeader from '@/layout/components/TheHeader.vue';
-import TheNav from '@/layout/components/TheNav.vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+import LayoutDefault from '@/layout/components/LayoutDefault.vue';
+import LayoutEmpty from '@/layout/components/LayoutEmpty.vue';
 
 import { getCheckAuth } from '@/auth/services';
-import { getCookieToken, isAuth, setAuth } from '@/auth/composables';
+import { getCookieToken, setAuth } from '@/auth/composables';
 import { setAuthHeader } from '@/common/services/api';
 import { URL_LOGIN } from '@/auth/constants';
+
+const route = useRoute();
+const router = useRouter();
+
+const isLoaded = ref(false);
+
+const layoutComponent = computed(() => (route.meta.layout === 'empty' ? LayoutEmpty : LayoutDefault));
 
 const isLoginPageAfterLogout = window.location.pathname === URL_LOGIN && window.location.search === '?logout=1';
 
@@ -34,21 +36,9 @@ if (!isLoginPageAfterLogout && token) {
     },
   });
 }
+
+onMounted(async () => {
+  await router.isReady();
+  isLoaded.value = true;
+});
 </script>
-
-<style module lang="scss">
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.main {
-  display: flex;
-}
-
-.content {
-  flex: 1;
-  padding: 32px;
-}
-</style>

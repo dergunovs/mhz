@@ -18,11 +18,15 @@ import { logout } from '@/auth/composables';
 
 <style module lang="scss">
 .header {
+  position: fixed;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   height: 80px;
   padding: 16px 32px;
+  background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray);
 }
 

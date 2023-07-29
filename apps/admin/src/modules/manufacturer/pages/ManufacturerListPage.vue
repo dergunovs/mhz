@@ -1,6 +1,8 @@
 <template>
-  <div :class="$style.container">
-    <div>
+  <div>
+    <PageTitle>Производители</PageTitle>
+
+    <div :class="$style.linkBlock">
       <RouterLink :to="URL_MANUFACTURER_CREATE">Добавить производителя</RouterLink>
     </div>
 
@@ -9,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';
 
 import { getManufacturers } from '@/manufacturer/services';
@@ -18,9 +21,7 @@ const { data: manufacturers } = getManufacturers();
 </script>
 
 <style module lang="scss">
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+.linkBlock {
+  margin-bottom: 32px;
 }
 </style>

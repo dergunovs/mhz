@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.container">
+  <div>
     <LoginForm />
   </div>
 </template>
@@ -16,12 +16,3 @@ const router = useRouter();
 
 if (isAuth.value) router.push(URL_MAIN);
 </script>
-
-<style module lang="scss">
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-</style>

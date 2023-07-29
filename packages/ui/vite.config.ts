@@ -74,6 +74,7 @@ export default defineConfig({
         { src: 'src/assets/styles/breakpoints.scss', dest: '' },
         { src: 'src/assets/styles/colors.scss', dest: '' },
         { src: 'src/assets/styles/fonts.scss', dest: '' },
+        { src: 'src/assets/styles/transitions.scss', dest: '' },
       ],
     }),
     {
