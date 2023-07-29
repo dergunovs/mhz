@@ -11,17 +11,22 @@ jobs:
       - name: Node
         uses: actions/setup-node@v3
         with:
-          node-version: "18.16.1"
+          node-version: "18.17.0"
       - name: Install
         run: npm i
-      - name: Create .env
-        uses: SpicyPizza/create-envfile@v1.3
+      - name: Create Admin .env
+        uses: SpicyPizza/create-envfile@v2.0.2
         with:
           envkey_VITE_API: ${{ secrets.ENV_VITE_API }}
           envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
+          directory: apps/admin/
+      - name: Create Back .env
+        uses: SpicyPizza/create-envfile@v2.0.2
+        with:
           envkey_DATABASE: ${{ secrets.DATABASE }}
           envkey_SECRET: ${{ secrets.SECRET }}
           envkey_PORT: ${{ secrets.PORT }}
+          directory: apps/back/
       - name: Build
         run: npm run build
       - name: Lint check
