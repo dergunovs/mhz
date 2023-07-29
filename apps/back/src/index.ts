@@ -9,9 +9,10 @@ const options: AppOptions = {
 
 const start = async () => {
   const app = await buildApp(options);
+  const port = Number(process.env.PORT);
 
   try {
-    await app.listen({ port: 5000, host: 'localhost' });
+    await app.listen({ port, host: 'localhost' });
   } catch (err) {
     app.log.error(err);
     process.exit(1);

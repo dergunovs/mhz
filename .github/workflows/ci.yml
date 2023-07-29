@@ -21,6 +21,7 @@ jobs:
           envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
           envkey_DATABASE: ${{ secrets.DATABASE }}
           envkey_SECRET: ${{ secrets.SECRET }}
+          envkey_PORT: ${{ secrets.PORT }}
       - name: Build
         run: npm run build
       - name: Lint check
