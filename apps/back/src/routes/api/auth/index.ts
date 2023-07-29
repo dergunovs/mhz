@@ -52,7 +52,7 @@ export default async function (fastify: IFastifyInstance) {
   fastify.get('/check', async function (request, reply) {
     try {
       await request.jwtVerify();
-      return reply.code(200).send({ message: 'Ok' });
+      return reply.code(200).send({ message: 'checked' });
     } catch (err) {
       reply.code(403).send({ message: 'Нужна авторизация' });
     }

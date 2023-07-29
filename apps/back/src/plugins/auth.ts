@@ -4,6 +4,7 @@ import jwt from '@fastify/jwt';
 
 export default fp(async function (fastify, opts) {
   const secret = process.env.SECRET;
+
   if (!secret) return;
 
   fastify.register(jwt, { secret });

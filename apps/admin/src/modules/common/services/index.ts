@@ -1,9 +1,29 @@
 import { useMutation } from '@tanstack/vue-query';
 
-import { API_UPLOAD } from '@/common/constants';
+import { API_UPLOAD, API_UPLOAD_SINGLE } from '@/common/constants';
 import { api } from '@/common/services/api';
 
-export function uploadFiles(options?: object) {
+export function uploadFile(options: object) {
+  async function fn(file?: File): Promise<string> {
+    if (!file) throw new Error();
+
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    const { data } = await api.post(API_UPLOAD_SINGLE, formData);
+
+    return data;
+  }
+
+  return useMutation({
+    mutationKey: [API_UPLOAD],
+    mutationFn: fn,
+    ...options,
+  });
+}
+
+export function uploadFiles(options: object) {
   async function fn(files: File[]): Promise<string[]> {
     const formData = new FormData();
 
@@ -12,6 +32,20 @@ export function uploadFiles(options?: object) {
     const { data } = await api.post(API_UPLOAD, formData);
 
     return data;
+  }
+
+  return useMutation({
+    mutationKey: [API_UPLOAD],
+    mutationFn: fn,
+    ...options,
+  });
+}
+
+export function deleteFile(options?: object) {
+  async function fn(filename: string) {
+    await api.delete(`${API_UPLOAD}/${filename}`);
+
+    return true;
   }
 
   return useMutation({

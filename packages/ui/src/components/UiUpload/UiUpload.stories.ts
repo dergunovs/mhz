@@ -5,12 +5,14 @@ import { html } from '@/utils';
 import { UiUpload } from '@/components';
 
 let files: File[] = [];
+let file;
 
 const meta = {
   component: UiUpload,
   args: {
     label: 'Заголовок',
     files,
+    file,
   },
   parameters: {
     docs: {
@@ -39,7 +41,7 @@ export const Primary: Story = {
     components: { UiUpload },
     setup: () => ({ args, argTypes, updateArgs }),
 
-    template: html` <UiUpload v-bind="args" @remove="remove($event)" @update="update($event)" /> `,
+    template: html` <UiUpload v-bind="args" @remove="remove($event)" @add="add($event)" /> `,
 
     methods: {
       remove(fileToRemove: File) {
@@ -49,9 +51,39 @@ export const Primary: Story = {
         files = [...newFiles];
       },
 
-      update(file: File) {
+      add(file: File) {
         updateArgs({ files: [...files, file] });
         files = [...files, file];
+      },
+    },
+  }),
+
+  decorators: [
+    (story, context) => {
+      const [args, updateArgs] = useArgs();
+
+      return story({ ...context, updateArgs, args });
+    },
+  ],
+
+  argTypes,
+};
+export const SingleFile: Story = {
+  render: (args, { argTypes, updateArgs }) => ({
+    components: { UiUpload },
+    setup: () => ({ args, argTypes, updateArgs }),
+
+    template: html` <UiUpload v-bind="args" isSingle @remove="remove($event)" @add="add($event)" /> `,
+
+    methods: {
+      remove() {
+        updateArgs({ file: undefined });
+        file = undefined;
+      },
+
+      add(fileToAdd: File) {
+        updateArgs({ file: fileToAdd });
+        file = fileToAdd;
       },
     },
   }),

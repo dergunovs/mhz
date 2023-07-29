@@ -9,7 +9,9 @@
       <div :class="$style.addButton">
         <UiButton
           :layout="props.layout"
-          :isDisabled="props.isDisabled || (props.isSingle && props.files.length > 1)"
+          :isDisabled="
+            props.isDisabled || (props.isSingle && props.files.length >= 1) || (props.isSingle && !!props.file)
+          "
           @click="emulateFileClickInput"
           :icon="IconUpload"
         >
@@ -28,13 +30,24 @@
         @input="handleFileChange($event.target)"
       />
 
-      <div v-for="(file, i) in files" :key="`${file}${i}`" :class="$style.files">
-        <div :class="$style.name">{{ file.name }}</div>
-        <UiButton @click="remove(file)" layout="plain">Удалить</UiButton>
+      <template v-if="props.files?.length && !props.file">
+        <div v-for="(fileToUpload, index) in files" :key="`${fileToUpload}-${index}`" :class="$style.files">
+          <div :class="$style.name">{{ fileToUpload.name }}</div>
+          <UiButton @click="remove(fileToUpload)" layout="plain">Удалить</UiButton>
+        </div>
+      </template>
+
+      <div v-if="props.isSingle && props.file" :class="$style.files">
+        <div :class="$style.name">{{ props.file.name }}</div>
+        <UiButton @click="remove(props.file)" layout="plain">Удалить</UiButton>
       </div>
     </div>
 
-    <div v-show="!!props.files.length" :class="$style.uploadButton" :data-label="!!props.label">
+    <div
+      v-show="(props.isSingle && props.file) || !!props.files.length"
+      :class="$style.uploadButton"
+      :data-label="!!props.label"
+    >
       <UiButton @click="emit('upload')">Загрузить</UiButton>
     </div>
   </div>
@@ -50,7 +63,8 @@ import IconUpload from './icons/upload.svg?component';
 interface IProps {
   layout?: 'primary' | 'secondary';
   label?: string;
-  files: File[];
+  file?: File;
+  files?: File[] | never[];
   error?: string | boolean;
   isDisabled?: boolean;
   isRequired?: boolean;
@@ -61,6 +75,8 @@ const props = withDefaults(defineProps<IProps>(), {
   layout: 'secondary',
   label: undefined,
   error: undefined,
+  file: undefined,
+  files: () => [],
 });
 
 const emit = defineEmits(['add', 'remove', 'upload']);

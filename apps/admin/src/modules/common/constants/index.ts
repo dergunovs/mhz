@@ -2,4 +2,5 @@ export const URL_MAIN = '/main';
 export const URL_ERROR = '/404';
 
 export const API_UPLOAD = 'upload';
-export const PATH_UPLOAD = 'http://localhost:5000/upload/';
+export const API_UPLOAD_SINGLE = `${API_UPLOAD}/single`;
+export const PATH_UPLOAD = import.meta.env.VITE_PATH_UPLOAD;

@@ -14,18 +14,19 @@
 
     <UiUpload
       label="Логотип"
-      :files="logoFiles"
+      :file="logoFile"
       isSingle
       isRequired
       :isDisabled="!!formData.logoUrl"
       :error="error('logoUrl')"
       @add="addLogoFile"
       @remove="removeLogoFile"
-      @upload="upload(logoFiles)"
+      @upload="mutateUploadFile(logoFile)"
     />
 
     <div v-if="formData.logoUrl">
-      {{ formData.logoUrl }} <UiButton @click="formData.logoUrl = ''" layout="plain">Удалить</UiButton>
+      <span>{{ formData.logoUrl }}</span>
+      <UiButton @click="deleteLogoFile" layout="plain">Удалить</UiButton>
     </div>
 
     <div :class="$style.buttons">
@@ -47,7 +48,7 @@ import { useValidator, required } from 'mhz-validate';
 
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer } from '@/manufacturer/services';
-import { uploadFiles } from '@/common/services';
+import { uploadFile, deleteFile } from '@/common/services';
 
 const queryClient = useQueryClient();
 
@@ -83,23 +84,30 @@ function submit() {
   if (isValid()) mutate(formData.value);
 }
 
-const { mutate: upload } = uploadFiles({
-  onSuccess: (data: string[]) => {
-    formData.value.logoUrl = data[0];
+const { mutate: mutateDeleteFile } = deleteFile();
+
+const logoFile = ref<File>();
+
+function addLogoFile(file: File) {
+  logoFile.value = file;
+}
+
+function removeLogoFile() {
+  logoFile.value = undefined;
+}
+
+function deleteLogoFile() {
+  mutateDeleteFile(formData.value.logoUrl);
+  formData.value.logoUrl = '';
+}
+
+const { mutate: mutateUploadFile } = uploadFile({
+  onSuccess: (data: string) => {
+    formData.value.logoUrl = data;
     removeLogoFile();
     toast.success('Логотип добавлен');
   },
 });
-
-const logoFiles = ref<File[]>([]);
-
-function addLogoFile(file: File) {
-  logoFiles.value = [file];
-}
-
-function removeLogoFile() {
-  logoFiles.value = [];
-}
 </script>
 
 <style module lang="scss">
