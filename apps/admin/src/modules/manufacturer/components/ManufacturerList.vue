@@ -5,7 +5,7 @@
         {{ manufacturer.title }}
       </td>
       <td>
-        {{ PATH_UPLOAD + manufacturer.logoUrl }}
+        {{ `${PATH_UPLOAD}/${manufacturer.logoUrl}` }}
       </td>
       <td>
         {{ manufacturer.date_created }}

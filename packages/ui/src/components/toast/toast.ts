@@ -40,6 +40,8 @@ function show(type: string, message: string) {
 
   icon.classList.add('uiToastIcon');
   icon.src = icons[type];
+  icon.width = 20;
+  icon.height = 20;
 
   const messageBlock = document.createElement('div');
 
@@ -51,14 +53,14 @@ function show(type: string, message: string) {
   document.querySelector('.uiToastBlock')?.append(toast);
 
   setTimeout(() => toast.classList.add('uiToastVisible'), 200);
-  setTimeout(() => toast.classList.remove('uiToastVisible'), 2800);
+  setTimeout(() => toast.classList.remove('uiToastVisible'), 92800);
 
   setTimeout(() => {
     toast.remove();
     if (body && !body.contains(document.querySelector('.uiToast'))) {
       document.querySelector('.uiToastBlock')?.remove();
     }
-  }, 3000);
+  }, 93000);
 }
 
 const toast = { success, error, info };

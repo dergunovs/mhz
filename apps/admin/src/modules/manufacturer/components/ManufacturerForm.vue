@@ -25,7 +25,10 @@
     />
 
     <div v-if="formData.logoUrl">
-      <span>{{ formData.logoUrl }}</span>
+      <div :class="$style.logo">
+        <img :src="`${PATH_UPLOAD}/${formData.logoUrl}`" alt="Логотип компании" />
+      </div>
+
       <UiButton @click="deleteLogoFile" layout="plain">Удалить</UiButton>
     </div>
 
@@ -49,6 +52,7 @@ import { useValidator, required } from 'mhz-validate';
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer } from '@/manufacturer/services';
 import { uploadFile, deleteFile } from '@/common/services';
+import { PATH_UPLOAD } from '@/common/constants';
 
 const queryClient = useQueryClient();
 
@@ -115,6 +119,10 @@ const { mutate: mutateUploadFile } = uploadFile({
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.logo {
+  width: 200px;
 }
 
 .buttons {
