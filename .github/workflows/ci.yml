@@ -29,6 +29,19 @@ jobs:
           directory: apps/back/
       - name: Build
         run: npm run build
+      - name: Lint check
+        run: npm run lint
+      - name: TS check
+        run: npm run ts
+      - name: Deploy Admin
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          rm: true
+          source: apps/admin/dist/
+          target: ${{ secrets.SSH_PATH }}
       - name: Deploy Backend
         uses: appleboy/scp-action@master
         with:
