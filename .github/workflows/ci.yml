@@ -48,4 +48,4 @@ jobs:
             cd ${{ secrets.SSH_PATH_BACKEND }}
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            node -v
+            npm i
