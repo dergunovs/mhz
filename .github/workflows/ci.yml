@@ -20,7 +20,7 @@ jobs:
           envkey_VITE_API: ${{ secrets.ENV_VITE_API }}
           envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
           directory: apps/admin/
-      - name: Create Back .env
+      - name: Create Backend .env
         uses: SpicyPizza/create-envfile@v2.0.2
         with:
           envkey_DATABASE: ${{ secrets.DATABASE }}
@@ -42,7 +42,7 @@ jobs:
           rm: true
           source: apps/admin/dist/
           target: ${{ secrets.SSH_PATH }}
-      - name: Deploy Back
+      - name: Deploy Backend
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -51,3 +51,13 @@ jobs:
           rm: false
           source: "apps/back/build,apps/back/node_modules,apps/back/package.json,apps/back/.env"
           target: ${{ secrets.SSH_PATH }}
+      - name: Install Backend deps and Reload PM2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ${{ secrets.SSH_PATH_BACKEND }}
+            npm i
+            pm2 reload mhz
