@@ -35,4 +35,13 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           rm: false
           source: apps/admin/dist/
-          target: ${{ secrets.SSH_PATH_ADMIN }}
+          target: ${{ secrets.SSH_PATH }}
+      - name: Deploy Back
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          rm: false
+          source: apps/back/build/
+          target: ${{ secrets.SSH_PATH }}
