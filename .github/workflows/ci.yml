@@ -49,5 +49,5 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           rm: false
-          source: apps/back/
+          source: "apps/back/build,apps/back/node_modules,apps/back/package.json,apps/back/.env"
           target: ${{ secrets.SSH_PATH }}
