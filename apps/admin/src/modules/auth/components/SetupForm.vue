@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Авторизация</h2>
+    <h2>Добавить менеджера</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
       <UiField label="E-mail" isRequired :error="error('email')">
@@ -11,31 +11,32 @@
         <UiInput v-model="formData.password" type="password" />
       </UiField>
 
-      <UiButton type="submit">Войти</UiButton>
+      <UiButton type="submit">Добавить</UiButton>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email } from 'mhz-validate';
 
-import { postLogin } from '@/auth/services';
-import { useAuth } from '@/auth/composables';
+import { postSetup } from '@/auth/services';
+import { URL_LOGIN } from '@/auth/constants';
 
-const { login } = useAuth();
+const router = useRouter();
 
 const formData = ref({
   email: '',
   password: '',
 });
 
-const { mutate } = postLogin({
-  onSuccess: (token?: string) => {
-    if (token) login(token);
-    toast.success('Добро пожаловать!');
+const { mutate } = postSetup({
+  onSuccess: () => {
+    toast.success('Пользователь добавлен!');
+    router.push(URL_LOGIN);
   },
 });
 

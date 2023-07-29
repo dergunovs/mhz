@@ -6,7 +6,7 @@ import { API_MANUFACTURER } from '@/manufacturer/constants';
 import { api } from '@/common/services/api';
 
 export function getManufacturers() {
-  async function fn(): Promise<IManufacturer[] | undefined> {
+  async function fn(): Promise<IManufacturer[]> {
     const { data } = await api.get(API_MANUFACTURER);
 
     return data;

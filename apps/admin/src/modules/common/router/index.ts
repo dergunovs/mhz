@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import { routes } from '@/common/router/routes';
 import { getCookieToken } from '@/auth/composables';
-import { URL_LOGIN } from '@/auth/constants';
+import { URL_LOGIN, URL_SETUP } from '@/auth/constants';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,7 +13,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== URL_LOGIN && !getCookieToken()) {
+  if (![URL_LOGIN, URL_SETUP].includes(to.path) && !getCookieToken()) {
     next({ path: `${URL_LOGIN}?logout=1` });
   } else {
     next();
