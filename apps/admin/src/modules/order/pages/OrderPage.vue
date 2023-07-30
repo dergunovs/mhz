@@ -1,8 +1,8 @@
 <template>
   <div>
-    <PageTitle>Заказ</PageTitle>
+    <PageTitle>Order</PageTitle>
 
-    <div>Заказ</div>
+    <div>Order</div>
   </div>
 </template>
 

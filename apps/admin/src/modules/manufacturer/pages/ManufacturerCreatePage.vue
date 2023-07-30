@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageTitle>Добавить производителя</PageTitle>
+    <PageTitle>Add manufacturer</PageTitle>
 
     <div :class="$style.form">
       <ManufacturerForm />

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <PageTitle>Менеджеры</PageTitle>
+    <PageTitle>Managers</PageTitle>
 
-    <div>Менеджеры</div>
+    <div>Managers</div>
   </div>
 </template>
 

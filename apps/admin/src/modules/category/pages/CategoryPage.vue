@@ -1,8 +1,8 @@
 <template>
   <div>
-    <PageTitle>Категория</PageTitle>
+    <PageTitle>Category</PageTitle>
 
-    <div>Категория</div>
+    <div>Category</div>
   </div>
 </template>
 

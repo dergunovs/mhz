@@ -1,8 +1,8 @@
 <template>
   <div>
-    <PageTitle>Ошибка</PageTitle>
+    <PageTitle>Error</PageTitle>
 
-    <div>Ошибка</div>
+    <div>Error</div>
   </div>
 </template>
 

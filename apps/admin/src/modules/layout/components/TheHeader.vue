@@ -4,7 +4,7 @@
       <ImageLogo :class="$style.logo" />
     </RouterLink>
 
-    <UiButton @click="logout">Выйти</UiButton>
+    <UiButton @click="logout">Log out</UiButton>
   </header>
 </template>
 

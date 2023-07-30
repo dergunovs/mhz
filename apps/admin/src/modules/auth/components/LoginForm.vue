@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h2>Авторизация</h2>
+    <h2>Login</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
       <UiField label="E-mail" isRequired :error="error('email')">
         <UiInput v-model="formData.email" />
       </UiField>
 
-      <UiField label="Пароль" isRequired :error="error('password')">
+      <UiField label="Password" isRequired :error="error('password')">
         <UiInput v-model="formData.password" type="password" />
       </UiField>
 
-      <UiButton type="submit">Войти</UiButton>
+      <UiButton type="submit">Submit</UiButton>
     </form>
   </div>
 </template>
@@ -35,7 +35,7 @@ const formData = ref({
 const { mutate } = postLogin({
   onSuccess: (token?: string) => {
     if (token) login(token);
-    toast.success('Добро пожаловать!');
+    toast.success('Welcome!');
   },
 });
 

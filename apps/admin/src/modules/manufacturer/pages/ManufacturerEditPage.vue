@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageTitle>Редактировать производителя</PageTitle>
+    <PageTitle>Edit manufacturer</PageTitle>
 
     <ManufacturerForm />
   </div>

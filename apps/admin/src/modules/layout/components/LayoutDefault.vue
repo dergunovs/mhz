@@ -45,6 +45,5 @@ import NavList from '@/layout/components/NavList.vue';
   overflow: hidden;
   background-color: var(--color-white);
   border-radius: 24px;
-  box-shadow: 0 0 24px -4px var(--color-gray-transparent);
 }
 </style>

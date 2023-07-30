@@ -2,7 +2,7 @@
   <div :class="$style.container">
     <UiButton @click="toast.success('Success!')">toast.success()</UiButton>
     <UiButton @click="toast.error('Error!')">toast.error()</UiButton>
-    <UiButton @click="toast.info('Info! А вот тут очень много текста. Как он влезет?')">toast.info()</UiButton>
+    <UiButton @click="toast.info('Info! Long text example. How will this toast look like?')">toast.info()</UiButton>
   </div>
 </template>
 

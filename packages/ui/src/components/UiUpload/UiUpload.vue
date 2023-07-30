@@ -15,10 +15,10 @@
           @click="emulateFileClickInput"
           :icon="IconUpload"
         >
-          Добавить файл
+          Add file
         </UiButton>
 
-        <div :class="$style.text" :data-error="!!props.error">Формат jpg, png. Размер до 10 мб.</div>
+        <div :class="$style.text" :data-error="!!props.error">Size up to 10 Mb, jpg, png</div>
       </div>
 
       <input
@@ -33,13 +33,13 @@
       <template v-if="props.files?.length && !props.file">
         <div v-for="(fileToUpload, index) in files" :key="`${fileToUpload}-${index}`" :class="$style.files">
           <div :class="$style.name">{{ fileToUpload.name }}</div>
-          <UiButton @click="remove(fileToUpload)" layout="plain">Удалить</UiButton>
+          <UiButton @click="remove(fileToUpload)" layout="plain">Remove</UiButton>
         </div>
       </template>
 
       <div v-if="props.isSingle && props.file" :class="$style.files">
         <div :class="$style.name">{{ props.file.name }}</div>
-        <UiButton @click="remove(props.file)" layout="plain">Удалить</UiButton>
+        <UiButton @click="remove(props.file)" layout="plain">Remove</UiButton>
       </div>
     </div>
 
@@ -48,7 +48,7 @@
       :class="$style.uploadButton"
       :data-label="!!props.label"
     >
-      <UiButton @click="emit('upload')">Загрузить</UiButton>
+      <UiButton @click="emit('upload')">Upload</UiButton>
     </div>
   </div>
 </template>
@@ -116,14 +116,14 @@ function handleFileChange(target: EventTarget | null) {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  align-items: flex-start;
+  min-width: 200px;
 }
 
 .text {
   font-size: 0.75rem;
 
   &[data-error='true'] {
-    color: var(--color-error-dark);
+    color: var(--color-error);
   }
 }
 
@@ -146,7 +146,7 @@ function handleFileChange(target: EventTarget | null) {
 }
 
 .error {
-  color: var(--color-error-dark);
+  color: var(--color-error);
 }
 
 .uploadButton {

@@ -10,7 +10,7 @@ let file;
 const meta = {
   component: UiUpload,
   args: {
-    label: 'Заголовок',
+    label: 'Label',
     files,
     file,
   },
@@ -30,6 +30,7 @@ const argTypes = {
     description: 'primary | secondary',
   },
   files: { description: 'File[]' },
+  error: { control: 'text' },
 };
 
 type Story = StoryObj<typeof UiUpload>;

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <PageTitle>Главная</PageTitle>
+    <PageTitle>Main</PageTitle>
 
-    <div>Главная</div>
+    <div>Main</div>
   </div>
 </template>
 

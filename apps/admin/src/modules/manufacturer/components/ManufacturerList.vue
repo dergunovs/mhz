@@ -11,7 +11,7 @@
         {{ manufacturer.date_created }}
       </td>
       <td>
-        <UiButton @click="mutate(manufacturer._id)" layout="plain">Удалить</UiButton>
+        <UiButton @click="mutate(manufacturer._id)" layout="plain">Delete</UiButton>
       </td>
     </tr>
   </UiTable>
@@ -33,14 +33,14 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const tableHeaders = ['Название', 'Логотип', 'Дата создания', ''];
+const tableHeaders = ['Title', 'Logo', 'Created', ''];
 
 const queryClient = useQueryClient();
 
 const { mutate } = deleteManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
-    toast.success('Производитель удален');
+    toast.success('Manufacturer deleted');
   },
 });
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <PageTitle>Производители</PageTitle>
+    <PageTitle>Manufacturers</PageTitle>
 
     <div :class="$style.linkBlock">
-      <RouterLink :to="URL_MANUFACTURER_CREATE">Добавить производителя</RouterLink>
+      <RouterLink :to="URL_MANUFACTURER_CREATE">Add manufacturer</RouterLink>
     </div>
 
     <ManufacturerList v-if="manufacturers?.length" :manufacturers="manufacturers" />

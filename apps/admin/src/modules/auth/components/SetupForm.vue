@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h2>Добавить менеджера</h2>
+    <h2>Add first manager</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
       <UiField label="E-mail" isRequired :error="error('email')">
         <UiInput v-model="formData.email" />
       </UiField>
 
-      <UiField label="Пароль" isRequired :error="error('password')">
+      <UiField label="Password" isRequired :error="error('password')">
         <UiInput v-model="formData.password" type="password" />
       </UiField>
 
-      <UiButton type="submit">Добавить</UiButton>
+      <UiButton type="submit">Submit</UiButton>
     </form>
   </div>
 </template>
@@ -35,7 +35,7 @@ const formData = ref({
 
 const { mutate } = postSetup({
   onSuccess: () => {
-    toast.success('Пользователь добавлен!');
+    toast.success('Manager successfully added!');
     router.push(URL_LOGIN);
   },
 });

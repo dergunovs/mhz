@@ -29,7 +29,7 @@ export const Primary: Story = {
     components: { UiButton },
     setup: () => ({ args, argTypes }),
 
-    template: html` <UiButton v-bind="args">Текст кнопки</UiButton>`,
+    template: html` <UiButton v-bind="args">Button text</UiButton>`,
   }),
   argTypes,
 };

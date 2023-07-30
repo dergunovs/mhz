@@ -1,8 +1,8 @@
 <template>
   <div>
-    <PageTitle>Покупатели</PageTitle>
+    <PageTitle>Customers</PageTitle>
 
-    <div>Покупатели</div>
+    <div>Customers</div>
   </div>
 </template>
 

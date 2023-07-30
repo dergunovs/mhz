@@ -6,7 +6,7 @@ import { UiTable } from '@/components';
 const meta = {
   component: UiTable,
   args: {
-    headers: ['Место', 'Команда', 'Игры', 'Очки'],
+    headers: ['Position', 'Team', 'Games', 'Points'],
   },
   parameters: {
     docs: {
@@ -31,19 +31,19 @@ export const Primary: Story = {
     template: html` <UiTable v-bind="args">
       <tr>
         <td>1</td>
-        <td>Фрозиноне</td>
+        <td>Frosinone</td>
         <td>38</td>
         <td>80</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>Дженоа</td>
+        <td>Genoa</td>
         <td>38</td>
         <td>73</td>
       </tr>
       <tr>
         <td>3</td>
-        <td>Бари</td>
+        <td>Bari</td>
         <td>38</td>
         <td>65</td>
       </tr>

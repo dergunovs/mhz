@@ -6,8 +6,8 @@ import { UiField, UiInput } from '@/components';
 const meta = {
   component: UiField,
   args: {
-    label: 'Заголовок',
-    error: 'Ошибка',
+    label: 'Label',
+    error: 'Error',
     isRequired: true,
   },
   parameters: {
@@ -32,7 +32,7 @@ export const Primary: Story = {
     components: { UiField, UiInput },
     setup: () => ({ args, argTypes }),
 
-    template: html` <UiField v-bind="args"><UiInput modelValue="Текст"></UiField>`,
+    template: html` <UiField v-bind="args"><UiInput modelValue="Text"></UiField>`,
   }),
   argTypes,
 };

@@ -6,7 +6,7 @@ import { UiInput } from '@/components';
 const meta = {
   component: UiInput,
   args: {
-    modelValue: 'Текст',
+    modelValue: 'Text',
   },
   parameters: {
     docs: {

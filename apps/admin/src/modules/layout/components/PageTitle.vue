@@ -14,7 +14,7 @@
   margin-bottom: 32px;
   margin-left: -32px;
   color: var(--color-white);
-  background-color: var(--color-primary-dark);
+  background: var(--gradient, linear-gradient(116deg, var(--color-primary) 0%, var(--color-success) 100%));
 
   h1 {
     margin: 0;

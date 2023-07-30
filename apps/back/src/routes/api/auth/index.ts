@@ -10,7 +10,7 @@ export default async function (fastify: IFastifyInstance) {
     const foundManager = await Manager.findOne({ email });
 
     if (!foundManager) {
-      reply.code(404).send({ message: 'Пользователь не найден' });
+      reply.code(404).send({ message: 'Manager not found' });
       return;
     }
 
@@ -18,7 +18,7 @@ export default async function (fastify: IFastifyInstance) {
       const valid = await bcrypt.compare(password, foundManager.password);
 
       if (!valid) {
-        reply.code(401).send({ message: 'Пароль неправильный' });
+        reply.code(401).send({ message: 'Wrong password' });
         return;
       }
 
@@ -42,7 +42,7 @@ export default async function (fastify: IFastifyInstance) {
     const isManagers = !!(await Manager.find()).length;
 
     if (isManagers) {
-      reply.code(500).send({ message: 'Менеджеры уже есть' });
+      reply.code(500).send({ message: 'Managers already exists' });
       return;
     }
 
@@ -65,7 +65,7 @@ export default async function (fastify: IFastifyInstance) {
       await request.jwtVerify();
       return reply.code(200).send({ message: 'checked' });
     } catch (err) {
-      reply.code(403).send({ message: 'Нужна авторизация' });
+      reply.code(403).send({ message: 'Authorization error' });
     }
   });
 }

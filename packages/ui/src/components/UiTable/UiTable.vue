@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.tableBlock" ref="tableBlock">
-    <div v-if="isScrollable" :class="$style.scrollMessage">Можно прокручивать вправо →</div>
+    <div v-if="isScrollable" :class="$style.scrollMessage">Table is scrollable →</div>
 
     <table :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
       <thead>

@@ -13,7 +13,7 @@ export default fp(async function (fastify, opts) {
     try {
       await request.jwtVerify();
     } catch (err) {
-      reply.code(403).send({ message: 'Нужна авторизация' });
+      reply.code(403).send({ message: 'Authentication error' });
     }
   });
 });

@@ -31,6 +31,6 @@ const props = defineProps<IProps>();
 }
 
 .error {
-  color: var(--color-error-dark);
+  color: var(--color-error);
 }
 </style>

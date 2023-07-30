@@ -1,19 +1,19 @@
 <template>
   <form @submit.prevent="submit" :class="$style.form">
-    <UiField label="Название" isRequired :error="error('title')">
+    <UiField label="Title" isRequired :error="error('title')">
       <UiInput v-model="formData.title" />
     </UiField>
 
-    <UiField label="Описание" isRequired :error="error('description')">
+    <UiField label="Description" isRequired :error="error('description')">
       <UiInput v-model="formData.description" />
     </UiField>
 
-    <UiField label="Страна" isRequired :error="error('country')">
+    <UiField label="Country" isRequired :error="error('country')">
       <UiInput v-model="formData.country" />
     </UiField>
 
     <UiUpload
-      label="Логотип"
+      label="Logo"
       :file="logoFile"
       isSingle
       isRequired
@@ -26,15 +26,15 @@
 
     <div v-if="formData.logoUrl">
       <div :class="$style.logo">
-        <img :src="`${PATH_UPLOAD}/${formData.logoUrl}`" alt="Логотип компании" />
+        <img :src="`${PATH_UPLOAD}/${formData.logoUrl}`" alt="Logo" />
       </div>
 
-      <UiButton @click="deleteLogoFile" layout="plain">Удалить</UiButton>
+      <UiButton @click="deleteLogoFile" layout="plain">Delete</UiButton>
     </div>
 
     <div :class="$style.buttons">
-      <UiButton type="submit" :isDisabled="isLoading">Отправить</UiButton>
-      <UiButton @click="$router.go(-1)" layout="secondary" :isDisabled="isLoading">Назад</UiButton>
+      <UiButton type="submit" :isDisabled="isLoading">Submit</UiButton>
+      <UiButton @click="$router.go(-1)" layout="secondary" :isDisabled="isLoading">Back</UiButton>
     </div>
   </form>
 </template>
@@ -69,7 +69,7 @@ const { mutate, isLoading } = postManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
     router.push(URL_MANUFACTURER);
-    toast.success('Производитель добавлен');
+    toast.success('Manufacturer added');
   },
 });
 
@@ -109,7 +109,7 @@ const { mutate: mutateUploadFile } = uploadFile({
   onSuccess: (data: string) => {
     formData.value.logoUrl = data;
     removeLogoFile();
-    toast.success('Логотип добавлен');
+    toast.success('Logo added');
   },
 });
 </script>
