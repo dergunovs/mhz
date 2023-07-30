@@ -7,6 +7,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
+      output2: ${{ steps.step2.outputs.test }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,10 +38,18 @@ jobs:
         run: npm run lint
       - name: TS check
         run: npm run ts
+      - name: Upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: mhz
   deploy:
     needs: check
     runs-on: ubuntu-latest
     steps:
+      - name: Download build
+        uses: actions/download-artifact@v3
+        with:
+          name: mhz
       - name: Deploy Admin
         uses: appleboy/scp-action@master
         with:
