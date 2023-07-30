@@ -70,7 +70,6 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           source: apps/admin/dist
           target: ${{ secrets.SSH_PATH }}
-          rm: true
       - name: Deploy Backend
         uses: appleboy/scp-action@master
         with:
@@ -87,7 +86,6 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           source: "packages/ui/storybook-static"
           target: ${{ secrets.SSH_PATH }}
-          rm: true
       - name: Install Backend deps and Reload PM2
         uses: appleboy/ssh-action@master
         with:
