@@ -53,14 +53,14 @@ function show(type: string, message: string) {
   document.querySelector('.uiToastBlock')?.append(toast);
 
   setTimeout(() => toast.classList.add('uiToastVisible'), 200);
-  setTimeout(() => toast.classList.remove('uiToastVisible'), 92800);
+  setTimeout(() => toast.classList.remove('uiToastVisible'), 3800);
 
   setTimeout(() => {
     toast.remove();
     if (body && !body.contains(document.querySelector('.uiToast'))) {
       document.querySelector('.uiToastBlock')?.remove();
     }
-  }, 93000);
+  }, 4000);
 }
 
 const toast = { success, error, info };
