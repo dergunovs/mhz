@@ -35,28 +35,33 @@ jobs:
         run: npm run lint
       - name: TS check
         run: npm run ts
-      - name: Upload build
-        uses: actions/upload-artifact@v3
-        with:
-          name: mhz
-          path: |
-            apps/admin/dist
-            apps/back/build
-            apps/back/package.json
-            apps/back/.env
-            packages/ui/storybook-static
   deploy:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - name: Download build
-        uses: actions/download-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Node
+        uses: actions/setup-node@v3
         with:
-          name: mhz
-      - name: Remove artifact
-        uses: c-hive/gha-remove-artifacts@v1
+          node-version: "18.17.0"
+      - name: Install
+        run: npm i
+      - name: Create Admin .env
+        uses: SpicyPizza/create-envfile@v2.0.2
         with:
-          age: "0 days"
+          envkey_VITE_API: ${{ secrets.ENV_VITE_API }}
+          envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
+          directory: apps/admin/
+      - name: Create Backend .env
+        uses: SpicyPizza/create-envfile@v2.0.2
+        with:
+          envkey_DATABASE: ${{ secrets.DATABASE }}
+          envkey_SECRET: ${{ secrets.SECRET }}
+          envkey_PORT: ${{ secrets.PORT }}
+          directory: apps/back/
+      - name: Build
+        run: npm run build -- --filter=mhz-admin --filter=mhz-back --filter=mhz-ui
       - name: Deploy Admin
         uses: appleboy/scp-action@master
         with:
