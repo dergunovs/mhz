@@ -32,7 +32,9 @@ export const Primary: Story = {
     components: { UiField, UiInput },
     setup: () => ({ args, argTypes }),
 
-    template: html` <UiField v-bind="args"><UiInput modelValue="Text"></UiField>`,
+    template: html` <UiField v-bind="args">
+      <UiInput modelValue="Text" />
+    </UiField>`,
   }),
   argTypes,
 };
