@@ -53,6 +53,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: mhz
+      - name: Remove artifact
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          age: "0 days"
       - name: Deploy Admin
         uses: appleboy/scp-action@master
         with:
