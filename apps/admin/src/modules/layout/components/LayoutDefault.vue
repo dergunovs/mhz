@@ -44,6 +44,6 @@ import NavList from '@/layout/components/NavList.vue';
   margin: 32px;
   overflow: hidden;
   background-color: var(--color-white);
-  border-radius: 24px;
+  border-radius: 16px;
 }
 </style>

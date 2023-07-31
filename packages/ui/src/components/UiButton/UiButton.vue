@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<IProps>(), {
   user-select: none;
   background: var(--color-primary);
   border: 2px solid var(--color-transparent);
-  border-radius: 24px;
+  border-radius: 16px;
   transition: all 200ms;
 
   &:hover {

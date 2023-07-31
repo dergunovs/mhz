@@ -5,6 +5,24 @@
     color: var(--color-white);
     background-color: var(--color-primary-dark);
   }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 8px 0;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-gray);
+    border-radius: 8px;
+
+    &:hover {
+      background: var(--color-gray-dark);
+    }
+  }
 }
 
 body {

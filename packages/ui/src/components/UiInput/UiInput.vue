@@ -1,24 +1,42 @@
 <template>
-  <div :class="$style.inputBlock">
+  <div
+    @click="emit('toggle')"
+    @keydown.space="emit('toggle')"
+    :class="$style.inputBlock"
+    :data-mode="props.mode"
+    :tabindex="props.mode === 'default' ? '0' : '1'"
+  >
     <input
       :value="props.modelValue"
       @input="handleInput($event.target)"
       :disabled="props.isDisabled"
       :class="$style.input"
       v-bind="$attrs"
+      :data-mode="props.mode"
+      :data-append-icon="!!props.appendIcon"
+      :tabindex="props.mode === 'default' ? '0' : '-1'"
     />
+
+    <component v-if="props.appendIcon" :is="props.appendIcon" :class="$style.icon" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { FunctionalComponent } from 'vue';
+
 interface IProps {
   modelValue: string | number | null;
   isDisabled?: boolean;
+  mode?: 'default' | 'select' | 'multiselect';
+  appendIcon?: FunctionalComponent;
 }
 
-const props = defineProps<IProps>();
+const props = withDefaults(defineProps<IProps>(), {
+  mode: 'default',
+  appendIcon: undefined,
+});
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'toggle']);
 
 function handleInput(target: EventTarget | null) {
   emit('update:modelValue', (target as HTMLInputElement).value);
@@ -28,16 +46,28 @@ function handleInput(target: EventTarget | null) {
 <style module lang="scss">
 .inputBlock {
   position: relative;
+  display: flex;
   width: 100%;
+  border-radius: 16px;
+
+  &[data-mode='select'] {
+    cursor: pointer;
+
+    &:hover {
+      .input {
+        border: 1px solid var(--color-gray-dark-extra);
+      }
+    }
+  }
 }
 
 .input {
   width: 100%;
   height: 44px;
-  padding: 0 24px;
+  padding: 0 16px;
   font-size: 1rem;
   border: 1px solid var(--color-gray);
-  border-radius: 24px;
+  border-radius: 16px;
   outline: none;
 
   &:hover {
@@ -57,5 +87,19 @@ function handleInput(target: EventTarget | null) {
   &::placeholder {
     color: var(--color-gray-dark-extra);
   }
+
+  &[data-mode='select'] {
+    pointer-events: none;
+  }
+
+  &[data-append-icon='true'] {
+    padding-right: 40px;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: calc(50% - 4px);
+  right: 16px;
 }
 </style>
