@@ -1,5 +1,5 @@
 <template>
-  <label :class="$style.field">
+  <label @click.prevent :class="$style.field">
     <span>
       <span>{{ props.label }}</span>
       <span v-if="props.isRequired" :class="$style.error">*</span>

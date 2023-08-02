@@ -28,6 +28,7 @@
           :class="$style.option"
           tabindex="0"
           ref="optionElement"
+          :data-current="props.modelValue === option"
         >
           {{ option }}
         </div>
@@ -59,7 +60,9 @@ const emit = defineEmits(['update:modelValue']);
 const filterQuery = ref('');
 
 const optionsComputed = computed(() => {
-  return props.isFilter ? props.options.filter((option) => option.includes(filterQuery.value)) : props.options;
+  return props.isFilter
+    ? props.options.filter((option) => option.toLowerCase().includes(filterQuery.value.toLowerCase()))
+    : props.options;
 });
 
 const isShowOptions = ref(false);
@@ -73,7 +76,7 @@ function handleUpdate(value: string) {
 
 function setFocusedOptionIndex(index: number) {
   if (index < 0 || index === optionsComputed.value.length || props.isFilter) return;
-  optionElement.value[index].focus();
+  optionElement.value[index]?.focus();
 }
 
 function hideOptions() {
@@ -140,6 +143,16 @@ onClickOutside(containerElement, () => {
   &:focus {
     color: var(--color-white);
     background-color: var(--color-primary);
+  }
+
+  &[data-current='true'] {
+    color: var(--color-black);
+    background-color: var(--color-gray-light);
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-gray);
+    }
   }
 }
 </style>

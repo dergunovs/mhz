@@ -9,7 +9,7 @@
     </UiField>
 
     <UiField label="Country" isRequired :error="error('country')">
-      <UiInput v-model="formData.country" />
+      <UiSelect v-model="formData.country" :options="countries" isFilter />
     </UiField>
 
     <UiUpload
@@ -45,9 +45,10 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, UiUpload, toast } from 'mhz-ui';
+import { UiField, UiInput, UiButton, UiUpload, toast, UiSelect } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
+import { countries } from 'mhz-countries';
 
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer } from '@/manufacturer/services';
