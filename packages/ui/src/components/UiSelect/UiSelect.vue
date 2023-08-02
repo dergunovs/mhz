@@ -3,29 +3,37 @@
     <UiInput
       :modelValue="props.modelValue"
       @update="handleUpdate"
-      @toggle="toggleOptions"
+      @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
       :placeholder="!props.modelValue && 'Choose variant'"
       :appendIcon="isShowOptions ? IconOpened : IconClosed"
     />
 
+    <div v-if="props.isFilter && isShowOptions" :class="$style.filter">
+      <UiInput v-model="filterQuery" placeholder="Filter Variants" isFocus />
+    </div>
+
     <div v-if="isShowOptions" :class="$style.options" ref="optionsElement">
-      <div
-        v-for="(option, index) in optionsComputed"
-        :key="option"
-        @click="setOption(option)"
-        @keydown.enter="setOption(option)"
-        @keydown.space="setOption(option)"
-        @mouseover="setFocusedOptionIndex(index)"
-        @keydown.up="setFocusedOptionIndex(index - 1)"
-        @keydown.down="setFocusedOptionIndex(index + 1)"
-        @keydown.esc="toggleOptions"
-        :class="$style.option"
-        tabindex="0"
-        ref="optionElement"
-      >
-        {{ option }}
+      <div v-if="optionsComputed.length">
+        <div
+          v-for="(option, index) in optionsComputed"
+          :key="`${option}-${index}`"
+          @click="setOption(option)"
+          @keydown.enter="setOption(option)"
+          @keydown.space="setOption(option)"
+          @mouseenter="setFocusedOptionIndex(index)"
+          @keydown.up="setFocusedOptionIndex(index - 1)"
+          @keydown.down="setFocusedOptionIndex(index + 1)"
+          @keydown.esc="isShowOptions ? hideOptions() : showOptions()"
+          :class="$style.option"
+          tabindex="0"
+          ref="optionElement"
+        >
+          {{ option }}
+        </div>
       </div>
+
+      <div v-else :class="$style.option">No results</div>
     </div>
   </div>
 </template>
@@ -42,12 +50,17 @@ import IconOpened from './icons/opened.svg?component';
 interface IProps {
   modelValue: string;
   options: string[];
+  isFilter?: boolean;
 }
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['update:modelValue']);
 
-const optionsComputed = computed(() => props.options.filter((option) => option !== props.modelValue));
+const filterQuery = ref('');
+
+const optionsComputed = computed(() => {
+  return props.isFilter ? props.options.filter((option) => option.includes(filterQuery.value)) : props.options;
+});
 
 const isShowOptions = ref(false);
 
@@ -59,14 +72,19 @@ function handleUpdate(value: string) {
 }
 
 function setFocusedOptionIndex(index: number) {
-  if (index < 0 || index === optionsComputed.value.length) return;
+  if (index < 0 || index === optionsComputed.value.length || props.isFilter) return;
   optionElement.value[index].focus();
 }
 
-function toggleOptions() {
-  isShowOptions.value = !isShowOptions.value;
+function hideOptions() {
+  filterQuery.value = '';
+  isShowOptions.value = false;
+}
 
-  if (isShowOptions.value) {
+function showOptions() {
+  isShowOptions.value = true;
+
+  if (!props.isFilter) {
     setTimeout(() => {
       optionsElement.value?.scrollTo(0, 0);
       setFocusedOptionIndex(0);
@@ -76,19 +94,23 @@ function toggleOptions() {
 
 function setOption(option: string) {
   emit('update:modelValue', option);
-  isShowOptions.value = false;
+  hideOptions();
 }
 
 const containerElement = ref<HTMLElement>();
 
 onClickOutside(containerElement, () => {
-  isShowOptions.value = false;
+  hideOptions();
 });
 </script>
 
 <style module lang="scss">
 .container {
   position: relative;
+}
+
+.filter {
+  margin-top: 8px;
 }
 
 .options {

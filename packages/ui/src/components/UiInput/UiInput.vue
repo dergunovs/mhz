@@ -12,6 +12,7 @@
       :disabled="props.isDisabled"
       :class="$style.input"
       v-bind="$attrs"
+      ref="input"
       :data-mode="props.mode"
       :data-append-icon="!!props.appendIcon"
       :tabindex="props.mode === 'default' ? '0' : '-1'"
@@ -22,13 +23,14 @@
 </template>
 
 <script setup lang="ts">
-import { FunctionalComponent } from 'vue';
+import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
 
 interface IProps {
   modelValue: string | number | null;
   isDisabled?: boolean;
   mode?: 'default' | 'select' | 'multiselect';
   appendIcon?: FunctionalComponent;
+  isFocus?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -41,6 +43,15 @@ const emit = defineEmits(['update:modelValue', 'toggle']);
 function handleInput(target: EventTarget | null) {
   emit('update:modelValue', (target as HTMLInputElement).value);
 }
+
+const input = ref<HTMLElement>();
+
+onMounted(async () => {
+  if (props.isFocus) {
+    await nextTick();
+    input.value?.focus();
+  }
+});
 </script>
 
 <style module lang="scss">

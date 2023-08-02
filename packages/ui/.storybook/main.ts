@@ -9,7 +9,7 @@ const config: StorybookConfig = {
 
   framework: { name: '@storybook/vue3-vite', options: {} },
 
-  core: { disableTelemetry: true },
+  core: { disableTelemetry: true, disableWhatsNewNotifications: true },
 };
 
 export default config;
