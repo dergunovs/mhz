@@ -71,8 +71,12 @@ onBeforeUnmount(() => {
     vertical-align: top;
     border-top: 1px solid var(--color-gray);
 
-    &.cellLoading {
-      border-bottom: 0;
+    &[data-grow] {
+      width: 100%;
+    }
+
+    &[data-no-wrap] {
+      text-wrap: nowrap;
     }
   }
 }

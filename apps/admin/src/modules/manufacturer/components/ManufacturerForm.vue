@@ -26,7 +26,7 @@
 
     <div v-if="formData.logoUrl">
       <div :class="$style.logo">
-        <img :src="`${PATH_UPLOAD}/${formData.logoUrl}`" alt="Logo" />
+        <img :src="`${PATH_UPLOAD}/${formData.logoUrl}`" width="200" alt="Logo" loading="lazy" />
       </div>
 
       <UiButton @click="deleteLogoFile" layout="plain">Delete</UiButton>

@@ -1,19 +1,16 @@
 <template>
   <UiTable :headers="tableHeaders">
     <tr v-for="manufacturer in props.manufacturers" :key="manufacturer._id">
-      <td width="100%">
+      <td data-grow>
         <RouterLink :to="`${URL_MANUFACTURER_EDIT}/${manufacturer._id}`">
-          <img
-            :src="`${PATH_UPLOAD}/${manufacturer.logoUrl}`"
-            :alt="manufacturer.title"
-            :title="manufacturer.title"
-            width="80"
-            loading="lazy"
-          />
+          {{ manufacturer.title }}
         </RouterLink>
       </td>
-      <td>
-        {{ formatDate(manufacturer.date_created) }}
+      <td data-no-wrap>
+        {{ formatDateTime(manufacturer.date_created) }}
+      </td>
+      <td data-no-wrap>
+        {{ formatDateTime(manufacturer.date_updated) }}
       </td>
       <td>
         <UiButton @click="mutate(manufacturer._id)" layout="plain">Delete</UiButton>
@@ -27,11 +24,10 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { IManufacturer } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDate } from 'mhz-helpers';
+import { formatDateTime } from 'mhz-helpers';
 
 import { deleteManufacturer } from '@/manufacturer/services';
 import { API_MANUFACTURER, URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
-import { PATH_UPLOAD } from '@/common/constants';
 
 interface IProps {
   manufacturers: IManufacturer[];
@@ -39,7 +35,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const tableHeaders = ['Manufacturer', 'Created', ''];
+const tableHeaders = ['Manufacturer', 'Created', 'Updated', ''];
 
 const queryClient = useQueryClient();
 

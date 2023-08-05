@@ -8,6 +8,7 @@ const categoryFieldSchema = new Schema<ICategoryField>({
   type: { type: String, required: true },
   value: { type: Schema.Types.Mixed, required: true },
   date_created: { type: Date, default: Date.now },
+  date_updated: { type: Date },
 });
 
 export default model('CategoryField', categoryFieldSchema);

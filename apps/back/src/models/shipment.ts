@@ -13,6 +13,7 @@ const shipmentSchema = new Schema<IShipment>({
   price: { type: Number, required: true },
   duration: { type: Number, required: true },
   date_created: { type: Date, default: Date.now },
+  date_updated: { type: Date },
 });
 
 export default model('Shipment', shipmentSchema);

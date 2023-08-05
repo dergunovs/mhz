@@ -18,6 +18,7 @@ const configurationSchema = new Schema<IConfiguration>({
   keyboard: { type: Schema.Types.ObjectId, ref: 'Product' },
   mouse: { type: Schema.Types.ObjectId, ref: 'Product' },
   date_created: { type: Date, default: Date.now },
+  date_updated: { type: Date },
 });
 
 export default model('Configuration', configurationSchema);

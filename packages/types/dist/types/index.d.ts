@@ -1,6 +1,7 @@
 interface IEntity {
   _id?: number;
   date_created?: Date;
+  date_updated?: Date;
 }
 
 export interface IAdress {
@@ -17,7 +18,6 @@ export interface IManager extends IEntity {
   password: string;
   email: string;
   date_logged_in?: Date;
-  date_updated?: Date;
 }
 
 export interface ICustomer extends IEntity {
@@ -35,7 +35,6 @@ export interface ICustomer extends IEntity {
   configurations?: IConfiguration[];
   adress?: IAdress;
   date_logged_in?: Date;
-  date_updated?: Date;
 }
 
 export interface ICart extends IEntity {

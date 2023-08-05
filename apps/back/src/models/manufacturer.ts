@@ -8,6 +8,7 @@ const manufacturerSchema = new Schema<IManufacturer>({
   logoUrl: { type: String, required: true },
   country: { type: String, required: true },
   date_created: { type: Date, default: Date.now },
+  date_updated: { type: Date },
 });
 
 export default model('Manufacturer', manufacturerSchema);

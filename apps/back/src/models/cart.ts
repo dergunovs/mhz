@@ -12,6 +12,7 @@ const cartSchema = new Schema<ICart>({
   isShared: { type: Boolean, required: true },
   user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   date_created: { type: Date, default: Date.now },
+  date_updated: { type: Date },
 });
 
 export default model('Cart', cartSchema);

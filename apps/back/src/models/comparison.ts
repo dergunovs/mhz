@@ -7,6 +7,7 @@ const comparisonSchema = new Schema<IComparison>({
   category: { type: Schema.Types.ObjectId, required: true, ref: 'Category' },
   user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   date_created: { type: Date, default: Date.now },
+  date_updated: { type: Date },
 });
 
 export default model('Comparison', comparisonSchema);

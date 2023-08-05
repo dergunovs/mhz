@@ -12,6 +12,7 @@ const productSchema = new Schema<IProduct>({
   manufacturer: { type: Schema.Types.ObjectId, ref: 'Manufacturer' },
   fields: { type: [Schema.Types.ObjectId], ref: 'CategoryField' },
   date_created: { type: Date, default: Date.now },
+  date_updated: { type: Date },
 });
 
 export default model('Product', productSchema);
