@@ -4,7 +4,7 @@
       <ImageLogo :class="$style.logo" />
     </RouterLink>
 
-    <UiButton @click="logout">Log out</UiButton>
+    <UiButton @click="logout" layout="plain">Logout</UiButton>
   </header>
 </template>
 
@@ -24,7 +24,7 @@ import { logout } from '@/auth/composables';
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 80px;
+  height: 64px;
   padding: 16px 32px;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray);
@@ -32,7 +32,6 @@ import { logout } from '@/auth/composables';
 
 .logo {
   display: block;
-  width: 166px;
-  height: 25px;
+  width: 150px;
 }
 </style>

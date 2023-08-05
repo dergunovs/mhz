@@ -78,6 +78,7 @@ const props = withDefaults(defineProps<IProps>(), {
   &[data-layout='plain'] {
     height: auto;
     padding: 0;
+    font-size: 1rem;
     color: var(--color-primary);
     text-decoration: underline;
     background: none;

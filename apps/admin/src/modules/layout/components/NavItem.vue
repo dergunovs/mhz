@@ -20,13 +20,15 @@ const props = defineProps<IProps>();
   display: flex;
   gap: 8px;
   align-items: center;
-  padding: 8px 0;
+  padding: 12px 16px;
   color: var(--color-black);
   text-decoration: none;
+  border-radius: 16px;
 
   &:hover,
   &:global(.router-link-active) {
-    color: var(--color-primary);
+    color: var(--color-white);
+    background-color: var(--color-primary);
   }
 }
 

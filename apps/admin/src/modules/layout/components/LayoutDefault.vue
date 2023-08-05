@@ -26,20 +26,20 @@ import NavList from '@/layout/components/NavList.vue';
 
 .main {
   display: flex;
-  height: calc(100vh - 80px);
-  margin-top: 80px;
+  height: calc(100vh - 64px);
+  margin-top: 64px;
   overflow-y: auto;
 }
 
 .contentBlock {
   flex: 1;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 64px);
   overflow-y: auto;
   background-color: var(--color-gray-light);
 }
 
 .content {
-  min-height: calc(100vh - 80px - 64px);
+  min-height: calc(100vh - 128px);
   padding: 32px;
   margin: 32px;
   overflow: hidden;
