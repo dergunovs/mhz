@@ -5,7 +5,7 @@
     </UiField>
 
     <UiField label="Description" isRequired :error="error('description')">
-      <UiInput v-model="formData.description" />
+      <UiEditor v-model="formData.description" />
     </UiField>
 
     <UiField label="Country" isRequired :error="error('country')">
@@ -61,12 +61,11 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, UiUpload, toast, UiSelect } from 'mhz-ui';
+import { UiField, UiInput, UiButton, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { countries } from 'mhz-countries';
 import { clone } from 'mhz-helpers';
-
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer, updateManufacturer, deleteManufacturer } from '@/manufacturer/services';
 import { uploadFile, deleteFile } from '@/common/services';

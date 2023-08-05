@@ -23,6 +23,9 @@
     "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@tiptap/pm": "2.0.4",
+    "@tiptap/starter-kit": "2.0.4",
+    "@tiptap/vue-3": "2.0.4",
     "@vueuse/core": "10.3.0",
     "@vueuse/integrations": "10.3.0",
     "vue": "3.3.4"
