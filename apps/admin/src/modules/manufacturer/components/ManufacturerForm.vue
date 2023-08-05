@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit" :class="$style.form">
+  <form @submit.prevent="props.manufacturer ? update() : submit()" :class="$style.form">
     <UiField label="Title" isRequired :error="error('title')">
       <UiInput v-model="formData.title" />
     </UiField>
@@ -33,14 +33,30 @@
     </div>
 
     <div :class="$style.buttons">
-      <UiButton type="submit" :isDisabled="isLoading">Submit</UiButton>
-      <UiButton @click="$router.go(-1)" layout="secondary" :isDisabled="isLoading">Back</UiButton>
+      <div :class="$style.buttonsInner">
+        <UiButton type="submit" :isDisabled="isLoadingPost || isLoadingUpdate">
+          {{ props.manufacturer ? 'Update' : 'Submit' }}
+        </UiButton>
+
+        <UiButton @click="router.go(-1)" layout="secondary" :isDisabled="isLoadingPost || isLoadingUpdate">
+          Back
+        </UiButton>
+      </div>
+
+      <UiButton
+        v-if="props.manufacturer?._id"
+        @click="mutateDelete(props.manufacturer._id)"
+        layout="secondary"
+        :isDisabled="isLoadingPost || isLoadingUpdate"
+      >
+        Delete
+      </UiButton>
     </div>
   </form>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
@@ -49,11 +65,18 @@ import { UiField, UiInput, UiButton, UiUpload, toast, UiSelect } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { countries } from 'mhz-countries';
+import { clone } from 'mhz-helpers';
 
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
-import { postManufacturer } from '@/manufacturer/services';
+import { postManufacturer, updateManufacturer, deleteManufacturer } from '@/manufacturer/services';
 import { uploadFile, deleteFile } from '@/common/services';
 import { PATH_UPLOAD } from '@/common/constants';
+
+interface IProps {
+  manufacturer?: IManufacturer;
+}
+
+const props = defineProps<IProps>();
 
 const queryClient = useQueryClient();
 
@@ -66,11 +89,29 @@ const formData = ref<IManufacturer>({
   country: '',
 });
 
-const { mutate, isLoading } = postManufacturer({
+const manufacturerId = computed(() => props.manufacturer?._id);
+
+const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
-    router.push(URL_MANUFACTURER);
     toast.success('Manufacturer added');
+    router.push(URL_MANUFACTURER);
+  },
+});
+
+const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer(manufacturerId, {
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, props.manufacturer?._id], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
+    toast.success('Manufacturer updated');
+  },
+});
+
+const { mutate: mutateDelete } = deleteManufacturer({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
+    toast.success('Manufacturer deleted');
+    router.push(URL_MANUFACTURER);
   },
 });
 
@@ -86,7 +127,11 @@ const rules = computed(() => {
 const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
-  if (isValid()) mutate(formData.value);
+  if (isValid()) mutatePost(formData.value);
+}
+
+function update() {
+  if (isValid()) mutateUpdate(formData.value);
 }
 
 const { mutate: mutateDeleteFile } = deleteFile();
@@ -113,6 +158,10 @@ const { mutate: mutateUploadFile } = uploadFile({
     toast.success('Logo added');
   },
 });
+
+onMounted(() => {
+  if (props.manufacturer) formData.value = clone(props.manufacturer);
+});
 </script>
 
 <style module lang="scss">
@@ -129,5 +178,10 @@ const { mutate: mutateUploadFile } = uploadFile({
 .buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.buttonsInner {
+  display: flex;
+  gap: 16px;
 }
 </style>

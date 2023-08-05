@@ -14,6 +14,24 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
+  fastify.get<{ Params: { id: string } }>('/:id', async function (request, reply) {
+    try {
+      const manufacturer = await Manufacturer.findOne({ _id: request.params.id }).lean().exec();
+      reply.code(200).send(manufacturer);
+    } catch (err) {
+      reply.code(500).send({ message: err });
+    }
+  });
+
+  fastify.patch<{ Body: IManufacturer; Params: { id: string } }>('/:id', async function (request, reply) {
+    try {
+      await Manufacturer.findOneAndUpdate({ _id: request.params.id }, request.body);
+      reply.code(200).send({ message: 'updated' });
+    } catch (err) {
+      reply.code(500).send({ message: err });
+    }
+  });
+
   fastify.post<{ Body: IManufacturer }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
     try {
       const manufacturer = new Manufacturer(request.body);
