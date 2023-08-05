@@ -21,7 +21,7 @@
   "devDependencies": {
     "@turbo/gen": "1.10.12",
     "turbo": "1.10.12",
-    "prettier": "3.0.0"
+    "prettier": "3.0.1"
   },
   "packageManager": "npm@9.6.4",
   "workspaces": [
