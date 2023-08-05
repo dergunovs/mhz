@@ -2,9 +2,7 @@
   <div>
     <PageTitle>Add manufacturer</PageTitle>
 
-    <div :class="$style.form">
-      <ManufacturerForm />
-    </div>
+    <ManufacturerForm />
   </div>
 </template>
 
@@ -12,9 +10,3 @@
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerForm from '@/manufacturer/components/ManufacturerForm.vue';
 </script>
-
-<style module lang="scss">
-.form {
-  width: 300px;
-}
-</style>

@@ -1,4 +1,4 @@
-import { URL_MANUFACTURER, URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
+import { URL_MANUFACTURER, URL_MANUFACTURER_CREATE, URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
 
 export const manufacturerRoutes = [
   {
@@ -12,7 +12,7 @@ export const manufacturerRoutes = [
     component: () => import('@/manufacturer/pages/ManufacturerCreatePage.vue'),
   },
   {
-    path: `${URL_MANUFACTURER}/edit/:id`,
+    path: `${URL_MANUFACTURER_EDIT}/:id`,
     name: 'ManufacturerEdit',
     component: () => import('@/manufacturer/pages/ManufacturerEditPage.vue'),
   },

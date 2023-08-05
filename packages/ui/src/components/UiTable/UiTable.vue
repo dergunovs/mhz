@@ -68,6 +68,7 @@ onBeforeUnmount(() => {
 
   td {
     padding: 6px 16px;
+    vertical-align: top;
     border-top: 1px solid var(--color-gray);
 
     &.cellLoading {

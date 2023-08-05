@@ -2,7 +2,7 @@
   <div>
     <PageTitle>Manufacturers</PageTitle>
 
-    <div :class="$style.linkBlock">
+    <div :class="$style.link">
       <RouterLink :to="URL_MANUFACTURER_CREATE">Add manufacturer</RouterLink>
     </div>
 
@@ -21,7 +21,7 @@ const { data: manufacturers } = getManufacturers();
 </script>
 
 <style module lang="scss">
-.linkBlock {
+.link {
   margin-bottom: 32px;
 }
 </style>
