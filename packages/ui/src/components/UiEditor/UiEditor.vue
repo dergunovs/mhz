@@ -1,5 +1,13 @@
 <template>
-  <EditorContent :editor="editor" :class="$style.editor" />
+  <div :class="$style.container">
+    <div :class="$style.actions">
+      <button v-for="action in actions" :key="action._id" @click="action.method()" :class="$style.action" type="button">
+        {{ action.name }}
+      </button>
+    </div>
+
+    <EditorContent :editor="editor" :class="$style.editor" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -14,7 +22,6 @@ interface IProps {
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['update:modelValue']);
-
 const content = computed(() => props.modelValue);
 
 const editor = useEditor({
@@ -24,6 +31,13 @@ const editor = useEditor({
     emit('update:modelValue', editor.value?.getHTML());
   },
 });
+
+const actions = [
+  { _id: 1, name: 'b', method: () => editor.value?.chain().focus().toggleBold().run() },
+  { _id: 2, name: 'i', method: () => editor.value?.chain().focus().toggleItalic().run() },
+  { _id: 3, name: 'h2', method: () => editor.value?.chain().focus().toggleHeading({ level: 2 }).run() },
+  { _id: 4, name: 'h3', method: () => editor.value?.chain().focus().toggleHeading({ level: 3 }).run() },
+];
 
 watch(
   () => props.modelValue,
@@ -44,14 +58,12 @@ onBeforeUnmount(() => {
 </script>
 
 <style module lang="scss">
-.editor {
+.container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  min-height: 44px;
-  padding: 8px 16px;
-  font-size: 1rem;
   border: 1px solid var(--color-gray);
   border-radius: 16px;
-  outline: none;
 
   &:focus-within {
     border: 1px solid var(--color-primary);
@@ -64,6 +76,36 @@ onBeforeUnmount(() => {
       border: 1px solid var(--color-gray-dark-extra);
     }
   }
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  padding: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--color-transparent);
+  border: none;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+}
+
+.editor {
+  padding: 8px 16px;
+  font-size: 1rem;
+  outline: none;
 
   :global(.ProseMirror) {
     outline: none;
