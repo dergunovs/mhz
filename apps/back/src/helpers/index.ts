@@ -13,7 +13,7 @@ export function deleteFile(filename?: string) {
 export async function paginate<T>(Entity: Model<T>, pageQuery?: string) {
   try {
     const page = Number(pageQuery) || 1;
-    const limit = 2;
+    const limit = 20;
 
     const count = await Entity.estimatedDocumentCount();
     const total = Math.round(count / limit) === 0 ? 1 : Math.round(count / limit);
