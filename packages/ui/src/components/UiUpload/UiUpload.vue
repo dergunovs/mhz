@@ -18,7 +18,7 @@
           Add file
         </UiButton>
 
-        <div :class="$style.text" :data-error="!!props.error">Size up to 10 Mb, jpg, png</div>
+        <div :class="$style.text" :data-error="!!props.error">Size up to 10 Mb, {{ props.extensions.join(', ') }}.</div>
       </div>
 
       <input
@@ -26,7 +26,7 @@
         :class="$style.input"
         :key="inputKey"
         type="file"
-        accept=".jpg,.png"
+        :accept="accept"
         @input="handleFileChange($event.target)"
       />
 
@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
 
@@ -65,6 +65,7 @@ interface IProps {
   label?: string;
   file?: File;
   files?: File[] | never[];
+  extensions?: string[];
   error?: string | boolean;
   isDisabled?: boolean;
   isRequired?: boolean;
@@ -77,12 +78,15 @@ const props = withDefaults(defineProps<IProps>(), {
   error: undefined,
   file: undefined,
   files: () => [],
+  extensions: () => ['jpg', 'png'],
 });
 
 const emit = defineEmits(['add', 'remove', 'upload']);
 
 const input = ref<HTMLElement>();
 const inputKey = ref(0);
+
+const accept = computed(() => props.extensions.map((extension) => `.${extension}`).join());
 
 function emulateFileClickInput() {
   input?.value?.click?.();

@@ -66,6 +66,7 @@ import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { countries } from 'mhz-countries';
 import { clone } from 'mhz-helpers';
+
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer, updateManufacturer, deleteManufacturer } from '@/manufacturer/services';
 import { uploadFile, deleteFile } from '@/common/services';
@@ -92,7 +93,7 @@ const manufacturerId = computed(() => props.manufacturer?._id);
 
 const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, 1], exact: true });
     toast.success('Manufacturer added');
     router.push(URL_MANUFACTURER);
   },
@@ -101,14 +102,14 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer(manufacturerId, {
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, props.manufacturer?._id], exact: true });
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, 1], exact: true });
     toast.success('Manufacturer updated');
   },
 });
 
 const { mutate: mutateDelete } = deleteManufacturer({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, 1], exact: true });
     toast.success('Manufacturer deleted');
     router.push(URL_MANUFACTURER);
   },

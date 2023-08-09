@@ -20,6 +20,7 @@ const props = defineProps<IProps>();
   display: flex;
   gap: 8px;
   align-items: center;
+  width: 100%;
   padding: 12px 16px;
   color: var(--color-black);
   text-decoration: none;
