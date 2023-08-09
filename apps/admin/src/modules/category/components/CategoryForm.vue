@@ -8,6 +8,14 @@
       <UiEditor v-model="formData.description" />
     </UiField>
 
+    <div>
+      <UiButton @click="isShowCategoryFieldForm = true" v-if="!isShowCategoryFieldForm" layout="secondary">
+        Add Category Field
+      </UiButton>
+    </div>
+
+    <CategoryFieldForm v-if="isShowCategoryFieldForm" @hide="isShowCategoryFieldForm = false" />
+
     <UiUpload
       label="Icon"
       :file="iconFile"
@@ -63,6 +71,8 @@ import { ICategory } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { clone } from 'mhz-helpers';
 
+import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
+
 import { API_CATEGORY, URL_CATEGORY } from '@/category/constants';
 import { postCategory, updateCategory, deleteCategory } from '@/category/services';
 import { uploadFile, deleteFile } from '@/common/services';
@@ -83,6 +93,8 @@ const formData = ref<ICategory>({
   description: '',
   iconUrl: '',
 });
+
+const isShowCategoryFieldForm = ref(false);
 
 const categoryId = computed(() => props.category?._id);
 
@@ -145,16 +157,13 @@ function deleteIconFile() {
   formData.value.iconUrl = '';
 }
 
-const { mutate: mutateUploadFile } = uploadFile(
-  {
-    onSuccess: (data: string) => {
-      formData.value.iconUrl = data;
-      removeIconFile();
-      toast.success('Icon added');
-    },
+const { mutate: mutateUploadFile } = uploadFile({
+  onSuccess: (data: string) => {
+    formData.value.iconUrl = data;
+    removeIconFile();
+    toast.success('Icon added');
   },
-  '500'
-);
+});
 
 onMounted(() => {
   if (props.category) formData.value = clone(props.category);

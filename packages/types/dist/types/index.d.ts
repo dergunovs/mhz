@@ -49,18 +49,20 @@ export interface IShipment extends IEntity {
   duration: number;
 }
 
+export type ICategoryFieldType = "string" | "number" | "boolean";
+
 export interface ICategoryField extends IEntity {
   title: string;
-  description: string;
-  type: "string" | "number" | "boolean";
-  value?: string | number | boolean;
+  fieldType: ICategoryFieldType;
+  fieldValue: string | number | boolean;
+  fieldUnits: string;
 }
 
 export interface ICategory extends IEntity {
   title: string;
   description: string;
   iconUrl: string;
-  fields?: number[] | ICategoryField[];
+  fields?: ICategoryField[];
 }
 
 export interface IManufacturer extends IEntity {
