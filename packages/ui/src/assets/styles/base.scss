@@ -33,6 +33,7 @@ body {
 }
 
 a {
+  width: fit-content;
   color: var(--color-primary);
 
   &:hover {

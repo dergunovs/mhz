@@ -1,10 +1,23 @@
 import fs from 'fs';
 import { Model } from 'mongoose';
 import path from 'path';
+import sharp from 'sharp';
 
 export function deleteFile(filename?: string) {
   try {
     fs.unlinkSync(path.resolve(`./public/upload/${filename}`));
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function resizeFile(filename: string, width: string) {
+  try {
+    await sharp(`./public/upload/${filename}`).resize(Number(width)).toFile(`./public/upload/resized-${filename}`);
+
+    deleteFile(filename);
+
+    return `resized-${filename}`;
   } catch (err) {
     throw err;
   }

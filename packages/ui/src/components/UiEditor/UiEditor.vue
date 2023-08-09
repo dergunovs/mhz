@@ -103,6 +103,7 @@ onBeforeUnmount(() => {
 }
 
 .editor {
+  min-height: 120px;
   padding: 8px 16px;
   font-size: 1rem;
   outline: none;
