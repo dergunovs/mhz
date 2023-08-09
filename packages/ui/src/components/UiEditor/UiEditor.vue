@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
   &:hover {
     cursor: text;
 
-    &:not(&:focus-within) {
+    &:not(:focus-within) {
       border: 1px solid var(--color-gray-dark-extra);
     }
   }

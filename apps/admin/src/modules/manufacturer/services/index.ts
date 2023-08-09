@@ -1,4 +1,4 @@
-import { ComputedRef } from 'vue';
+import { ComputedRef, Ref } from 'vue';
 import { useMutation, useQuery } from '@tanstack/vue-query';
 
 import { IManufacturer } from 'mhz-types';
@@ -6,15 +6,15 @@ import { IManufacturer } from 'mhz-types';
 import { API_MANUFACTURER } from '@/manufacturer/constants';
 import { api } from '@/common/services/api';
 
-export function getManufacturers() {
-  async function fn(): Promise<IManufacturer[]> {
-    const { data } = await api.get(API_MANUFACTURER);
+export function getManufacturers(page: Ref<number>) {
+  async function fn(): Promise<{ data: IManufacturer[]; total: number }> {
+    const { data } = await api.get(API_MANUFACTURER, { params: { page: page.value || 1 } });
 
     return data;
   }
 
   return useQuery({
-    queryKey: [API_MANUFACTURER],
+    queryKey: [API_MANUFACTURER, page],
     queryFn: fn,
   });
 }

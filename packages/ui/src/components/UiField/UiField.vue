@@ -1,14 +1,14 @@
 <template>
-  <label @click.prevent :class="$style.field">
+  <div :class="$style.field">
     <span>
-      <span>{{ props.label }}</span>
+      <label>{{ props.label }}</label>
       <span v-if="props.isRequired" :class="$style.error">*</span>
     </span>
 
     <slot></slot>
 
     <div v-show="!!props.error" :class="$style.error">{{ props.error }}</div>
-  </label>
+  </div>
 </template>
 
 <script setup lang="ts">

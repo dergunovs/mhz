@@ -1,21 +1,23 @@
 <template>
   <UiTable :headers="tableHeaders">
-    <tr v-for="manufacturer in props.manufacturers" :key="manufacturer._id">
-      <td data-grow>
-        <RouterLink :to="`${URL_MANUFACTURER_EDIT}/${manufacturer._id}`">
-          {{ manufacturer.title }}
-        </RouterLink>
-      </td>
-      <td data-no-wrap>
-        {{ formatDateTime(manufacturer.date_created) }}
-      </td>
-      <td data-no-wrap>
-        {{ formatDateTime(manufacturer.date_updated) }}
-      </td>
-      <td>
-        <UiButton @click="mutate(manufacturer._id)" layout="plain">Delete</UiButton>
-      </td>
-    </tr>
+    <template v-if="props.manufacturers?.length">
+      <tr v-for="manufacturer in props.manufacturers" :key="manufacturer._id">
+        <td data-grow>
+          <RouterLink :to="`${URL_MANUFACTURER_EDIT}/${manufacturer._id}`">
+            {{ manufacturer.title }}
+          </RouterLink>
+        </td>
+        <td data-no-wrap>
+          {{ formatDateTime(manufacturer.date_created) }}
+        </td>
+        <td data-no-wrap>
+          {{ formatDateTime(manufacturer.date_updated) }}
+        </td>
+        <td>
+          <UiButton @click="mutate(manufacturer._id)" layout="plain">Delete</UiButton>
+        </td>
+      </tr>
+    </template>
   </UiTable>
 </template>
 
@@ -30,7 +32,7 @@ import { deleteManufacturer } from '@/manufacturer/services';
 import { API_MANUFACTURER, URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
 
 interface IProps {
-  manufacturers: IManufacturer[];
+  manufacturers?: IManufacturer[];
 }
 
 const props = defineProps<IProps>();

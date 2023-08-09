@@ -5,4 +5,5 @@ export { default as UiTable } from './UiTable/UiTable.vue';
 export { default as UiUpload } from './UiUpload/UiUpload.vue';
 export { default as UiSelect } from './UiSelect/UiSelect.vue';
 export { default as UiEditor } from './UiEditor/UiEditor.vue';
+export { default as UiPagination } from './UiPagination/UiPagination.vue';
 export { default as toast } from './toast/toast';
