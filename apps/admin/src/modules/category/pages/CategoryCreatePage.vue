@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageTitle>Category</PageTitle>
+    <PageTitle>Add category</PageTitle>
 
     <CategoryForm />
   </div>

@@ -1,4 +1,4 @@
-import { URL_CATEGORY } from '@/category/constants';
+import { URL_CATEGORY, URL_CATEGORY_CREATE, URL_CATEGORY_EDIT } from '@/category/constants';
 
 export const categoryRoutes = [
   {
@@ -7,8 +7,13 @@ export const categoryRoutes = [
     component: () => import('@/category/pages/CategoryListPage.vue'),
   },
   {
-    path: `${URL_CATEGORY}/:id`,
-    name: 'Category',
-    component: () => import('@/category/pages/CategoryPage.vue'),
+    path: URL_CATEGORY_CREATE,
+    name: 'CategoryCreate',
+    component: () => import('@/category/pages/CategoryCreatePage.vue'),
+  },
+  {
+    path: `${URL_CATEGORY_EDIT}/:id`,
+    name: 'CategoryEdit',
+    component: () => import('@/category/pages/CategoryEditPage.vue'),
   },
 ];
