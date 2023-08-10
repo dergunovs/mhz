@@ -2,10 +2,43 @@
   <div>
     <PageTitle>Products</PageTitle>
 
-    <div>Products</div>
+    <div :class="$style.page">
+      <RouterLink :to="URL_PRODUCT_CREATE">Add product</RouterLink>
+
+      <ProductList :products="products" />
+
+      <UiPagination :page="page" :total="total" @update="updatePage" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+
+import { UiPagination } from 'mhz-ui';
+import { usePagination } from 'mhz-helpers';
+
 import PageTitle from '@/layout/components/PageTitle.vue';
+import ProductList from '@/product/components/ProductList.vue';
+
+import { getProducts } from '@/product/services';
+import { URL_PRODUCT_CREATE } from '@/product/constants';
+
+const page = ref(1);
+
+const { data } = getProducts(page);
+
+const { data: products, total, setPage } = usePagination(data);
+
+function updatePage(pageToSet: number) {
+  page.value = setPage(pageToSet, page.value);
+}
 </script>
+
+<style module lang="scss">
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+</style>

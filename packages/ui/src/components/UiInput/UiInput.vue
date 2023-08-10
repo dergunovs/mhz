@@ -26,7 +26,7 @@
 import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
 
 interface IProps {
-  modelValue?: string | number;
+  modelValue?: string | number | null;
   isDisabled?: boolean;
   mode?: 'default' | 'select' | 'multiselect';
   appendIcon?: FunctionalComponent;

@@ -19,6 +19,7 @@
       isRequired
       :isDisabled="!!formData.logoUrl"
       :error="error('logoUrl')"
+      :extensions="['png']"
       @add="addLogoFile"
       @remove="removeLogoFile"
       @upload="mutateUploadFile(logoFile)"

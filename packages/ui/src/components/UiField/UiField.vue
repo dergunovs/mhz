@@ -1,9 +1,6 @@
 <template>
   <div :class="$style.field">
-    <span>
-      <label>{{ props.label }}</label>
-      <span v-if="props.isRequired" :class="$style.error">*</span>
-    </span>
+    <label>{{ props.label }}<span v-if="props.isRequired" :class="$style.error">*</span></label>
 
     <slot></slot>
 

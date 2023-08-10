@@ -1,4 +1,4 @@
-import { URL_PRODUCT } from '@/product/constants';
+import { URL_PRODUCT, URL_PRODUCT_CREATE, URL_PRODUCT_EDIT } from '@/product/constants';
 
 export const productRoutes = [
   {
@@ -7,8 +7,13 @@ export const productRoutes = [
     component: () => import('@/product/pages/ProductListPage.vue'),
   },
   {
-    path: `${URL_PRODUCT}/:id`,
-    name: 'Product',
-    component: () => import('@/product/pages/ProductPage.vue'),
+    path: URL_PRODUCT_CREATE,
+    name: 'ProductCreate',
+    component: () => import('@/product/pages/ProductCreatePage.vue'),
+  },
+  {
+    path: `${URL_PRODUCT_EDIT}/:id`,
+    name: 'ProductEdit',
+    component: () => import('@/product/pages/ProductEditPage.vue'),
   },
 ];

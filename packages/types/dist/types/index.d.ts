@@ -75,11 +75,11 @@ export interface IManufacturer extends IEntity {
 export interface IProduct extends IEntity {
   title: string;
   description: string;
-  price: number;
+  price: number | null;
   isInStock: boolean;
   imageUrls: string[];
-  category: number | ICategory;
-  manufacturer: number | IManufacturer;
+  category: number | ICategory | null;
+  manufacturer: number | IManufacturer | null;
   fields?: number[] | ICategoryField[];
 }
 

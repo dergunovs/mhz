@@ -43,7 +43,7 @@
       isSingle
       isRequired
       :isDisabled="!!formData.iconUrl"
-      :extensions="['svg']"
+      :extensions="['png']"
       :error="error('iconUrl')"
       @add="addIconFile"
       @remove="removeIconFile"
@@ -172,7 +172,9 @@ function addCategoryField(field: ICategoryField) {
 
 function updateCategoryField(fieldToUpdate: ICategoryField) {
   formData.value.fields = formData.value.fields?.map((field) => {
-    return field._id === fieldToUpdate._id ? fieldToUpdate : field;
+    if (fieldToUpdate._id) {
+      return field._id === fieldToUpdate._id ? fieldToUpdate : field;
+    } else return field;
   });
 }
 
@@ -205,13 +207,16 @@ function deleteIconFile() {
   formData.value.iconUrl = '';
 }
 
-const { mutate: mutateUploadFile } = uploadFile({
-  onSuccess: (data: string) => {
-    formData.value.iconUrl = data;
-    removeIconFile();
-    toast.success('Icon added');
+const { mutate: mutateUploadFile } = uploadFile(
+  {
+    onSuccess: (data: string) => {
+      formData.value.iconUrl = data;
+      removeIconFile();
+      toast.success('Icon added');
+    },
   },
-});
+  '500'
+);
 
 onMounted(() => {
   if (props.category) formData.value = clone(props.category);

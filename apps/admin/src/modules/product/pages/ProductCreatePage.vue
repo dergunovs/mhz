@@ -1,11 +1,12 @@
 <template>
   <div>
-    <PageTitle>Product</PageTitle>
+    <PageTitle>Add product</PageTitle>
 
-    <div>Product</div>
+    <ProductForm />
   </div>
 </template>
 
 <script setup lang="ts">
 import PageTitle from '@/layout/components/PageTitle.vue';
+import ProductForm from '@/product/components/ProductForm.vue';
 </script>

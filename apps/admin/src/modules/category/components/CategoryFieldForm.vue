@@ -20,7 +20,7 @@
           {{ props.categoryField ? 'Update Field' : 'Submit Field' }}
         </UiButton>
 
-        <UiButton @click="emit('hide')" layout="secondary"> Cancel </UiButton>
+        <UiButton @click="emit('hide')" layout="secondary">Cancel</UiButton>
       </div>
 
       <UiButton v-if="props.categoryField?._id" @click="remove" layout="secondary">Delete</UiButton>
