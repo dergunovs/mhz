@@ -1,9 +1,9 @@
 import { Ref, ComputedRef } from 'vue';
 import { useQuery, useMutation } from '@tanstack/vue-query';
 
-import { ICategory, ICategoryField } from 'mhz-types';
+import { ICategory } from 'mhz-types';
 
-import { API_CATEGORY, API_CATEGORY_FIELD } from '@/category/constants';
+import { API_CATEGORY } from '@/category/constants';
 import { api } from '@/common/services/api';
 
 export function getCategories(page: Ref<number>) {
@@ -63,55 +63,6 @@ export function deleteCategory(options: object) {
 
   return useMutation({
     mutationKey: [API_CATEGORY],
-    mutationFn: fn,
-    ...options,
-  });
-}
-
-export function getCategoryField(id: ComputedRef<string>) {
-  async function fn(): Promise<ICategoryField> {
-    const { data } = await api.get(`${API_CATEGORY_FIELD}/${id.value}`);
-
-    return data;
-  }
-
-  return useQuery({
-    queryKey: [API_CATEGORY_FIELD, id],
-    queryFn: fn,
-  });
-}
-
-export function postCategoryField(options: object) {
-  async function fn(formData: ICategoryField) {
-    await api.post(API_CATEGORY_FIELD, formData);
-  }
-
-  return useMutation({
-    mutationKey: [API_CATEGORY_FIELD],
-    mutationFn: fn,
-    ...options,
-  });
-}
-
-export function updateCategoryField(id: ComputedRef<number | undefined>, options: object) {
-  async function fn(formData: ICategoryField) {
-    await api.patch(`${API_CATEGORY_FIELD}/${id.value}`, formData);
-  }
-
-  return useMutation({
-    mutationKey: [API_CATEGORY_FIELD, id],
-    mutationFn: fn,
-    ...options,
-  });
-}
-
-export function deleteCategoryField(options: object) {
-  async function fn(id?: number) {
-    await api.delete(`${API_CATEGORY_FIELD}/${id}`);
-  }
-
-  return useMutation({
-    mutationKey: [API_CATEGORY_FIELD],
     mutationFn: fn,
     ...options,
   });

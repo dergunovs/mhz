@@ -26,7 +26,7 @@
 import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
 
 interface IProps {
-  modelValue: string | number | boolean | null;
+  modelValue?: string | number;
   isDisabled?: boolean;
   mode?: 'default' | 'select' | 'multiselect';
   appendIcon?: FunctionalComponent;
@@ -34,6 +34,7 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
+  modelValue: '',
   mode: 'default',
   appendIcon: undefined,
 });

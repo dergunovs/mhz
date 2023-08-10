@@ -55,7 +55,7 @@ export interface ICategoryField extends IEntity {
   title: string;
   fieldType: ICategoryFieldType;
   fieldValue: string | number | boolean;
-  fieldUnits: string;
+  fieldUnits?: string;
 }
 
 export interface ICategory extends IEntity {

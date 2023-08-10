@@ -8,13 +8,34 @@
       <UiEditor v-model="formData.description" />
     </UiField>
 
+    <div v-if="formData.fields?.length">
+      <div>Fields</div>
+      <div v-for="(field, index) in formData.fields" :key="`${field.title}-${index}`" :class="$style.field">
+        <div>
+          <span>{{ index + 1 }}. {{ field.title }}, type: {{ field.fieldType }}</span>
+          <span v-if="field.fieldType === 'number'">, units: {{ field.fieldUnits }}</span>
+        </div>
+
+        <UiButton @click="editCategoryField(field)" :isDisabled="isShowCategoryFieldForm" layout="plain">
+          Edit
+        </UiButton>
+      </div>
+    </div>
+
     <div>
-      <UiButton @click="isShowCategoryFieldForm = true" v-if="!isShowCategoryFieldForm" layout="secondary">
+      <UiButton @click="showCategoryField" v-if="!isShowCategoryFieldForm" layout="secondary">
         Add Category Field
       </UiButton>
     </div>
 
-    <CategoryFieldForm v-if="isShowCategoryFieldForm" @hide="isShowCategoryFieldForm = false" />
+    <CategoryFieldForm
+      v-if="isShowCategoryFieldForm"
+      :categoryField="editableCategoryField"
+      @add="addCategoryField"
+      @update="updateCategoryField"
+      @delete="deleteCategoryField"
+      @hide="isShowCategoryFieldForm = false"
+    />
 
     <UiUpload
       label="Icon"
@@ -67,7 +88,7 @@ import { useRouter } from 'vue-router';
 import { useQueryClient } from '@tanstack/vue-query';
 
 import { UiField, UiInput, UiButton, UiUpload, toast, UiEditor } from 'mhz-ui';
-import { ICategory } from 'mhz-types';
+import { ICategory, ICategoryField } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { clone } from 'mhz-helpers';
 
@@ -92,9 +113,12 @@ const formData = ref<ICategory>({
   title: '',
   description: '',
   iconUrl: '',
+  fields: [],
 });
 
 const isShowCategoryFieldForm = ref(false);
+
+const editableCategoryField = ref<ICategoryField>();
 
 const categoryId = computed(() => props.category?._id);
 
@@ -131,6 +155,30 @@ const rules = computed(() => {
 });
 
 const { error, isValid } = useValidator(formData, rules);
+
+function showCategoryField() {
+  editableCategoryField.value = undefined;
+  isShowCategoryFieldForm.value = true;
+}
+
+function editCategoryField(field: ICategoryField) {
+  editableCategoryField.value = field;
+  isShowCategoryFieldForm.value = true;
+}
+
+function addCategoryField(field: ICategoryField) {
+  formData.value.fields?.push(field);
+}
+
+function updateCategoryField(fieldToUpdate: ICategoryField) {
+  formData.value.fields = formData.value.fields?.map((field) => {
+    return field._id === fieldToUpdate._id ? fieldToUpdate : field;
+  });
+}
+
+function deleteCategoryField(fieldId: number) {
+  formData.value.fields = formData.value.fields?.filter((field) => field._id !== fieldId);
+}
 
 function submit() {
   if (isValid()) mutatePost(formData.value);
@@ -189,5 +237,10 @@ onMounted(() => {
 .buttonsInner {
   display: flex;
   gap: 16px;
+}
+
+.field {
+  display: flex;
+  gap: 8px;
 }
 </style>
