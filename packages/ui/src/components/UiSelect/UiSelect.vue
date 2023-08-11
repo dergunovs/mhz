@@ -14,7 +14,7 @@
     </div>
 
     <div v-if="isShowOptions" :class="$style.options" ref="optionsElement">
-      <div v-if="optionsComputed?.length">
+      <div v-if="optionsComputed.length" ref="optionsInnerElement">
         <div
           v-for="(option, index) in optionsComputed"
           :key="`${option}-${index}`"
@@ -60,7 +60,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'reachedBottom']);
 
 const filterQuery = ref('');
 
@@ -83,6 +83,7 @@ const optionsComputed = computed(() => {
 const isShowOptions = ref(false);
 
 const optionsElement = ref<HTMLElement>();
+const optionsInnerElement = ref<HTMLElement>();
 const optionElement = ref<HTMLElement[]>([]);
 
 function handleUpdate(value: string) {
@@ -95,6 +96,8 @@ function setFocusedOptionIndex(index: number) {
 }
 
 function hideOptions() {
+  optionsElement.value?.removeEventListener('scroll', checkScroll, true);
+
   filterQuery.value = '';
   isShowOptions.value = false;
 }
@@ -106,6 +109,8 @@ function showOptions() {
     setTimeout(() => {
       optionsElement.value?.scrollTo(0, 0);
       setFocusedOptionIndex(0);
+
+      optionsElement.value?.addEventListener('scroll', checkScroll, true);
     }, 100);
   }
 }
@@ -113,6 +118,18 @@ function showOptions() {
 function setOption(option: IOption) {
   emit('update:modelValue', typeof props.modelValue === 'object' ? option : option._id);
   hideOptions();
+}
+
+function checkScroll() {
+  if (!optionsElement.value || !optionsInnerElement.value) return;
+
+  const scrollPosition =
+    optionsElement.value.getBoundingClientRect().y -
+    optionsInnerElement.value.getBoundingClientRect().y -
+    optionsInnerElement.value.scrollHeight +
+    optionsElement.value.getBoundingClientRect().height;
+
+  if (scrollPosition > -100) emit('reachedBottom');
 }
 
 const containerElement = ref<HTMLElement>();
@@ -133,11 +150,11 @@ onClickOutside(containerElement, () => {
 
 .options {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   min-width: 100%;
-  max-height: 240px;
+  max-height: 200px;
   margin-top: 8px;
   overflow-y: auto;
   background-color: var(--color-white);

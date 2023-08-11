@@ -8,15 +8,15 @@
       <UiEditor v-model="formData.description" />
     </UiField>
 
+    <UiField label="Category" isRequired :error="error('category')">
+      <UiSelect v-model="formData.category" :options="allCategoriesData" @reachedBottom="handleInfiniteScroll" />
+    </UiField>
+
     <UiField label="Price" isRequired :error="error('price')">
       <UiInput v-model="formData.price" type="number" />
     </UiField>
 
     <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
-
-    <UiField label="Category" isRequired :error="error('category')">
-      <UiSelect v-model="formData.category" :options="categories" />
-    </UiField>
 
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
@@ -78,10 +78,25 @@ const formData = ref<IProduct>({
 });
 
 const categoriesPage = ref(1);
+const allCategoriesData = ref<ICategory[]>([]);
 
-const { data } = getCategories(categoriesPage);
+const { data, isLoading } = getCategories(categoriesPage);
 
-const { data: categories } = usePagination(data);
+const { data: categories, setPage } = usePagination(data);
+
+watch(
+  () => categories.value,
+  () => {
+    if (categories.value) {
+      allCategoriesData.value = [...allCategoriesData.value, ...categories.value];
+    }
+  }
+);
+
+function handleInfiniteScroll() {
+  if (isLoading.value) return;
+  categoriesPage.value = setPage(categoriesPage.value + 1, categoriesPage.value);
+}
 
 const productId = computed(() => props.product?._id);
 
@@ -130,6 +145,7 @@ function update() {
 
 onMounted(() => {
   if (props.product) formData.value = clone(props.product);
+  if (categories.value) allCategoriesData.value = [...categories.value];
 });
 </script>
 

@@ -43,11 +43,11 @@ function checkTableSize(): void {
 
 onMounted(() => {
   checkTableSize();
-  window.addEventListener('resize', checkTableSize);
+  window.addEventListener('resize', checkTableSize, true);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', checkTableSize);
+  window.removeEventListener('resize', checkTableSize, true);
 });
 </script>
 

@@ -26,10 +26,10 @@ export async function resizeFile(filename: string, width: string) {
 export async function paginate<T>(Entity: Model<T>, pageQuery?: string) {
   try {
     const page = Number(pageQuery) || 1;
-    const limit = 20;
+    const limit = 10;
 
     const count = await Entity.estimatedDocumentCount();
-    const total = Math.round(count / limit) === 0 ? 1 : Math.round(count / limit);
+    const total = Math.ceil(count / limit);
 
     const data = await Entity.find()
       .skip((page - 1) * limit)
