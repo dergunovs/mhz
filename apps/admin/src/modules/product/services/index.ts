@@ -44,7 +44,7 @@ export function postProduct(options: object) {
   });
 }
 
-export function updateProduct(id: ComputedRef<number | undefined>, options: object) {
+export function updateProduct(id: ComputedRef<string | undefined>, options: object) {
   async function fn(formData: IProduct) {
     await api.patch(`${API_PRODUCT}/${id.value}`, formData);
   }
@@ -57,7 +57,7 @@ export function updateProduct(id: ComputedRef<number | undefined>, options: obje
 }
 
 export function deleteProduct(options: object) {
-  async function fn(id?: number) {
+  async function fn(id?: string) {
     await api.delete(`${API_PRODUCT}/${id}`);
   }
 

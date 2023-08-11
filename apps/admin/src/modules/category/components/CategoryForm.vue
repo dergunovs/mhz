@@ -1,26 +1,19 @@
 <template>
   <form @submit.prevent="props.category ? update() : submit()" :class="$style.form">
     <UiField label="Title" isRequired :error="error('title')">
-      <UiInput v-model="formData.title" />
+      <UiInput v-model="formData.title" isFocus />
     </UiField>
 
     <UiField label="Description" isRequired :error="error('description')">
       <UiEditor v-model="formData.description" />
     </UiField>
 
-    <div v-if="formData.fields?.length">
-      <div>Fields</div>
-      <div v-for="(field, index) in formData.fields" :key="`${field.title}-${index}`" :class="$style.field">
-        <div>
-          <span>{{ index + 1 }}. {{ field.title }}, type: {{ field.fieldType }}</span>
-          <span v-if="field.fieldType === 'number'">, units: {{ field.fieldUnits }}</span>
-        </div>
-
-        <UiButton @click="editCategoryField(field)" :isDisabled="isShowCategoryFieldForm" layout="plain">
-          Edit
-        </UiButton>
-      </div>
-    </div>
+    <CategoryFieldList
+      v-if="formData.fields?.length"
+      :fields="formData.fields"
+      :isShowCategoryFieldForm="isShowCategoryFieldForm"
+      @edit="editCategoryField"
+    />
 
     <div>
       <UiButton @click="showCategoryField" v-if="!isShowCategoryFieldForm" layout="secondary">
@@ -90,9 +83,10 @@ import { useQueryClient } from '@tanstack/vue-query';
 import { UiField, UiInput, UiButton, UiUpload, toast, UiEditor } from 'mhz-ui';
 import { ICategory, ICategoryField } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
-import { clone } from 'mhz-helpers';
+import { clone, deleteTempId } from 'mhz-helpers';
 
 import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
+import CategoryFieldList from '@/category/components/CategoryFieldList.vue';
 
 import { API_CATEGORY, URL_CATEGORY } from '@/category/constants';
 import { postCategory, updateCategory, deleteCategory } from '@/category/services';
@@ -171,23 +165,27 @@ function addCategoryField(field: ICategoryField) {
 }
 
 function updateCategoryField(fieldToUpdate: ICategoryField) {
-  formData.value.fields = formData.value.fields?.map((field) => {
-    if (fieldToUpdate._id) {
-      return field._id === fieldToUpdate._id ? fieldToUpdate : field;
-    } else return field;
-  });
+  formData.value.fields = formData.value.fields?.map((field) =>
+    field._id === fieldToUpdate._id ? fieldToUpdate : field
+  );
 }
 
-function deleteCategoryField(fieldId: number) {
+function deleteCategoryField(fieldId: string) {
   formData.value.fields = formData.value.fields?.filter((field) => field._id !== fieldId);
 }
 
 function submit() {
-  if (isValid()) mutatePost(formData.value);
+  if (isValid()) {
+    if (formData.value.fields) formData.value.fields = deleteTempId(formData.value.fields);
+    mutatePost(formData.value);
+  }
 }
 
 function update() {
-  if (isValid()) mutateUpdate(formData.value);
+  if (isValid()) {
+    if (formData.value.fields) formData.value.fields = deleteTempId(formData.value.fields);
+    mutateUpdate(formData.value);
+  }
 }
 
 const { mutate: mutateDeleteFile } = deleteFile();
@@ -242,10 +240,5 @@ onMounted(() => {
 .buttonsInner {
   display: flex;
   gap: 16px;
-}
-
-.field {
-  display: flex;
-  gap: 8px;
 }
 </style>

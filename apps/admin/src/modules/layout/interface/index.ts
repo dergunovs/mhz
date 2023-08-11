@@ -1,7 +1,7 @@
 import { FunctionalComponent } from 'vue';
 
 export interface INavItem {
-  _id: number;
+  _id: string;
   url: string;
   title: string;
   icon: FunctionalComponent;

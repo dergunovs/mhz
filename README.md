@@ -15,9 +15,9 @@ Fake PC hardware store monorepo.
 ## Installation
 
 1. Install Node.js 18 https://nodejs.org/en
-2. Install MongoDB 5 https://www.mongodb.com/try/download/community
-3. `npm install` - install deps from root folder
-4. Create .env files in `/apps` with examples in subfolders
+2. Install MongoDB 6 https://www.mongodb.com/try/download/community
+3. `npm install` - install deps
+4. Create .env files in `/apps` subfolders
 5. `npm run build` - build all apps and packages
 6. `npm run dev` - start all apps and packages in dev mode
-7. Create first manager in admin app at `/setup` url
+7. Create first manager in admin app with url `/setup`

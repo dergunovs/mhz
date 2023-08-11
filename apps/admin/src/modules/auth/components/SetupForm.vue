@@ -4,7 +4,7 @@
 
     <form @submit.prevent="submit" :class="$style.form">
       <UiField label="E-mail" isRequired :error="error('email')">
-        <UiInput v-model="formData.email" />
+        <UiInput v-model="formData.email" isFocus />
       </UiField>
 
       <UiField label="Password" isRequired :error="error('password')">

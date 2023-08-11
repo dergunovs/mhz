@@ -2,7 +2,7 @@
   <form @submit.prevent="props.categoryField ? update() : submit()" :class="$style.form">
     <div :class="$style.fields">
       <UiField label="Field title" isRequired :error="error('title')">
-        <UiInput v-model="formData.title" />
+        <UiInput v-model="formData.title" isFocus />
       </UiField>
 
       <UiField label="Field type" isRequired :error="error('fieldType')">
@@ -34,7 +34,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 import { UiField, UiInput, UiButton, UiSelect } from 'mhz-ui';
 import { ICategoryField } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
-import { clone } from 'mhz-helpers';
+import { clone, createTempId } from 'mhz-helpers';
 
 interface IProps {
   categoryField?: ICategoryField;
@@ -77,6 +77,7 @@ const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) {
+    if (!props.categoryField?._id) formData.value._id = createTempId();
     emit('add', formData.value);
     emit('hide');
   }
@@ -84,6 +85,7 @@ function submit() {
 
 function update() {
   if (isValid()) {
+    if (!props.categoryField?._id) formData.value._id = createTempId();
     emit('update', formData.value);
     emit('hide');
   }

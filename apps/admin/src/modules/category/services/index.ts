@@ -44,7 +44,7 @@ export function postCategory(options: object) {
   });
 }
 
-export function updateCategory(id: ComputedRef<number | undefined>, options: object) {
+export function updateCategory(id: ComputedRef<string | undefined>, options: object) {
   async function fn(formData: ICategory) {
     await api.patch(`${API_CATEGORY}/${id.value}`, formData);
   }
@@ -57,7 +57,7 @@ export function updateCategory(id: ComputedRef<number | undefined>, options: obj
 }
 
 export function deleteCategory(options: object) {
-  async function fn(id?: number) {
+  async function fn(id?: string) {
     await api.delete(`${API_CATEGORY}/${id}`);
   }
 

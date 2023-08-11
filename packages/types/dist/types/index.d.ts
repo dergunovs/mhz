@@ -1,5 +1,5 @@
 interface IEntity {
-  _id?: number;
+  _id?: string;
   date_created?: Date;
   date_updated?: Date;
 }
@@ -40,11 +40,11 @@ export interface ICustomer extends IEntity {
 export interface ICart extends IEntity {
   products: { product: IProduct; count: number }[];
   isShared: boolean;
-  user: number | ICustomer;
+  user: string | ICustomer;
 }
 
 export interface IShipment extends IEntity {
-  adress: number | IAdress;
+  adress: string | IAdress;
   price: number;
   duration: number;
 }
@@ -78,28 +78,28 @@ export interface IProduct extends IEntity {
   price: number | null;
   isInStock: boolean;
   imageUrls: string[];
-  category: number | ICategory | null;
-  manufacturer: number | IManufacturer | null;
-  fields?: number[] | ICategoryField[];
+  category: string | ICategory | null;
+  manufacturer: string | IManufacturer | null;
+  fields?: string[] | ICategoryField[];
 }
 
 export interface IOrder extends IEntity {
   products: { product: IProduct; count: number }[];
-  shipment: number | IShipment;
-  user: number | ICustomer;
+  shipment: string | IShipment;
+  user: string | ICustomer;
   status: "payment" | "delivery" | "done" | "canceled";
 }
 
 export interface IComparison extends IEntity {
   products: IProduct[];
-  category: number | ICategory;
-  user: number | ICustomer;
+  category: string | ICategory;
+  user: string | ICustomer;
 }
 
 export interface IConfiguration extends IEntity {
   title: string;
   isShared: boolean;
-  user: number | ICustomer;
+  user: string | ICustomer;
   processor: IProduct;
   cooler: IProduct;
   mainboard: IProduct;

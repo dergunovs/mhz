@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="props.manufacturer ? update() : submit()" :class="$style.form">
     <UiField label="Title" isRequired :error="error('title')">
-      <UiInput v-model="formData.title" />
+      <UiInput v-model="formData.title" isFocus />
     </UiField>
 
     <UiField label="Description" isRequired :error="error('description')">

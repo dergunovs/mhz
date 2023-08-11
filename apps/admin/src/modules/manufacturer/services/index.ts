@@ -44,7 +44,7 @@ export function postManufacturer(options: object) {
   });
 }
 
-export function updateManufacturer(id: ComputedRef<number | undefined>, options: object) {
+export function updateManufacturer(id: ComputedRef<string | undefined>, options: object) {
   async function fn(formData: IManufacturer) {
     await api.patch(`${API_MANUFACTURER}/${id.value}`, formData);
   }
@@ -57,7 +57,7 @@ export function updateManufacturer(id: ComputedRef<number | undefined>, options:
 }
 
 export function deleteManufacturer(options: object) {
-  async function fn(id?: number) {
+  async function fn(id?: string) {
     await api.delete(`${API_MANUFACTURER}/${id}`);
   }
 

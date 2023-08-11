@@ -19,12 +19,12 @@ import IconNavManager from '@/layout/icons/nav-manager.svg?component';
 import IconNavCustomer from '@/layout/icons/nav-customer.svg?component';
 
 export const NAV_ITEMS: INavItem[] = [
-  { _id: 1, url: URL_MAIN, title: 'Main', icon: IconNavMain },
-  { _id: 2, url: URL_PRODUCT, title: 'Products', icon: IconNavProduct },
-  { _id: 3, url: URL_CATEGORY, title: 'Categories', icon: IconNavCategory },
-  { _id: 4, url: URL_MANUFACTURER, title: 'Manufacturers', icon: IconNavManufacturer },
-  { _id: 5, url: URL_ORDER, title: 'Orders', icon: IconNavOrder },
-  { _id: 6, url: URL_SHIPMENT, title: 'Shipments', icon: IconNavShipment },
-  { _id: 7, url: URL_MANAGER, title: 'Managers', icon: IconNavManager },
-  { _id: 8, url: URL_CUSTOMER, title: 'Customers', icon: IconNavCustomer },
+  { _id: '1', url: URL_MAIN, title: 'Main', icon: IconNavMain },
+  { _id: '2', url: URL_PRODUCT, title: 'Products', icon: IconNavProduct },
+  { _id: '3', url: URL_CATEGORY, title: 'Categories', icon: IconNavCategory },
+  { _id: '4', url: URL_MANUFACTURER, title: 'Manufacturers', icon: IconNavManufacturer },
+  { _id: '5', url: URL_ORDER, title: 'Orders', icon: IconNavOrder },
+  { _id: '6', url: URL_SHIPMENT, title: 'Shipments', icon: IconNavShipment },
+  { _id: '7', url: URL_MANAGER, title: 'Managers', icon: IconNavManager },
+  { _id: '8', url: URL_CUSTOMER, title: 'Customers', icon: IconNavCustomer },
 ];
