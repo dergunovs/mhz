@@ -49,7 +49,7 @@ const emit = defineEmits(['update']);
   border-radius: 16px;
 
   &:hover:not(:disabled) {
-    background-color: var(--color-gray-light);
+    border-color: var(--color-primary);
   }
 
   &:disabled {
