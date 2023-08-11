@@ -14,7 +14,7 @@
     "lint": "turbo run lint --no-daemon",
     "ts": "turbo run ts --no-daemon",
     "pub": "turbo run build --no-daemon && changeset version && changeset publish",
-    "dump": "mongodump --db=mhz --excludeCollection=managers"
+    "dump": "mongodump --db=mhz --excludeCollection=managers --out=apps/back/dump"
   },
   "dependencies": {
     "@changesets/cli": "2.26.2"
