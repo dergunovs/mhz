@@ -1,11 +1,11 @@
 <template>
   <div :class="$style.container" ref="containerElement">
     <UiInput
-      :modelValue="props.modelValue"
+      :modelValue="typeof props.modelValue === 'object' ? props.modelValue.title : props.modelValue"
       @update="handleUpdate"
       @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
-      :placeholder="!props.modelValue && 'Choose variant'"
+      placeholder="Choose variant"
       :appendIcon="isShowOptions ? IconOpened : IconClosed"
     />
 
@@ -14,7 +14,7 @@
     </div>
 
     <div v-if="isShowOptions" :class="$style.options" ref="optionsElement">
-      <div v-if="optionsComputed.length">
+      <div v-if="optionsComputed?.length">
         <div
           v-for="(option, index) in optionsComputed"
           :key="`${option}-${index}`"
@@ -28,13 +28,13 @@
           :class="$style.option"
           tabindex="0"
           ref="optionElement"
-          :data-current="props.modelValue === option"
+          :data-current="props.modelValue === option._id"
         >
-          {{ option }}
+          {{ option.title }}
         </div>
       </div>
 
-      <div v-else :class="$style.option">No results</div>
+      <div v-else @click="hideOptions" :class="$style.option" tabindex="0">No results</div>
     </div>
   </div>
 </template>
@@ -48,9 +48,14 @@ import UiInput from '../UiInput/UiInput.vue';
 import IconClosed from './icons/closed.svg?component';
 import IconOpened from './icons/opened.svg?component';
 
+interface IOption {
+  _id?: string;
+  title: string;
+}
+
 interface IProps {
-  modelValue: string;
-  options: string[];
+  modelValue: string | IOption;
+  options?: string[] | IOption[];
   isFilter?: boolean;
 }
 
@@ -60,9 +65,19 @@ const emit = defineEmits(['update:modelValue']);
 const filterQuery = ref('');
 
 const optionsComputed = computed(() => {
+  if (!props.options) return [];
+
+  let optionsObject = props.options as IOption[];
+
+  if (typeof props.options[0] !== 'object') {
+    optionsObject = (props.options as IOption[]).map((option) => {
+      return { _id: option as unknown as string, title: option as unknown as string };
+    });
+  }
+
   return props.isFilter
-    ? props.options.filter((option) => option.toLowerCase().includes(filterQuery.value.toLowerCase()))
-    : props.options;
+    ? optionsObject.filter((option) => option.title.toLowerCase().includes(filterQuery.value.toLowerCase()))
+    : optionsObject;
 });
 
 const isShowOptions = ref(false);
@@ -95,8 +110,8 @@ function showOptions() {
   }
 }
 
-function setOption(option: string) {
-  emit('update:modelValue', option);
+function setOption(option: IOption) {
+  emit('update:modelValue', typeof props.modelValue === 'object' ? option : option._id);
   hideOptions();
 }
 

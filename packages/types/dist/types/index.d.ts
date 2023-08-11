@@ -40,11 +40,11 @@ export interface ICustomer extends IEntity {
 export interface ICart extends IEntity {
   products: { product: IProduct; count: number }[];
   isShared: boolean;
-  user: string | ICustomer;
+  user: ICustomer;
 }
 
 export interface IShipment extends IEntity {
-  adress: string | IAdress;
+  adress: IAdress;
   price: number;
   duration: number;
 }
@@ -75,31 +75,31 @@ export interface IManufacturer extends IEntity {
 export interface IProduct extends IEntity {
   title: string;
   description: string;
-  price: number | null;
+  price: number;
   isInStock: boolean;
   imageUrls: string[];
-  category: string | ICategory | null;
-  manufacturer: string | IManufacturer | null;
-  fields?: string[] | ICategoryField[];
+  category: ICategory;
+  manufacturer: IManufacturer;
+  fields?: ICategoryField[];
 }
 
 export interface IOrder extends IEntity {
   products: { product: IProduct; count: number }[];
-  shipment: string | IShipment;
-  user: string | ICustomer;
+  shipment: IShipment;
+  user: ICustomer;
   status: "payment" | "delivery" | "done" | "canceled";
 }
 
 export interface IComparison extends IEntity {
   products: IProduct[];
-  category: string | ICategory;
-  user: string | ICustomer;
+  category: ICategory;
+  user: ICustomer;
 }
 
 export interface IConfiguration extends IEntity {
   title: string;
   isShared: boolean;
-  user: string | ICustomer;
+  user: ICustomer;
   processor: IProduct;
   cooler: IProduct;
   mainboard: IProduct;

@@ -14,6 +14,10 @@
 
     <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
 
+    <UiField label="Category" isRequired :error="error('category')">
+      <UiSelect v-model="formData.category" :options="categories" />
+    </UiField>
+
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
         <UiButton type="submit" :isDisabled="isLoadingPost || isLoadingUpdate">
@@ -43,13 +47,14 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, UiCheckbox, toast, UiEditor } from 'mhz-ui';
-import { IProduct } from 'mhz-types';
+import { UiField, UiInput, UiButton, UiCheckbox, toast, UiEditor, UiSelect } from 'mhz-ui';
+import { ICategory, IProduct, IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
-import { clone } from 'mhz-helpers';
+import { clone, usePagination } from 'mhz-helpers';
 
 import { API_PRODUCT, URL_PRODUCT } from '@/product/constants';
 import { postProduct, updateProduct, deleteProduct } from '@/product/services';
+import { getCategories } from '@/category/services';
 
 interface IProps {
   product?: IProduct;
@@ -64,13 +69,19 @@ const router = useRouter();
 const formData = ref<IProduct>({
   title: '',
   description: '',
-  price: null,
+  price: 0,
   isInStock: false,
   imageUrls: [],
-  category: null,
-  manufacturer: null,
+  category: {} as ICategory,
+  manufacturer: {} as IManufacturer,
   fields: [],
 });
+
+const categoriesPage = ref(1);
+
+const { data } = getCategories(categoriesPage);
+
+const { data: categories } = usePagination(data);
 
 const productId = computed(() => props.product?._id);
 

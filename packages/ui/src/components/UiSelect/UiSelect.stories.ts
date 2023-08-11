@@ -34,7 +34,7 @@ export const Primary: Story = {
     template: html` <UiSelect v-bind="args" @update:modelValue="update" />`,
 
     methods: {
-      update(option: string | number) {
+      update(option: string) {
         updateArgs({ modelValue: option });
       },
     },
@@ -59,7 +59,7 @@ export const Filter: Story = {
     template: html` <UiSelect v-bind="args" @update:modelValue="update" isFilter />`,
 
     methods: {
-      update(option: string | number) {
+      update(option: string) {
         updateArgs({ modelValue: option });
       },
     },

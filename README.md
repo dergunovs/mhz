@@ -2,7 +2,7 @@
 
 Fake PC hardware store monorepo.
 
-**Frontend:** TS, Vite, Vue, Tastack Query, Storybook.
+**Frontend:** TS, Vite, Vue, Tastack Query.
 
 **Backend:** TS, Fastify, Mongoose, MongoDB.
 
@@ -10,9 +10,9 @@ Fake PC hardware store monorepo.
 
 **Storybook:** https://ui.9000mhz.ru
 
-**Design:** https://www.figma.com/file/TOqDhQK83b2x4zM0Gtev94/9000-MHz?type=design&node-id=29-2&mode=design&t=Lmfvr5PPEkyTLxaQ-0
+**Design:** https://www.figma.com/file/TOqDhQK83b2x4zM0Gtev94/9000-MHz
 
-**Youtube live coding:** https://www.youtube.com/playlist?list=PLOICX-WjKEZcwBaFQAfogv0vUvjcnr3Lj
+**Youtube live coding:** https://youtube.com/playlist?list=PLOICX-WjKEZcwBaFQAfogv0vUvjcnr3Lj
 
 ## Installation
 
