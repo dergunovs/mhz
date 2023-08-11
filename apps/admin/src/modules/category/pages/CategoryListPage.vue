@@ -7,7 +7,7 @@
 
       <CategoryList :categories="categories" />
 
-      <UiPagination :page="page" :total="total" @update="updatePage" />
+      <UiPagination v-if="categories?.length" :page="page" :total="total" @update="updatePage" />
     </div>
   </div>
 </template>

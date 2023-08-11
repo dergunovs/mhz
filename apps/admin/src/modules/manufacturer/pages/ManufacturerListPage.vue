@@ -7,7 +7,7 @@
 
       <ManufacturerList :manufacturers="manufacturers" />
 
-      <UiPagination :page="page" :total="total" @update="updatePage" />
+      <UiPagination v-if="manufacturers?.length" :page="page" :total="total" @update="updatePage" />
     </div>
   </div>
 </template>

@@ -9,7 +9,11 @@
     </UiField>
 
     <UiField label="Category" isRequired :error="error('category')">
-      <UiSelect v-model="formData.category" :options="allCategoriesData" @reachedBottom="handleInfiniteScroll" />
+      <UiSelect v-model="formData.category" :options="allCategories" @reachedBottom="handleCategoryScroll" />
+    </UiField>
+
+    <UiField label="Manufacturer" isRequired :error="error('manufacturer')">
+      <UiSelect v-model="formData.manufacturer" :options="allManufacturers" @reachedBottom="handleManufacturerScroll" />
     </UiField>
 
     <UiField label="Price" isRequired :error="error('price')">
@@ -55,6 +59,7 @@ import { clone, usePagination } from 'mhz-helpers';
 import { API_PRODUCT, URL_PRODUCT } from '@/product/constants';
 import { postProduct, updateProduct, deleteProduct } from '@/product/services';
 import { getCategories } from '@/category/services';
+import { getManufacturers } from '@/manufacturer/services';
 
 interface IProps {
   product?: IProduct;
@@ -77,25 +82,40 @@ const formData = ref<IProduct>({
   fields: [],
 });
 
-const categoriesPage = ref(1);
-const allCategoriesData = ref<ICategory[]>([]);
+const categoryPage = ref(1);
+const allCategories = ref<ICategory[]>([]);
 
-const { data, isLoading } = getCategories(categoriesPage);
-
-const { data: categories, setPage } = usePagination(data);
+const { data: categoriesData, isLoading: isLoadingCategories } = getCategories(categoryPage);
+const { data: categories, setPage: setCategoryPage } = usePagination(categoriesData);
 
 watch(
   () => categories.value,
   () => {
-    if (categories.value) {
-      allCategoriesData.value = [...allCategoriesData.value, ...categories.value];
-    }
+    if (categories.value) allCategories.value = [...allCategories.value, ...categories.value];
   }
 );
 
-function handleInfiniteScroll() {
-  if (isLoading.value) return;
-  categoriesPage.value = setPage(categoriesPage.value + 1, categoriesPage.value);
+function handleCategoryScroll() {
+  if (isLoadingCategories.value) return;
+  categoryPage.value = setCategoryPage(categoryPage.value + 1, categoryPage.value);
+}
+
+const manufacturerPage = ref(1);
+const allManufacturers = ref<IManufacturer[]>([]);
+
+const { data: manufacturersData, isLoading: isLoadingManufacturers } = getManufacturers(manufacturerPage);
+const { data: manufacturers, setPage: setManufacturerPage } = usePagination(manufacturersData);
+
+watch(
+  () => manufacturers.value,
+  () => {
+    if (manufacturers.value) allManufacturers.value = [...allManufacturers.value, ...manufacturers.value];
+  }
+);
+
+function handleManufacturerScroll() {
+  if (isLoadingManufacturers.value) return;
+  manufacturerPage.value = setManufacturerPage(manufacturerPage.value + 1, manufacturerPage.value);
 }
 
 const productId = computed(() => props.product?._id);
@@ -145,7 +165,9 @@ function update() {
 
 onMounted(() => {
   if (props.product) formData.value = clone(props.product);
-  if (categories.value) allCategoriesData.value = [...categories.value];
+
+  if (categories.value) allCategories.value = [...categories.value];
+  if (manufacturers.value) allManufacturers.value = [...manufacturers.value];
 });
 </script>
 
