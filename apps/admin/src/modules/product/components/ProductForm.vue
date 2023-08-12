@@ -22,6 +22,8 @@
 
     <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
 
+    <ProductFieldsForm v-if="currentFields" :fields="currentFields" />
+
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
         <UiButton type="submit" :isDisabled="isLoadingPost || isLoadingUpdate">
@@ -46,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, toRaw } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
@@ -55,6 +57,8 @@ import { UiField, UiInput, UiButton, UiCheckbox, toast, UiEditor, UiSelect } fro
 import { ICategory, IProduct, IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { clone, usePagination } from 'mhz-helpers';
+
+import ProductFieldsForm from '@/product/components/ProductFieldsForm.vue';
 
 import { API_PRODUCT, URL_PRODUCT } from '@/product/constants';
 import { postProduct, updateProduct, deleteProduct } from '@/product/services';
@@ -94,6 +98,8 @@ watch(
     if (categories.value) allCategories.value = [...allCategories.value, ...categories.value];
   }
 );
+
+const currentFields = computed(() => toRaw(formData.value.category.fields));
 
 function handleCategoryScroll() {
   if (isLoadingCategories.value) return;

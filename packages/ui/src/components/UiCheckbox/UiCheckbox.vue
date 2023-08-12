@@ -9,7 +9,7 @@
       type="checkbox"
       ref="checkbox"
       :value="props.initialValue"
-      :checked="props.modelValue"
+      :checked="!!props.modelValue"
       :disabled="props.isDisabled"
       :class="$style.input"
       tabindex="-1"
@@ -40,7 +40,7 @@ type InitialValue = boolean | string | number;
 
 interface IProps {
   initialValue?: InitialValue;
-  modelValue?: boolean;
+  modelValue?: InitialValue;
   label?: string;
   labelSwitcher?: string;
   error?: string | boolean;
@@ -50,6 +50,7 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
+  modelValue: false,
   initialValue: false,
   label: '',
   labelSwitcher: '',

@@ -11,3 +11,11 @@ export function deleteTempId<T extends { _id?: string }>(array: T[]) {
     } else return obj;
   });
 }
+
+export function deleteId<T extends { _id?: string }>(array: T[]) {
+  return array.map((obj) => {
+    delete obj._id;
+
+    return obj;
+  });
+}
