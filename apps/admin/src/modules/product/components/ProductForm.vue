@@ -22,7 +22,30 @@
 
     <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
 
-    <ProductFieldsForm v-if="currentFields" :fields="currentFields" />
+    <UiUpload
+      label="Images"
+      :files="images"
+      isRequired
+      :error="error('imageUrls')"
+      :extensions="['jpg', 'png']"
+      @add="addImage"
+      @remove="removeImage"
+      @upload="mutateUploadFiles(images)"
+    />
+
+    <div v-if="formData.imageUrls.length" :class="$style.images">
+      <div v-for="image in formData.imageUrls" :key="image">
+        <img :src="`${PATH_UPLOAD}/${image}`" width="200" alt="Image" loading="lazy" />
+        <UiButton @click="deleteImage(image)" layout="plain">Delete</UiButton>
+      </div>
+    </div>
+
+    <ProductFieldsForm
+      v-if="currentFields"
+      :fields="currentFields"
+      :isUpdated="isCategoryUpdated"
+      @update="updateFields"
+    />
 
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
@@ -53,8 +76,8 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, UiCheckbox, toast, UiEditor, UiSelect } from 'mhz-ui';
-import { ICategory, IProduct, IManufacturer } from 'mhz-types';
+import { UiField, UiInput, UiButton, UiCheckbox, toast, UiEditor, UiSelect, UiUpload } from 'mhz-ui';
+import { ICategory, IProduct, IManufacturer, ICategoryField } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { clone, usePagination } from 'mhz-helpers';
 
@@ -64,6 +87,8 @@ import { API_PRODUCT, URL_PRODUCT } from '@/product/constants';
 import { postProduct, updateProduct, deleteProduct } from '@/product/services';
 import { getCategories } from '@/category/services';
 import { getManufacturers } from '@/manufacturer/services';
+import { deleteFile, uploadFiles } from '@/common/services';
+import { PATH_UPLOAD } from '@/common/constants';
 
 interface IProps {
   product?: IProduct;
@@ -86,6 +111,42 @@ const formData = ref<IProduct>({
   fields: [],
 });
 
+const isCategoryUpdated = ref(false);
+
+const currentFields = computed(() => {
+  return props.product?._id && !isCategoryUpdated.value
+    ? toRaw(formData.value.fields)
+    : toRaw(formData.value.category.fields);
+});
+
+const images = ref<File[]>([]);
+
+const { mutate: mutateDeleteFile } = deleteFile();
+
+function addImage(file: File) {
+  images.value = [...images.value, file];
+}
+
+function removeImage(fileToRemove: File) {
+  images.value = images.value.filter((file) => file.name !== fileToRemove.name);
+}
+
+function deleteImage(imageToDelete: string) {
+  mutateDeleteFile(imageToDelete);
+  formData.value.imageUrls = formData.value.imageUrls.filter((image) => image !== imageToDelete);
+}
+
+const { mutate: mutateUploadFiles } = uploadFiles(
+  {
+    onSuccess: (data: string[]) => {
+      formData.value.imageUrls = [...data];
+      images.value = [];
+      toast.success('Images added');
+    },
+  },
+  '1200'
+);
+
 const categoryPage = ref(1);
 const allCategories = ref<ICategory[]>([]);
 
@@ -98,8 +159,6 @@ watch(
     if (categories.value) allCategories.value = [...allCategories.value, ...categories.value];
   }
 );
-
-const currentFields = computed(() => toRaw(formData.value.category.fields));
 
 function handleCategoryScroll() {
   if (isLoadingCategories.value) return;
@@ -150,6 +209,10 @@ const { mutate: mutateDelete } = deleteProduct({
   },
 });
 
+function updateFields(fields: ICategoryField[]) {
+  formData.value.fields = [...fields];
+}
+
 const rules = computed(() => {
   return {
     title: required,
@@ -174,6 +237,16 @@ onMounted(() => {
 
   if (categories.value) allCategories.value = [...categories.value];
   if (manufacturers.value) allManufacturers.value = [...manufacturers.value];
+
+  watch(
+    () => formData.value.category,
+    () => {
+      if (props.product?._id) {
+        formData.value.fields = [];
+        isCategoryUpdated.value = true;
+      }
+    }
+  );
 });
 </script>
 
@@ -182,6 +255,10 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.images {
+  display: flex;
 }
 
 .buttons {

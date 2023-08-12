@@ -1,7 +1,7 @@
 <template>
   <UiTable :headers="tableHeaders">
-    <template v-if="props.categories?.length">
-      <tr v-for="product in props.categories" :key="product._id">
+    <template v-if="props.products?.length">
+      <tr v-for="product in props.products" :key="product._id">
         <td data-grow>
           <RouterLink :to="`${URL_PRODUCT_EDIT}/${product._id}`">
             {{ product.title }}
@@ -32,7 +32,7 @@ import { deleteProduct } from '@/product/services';
 import { API_PRODUCT, URL_PRODUCT_EDIT } from '@/product/constants';
 
 interface IProps {
-  categories?: IProduct[];
+  products?: IProduct[];
 }
 
 const props = defineProps<IProps>();

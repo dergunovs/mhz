@@ -50,9 +50,9 @@ export default async function (fastify: IFastifyInstance) {
       try {
         const category = await Category.findOne({ _id: request.params.id });
 
-        await category?.deleteOne();
-
         deleteFile(category?.iconUrl);
+
+        await category?.deleteOne();
 
         reply.code(200).send({ message: 'deleted' });
       } catch (err) {

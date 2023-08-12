@@ -21,15 +21,24 @@ import { deleteId } from 'mhz-helpers';
 
 interface IProps {
   fields: ICategoryField[];
+  isUpdated: boolean;
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['update']);
 
 const formData = ref<ICategoryField[]>([]);
 
 watch(
-  () => props.fields,
+  () => [props.fields, props.isUpdated],
   () => getFields()
+);
+
+watch(
+  () => formData.value,
+  () => {
+    emit('update', formData.value);
+  }
 );
 
 function getFields() {

@@ -50,9 +50,9 @@ export default async function (fastify: IFastifyInstance) {
       try {
         const manufacturer = await Manufacturer.findOne({ _id: request.params.id });
 
-        await manufacturer?.deleteOne();
-
         deleteFile(manufacturer?.logoUrl);
+
+        await manufacturer?.deleteOne();
 
         reply.code(200).send({ message: 'deleted' });
       } catch (err) {
