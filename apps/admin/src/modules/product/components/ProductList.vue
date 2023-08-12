@@ -8,10 +8,10 @@
           </RouterLink>
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(product.date_created) }}
+          {{ formatDateTime(product.dateCreated) }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(product.date_updated) }}
+          {{ formatDateTime(product.dateUpdated) }}
         </td>
         <td>
           <UiButton @click="mutate(product._id)" layout="plain">Delete</UiButton>

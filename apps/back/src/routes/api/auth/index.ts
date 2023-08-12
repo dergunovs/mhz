@@ -5,48 +5,47 @@ import Manager from '../../../models/manager.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Body: { email: string; password: string } }>('/login', async function (request, reply) {
-    const { email, password } = request.body;
-
-    const foundManager = await Manager.findOne({ email });
-
-    if (!foundManager) {
-      reply.code(404).send({ message: 'Manager not found' });
-      return;
-    }
-
     try {
-      const valid = await bcrypt.compare(password, foundManager.password);
+      const { email, password } = request.body;
+
+      const foundManager = await Manager.findOne({ email }).lean().exec();
+
+      if (!foundManager) {
+        reply.code(404).send({ message: 'Manager not found' });
+        return;
+      }
+
+      const valid = bcrypt.compare(password, foundManager.password);
 
       if (!valid) {
         reply.code(401).send({ message: 'Wrong password' });
         return;
       }
 
-      const managerInfo = {
+      const manager = {
         _id: foundManager._id,
-        first_name: foundManager.first_name,
-        last_name: foundManager.last_name,
+        firstName: foundManager.firstName,
+        lastName: foundManager.lastName,
         email: foundManager.email,
       };
 
-      const token = fastify.jwt.sign(managerInfo, { expiresIn: '9h' });
-      const manager = { ...managerInfo, token };
+      const token = fastify.jwt.sign(manager, { expiresIn: '9h' });
 
-      reply.code(200).send(manager);
+      reply.code(200).send({ ...manager, token });
     } catch (err) {
       reply.code(500).send({ message: err });
     }
   });
 
   fastify.post<{ Body: { email: string; password: string } }>('/setup', async function (request, reply) {
-    const isManagers = !!(await Manager.find()).length;
-
-    if (isManagers) {
-      reply.code(500).send({ message: 'Managers already exists' });
-      return;
-    }
-
     try {
+      const managers = await Manager.find().lean().exec();
+
+      if (managers.length) {
+        reply.code(500).send({ message: 'Managers already exists' });
+        return;
+      }
+
       const { email, password } = request.body;
 
       const hashedPassword = await bcrypt.hash(password, 10);

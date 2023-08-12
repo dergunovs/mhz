@@ -3,8 +3,8 @@ import { Schema, model } from 'mongoose';
 import { ICustomer } from 'mhz-types';
 
 const customerSchema = new Schema<ICustomer>({
-  first_name: { type: String },
-  last_name: { type: String },
+  firstName: { type: String },
+  lastName: { type: String },
   phone: { type: String },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -22,9 +22,9 @@ const customerSchema = new Schema<ICustomer>({
   favouriteProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
   comparisons: [{ type: Schema.Types.ObjectId, ref: 'Comparison' }],
   configurations: [{ type: Schema.Types.ObjectId, ref: 'Configuration' }],
-  date_created: { type: Date, default: Date.now },
-  date_logged_in: { type: Date },
-  date_updated: { type: Date },
+  dateLoggedIn: { type: Date },
+  dateCreated: { type: Date, default: Date.now },
+  dateUpdated: { type: Date },
 });
 
 export default model('Customer', customerSchema);

@@ -7,8 +7,8 @@ const manufacturerSchema = new Schema<IManufacturer>({
   description: { type: String, required: true },
   logoUrl: { type: String, required: true },
   country: { type: String, required: true },
-  date_created: { type: Date, default: Date.now },
-  date_updated: { type: Date },
+  dateCreated: { type: Date, default: Date.now },
+  dateUpdated: { type: Date },
 });
 
 export default model('Manufacturer', manufacturerSchema);

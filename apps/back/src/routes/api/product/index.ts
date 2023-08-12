@@ -32,7 +32,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: IProduct; Params: { id: string } }>('/:id', async function (request, reply) {
     try {
-      await Product.findOneAndUpdate({ _id: request.params.id }, { ...request.body, date_updated: new Date() });
+      await Product.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
       reply.code(200).send({ message: 'updated' });
     } catch (err) {
       reply.code(500).send({ message: err });

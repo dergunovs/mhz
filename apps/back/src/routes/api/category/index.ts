@@ -26,7 +26,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: ICategory; Params: { id: string } }>('/:id', async function (request, reply) {
     try {
-      await Category.findOneAndUpdate({ _id: request.params.id }, { ...request.body, date_updated: new Date() });
+      await Category.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
       reply.code(200).send({ message: 'updated' });
     } catch (err) {
       reply.code(500).send({ message: err });

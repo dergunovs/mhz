@@ -34,7 +34,8 @@ export async function paginate<T>(Entity: Model<T>, pageQuery?: string) {
     const data = await Entity.find()
       .skip((page - 1) * limit)
       .limit(limit)
-      .sort('-date_created')
+      .select('-password -__v')
+      .sort('-dateCreated')
       .lean()
       .exec();
 

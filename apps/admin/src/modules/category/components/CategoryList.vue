@@ -8,10 +8,10 @@
           </RouterLink>
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(category.date_created) }}
+          {{ formatDateTime(category.dateCreated) }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(category.date_updated) }}
+          {{ formatDateTime(category.dateUpdated) }}
         </td>
         <td>
           <UiButton @click="mutate(category._id)" layout="plain">Delete</UiButton>

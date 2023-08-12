@@ -12,8 +12,8 @@ const orderSchema = new Schema<IOrder>({
   ],
   shipment: { type: Schema.Types.ObjectId, required: true, ref: 'Shipment' },
   user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-  date_created: { type: Date, default: Date.now },
-  date_updated: { type: Date },
+  dateCreated: { type: Date, default: Date.now },
+  dateUpdated: { type: Date },
 });
 
 export default model('Order', orderSchema);

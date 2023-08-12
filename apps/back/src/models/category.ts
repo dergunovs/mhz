@@ -16,8 +16,8 @@ const categorySchema = new Schema<ICategory>({
       },
     ],
   },
-  date_created: { type: Date, default: Date.now },
-  date_updated: { type: Date },
+  dateCreated: { type: Date, default: Date.now },
+  dateUpdated: { type: Date },
 });
 
 export default model('Category', categorySchema);

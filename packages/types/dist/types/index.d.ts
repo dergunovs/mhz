@@ -1,7 +1,7 @@
 interface IEntity {
   _id?: string;
-  date_created?: Date;
-  date_updated?: Date;
+  dateCreated?: Date;
+  dateUpdated?: Date;
 }
 
 export interface IAdress {
@@ -13,16 +13,16 @@ export interface IAdress {
 }
 
 export interface IManager extends IEntity {
-  first_name?: string;
-  last_name?: string;
+  firstName?: string;
+  lastName?: string;
   password: string;
   email: string;
-  date_logged_in?: Date;
+  dateLoggedIn?: Date;
 }
 
 export interface ICustomer extends IEntity {
-  first_name?: string;
-  last_name?: string;
+  firstName?: string;
+  lastName?: string;
   phone?: string;
   password: string;
   email: string;
@@ -34,7 +34,7 @@ export interface ICustomer extends IEntity {
   comparisons?: IComparison[];
   configurations?: IConfiguration[];
   adress?: IAdress;
-  date_logged_in?: Date;
+  dateLoggedIn?: Date;
 }
 
 export interface ICart extends IEntity {
