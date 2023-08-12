@@ -28,14 +28,14 @@
     "fastify": "4.21.0",
     "fastify-plugin": "4.5.1",
     "mhz-types": "*",
-    "mongoose": "7.4.2",
+    "mongoose": "7.4.3",
     "nodemailer": "6.9.4",
     "sharp": "0.32.4",
     "xmlbuilder2": "3.1.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
-    "@types/node": "20.4.9",
+    "@types/node": "20.4.10",
     "concurrently": "8.2.0",
     "cross-env": "7.0.3",
     "nodemon": "3.0.1",
