@@ -6,7 +6,7 @@ Fake PC hardware store monorepo.
 
 **Backend:** TS, Fastify, Mongoose, MongoDB.
 
-**Site:** https://9000mhz.ru1
+**Site:** https://9000mhz.ru
 
 **Storybook:** https://ui.9000mhz.ru
 

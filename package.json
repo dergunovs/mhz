@@ -1,9 +1,21 @@
 {
   "name": "9000mhz",
-  "description": "9000mhz",
+  "description": "Fake PC hardware store monorepo",
   "version": "0.0.1",
-  "author": "dergunov.com",
-  "license": "ISC",
+  "keywords": [
+    "monorepo",
+    "turborepo",
+    "typescript",
+    "vue",
+    "vite",
+    "fastify",
+    "mongoose",
+    "mongodb"
+  ],
+  "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
+  "homepage": "https://9000mhz.ru",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dergunovs/mhz"
