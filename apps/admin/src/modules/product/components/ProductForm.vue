@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="props.product ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.product?._id ? update() : submit()" :class="$style.form">
     <UiField label="Title" isRequired :error="error('title')">
       <UiInput v-model="formData.title" isFocus />
     </UiField>
@@ -47,26 +47,7 @@
       @update="updateFields"
     />
 
-    <div :class="$style.buttons">
-      <div :class="$style.buttonsInner">
-        <UiButton type="submit" :isDisabled="isLoadingPost || isLoadingUpdate">
-          {{ props.product ? 'Update' : 'Submit' }}
-        </UiButton>
-
-        <UiButton @click="router.go(-1)" layout="secondary" :isDisabled="isLoadingPost || isLoadingUpdate">
-          Back
-        </UiButton>
-      </div>
-
-      <UiButton
-        v-if="props.product?._id"
-        @click="mutateDelete(props.product._id)"
-        layout="secondary"
-        :isDisabled="isLoadingPost || isLoadingUpdate"
-      >
-        Delete
-      </UiButton>
-    </div>
+    <FormButtons :id="props.product?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
   </form>
 </template>
 
@@ -76,13 +57,14 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, UiCheckbox, toast, UiEditor, UiSelect, UiUpload } from 'mhz-ui';
+import { UiField, UiInput, UiCheckbox, toast, UiEditor, UiSelect, UiUpload } from 'mhz-ui';
 import { ICategory, IProduct, IManufacturer, ICategoryField } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { clone, usePagination } from 'mhz-helpers';
 
 import ProductFieldsForm from '@/product/components/ProductFieldsForm.vue';
 import ImagePreview from '@/common/components/ImagePreview.vue';
+import FormButtons from '@/common/components/FormButtons.vue';
 
 import { API_PRODUCT, URL_PRODUCT } from '@/product/constants';
 import { postProduct, updateProduct, deleteProduct } from '@/product/services';
@@ -233,6 +215,10 @@ function update() {
   if (isValid()) mutateUpdate(formData.value);
 }
 
+function handleDelete(id: string) {
+  mutateDelete(id);
+}
+
 onMounted(() => {
   if (props.product) formData.value = clone(props.product);
 
@@ -254,15 +240,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonsInner {
-  display: flex;
-  gap: 16px;
+  align-items: flex-start;
 }
 </style>

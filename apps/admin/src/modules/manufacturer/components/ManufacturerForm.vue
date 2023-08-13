@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="props.manufacturer ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.manufacturer?._id ? update() : submit()" :class="$style.form">
     <UiField label="Title" isRequired :error="error('title')">
       <UiInput v-model="formData.title" isFocus />
     </UiField>
@@ -27,26 +27,7 @@
 
     <ImagePreview v-if="formData.logoUrl" :urls="[formData.logoUrl]" @delete="formData.logoUrl = ''" />
 
-    <div :class="$style.buttons">
-      <div :class="$style.buttonsInner">
-        <UiButton type="submit" :isDisabled="isLoadingPost || isLoadingUpdate">
-          {{ props.manufacturer ? 'Update' : 'Submit' }}
-        </UiButton>
-
-        <UiButton @click="router.go(-1)" layout="secondary" :isDisabled="isLoadingPost || isLoadingUpdate">
-          Back
-        </UiButton>
-      </div>
-
-      <UiButton
-        v-if="props.manufacturer?._id"
-        @click="mutateDelete(props.manufacturer._id)"
-        layout="secondary"
-        :isDisabled="isLoadingPost || isLoadingUpdate"
-      >
-        Delete
-      </UiButton>
-    </div>
+    <FormButtons :id="props.manufacturer?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
   </form>
 </template>
 
@@ -56,13 +37,14 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
+import { UiField, UiInput, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { countries } from 'mhz-countries';
 import { clone } from 'mhz-helpers';
 
 import ImagePreview from '@/common/components/ImagePreview.vue';
+import FormButtons from '@/common/components/FormButtons.vue';
 
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer, updateManufacturer, deleteManufacturer } from '@/manufacturer/services';
@@ -130,6 +112,10 @@ function update() {
   if (isValid()) mutateUpdate(formData.value);
 }
 
+function handleDelete(id: string) {
+  mutateDelete(id);
+}
+
 const logoFile = ref<File>();
 
 function addLogoFile(file: File) {
@@ -161,15 +147,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonsInner {
-  display: flex;
-  gap: 16px;
+  align-items: flex-start;
 }
 </style>

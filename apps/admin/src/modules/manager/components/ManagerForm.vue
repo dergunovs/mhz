@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="props.manager ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.manager?._id ? update() : submit()" :class="$style.form">
     <UiField label="First name" isRequired :error="error('firstName')">
       <UiInput v-model="formData.firstName" isFocus />
     </UiField>
@@ -16,26 +16,7 @@
       <UiInput v-model="formData.password" />
     </UiField>
 
-    <div :class="$style.buttons">
-      <div :class="$style.buttonsInner">
-        <UiButton type="submit" :isDisabled="isLoadingPost || isLoadingUpdate">
-          {{ props.manager ? 'Update' : 'Submit' }}
-        </UiButton>
-
-        <UiButton @click="router.go(-1)" layout="secondary" :isDisabled="isLoadingPost || isLoadingUpdate">
-          Back
-        </UiButton>
-      </div>
-
-      <UiButton
-        v-if="props.manager?._id"
-        @click="mutateDelete(props.manager._id)"
-        layout="secondary"
-        :isDisabled="isLoadingPost || isLoadingUpdate"
-      >
-        Delete
-      </UiButton>
-    </div>
+    <FormButtons :id="props.manager?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
   </form>
 </template>
 
@@ -45,10 +26,12 @@ import { useRouter } from 'vue-router';
 
 import { useQueryClient } from '@tanstack/vue-query';
 
-import { UiField, UiInput, UiButton, toast } from 'mhz-ui';
+import { UiField, UiInput, toast } from 'mhz-ui';
 import { IManager } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
 import { clone } from 'mhz-helpers';
+
+import FormButtons from '@/common/components/FormButtons.vue';
 
 import { API_MANAGER, URL_MANAGER } from '@/manager/constants';
 import { postManager, updateManager, deleteManager } from '@/manager/services';
@@ -115,6 +98,10 @@ function update() {
   if (isValid()) mutateUpdate(formData.value);
 }
 
+function handleDelete(id: string) {
+  mutateDelete(id);
+}
+
 onMounted(() => {
   if (props.manager) formData.value = clone(props.manager);
 });
@@ -125,15 +112,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonsInner {
-  display: flex;
-  gap: 16px;
+  align-items: flex-start;
 }
 </style>

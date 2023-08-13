@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="props.category ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.category?._id ? update() : submit()" :class="$style.form">
     <UiField label="Title" isRequired :error="error('title')">
       <UiInput v-model="formData.title" isFocus />
     </UiField>
@@ -16,11 +16,9 @@
       @update="updateFieldList"
     />
 
-    <div>
-      <UiButton @click="showCategoryField" v-if="!isShowCategoryFieldForm" layout="secondary">
-        Add Category Field
-      </UiButton>
-    </div>
+    <UiButton @click="showCategoryField" v-if="!isShowCategoryFieldForm" layout="secondary">
+      Add Category Field
+    </UiButton>
 
     <CategoryFieldForm
       v-if="isShowCategoryFieldForm"
@@ -46,26 +44,7 @@
 
     <ImagePreview v-if="formData.iconUrl" :urls="[formData.iconUrl]" @delete="formData.iconUrl = ''" />
 
-    <div :class="$style.buttons">
-      <div :class="$style.buttonsInner">
-        <UiButton type="submit" :isDisabled="isLoadingPost || isLoadingUpdate">
-          {{ props.category ? 'Update' : 'Submit' }}
-        </UiButton>
-
-        <UiButton @click="router.go(-1)" layout="secondary" :isDisabled="isLoadingPost || isLoadingUpdate">
-          Back
-        </UiButton>
-      </div>
-
-      <UiButton
-        v-if="props.category?._id"
-        @click="mutateDelete(props.category._id)"
-        layout="secondary"
-        :isDisabled="isLoadingPost || isLoadingUpdate"
-      >
-        Delete
-      </UiButton>
-    </div>
+    <FormButtons :id="props.category?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
   </form>
 </template>
 
@@ -83,6 +62,7 @@ import { clone, deleteTempId } from 'mhz-helpers';
 import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
 import CategoryFieldList from '@/category/components/CategoryFieldList.vue';
 import ImagePreview from '@/common/components/ImagePreview.vue';
+import FormButtons from '@/common/components/FormButtons.vue';
 
 import { API_CATEGORY, URL_CATEGORY } from '@/category/constants';
 import { postCategory, updateCategory, deleteCategory } from '@/category/services';
@@ -187,6 +167,10 @@ function update() {
   }
 }
 
+function handleDelete(id: string) {
+  mutateDelete(id);
+}
+
 const iconFile = ref<File>();
 
 function addIconFile(file: File) {
@@ -218,15 +202,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttonsInner {
-  display: flex;
-  gap: 16px;
+  align-items: flex-start;
 }
 </style>
