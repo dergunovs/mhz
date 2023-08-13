@@ -15,7 +15,7 @@
           @click="emulateFileClickInput"
           :icon="IconUpload"
         >
-          Add file
+          Add file<template v-if="!props.isSingle">s</template>
         </UiButton>
 
         <div :class="$style.text" :data-error="!!props.error">Size up to 10 Mb, {{ props.extensions.join(', ') }}.</div>
@@ -27,6 +27,7 @@
         :key="inputKey"
         type="file"
         :accept="accept"
+        :multiple="!props.isSingle"
         @input="handleFileChange($event.target)"
       />
 
@@ -98,9 +99,19 @@ async function remove(file: File) {
 }
 
 function handleFileChange(target: EventTarget | null) {
-  const file = (target as HTMLInputElement).files?.[0];
+  if (props.isSingle) {
+    const file = (target as HTMLInputElement).files?.[0];
 
-  if (file?.size && file.size < 10 * 1024 * 1024) emit('add', file);
+    if (file?.size && file.size < 10 * 1024 * 1024) emit('add', file);
+  } else {
+    const files = (target as HTMLInputElement).files;
+
+    if (files === null) return;
+
+    for (let index = 0; index < files.length; index++) {
+      if (files[index].size && files[index].size < 10 * 1024 * 1024) emit('add', files[index]);
+    }
+  }
 }
 </script>
 

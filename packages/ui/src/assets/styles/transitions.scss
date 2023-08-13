@@ -7,3 +7,12 @@
 .fade-leave-to {
   opacity: 0;
 }
+
+.list-enter-active {
+  transition: opacity 300ms ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}

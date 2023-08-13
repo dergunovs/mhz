@@ -6,7 +6,7 @@
       <UiCheckbox v-if="field.fieldType === 'boolean'" v-model="field.fieldValue" :label="field.title" />
 
       <UiField v-else :label="field.fieldUnits ? `${field.title}, ${field.fieldUnits}` : field.title">
-        <UiInput v-model="field.fieldValue" :type="field.fieldType" />
+        <UiInput v-model="field.fieldValue" :type="field.fieldType" step="0.01" />
       </UiField>
     </div>
   </div>

@@ -12,11 +12,16 @@
       <UiSelect v-model="formData.manufacturer" :options="allManufacturers" @reachedBottom="handleManufacturerScroll" />
     </UiField>
 
-    <UiField label="Price" isRequired :error="error('price')">
-      <UiInput v-model="formData.price" type="number" />
+    <UiField label="Category" isRequired :error="error('category')">
+      <UiSelect v-model="formData.category" :options="allCategories" @reachedBottom="handleCategoryScroll" />
     </UiField>
 
-    <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
+    <ProductFieldsForm
+      v-if="currentFields?.length"
+      :fields="currentFields"
+      :updates="categoryUpdates"
+      @update="updateFields"
+    />
 
     <UiUpload
       label="Upload images"
@@ -36,16 +41,11 @@
       @delete="deleteImage"
     />
 
-    <UiField label="Category" isRequired :error="error('category')">
-      <UiSelect v-model="formData.category" :options="allCategories" @reachedBottom="handleCategoryScroll" />
+    <UiField label="Price" isRequired :error="error('price')">
+      <UiInput v-model="formData.price" type="number" />
     </UiField>
 
-    <ProductFieldsForm
-      v-if="currentFields?.length"
-      :fields="currentFields"
-      :updates="categoryUpdates"
-      @update="updateFields"
-    />
+    <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
 
     <FormButtons :id="props.product?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
   </form>

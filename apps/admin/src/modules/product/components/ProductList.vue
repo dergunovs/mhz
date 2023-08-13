@@ -1,11 +1,20 @@
 <template>
-  <UiTable :headers="tableHeaders">
+  <UiTable :headers="tableHeaders" :isLoading="!props.products?.length">
     <template v-if="props.products?.length">
       <tr v-for="product in props.products" :key="product._id">
         <td data-grow>
           <RouterLink :to="`${URL_PRODUCT_EDIT}/${product._id}`">
             {{ product.title }}
           </RouterLink>
+        </td>
+        <td data-no-wrap>
+          {{ product.category.title }}
+        </td>
+        <td data-no-wrap>
+          {{ product.manufacturer.title }}
+        </td>
+        <td data-no-wrap>
+          {{ product.price }}
         </td>
         <td data-no-wrap>
           {{ formatDateTime(product.dateCreated) }}
@@ -37,7 +46,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const tableHeaders = ['Product', 'Created', 'Updated', ''];
+const tableHeaders = ['Product', 'Category', 'Manufacturer', 'Price', 'Created', 'Updated', ''];
 
 const queryClient = useQueryClient();
 

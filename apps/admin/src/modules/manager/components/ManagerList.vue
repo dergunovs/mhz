@@ -1,5 +1,5 @@
 <template>
-  <UiTable :headers="tableHeaders">
+  <UiTable :headers="tableHeaders" :isLoading="!props.managers?.length">
     <template v-if="props.managers?.length">
       <tr v-for="manager in props.managers" :key="manager._id">
         <td data-grow>
@@ -7,6 +7,7 @@
             {{ manager.email }}
           </RouterLink>
         </td>
+        <td data-no-wrap>{{ manager.firstName }} {{ manager.lastName }}</td>
         <td data-no-wrap>
           {{ formatDateTime(manager.dateCreated) }}
         </td>
@@ -37,7 +38,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const tableHeaders = ['Manager', 'Created', 'Updated', ''];
+const tableHeaders = ['Email', 'Name', 'Created', 'Updated', ''];
 
 const queryClient = useQueryClient();
 

@@ -5,7 +5,12 @@
     <table :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
       <thead>
         <tr>
-          <th v-for="(header, index) in props.headers" :key="`header-${header}-${index}`" :class="$style.th">
+          <th
+            v-for="(header, index) in props.headers"
+            :key="`header-${header}-${index}`"
+            :class="$style.th"
+            :data-loading="props.isLoading"
+          >
             {{ header }}
           </th>
         </tr>
@@ -23,6 +28,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 interface IProps {
   headers: string[];
+  isLoading?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -85,6 +91,7 @@ onBeforeUnmount(() => {
   padding: 12px 16px;
   font-size: 1rem;
   font-weight: 700;
+  color: var(--color-black);
   text-align: left;
   background-color: var(--color-gray-light-extra);
 
@@ -94,6 +101,10 @@ onBeforeUnmount(() => {
 
   &:last-child {
     border-top-right-radius: 8px;
+  }
+
+  &[data-loading='true'] {
+    color: var(--color-gray-light-extra);
   }
 }
 </style>
