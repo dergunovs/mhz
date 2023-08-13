@@ -43,7 +43,7 @@ const queryClient = useQueryClient();
 
 const { mutate } = deleteCategory({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_CATEGORY], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_CATEGORY, 1], exact: true });
     toast.success('Category deleted');
   },
 });

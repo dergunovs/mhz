@@ -43,7 +43,7 @@ const queryClient = useQueryClient();
 
 const { mutate } = deleteManufacturer({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, 1], exact: true });
     toast.success('Manufacturer deleted');
   },
 });

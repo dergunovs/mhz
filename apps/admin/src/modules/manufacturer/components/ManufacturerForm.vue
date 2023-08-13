@@ -13,7 +13,7 @@
     </UiField>
 
     <UiUpload
-      label="Logo"
+      label="Upload logo"
       :file="logoFile"
       isSingle
       isRequired
@@ -25,13 +25,7 @@
       @upload="mutateUploadFile(logoFile)"
     />
 
-    <div v-if="formData.logoUrl">
-      <div :class="$style.logo">
-        <img :src="`${PATH_UPLOAD}/${formData.logoUrl}`" width="200" alt="Logo" loading="lazy" />
-      </div>
-
-      <UiButton @click="deleteLogoFile" layout="plain">Delete</UiButton>
-    </div>
+    <ImagePreview v-if="formData.logoUrl" :urls="[formData.logoUrl]" @delete="formData.logoUrl = ''" />
 
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
@@ -68,10 +62,11 @@ import { useValidator, required } from 'mhz-validate';
 import { countries } from 'mhz-countries';
 import { clone } from 'mhz-helpers';
 
+import ImagePreview from '@/common/components/ImagePreview.vue';
+
 import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer, updateManufacturer, deleteManufacturer } from '@/manufacturer/services';
-import { uploadFile, deleteFile } from '@/common/services';
-import { PATH_UPLOAD } from '@/common/constants';
+import { uploadFile } from '@/common/services';
 
 interface IProps {
   manufacturer?: IManufacturer;
@@ -135,8 +130,6 @@ function update() {
   if (isValid()) mutateUpdate(formData.value);
 }
 
-const { mutate: mutateDeleteFile } = deleteFile();
-
 const logoFile = ref<File>();
 
 function addLogoFile(file: File) {
@@ -145,11 +138,6 @@ function addLogoFile(file: File) {
 
 function removeLogoFile() {
   logoFile.value = undefined;
-}
-
-function deleteLogoFile() {
-  mutateDeleteFile(formData.value.logoUrl);
-  formData.value.logoUrl = '';
 }
 
 const { mutate: mutateUploadFile } = uploadFile(
@@ -173,10 +161,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.logo {
-  width: 200px;
 }
 
 .buttons {

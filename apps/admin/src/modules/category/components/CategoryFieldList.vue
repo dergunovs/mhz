@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <div>Fields <i>(sortable)</i></div>
+  <div :class="$style.container">
+    <div>
+      Field<template v-if="props.fields.length > 1">s <i>(sortable)</i></template>
+    </div>
 
     <Sortable
       :list="props.fields"
@@ -62,6 +64,12 @@ onMounted(() => {
 </script>
 
 <style module lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .fields {
   display: flex;
   flex-direction: column;

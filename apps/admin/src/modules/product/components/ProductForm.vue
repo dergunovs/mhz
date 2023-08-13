@@ -8,10 +8,6 @@
       <UiEditor v-model="formData.description" />
     </UiField>
 
-    <UiField label="Category" isRequired :error="error('category')">
-      <UiSelect v-model="formData.category" :options="allCategories" @reachedBottom="handleCategoryScroll" />
-    </UiField>
-
     <UiField label="Manufacturer" isRequired :error="error('manufacturer')">
       <UiSelect v-model="formData.manufacturer" :options="allManufacturers" @reachedBottom="handleManufacturerScroll" />
     </UiField>
@@ -23,7 +19,7 @@
     <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
 
     <UiUpload
-      label="Images"
+      label="Upload images"
       :files="images"
       isRequired
       :error="error('imageUrls')"
@@ -33,17 +29,21 @@
       @upload="mutateUploadFiles(images)"
     />
 
-    <div v-if="formData.imageUrls.length" :class="$style.images">
-      <div v-for="image in formData.imageUrls" :key="image">
-        <img :src="`${PATH_UPLOAD}/${image}`" width="200" alt="Image" loading="lazy" />
-        <UiButton @click="deleteImage(image)" layout="plain">Delete</UiButton>
-      </div>
-    </div>
+    <ImagePreview
+      v-if="formData.imageUrls.length"
+      :urls="formData.imageUrls"
+      @update="updateImages"
+      @delete="deleteImage"
+    />
+
+    <UiField label="Category" isRequired :error="error('category')">
+      <UiSelect v-model="formData.category" :options="allCategories" @reachedBottom="handleCategoryScroll" />
+    </UiField>
 
     <ProductFieldsForm
-      v-if="currentFields"
+      v-if="currentFields?.length"
       :fields="currentFields"
-      :isUpdated="isCategoryUpdated"
+      :updates="categoryUpdates"
       @update="updateFields"
     />
 
@@ -82,13 +82,13 @@ import { useValidator, required } from 'mhz-validate';
 import { clone, usePagination } from 'mhz-helpers';
 
 import ProductFieldsForm from '@/product/components/ProductFieldsForm.vue';
+import ImagePreview from '@/common/components/ImagePreview.vue';
 
 import { API_PRODUCT, URL_PRODUCT } from '@/product/constants';
 import { postProduct, updateProduct, deleteProduct } from '@/product/services';
 import { getCategories } from '@/category/services';
 import { getManufacturers } from '@/manufacturer/services';
-import { deleteFile, uploadFiles } from '@/common/services';
-import { PATH_UPLOAD } from '@/common/constants';
+import { uploadFiles } from '@/common/services';
 
 interface IProps {
   product?: IProduct;
@@ -111,17 +111,15 @@ const formData = ref<IProduct>({
   fields: [],
 });
 
-const isCategoryUpdated = ref(false);
+const categoryUpdates = ref(0);
 
 const currentFields = computed(() => {
-  return props.product?._id && !isCategoryUpdated.value
+  return props.product?._id && !categoryUpdates.value
     ? toRaw(formData.value.fields)
     : toRaw(formData.value.category.fields);
 });
 
 const images = ref<File[]>([]);
-
-const { mutate: mutateDeleteFile } = deleteFile();
 
 function addImage(file: File) {
   images.value = [...images.value, file];
@@ -132,8 +130,11 @@ function removeImage(fileToRemove: File) {
 }
 
 function deleteImage(imageToDelete: string) {
-  mutateDeleteFile(imageToDelete);
   formData.value.imageUrls = formData.value.imageUrls.filter((image) => image !== imageToDelete);
+}
+
+function updateImages(urls: string[]) {
+  formData.value.imageUrls = [...urls];
 }
 
 const { mutate: mutateUploadFiles } = uploadFiles(
@@ -241,10 +242,8 @@ onMounted(() => {
   watch(
     () => formData.value.category,
     () => {
-      if (props.product?._id) {
-        formData.value.fields = [];
-        isCategoryUpdated.value = true;
-      }
+      if (props.product?._id) formData.value.fields = [];
+      categoryUpdates.value++;
     }
   );
 });
@@ -255,10 +254,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.images {
-  display: flex;
 }
 
 .buttons {

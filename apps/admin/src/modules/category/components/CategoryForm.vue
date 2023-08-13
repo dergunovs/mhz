@@ -32,7 +32,7 @@
     />
 
     <UiUpload
-      label="Icon"
+      label="Upload icon"
       :file="iconFile"
       isSingle
       isRequired
@@ -44,13 +44,7 @@
       @upload="mutateUploadFile(iconFile)"
     />
 
-    <div v-if="formData.iconUrl">
-      <div :class="$style.icon">
-        <img :src="`${PATH_UPLOAD}/${formData.iconUrl}`" width="200" alt="Icon" loading="lazy" />
-      </div>
-
-      <UiButton @click="deleteIconFile" layout="plain">Delete</UiButton>
-    </div>
+    <ImagePreview v-if="formData.iconUrl" :urls="[formData.iconUrl]" @delete="formData.iconUrl = ''" />
 
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
@@ -88,11 +82,11 @@ import { clone, deleteTempId } from 'mhz-helpers';
 
 import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
 import CategoryFieldList from '@/category/components/CategoryFieldList.vue';
+import ImagePreview from '@/common/components/ImagePreview.vue';
 
 import { API_CATEGORY, URL_CATEGORY } from '@/category/constants';
 import { postCategory, updateCategory, deleteCategory } from '@/category/services';
-import { uploadFile, deleteFile } from '@/common/services';
-import { PATH_UPLOAD } from '@/common/constants';
+import { uploadFile } from '@/common/services';
 
 interface IProps {
   category?: ICategory;
@@ -193,8 +187,6 @@ function update() {
   }
 }
 
-const { mutate: mutateDeleteFile } = deleteFile();
-
 const iconFile = ref<File>();
 
 function addIconFile(file: File) {
@@ -203,11 +195,6 @@ function addIconFile(file: File) {
 
 function removeIconFile() {
   iconFile.value = undefined;
-}
-
-function deleteIconFile() {
-  mutateDeleteFile(formData.value.iconUrl);
-  formData.value.iconUrl = '';
 }
 
 const { mutate: mutateUploadFile } = uploadFile(
@@ -231,10 +218,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.icon {
-  width: 200px;
 }
 
 .buttons {

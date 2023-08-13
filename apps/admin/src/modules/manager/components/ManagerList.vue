@@ -22,8 +22,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { useQueryClient } from '@tanstack/vue-query';
 
 import { IManager } from 'mhz-types';
@@ -45,7 +43,7 @@ const queryClient = useQueryClient();
 
 const { mutate } = deleteManager({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER, ref(1)], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANAGER, 1], exact: true });
     toast.success('Manager deleted');
   },
 });

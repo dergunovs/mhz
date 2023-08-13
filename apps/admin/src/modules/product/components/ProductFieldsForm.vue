@@ -21,7 +21,7 @@ import { deleteId } from 'mhz-helpers';
 
 interface IProps {
   fields: ICategoryField[];
-  isUpdated: boolean;
+  updates: number;
 }
 
 const props = defineProps<IProps>();
@@ -30,7 +30,7 @@ const emit = defineEmits(['update']);
 const formData = ref<ICategoryField[]>([]);
 
 watch(
-  () => [props.fields, props.isUpdated],
+  () => props.updates,
   () => getFields()
 );
 
