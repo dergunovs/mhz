@@ -12,7 +12,7 @@ Fake PC hardware store monorepo.
 
 **Design:** https://www.figma.com/file/TOqDhQK83b2x4zM0Gtev94/9000-MHz
 
-**Youtube live coding:** https://youtube.com/playlist?list=PLOICX-WjKEZcwBaFQAfogv0vUvjcnr3Lj
+**Live coding:** https://youtube.com/playlist?list=PLOICX-WjKEZcwBaFQAfogv0vUvjcnr3Lj
 
 ## Installation
 
