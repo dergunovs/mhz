@@ -23,10 +23,13 @@ export async function resizeFile(filename: string, width: string) {
   }
 }
 
-export async function paginate<T>(Entity: Model<T>, pageQuery?: string, populate?: PopulateOptions[]) {
+export async function paginate<T>(
+  Entity: Model<T>,
+  options?: { page?: string; populate?: PopulateOptions[]; sort?: string }
+) {
   try {
-    const page = Number(pageQuery) || 1;
-    const limit = 12;
+    const page = Number(options?.page) || 1;
+    const limit = 10;
 
     const count = await Entity.estimatedDocumentCount();
     const total = Math.ceil(count / limit);
@@ -34,9 +37,9 @@ export async function paginate<T>(Entity: Model<T>, pageQuery?: string, populate
     const data = await Entity.find()
       .skip((page - 1) * limit)
       .limit(limit)
-      .populate(populate || [])
+      .populate(options?.populate || [])
       .select('-password -__v')
-      .sort('-dateCreated')
+      .sort(options?.sort || '-dateCreated')
       .lean()
       .exec();
 

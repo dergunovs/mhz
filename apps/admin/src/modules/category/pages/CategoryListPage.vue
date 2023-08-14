@@ -13,18 +13,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { UiPagination } from 'mhz-ui';
-import { usePagination } from 'mhz-helpers';
+import { usePagination, usePage } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import CategoryList from '@/category/components/CategoryList.vue';
 
 import { getCategories } from '@/category/services';
-import { URL_CATEGORY_CREATE } from '@/category/constants';
+import { URL_CATEGORY, URL_CATEGORY_CREATE } from '@/category/constants';
 
-const page = ref(1);
+const { page } = usePage(URL_CATEGORY);
 
 const { data } = getCategories(page);
 

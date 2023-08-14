@@ -11,7 +11,7 @@ export default async function (fastify: IFastifyInstance) {
     { preValidation: [fastify.checkAuth] },
     async function (request, reply) {
       try {
-        const { data, total } = await paginate(Manager, request.query.page);
+        const { data, total } = await paginate(Manager, { page: request.query.page, sort: 'title' });
 
         reply.code(200).send({ data, total });
       } catch (err) {

@@ -7,10 +7,14 @@ import { IProduct } from 'mhz-types';
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: { page?: string } }>('/', async function (request, reply) {
     try {
-      const { data, total } = await paginate(Product, request.query.page, [
-        { path: 'category', select: ['_id', 'title'] },
-        { path: 'manufacturer', select: ['_id', 'title'] },
-      ]);
+      const { data, total } = await paginate(Product, {
+        page: request.query.page,
+        populate: [
+          { path: 'category', select: ['_id', 'title'] },
+          { path: 'manufacturer', select: ['_id', 'title'] },
+        ],
+        sort: 'title',
+      });
 
       reply.code(200).send({ data, total });
     } catch (err) {

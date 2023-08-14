@@ -13,18 +13,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { UiPagination } from 'mhz-ui';
-import { usePagination } from 'mhz-helpers';
+import { usePagination, usePage } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';
 
 import { getManufacturers } from '@/manufacturer/services';
-import { URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
+import { URL_MANUFACTURER, URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
 
-const page = ref(1);
+const { page } = usePage(URL_MANUFACTURER);
 
 const { data } = getManufacturers(page);
 
