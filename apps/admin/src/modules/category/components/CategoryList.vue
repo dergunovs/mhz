@@ -8,10 +8,10 @@
           </RouterLink>
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(category.dateCreated) }}
+          {{ formatDate(category.dateCreated) }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(category.dateUpdated) }}
+          {{ formatDate(category.dateUpdated) }}
         </td>
         <td>
           <UiButton @click="mutate(category._id)" layout="plain">Delete</UiButton>
@@ -26,7 +26,7 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { ICategory } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDateTime } from 'mhz-helpers';
+import { formatDate } from 'mhz-helpers';
 
 import { deleteCategory } from '@/category/services';
 import { API_CATEGORY, URL_CATEGORY_EDIT } from '@/category/constants';

@@ -9,10 +9,10 @@
         </td>
         <td data-no-wrap>{{ manager.firstName }} {{ manager.lastName }}</td>
         <td data-no-wrap>
-          {{ formatDateTime(manager.dateCreated) }}
+          {{ formatDate(manager.dateCreated) }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(manager.dateUpdated) }}
+          {{ formatDate(manager.dateUpdated) }}
         </td>
         <td>
           <UiButton @click="mutate(manager._id)" layout="plain">Delete</UiButton>
@@ -27,7 +27,7 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { IManager } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDateTime } from 'mhz-helpers';
+import { formatDate } from 'mhz-helpers';
 
 import { deleteManager } from '@/manager/services';
 import { API_MANAGER, URL_MANAGER_EDIT } from '@/manager/constants';

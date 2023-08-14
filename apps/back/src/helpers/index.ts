@@ -26,7 +26,7 @@ export async function resizeFile(filename: string, width: string) {
 export async function paginate<T>(Entity: Model<T>, pageQuery?: string, populate?: PopulateOptions[]) {
   try {
     const page = Number(pageQuery) || 1;
-    const limit = 10;
+    const limit = 12;
 
     const count = await Entity.estimatedDocumentCount();
     const total = Math.ceil(count / limit);

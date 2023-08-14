@@ -11,10 +11,10 @@
           {{ manufacturer.country }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(manufacturer.dateCreated) }}
+          {{ formatDate(manufacturer.dateCreated) }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(manufacturer.dateUpdated) }}
+          {{ formatDate(manufacturer.dateUpdated) }}
         </td>
         <td>
           <UiButton @click="mutate(manufacturer._id)" layout="plain">Delete</UiButton>
@@ -29,7 +29,7 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { IManufacturer } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDateTime } from 'mhz-helpers';
+import { formatDate } from 'mhz-helpers';
 
 import { deleteManufacturer } from '@/manufacturer/services';
 import { API_MANUFACTURER, URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';

@@ -2,7 +2,7 @@
 
 Fake PC hardware store monorepo.
 
-**Frontend:** TS, Vite, Vue, Tastack Query.
+**Frontend:** TS, Vite, Vue, Tanstack Query.
 
 **Backend:** TS, Fastify, Mongoose, MongoDB.
 

@@ -17,10 +17,13 @@
           {{ product.price }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(product.dateCreated) }}
+          {{ product.isInStock ? 'Yes' : 'No' }}
         </td>
         <td data-no-wrap>
-          {{ formatDateTime(product.dateUpdated) }}
+          {{ formatDate(product.dateCreated) }}
+        </td>
+        <td data-no-wrap>
+          {{ formatDate(product.dateUpdated) }}
         </td>
         <td>
           <UiButton @click="mutate(product._id)" layout="plain">Delete</UiButton>
@@ -35,7 +38,7 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { IProduct } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDateTime } from 'mhz-helpers';
+import { formatDate } from 'mhz-helpers';
 
 import { deleteProduct } from '@/product/services';
 import { API_PRODUCT, URL_PRODUCT_EDIT } from '@/product/constants';
@@ -46,7 +49,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const tableHeaders = ['Product', 'Category', 'Manufacturer', 'Price', 'Created', 'Updated', ''];
+const tableHeaders = ['Product', 'Category', 'Manufacturer', 'Price', 'In stock', 'Created', 'Updated', ''];
 
 const queryClient = useQueryClient();
 

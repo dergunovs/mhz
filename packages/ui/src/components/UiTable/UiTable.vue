@@ -93,6 +93,7 @@ onBeforeUnmount(() => {
   font-weight: 700;
   color: var(--color-black);
   text-align: left;
+  text-wrap: nowrap;
   background-color: var(--color-gray-light-extra);
 
   &:first-child {

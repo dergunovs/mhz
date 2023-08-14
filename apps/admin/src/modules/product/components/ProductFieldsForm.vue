@@ -31,7 +31,9 @@ const formData = ref<ICategoryField[]>([]);
 
 watch(
   () => props.updates,
-  () => getFields()
+  () => {
+    getFields();
+  }
 );
 
 watch(
@@ -45,7 +47,9 @@ function getFields() {
   formData.value = deleteId(props.fields);
 }
 
-onMounted(() => getFields());
+onMounted(() => {
+  getFields();
+});
 </script>
 
 <style module lang="scss">
