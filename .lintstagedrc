@@ -1,6 +1,0 @@
-{
-  "/apps/**/*.{js,ts,vue}": ["eslint"],
-  "/apps/**/*.{scss,vue}": ["stylelint"],
-  "/packages/**/*.{js,ts,vue}": ["eslint"],
-  "/packages/**/*.{scss,vue}": ["stylelint"]
-}
