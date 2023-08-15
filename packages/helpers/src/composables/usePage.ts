@@ -1,4 +1,4 @@
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 export function usePage(url: string) {
@@ -14,9 +14,7 @@ export function usePage(url: string) {
     }
   );
 
-  onMounted(() => {
-    page.value = Number(route.query.page || page.value);
-  });
+  page.value = Number(route.query.page || page.value);
 
   return { page };
 }

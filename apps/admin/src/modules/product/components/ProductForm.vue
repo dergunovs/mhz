@@ -9,11 +9,21 @@
     </UiField>
 
     <UiField label="Manufacturer" isRequired :error="error('manufacturer')">
-      <UiSelect v-model="formData.manufacturer" :options="allManufacturers" @reachedBottom="handleManufacturerScroll" />
+      <UiSelect
+        v-model="formData.manufacturer"
+        :options="allManufacturers"
+        @reachedBottom="
+          scrollManufacturers(isLoadingManufacturers, setManufacturerPage(manufacturersPage + 1, manufacturersPage))
+        "
+      />
     </UiField>
 
     <UiField label="Category" isRequired :error="error('category')">
-      <UiSelect v-model="formData.category" :options="allCategories" @reachedBottom="handleCategoryScroll" />
+      <UiSelect
+        v-model="formData.category"
+        :options="allCategories"
+        @reachedBottom="scrollCategories(isLoadingCategories, setCategoryPage(categoriesPage + 1, categoriesPage))"
+      />
     </UiField>
 
     <ProductFieldsForm
@@ -60,7 +70,7 @@ import { useQueryClient } from '@tanstack/vue-query';
 import { UiField, UiInput, UiCheckbox, toast, UiEditor, UiSelect, UiUpload } from 'mhz-ui';
 import { ICategory, IProduct, IManufacturer, ICategoryField } from 'mhz-types';
 import { useValidator, required } from 'mhz-validate';
-import { clone, usePagination } from 'mhz-helpers';
+import { clone, usePagination, useInfiniteScroll } from 'mhz-helpers';
 
 import ProductFieldsForm from '@/product/components/ProductFieldsForm.vue';
 import ImagePreview from '@/common/components/ImagePreview.vue';
@@ -130,41 +140,39 @@ const { mutate: mutateUploadFiles } = uploadFiles(
   '1200'
 );
 
-const categoryPage = ref(1);
-const allCategories = ref<ICategory[]>([]);
+const {
+  page: categoriesPage,
+  allData: allCategories,
+  addData: addCategories,
+  handleScroll: scrollCategories,
+} = useInfiniteScroll<ICategory>();
 
-const { data: categoriesData, isLoading: isLoadingCategories } = getCategories(categoryPage);
+const { data: categoriesData, isLoading: isLoadingCategories } = getCategories(categoriesPage);
 const { data: categories, setPage: setCategoryPage } = usePagination(categoriesData);
 
 watch(
   () => categories.value,
   () => {
-    if (categories.value) allCategories.value = [...allCategories.value, ...categories.value];
+    if (categories.value && !isLoadingCategories.value) addCategories(categories.value);
   }
 );
 
-function handleCategoryScroll() {
-  if (isLoadingCategories.value) return;
-  categoryPage.value = setCategoryPage(categoryPage.value + 1, categoryPage.value);
-}
+const {
+  page: manufacturersPage,
+  allData: allManufacturers,
+  addData: addManufacturers,
+  handleScroll: scrollManufacturers,
+} = useInfiniteScroll<IManufacturer>();
 
-const manufacturerPage = ref(1);
-const allManufacturers = ref<IManufacturer[]>([]);
-
-const { data: manufacturersData, isLoading: isLoadingManufacturers } = getManufacturers(manufacturerPage);
+const { data: manufacturersData, isLoading: isLoadingManufacturers } = getManufacturers(manufacturersPage);
 const { data: manufacturers, setPage: setManufacturerPage } = usePagination(manufacturersData);
 
 watch(
   () => manufacturers.value,
   () => {
-    if (manufacturers.value) allManufacturers.value = [...allManufacturers.value, ...manufacturers.value];
+    if (manufacturers.value && !isLoadingManufacturers.value) addManufacturers(manufacturers.value);
   }
 );
-
-function handleManufacturerScroll() {
-  if (isLoadingManufacturers.value) return;
-  manufacturerPage.value = setManufacturerPage(manufacturerPage.value + 1, manufacturerPage.value);
-}
 
 const productId = computed(() => props.product?._id);
 
@@ -222,8 +230,8 @@ function handleDelete(id: string) {
 onMounted(() => {
   if (props.product) formData.value = clone(props.product);
 
-  if (categories.value) allCategories.value = [...categories.value];
-  if (manufacturers.value) allManufacturers.value = [...manufacturers.value];
+  if (categories.value) addCategories(categories.value);
+  if (manufacturers.value) addManufacturers(manufacturers.value);
 
   watch(
     () => formData.value.category,
