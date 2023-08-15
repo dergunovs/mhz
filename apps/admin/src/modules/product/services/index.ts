@@ -5,16 +5,19 @@ import { IProduct } from 'mhz-types';
 
 import { API_PRODUCT } from '@/product/constants';
 import { api } from '@/common/services/api';
+import { ISortOption } from '@/common/interface';
 
-export function getProducts(page: Ref<number>) {
+export function getProducts(page: Ref<number>, sort?: Ref<ISortOption>) {
   async function fn(): Promise<{ data: IProduct[]; total: number }> {
-    const { data } = await api.get(API_PRODUCT, { params: { page: page.value || 1 } });
+    const { data } = await api.get(API_PRODUCT, {
+      params: { page: page.value || 1, sort: sort?.value.value, dir: sort?.value.isAsc === false ? 'desc' : 'asc' },
+    });
 
     return data;
   }
 
   return useQuery({
-    queryKey: [API_PRODUCT, page],
+    queryKey: [API_PRODUCT, page, sort],
     queryFn: fn,
   });
 }

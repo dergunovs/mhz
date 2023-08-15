@@ -5,13 +5,25 @@
     <table :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
       <thead>
         <tr>
-          <th
-            v-for="(header, index) in props.headers"
-            :key="`header-${header}-${index}`"
-            :class="$style.th"
-            :data-loading="props.isLoading"
-          >
-            {{ header }}
+          <th v-for="header in props.headers" :key="header.value" :class="$style.th">
+            <label :class="$style.label" :data-loading="props.isLoading">
+              <span>{{ header.title }}</span>
+
+              <button v-if="header.value" type="button" @click="sort(header.value)" :class="$style.sort">
+                <span
+                  :data-current="props.modelValue.isAsc && props.modelValue.value === header.value"
+                  :class="$style.arrow"
+                >
+                  ↑
+                </span>
+                <span
+                  :data-current="!props.modelValue.isAsc && props.modelValue.value === header.value"
+                  :class="$style.arrow"
+                >
+                  ↓
+                </span>
+              </button>
+            </label>
           </th>
         </tr>
       </thead>
@@ -26,12 +38,19 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
+interface IHeader {
+  value?: string;
+  title: string;
+}
+
 interface IProps {
-  headers: string[];
+  headers: IHeader[];
+  modelValue: { value: string; isAsc: boolean };
   isLoading?: boolean;
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['update:modelValue']);
 
 const tableBlock = ref<HTMLElement>();
 const table = ref<HTMLElement>();
@@ -45,6 +64,12 @@ function checkTableSize(): void {
 
     isScrollable.value = tableSize > tableBlockSize;
   }
+}
+
+function sort(value: string) {
+  const isAsc = !(value === props.modelValue.value && props.modelValue.isAsc);
+
+  emit('update:modelValue', { value, isAsc });
 }
 
 onMounted(() => {
@@ -88,12 +113,8 @@ onBeforeUnmount(() => {
 }
 
 .th {
-  padding: 12px 16px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-black);
+  padding: 8px 16px;
   text-align: left;
-  text-wrap: nowrap;
   background-color: var(--color-gray-light-extra);
 
   &:first-child {
@@ -103,9 +124,46 @@ onBeforeUnmount(() => {
   &:last-child {
     border-top-right-radius: 8px;
   }
+}
+
+.label {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: fit-content;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-gray-dark-extra);
+  text-wrap: nowrap;
+  cursor: pointer;
+  user-select: none;
 
   &[data-loading='true'] {
     color: var(--color-gray-light-extra);
+  }
+
+  &:hover {
+    color: var(--color-black);
+
+    .sort {
+      color: var(--color-black);
+    }
+  }
+}
+
+.sort {
+  display: flex;
+  padding: 0;
+  cursor: pointer;
+  background-color: var(--color-transparent);
+  border: none;
+}
+
+.arrow {
+  color: var(--color-gray-dark-extra);
+
+  &[data-current='true'] {
+    color: var(--color-primary);
   }
 }
 </style>

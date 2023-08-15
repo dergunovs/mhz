@@ -1,5 +1,10 @@
 <template>
-  <UiTable :headers="tableHeaders" :isLoading="!props.categories?.length">
+  <UiTable
+    :headers="tableHeaders"
+    :isLoading="!props.categories?.length"
+    :modelValue="props.modelValue"
+    @update:modelValue="(value) => emit('update:modelValue', value)"
+  >
     <template v-if="props.categories?.length">
       <tr v-for="category in props.categories" :key="category._id">
         <td data-grow>
@@ -30,14 +35,22 @@ import { formatDate } from 'mhz-helpers';
 
 import { deleteCategory } from '@/category/services';
 import { API_CATEGORY, URL_CATEGORY_EDIT } from '@/category/constants';
+import { ISortOption } from '@/common/interface';
 
 interface IProps {
   categories?: ICategory[];
+  modelValue: ISortOption;
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['update:modelValue']);
 
-const tableHeaders = ['Category', 'Created', 'Updated', ''];
+const tableHeaders = [
+  { value: 'title', title: 'Category' },
+  { value: 'dateCreated', title: 'Created' },
+  { value: 'dateUpdated', title: 'Updated' },
+  { title: '' },
+];
 
 const queryClient = useQueryClient();
 

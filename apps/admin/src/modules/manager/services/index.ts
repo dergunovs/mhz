@@ -5,16 +5,19 @@ import { IManager } from 'mhz-types';
 
 import { API_MANAGER } from '@/manager/constants';
 import { api } from '@/common/services/api';
+import { ISortOption } from '@/common/interface';
 
-export function getManagers(page: Ref<number>) {
+export function getManagers(page: Ref<number>, sort?: Ref<ISortOption>) {
   async function fn(): Promise<{ data: IManager[]; total: number }> {
-    const { data } = await api.get(API_MANAGER, { params: { page: page.value || 1 } });
+    const { data } = await api.get(API_MANAGER, {
+      params: { page: page.value || 1, sort: sort?.value.value, dir: sort?.value.isAsc === false ? 'desc' : 'asc' },
+    });
 
     return data;
   }
 
   return useQuery({
-    queryKey: [API_MANAGER, page],
+    queryKey: [API_MANAGER, page, sort],
     queryFn: fn,
   });
 }

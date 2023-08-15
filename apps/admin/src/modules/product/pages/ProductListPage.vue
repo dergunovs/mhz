@@ -5,7 +5,7 @@
     <div :class="$style.page">
       <RouterLink :to="URL_PRODUCT_CREATE">Add product</RouterLink>
 
-      <ProductList :products="products" />
+      <ProductList :products="products" v-model="sort" />
 
       <UiPagination v-if="products?.length" :page="page" :total="total" @update="updatePage" />
     </div>
@@ -22,9 +22,9 @@ import ProductList from '@/product/components/ProductList.vue';
 import { getProducts } from '@/product/services';
 import { URL_PRODUCT, URL_PRODUCT_CREATE } from '@/product/constants';
 
-const { page } = usePage(URL_PRODUCT);
+const { page, sort } = usePage(URL_PRODUCT, 'title');
 
-const { data } = getProducts(page);
+const { data } = getProducts(page, sort);
 
 const { data: products, total, setPage } = usePagination(data);
 

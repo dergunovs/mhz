@@ -1,5 +1,10 @@
 <template>
-  <UiTable :headers="tableHeaders" :isLoading="!props.managers?.length">
+  <UiTable
+    :headers="tableHeaders"
+    :isLoading="!props.managers?.length"
+    :modelValue="props.modelValue"
+    @update:modelValue="(value) => emit('update:modelValue', value)"
+  >
     <template v-if="props.managers?.length">
       <tr v-for="manager in props.managers" :key="manager._id">
         <td data-grow>
@@ -31,14 +36,23 @@ import { formatDate } from 'mhz-helpers';
 
 import { deleteManager } from '@/manager/services';
 import { API_MANAGER, URL_MANAGER_EDIT } from '@/manager/constants';
+import { ISortOption } from '@/common/interface';
 
 interface IProps {
   managers?: IManager[];
+  modelValue: ISortOption;
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['update:modelValue']);
 
-const tableHeaders = ['Email', 'Name', 'Created', 'Updated', ''];
+const tableHeaders = [
+  { value: 'email', title: 'Email' },
+  { value: 'lastName', title: 'Name' },
+  { value: 'dateCreated', title: 'Created' },
+  { value: 'dateUpdated', title: 'Updated' },
+  { title: '' },
+];
 
 const queryClient = useQueryClient();
 

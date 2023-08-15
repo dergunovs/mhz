@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { useArgs } from '@storybook/preview-api';
 import { html } from '@/utils';
 
 import { UiTable } from '@/components';
@@ -6,7 +7,13 @@ import { UiTable } from '@/components';
 const meta = {
   component: UiTable,
   args: {
-    headers: ['Position', 'Team', 'Games', 'Points'],
+    headers: [
+      { value: 'position', title: 'Position' },
+      { value: 'team', title: 'Team' },
+      { value: 'games', title: 'Games' },
+      { value: 'points', title: 'Points' },
+    ],
+    modelValue: { value: 'position', isAsc: true },
   },
   parameters: {
     docs: {
@@ -24,11 +31,11 @@ type Story = StoryObj<typeof UiTable>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args, { argTypes, updateArgs }) => ({
     components: { UiTable },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args, argTypes, updateArgs }),
 
-    template: html` <UiTable v-bind="args">
+    template: html` <UiTable v-bind="args" @update:modelValue="update">
       <tr>
         <td>1</td>
         <td>Frosinone</td>
@@ -48,6 +55,21 @@ export const Primary: Story = {
         <td>65</td>
       </tr>
     </UiTable>`,
+
+    methods: {
+      update(sort: { value: string; dir: 'asc' | 'desc' }) {
+        updateArgs({ modelValue: { ...sort } });
+      },
+    },
   }),
+
+  decorators: [
+    (story, context) => {
+      const [args, updateArgs] = useArgs();
+
+      return story({ ...context, updateArgs, args });
+    },
+  ],
+
   argTypes,
 };

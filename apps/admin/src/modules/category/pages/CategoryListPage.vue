@@ -5,7 +5,7 @@
     <div :class="$style.page">
       <RouterLink :to="URL_CATEGORY_CREATE">Add category</RouterLink>
 
-      <CategoryList :categories="categories" />
+      <CategoryList :categories="categories" v-model="sort" />
 
       <UiPagination v-if="categories?.length" :page="page" :total="total" @update="updatePage" />
     </div>
@@ -22,9 +22,9 @@ import CategoryList from '@/category/components/CategoryList.vue';
 import { getCategories } from '@/category/services';
 import { URL_CATEGORY, URL_CATEGORY_CREATE } from '@/category/constants';
 
-const { page } = usePage(URL_CATEGORY);
+const { page, sort } = usePage(URL_CATEGORY, 'title');
 
-const { data } = getCategories(page);
+const { data } = getCategories(page, sort);
 
 const { data: categories, total, setPage } = usePagination(data);
 

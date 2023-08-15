@@ -1,5 +1,10 @@
 <template>
-  <UiTable :headers="tableHeaders" :isLoading="!props.products?.length">
+  <UiTable
+    :headers="tableHeaders"
+    :isLoading="!props.products?.length"
+    :modelValue="props.modelValue"
+    @update:modelValue="(value) => emit('update:modelValue', value)"
+  >
     <template v-if="props.products?.length">
       <tr v-for="product in props.products" :key="product._id">
         <td data-grow>
@@ -42,14 +47,26 @@ import { formatDate } from 'mhz-helpers';
 
 import { deleteProduct } from '@/product/services';
 import { API_PRODUCT, URL_PRODUCT_EDIT } from '@/product/constants';
+import { ISortOption } from '@/common/interface';
 
 interface IProps {
   products?: IProduct[];
+  modelValue: ISortOption;
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['update:modelValue']);
 
-const tableHeaders = ['Product', 'Category', 'Manufacturer', 'Price', 'In stock', 'Created', 'Updated', ''];
+const tableHeaders = [
+  { value: 'title', title: 'Product' },
+  { value: 'category', title: 'Category' },
+  { value: 'manufacturer', title: 'Manufacturer' },
+  { value: 'price', title: 'Price' },
+  { value: 'isInStock', title: 'In stock' },
+  { value: 'dateCreated', title: 'Created' },
+  { value: 'dateUpdated', title: 'Updated' },
+  { title: '' },
+];
 
 const queryClient = useQueryClient();
 

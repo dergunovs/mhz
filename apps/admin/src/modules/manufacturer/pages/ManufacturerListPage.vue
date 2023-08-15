@@ -5,7 +5,7 @@
     <div :class="$style.page">
       <RouterLink :to="URL_MANUFACTURER_CREATE">Add manufacturer</RouterLink>
 
-      <ManufacturerList :manufacturers="manufacturers" />
+      <ManufacturerList :manufacturers="manufacturers" v-model="sort" />
 
       <UiPagination v-if="manufacturers?.length" :page="page" :total="total" @update="updatePage" />
     </div>
@@ -22,9 +22,9 @@ import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';
 import { getManufacturers } from '@/manufacturer/services';
 import { URL_MANUFACTURER, URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
 
-const { page } = usePage(URL_MANUFACTURER);
+const { page, sort } = usePage(URL_MANUFACTURER, 'manufacturer');
 
-const { data } = getManufacturers(page);
+const { data } = getManufacturers(page, sort);
 
 const { data: manufacturers, total, setPage } = usePagination(data);
 
