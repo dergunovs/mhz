@@ -1,29 +1,39 @@
 <template>
   <form @submit.prevent="props.product?._id ? update() : submit()" :class="$style.form">
-    <UiField label="Title" isRequired :error="error('title')">
-      <UiInput v-model="formData.title" isFocus />
-    </UiField>
+    <div :class="$style.row">
+      <UiField label="Title" isRequired :error="error('title')">
+        <UiInput v-model="formData.title" isFocus />
+      </UiField>
+
+      <UiField label="Price" isRequired :error="error('price')">
+        <UiInput v-model="formData.price" type="number" />
+      </UiField>
+    </div>
+
+    <div :class="$style.row">
+      <UiField label="Manufacturer" isRequired :error="error('manufacturer')">
+        <UiSelect
+          v-model="formData.manufacturer"
+          :options="allManufacturers"
+          @reachedBottom="
+            scrollManufacturers(isLoadingManufacturers, setManufacturerPage(manufacturersPage + 1, manufacturersPage))
+          "
+        />
+      </UiField>
+
+      <UiField label="Category" isRequired :error="error('category')">
+        <UiSelect
+          v-model="formData.category"
+          :options="allCategories"
+          @reachedBottom="scrollCategories(isLoadingCategories, setCategoryPage(categoriesPage + 1, categoriesPage))"
+        />
+      </UiField>
+    </div>
+
+    <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
 
     <UiField label="Description" isRequired :error="error('description')">
       <UiEditor v-model="formData.description" />
-    </UiField>
-
-    <UiField label="Manufacturer" isRequired :error="error('manufacturer')">
-      <UiSelect
-        v-model="formData.manufacturer"
-        :options="allManufacturers"
-        @reachedBottom="
-          scrollManufacturers(isLoadingManufacturers, setManufacturerPage(manufacturersPage + 1, manufacturersPage))
-        "
-      />
-    </UiField>
-
-    <UiField label="Category" isRequired :error="error('category')">
-      <UiSelect
-        v-model="formData.category"
-        :options="allCategories"
-        @reachedBottom="scrollCategories(isLoadingCategories, setCategoryPage(categoriesPage + 1, categoriesPage))"
-      />
     </UiField>
 
     <ProductFieldsForm
@@ -50,12 +60,6 @@
       @update="updateImages"
       @delete="deleteImage"
     />
-
-    <UiField label="Price" isRequired :error="error('price')">
-      <UiInput v-model="formData.price" type="number" />
-    </UiField>
-
-    <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
 
     <FormButtons :id="props.product?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
   </form>
@@ -249,5 +253,11 @@ onMounted(() => {
   flex-direction: column;
   gap: 24px;
   align-items: flex-start;
+}
+
+.row {
+  display: flex;
+  gap: 24px;
+  width: 100%;
 }
 </style>
