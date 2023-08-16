@@ -5,9 +5,14 @@
     <div :class="$style.page">
       <RouterLink :to="URL_MANUFACTURER_CREATE">Add manufacturer</RouterLink>
 
-      <ManufacturerList :manufacturers="manufacturers" v-model="sort" />
+      <ManufacturerList :manufacturers="manufacturers" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
-      <UiPagination v-if="manufacturers?.length" :page="page" :total="total" @update="updatePage" />
+      <UiPagination
+        v-if="manufacturers?.length"
+        :page="query.page"
+        :total="total"
+        @update="(value) => setQueryPage(setPage(value, query.page))"
+      />
     </div>
   </div>
 </template>
@@ -22,15 +27,11 @@ import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';
 import { getManufacturers } from '@/manufacturer/services';
 import { URL_MANUFACTURER, URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
 
-const { page, sort } = usePage(URL_MANUFACTURER, 'manufacturer');
+const { query, resetQuery, setQueryPage } = usePage(URL_MANUFACTURER, 'manufacturer');
 
-const { data } = getManufacturers(page, sort);
+const { data } = getManufacturers(query);
 
 const { data: manufacturers, total, setPage } = usePagination(data);
-
-function updatePage(pageToSet: number) {
-  page.value = setPage(pageToSet, page.value);
-}
 </script>
 
 <style module lang="scss">

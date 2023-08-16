@@ -50,7 +50,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'reset']);
 
 const tableBlock = ref<HTMLElement>();
 const table = ref<HTMLElement>();
@@ -67,9 +67,9 @@ function checkTableSize(): void {
 }
 
 function sort(value: string) {
-  const isAsc = !(value === props.modelValue.value && props.modelValue.isAsc);
-
-  emit('update:modelValue', { value, isAsc });
+  props.modelValue.value === value
+    ? emit('update:modelValue', { value, isAsc: !props.modelValue.isAsc })
+    : emit('reset', value);
 }
 
 onMounted(() => {

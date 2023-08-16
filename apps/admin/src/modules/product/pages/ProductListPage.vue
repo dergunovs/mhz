@@ -5,9 +5,14 @@
     <div :class="$style.page">
       <RouterLink :to="URL_PRODUCT_CREATE">Add product</RouterLink>
 
-      <ProductList :products="products" v-model="sort" />
+      <ProductList :products="products" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
-      <UiPagination v-if="products?.length" :page="page" :total="total" @update="updatePage" />
+      <UiPagination
+        v-if="products?.length"
+        :page="query.page"
+        :total="total"
+        @update="(value) => setQueryPage(setPage(value, query.page))"
+      />
     </div>
   </div>
 </template>
@@ -22,15 +27,11 @@ import ProductList from '@/product/components/ProductList.vue';
 import { getProducts } from '@/product/services';
 import { URL_PRODUCT, URL_PRODUCT_CREATE } from '@/product/constants';
 
-const { page, sort } = usePage(URL_PRODUCT, 'title');
+const { query, resetQuery, setQueryPage } = usePage(URL_PRODUCT, 'title');
 
-const { data } = getProducts(page, sort);
+const { data } = getProducts(query);
 
 const { data: products, total, setPage } = usePagination(data);
-
-function updatePage(pageToSet: number) {
-  page.value = setPage(pageToSet, page.value);
-}
 </script>
 
 <style module lang="scss">

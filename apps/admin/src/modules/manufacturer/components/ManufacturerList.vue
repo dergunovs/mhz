@@ -4,6 +4,7 @@
     :isLoading="!props.manufacturers?.length"
     :modelValue="props.modelValue"
     @update:modelValue="(value) => emit('update:modelValue', value)"
+    @reset="(value) => emit('reset', value)"
   >
     <template v-if="props.manufacturers?.length">
       <tr v-for="manufacturer in props.manufacturers" :key="manufacturer._id">
@@ -34,11 +35,10 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { IManufacturer } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDate } from 'mhz-helpers';
+import { formatDate, ISortOption } from 'mhz-helpers';
 
 import { deleteManufacturer } from '@/manufacturer/services';
 import { API_MANUFACTURER, URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
-import { ISortOption } from '@/common/interface';
 
 interface IProps {
   manufacturers?: IManufacturer[];
@@ -46,7 +46,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'reset']);
 
 const tableHeaders = [
   { value: 'manufacturer', title: 'Manufacturer' },

@@ -2,22 +2,29 @@ import { Ref, ComputedRef } from 'vue';
 import { useQuery, useMutation } from '@tanstack/vue-query';
 
 import { ICategory } from 'mhz-types';
+import { IPageQuery } from 'mhz-helpers';
 
 import { API_CATEGORY } from '@/category/constants';
 import { api } from '@/common/services/api';
-import { ISortOption } from '@/common/interface';
 
-export function getCategories(page: Ref<number>, sort?: Ref<ISortOption>) {
+export function getCategories(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: ICategory[]; total: number }> {
-    const { data } = await api.get(API_CATEGORY, {
-      params: { page: page.value || 1, sort: sort?.value.value, dir: sort?.value.isAsc === false ? 'desc' : 'asc' },
-    });
+    const params =
+      typeof query.value === 'number'
+        ? { page: query.value }
+        : {
+            page: query.value.page || 1,
+            sort: query.value.sort.value,
+            dir: query.value.sort.isAsc === false ? 'desc' : 'asc',
+          };
+
+    const { data } = await api.get(API_CATEGORY, { params });
 
     return data;
   }
 
   return useQuery({
-    queryKey: [API_CATEGORY, page, sort],
+    queryKey: [API_CATEGORY, query],
     queryFn: fn,
   });
 }

@@ -5,9 +5,14 @@
     <div :class="$style.page">
       <RouterLink :to="URL_MANAGER_CREATE">Add manager</RouterLink>
 
-      <ManagerList :managers="managers" v-model="sort" />
+      <ManagerList v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
-      <UiPagination v-if="managers?.length" :page="page" :total="total" @update="updatePage" />
+      <UiPagination
+        v-if="managers?.length"
+        :page="query.page"
+        :total="total"
+        @update="(value) => setQueryPage(setPage(value, query.page))"
+      />
     </div>
   </div>
 </template>
@@ -22,15 +27,11 @@ import ManagerList from '@/manager/components/ManagerList.vue';
 import { getManagers } from '@/manager/services';
 import { URL_MANAGER, URL_MANAGER_CREATE } from '@/manager/constants';
 
-const { page, sort } = usePage(URL_MANAGER, 'email');
+const { query, resetQuery, setQueryPage } = usePage(URL_MANAGER, 'email');
 
-const { data } = getManagers(page, sort);
+const { data } = getManagers(query);
 
 const { data: managers, total, setPage } = usePagination(data);
-
-function updatePage(pageToSet: number) {
-  page.value = setPage(pageToSet, page.value);
-}
 </script>
 
 <style module lang="scss">

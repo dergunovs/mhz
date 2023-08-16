@@ -4,6 +4,7 @@
     :isLoading="!props.products?.length"
     :modelValue="props.modelValue"
     @update:modelValue="(value) => emit('update:modelValue', value)"
+    @reset="(value) => emit('reset', value)"
   >
     <template v-if="props.products?.length">
       <tr v-for="product in props.products" :key="product._id">
@@ -43,11 +44,10 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { IProduct } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDate } from 'mhz-helpers';
+import { formatDate, ISortOption } from 'mhz-helpers';
 
 import { deleteProduct } from '@/product/services';
 import { API_PRODUCT, URL_PRODUCT_EDIT } from '@/product/constants';
-import { ISortOption } from '@/common/interface';
 
 interface IProps {
   products?: IProduct[];
@@ -55,7 +55,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'reset']);
 
 const tableHeaders = [
   { value: 'title', title: 'Product' },

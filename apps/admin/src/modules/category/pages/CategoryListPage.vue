@@ -5,9 +5,14 @@
     <div :class="$style.page">
       <RouterLink :to="URL_CATEGORY_CREATE">Add category</RouterLink>
 
-      <CategoryList :categories="categories" v-model="sort" />
+      <CategoryList :categories="categories" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
-      <UiPagination v-if="categories?.length" :page="page" :total="total" @update="updatePage" />
+      <UiPagination
+        v-if="categories?.length"
+        :page="query.page"
+        :total="total"
+        @update="(value) => setQueryPage(setPage(value, query.page))"
+      />
     </div>
   </div>
 </template>
@@ -22,15 +27,11 @@ import CategoryList from '@/category/components/CategoryList.vue';
 import { getCategories } from '@/category/services';
 import { URL_CATEGORY, URL_CATEGORY_CREATE } from '@/category/constants';
 
-const { page, sort } = usePage(URL_CATEGORY, 'title');
+const { query, resetQuery, setQueryPage } = usePage(URL_CATEGORY, 'title');
 
-const { data } = getCategories(page, sort);
+const { data } = getCategories(query);
 
 const { data: categories, total, setPage } = usePagination(data);
-
-function updatePage(pageToSet: number) {
-  page.value = setPage(pageToSet, page.value);
-}
 </script>
 
 <style module lang="scss">

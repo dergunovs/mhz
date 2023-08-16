@@ -4,6 +4,7 @@
     :isLoading="!props.managers?.length"
     :modelValue="props.modelValue"
     @update:modelValue="(value) => emit('update:modelValue', value)"
+    @reset="(value) => emit('reset', value)"
   >
     <template v-if="props.managers?.length">
       <tr v-for="manager in props.managers" :key="manager._id">
@@ -32,11 +33,10 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { IManager } from 'mhz-types';
 import { UiTable, UiButton, toast } from 'mhz-ui';
-import { formatDate } from 'mhz-helpers';
+import { formatDate, ISortOption } from 'mhz-helpers';
 
 import { deleteManager } from '@/manager/services';
 import { API_MANAGER, URL_MANAGER_EDIT } from '@/manager/constants';
-import { ISortOption } from '@/common/interface';
 
 interface IProps {
   managers?: IManager[];
@@ -44,7 +44,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'reset']);
 
 const tableHeaders = [
   { value: 'email', title: 'Email' },
