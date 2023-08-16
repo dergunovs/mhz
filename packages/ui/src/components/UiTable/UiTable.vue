@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
     color: var(--color-transparent);
   }
 
-  &:hover {
+  &:hover:not(&[data-loading='true']) {
     color: var(--color-black);
 
     .sort {
@@ -168,7 +168,7 @@ onBeforeUnmount(() => {
     color: var(--color-transparent);
   }
 
-  &[data-current='true'] {
+  &[data-current='true']:not(&[data-loading='true']) {
     color: var(--color-primary);
   }
 }
