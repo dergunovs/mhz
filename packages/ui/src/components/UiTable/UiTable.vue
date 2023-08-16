@@ -47,7 +47,7 @@ interface IHeader {
 
 interface IProps {
   headers: IHeader[];
-  modelValue: { value: string; isAsc: boolean };
+  modelValue: { value?: string; isAsc: boolean };
   isLoading?: boolean;
 }
 

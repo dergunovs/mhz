@@ -57,7 +57,7 @@ const managerId = computed(() => props.manager?._id);
 
 const { mutate: mutatePost, isLoading: isLoadingPost } = postManager({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
     toast.success('Manager added');
     router.push(URL_MANAGER);
   },
@@ -65,15 +65,15 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManager({
 
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManager(managerId, {
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER, props.manager?._id], exact: true });
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANAGER, props.manager?._id] });
+    await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
     toast.success('Manager updated');
   },
 });
 
 const { mutate: mutateDelete } = deleteManager({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
     toast.success('Manager deleted');
     router.push(URL_MANAGER);
   },

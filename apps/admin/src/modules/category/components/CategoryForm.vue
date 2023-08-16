@@ -93,7 +93,7 @@ const categoryId = computed(() => props.category?._id);
 
 const { mutate: mutatePost, isLoading: isLoadingPost } = postCategory({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_CATEGORY, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
     toast.success('Category added');
     router.push(URL_CATEGORY);
   },
@@ -101,15 +101,15 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postCategory({
 
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateCategory(categoryId, {
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_CATEGORY, props.category?._id], exact: true });
-    await queryClient.refetchQueries({ queryKey: [API_CATEGORY, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_CATEGORY, props.category?._id] });
+    await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
     toast.success('Category updated');
   },
 });
 
 const { mutate: mutateDelete } = deleteCategory({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_CATEGORY, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
     toast.success('Category deleted');
     router.push(URL_CATEGORY);
   },

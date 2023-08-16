@@ -2,7 +2,7 @@ import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 export interface ISortOption {
-  value: string;
+  value?: string;
   isAsc: boolean;
 }
 
@@ -11,14 +11,14 @@ export interface IPageQuery {
   sort: ISortOption;
 }
 
-export function usePage(url: string, sortValue: string) {
+export function usePage() {
   const router = useRouter();
   const route = useRoute();
 
   const query = ref<IPageQuery>({
     page: Number(route.query.page || 1),
     sort: {
-      value: route.query.sort?.toString() || sortValue,
+      value: route.query.sort?.toString(),
       isAsc: route.query.dir !== 'desc',
     },
   });
@@ -34,9 +34,14 @@ export function usePage(url: string, sortValue: string) {
   watch(
     () => query.value,
     () => {
-      router.push(
-        `${url}?page=${query.value.page}&sort=${query.value.sort.value}&dir=${query.value.sort.isAsc ? 'asc' : 'desc'}`
-      );
+      router.push({
+        path: route.path,
+        query: {
+          page: query.value.page,
+          sort: query.value.sort.value,
+          dir: query.value.sort.isAsc ? 'asc' : 'desc',
+        },
+      });
     },
     { deep: true }
   );

@@ -71,7 +71,7 @@ const manufacturerId = computed(() => props.manufacturer?._id);
 
 const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer added');
     router.push(URL_MANUFACTURER);
   },
@@ -79,15 +79,15 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
 
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer(manufacturerId, {
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, props.manufacturer?._id], exact: true });
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, props.manufacturer?._id] });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer updated');
   },
 });
 
 const { mutate: mutateDelete } = deleteManufacturer({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer deleted');
     router.push(URL_MANUFACTURER);
   },

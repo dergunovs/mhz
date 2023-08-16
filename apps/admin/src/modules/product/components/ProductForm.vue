@@ -182,7 +182,7 @@ const productId = computed(() => props.product?._id);
 
 const { mutate: mutatePost, isLoading: isLoadingPost } = postProduct({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_PRODUCT, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product added');
     router.push(URL_PRODUCT);
   },
@@ -190,15 +190,15 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postProduct({
 
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateProduct(productId, {
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_PRODUCT, props.product?._id], exact: true });
-    await queryClient.refetchQueries({ queryKey: [API_PRODUCT, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_PRODUCT, props.product?._id] });
+    await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product updated');
   },
 });
 
 const { mutate: mutateDelete } = deleteProduct({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_PRODUCT, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product deleted');
     router.push(URL_PRODUCT);
   },

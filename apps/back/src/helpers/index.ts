@@ -29,7 +29,7 @@ export async function paginate<T>(
 ) {
   try {
     const page = Number(options?.page) || 1;
-    const sort = `${options?.dir === 'desc' ? '-' : ''}${options?.sort}`;
+    const sort = options?.sort === undefined ? '-dateCreated' : `${options?.dir === 'desc' ? '-' : ''}${options?.sort}`;
 
     const limit = 10;
 
@@ -41,7 +41,7 @@ export async function paginate<T>(
       .limit(limit)
       .populate(options?.populate || [])
       .select('-password -__v')
-      .sort(sort || '-dateCreated')
+      .sort(sort)
       .lean()
       .exec();
 

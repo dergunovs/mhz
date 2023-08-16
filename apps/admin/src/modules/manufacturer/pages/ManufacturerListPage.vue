@@ -25,9 +25,9 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';
 
 import { getManufacturers } from '@/manufacturer/services';
-import { URL_MANUFACTURER, URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
+import { URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
 
-const { query, resetQuery, setQueryPage } = usePage(URL_MANUFACTURER, 'title');
+const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getManufacturers(query);
 

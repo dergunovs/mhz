@@ -58,7 +58,7 @@ const queryClient = useQueryClient();
 
 const { mutate } = deleteManager({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
     toast.success('Manager deleted');
   },
 });

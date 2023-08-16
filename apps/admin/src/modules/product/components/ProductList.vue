@@ -72,7 +72,7 @@ const queryClient = useQueryClient();
 
 const { mutate } = deleteProduct({
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_PRODUCT, 1], exact: true });
+    await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product deleted');
   },
 });

@@ -25,9 +25,9 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import ProductList from '@/product/components/ProductList.vue';
 
 import { getProducts } from '@/product/services';
-import { URL_PRODUCT, URL_PRODUCT_CREATE } from '@/product/constants';
+import { URL_PRODUCT_CREATE } from '@/product/constants';
 
-const { query, resetQuery, setQueryPage } = usePage(URL_PRODUCT, 'title');
+const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getProducts(query);
 

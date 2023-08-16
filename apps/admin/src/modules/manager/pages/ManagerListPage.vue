@@ -5,7 +5,7 @@
     <div :class="$style.page">
       <RouterLink :to="URL_MANAGER_CREATE">Add manager</RouterLink>
 
-      <ManagerList v-model="query.sort" @reset="(value) => resetQuery(value)" />
+      <ManagerList :managers="managers" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
       <UiPagination
         v-if="managers?.length"
@@ -25,9 +25,9 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import ManagerList from '@/manager/components/ManagerList.vue';
 
 import { getManagers } from '@/manager/services';
-import { URL_MANAGER, URL_MANAGER_CREATE } from '@/manager/constants';
+import { URL_MANAGER_CREATE } from '@/manager/constants';
 
-const { query, resetQuery, setQueryPage } = usePage(URL_MANAGER, 'email');
+const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getManagers(query);
 

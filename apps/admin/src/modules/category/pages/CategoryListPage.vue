@@ -25,9 +25,9 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import CategoryList from '@/category/components/CategoryList.vue';
 
 import { getCategories } from '@/category/services';
-import { URL_CATEGORY, URL_CATEGORY_CREATE } from '@/category/constants';
+import { URL_CATEGORY_CREATE } from '@/category/constants';
 
-const { query, resetQuery, setQueryPage } = usePage(URL_CATEGORY, 'title');
+const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getCategories(query);
 
