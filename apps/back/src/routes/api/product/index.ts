@@ -1,19 +1,20 @@
 import Product from '../../../models/product.js';
 
-import { IFastifyInstance } from '../../../interface/index.js';
+import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { deleteFile, paginate } from '../../../helpers/index.js';
 import { IProduct } from 'mhz-types';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: { page?: string } }>('/', async function (request, reply) {
+  fastify.get<{ Querystring: IQuery }>('/', async function (request, reply) {
     try {
       const { data, total } = await paginate(Product, {
         page: request.query.page,
+        sort: request.query.sort,
+        dir: request.query.dir,
         populate: [
           { path: 'category', select: ['_id', 'title'] },
           { path: 'manufacturer', select: ['_id', 'title'] },
         ],
-        sort: 'title',
       });
 
       reply.code(200).send({ data, total });

@@ -2,23 +2,23 @@ import bcrypt from 'bcryptjs';
 import { IManager } from 'mhz-types';
 
 import Manager from '../../../models/manager.js';
-import { IFastifyInstance } from '../../../interface/index.js';
+import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { paginate } from '../../../helpers/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: { page?: string } }>(
-    '/',
-    { preValidation: [fastify.checkAuth] },
-    async function (request, reply) {
-      try {
-        const { data, total } = await paginate(Manager, { page: request.query.page, sort: 'title' });
+  fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
+    try {
+      const { data, total } = await paginate(Manager, {
+        page: request.query.page,
+        sort: request.query.sort,
+        dir: request.query.dir,
+      });
 
-        reply.code(200).send({ data, total });
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send({ data, total });
+    } catch (err) {
+      reply.code(500).send({ message: err });
     }
-  );
+  });
 
   fastify.get<{ Params: { id: string } }>('/:id', async function (request, reply) {
     try {

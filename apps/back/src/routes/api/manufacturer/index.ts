@@ -1,13 +1,17 @@
 import { IManufacturer } from 'mhz-types';
 
 import Manufacturer from '../../../models/manufacturer.js';
-import { IFastifyInstance } from '../../../interface/index.js';
+import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { deleteFile, paginate } from '../../../helpers/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: { page?: string } }>('/', async function (request, reply) {
+  fastify.get<{ Querystring: IQuery }>('/', async function (request, reply) {
     try {
-      const { data, total } = await paginate(Manufacturer, { page: request.query.page, sort: 'title' });
+      const { data, total } = await paginate(Manufacturer, {
+        page: request.query.page,
+        sort: request.query.sort,
+        dir: request.query.dir,
+      });
 
       reply.code(200).send({ data, total });
     } catch (err) {

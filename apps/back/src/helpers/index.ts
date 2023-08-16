@@ -25,10 +25,12 @@ export async function resizeFile(filename: string, width: string) {
 
 export async function paginate<T>(
   Entity: Model<T>,
-  options?: { page?: string; populate?: PopulateOptions[]; sort?: string }
+  options?: { page?: string; sort?: string; dir?: string; populate?: PopulateOptions[] }
 ) {
   try {
     const page = Number(options?.page) || 1;
+    const sort = `${options?.dir === 'desc' ? '-' : ''}${options?.sort}`;
+
     const limit = 10;
 
     const count = await Entity.estimatedDocumentCount();
@@ -39,7 +41,7 @@ export async function paginate<T>(
       .limit(limit)
       .populate(options?.populate || [])
       .select('-password -__v')
-      .sort(options?.sort || '-dateCreated')
+      .sort(sort || '-dateCreated')
       .lean()
       .exec();
 

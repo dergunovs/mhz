@@ -49,7 +49,7 @@ const props = defineProps<IProps>();
 const emit = defineEmits(['update:modelValue', 'reset']);
 
 const tableHeaders = [
-  { value: 'manufacturer', title: 'Manufacturer' },
+  { value: 'title', title: 'Manufacturer' },
   { value: 'country', title: 'Country' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },

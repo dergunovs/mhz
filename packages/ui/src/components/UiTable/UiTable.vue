@@ -13,12 +13,14 @@
                 <span
                   :data-current="props.modelValue.isAsc && props.modelValue.value === header.value"
                   :class="$style.arrow"
+                  :data-loading="props.isLoading"
                 >
                   ↑
                 </span>
                 <span
                   :data-current="!props.modelValue.isAsc && props.modelValue.value === header.value"
                   :class="$style.arrow"
+                  :data-loading="props.isLoading"
                 >
                   ↓
                 </span>
@@ -139,7 +141,7 @@ onBeforeUnmount(() => {
   user-select: none;
 
   &[data-loading='true'] {
-    color: var(--color-gray-light-extra);
+    color: var(--color-transparent);
   }
 
   &:hover {
@@ -161,6 +163,10 @@ onBeforeUnmount(() => {
 
 .arrow {
   color: var(--color-gray-dark-extra);
+
+  &[data-loading='true'] {
+    color: var(--color-transparent);
+  }
 
   &[data-current='true'] {
     color: var(--color-primary);
