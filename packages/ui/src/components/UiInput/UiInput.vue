@@ -4,7 +4,7 @@
     @keydown.space="emit('toggle')"
     :class="$style.inputBlock"
     :data-mode="props.mode"
-    :tabindex="props.mode === 'default' ? '0' : '1'"
+    :tabindex="props.mode === 'default' ? '-1' : '0'"
   >
     <input
       :value="props.modelValue"
