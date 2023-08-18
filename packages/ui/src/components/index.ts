@@ -7,4 +7,5 @@ export { default as UiSelect } from './UiSelect/UiSelect.vue';
 export { default as UiEditor } from './UiEditor/UiEditor.vue';
 export { default as UiPagination } from './UiPagination/UiPagination.vue';
 export { default as UiCheckbox } from './UiCheckbox/UiCheckbox.vue';
+export { default as UiModal } from './UiModal/UiModal.vue';
 export { default as toast } from './toast/toast';
