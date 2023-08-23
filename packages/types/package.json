@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "mhz-types",
   "author": "dergunov.com",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "sideEffects": false,
   "main": "dist/types/index.d.ts",
