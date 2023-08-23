@@ -70,6 +70,14 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           source: apps/admin/dist
           target: ${{ secrets.SSH_PATH }}
+      - name: Deploy Site
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: apps/site/dist
+          target: ${{ secrets.SSH_PATH }}
       - name: Deploy Backend
         uses: appleboy/scp-action@master
         with:
