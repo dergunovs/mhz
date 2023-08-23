@@ -52,7 +52,15 @@ jobs:
         with:
           envkey_VITE_API: ${{ secrets.ENV_VITE_API }}
           envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
+          envkey_VITE_VERSION: ${npm_package_version}
           directory: apps/admin/
+      - name: Create Site .env
+        uses: SpicyPizza/create-envfile@v2.0.2
+        with:
+          envkey_VITE_API: ${{ secrets.ENV_VITE_API }}
+          envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
+          envkey_VITE_VERSION: ${npm_package_version}
+          directory: apps/site/
       - name: Create Backend .env
         uses: SpicyPizza/create-envfile@v2.0.2
         with:
@@ -61,7 +69,7 @@ jobs:
           envkey_PORT: ${{ secrets.PORT }}
           directory: apps/back/
       - name: Build
-        run: npm run build -- --filter=mhz-admin --filter=mhz-back --filter=mhz-ui
+        run: npm run build -- --filter=mhz-admin --filter=mhz-site --filter=mhz-back --filter=mhz-ui
       - name: Deploy Admin
         uses: appleboy/scp-action@master
         with:
