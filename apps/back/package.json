@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "mhz-back",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "dergunov.com",
   "license": "ISC",
   "main": "app.js",
