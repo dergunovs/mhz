@@ -29,7 +29,7 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', 'vue-router'],
       output: {
         entryFileNames: `[name]/[name].js`,
         assetFileNames: `[name]/[name].[ext]`,

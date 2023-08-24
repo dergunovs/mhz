@@ -28,7 +28,8 @@
     "@tiptap/vue-3": "2.1.6",
     "@vueuse/core": "10.3.0",
     "@vueuse/integrations": "10.3.0",
-    "vue": "3.3.4"
+    "vue": "3.3.4",
+    "vue-router": "4.2.4"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "7.3.2",
