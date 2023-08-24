@@ -1,13 +1,13 @@
 <template>
   <div :class="$style.list">
-    <ProductCard v-for="product in props.products" :key="product._id" :product="product" />
+    <ProductCatalogCard v-for="product in props.products" :key="product._id" :product="product" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { IProduct } from 'mhz-types';
 
-import ProductCard from '@/product/components/ProductCard.vue';
+import ProductCatalogCard from '@/product/components/ProductCatalogCard.vue';
 
 interface IProps {
   products: IProduct[];

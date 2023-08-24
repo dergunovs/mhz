@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import { Ref, ComputedRef } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 
 import { IProduct } from 'mhz-types';
@@ -25,6 +25,19 @@ export function getProducts(query: Ref<IPageQuery | number>) {
 
   return useQuery({
     queryKey: [API_PRODUCT, query],
+    queryFn: fn,
+  });
+}
+
+export function getProduct(id: ComputedRef<string>) {
+  async function fn(): Promise<IProduct> {
+    const { data } = await api.get(`${API_PRODUCT}/${id.value}`);
+
+    return data;
+  }
+
+  return useQuery({
+    queryKey: [API_PRODUCT, id],
     queryFn: fn,
   });
 }

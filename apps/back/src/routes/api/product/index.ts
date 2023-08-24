@@ -28,7 +28,7 @@ export default async function (fastify: IFastifyInstance) {
       const product = await Product.findOne({ _id: request.params.id })
         .populate([
           { path: 'category', select: ['_id', 'title'] },
-          { path: 'manufacturer', select: ['_id', 'title'] },
+          { path: 'manufacturer', select: ['_id', 'title', 'logoUrl', 'country'] },
         ])
         .lean()
         .exec();
