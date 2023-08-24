@@ -20,6 +20,6 @@ const props = defineProps<IProps>();
 .list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 64px 32px;
 }
 </style>
