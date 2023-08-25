@@ -2,11 +2,11 @@
   <div :class="$style.layout">
     <TheHeader />
 
-    <main :class="$style.main">
-      <div :class="$style.contentBlock">
+    <div :class="$style.container">
+      <main :class="$style.main">
         <RouterView :class="$style.content" />
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -21,14 +21,14 @@ import TheHeader from '@/layout/components/TheHeader.vue';
   min-height: 100vh;
 }
 
-.main {
+.container {
   display: flex;
   height: calc(100vh - 64px);
   margin-top: 64px;
   overflow-y: auto;
 }
 
-.contentBlock {
+.main {
   flex: 1;
   height: calc(100vh - 64px);
   overflow-y: auto;

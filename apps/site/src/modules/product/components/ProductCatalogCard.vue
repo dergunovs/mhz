@@ -1,9 +1,10 @@
 <template>
   <div :class="$style.card">
-    <RouterLink :to="productLink" :class="$style.image">
+    <RouterLink :to="productLink" :class="$style.imageBlock">
       <img
         :src="`${PATH_UPLOAD}/${props.product.imageUrls[0]}`"
-        width="200"
+        :class="$style.image"
+        height="200"
         :alt="product.title"
         :title="product.title"
         loading="lazy"
@@ -53,14 +54,20 @@ const productLink = `${URL_CATEGORY}/${props.product.category._id}${URL_PRODUCT}
   width: 100%;
 }
 
-.image {
+.imageBlock {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 200px;
 
   &:hover + .info .title {
     color: var(--color-primary-dark);
+  }
+
+  .image {
+    width: auto;
+    max-height: 200px;
   }
 }
 

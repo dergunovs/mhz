@@ -1,16 +1,16 @@
 <template>
   <div :class="$style.pagination">
-    <button @click="emit('update', 1)" :disabled="page === 1" :class="$style.button" type="button">&lt;&lt;</button>
-    <button @click="emit('update', props.page - 1)" :disabled="page === 1" :class="$style.button" type="button">
+    <button @click="handleUpdate(1)" :disabled="page === 1" :class="$style.button" type="button">&lt;&lt;</button>
+    <button @click="handleUpdate(props.page - 1)" :disabled="page === 1" :class="$style.button" type="button">
       &lt;
     </button>
 
     <div :class="$style.text">{{ page }} of {{ total }}</div>
 
-    <button @click="emit('update', props.page + 1)" :disabled="page === total" :class="$style.button" type="button">
+    <button @click="handleUpdate(props.page + 1)" :disabled="page === total" :class="$style.button" type="button">
       >
     </button>
-    <button @click="emit('update', props.total)" :disabled="page === total" :class="$style.button" type="button">
+    <button @click="handleUpdate(props.total)" :disabled="page === total" :class="$style.button" type="button">
       >>
     </button>
   </div>
@@ -24,6 +24,13 @@ interface IProps {
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['update']);
+
+const main = document.querySelector('main');
+
+function handleUpdate(value?: number) {
+  emit('update', value);
+  if (main) main.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+}
 </script>
 
 <style module lang="scss">

@@ -9,9 +9,10 @@ export interface ISortOption {
 export interface IPageQuery {
   page: number;
   sort: ISortOption;
+  filter: object;
 }
 
-export function usePage() {
+export function usePage(filter?: object) {
   const router = useRouter();
   const route = useRoute();
 
@@ -21,10 +22,11 @@ export function usePage() {
       value: route.query.sort?.toString(),
       isAsc: route.query.dir !== 'desc',
     },
+    filter: filter || {},
   });
 
   function resetQuery(value: string) {
-    query.value = Object.assign(query.value, { page: 1, sort: { value, isAsc: true } });
+    query.value = Object.assign(query.value, { page: 1, sort: { value, isAsc: true }, filter: {} });
   }
 
   function setQueryPage(pageToSet: number) {

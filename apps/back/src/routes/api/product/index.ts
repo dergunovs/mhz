@@ -15,6 +15,7 @@ export default async function (fastify: IFastifyInstance) {
           { path: 'category', select: ['_id', 'title'] },
           { path: 'manufacturer', select: ['_id', 'title'] },
         ],
+        filter: request.query.filter,
       });
 
       reply.code(200).send({ data, total });

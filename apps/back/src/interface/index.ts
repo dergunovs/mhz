@@ -8,4 +8,5 @@ export interface IQuery {
   page: string;
   sort?: string;
   dir?: 'asc' | 'desc';
+  filter?: string;
 }

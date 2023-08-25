@@ -16,6 +16,7 @@ export function getProducts(query: Ref<IPageQuery | number>) {
             page: query.value.page || 1,
             sort: query.value.sort.value,
             dir: query.value.sort.isAsc === false ? 'desc' : 'asc',
+            filter: JSON.stringify(query.value.filter),
           };
 
     const { data } = await api.get(API_PRODUCT, { params });

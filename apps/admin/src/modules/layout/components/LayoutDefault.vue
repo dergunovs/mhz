@@ -2,13 +2,13 @@
   <div :class="$style.layout">
     <TheHeader />
 
-    <main :class="$style.main">
+    <div :class="$style.container">
       <NavList />
 
-      <div :class="$style.contentBlock">
+      <main :class="$style.main">
         <RouterView :class="$style.content" />
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -24,14 +24,14 @@ import NavList from '@/layout/components/NavList.vue';
   min-height: 100vh;
 }
 
-.main {
+.container {
   display: flex;
   height: calc(100vh - 64px);
   margin-top: 64px;
   overflow-y: auto;
 }
 
-.contentBlock {
+.main {
   flex: 1;
   height: calc(100vh - 64px);
   overflow-y: auto;
