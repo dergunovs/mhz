@@ -31,23 +31,17 @@
         <td data-no-wrap>
           {{ formatDate(product.dateUpdated) }}
         </td>
-        <td>
-          <UiButton @click="mutate(product._id)" layout="plain">Delete</UiButton>
-        </td>
       </tr>
     </template>
   </UiTable>
 </template>
 
 <script setup lang="ts">
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { IProduct } from 'mhz-types';
-import { UiTable, UiButton, toast } from 'mhz-ui';
+import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 
-import { deleteProduct } from '@/product/services';
-import { API_PRODUCT, URL_PRODUCT_EDIT } from '@/product/constants';
+import { URL_PRODUCT_EDIT } from '@/product/constants';
 
 interface IProps {
   products?: IProduct[];
@@ -65,15 +59,5 @@ const tableHeaders = [
   { value: 'isInStock', title: 'In stock' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },
-  { title: '' },
 ];
-
-const queryClient = useQueryClient();
-
-const { mutate } = deleteProduct({
-  onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
-    toast.success('Product deleted');
-  },
-});
 </script>

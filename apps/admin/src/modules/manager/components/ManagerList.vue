@@ -20,23 +20,17 @@
         <td data-no-wrap>
           {{ formatDate(manager.dateUpdated) }}
         </td>
-        <td>
-          <UiButton @click="mutate(manager._id)" layout="plain">Delete</UiButton>
-        </td>
       </tr>
     </template>
   </UiTable>
 </template>
 
 <script setup lang="ts">
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { IManager } from 'mhz-types';
-import { UiTable, UiButton, toast } from 'mhz-ui';
+import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 
-import { deleteManager } from '@/manager/services';
-import { API_MANAGER, URL_MANAGER_EDIT } from '@/manager/constants';
+import { URL_MANAGER_EDIT } from '@/manager/constants';
 
 interface IProps {
   managers?: IManager[];
@@ -51,15 +45,5 @@ const tableHeaders = [
   { value: 'lastName', title: 'Name' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },
-  { title: '' },
 ];
-
-const queryClient = useQueryClient();
-
-const { mutate } = deleteManager({
-  onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
-    toast.success('Manager deleted');
-  },
-});
 </script>

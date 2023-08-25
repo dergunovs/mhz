@@ -6,6 +6,11 @@
       </div>
 
       <slot></slot>
+
+      <div v-if="props.isConfirm" :class="$style.buttons">
+        <UiButton @click="handleConfirm">Confirm</UiButton>
+        <UiButton layout="secondary" @click="emit('update:modelValue', false)">Cancel</UiButton>
+      </div>
     </div>
   </div>
 </template>
@@ -13,12 +18,16 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 
+import UiButton from '../UiButton/UiButton.vue';
+
 interface IProps {
   modelValue: boolean;
+  isConfirm?: boolean;
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+
+const emit = defineEmits(['update:modelValue', 'confirm']);
 
 const body = document.querySelector('body');
 
@@ -30,6 +39,11 @@ watch(
     if (body) body.style.overflow = overflow;
   }
 );
+
+function handleConfirm() {
+  emit('confirm');
+  emit('update:modelValue', false);
+}
 </script>
 
 <style module lang="scss">
@@ -81,5 +95,10 @@ watch(
   &:hover {
     background-color: var(--color-gray-dark-extra);
   }
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
 }
 </style>

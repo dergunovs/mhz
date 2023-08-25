@@ -19,23 +19,17 @@
         <td data-no-wrap>
           {{ formatDate(category.dateUpdated) }}
         </td>
-        <td>
-          <UiButton @click="mutate(category._id)" layout="plain">Delete</UiButton>
-        </td>
       </tr>
     </template>
   </UiTable>
 </template>
 
 <script setup lang="ts">
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { ICategory } from 'mhz-types';
-import { UiTable, UiButton, toast } from 'mhz-ui';
+import { UiTable } from 'mhz-ui';
 import { ISortOption, formatDate } from 'mhz-helpers';
 
-import { deleteCategory } from '@/category/services';
-import { API_CATEGORY, URL_CATEGORY_EDIT } from '@/category/constants';
+import { URL_CATEGORY_EDIT } from '@/category/constants';
 
 interface IProps {
   categories?: ICategory[];
@@ -49,15 +43,5 @@ const tableHeaders = [
   { value: 'title', title: 'Category' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },
-  { title: '' },
 ];
-
-const queryClient = useQueryClient();
-
-const { mutate } = deleteCategory({
-  onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
-    toast.success('Category deleted');
-  },
-});
 </script>

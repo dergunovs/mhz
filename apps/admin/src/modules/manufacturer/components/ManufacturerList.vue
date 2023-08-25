@@ -22,23 +22,17 @@
         <td data-no-wrap>
           {{ formatDate(manufacturer.dateUpdated) }}
         </td>
-        <td>
-          <UiButton @click="mutate(manufacturer._id)" layout="plain">Delete</UiButton>
-        </td>
       </tr>
     </template>
   </UiTable>
 </template>
 
 <script setup lang="ts">
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { IManufacturer } from 'mhz-types';
-import { UiTable, UiButton, toast } from 'mhz-ui';
+import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 
-import { deleteManufacturer } from '@/manufacturer/services';
-import { API_MANUFACTURER, URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
+import { URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
 
 interface IProps {
   manufacturers?: IManufacturer[];
@@ -53,15 +47,5 @@ const tableHeaders = [
   { value: 'country', title: 'Country' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },
-  { title: '' },
 ];
-
-const queryClient = useQueryClient();
-
-const { mutate } = deleteManufacturer({
-  onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
-    toast.success('Manufacturer deleted');
-  },
-});
 </script>

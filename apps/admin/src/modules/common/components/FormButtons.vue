@@ -8,14 +8,18 @@
       <UiButton @click="$router.go(-1)" layout="secondary" :isDisabled="props.isLoading">Back</UiButton>
     </div>
 
-    <UiButton v-if="props.id" @click="emit('delete', props.id)" layout="secondary" :isDisabled="props.isLoading">
+    <UiButton v-if="props.id" @click="isShowConfirm = true" layout="secondary" :isDisabled="props.isLoading">
       Delete
     </UiButton>
+
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="emit('delete', props.id)">Confirm delete?</UiModal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { UiButton } from 'mhz-ui';
+import { ref } from 'vue';
+
+import { UiButton, UiModal } from 'mhz-ui';
 
 interface IProps {
   id?: string;
@@ -23,7 +27,10 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
+
 const emit = defineEmits(['delete']);
+
+const isShowConfirm = ref(false);
 </script>
 
 <style module lang="scss">

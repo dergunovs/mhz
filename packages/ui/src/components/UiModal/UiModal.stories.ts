@@ -8,6 +8,7 @@ const meta = {
   component: UiModal,
   args: {
     modelValue: false,
+    isConfirm: true,
   },
   parameters: {
     docs: {

@@ -31,7 +31,7 @@ export async function paginate<T>(
     const page = Number(options?.page) || 1;
     const sort = options?.sort === undefined ? '-dateCreated' : `${options?.dir === 'desc' ? '-' : ''}${options?.sort}`;
 
-    const limit = 10;
+    const limit = 12;
 
     const count = await Entity.estimatedDocumentCount();
     const total = Math.ceil(count / limit);
