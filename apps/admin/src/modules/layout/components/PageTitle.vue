@@ -12,7 +12,7 @@
 import { UiBreadcrumbs } from 'mhz-ui';
 
 interface IProps {
-  links?: { url?: string; title?: string }[];
+  links?: { url: string; title?: string }[];
 }
 
 const props = defineProps<IProps>();

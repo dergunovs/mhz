@@ -1,17 +1,30 @@
 <template>
-  <div :class="$style.breadcrumbs">
-    <div v-for="(link, index) in props.links" :key="`${link.title}${link.url}`" :class="$style.links">
+  <div :class="$style.breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <div
+      v-for="(link, index) in props.links"
+      :key="`${link.title}${link.url}`"
+      :class="$style.links"
+      itemprop="itemListElement"
+      itemscope
+      itemtype="https://schema.org/ListItem"
+    >
       <component
         :is="index === props.links.length - 1 ? 'div' : linkComponent"
         :to="link.url"
         :class="$style.link"
         :data-link="index !== props.links.length - 1"
         :data-white="props.color === 'white'"
+        :itemid="link.url"
+        itemtype="https://schema.org/Thing"
+        itemscope
+        itemprop="item"
       >
-        {{ link.title }}
+        <span itemprop="name">{{ link.title }}</span>
       </component>
 
       <span v-if="index !== props.links.length - 1" :class="$style.slash" :data-white="props.color === 'white'">/</span>
+
+      <meta itemprop="position" :content="(index + 1).toString()" />
     </div>
   </div>
 </template>
@@ -21,7 +34,7 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 
 interface ILink {
-  url?: string;
+  url: string;
   title?: string;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageTitle>Manufacturers</PageTitle>
+    <PageTitle :links="links">{{ title }}</PageTitle>
 
     <div :class="$style.page">
       <RouterLink :to="URL_MANUFACTURER_CREATE">Add manufacturer</RouterLink>
@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
+
 import { UiPagination } from 'mhz-ui';
 import { usePagination, usePage } from 'mhz-helpers';
 
@@ -25,13 +27,25 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';
 
 import { getManufacturers } from '@/manufacturer/services';
-import { URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
+import { URL_MANUFACTURER, URL_MANUFACTURER_CREATE } from '@/manufacturer/constants';
+import { URL_MAIN } from '@/common/constants';
 
 const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getManufacturers(query);
 
 const { data: manufacturers, total, setPage } = usePagination(data);
+
+const title = 'Manufacturers';
+
+const links = [
+  { url: URL_MAIN, title: 'Main' },
+  { url: URL_MANUFACTURER, title },
+];
+
+useHead({
+  title,
+});
 </script>
 
 <style module lang="scss">

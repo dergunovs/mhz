@@ -1,11 +1,19 @@
 <template>
   <div>
-    <PageTitle>Error</PageTitle>
+    <PageTitle>{{ title }}</PageTitle>
 
     <div>Error</div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
+
 import PageTitle from '@/layout/components/PageTitle.vue';
+
+const title = 'Error';
+
+useHead({
+  title,
+});
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageTitle>Managers</PageTitle>
+    <PageTitle :links="links">{{ title }}</PageTitle>
 
     <div :class="$style.page">
       <RouterLink :to="URL_MANAGER_CREATE">Add manager</RouterLink>
@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
+
 import { UiPagination } from 'mhz-ui';
 import { usePagination, usePage } from 'mhz-helpers';
 
@@ -25,13 +27,25 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import ManagerList from '@/manager/components/ManagerList.vue';
 
 import { getManagers } from '@/manager/services';
-import { URL_MANAGER_CREATE } from '@/manager/constants';
+import { URL_MANAGER, URL_MANAGER_CREATE } from '@/manager/constants';
+import { URL_MAIN } from '@/common/constants';
 
 const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getManagers(query);
 
 const { data: managers, total, setPage } = usePagination(data);
+
+const title = 'Managers';
+
+const links = [
+  { url: URL_MAIN, title: 'Main' },
+  { url: URL_MANAGER, title },
+];
+
+useHead({
+  title,
+});
 </script>
 
 <style module lang="scss">

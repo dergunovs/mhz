@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageTitle>Products</PageTitle>
+    <PageTitle :links="links">{{ title }}</PageTitle>
 
     <div :class="$style.page">
       <RouterLink :to="URL_PRODUCT_CREATE">Add product</RouterLink>
@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
+
 import { UiPagination } from 'mhz-ui';
 import { usePagination, usePage } from 'mhz-helpers';
 
@@ -25,13 +27,25 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import ProductList from '@/product/components/ProductList.vue';
 
 import { getProducts } from '@/product/services';
-import { URL_PRODUCT_CREATE } from '@/product/constants';
+import { URL_PRODUCT, URL_PRODUCT_CREATE } from '@/product/constants';
+import { URL_MAIN } from '@/common/constants';
 
 const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getProducts(query);
 
 const { data: products, total, setPage } = usePagination(data);
+
+const title = 'Products';
+
+const links = [
+  { url: URL_MAIN, title: 'Main' },
+  { url: URL_PRODUCT, title },
+];
+
+useHead({
+  title,
+});
 </script>
 
 <style module lang="scss">
