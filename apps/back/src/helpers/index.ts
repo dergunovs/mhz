@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Model, PopulateOptions, Types } from 'mongoose';
+import { Model, PopulateOptions } from 'mongoose';
 import path from 'path';
 import sharp from 'sharp';
 

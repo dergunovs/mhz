@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "mhz-back",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "dergunov.com",
   "license": "MIT",
   "main": "app.js",
@@ -28,19 +28,19 @@
     "fastify": "4.21.0",
     "fastify-plugin": "4.5.1",
     "mhz-types": "*",
-    "mongoose": "7.4.4",
+    "mongoose": "7.4.5",
     "nodemailer": "6.9.4",
     "sharp": "0.32.5",
     "xmlbuilder2": "3.1.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
-    "@types/node": "20.5.3",
+    "@types/node": "20.5.6",
     "concurrently": "8.2.1",
     "cross-env": "7.0.3",
     "nodemon": "3.0.1",
     "ts-node": "10.9.1",
     "tsconfig-paths": "4.2.0",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   }
 }

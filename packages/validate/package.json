@@ -1,6 +1,6 @@
 {
   "name": "mhz-validate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "mhz-validate",
   "author": "dergunov.com",
   "type": "module",
@@ -16,13 +16,13 @@
     "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@vueuse/core": "10.3.0",
-    "@vueuse/integrations": "10.3.0",
+    "@vueuse/core": "10.4.0",
+    "@vueuse/integrations": "10.4.0",
     "async-validator": "4.2.5",
     "vue": "3.3.4"
   },
   "devDependencies": {
-    "@types/node": "20.5.3",
+    "@types/node": "20.5.6",
     "@typescript-eslint/eslint-plugin": "6.4.1",
     "@typescript-eslint/parser": "6.4.1",
     "@vitejs/plugin-vue": "4.3.3",
@@ -39,7 +39,7 @@
     "stylelint-config-recommended-scss": "12.0.0",
     "stylelint-config-recommended-vue": "1.5.0",
     "stylelint-prettier": "4.0.2",
-    "typescript": "5.1.6",
+    "typescript": "5.2.2",
     "vite": "4.4.9",
     "vite-plugin-dts": "3.5.2",
     "vue-linters-config": "0.1.6",
