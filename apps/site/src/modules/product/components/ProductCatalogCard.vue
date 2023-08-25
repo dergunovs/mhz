@@ -50,6 +50,7 @@ const productLink = `${URL_CATEGORY}/${props.product.category._id}${URL_PRODUCT}
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .image {

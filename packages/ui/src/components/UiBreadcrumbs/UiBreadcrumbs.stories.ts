@@ -11,7 +11,6 @@ const meta = {
       { url: '/category', title: 'Category' },
       { url: '/cpu', title: 'CPU' },
     ],
-    color: 'white',
   },
   parameters: {
     docs: {

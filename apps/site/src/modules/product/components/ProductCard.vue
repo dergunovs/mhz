@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div :class="$style.title">{{ product.title }}</div>
-
     <div :class="$style.top">
       <div :class="$style.image">
         <img :src="`${PATH_UPLOAD}/${product.imageUrls[0]}`" :alt="product.title" loading="lazy" />
@@ -35,25 +33,31 @@
           </div>
         </div>
 
+        <h3>Specifications</h3>
+
         <div v-for="field in product.fields" :key="field._id" :class="$style.field">
           <span :class="$style.fieldTitle">{{ field.title }}</span>
           <span>{{ field.fieldValue }} {{ field.fieldUnits }}</span>
         </div>
+
+        <a href="#description">Read full description</a>
       </div>
 
       <div :class="$style.actions">
         <div :class="$style.stock">
           {{ props.product.isInStock ? 'In stock' : 'Not in stock' }}
-
           <ProductActionButtons />
         </div>
 
         <div :class="$style.price">{{ props.product.price }} {{ CURRENCY }}</div>
 
         <UiButton>Add to cart</UiButton>
+
+        <div>Delivery in 7 days. No Import Fees Deposit.</div>
       </div>
     </div>
 
+    <h2 id="description">Description</h2>
     <div v-html="product.description"></div>
   </div>
 </template>
@@ -76,11 +80,6 @@ const props = defineProps<IProps>();
 </script>
 
 <style module lang="scss">
-.title {
-  font-size: 1.75rem;
-  font-weight: 700;
-}
-
 .top {
   display: flex;
   justify-content: space-between;
@@ -93,10 +92,7 @@ const props = defineProps<IProps>();
 .fields {
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   gap: 16px;
-  width: 25%;
-  padding: 0 32px;
 }
 
 .fieldsTop {
@@ -112,7 +108,7 @@ const props = defineProps<IProps>();
 
 .fieldTitle {
   display: inline-block;
-  width: 200px;
+  width: 300px;
   color: var(--color-gray-dark-extra);
   border-bottom: 1px solid var(--color-gray-light);
 }
@@ -120,9 +116,8 @@ const props = defineProps<IProps>();
 .actions {
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   gap: 16px;
-  width: 20%;
+  width: 25%;
 }
 
 .price {
