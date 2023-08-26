@@ -2,14 +2,12 @@
   <div :class="$style.container">
     <UiInput v-model="searchQuery" :appendIcon="IconSearch" placeholder="Search" />
 
-    <div :class="$style.resultsBlock">
-      <div v-if="searchQuery.length > 0 && searchQuery.length < 3 && !isResults" :class="$style.results">
-        Please enter 3 or more symbols
-      </div>
+    <div v-if="searchQuery.length" :class="$style.results">
+      <template v-if="searchQuery.length < 3 && !isResults">Please enter 3 or more symbols</template>
+      <template v-if="searchQuery.length > 2 && !isSuccess">Loading...</template>
+      <template v-if="searchQuery.length > 2 && !isResults && isSuccess">No results</template>
 
-      <div v-if="searchQuery.length > 2 && !isResults" :class="$style.results">No results</div>
-
-      <div v-if="searchQuery.length > 2 && isResults" :class="$style.results">
+      <template v-if="searchQuery.length > 2 && isResults">
         <div v-if="results?.products.length" :class="$style.resultsInner">
           <div>Products:</div>
           <RouterLink
@@ -57,7 +55,7 @@
             {{ manager.firstName }} {{ manager.lastName }}
           </RouterLink>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -77,7 +75,7 @@ import { URL_MANAGER_EDIT } from '@/manager/constants';
 
 const searchQuery = ref('');
 
-const { data: results, refetch } = search(searchQuery, { enabled: false });
+const { data: results, refetch, isSuccess } = search(searchQuery, { enabled: false });
 
 const debounced = debounce(async () => {
   refetch();
@@ -97,7 +95,7 @@ function clearSearch() {
 const isResults = computed(() => {
   return results.value
     ? results.value.categories.length +
-        results.value.managers.length +
+        results.value.products.length +
         results.value.manufacturers.length +
         results.value.managers.length >
         0
@@ -111,22 +109,18 @@ const isResults = computed(() => {
   width: 320px;
 }
 
-.resultsBlock {
+.results {
   position: absolute;
   z-index: 2;
-  width: 100%;
-  margin-top: 8px;
-  background-color: var(--color-white);
-  border-radius: 16px;
-}
-
-.results {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
   max-height: 320px;
   padding: 16px;
+  margin-top: 8px;
   overflow-y: auto;
+  background-color: var(--color-white);
   border-radius: 16px;
   box-shadow: 0 0 16px -8px var(--color-black-transparent);
 }

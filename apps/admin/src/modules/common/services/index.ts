@@ -2,12 +2,12 @@ import { Ref } from 'vue';
 
 import { useQuery, useMutation } from '@tanstack/vue-query';
 
-import { ISearchResult } from '@/common/interface';
-import { API_UPLOAD, API_UPLOAD_SINGLE, API_SEARCH } from '@/common/constants';
+import { ISearchResults, IEntitiesCount } from '@/common/interface';
+import { API_UPLOAD, API_UPLOAD_SINGLE, API_SEARCH, API_COUNT } from '@/common/constants';
 import { api } from '@/common/services/api';
 
 export function search(query: Ref<string>, options: object) {
-  async function fn(): Promise<ISearchResult> {
+  async function fn(): Promise<ISearchResults> {
     const { data } = await api.get(API_SEARCH, { params: { search: query.value } });
 
     return data;
@@ -17,6 +17,19 @@ export function search(query: Ref<string>, options: object) {
     queryKey: [API_SEARCH, query],
     queryFn: fn,
     ...options,
+  });
+}
+
+export function getEntitiesCount() {
+  async function fn(): Promise<IEntitiesCount> {
+    const { data } = await api.get(API_COUNT);
+
+    return data;
+  }
+
+  return useQuery({
+    queryKey: [API_COUNT],
+    queryFn: fn,
   });
 }
 

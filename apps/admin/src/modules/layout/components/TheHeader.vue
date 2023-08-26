@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { UiButton } from 'mhz-ui';
 
-import TheSearch from '@/layout/components/TheSearch.vue';
+import TheSearch from '@/common/components/TheSearch.vue';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { URL_MAIN } from '@/common/constants';

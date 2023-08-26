@@ -2,7 +2,7 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <div>Main</div>
+    <EntitiesCount />
   </div>
 </template>
 
@@ -10,6 +10,7 @@
 import { useHead } from '@vueuse/head';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
+import EntitiesCount from '@/common/components/EntitiesCount.vue';
 
 import { URL_MAIN } from '@/common/constants';
 
