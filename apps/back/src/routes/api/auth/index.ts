@@ -1,41 +1,50 @@
 import bcrypt from 'bcryptjs';
 
 import { IFastifyInstance } from '../../../interface/index.js';
+
 import Manager from '../../../models/manager.js';
+import Customer from '../../../models/customer.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.post<{ Body: { email: string; password: string } }>('/login', async function (request, reply) {
-    try {
-      const { email, password } = request.body;
+  fastify.post<{ Body: { email: string; password: string; role: 'manager' | 'customer' } }>(
+    '/login',
+    async function (request, reply) {
+      try {
+        const { email, password } = request.body;
 
-      const foundManager = await Manager.findOne({ email }).lean().exec();
+        const foundUser =
+          request.body.role === 'manager'
+            ? await Manager.findOne({ email }).lean().exec()
+            : await Customer.findOne({ email }).lean().exec();
 
-      if (!foundManager) {
-        reply.code(404).send({ message: 'Manager not found' });
-        return;
+        if (!foundUser) {
+          reply.code(404).send({ message: 'User not found' });
+          return;
+        }
+
+        const valid = bcrypt.compare(password, foundUser.password);
+
+        if (!valid) {
+          reply.code(401).send({ message: 'Wrong password' });
+          return;
+        }
+
+        const user = {
+          _id: foundUser._id,
+          firstName: foundUser.firstName,
+          lastName: foundUser.lastName,
+          email: foundUser.email,
+          role: request.body.role,
+        };
+
+        const token = fastify.jwt.sign(user, { expiresIn: '9h' });
+
+        reply.code(200).send({ ...user, token });
+      } catch (err) {
+        reply.code(500).send({ message: err });
       }
-
-      const valid = bcrypt.compare(password, foundManager.password);
-
-      if (!valid) {
-        reply.code(401).send({ message: 'Wrong password' });
-        return;
-      }
-
-      const manager = {
-        _id: foundManager._id,
-        firstName: foundManager.firstName,
-        lastName: foundManager.lastName,
-        email: foundManager.email,
-      };
-
-      const token = fastify.jwt.sign(manager, { expiresIn: '9h' });
-
-      reply.code(200).send({ ...manager, token });
-    } catch (err) {
-      reply.code(500).send({ message: err });
     }
-  });
+  );
 
   fastify.post<{ Body: { email: string; password: string } }>('/setup', async function (request, reply) {
     try {

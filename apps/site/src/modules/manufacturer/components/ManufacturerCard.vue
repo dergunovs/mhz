@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.manufacturer">
-    <img :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`" width="200" />
+    <img :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`" :class="$style.image" height="128" loading="lazy" />
 
     <div>Country: {{ props.manufacturer.country }}</div>
 
@@ -25,5 +25,10 @@ const props = defineProps<IProps>();
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.image {
+  width: fit-content;
+  height: 128px;
 }
 </style>

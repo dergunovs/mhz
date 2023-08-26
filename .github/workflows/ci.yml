@@ -37,6 +37,8 @@ jobs:
           envkey_DATABASE: ${{ secrets.DATABASE }}
           envkey_SECRET: ${{ secrets.SECRET }}
           envkey_PORT: ${{ secrets.PORT }}
+          envkey_SITE_URL: https://9000mhz.ru
+          envkey_ADMIN_URL: https://admin.9000mhz.ru
           directory: apps/back/
       - name: Build
         run: npm run build
@@ -77,6 +79,8 @@ jobs:
           envkey_DATABASE: ${{ secrets.DATABASE }}
           envkey_SECRET: ${{ secrets.SECRET }}
           envkey_PORT: ${{ secrets.PORT }}
+          envkey_SITE_URL: https://9000mhz.ru
+          envkey_ADMIN_URL: https://admin.9000mhz.ru
           directory: apps/back/
       - name: Build
         run: npm run build -- --filter=mhz-admin --filter=mhz-site --filter=mhz-back --filter=mhz-ui

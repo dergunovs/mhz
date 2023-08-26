@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProductCatalogList v-if="products?.length" :products="products" />
+    <ProductCatalogList v-if="products?.length" :products="products" isScroll />
   </div>
 </template>
 

@@ -2,7 +2,6 @@ import { readonly, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { setAuthHeader, deleteAuthHeader } from '@/common/services/api';
-import { URL_LOGIN } from '@/auth/constants';
 import { URL_MAIN } from '@/common/constants';
 
 const isAuthLocal = ref(false);
@@ -16,21 +15,21 @@ export function setAuth(auth: boolean) {
 export function logout() {
   deleteCookieToken();
   deleteAuthHeader();
-  window.location.href = `${URL_LOGIN}?logout=1`;
+  window.location.href = URL_MAIN;
 }
 
 export function setCookieToken(token: string) {
-  document.cookie = `mhz_token=${token};Secure;samesite=strict;`;
+  document.cookie = `mhz_token_customer=${token};Secure;samesite=strict;`;
 }
 
 export function getCookieToken(): string | undefined {
-  const { mhz_token } = Object.fromEntries(document.cookie.split('; ').map((v) => v.split('=')));
+  const { mhz_token_customer } = Object.fromEntries(document.cookie.split('; ').map((v) => v.split('=')));
 
-  return mhz_token;
+  return mhz_token_customer;
 }
 
 export function deleteCookieToken() {
-  document.cookie = `mhz_token=;expires=${new Date(0).toUTCString()}`;
+  document.cookie = `mhz_token_customer=;expires=${new Date(0).toUTCString()}`;
 }
 
 export function useAuth() {

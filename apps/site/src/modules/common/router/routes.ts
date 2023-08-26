@@ -2,11 +2,13 @@ import { RouteRecordRaw } from 'vue-router';
 
 import { URL_MAIN, URL_ERROR } from '@/common/constants';
 
+import { authRoutes } from '@/auth/routes';
 import { categoryRoutes } from '@/category/routes';
 import { manufacturerRoutes } from '@/manufacturer/routes';
 import { productRoutes } from '@/product/routes';
 
 export const routes: RouteRecordRaw[] = [
+  ...authRoutes,
   ...categoryRoutes,
   ...manufacturerRoutes,
   ...productRoutes,

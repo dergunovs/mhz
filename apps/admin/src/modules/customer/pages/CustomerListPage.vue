@@ -2,17 +2,37 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <div>Customers</div>
+    <div :class="$style.page">
+      <CustomerList :customers="customers" v-model="query.sort" @reset="(value) => resetQuery(value)" />
+
+      <UiPagination
+        v-if="customers?.length"
+        :page="query.page"
+        :total="total"
+        @update="(value) => setQueryPage(setPage(value, query.page))"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useHead } from '@vueuse/head';
 
-import PageTitle from '@/layout/components/PageTitle.vue';
+import { UiPagination } from 'mhz-ui';
+import { usePagination, usePage } from 'mhz-helpers';
 
+import PageTitle from '@/layout/components/PageTitle.vue';
+import CustomerList from '@/customer/components/CustomerList.vue';
+
+import { getCustomers } from '@/customer/services';
 import { URL_CUSTOMER } from '@/customer/constants';
 import { URL_MAIN } from '@/common/constants';
+
+const { query, resetQuery, setQueryPage } = usePage();
+
+const { data } = getCustomers(query);
+
+const { data: customers, total, setPage } = usePagination(data);
 
 const title = 'Customers';
 
@@ -25,3 +45,11 @@ useHead({
   title,
 });
 </script>
+
+<style module lang="scss">
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+</style>

@@ -23,7 +23,7 @@ import { useRouter } from 'vue-router';
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email } from 'mhz-validate';
 
-import { postSetup } from '@/auth/services';
+import { setup } from '@/auth/services';
 import { URL_LOGIN } from '@/auth/constants';
 
 const router = useRouter();
@@ -33,7 +33,7 @@ const formData = ref({
   password: '',
 });
 
-const { mutate } = postSetup({
+const { mutate } = setup({
   onSuccess: () => {
     toast.success('Manager successfully added!');
     router.push(URL_LOGIN);

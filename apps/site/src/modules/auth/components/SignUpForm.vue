@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Login</h2>
+    <h2>Sign up</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
       <UiField label="E-mail" isRequired :error="error('email')">
@@ -18,24 +18,25 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email } from 'mhz-validate';
 
-import { login } from '@/auth/services';
-import { useAuth } from '@/auth/composables';
+import { postCustomer } from '@/customer/services';
+import { URL_LOGIN } from '@/auth/constants';
 
-const { auth } = useAuth();
+const router = useRouter();
 
 const formData = ref({
   email: '',
   password: '',
 });
 
-const { mutate } = login({
-  onSuccess: (user: { token: string }) => {
-    auth(user.token);
-    toast.success('Welcome!');
+const { mutate } = postCustomer({
+  onSuccess: () => {
+    toast.success('Successfully registered! Please login!');
+    router.push(URL_LOGIN);
   },
 });
 

@@ -4,7 +4,12 @@
       <ImageLogo :class="$style.logo" />
     </RouterLink>
 
-    <UiButton layout="plain">Sign up</UiButton>
+    <UiButton v-if="isAuth" @click="logout" layout="plain">Logout</UiButton>
+
+    <div v-else :class="$style.buttons">
+      <RouterLink :to="URL_SIGN_UP">Sign up</RouterLink>
+      <RouterLink :to="URL_LOGIN">Login</RouterLink>
+    </div>
   </header>
 </template>
 
@@ -13,6 +18,8 @@ import { UiButton } from 'mhz-ui';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { URL_MAIN } from '@/common/constants';
+import { isAuth, logout } from '@/auth/composables';
+import { URL_LOGIN, URL_SIGN_UP } from '@/auth/constants';
 </script>
 
 <style module lang="scss">
@@ -32,5 +39,10 @@ import { URL_MAIN } from '@/common/constants';
 .logo {
   display: block;
   width: 150px;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
 }
 </style>

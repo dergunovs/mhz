@@ -12,7 +12,7 @@ import { useHead } from '@vueuse/head';
 import LayoutDefault from '@/layout/components/LayoutDefault.vue';
 import LayoutEmpty from '@/layout/components/LayoutEmpty.vue';
 
-import { getCheckAuth } from '@/auth/services';
+import { checkAuth } from '@/auth/services';
 import { getCookieToken, setAuth } from '@/auth/composables';
 import { setAuthHeader } from '@/common/services/api';
 import { URL_LOGIN } from '@/auth/constants';
@@ -35,7 +35,7 @@ const token = getCookieToken();
 if (!isLoginPageAfterLogout && token) {
   setAuthHeader(token);
 
-  getCheckAuth({
+  checkAuth({
     onSuccess: () => {
       setAuth(true);
     },
