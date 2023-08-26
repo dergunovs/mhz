@@ -1,7 +1,24 @@
-import { useMutation } from '@tanstack/vue-query';
+import { Ref } from 'vue';
 
-import { API_UPLOAD, API_UPLOAD_SINGLE } from '@/common/constants';
+import { useQuery, useMutation } from '@tanstack/vue-query';
+
+import { ISearchResult } from '@/common/interface';
+import { API_UPLOAD, API_UPLOAD_SINGLE, API_SEARCH } from '@/common/constants';
 import { api } from '@/common/services/api';
+
+export function search(query: Ref<string>, options: object) {
+  async function fn(): Promise<ISearchResult> {
+    const { data } = await api.get(API_SEARCH, { params: { search: query.value } });
+
+    return data;
+  }
+
+  return useQuery({
+    queryKey: [API_SEARCH, query],
+    queryFn: fn,
+    ...options,
+  });
+}
 
 export function uploadFile(options: object, width?: string) {
   async function fn(file?: File): Promise<string> {

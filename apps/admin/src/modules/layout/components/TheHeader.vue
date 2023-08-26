@@ -1,8 +1,12 @@
 <template>
   <header :class="$style.header">
-    <RouterLink :to="URL_MAIN">
-      <ImageLogo :class="$style.logo" />
-    </RouterLink>
+    <div :class="$style.logoAndSearch">
+      <RouterLink :to="URL_MAIN">
+        <ImageLogo :class="$style.logo" />
+      </RouterLink>
+
+      <TheSearch />
+    </div>
 
     <UiButton @click="logout" layout="plain">Logout</UiButton>
   </header>
@@ -10,6 +14,8 @@
 
 <script setup lang="ts">
 import { UiButton } from 'mhz-ui';
+
+import TheSearch from '@/layout/components/TheSearch.vue';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { URL_MAIN } from '@/common/constants';
@@ -28,6 +34,12 @@ import { logout } from '@/auth/composables';
   padding: 16px 32px;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray);
+}
+
+.logoAndSearch {
+  display: flex;
+  gap: 64px;
+  align-items: center;
 }
 
 .logo {

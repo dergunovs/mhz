@@ -75,7 +75,7 @@ onMounted(async () => {
 
 .input {
   width: 100%;
-  height: 44px;
+  height: 40px;
   padding: 0 16px;
   font-size: 1rem;
   border: 1px solid var(--color-gray);
@@ -111,7 +111,7 @@ onMounted(async () => {
 
 .icon {
   position: absolute;
-  top: calc(50% - 4px);
+  top: calc(50% - 8px);
   right: 16px;
 }
 </style>

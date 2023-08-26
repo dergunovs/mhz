@@ -166,7 +166,7 @@ onClickOutside(containerElement, () => {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  height: 44px;
+  height: 40px;
   padding: 0 16px;
   cursor: pointer;
   outline: none;

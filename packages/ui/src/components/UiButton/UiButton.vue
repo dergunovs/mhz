@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<IProps>(), {
   gap: 12px;
   align-items: center;
   justify-content: center;
-  height: 44px;
+  height: 40px;
   padding: 16px 32px;
   overflow: hidden;
   font-size: 0.875rem;

@@ -47,8 +47,8 @@ function handleUpdate(value?: number) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   font-size: 0.875rem;
   cursor: pointer;
   background-color: var(--color-white);
