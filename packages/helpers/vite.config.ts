@@ -3,8 +3,6 @@ import dts from 'vite-plugin-dts';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-  server: { port: 8082 },
-
   build: {
     target: 'esnext',
     copyPublicDir: false,

@@ -47,9 +47,9 @@ const props = withDefaults(defineProps<IProps>(), {
   color: 'default',
 });
 
-const isDevMode = import.meta.env.DEV;
+declare const window: Window & typeof globalThis & { IS_STORYBOOK: boolean };
 
-const linkComponent = computed(() => (isDevMode ? 'a' : RouterLink));
+const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink));
 </script>
 
 <style module lang="scss">

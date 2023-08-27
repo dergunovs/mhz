@@ -17,8 +17,6 @@ const components = files.reduce<{ [key: string]: string }>((obj, component) => {
 components['toast'] = `src/components/toast/toast.ts`;
 
 export default defineConfig({
-  server: { port: 8080 },
-
   build: {
     target: 'esnext',
     cssCodeSplit: true,

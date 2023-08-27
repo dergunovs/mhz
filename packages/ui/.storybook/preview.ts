@@ -20,3 +20,5 @@ export const decorators = [
       </div>`,
   }),
 ];
+
+window['IS_STORYBOOK'] = true;
