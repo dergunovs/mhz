@@ -6,15 +6,10 @@
 
     <h2>Products</h2>
 
-    <div :class="$style.products">
-      <ProductCatalogList v-if="products?.length" :products="products" />
+    <div v-if="products?.length" :class="$style.products">
+      <ProductCatalogList :products="products" />
 
-      <UiPagination
-        v-if="products?.length"
-        :page="query.page"
-        :total="total"
-        @update="(value) => setQueryPage(setPage(value, query.page))"
-      />
+      <UiPagination :page="query.page" :total="total" @update="(value) => setQueryPage(setPage(value, query.page))" />
     </div>
   </div>
 </template>

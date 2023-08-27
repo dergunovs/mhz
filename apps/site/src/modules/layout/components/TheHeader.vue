@@ -4,11 +4,17 @@
       <ImageLogo :class="$style.logo" />
     </RouterLink>
 
-    <UiButton v-if="isAuth" @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
+    <div :class="$style.buttons">
+      <template v-if="isAuth">
+        <RouterLink :to="URL_FAVOURITES">Favourites</RouterLink>
+        <RouterLink :to="URL_CUSTOMER">Profile</RouterLink>
+        <UiButton @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
+      </template>
 
-    <div v-else :class="$style.buttons">
-      <RouterLink :to="URL_SIGN_UP">Sign up</RouterLink>
-      <RouterLink :to="URL_LOGIN">Login</RouterLink>
+      <template v-else>
+        <RouterLink :to="URL_SIGN_UP">Sign up</RouterLink>
+        <RouterLink :to="URL_LOGIN">Login</RouterLink>
+      </template>
     </div>
   </header>
 </template>
@@ -21,6 +27,7 @@ import ImageLogo from '@/common/assets/images/logo.svg';
 import { URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { deleteAuthHeader } from '@/common/services/api';
+import { URL_CUSTOMER, URL_FAVOURITES } from '@/customer/constants';
 </script>
 
 <style module lang="scss">

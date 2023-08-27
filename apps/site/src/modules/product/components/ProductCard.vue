@@ -46,7 +46,7 @@
       <div :class="$style.actions">
         <div :class="$style.stock">
           {{ props.product.isInStock ? 'In stock' : 'Not in stock' }}
-          <ProductActionButtons />
+          <ProductActionButtons :product="props.product" />
         </div>
 
         <div :class="$style.price">{{ props.product.price }} {{ CURRENCY }}</div>

@@ -12,9 +12,9 @@ import { useRoute } from 'vue-router';
 
 import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 
-import { getProductsWatched } from '@/product/services';
+import { getCustomerWatchedProducts } from '@/customer/services';
 
-const { data: products, refetch } = getProductsWatched();
+const { data: products, refetch } = getCustomerWatchedProducts();
 
 const route = useRoute();
 

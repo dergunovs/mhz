@@ -19,7 +19,7 @@
       <div :class="$style.priceBlock">
         <div :class="$style.price">{{ props.product.price }} {{ CURRENCY }}</div>
 
-        <ProductActionButtons />
+        <ProductActionButtons :product="props.product" />
       </div>
     </div>
 

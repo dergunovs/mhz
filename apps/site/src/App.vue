@@ -16,7 +16,8 @@ import LayoutEmpty from '@/layout/components/LayoutEmpty.vue';
 
 import { checkAuth } from '@/auth/services';
 import { setAuthHeader } from '@/common/services/api';
-import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';
+import { TOKEN_NAME, URL_LOGIN, AUTH_URLS } from '@/auth/constants';
+import { URL_MAIN } from '@/common/constants';
 
 const route = useRoute();
 const router = useRouter();
@@ -30,6 +31,7 @@ const isLoaded = ref(false);
 const layoutComponent = computed(() => (route.meta.layout === 'empty' ? LayoutEmpty : LayoutDefault));
 
 const isLoginPage = window.location.pathname === URL_LOGIN;
+const isAuthPages = AUTH_URLS.includes(window.location.pathname);
 
 const token = getCookieToken(TOKEN_NAME);
 
@@ -42,6 +44,8 @@ if (!isLoginPage && token) {
     },
   });
 }
+
+if (isAuthPages && !token) router.push(URL_MAIN);
 
 onMounted(async () => {
   await router.isReady();

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/vue-query';
 import { IProduct } from 'mhz-types';
 import { IPageQuery } from 'mhz-helpers';
 
-import { API_PRODUCT, API_PRODUCT_WATCHED } from '@/product/constants';
+import { API_PRODUCT } from '@/product/constants';
 import { api } from '@/common/services/api';
 
 export function getProducts(query: Ref<IPageQuery | number>) {
@@ -25,16 +25,6 @@ export function getProducts(query: Ref<IPageQuery | number>) {
   }
 
   return useQuery({ queryKey: [API_PRODUCT, query], queryFn: fn });
-}
-
-export function getProductsWatched() {
-  async function fn(): Promise<IProduct[]> {
-    const { data } = await api.get(API_PRODUCT_WATCHED);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_PRODUCT_WATCHED], queryFn: fn });
 }
 
 export function getProduct(id: ComputedRef<string>) {
