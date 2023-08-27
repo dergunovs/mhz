@@ -2,7 +2,7 @@ import Product from '../../../models/product.js';
 import Category from '../../../models/category.js';
 import Manufacturer from '../../../models/manufacturer.js';
 import Manager from '../../../models/manager.js';
-
+import Customer from '../../../models/customer.js';
 import { IFastifyInstance } from '../../../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
@@ -19,8 +19,11 @@ export default async function (fastify: IFastifyInstance) {
         await Manager.find({ $or: [{ email: regex }, { firstName: regex }, { lastName: regex }] })
           .lean()
           .exec(),
-      ]).then(([products, categories, manufacturers, managers]) => {
-        results = { products, categories, manufacturers, managers };
+        await Customer.find({ $or: [{ email: regex }, { firstName: regex }, { lastName: regex }] })
+          .lean()
+          .exec(),
+      ]).then(([products, categories, manufacturers, managers, customers]) => {
+        results = { products, categories, manufacturers, managers, customers };
       });
 
       reply.code(200).send(results);

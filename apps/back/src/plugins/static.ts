@@ -1,6 +1,5 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import fp from 'fastify-plugin';
 import staticF from '@fastify/static';
 

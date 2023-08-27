@@ -2,7 +2,7 @@ import Product from '../../../models/product.js';
 import Category from '../../../models/category.js';
 import Manufacturer from '../../../models/manufacturer.js';
 import Manager from '../../../models/manager.js';
-
+import Customer from '../../../models/customer.js';
 import { IFastifyInstance } from '../../../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
@@ -15,8 +15,9 @@ export default async function (fastify: IFastifyInstance) {
         await Category.estimatedDocumentCount(),
         await Manufacturer.estimatedDocumentCount(),
         await Manager.estimatedDocumentCount(),
-      ]).then(([products, categories, manufacturers, managers]) => {
-        count = { products, categories, manufacturers, managers };
+        await Customer.estimatedDocumentCount(),
+      ]).then(([products, categories, manufacturers, managers, customers]) => {
+        count = { products, categories, manufacturers, managers, customers };
       });
 
       reply.code(200).send(count);

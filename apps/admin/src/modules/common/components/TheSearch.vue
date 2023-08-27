@@ -55,6 +55,18 @@
             {{ manager.firstName }} {{ manager.lastName }}
           </RouterLink>
         </div>
+
+        <div v-if="results?.customers.length" :class="$style.resultsInner">
+          <div>Customers:</div>
+          <RouterLink
+            v-for="customer in results.managers"
+            :key="customer._id"
+            :to="`${URL_CUSTOMER}/${customer._id}`"
+            @click="clearSearch"
+          >
+            {{ customer.firstName }} {{ customer.lastName }}
+          </RouterLink>
+        </div>
       </template>
     </div>
   </div>
@@ -72,6 +84,7 @@ import { URL_PRODUCT_EDIT } from '@/product/constants';
 import { URL_CATEGORY_EDIT } from '@/category/constants';
 import { URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
 import { URL_MANAGER_EDIT } from '@/manager/constants';
+import { URL_CUSTOMER } from '@/customer/constants';
 
 const searchQuery = ref('');
 
@@ -97,7 +110,8 @@ const isResults = computed(() => {
     ? results.value.categories.length +
         results.value.products.length +
         results.value.manufacturers.length +
-        results.value.managers.length >
+        results.value.managers.length +
+        results.value.customers.length >
         0
     : false;
 });

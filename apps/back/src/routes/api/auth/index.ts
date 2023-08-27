@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 
 import { IUserToken, IFastifyInstance, TUserRole } from '../../../interface/index.js';
-
 import Manager from '../../../models/manager.js';
 import Customer from '../../../models/customer.js';
 
