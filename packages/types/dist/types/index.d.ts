@@ -26,10 +26,10 @@ export interface ICustomer extends IEntity {
   phone?: string;
   password: string;
   email: string;
-  isEmailConfirmed?: boolean;
   card?: string;
   cart?: ICart;
   orders?: IOrder[];
+  watchedProducts?: { _id: string; dateCreated: string }[];
   favouriteProducts?: IProduct[];
   comparisons?: IComparison[];
   configurations?: IConfiguration[];
@@ -49,11 +49,11 @@ export interface IShipment extends IEntity {
   duration: number;
 }
 
-export type ICategoryFieldType = "string" | "number" | "boolean";
+export type TCategoryFieldType = "string" | "number" | "boolean";
 
 export interface ICategoryField extends IEntity {
   title: string;
-  fieldType: ICategoryFieldType;
+  fieldType: TCategoryFieldType;
   fieldValue: string | number | boolean;
   fieldUnits?: string;
 }

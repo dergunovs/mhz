@@ -23,10 +23,7 @@ export function getManufacturers(query: Ref<IPageQuery | number>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_MANUFACTURER, query],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_MANUFACTURER, query], queryFn: fn });
 }
 
 export function getManufacturer(id: ComputedRef<string>) {
@@ -36,8 +33,5 @@ export function getManufacturer(id: ComputedRef<string>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_MANUFACTURER, id],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_MANUFACTURER, id], queryFn: fn });
 }

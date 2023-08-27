@@ -1,7 +1,8 @@
 import Product from '../../../models/product.js';
+import Customer from '../../../models/customer.js';
 
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
-import { deleteFile, paginate } from '../../../helpers/index.js';
+import { deleteFile, paginate, decodeToken, addProductToWatched } from '../../../helpers/index.js';
 import { IProduct } from 'mhz-types';
 
 export default async function (fastify: IFastifyInstance) {
@@ -33,7 +34,55 @@ export default async function (fastify: IFastifyInstance) {
         ])
         .lean()
         .exec();
+
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
+      addProductToWatched(user, product);
+
       reply.code(200).send(product);
+    } catch (err) {
+      reply.code(500).send({ message: err });
+    }
+  });
+
+  fastify.get<{ Querystring: IQuery }>('/watched', async function (request, reply) {
+    try {
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
+      const customer = await Customer.findOne({ _id: user?._id })
+        .lean()
+        .exec();
+
+      const customerProducts = customer?.watchedProducts
+        ?.sort((a, b) => Number(b.dateCreated) - Number(a.dateCreated))
+        .map((product) => product._id);
+
+      const products = await Product.aggregate([
+        { $match: { _id: { $in: customerProducts } } },
+        {
+          $project: {
+            imageUrls: 1,
+            title: 1,
+            price: 1,
+            category: 1,
+            index: { $indexOfArray: [customerProducts, '$_id'] },
+          },
+        },
+        {
+          $lookup: {
+            from: 'categories',
+            localField: 'category',
+            foreignField: '_id',
+            as: 'category',
+          },
+        },
+        { $unwind: '$category' },
+        { $sort: { index: 1 } },
+      ]);
+
+      console.log(products);
+
+      reply.code(200).send(products);
     } catch (err) {
       reply.code(500).send({ message: err });
     }

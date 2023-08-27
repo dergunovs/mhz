@@ -25,11 +25,9 @@ interface IProps {
 const props = defineProps<IProps>();
 const emit = defineEmits(['update']);
 
-const main = document.querySelector('main');
-
 function handleUpdate(value?: number) {
   emit('update', value);
-  if (main) main.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  document.querySelector('main')?.scrollTo(0, 0);
 }
 </script>
 

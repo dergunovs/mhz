@@ -5,8 +5,8 @@
         :src="`${PATH_UPLOAD}/${props.product.imageUrls[0]}`"
         :class="$style.image"
         height="200"
-        :alt="product.title"
-        :title="product.title"
+        :alt="props.product.title"
+        :title="props.product.title"
         loading="lazy"
       />
     </RouterLink>

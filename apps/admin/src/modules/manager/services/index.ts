@@ -23,10 +23,7 @@ export function getManagers(query: Ref<IPageQuery | number>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_MANAGER, query],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_MANAGER, query], queryFn: fn });
 }
 
 export function getManager(id: ComputedRef<string>) {
@@ -36,10 +33,7 @@ export function getManager(id: ComputedRef<string>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_MANAGER, id],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_MANAGER, id], queryFn: fn });
 }
 
 export function postManager(options: object) {
@@ -47,11 +41,7 @@ export function postManager(options: object) {
     await api.post(API_MANAGER, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_MANAGER],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_MANAGER], mutationFn: fn, ...options });
 }
 
 export function updateManager(id: ComputedRef<string | undefined>, options: object) {
@@ -59,11 +49,7 @@ export function updateManager(id: ComputedRef<string | undefined>, options: obje
     await api.patch(`${API_MANAGER}/${id.value}`, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_MANAGER, id],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_MANAGER, id], mutationFn: fn, ...options });
 }
 
 export function deleteManager(options: object) {
@@ -71,9 +57,5 @@ export function deleteManager(options: object) {
     await api.delete(`${API_MANAGER}/${id}`);
   }
 
-  return useMutation({
-    mutationKey: [API_MANAGER],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_MANAGER], mutationFn: fn, ...options });
 }

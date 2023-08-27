@@ -4,14 +4,19 @@
 
     <div :class="$style.container">
       <main :class="$style.main">
-        <RouterView :class="$style.content" />
+        <RouterView />
+
+        <ProductsWatchedList v-if="isAuth" />
       </main>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { isAuth } from 'mhz-helpers';
+
 import TheHeader from '@/layout/components/TheHeader.vue';
+import ProductsWatchedList from '@/product/components/ProductsWatchedList.vue';
 </script>
 
 <style module lang="scss">
@@ -31,16 +36,8 @@ import TheHeader from '@/layout/components/TheHeader.vue';
 .main {
   flex: 1;
   height: calc(100vh - 64px);
-  overflow-y: auto;
-  background-color: var(--color-gray-light);
-}
-
-.content {
   min-height: calc(100vh - 128px);
-  padding: 32px;
-  margin: 32px;
-  overflow: hidden;
-  background-color: var(--color-white);
-  border-radius: 16px;
+  padding: 32px 64px;
+  overflow-y: auto;
 }
 </style>

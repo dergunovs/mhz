@@ -23,10 +23,7 @@ export function getProducts(query: Ref<IPageQuery | number>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_PRODUCT, query],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_PRODUCT, query], queryFn: fn });
 }
 
 export function getProduct(id: ComputedRef<string>) {
@@ -36,10 +33,7 @@ export function getProduct(id: ComputedRef<string>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_PRODUCT, id],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
 }
 
 export function postProduct(options: object) {
@@ -47,11 +41,7 @@ export function postProduct(options: object) {
     await api.post(API_PRODUCT, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_PRODUCT],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_PRODUCT], mutationFn: fn, ...options });
 }
 
 export function updateProduct(id: ComputedRef<string | undefined>, options: object) {
@@ -59,11 +49,7 @@ export function updateProduct(id: ComputedRef<string | undefined>, options: obje
     await api.patch(`${API_PRODUCT}/${id.value}`, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_PRODUCT, id],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_PRODUCT, id], mutationFn: fn, ...options });
 }
 
 export function deleteProduct(options: object) {
@@ -71,9 +57,5 @@ export function deleteProduct(options: object) {
     await api.delete(`${API_PRODUCT}/${id}`);
   }
 
-  return useMutation({
-    mutationKey: [API_PRODUCT],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_PRODUCT], mutationFn: fn, ...options });
 }

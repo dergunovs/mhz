@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
@@ -33,4 +33,11 @@ const links = computed(() => [
     title: product.value?.title,
   },
 ]);
+
+watch(
+  () => productId.value,
+  () => {
+    document.querySelector('main')?.scrollTo(0, 0);
+  }
+);
 </script>

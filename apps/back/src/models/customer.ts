@@ -8,7 +8,6 @@ const customerSchema = new Schema<ICustomer>({
   phone: { type: String },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  isEmailConfirmed: { type: Boolean, default: false },
   card: { type: String },
   adress: {
     region: { type: String },
@@ -19,6 +18,7 @@ const customerSchema = new Schema<ICustomer>({
   },
   cart: { type: Schema.Types.ObjectId, ref: 'Cart' },
   orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
+  watchedProducts: [{ _id: { type: Schema.Types.ObjectId, ref: 'Product' }, dateCreated: Date }],
   favouriteProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
   comparisons: [{ type: Schema.Types.ObjectId, ref: 'Comparison' }],
   configurations: [{ type: Schema.Types.ObjectId, ref: 'Configuration' }],

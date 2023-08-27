@@ -23,10 +23,7 @@ export function getCategories(query: Ref<IPageQuery | number>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_CATEGORY, query],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_CATEGORY, query], queryFn: fn });
 }
 
 export function getCategory(id: ComputedRef<string>) {
@@ -36,8 +33,5 @@ export function getCategory(id: ComputedRef<string>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_CATEGORY, id],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_CATEGORY, id], queryFn: fn });
 }

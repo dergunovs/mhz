@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs';
 
-import { IFastifyInstance } from '../../../interface/index.js';
+import { IUserToken, IFastifyInstance, TUserRole } from '../../../interface/index.js';
 
 import Manager from '../../../models/manager.js';
 import Customer from '../../../models/customer.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.post<{ Body: { email: string; password: string; role: 'manager' | 'customer' } }>(
+  fastify.post<{ Body: { email: string; password: string; role: TUserRole } }>(
     '/login',
     async function (request, reply) {
       try {
@@ -29,7 +29,7 @@ export default async function (fastify: IFastifyInstance) {
           return;
         }
 
-        const user = {
+        const user: IUserToken = {
           _id: foundUser._id,
           firstName: foundUser.firstName,
           lastName: foundUser.lastName,

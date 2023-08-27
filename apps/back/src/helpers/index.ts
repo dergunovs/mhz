@@ -3,6 +3,11 @@ import { Model, PopulateOptions } from 'mongoose';
 import path from 'path';
 import sharp from 'sharp';
 
+import { IProduct } from 'mhz-types';
+
+import { IUserToken } from '../interface/index.js';
+import Customer from '../models/customer.js';
+
 export async function paginate<T>(
   Entity: Model<T>,
   options?: { page?: string; sort?: string; dir?: string; populate?: PopulateOptions[]; filter?: string }
@@ -55,5 +60,34 @@ export async function resizeFile(filename: string, width: string) {
     return `resized-${filename}`;
   } catch (err) {
     throw err;
+  }
+}
+
+export function decodeToken(decode: (token: string) => IUserToken | null, authorizationHeader?: string) {
+  const token = authorizationHeader ? authorizationHeader.split('Bearer ')[1] : undefined;
+
+  return token ? decode(token) : null;
+}
+
+export async function addProductToWatched(user: IUserToken | null, product: IProduct | null) {
+  if (user?.role === 'customer' && product?._id) {
+    const filter = { _id: user._id };
+    const limit = 6;
+
+    const currentCustomer = await Customer.findOne(filter).lean().exec();
+
+    const watchedProducts = [...new Set(currentCustomer?.watchedProducts)];
+
+    const watchedProductsIds = watchedProducts.map((product) => product._id.toString());
+
+    if (watchedProductsIds.includes(product._id.toString())) return;
+
+    if (watchedProducts && product._id) {
+      if (watchedProducts.length === limit) watchedProducts.pop();
+
+      await Customer.findOneAndUpdate(filter, {
+        watchedProducts: [{ _id: product._id.toString(), dateCreated: new Date() }, ...watchedProducts],
+      });
+    }
   }
 }

@@ -12,11 +12,7 @@ export function checkAuth(options: object) {
     return true;
   }
 
-  return useQuery({
-    queryKey: [API_CHECK_AUTH],
-    queryFn: fn,
-    ...options,
-  });
+  return useQuery({ queryKey: [API_CHECK_AUTH], queryFn: fn, ...options });
 }
 
 export function login(options: object) {
@@ -26,9 +22,5 @@ export function login(options: object) {
     return data;
   }
 
-  return useMutation({
-    mutationKey: [API_LOGIN],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_LOGIN], mutationFn: fn, ...options });
 }

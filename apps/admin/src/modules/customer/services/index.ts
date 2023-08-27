@@ -23,8 +23,5 @@ export function getCustomers(query: Ref<IPageQuery | number>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_CUSTOMER, query],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_CUSTOMER, query], queryFn: fn });
 }

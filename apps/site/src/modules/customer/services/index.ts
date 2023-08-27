@@ -10,9 +10,5 @@ export function postCustomer(options: object) {
     await api.post(API_CUSTOMER, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_CUSTOMER],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
 }

@@ -32,7 +32,7 @@ import { deleteAuthHeader } from '@/common/services/api';
   justify-content: space-between;
   width: 100%;
   height: 64px;
-  padding: 16px 32px;
+  padding: 16px 64px;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray);
 }

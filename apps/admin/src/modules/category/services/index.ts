@@ -23,10 +23,7 @@ export function getCategories(query: Ref<IPageQuery | number>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_CATEGORY, query],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_CATEGORY, query], queryFn: fn });
 }
 
 export function getCategory(id: ComputedRef<string>) {
@@ -36,10 +33,7 @@ export function getCategory(id: ComputedRef<string>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_CATEGORY, id],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_CATEGORY, id], queryFn: fn });
 }
 
 export function postCategory(options: object) {
@@ -47,11 +41,7 @@ export function postCategory(options: object) {
     await api.post(API_CATEGORY, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_CATEGORY],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_CATEGORY], mutationFn: fn, ...options });
 }
 
 export function updateCategory(id: ComputedRef<string | undefined>, options: object) {
@@ -59,11 +49,7 @@ export function updateCategory(id: ComputedRef<string | undefined>, options: obj
     await api.patch(`${API_CATEGORY}/${id.value}`, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_CATEGORY, id],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_CATEGORY, id], mutationFn: fn, ...options });
 }
 
 export function deleteCategory(options: object) {
@@ -71,9 +57,5 @@ export function deleteCategory(options: object) {
     await api.delete(`${API_CATEGORY}/${id}`);
   }
 
-  return useMutation({
-    mutationKey: [API_CATEGORY],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_CATEGORY], mutationFn: fn, ...options });
 }

@@ -23,10 +23,7 @@ export function getManufacturers(query: Ref<IPageQuery | number>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_MANUFACTURER, query],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_MANUFACTURER, query], queryFn: fn });
 }
 
 export function getManufacturer(id: ComputedRef<string>) {
@@ -36,10 +33,7 @@ export function getManufacturer(id: ComputedRef<string>) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_MANUFACTURER, id],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_MANUFACTURER, id], queryFn: fn });
 }
 
 export function postManufacturer(options: object) {
@@ -47,11 +41,7 @@ export function postManufacturer(options: object) {
     await api.post(API_MANUFACTURER, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_MANUFACTURER],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_MANUFACTURER], mutationFn: fn, ...options });
 }
 
 export function updateManufacturer(id: ComputedRef<string | undefined>, options: object) {
@@ -59,11 +49,7 @@ export function updateManufacturer(id: ComputedRef<string | undefined>, options:
     await api.patch(`${API_MANUFACTURER}/${id.value}`, formData);
   }
 
-  return useMutation({
-    mutationKey: [API_MANUFACTURER, id],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_MANUFACTURER, id], mutationFn: fn, ...options });
 }
 
 export function deleteManufacturer(options: object) {
@@ -71,9 +57,5 @@ export function deleteManufacturer(options: object) {
     await api.delete(`${API_MANUFACTURER}/${id}`);
   }
 
-  return useMutation({
-    mutationKey: [API_MANUFACTURER],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_MANUFACTURER], mutationFn: fn, ...options });
 }

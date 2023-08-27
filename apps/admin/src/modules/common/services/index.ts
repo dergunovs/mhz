@@ -13,11 +13,7 @@ export function search(query: Ref<string>, options: object) {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_SEARCH, query],
-    queryFn: fn,
-    ...options,
-  });
+  return useQuery({ queryKey: [API_SEARCH, query], queryFn: fn, ...options });
 }
 
 export function getEntitiesCount() {
@@ -27,10 +23,7 @@ export function getEntitiesCount() {
     return data;
   }
 
-  return useQuery({
-    queryKey: [API_COUNT],
-    queryFn: fn,
-  });
+  return useQuery({ queryKey: [API_COUNT], queryFn: fn });
 }
 
 export function uploadFile(options: object, width?: string) {
@@ -46,11 +39,7 @@ export function uploadFile(options: object, width?: string) {
     return data;
   }
 
-  return useMutation({
-    mutationKey: [API_UPLOAD],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
 }
 
 export function uploadFiles(options: object, width?: string) {
@@ -64,11 +53,7 @@ export function uploadFiles(options: object, width?: string) {
     return data;
   }
 
-  return useMutation({
-    mutationKey: [API_UPLOAD],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
 }
 
 export function deleteFile(options?: object) {
@@ -78,9 +63,5 @@ export function deleteFile(options?: object) {
     return true;
   }
 
-  return useMutation({
-    mutationKey: [API_UPLOAD],
-    mutationFn: fn,
-    ...options,
-  });
+  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
 }
