@@ -56,8 +56,7 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { UiField, UiInput, UiButton, UiUpload, toast, UiEditor } from 'mhz-ui';
 import { ICategory, ICategoryField } from 'mhz-types';
-import { useValidator, required } from 'mhz-validate';
-import { clone, deleteTempId } from 'mhz-helpers';
+import { clone, deleteTempId, useValidator, required } from 'mhz-helpers';
 
 import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
 import CategoryFieldList from '@/category/components/CategoryFieldList.vue';

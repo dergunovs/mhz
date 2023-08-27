@@ -21,7 +21,7 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
-import { useValidator, required, email } from 'mhz-validate';
+import { useValidator, required, email } from 'mhz-helpers';
 
 import { setup } from '@/auth/services';
 import { URL_LOGIN } from '@/auth/constants';

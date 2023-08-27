@@ -20,10 +20,12 @@
 import { ref, computed } from 'vue';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
-import { useValidator, required, email } from 'mhz-validate';
+import { useValidator, required, email, useAuth } from 'mhz-helpers';
 
 import { login } from '@/auth/services';
-import { useAuth } from '@/auth/composables';
+import { TOKEN_NAME } from '@/auth/constants';
+import { setAuthHeader } from '@/common/services/api';
+import { URL_MAIN } from '@/common/constants';
 
 const { auth } = useAuth();
 
@@ -34,7 +36,7 @@ const formData = ref({
 
 const { mutate } = login({
   onSuccess: (user: { token: string }) => {
-    auth(user.token);
+    auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');
   },
 });

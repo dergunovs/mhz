@@ -8,18 +8,20 @@
       <TheSearch />
     </div>
 
-    <UiButton @click="logout" layout="plain">Logout</UiButton>
+    <UiButton @click="logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
   </header>
 </template>
 
 <script setup lang="ts">
 import { UiButton } from 'mhz-ui';
+import { logout } from 'mhz-helpers';
 
 import TheSearch from '@/common/components/TheSearch.vue';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { URL_MAIN } from '@/common/constants';
-import { logout } from '@/auth/composables';
+import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';
+import { deleteAuthHeader } from '@/common/services/api';
 </script>
 
 <style module lang="scss">

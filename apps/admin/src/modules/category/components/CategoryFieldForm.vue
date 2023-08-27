@@ -33,8 +33,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiSelect } from 'mhz-ui';
 import { ICategoryField } from 'mhz-types';
-import { useValidator, required } from 'mhz-validate';
-import { clone, createTempId } from 'mhz-helpers';
+import { clone, createTempId, useValidator, required } from 'mhz-helpers';
 
 interface IProps {
   categoryField?: ICategoryField;

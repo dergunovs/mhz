@@ -28,8 +28,7 @@ import { useQueryClient } from '@tanstack/vue-query';
 
 import { UiField, UiInput, toast } from 'mhz-ui';
 import { IManager } from 'mhz-types';
-import { useValidator, required } from 'mhz-validate';
-import { clone } from 'mhz-helpers';
+import { clone, useValidator, required } from 'mhz-helpers';
 
 import FormButtons from '@/common/components/FormButtons.vue';
 

@@ -4,3 +4,5 @@ export const API_SETUP = 'auth/setup';
 
 export const URL_LOGIN = '/';
 export const URL_SETUP = '/setup';
+
+export const TOKEN_NAME = 'mhz_token';

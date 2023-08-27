@@ -4,7 +4,7 @@
       <ImageLogo :class="$style.logo" />
     </RouterLink>
 
-    <UiButton v-if="isAuth" @click="logout" layout="plain">Logout</UiButton>
+    <UiButton v-if="isAuth" @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
 
     <div v-else :class="$style.buttons">
       <RouterLink :to="URL_SIGN_UP">Sign up</RouterLink>
@@ -15,11 +15,12 @@
 
 <script setup lang="ts">
 import { UiButton } from 'mhz-ui';
+import { isAuth, logout } from 'mhz-helpers';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { URL_MAIN } from '@/common/constants';
-import { isAuth, logout } from '@/auth/composables';
-import { URL_LOGIN, URL_SIGN_UP } from '@/auth/constants';
+import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
+import { deleteAuthHeader } from '@/common/services/api';
 </script>
 
 <style module lang="scss">

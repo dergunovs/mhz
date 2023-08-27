@@ -8,9 +8,10 @@
 import { useRouter } from 'vue-router';
 import { useHead } from '@vueuse/head';
 
+import { isAuth } from 'mhz-helpers';
+
 import SetupForm from '@/auth/components/SetupForm.vue';
 
-import { isAuth } from '@/auth/composables';
 import { URL_MAIN } from '@/common/constants';
 
 const router = useRouter();
