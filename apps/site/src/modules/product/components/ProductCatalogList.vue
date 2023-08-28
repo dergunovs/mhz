@@ -5,7 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { IProduct } from 'mhz-types';
 
@@ -18,12 +19,21 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
+const route = useRoute();
+
 const container = ref<HTMLElement>();
 
 function scroll(e: WheelEvent) {
   e.preventDefault();
   if (container.value) container.value.scrollLeft += e.deltaY / 2;
 }
+
+watch(
+  () => route.path,
+  () => {
+    if (container.value) container.value.scrollLeft = 0;
+  }
+);
 
 onMounted(() => {
   if (props.isScroll) container.value?.addEventListener('wheel', (e) => scroll(e));

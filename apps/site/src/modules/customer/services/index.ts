@@ -30,14 +30,14 @@ export function getCustomerWatchedProducts() {
   return useQuery({ queryKey: [API_CUSTOMER_WATCHED], queryFn: fn });
 }
 
-export function getCustomerFavouriteProducts() {
+export function getCustomerFavouriteProducts(options?: object) {
   async function fn(): Promise<IProduct[]> {
     const { data } = await api.get(API_CUSTOMER_FAVOURITES);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_CUSTOMER_FAVOURITES], queryFn: fn });
+  return useQuery({ queryKey: [API_CUSTOMER_FAVOURITES], queryFn: fn, ...options });
 }
 
 export function postCustomer(options: object) {
@@ -51,6 +51,16 @@ export function postCustomer(options: object) {
 export function addToFavourites(options: object) {
   async function fn(_id?: string) {
     const { data } = await api.post(API_CUSTOMER_FAVOURITES, { _id });
+
+    return data;
+  }
+
+  return useMutation({ mutationKey: [API_CUSTOMER_FAVOURITES], mutationFn: fn, ...options });
+}
+
+export function removeFromFavourites(options: object) {
+  async function fn(_id?: string) {
+    const { data } = await api.delete(`${API_CUSTOMER_FAVOURITES}/${_id}`);
 
     return data;
   }

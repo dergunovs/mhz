@@ -4,19 +4,30 @@
       <IconComparison />
     </button>
 
-    <button @click="mutate(props.product._id)" :class="$style.button" type="button" title="Add to favourites">
+    <button
+      @click="isInFavourites ? remove(props.product._id) : add(props.product._id)"
+      :class="$style.button"
+      :data-active="isInFavourites"
+      type="button"
+      :title="isInFavourites ? 'Remove from favourites' : 'Add to favourites'"
+    >
       <IconFavourites />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
+import { useQueryClient } from '@tanstack/vue-query';
+
 import { IProduct } from 'mhz-types';
 import { toast } from 'mhz-ui';
 
 import IconComparison from '@/product/icons/comparison.svg';
 import IconFavourites from '@/product/icons/favourites.svg';
-import { addToFavourites } from '@/customer/services';
+import { addToFavourites, removeFromFavourites, getCustomerFavouriteProducts } from '@/customer/services';
+import { API_CUSTOMER_FAVOURITES } from '@/customer/constants';
 
 interface IProps {
   product: IProduct;
@@ -24,9 +35,23 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const { mutate } = addToFavourites({
-  onSuccess: () => {
+const queryClient = useQueryClient();
+
+const { data: favourites } = getCustomerFavouriteProducts();
+
+const isInFavourites = computed(() => favourites.value?.some((fav) => fav._id === props.product._id));
+
+const { mutate: add } = addToFavourites({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_FAVOURITES] });
     toast.success('Successfully added');
+  },
+});
+
+const { mutate: remove } = removeFromFavourites({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_FAVOURITES] });
+    toast.success('Successfully removed');
   },
 });
 </script>
@@ -51,6 +76,10 @@ const { mutate } = addToFavourites({
 
   &:hover {
     background-color: var(--color-gray);
+  }
+
+  &[data-active='true'] {
+    background-color: var(--color-primary-light);
   }
 }
 </style>

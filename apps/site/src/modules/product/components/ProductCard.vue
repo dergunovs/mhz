@@ -46,7 +46,7 @@
       <div :class="$style.actions">
         <div :class="$style.stock">
           {{ props.product.isInStock ? 'In stock' : 'Not in stock' }}
-          <ProductActionButtons :product="props.product" />
+          <ProductActionButtons v-if="isAuth" :product="props.product" />
         </div>
 
         <div :class="$style.price">{{ props.product.price }} {{ CURRENCY }}</div>
@@ -65,6 +65,7 @@
 <script setup lang="ts">
 import { UiButton } from 'mhz-ui';
 import { IProduct } from 'mhz-types';
+import { isAuth } from 'mhz-helpers';
 
 import ProductActionButtons from '@/product/components/ProductActionButtons.vue';
 

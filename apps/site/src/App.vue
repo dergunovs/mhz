@@ -18,6 +18,7 @@ import { checkAuth } from '@/auth/services';
 import { setAuthHeader } from '@/common/services/api';
 import { TOKEN_NAME, URL_LOGIN, AUTH_URLS } from '@/auth/constants';
 import { URL_MAIN } from '@/common/constants';
+import { getCustomerFavouriteProducts } from '@/customer/services';
 
 const route = useRoute();
 const router = useRouter();
@@ -35,12 +36,15 @@ const isAuthPages = AUTH_URLS.includes(window.location.pathname);
 
 const token = getCookieToken(TOKEN_NAME);
 
+const { refetch } = getCustomerFavouriteProducts({ enabled: false });
+
 if (!isLoginPage && token) {
   setAuthHeader(token);
 
   checkAuth({
     onSuccess: () => {
       setAuth(true);
+      refetch();
     },
   });
 }

@@ -26,6 +26,7 @@ import { login } from '@/auth/services';
 import { URL_MAIN } from '@/common/constants';
 import { setAuthHeader } from '@/common/services/api';
 import { TOKEN_NAME } from '@/auth/constants';
+import { getCustomerFavouriteProducts } from '@/customer/services';
 
 const { auth } = useAuth();
 
@@ -34,10 +35,13 @@ const formData = ref({
   password: '',
 });
 
+const { refetch } = getCustomerFavouriteProducts({ enabled: false });
+
 const { mutate } = login({
   onSuccess: (user: { token: string }) => {
     auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');
+    refetch();
   },
 });
 

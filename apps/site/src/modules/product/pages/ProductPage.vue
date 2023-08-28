@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { useHead } from '@vueuse/head';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ProductCard from '@/product/components/ProductCard.vue';
@@ -40,4 +41,8 @@ watch(
     document.querySelector('main')?.scrollTo(0, 0);
   }
 );
+
+useHead({
+  title: () => product.value?.title || 'Product',
+});
 </script>

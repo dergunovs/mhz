@@ -6,7 +6,7 @@
       <main :class="$style.main">
         <RouterView />
 
-        <CustomerWatchedProducts v-if="isShowProductsWathed" />
+        <CustomerWatchedProducts v-if="isShowWathedProducts" />
       </main>
     </div>
   </div>
@@ -23,7 +23,7 @@ import CustomerWatchedProducts from '@/customer/components/CustomerWatchedProduc
 
 const route = useRoute();
 
-const isShowProductsWathed = computed(
+const isShowWathedProducts = computed(
   () => isAuth.value && route.name && ['Product', 'Main'].includes(route.name.toString())
 );
 </script>

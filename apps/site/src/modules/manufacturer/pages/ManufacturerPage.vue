@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useHead } from '@vueuse/head';
 
 import { UiPagination } from 'mhz-ui';
 import { usePage, usePagination } from 'mhz-helpers';
@@ -52,6 +53,10 @@ const links = computed(() => [
   { url: `${URL_MANUFACTURER}`, title: 'Manufacturers' },
   { url: `${URL_MANUFACTURER}/${manufacturer.value?._id}`, title: manufacturer.value?.title },
 ]);
+
+useHead({
+  title: () => manufacturer.value?.title || 'Manufacturer',
+});
 </script>
 
 <style module lang="scss">

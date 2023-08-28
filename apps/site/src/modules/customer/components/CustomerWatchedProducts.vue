@@ -21,7 +21,7 @@ const route = useRoute();
 watch(
   () => route.path,
   () => {
-    if (route.name === 'Product') refetch();
+    if (['Product', 'Main'].includes(`${route.name?.toString()}`)) refetch();
   }
 );
 </script>

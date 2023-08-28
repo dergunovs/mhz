@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useHead } from '@vueuse/head';
 
 import { UiPagination } from 'mhz-ui';
 import { usePage, usePagination } from 'mhz-helpers';
@@ -47,6 +48,10 @@ const links = computed(() => [
   { url: `${URL_CATEGORY}`, title: 'Categories' },
   { url: `${URL_CATEGORY}/${category.value?._id}`, title: category.value?.title },
 ]);
+
+useHead({
+  title: () => category.value?.title || 'Category',
+});
 </script>
 
 <style module lang="scss">

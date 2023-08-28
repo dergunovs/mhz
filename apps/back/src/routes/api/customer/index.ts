@@ -36,87 +36,130 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.get<{ Querystring: IQuery }>('/watched', async function (request, reply) {
-    try {
-      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+  fastify.get<{ Querystring: IQuery }>(
+    '/watched',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-      const customer = await Customer.findOne({ _id: user?._id })
-        .lean()
-        .exec();
+        const customer = await Customer.findOne({ _id: user?._id })
+          .lean()
+          .exec();
 
-      const customerProducts = customer?.watchedProducts
-        ?.sort((a, b) => Number(b.dateCreated) - Number(a.dateCreated))
-        .map((product) => product._id);
+        const customerProducts = customer?.watchedProducts
+          ?.sort((a, b) => Number(b.dateCreated) - Number(a.dateCreated))
+          .map((product) => product._id);
 
-      const products = await Product.aggregate([
-        { $match: { _id: { $in: customerProducts } } },
-        {
-          $project: {
-            imageUrls: 1,
-            title: 1,
-            price: 1,
-            category: 1,
-            index: { $indexOfArray: [customerProducts, '$_id'] },
+        const products = await Product.aggregate([
+          { $match: { _id: { $in: customerProducts } } },
+          {
+            $lookup: {
+              from: 'categories',
+              localField: 'category',
+              foreignField: '_id',
+              as: 'category',
+            },
           },
-        },
-        {
-          $lookup: {
-            from: 'categories',
-            localField: 'category',
-            foreignField: '_id',
-            as: 'category',
+          { $unwind: '$category' },
+          {
+            $project: {
+              imageUrls: 1,
+              title: 1,
+              price: 1,
+              category: { _id: '$category._id' },
+              index: { $indexOfArray: [customerProducts, '$_id'] },
+            },
           },
-        },
-        { $unwind: '$category' },
-        { $sort: { index: 1 } },
-      ]);
+          { $sort: { index: 1 } },
+        ]);
 
-      reply.code(200).send(products);
-    } catch (err) {
-      reply.code(500).send({ message: err });
-    }
-  });
-
-  fastify.get<{ Querystring: IQuery }>('/favourites', async function (request, reply) {
-    try {
-      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
-
-      const customer = await Customer.findOne({ _id: user?._id })
-        .lean()
-        .exec();
-
-      const products = await Product.find({ _id: { $in: customer?.favouriteProducts } });
-
-      reply.code(200).send(products);
-    } catch (err) {
-      reply.code(500).send({ message: err });
-    }
-  });
-
-  fastify.post<{ Body: { _id: string } }>('/favourites', async function (request, reply) {
-    try {
-      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
-      const filter = { _id: user?._id };
-
-      const currentCustomer = await Customer.findOne(filter).lean().exec();
-
-      const currentFavourites = currentCustomer?.favouriteProducts?.map((product) => product.toString()) || [];
-
-      if (currentFavourites.includes(request.body._id)) {
-        reply.code(500).send({ message: 'Already in your favourites' });
-      } else {
-        if (currentCustomer?.favouriteProducts) {
-          await Customer.findOneAndUpdate(filter, {
-            favouriteProducts: [...currentFavourites, request.body._id],
-          });
-        }
-
-        reply.code(201).send({ message: 'added' });
+        reply.code(200).send(products);
+      } catch (err) {
+        reply.code(500).send({ message: err });
       }
-    } catch (err) {
-      reply.code(500).send({ message: err });
     }
-  });
+  );
+
+  fastify.get<{ Querystring: IQuery }>(
+    '/favourites',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
+        const customer = await Customer.findOne({ _id: user?._id })
+          .lean()
+          .exec();
+
+        const products = await Product.find({ _id: { $in: customer?.favouriteProducts } })
+          .select('imageUrls title price category')
+          .populate({ path: 'category', select: ['_id'] })
+          .lean()
+          .exec();
+
+        reply.code(200).send(products);
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.post<{ Body: { _id: string } }>(
+    '/favourites',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+        const filter = { _id: user?._id };
+
+        const currentCustomer = await Customer.findOne(filter).lean().exec();
+
+        const currentFavourites = currentCustomer?.favouriteProducts?.map((product) => product.toString()) || [];
+
+        if (currentFavourites.includes(request.body._id)) {
+          reply.code(500).send({ message: 'Already in your favourites' });
+        } else {
+          if (currentCustomer?.favouriteProducts) {
+            await Customer.findOneAndUpdate(filter, {
+              favouriteProducts: [...currentFavourites, request.body._id],
+            });
+          }
+
+          reply.code(201).send({ message: 'added' });
+        }
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.delete<{ Params: { id: string } }>(
+    '/favourites/:id',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+        const filter = { _id: user?._id };
+
+        const currentCustomer = await Customer.findOne(filter).lean().exec();
+
+        const currentFavourites = currentCustomer?.favouriteProducts?.map((product) => product.toString()) || [];
+
+        if (currentFavourites.includes(request.params.id) && currentCustomer?.favouriteProducts) {
+          await Customer.findOneAndUpdate(filter, {
+            favouriteProducts: currentFavourites.filter((fav) => fav !== request.params.id),
+          });
+
+          reply.code(201).send({ message: 'remover' });
+        } else {
+          reply.code(500).send({ message: 'No such product in your favourites' });
+        }
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
 
   fastify.post<{ Body: ICustomer }>('/', async function (request, reply) {
     try {

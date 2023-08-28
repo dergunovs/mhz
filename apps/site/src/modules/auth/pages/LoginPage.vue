@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$style.page">
     <LoginForm />
   </div>
 </template>
@@ -22,3 +22,11 @@ useHead({
   title: 'Login',
 });
 </script>
+
+<style module lang="scss">
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
