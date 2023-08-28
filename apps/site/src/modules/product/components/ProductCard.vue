@@ -51,7 +51,7 @@
 
         <div :class="$style.price">{{ props.product.price }} {{ CURRENCY }}</div>
 
-        <UiButton>Add to cart</UiButton>
+        <UiButton @click="mutate(props.product._id)">Add to cart</UiButton>
 
         <div>Delivery in 7 days. No Import Fees Deposit.</div>
       </div>
@@ -63,7 +63,9 @@
 </template>
 
 <script setup lang="ts">
-import { UiButton } from 'mhz-ui';
+import { useQueryClient } from '@tanstack/vue-query';
+
+import { UiButton, toast } from 'mhz-ui';
 import { IProduct } from 'mhz-types';
 import { isAuth } from 'mhz-helpers';
 
@@ -72,12 +74,23 @@ import ProductActionButtons from '@/product/components/ProductActionButtons.vue'
 import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
 import { URL_CATEGORY } from '@/category/constants';
 import { URL_MANUFACTURER } from '@/manufacturer/constants';
+import { addToCart } from '@/customer/services';
+import { API_CUSTOMER_CART } from '@/customer/constants';
 
 interface IProps {
   product: IProduct;
 }
 
 const props = defineProps<IProps>();
+
+const queryClient = useQueryClient();
+
+const { mutate } = addToCart({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
+    toast.success('Added to cart');
+  },
+});
 </script>
 
 <style module lang="scss">

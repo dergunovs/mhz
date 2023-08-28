@@ -20,6 +20,12 @@ export interface IManager extends IEntity {
   dateLoggedIn?: Date;
 }
 
+export interface ICartItem {
+  _id: string;
+  product: IProduct;
+  count: number;
+}
+
 export interface ICustomer extends IEntity {
   firstName?: string;
   lastName?: string;
@@ -27,20 +33,14 @@ export interface ICustomer extends IEntity {
   password: string;
   email: string;
   card?: string;
-  cart?: ICart;
+  cart?: ICartItem[];
   orders?: IOrder[];
-  watchedProducts?: { _id: string; dateCreated: string }[];
+  watchedProducts?: IProduct[];
   favouriteProducts?: IProduct[];
   comparisons?: IComparison[];
   configurations?: IConfiguration[];
   adress?: IAdress;
   dateLoggedIn?: Date;
-}
-
-export interface ICart extends IEntity {
-  products: { product: IProduct; count: number }[];
-  isShared: boolean;
-  user: ICustomer;
 }
 
 export interface IShipment extends IEntity {

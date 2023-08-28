@@ -7,8 +7,10 @@ import { categoryRoutes } from '@/category/routes';
 import { manufacturerRoutes } from '@/manufacturer/routes';
 import { productRoutes } from '@/product/routes';
 import { customerRoutes } from '@/customer/routes';
+import { cartRoutes } from '@/cart/routes';
 
 export const routes: RouteRecordRaw[] = [
+  ...cartRoutes,
   ...authRoutes,
   ...categoryRoutes,
   ...manufacturerRoutes,

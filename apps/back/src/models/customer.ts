@@ -16,7 +16,7 @@ const customerSchema = new Schema<ICustomer>({
     house: { type: String },
     room: { type: String },
   },
-  cart: { type: Schema.Types.ObjectId, ref: 'Cart' },
+  cart: [{ product: { type: Schema.Types.ObjectId, ref: 'Product' }, count: Number }],
   orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
   watchedProducts: [{ _id: { type: Schema.Types.ObjectId, ref: 'Product' }, dateCreated: Date }],
   favouriteProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],

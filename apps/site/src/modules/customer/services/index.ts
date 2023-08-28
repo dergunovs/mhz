@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/vue-query';
 
-import { ICustomer, IProduct } from 'mhz-types';
+import { ICustomer, IProduct, ICartItem } from 'mhz-types';
 
 import {
   API_CUSTOMER,
+  API_CUSTOMER_CART,
   API_CUSTOMER_CURRENT,
   API_CUSTOMER_FAVOURITES,
   API_CUSTOMER_WATCHED,
@@ -66,4 +67,24 @@ export function removeFromFavourites(options: object) {
   }
 
   return useMutation({ mutationKey: [API_CUSTOMER_FAVOURITES], mutationFn: fn, ...options });
+}
+
+export function getCustomerCart(options?: object) {
+  async function fn(): Promise<ICartItem[]> {
+    const { data } = await api.get(API_CUSTOMER_CART);
+
+    return data;
+  }
+
+  return useQuery({ queryKey: [API_CUSTOMER_CART], queryFn: fn, ...options });
+}
+
+export function addToCart(options: object) {
+  async function fn(_id?: string) {
+    const { data } = await api.post(API_CUSTOMER_CART, { _id });
+
+    return data;
+  }
+
+  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: fn, ...options });
 }

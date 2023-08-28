@@ -44,14 +44,14 @@ const isInFavourites = computed(() => favourites.value?.some((fav) => fav._id ==
 const { mutate: add } = addToFavourites({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_FAVOURITES] });
-    toast.success('Successfully added');
+    toast.success('Added to favourites');
   },
 });
 
 const { mutate: remove } = removeFromFavourites({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_FAVOURITES] });
-    toast.success('Successfully removed');
+    toast.success('Removed from favourites');
   },
 });
 </script>

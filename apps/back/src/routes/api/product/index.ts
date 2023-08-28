@@ -12,8 +12,8 @@ export default async function (fastify: IFastifyInstance) {
         sort: request.query.sort,
         dir: request.query.dir,
         populate: [
-          { path: 'category', select: ['_id', 'title'] },
-          { path: 'manufacturer', select: ['_id', 'title'] },
+          { path: 'category', select: '_id title' },
+          { path: 'manufacturer', select: '_id title' },
         ],
         filter: request.query.filter,
       });
@@ -28,8 +28,8 @@ export default async function (fastify: IFastifyInstance) {
     try {
       const product = await Product.findOne({ _id: request.params.id })
         .populate([
-          { path: 'category', select: ['_id', 'title'] },
-          { path: 'manufacturer', select: ['_id', 'title', 'logoUrl', 'country'] },
+          { path: 'category', select: '_id title' },
+          { path: 'manufacturer', select: '_id title logoUrl country' },
         ])
         .lean()
         .exec();

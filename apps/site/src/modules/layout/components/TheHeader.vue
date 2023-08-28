@@ -8,6 +8,7 @@
       <template v-if="isAuth">
         <RouterLink :to="URL_FAVOURITES">Favourites</RouterLink>
         <RouterLink :to="URL_CUSTOMER">Profile</RouterLink>
+        <RouterLink :to="URL_CART">Cart</RouterLink>
         <UiButton @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
       </template>
 
@@ -28,6 +29,7 @@ import { URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { deleteAuthHeader } from '@/common/services/api';
 import { URL_CUSTOMER, URL_FAVOURITES } from '@/customer/constants';
+import { URL_CART } from '@/cart/constants';
 </script>
 
 <style module lang="scss">

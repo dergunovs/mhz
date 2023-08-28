@@ -76,7 +76,7 @@ export async function addProductToWatched(user: IUserToken | null, product: IPro
 
     const currentCustomer = await Customer.findOne(filter).lean().exec();
 
-    const watchedProductsIds = currentCustomer?.watchedProducts?.map((product) => product._id.toString()) || [];
+    const watchedProductsIds = currentCustomer?.watchedProducts?.map((product) => product._id?.toString()) || [];
 
     if (watchedProductsIds.includes(product._id.toString())) return;
 

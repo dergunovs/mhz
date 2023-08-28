@@ -94,7 +94,7 @@ export default async function (fastify: IFastifyInstance) {
 
         const products = await Product.find({ _id: { $in: customer?.favouriteProducts } })
           .select('imageUrls title price category')
-          .populate({ path: 'category', select: ['_id'] })
+          .populate({ path: 'category', select: '_id' })
           .lean()
           .exec();
 
@@ -128,6 +128,74 @@ export default async function (fastify: IFastifyInstance) {
 
           reply.code(201).send({ message: 'added' });
         }
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.get<{ Querystring: IQuery }>(
+    '/cart',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
+        const customer = await Customer.findOne({ _id: user?._id })
+          .lean()
+          .exec();
+
+        const productIds = customer?.cart?.map((item) => item.product._id);
+
+        const products = await Product.find({ _id: { $in: productIds } })
+          .select('imageUrls title price category')
+          .populate({ path: 'category', select: '_id title' })
+          .lean()
+          .exec();
+
+        const cart = products.map((product) => {
+          return {
+            _id: product._id,
+            product,
+            count: customer?.cart?.find((item) => item.product._id?.toString() === product._id.toString())?.count,
+          };
+        });
+
+        reply.code(200).send(cart);
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.post<{ Body: { _id: string } }>(
+    '/cart',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+        const filter = { _id: user?._id };
+
+        const currentCustomer = await Customer.findOne(filter).lean().exec();
+
+        const currentProducts = currentCustomer?.cart?.map((product) => product.product._id?.toString());
+        const currentCart = currentCustomer?.cart || [];
+
+        if (currentProducts?.includes(request.body._id)) {
+          await Customer.findOneAndUpdate(filter, {
+            cart: currentCart.map((item) => {
+              return item.product._id?.toString() === request.body._id
+                ? { product: item.product, count: item.count + 1 }
+                : item;
+            }),
+          });
+        } else {
+          await Customer.findOneAndUpdate(filter, {
+            $push: { cart: { product: request.body._id, count: 1 } },
+          });
+        }
+
+        reply.code(201).send({ message: 'added' });
       } catch (err) {
         reply.code(500).send({ message: err });
       }

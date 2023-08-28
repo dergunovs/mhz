@@ -23,12 +23,14 @@
       </div>
     </div>
 
-    <UiButton>Add to cart</UiButton>
+    <UiButton @click="mutate(props.product._id)">Add to cart</UiButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import { UiButton } from 'mhz-ui';
+import { useQueryClient } from '@tanstack/vue-query';
+
+import { UiButton, toast } from 'mhz-ui';
 import { IProduct } from 'mhz-types';
 import { isAuth } from 'mhz-helpers';
 
@@ -37,6 +39,8 @@ import ProductActionButtons from './ProductActionButtons.vue';
 import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
 import { URL_CATEGORY } from '@/category/constants';
 import { URL_PRODUCT } from '@/product/constants';
+import { addToCart } from '@/customer/services';
+import { API_CUSTOMER_CART } from '@/customer/constants';
 
 interface IProps {
   product: IProduct;
@@ -45,6 +49,15 @@ interface IProps {
 const props = defineProps<IProps>();
 
 const productLink = `${URL_CATEGORY}/${props.product.category._id}${URL_PRODUCT}/${props.product._id}`;
+
+const queryClient = useQueryClient();
+
+const { mutate } = addToCart({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
+    toast.success('Added to cart');
+  },
+});
 </script>
 
 <style module lang="scss">
