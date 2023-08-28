@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: "18.17.0"
       - name: Install
-        run: npm i
+        run: npm ci
       - name: Create Admin .env
         uses: SpicyPizza/create-envfile@v2.0.2
         with:
