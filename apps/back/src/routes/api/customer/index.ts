@@ -113,7 +113,7 @@ export default async function (fastify: IFastifyInstance) {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
         const filter = { _id: user?._id };
 
-        const currentCustomer = await Customer.findOne(filter).lean().exec();
+        const currentCustomer = await Customer.findOne(filter).exec();
 
         const currentFavourites = currentCustomer?.favouriteProducts?.map((product) => product.toString()) || [];
 
@@ -121,12 +121,40 @@ export default async function (fastify: IFastifyInstance) {
           reply.code(500).send({ message: 'Already in your favourites' });
         } else {
           if (currentCustomer?.favouriteProducts) {
-            await Customer.findOneAndUpdate(filter, {
-              favouriteProducts: [...currentFavourites, request.body._id],
-            });
+            await Customer.updateOne(filter, { $push: { favouriteProducts: request.body._id } });
+            await currentCustomer.save();
           }
 
           reply.code(201).send({ message: 'added' });
+        }
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.delete<{ Params: { id: string } }>(
+    '/favourites/:id',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+        const filter = { _id: user?._id };
+
+        const currentCustomer = await Customer.findOne(filter).exec();
+
+        const currentFavourites = currentCustomer?.favouriteProducts?.map((product) => product.toString()) || [];
+
+        if (currentFavourites.includes(request.params.id) && currentCustomer?.favouriteProducts) {
+          await Customer.updateOne(filter, {
+            favouriteProducts: currentFavourites.filter((product) => product !== request.params.id),
+          });
+
+          await currentCustomer.save();
+
+          reply.code(201).send({ message: 'removed' });
+        } else {
+          reply.code(500).send({ message: 'No such product in your favourites' });
         }
       } catch (err) {
         reply.code(500).send({ message: err });
@@ -176,13 +204,13 @@ export default async function (fastify: IFastifyInstance) {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
         const filter = { _id: user?._id };
 
-        const currentCustomer = await Customer.findOne(filter).lean().exec();
+        const currentCustomer = await Customer.findOne(filter).exec();
 
-        const currentProducts = currentCustomer?.cart?.map((product) => product.product._id?.toString());
+        const currentItems = currentCustomer?.cart?.map((product) => product.product._id?.toString());
         const currentCart = currentCustomer?.cart || [];
 
-        if (currentProducts?.includes(request.body._id)) {
-          await Customer.findOneAndUpdate(filter, {
+        if (currentItems?.includes(request.body._id)) {
+          await Customer.updateOne(filter, {
             cart: currentCart.map((item) => {
               return item.product._id?.toString() === request.body._id
                 ? { product: item.product, count: item.count + 1 }
@@ -190,10 +218,12 @@ export default async function (fastify: IFastifyInstance) {
             }),
           });
         } else {
-          await Customer.findOneAndUpdate(filter, {
+          await Customer.updateOne(filter, {
             $push: { cart: { product: request.body._id, count: 1 } },
           });
         }
+
+        await currentCustomer?.save();
 
         reply.code(201).send({ message: 'added' });
       } catch (err) {
@@ -202,26 +232,63 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string } }>(
-    '/favourites/:id',
+  fastify.patch<{ Body: { _id: string; count: string } }>(
+    '/cart',
     { preValidation: [fastify.checkAuth] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
         const filter = { _id: user?._id };
 
-        const currentCustomer = await Customer.findOne(filter).lean().exec();
+        const currentCustomer = await Customer.findOne(filter).exec();
 
-        const currentFavourites = currentCustomer?.favouriteProducts?.map((product) => product.toString()) || [];
+        const currentItems = currentCustomer?.cart?.map((product) => product.product._id?.toString());
+        const currentCart = currentCustomer?.cart || [];
 
-        if (currentFavourites.includes(request.params.id) && currentCustomer?.favouriteProducts) {
-          await Customer.findOneAndUpdate(filter, {
-            favouriteProducts: currentFavourites.filter((fav) => fav !== request.params.id),
+        if (currentItems?.includes(request.body._id)) {
+          await Customer.updateOne(filter, {
+            cart: currentCart.map((item) => {
+              return item.product._id?.toString() === request.body._id
+                ? { product: item.product, count: request.body.count }
+                : item;
+            }),
           });
 
-          reply.code(201).send({ message: 'remover' });
+          await currentCustomer?.save();
+
+          reply.code(201).send({ message: 'updated' });
         } else {
-          reply.code(500).send({ message: 'No such product in your favourites' });
+          reply.code(500).send({ message: 'No such product in your cart' });
+        }
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.delete<{ Params: { id: string } }>(
+    '/cart/:id',
+    { preValidation: [fastify.checkAuth] },
+    async function (request, reply) {
+      try {
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+        const filter = { _id: user?._id };
+
+        const currentCustomer = await Customer.findOne(filter).exec();
+
+        const currentItems = currentCustomer?.cart?.map((product) => product.product._id?.toString());
+        const currentCart = currentCustomer?.cart || [];
+
+        if (currentItems?.includes(request.params.id)) {
+          await Customer.updateOne(filter, {
+            cart: currentCart.filter((item) => item.product._id?.toString() !== request.params.id),
+          });
+
+          await currentCustomer?.save();
+
+          reply.code(201).send({ message: 'removed' });
+        } else {
+          reply.code(500).send({ message: 'No such product in your cart' });
         }
       } catch (err) {
         reply.code(500).send({ message: err });

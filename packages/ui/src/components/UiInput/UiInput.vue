@@ -14,6 +14,7 @@
       v-bind="$attrs"
       ref="input"
       :data-mode="props.mode"
+      :data-center="props.isCenter"
       :data-append-icon="!!props.appendIcon"
       :tabindex="props.mode === 'default' ? '0' : '-1'"
     />
@@ -31,6 +32,7 @@ interface IProps {
   mode?: 'default' | 'select' | 'multiselect';
   appendIcon?: FunctionalComponent;
   isFocus?: boolean;
+  isCenter?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -106,6 +108,10 @@ onMounted(async () => {
 
   &[data-append-icon='true'] {
     padding-right: 40px;
+  }
+
+  &[data-center='true'] {
+    text-align: center;
   }
 }
 

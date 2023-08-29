@@ -20,6 +20,6 @@ const props = defineProps<IProps>();
 .list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
 }
 </style>

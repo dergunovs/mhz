@@ -2,7 +2,10 @@
   <div>
     <PageTitle>{{ title }}</PageTitle>
 
-    <CartItemList v-if="cart" :cart="cart" />
+    <div :class="$style.cart">
+      <CartItemList v-if="cart" :cart="cart" />
+      <CartSummary v-if="cart" :cart="cart" />
+    </div>
   </div>
 </template>
 
@@ -11,6 +14,7 @@ import { useHead } from '@vueuse/head';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import CartItemList from '@/cart/components/CartItemList.vue';
+import CartSummary from '@/cart/components/CartSummary.vue';
 
 import { getCustomerCart } from '@/customer/services';
 
@@ -22,3 +26,10 @@ useHead({
   title,
 });
 </script>
+
+<style module lang="scss">
+.cart {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

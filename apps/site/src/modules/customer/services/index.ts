@@ -88,3 +88,23 @@ export function addToCart(options: object) {
 
   return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: fn, ...options });
 }
+
+export function removeFromCart(options: object) {
+  async function fn(_id?: string) {
+    const { data } = await api.delete(`${API_CUSTOMER_CART}/${_id}`);
+
+    return data;
+  }
+
+  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: fn, ...options });
+}
+
+export function updateCountCart(options: object) {
+  async function fn(product: { count: number; _id?: string }) {
+    const { data } = await api.patch(API_CUSTOMER_CART, product);
+
+    return data;
+  }
+
+  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: fn, ...options });
+}

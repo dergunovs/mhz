@@ -74,18 +74,22 @@ export async function addProductToWatched(user: IUserToken | null, product: IPro
     const filter = { _id: user._id };
     const limit = 6;
 
-    const currentCustomer = await Customer.findOne(filter).lean().exec();
+    const currentCustomer = await Customer.findOne(filter).exec();
 
     const watchedProductsIds = currentCustomer?.watchedProducts?.map((product) => product._id?.toString()) || [];
 
     if (watchedProductsIds.includes(product._id.toString())) return;
 
     if (currentCustomer?.watchedProducts && product._id) {
-      if (currentCustomer.watchedProducts.length === limit) currentCustomer.watchedProducts.pop();
+      if (currentCustomer.watchedProducts.length === limit) {
+        await Customer.updateOne(filter, { $pop: { watchedProducts: 1 } });
+      }
 
-      await Customer.findOneAndUpdate(filter, {
-        watchedProducts: [{ _id: product._id.toString(), dateCreated: new Date() }, ...currentCustomer.watchedProducts],
+      await Customer.updateOne(filter, {
+        $push: { watchedProducts: { _id: product._id.toString(), dateCreated: new Date() } },
       });
     }
+
+    await currentCustomer?.save();
   }
 }

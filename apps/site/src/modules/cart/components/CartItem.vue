@@ -19,30 +19,62 @@
       <ProductActionButtons :product="props.item.product" />
     </div>
 
-    <div :class="$style.price">{{ props.item.product.price }} {{ CURRENCY }}</div>
+    <div :class="$style.price">
+      <div :class="$style.priceComputed">{{ priceComputed }} {{ CURRENCY }}</div>
+      <div>{{ `${props.item.count} x ${props.item.product.price}` }} {{ CURRENCY }}</div>
+    </div>
 
-    <div>
-      <div>Count: {{ props.item.count }}</div>
+    <div :class="$style.actions">
+      <CartItemCount
+        :id="props.item._id"
+        :count="props.item.count"
+        @update="(count) => updateCount({ count, _id: props.item.product._id })"
+      />
 
-      <UiButton layout="plain">Delete</UiButton>
+      <UiButton @click="mutate(props.item._id)" layout="plain">Remove from cart</UiButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { UiButton } from 'mhz-ui';
+import { computed } from 'vue';
+
+import { useQueryClient } from '@tanstack/vue-query';
+
+import { UiButton, toast } from 'mhz-ui';
 import { ICartItem } from 'mhz-types';
+
+import CartItemCount from '@/cart/components/CartItemCount.vue';
+import ProductActionButtons from '@/product/components/ProductActionButtons.vue';
 
 import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
 import { URL_CATEGORY } from '@/category/constants';
 import { URL_PRODUCT } from '@/product/constants';
-import ProductActionButtons from '@/product/components/ProductActionButtons.vue';
+import { removeFromCart, updateCountCart } from '@/customer/services';
+import { API_CUSTOMER_CART } from '@/customer/constants';
 
 interface IProps {
   item: ICartItem;
 }
 
 const props = defineProps<IProps>();
+
+const queryClient = useQueryClient();
+
+const priceComputed = computed(() => props.item.count * props.item.product.price);
+
+const { mutate } = removeFromCart({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
+    toast.success('Removed from cart');
+  },
+});
+
+const { mutate: updateCount } = updateCountCart({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
+  },
+});
 </script>
 
 <style module lang="scss">
@@ -59,8 +91,22 @@ const props = defineProps<IProps>();
 }
 
 .price {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.priceComputed {
   width: 160px;
   font-size: 2rem;
   font-weight: 700;
+  line-height: 1;
+  text-wrap: nowrap;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 </style>
