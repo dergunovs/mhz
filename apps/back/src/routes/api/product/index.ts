@@ -56,6 +56,7 @@ export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Body: IProduct }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
     try {
       const product = new Product(request.body);
+
       await product.save();
       reply.code(201).send({ message: 'created' });
     } catch (err) {

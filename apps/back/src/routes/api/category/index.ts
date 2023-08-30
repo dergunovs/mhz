@@ -22,6 +22,7 @@ export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Params: { id: string } }>('/:id', async function (request, reply) {
     try {
       const category = await Category.findOne({ _id: request.params.id }).lean().exec();
+
       reply.code(200).send(category);
     } catch (err) {
       reply.code(500).send({ message: err });
@@ -40,6 +41,7 @@ export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Body: ICategory }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
     try {
       const category = new Category(request.body);
+
       await category.save();
       reply.code(201).send({ message: 'created' });
     } catch (err) {

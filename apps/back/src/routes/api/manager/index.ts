@@ -61,6 +61,7 @@ export default async function (fastify: IFastifyInstance) {
     async function (request, reply) {
       try {
         const manager = await Manager.findOne({ _id: request.params.id });
+
         await manager?.deleteOne();
 
         reply.code(200).send({ message: 'deleted' });

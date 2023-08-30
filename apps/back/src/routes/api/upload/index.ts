@@ -21,7 +21,8 @@ export default async function (fastify: IFastifyInstance) {
         const filesToUpload = [];
 
         for await (const file of files) {
-          let filename = Date.now() + '-' + file.filename;
+          let filename = `${Date.now()}-${file.filename}`;
+
           await pump(file.file, fs.createWriteStream(path.resolve(`./public/upload/${filename}`)));
 
           if (request.query.width) {
@@ -46,7 +47,8 @@ export default async function (fastify: IFastifyInstance) {
 
         if (!file) return;
 
-        let filename = Date.now() + '-' + file.filename;
+        let filename = `${Date.now()}-${file.filename}`;
+
         await pump(file.file, fs.createWriteStream(path.resolve(`./public/upload/${filename}`)));
 
         if (request.query.width) {

@@ -18,6 +18,7 @@ export default async function (fastify: IFastifyInstance) {
 
         if (!foundUser) {
           reply.code(404).send({ message: 'User not found' });
+
           return;
         }
 
@@ -25,6 +26,7 @@ export default async function (fastify: IFastifyInstance) {
 
         if (!valid) {
           reply.code(401).send({ message: 'Wrong password' });
+
           return;
         }
 
@@ -51,6 +53,7 @@ export default async function (fastify: IFastifyInstance) {
 
       if (managers.length) {
         reply.code(500).send({ message: 'Managers already exists' });
+
         return;
       }
 
@@ -59,6 +62,7 @@ export default async function (fastify: IFastifyInstance) {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const manager = new Manager({ email, password: hashedPassword });
+
       await manager.save();
 
       reply.code(200).send({ message: 'created' });
@@ -70,6 +74,7 @@ export default async function (fastify: IFastifyInstance) {
   fastify.get('/check', async function (request, reply) {
     try {
       await request.jwtVerify();
+
       return reply.code(200).send({ message: 'checked' });
     } catch (err) {
       reply.code(403).send({ message: 'Authorization error' });

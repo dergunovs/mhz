@@ -1,6 +1,6 @@
+import dotenv from 'dotenv';
 import { buildApp, AppOptions } from './app.js';
 
-import dotenv from 'dotenv';
 dotenv.config();
 
 const options: AppOptions = {
