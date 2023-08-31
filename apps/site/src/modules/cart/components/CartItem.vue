@@ -5,7 +5,7 @@
     </div>
 
     <div :class="$style.text">
-      <RouterLink :to="`${URL_CATEGORY}/${props.item.product.category._id}${URL_PRODUCT}/${props.item.product._id}`">
+      <RouterLink :to="`${URL_PRODUCT}/${props.item.product._id}`">
         {{ props.item.product.title }}
       </RouterLink>
 

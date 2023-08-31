@@ -5,7 +5,7 @@
         <ImageLogo :class="$style.logo" />
       </RouterLink>
 
-      <TheSearch />
+      <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" isAdmin />
     </div>
 
     <UiButton @click="logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
@@ -13,15 +13,27 @@
 </template>
 
 <script setup lang="ts">
-import { UiButton } from 'mhz-ui';
+import { ref, watch } from 'vue';
+
+import { UiButton, UiSearch } from 'mhz-ui';
 import { logout } from 'mhz-helpers';
 
-import TheSearch from '@/common/components/TheSearch.vue';
-
 import ImageLogo from '@/common/assets/images/logo.svg';
-import { URL_MAIN } from '@/common/constants';
+import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
 import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';
 import { deleteAuthHeader } from '@/common/services/api';
+import { search } from '@/common/services';
+
+const searchQuery = ref('');
+
+const { data: results, refetch, isSuccess } = search(searchQuery, true);
+
+watch(
+  () => searchQuery.value,
+  () => {
+    if (searchQuery.value.length > 2) refetch();
+  }
+);
 </script>
 
 <style module lang="scss">

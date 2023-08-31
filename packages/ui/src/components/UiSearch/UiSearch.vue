@@ -1,0 +1,140 @@
+<template>
+  <div :class="$style.container" ref="containerElement">
+    <UiInput
+      :modelValue="props.modelValue"
+      @update:modelValue="updateValue"
+      :appendIcon="IconSearch"
+      placeholder="Search"
+      @click="isShowResults = true"
+      @keyup.esc="hideResults"
+    />
+
+    <div v-if="isShowResults && props.modelValue.length" :class="$style.results">
+      <template v-if="props.modelValue.length < 3">Please enter 3 or more symbols</template>
+      <template v-if="props.modelValue.length > 2 && !props.isSuccess">Loading...</template>
+      <template v-if="props.modelValue.length > 2 && !isResults && props.isSuccess">No results</template>
+
+      <template v-if="props.modelValue.length > 2 && isResults">
+        <div v-for="result in props.searchScheme" :key="result.type" :class="$style.resultsInner">
+          <template v-if="results?.[result.type]?.length">
+            <div :class="$style.type">{{ result.type }}:</div>
+
+            <component
+              :is="linkComponent"
+              v-for="item in results[result.type]"
+              :key="item._id"
+              :to="`${result.url}/${item._id}`"
+              @click="clearSearch"
+              :class="$style.link"
+            >
+              <span v-for="label in result.labels" :key="label">
+                {{ item[label as keyof object] }}
+              </span>
+            </component>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { RouterLink } from 'vue-router';
+import { onClickOutside } from '@vueuse/core';
+
+import { debounce } from 'perfect-debounce';
+
+import UiInput from '../UiInput/UiInput.vue';
+import IconSearch from './icons/search.svg?component';
+
+interface IProps {
+  modelValue: string;
+  searchScheme: {
+    type: string;
+    labels: string[];
+    url: string;
+  }[];
+  results?: {
+    [key: string]: { _id?: string }[] | { [key: string]: string }[];
+  };
+  isSuccess: boolean;
+}
+
+const props = defineProps<IProps>();
+
+const emit = defineEmits(['update:modelValue']);
+
+const isShowResults = ref(false);
+
+const debounced = debounce(async (value: string) => {
+  emit('update:modelValue', value);
+}, 300);
+
+async function updateValue(value: string) {
+  await debounced(value);
+}
+
+function hideResults() {
+  isShowResults.value = false;
+}
+
+function clearSearch() {
+  hideResults();
+  emit('update:modelValue', '');
+}
+
+const isResults = computed(() => {
+  return props.results ? Object.values(props.results).reduce((acc, val) => acc + val.length, 0) : false;
+});
+
+const containerElement = ref<HTMLElement>();
+
+onClickOutside(containerElement, () => {
+  hideResults();
+});
+
+declare const window: Window & typeof globalThis & { IS_STORYBOOK: boolean };
+
+const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink));
+</script>
+
+<style module lang="scss">
+.container {
+  position: relative;
+  width: 320px;
+}
+
+.results {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-height: 320px;
+  padding: 16px;
+  margin-top: 8px;
+  overflow-y: auto;
+  background-color: var(--color-white);
+  border-radius: 16px;
+  box-shadow: 0 0 16px -8px var(--color-black-transparent);
+}
+
+.resultsInner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.type {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.link {
+  display: flex;
+  gap: 4px;
+  text-decoration: none;
+}
+</style>

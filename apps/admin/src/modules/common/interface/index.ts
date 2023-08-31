@@ -1,11 +1,7 @@
-import { ICategory, IManager, IManufacturer, IProduct, ICustomer } from 'mhz-types';
+import { IEntity } from 'mhz-types';
 
 export interface ISearchResults {
-  products: IProduct[];
-  categories: ICategory[];
-  manufacturers: IManufacturer[];
-  managers: IManager[];
-  customers: ICustomer[];
+  [key: string]: IEntity[];
 }
 
 export interface IEntitiesCount {

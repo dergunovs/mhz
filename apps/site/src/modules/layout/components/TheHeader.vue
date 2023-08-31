@@ -1,8 +1,12 @@
 <template>
   <header :class="$style.header">
-    <RouterLink :to="URL_MAIN">
-      <ImageLogo :class="$style.logo" />
-    </RouterLink>
+    <div :class="$style.logoAndSearch">
+      <RouterLink :to="URL_MAIN">
+        <ImageLogo :class="$style.logo" />
+      </RouterLink>
+
+      <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" />
+    </div>
 
     <div :class="$style.buttons">
       <template v-if="isAuth">
@@ -21,15 +25,29 @@
 </template>
 
 <script setup lang="ts">
-import { UiButton } from 'mhz-ui';
+import { ref, watch } from 'vue';
+
+import { UiButton, UiSearch } from 'mhz-ui';
 import { isAuth, logout } from 'mhz-helpers';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
-import { URL_MAIN } from '@/common/constants';
+import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { deleteAuthHeader } from '@/common/services/api';
 import { URL_CUSTOMER, URL_FAVOURITES } from '@/customer/constants';
 import { URL_CART } from '@/cart/constants';
+import { search } from '@/common/services';
+
+const searchQuery = ref('');
+
+const { data: results, refetch, isSuccess } = search(searchQuery);
+
+watch(
+  () => searchQuery.value,
+  () => {
+    if (searchQuery.value.length > 2) refetch();
+  }
+);
 </script>
 
 <style module lang="scss">
@@ -44,6 +62,12 @@ import { URL_CART } from '@/cart/constants';
   padding: 16px 64px;
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray);
+}
+
+.logoAndSearch {
+  display: flex;
+  gap: 64px;
+  align-items: center;
 }
 
 .logo {
