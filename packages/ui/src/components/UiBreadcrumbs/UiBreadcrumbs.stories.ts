@@ -21,7 +21,16 @@ const meta = {
   },
 } satisfies Meta<typeof UiBreadcrumbs>;
 
-const argTypes = {};
+const argTypes = {
+  links: {
+    description: '{ url: string; title: string }[]',
+  },
+  color: {
+    control: 'select',
+    options: ['default', 'white'],
+    description: 'default | white',
+  },
+};
 
 type Story = StoryObj<typeof UiBreadcrumbs>;
 

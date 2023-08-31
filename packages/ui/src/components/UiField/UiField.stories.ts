@@ -20,7 +20,7 @@ const meta = {
 } satisfies Meta<typeof UiField>;
 
 const argTypes = {
-  error: { description: 'string | false' },
+  error: { control: 'text', description: 'string | false' },
 };
 
 type Story = StoryObj<typeof UiField>;

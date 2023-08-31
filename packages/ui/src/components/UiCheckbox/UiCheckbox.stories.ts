@@ -19,7 +19,16 @@ const meta = {
 } satisfies Meta<typeof UiCheckbox>;
 
 const argTypes = {
-  error: { control: 'boolean', description: 'string | boolean' },
+  modelValue: {
+    description: 'boolean | string | number',
+  },
+  initialValue: {
+    description: 'boolean | string | number',
+  },
+  error: {
+    control: 'text',
+    description: 'string | boolean',
+  },
 };
 
 type Story = StoryObj<typeof UiCheckbox>;

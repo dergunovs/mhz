@@ -18,7 +18,8 @@ const meta = {
 } satisfies Meta<typeof UiInput>;
 
 const argTypes = {
-  modelValue: { description: 'string | number | null' },
+  modelValue: { description: 'string | number | boolean | null' },
+  mode: { description: 'default | select' },
 };
 
 type Story = StoryObj<typeof UiInput>;

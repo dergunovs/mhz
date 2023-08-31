@@ -29,8 +29,10 @@ const argTypes = {
     options: ['primary', 'secondary'],
     description: 'primary | secondary',
   },
+  file: { description: 'File' },
   files: { description: 'File[]' },
-  error: { control: 'text' },
+  extensions: { description: 'string[]' },
+  error: { control: 'text', description: 'string | false' },
 };
 
 type Story = StoryObj<typeof UiUpload>;

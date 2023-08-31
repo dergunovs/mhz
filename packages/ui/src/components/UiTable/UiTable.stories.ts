@@ -24,7 +24,9 @@ const meta = {
   },
 } satisfies Meta<typeof UiTable>;
 
-const argTypes = {};
+const argTypes = {
+  headers: { description: '{ value: string; title: string }[]' },
+};
 
 type Story = StoryObj<typeof UiTable>;
 

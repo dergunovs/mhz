@@ -20,7 +20,10 @@ const meta = {
   },
 } satisfies Meta<typeof UiSelect>;
 
-const argTypes = {};
+const argTypes = {
+  modelValue: { description: 'string | { _id?: string; title: string }' },
+  options: { description: 'string[] | { _id?: string; title: string }[]' },
+};
 
 type Story = StoryObj<typeof UiSelect>;
 

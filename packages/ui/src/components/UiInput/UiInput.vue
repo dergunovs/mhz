@@ -29,7 +29,7 @@ import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
 interface IProps {
   modelValue?: string | number | boolean | null;
   isDisabled?: boolean;
-  mode?: 'default' | 'select' | 'multiselect';
+  mode?: 'default' | 'select';
   appendIcon?: FunctionalComponent;
   isFocus?: boolean;
   isCenter?: boolean;

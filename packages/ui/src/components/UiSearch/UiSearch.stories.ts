@@ -27,7 +27,10 @@ const meta = {
   },
 } satisfies Meta<typeof UiSearch>;
 
-const argTypes = {};
+const argTypes = {
+  results: { description: '{_id: string, ...}[]' },
+  searchScheme: { description: '{ type: string; labels: string[]; url: string }[]' },
+};
 
 type Story = StoryObj<typeof UiSearch>;
 

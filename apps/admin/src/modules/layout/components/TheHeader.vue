@@ -5,7 +5,7 @@
         <ImageLogo :class="$style.logo" />
       </RouterLink>
 
-      <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" isAdmin />
+      <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" />
     </div>
 
     <UiButton @click="logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
