@@ -28,12 +28,11 @@
 import { ref, watch } from 'vue';
 
 import { UiButton, UiSearch } from 'mhz-ui';
-import { isAuth, logout } from 'mhz-helpers';
+import { isAuth, logout, deleteAuthHeader } from 'mhz-helpers';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
-import { deleteAuthHeader } from '@/common/services/api';
 import { URL_CUSTOMER, URL_FAVOURITES } from '@/customer/constants';
 import { URL_CART } from '@/cart/constants';
 import { search } from '@/common/services';

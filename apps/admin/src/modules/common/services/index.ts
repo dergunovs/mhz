@@ -1,10 +1,9 @@
 import { Ref } from 'vue';
 
-import { useQuery, useMutation } from '@tanstack/vue-query';
+import { api, useQuery, useMutation } from 'mhz-helpers';
 
 import { ISearchResults, IEntitiesCount } from '@/common/interface';
 import { API_UPLOAD, API_UPLOAD_SINGLE, API_SEARCH, API_COUNT } from '@/common/constants';
-import { api } from '@/common/services/api';
 
 export function search(query: Ref<string>, isAdmin?: boolean) {
   async function fn(): Promise<ISearchResults> {

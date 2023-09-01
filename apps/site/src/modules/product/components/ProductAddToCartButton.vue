@@ -3,10 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { UiButton, toast } from 'mhz-ui';
-import { isAuth } from 'mhz-helpers';
+import { isAuth, useQueryClient } from 'mhz-helpers';
 
 import { addToCart } from '@/customer/services';
 import { API_CUSTOMER_CART } from '@/customer/constants';

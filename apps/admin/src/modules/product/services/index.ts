@@ -1,11 +1,9 @@
 import { Ref, ComputedRef } from 'vue';
-import { useQuery, useMutation } from '@tanstack/vue-query';
 
 import { IProduct } from 'mhz-types';
-import { IPageQuery } from 'mhz-helpers';
+import { api, useQuery, useMutation, IPageQuery } from 'mhz-helpers';
 
 import { API_PRODUCT } from '@/product/constants';
-import { api } from '@/common/services/api';
 
 export function getProducts(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: IProduct[]; total: number }> {

@@ -1,11 +1,9 @@
 import { Ref, ComputedRef } from 'vue';
-import { useQuery, useMutation } from '@tanstack/vue-query';
 
 import { ICategory } from 'mhz-types';
-import { IPageQuery } from 'mhz-helpers';
+import { api, useQuery, useMutation, IPageQuery } from 'mhz-helpers';
 
 import { API_CATEGORY } from '@/category/constants';
-import { api } from '@/common/services/api';
 
 export function getCategories(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: ICategory[]; total: number }> {

@@ -1,6 +1,11 @@
 <template>
   <div :class="$style.manufacturer">
-    <img :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`" :class="$style.image" height="128" loading="lazy" />
+    <img
+      :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`"
+      :class="$style.image"
+      height="64"
+      crossorigin="anonymous"
+    />
 
     <div>Country: {{ props.manufacturer.country }}</div>
 
@@ -29,6 +34,6 @@ const props = defineProps<IProps>();
 
 .image {
   width: fit-content;
-  height: 128px;
+  height: 64px;
 }
 </style>

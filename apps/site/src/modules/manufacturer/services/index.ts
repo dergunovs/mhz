@@ -1,10 +1,8 @@
 import { Ref, ComputedRef } from 'vue';
-import { useQuery } from '@tanstack/vue-query';
 
-import { IPageQuery } from 'mhz-helpers';
 import { IManufacturer } from 'mhz-types';
+import { api, useQuery, IPageQuery } from 'mhz-helpers';
 
-import { api } from '@/common/services/api';
 import { API_MANUFACTURER } from '@/manufacturer/constants';
 
 export function getManufacturers(query: Ref<IPageQuery | number>) {

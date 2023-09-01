@@ -4,7 +4,7 @@
 
     <CategoryCard v-if="category" :category="category" />
 
-    <h2>Products</h2>
+    <h2 v-if="products?.length">Products</h2>
 
     <div v-if="products?.length" :class="$style.products">
       <ProductCatalogList :products="products" />

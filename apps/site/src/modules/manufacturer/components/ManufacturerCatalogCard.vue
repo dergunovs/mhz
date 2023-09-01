@@ -6,6 +6,7 @@
         :class="$style.image"
         :alt="props.manufacturer.title"
         loading="lazy"
+        crossorigin="anonymous"
       />
     </div>
 

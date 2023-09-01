@@ -19,10 +19,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { IProduct } from 'mhz-types';
 import { toast } from 'mhz-ui';
+import { useQueryClient } from 'mhz-helpers';
 
 import IconComparison from '@/product/icons/comparison.svg';
 import IconFavourites from '@/product/icons/favourites.svg';

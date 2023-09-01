@@ -1,11 +1,9 @@
 import { Ref } from 'vue';
-import { useQuery } from '@tanstack/vue-query';
 
 import { ICustomer } from 'mhz-types';
-import { IPageQuery } from 'mhz-helpers';
+import { api, useQuery, IPageQuery } from 'mhz-helpers';
 
 import { API_CUSTOMER } from '@/customer/constants';
-import { api } from '@/common/services/api';
 
 export function getCustomers(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: ICustomer[]; total: number }> {

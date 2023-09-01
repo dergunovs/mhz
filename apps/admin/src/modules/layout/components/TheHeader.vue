@@ -16,12 +16,11 @@
 import { ref, watch } from 'vue';
 
 import { UiButton, UiSearch } from 'mhz-ui';
-import { logout } from 'mhz-helpers';
+import { logout, deleteAuthHeader } from 'mhz-helpers';
 
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
 import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';
-import { deleteAuthHeader } from '@/common/services/api';
 import { search } from '@/common/services';
 
 const searchQuery = ref('');

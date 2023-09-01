@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.cart">
     <div>
-      <img :src="`${PATH_UPLOAD}/${props.item.product.imageUrls[0]}`" width="128" />
+      <img :src="`${PATH_UPLOAD}/${props.item.product.imageUrls[0]}`" width="128" crossorigin="anonymous" />
     </div>
 
     <div :class="$style.text">
@@ -39,10 +39,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { UiButton, toast } from 'mhz-ui';
 import { ICartItem } from 'mhz-types';
+import { useQueryClient } from 'mhz-helpers';
 
 import CartItemCount from '@/cart/components/CartItemCount.vue';
 import ProductActionButtons from '@/product/components/ProductActionButtons.vue';

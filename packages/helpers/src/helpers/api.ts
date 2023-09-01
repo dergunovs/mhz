@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { toast } from 'mhz-ui';
-
-axios.defaults.baseURL = import.meta.env.VITE_API;
-
 export const api = axios;
+
+export function setBaseURL(url: string) {
+  axios.defaults.baseURL = url;
+}
 
 export function setAuthHeader(token: string) {
   api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -15,7 +15,5 @@ export function deleteAuthHeader() {
 }
 
 export function handleError(error: unknown) {
-  if (axios.isAxiosError(error)) {
-    toast.error(error.response?.data.message);
-  }
+  return axios.isAxiosError(error) ? error.response?.data.message : '';
 }

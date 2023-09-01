@@ -1,5 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/vue-query';
-
+import { api, useMutation, useQuery } from 'mhz-helpers';
 import { ICustomer, IProduct, ICartItem } from 'mhz-types';
 
 import {
@@ -9,7 +8,6 @@ import {
   API_CUSTOMER_FAVOURITES,
   API_CUSTOMER_WATCHED,
 } from '@/customer/constants';
-import { api } from '@/common/services/api';
 
 export function getCurrentCustomer() {
   async function fn(): Promise<ICustomer> {

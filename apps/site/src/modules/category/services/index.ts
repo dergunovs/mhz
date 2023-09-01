@@ -1,10 +1,8 @@
 import { Ref, ComputedRef } from 'vue';
-import { useQuery } from '@tanstack/vue-query';
 
-import { IPageQuery } from 'mhz-helpers';
 import { ICategory } from 'mhz-types';
+import { api, useQuery, IPageQuery } from 'mhz-helpers';
 
-import { api } from '@/common/services/api';
 import { API_CATEGORY } from '@/category/constants';
 
 export function getCategories(query: Ref<IPageQuery | number>) {

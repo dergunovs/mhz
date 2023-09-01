@@ -1,10 +1,12 @@
 import { createApp } from 'vue';
 import { createHead } from '@vueuse/head';
 
+import { VueQueryPlugin, vueQueryOptions, setBaseURL } from 'mhz-helpers';
+import { toast } from 'mhz-ui';
+
 import App from './App.vue';
 
 import router from '@/common/router';
-import { VueQueryPlugin, vueQueryOptions } from '@/common/plugins/vue-query';
 
 import '@/common/assets/styles/main.scss';
 
@@ -13,6 +15,8 @@ const head = createHead();
 
 app.use(router);
 app.use(head);
-app.use(VueQueryPlugin, vueQueryOptions);
+app.use(VueQueryPlugin, vueQueryOptions(toast));
+
+setBaseURL(import.meta.env.VITE_API);
 
 app.mount('#app');

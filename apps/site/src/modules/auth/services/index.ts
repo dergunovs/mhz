@@ -1,9 +1,7 @@
-import { useMutation, useQuery } from '@tanstack/vue-query';
+import { api, useMutation, useQuery } from 'mhz-helpers';
 
 import { ILoginFormData } from '@/auth/interface';
 import { API_CHECK_AUTH, API_LOGIN } from '@/auth/constants';
-
-import { api } from '@/common/services/api';
 
 export function checkAuth(options: object) {
   async function fn() {

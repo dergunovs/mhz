@@ -1,10 +1,20 @@
 <template>
   <div>
+    <ImageLogo />
+
     <h2>Add first manager</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
+      <UiField label="First name" isRequired :error="error('firstName')">
+        <UiInput v-model="formData.firstName" isFocus />
+      </UiField>
+
+      <UiField label="Last name" isRequired :error="error('lastName')">
+        <UiInput v-model="formData.lastName" />
+      </UiField>
+
       <UiField label="E-mail" isRequired :error="error('email')">
-        <UiInput v-model="formData.email" isFocus />
+        <UiInput v-model="formData.email" />
       </UiField>
 
       <UiField label="Password" isRequired :error="error('password')">
@@ -23,12 +33,15 @@ import { useRouter } from 'vue-router';
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email } from 'mhz-helpers';
 
+import ImageLogo from '@/layout/icons/logo.svg';
 import { setup } from '@/auth/services';
 import { URL_LOGIN } from '@/auth/constants';
 
 const router = useRouter();
 
 const formData = ref({
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
 });
@@ -42,6 +55,8 @@ const { mutate } = setup({
 
 const rules = computed(() => {
   return {
+    firstName: required,
+    lastName: required,
     email: [required, email],
     password: required,
   };

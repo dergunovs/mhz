@@ -35,12 +35,10 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { UiField, UiInput, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { countries } from 'mhz-countries';
-import { clone, useValidator, required } from 'mhz-helpers';
+import { clone, useValidator, required, useQueryClient } from 'mhz-helpers';
 
 import ImagePreview from '@/common/components/ImagePreview.vue';
 import FormButtons from '@/common/components/FormButtons.vue';

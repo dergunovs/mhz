@@ -8,6 +8,7 @@
         :alt="props.product.title"
         :title="props.product.title"
         loading="lazy"
+        crossorigin="anonymous"
       />
     </RouterLink>
 

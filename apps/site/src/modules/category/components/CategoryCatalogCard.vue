@@ -6,6 +6,8 @@
         :class="$style.image"
         :alt="props.category.title"
         loading="lazy"
+        height="100"
+        crossorigin="anonymous"
       />
     </div>
 
@@ -46,7 +48,7 @@ const props = defineProps<IProps>();
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100px;
 }
 
 .image {

@@ -1,11 +1,9 @@
 import { ComputedRef, Ref } from 'vue';
-import { useMutation, useQuery } from '@tanstack/vue-query';
 
 import { IManufacturer } from 'mhz-types';
-import { IPageQuery } from 'mhz-helpers';
+import { api, useMutation, useQuery, IPageQuery } from 'mhz-helpers';
 
 import { API_MANUFACTURER } from '@/manufacturer/constants';
-import { api } from '@/common/services/api';
 
 export function getManufacturers(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: IManufacturer[]; total: number }> {

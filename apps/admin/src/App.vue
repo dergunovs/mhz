@@ -9,13 +9,12 @@ import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useHead } from '@vueuse/head';
 
-import { getCookieToken, setAuth } from 'mhz-helpers';
+import { getCookieToken, setAuth, setAuthHeader } from 'mhz-helpers';
 
 import LayoutDefault from '@/layout/components/LayoutDefault.vue';
 import LayoutEmpty from '@/layout/components/LayoutEmpty.vue';
 
 import { checkAuth } from '@/auth/services';
-import { setAuthHeader } from '@/common/services/api';
 import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';
 
 const route = useRoute();

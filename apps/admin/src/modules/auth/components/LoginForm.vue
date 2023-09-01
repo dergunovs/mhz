@@ -1,5 +1,7 @@
 <template>
   <div>
+    <ImageLogo />
+
     <h2>Login</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
@@ -20,11 +22,11 @@
 import { ref, computed } from 'vue';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
-import { useValidator, required, email, useAuth } from 'mhz-helpers';
+import { useValidator, required, email, useAuth, setAuthHeader } from 'mhz-helpers';
 
+import ImageLogo from '@/layout/icons/logo.svg';
 import { login } from '@/auth/services';
 import { TOKEN_NAME } from '@/auth/constants';
-import { setAuthHeader } from '@/common/services/api';
 import { URL_MAIN } from '@/common/constants';
 
 const { auth } = useAuth();

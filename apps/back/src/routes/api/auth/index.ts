@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { IManager } from 'mhz-types';
 
 import { IUserToken, IFastifyInstance, TUserRole } from '../../../interface/index.js';
 import Manager from '../../../models/manager.js';
@@ -22,9 +23,9 @@ export default async function (fastify: IFastifyInstance) {
           return;
         }
 
-        const valid = bcrypt.compare(password, foundUser.password);
+        const isValid = await bcrypt.compare(password, foundUser.password);
 
-        if (!valid) {
+        if (!isValid) {
           reply.code(401).send({ message: 'Wrong password' });
 
           return;
@@ -47,7 +48,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: { email: string; password: string } }>('/setup', async function (request, reply) {
+  fastify.post<{ Body: IManager }>('/setup', async function (request, reply) {
     try {
       const managers = await Manager.find().lean().exec();
 
@@ -57,11 +58,10 @@ export default async function (fastify: IFastifyInstance) {
         return;
       }
 
-      const { email, password } = request.body;
+      const manager = new Manager(request.body);
+      const hashedPassword = await bcrypt.hash(manager.password, 10);
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      const manager = new Manager({ email, password: hashedPassword });
+      manager.password = hashedPassword;
 
       await manager.save();
 

@@ -69,11 +69,9 @@
 import { ref, computed, onMounted, watch, toRaw } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { useQueryClient } from '@tanstack/vue-query';
-
 import { UiField, UiInput, UiCheckbox, toast, UiEditor, UiSelect, UiUpload } from 'mhz-ui';
 import { ICategory, IProduct, IManufacturer, ICategoryField } from 'mhz-types';
-import { clone, usePagination, useInfiniteScroll, useValidator, required } from 'mhz-helpers';
+import { clone, usePagination, useInfiniteScroll, useValidator, required, useQueryClient } from 'mhz-helpers';
 
 import ProductFieldsForm from '@/product/components/ProductFieldsForm.vue';
 import ImagePreview from '@/common/components/ImagePreview.vue';

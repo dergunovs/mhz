@@ -2,18 +2,19 @@
   <div>
     <div :class="$style.top">
       <div :class="$style.image">
-        <img :src="`${PATH_UPLOAD}/${product.imageUrls[0]}`" :alt="product.title" loading="lazy" />
+        <img :src="`${PATH_UPLOAD}/${product.imageUrls[0]}`" :alt="product.title" crossorigin="anonymous" />
       </div>
 
       <div :class="$style.fields">
         <div :class="$style.fieldsTop">
-          <RouterLink :to="`${URL_MANUFACTURER}/${props.product.manufacturer._id}`">
+          <RouterLink :to="`${URL_MANUFACTURER}/${props.product.manufacturer._id}`" :class="$style.logoLink">
             <img
               :src="`${PATH_UPLOAD}/${props.product.manufacturer.logoUrl}`"
-              width="160"
+              height="64"
               :alt="props.product.manufacturer.title"
               :title="props.product.manufacturer.title"
-              loading="lazy"
+              :class="$style.logo"
+              crossorigin="anonymous"
             />
           </RouterLink>
 
@@ -100,6 +101,15 @@ const props = defineProps<IProps>();
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.logoLink {
+  height: 64px;
+}
+
+.logo {
+  width: fit-content;
+  height: 64px;
 }
 
 .field {

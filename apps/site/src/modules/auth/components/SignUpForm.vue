@@ -1,8 +1,18 @@
 <template>
   <div>
+    <ImageLogo />
+
     <h2>Sign up</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
+      <UiField label="First name" isRequired :error="error('firstName')">
+        <UiInput v-model="formData.firstName" isFocus />
+      </UiField>
+
+      <UiField label="Last name" isRequired :error="error('lastName')">
+        <UiInput v-model="formData.lastName" />
+      </UiField>
+
       <UiField label="E-mail" isRequired :error="error('email')">
         <UiInput v-model="formData.email" isFocus />
       </UiField>
@@ -23,12 +33,15 @@ import { useRouter } from 'vue-router';
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email } from 'mhz-helpers';
 
+import ImageLogo from '@/layout/icons/logo.svg';
 import { postCustomer } from '@/customer/services';
 import { URL_LOGIN } from '@/auth/constants';
 
 const router = useRouter();
 
 const formData = ref({
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
 });
@@ -42,6 +55,8 @@ const { mutate } = postCustomer({
 
 const rules = computed(() => {
   return {
+    firstName: required,
+    lastName: required,
     email: [required, email],
     password: required,
   };
