@@ -11,7 +11,7 @@ const pump = util.promisify(pipeline);
 export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Querystring: { width: string } }>(
     '/',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       try {
         const files = request.files();
@@ -40,7 +40,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Querystring: { width: string } }>(
     '/single',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       try {
         const file = await request.file();
@@ -64,7 +64,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: { id: string } }>(
     '/:id',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       try {
         deleteFile(request.params.id);

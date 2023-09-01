@@ -44,16 +44,20 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.patch<{ Body: IProduct; Params: { id: string } }>('/:id', async function (request, reply) {
-    try {
-      await Product.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
-      reply.code(200).send({ message: 'updated' });
-    } catch (err) {
-      reply.code(500).send({ message: err });
+  fastify.patch<{ Body: IProduct; Params: { id: string } }>(
+    '/:id',
+    { preValidation: [fastify.onlyManager] },
+    async function (request, reply) {
+      try {
+        await Product.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
+        reply.code(200).send({ message: 'updated' });
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
     }
-  });
+  );
 
-  fastify.post<{ Body: IProduct }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
+  fastify.post<{ Body: IProduct }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
     try {
       const product = new Product(request.body);
 
@@ -66,7 +70,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: { id: string } }>(
     '/:id',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       try {
         const product = await Product.findOneAndDelete({ _id: request.params.id });

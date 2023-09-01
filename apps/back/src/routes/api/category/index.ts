@@ -29,16 +29,20 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.patch<{ Body: ICategory; Params: { id: string } }>('/:id', async function (request, reply) {
-    try {
-      await Category.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
-      reply.code(200).send({ message: 'updated' });
-    } catch (err) {
-      reply.code(500).send({ message: err });
+  fastify.patch<{ Body: ICategory; Params: { id: string } }>(
+    '/:id',
+    { preValidation: [fastify.onlyManager] },
+    async function (request, reply) {
+      try {
+        await Category.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
+        reply.code(200).send({ message: 'updated' });
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
     }
-  });
+  );
 
-  fastify.post<{ Body: ICategory }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
+  fastify.post<{ Body: ICategory }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
     try {
       const category = new Category(request.body);
 
@@ -51,7 +55,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: { id: string } }>(
     '/:id',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       try {
         const category = await Category.findOne({ _id: request.params.id });

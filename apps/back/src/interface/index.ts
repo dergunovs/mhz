@@ -2,7 +2,8 @@ import { FastifyInstance } from 'fastify';
 import { ObjectId } from 'mongoose';
 
 export interface IFastifyInstance extends FastifyInstance {
-  checkAuth: () => void;
+  onlyManager: () => void;
+  onlyCustomer: () => void;
 }
 
 export interface IQuery {

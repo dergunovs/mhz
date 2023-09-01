@@ -6,23 +6,27 @@ import Customer from '../../../models/customer.js';
 import { IFastifyInstance } from '../../../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: { search: string } }>('/count', async function (request, reply) {
-    let count = {};
+  fastify.get<{ Querystring: { search: string } }>(
+    '/count',
+    { preValidation: [fastify.onlyManager] },
+    async function (request, reply) {
+      let count = {};
 
-    try {
-      await Promise.all([
-        await Product.estimatedDocumentCount(),
-        await Category.estimatedDocumentCount(),
-        await Manufacturer.estimatedDocumentCount(),
-        await Manager.estimatedDocumentCount(),
-        await Customer.estimatedDocumentCount(),
-      ]).then(([products, categories, manufacturers, managers, customers]) => {
-        count = { products, categories, manufacturers, managers, customers };
-      });
+      try {
+        await Promise.all([
+          await Product.estimatedDocumentCount(),
+          await Category.estimatedDocumentCount(),
+          await Manufacturer.estimatedDocumentCount(),
+          await Manager.estimatedDocumentCount(),
+          await Customer.estimatedDocumentCount(),
+        ]).then(([products, categories, manufacturers, managers, customers]) => {
+          count = { products, categories, manufacturers, managers, customers };
+        });
 
-      reply.code(200).send(count);
-    } catch (err) {
-      reply.code(500).send({ message: err });
+        reply.code(200).send(count);
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
     }
-  });
+  );
 }

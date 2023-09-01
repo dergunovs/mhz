@@ -7,7 +7,7 @@ import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { decodeToken, paginate } from '../../../helpers/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
+  fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
     try {
       const { data, total } = await paginate(Customer, {
         page: request.query.page,
@@ -21,7 +21,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.get('/current', { preValidation: [fastify.checkAuth] }, async function (request, reply) {
+  fastify.get('/current', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
     try {
       const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
@@ -38,7 +38,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Querystring: IQuery }>(
     '/watched',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -83,7 +83,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Querystring: IQuery }>(
     '/favourites',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -107,7 +107,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: { _id: string } }>(
     '/favourites',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -135,7 +135,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: { id: string } }>(
     '/favourites/:id',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -164,7 +164,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Querystring: IQuery }>(
     '/cart',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -198,7 +198,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: { _id: string } }>(
     '/cart',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -234,7 +234,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: { _id: string; count: string } }>(
     '/cart',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -268,7 +268,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: { id: string } }>(
     '/cart/:id',
-    { preValidation: [fastify.checkAuth] },
+    { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
