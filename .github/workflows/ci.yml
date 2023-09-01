@@ -29,7 +29,7 @@ jobs:
           envkey_VITE_API: ${{ secrets.ENV_VITE_API }}
           envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
           envkey_VITE_VERSION: ${npm_package_version}
-          envkey_VITE_CURRENCY: ₽
+          envkey_VITE_CURRENCY: ${{ secrets.CURRENCY }}
           directory: apps/site/
       - name: Create Backend .env
         uses: SpicyPizza/create-envfile@v2.0.2
@@ -37,8 +37,8 @@ jobs:
           envkey_DATABASE: ${{ secrets.DATABASE }}
           envkey_SECRET: ${{ secrets.SECRET }}
           envkey_PORT: ${{ secrets.PORT }}
-          envkey_SITE_URL: https://9000mhz.ru
-          envkey_ADMIN_URL: https://admin.9000mhz.ru
+          envkey_SITE_URL: ${{ secrets.SITE_URL }}
+          envkey_ADMIN_URL: ${{ secrets.ADMIN_URL }}
           directory: apps/back/
       - name: Build
         run: npm run build
