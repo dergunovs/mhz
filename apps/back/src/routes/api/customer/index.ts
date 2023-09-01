@@ -21,6 +21,28 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
+  fastify.get<{ Params: { id: string } }>(
+    '/:id',
+    { preValidation: [fastify.onlyManager] },
+    async function (request, reply) {
+      try {
+        const customer = await Customer.findOne({ _id: request.params.id })
+          .populate([
+            { path: 'cart.product', select: '_id title' },
+            { path: 'favouriteProducts', select: '_id title' },
+            { path: 'watchedProducts.product', select: '_id title' },
+          ])
+          .select('-password -__v')
+          .lean()
+          .exec();
+
+        reply.code(200).send(customer);
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
   fastify.get('/current', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
     try {
       const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -36,74 +58,66 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.get<{ Querystring: IQuery }>(
-    '/watched',
-    { preValidation: [fastify.onlyCustomer] },
-    async function (request, reply) {
-      try {
-        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+  fastify.get('/watched', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
+    try {
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-        const customer = await Customer.findOne({ _id: user?._id })
-          .lean()
-          .exec();
+      const customer = await Customer.findOne({ _id: user?._id })
+        .lean()
+        .exec();
 
-        const customerProducts = customer?.watchedProducts
-          ?.sort((a, b) => Number(b.dateCreated) - Number(a.dateCreated))
-          .map((product) => product._id);
+      const customerProducts = customer?.watchedProducts
+        ?.sort((a, b) => Number(b.dateCreated) - Number(a.dateCreated))
+        .map((item) => item.product._id);
 
-        const products = await Product.aggregate([
-          { $match: { _id: { $in: customerProducts } } },
-          {
-            $lookup: {
-              from: 'categories',
-              localField: 'category',
-              foreignField: '_id',
-              as: 'category',
-            },
+      const products = await Product.aggregate([
+        { $match: { _id: { $in: customerProducts } } },
+        {
+          $lookup: {
+            from: 'categories',
+            localField: 'category',
+            foreignField: '_id',
+            as: 'category',
           },
-          { $unwind: '$category' },
-          {
-            $project: {
-              imageUrls: 1,
-              title: 1,
-              price: 1,
-              category: { _id: '$category._id' },
-              index: { $indexOfArray: [customerProducts, '$_id'] },
-            },
+        },
+        { $unwind: '$category' },
+        {
+          $project: {
+            imageUrls: 1,
+            title: 1,
+            price: 1,
+            category: { _id: '$category._id' },
+            index: { $indexOfArray: [customerProducts, '$_id'] },
           },
-          { $sort: { index: 1 } },
-        ]);
+        },
+        { $sort: { index: 1 } },
+      ]);
 
-        reply.code(200).send(products);
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send(products);
+    } catch (err) {
+      reply.code(500).send({ message: err });
     }
-  );
+  });
 
-  fastify.get<{ Querystring: IQuery }>(
-    '/favourites',
-    { preValidation: [fastify.onlyCustomer] },
-    async function (request, reply) {
-      try {
-        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+  fastify.get('/favourites', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
+    try {
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-        const customer = await Customer.findOne({ _id: user?._id })
-          .lean()
-          .exec();
+      const customer = await Customer.findOne({ _id: user?._id })
+        .lean()
+        .exec();
 
-        const products = await Product.find({ _id: { $in: customer?.favouriteProducts } })
-          .select('imageUrls title price category')
-          .populate({ path: 'category', select: '_id' })
-          .lean()
-          .exec();
+      const products = await Product.find({ _id: { $in: customer?.favouriteProducts } })
+        .select('imageUrls title price category')
+        .populate({ path: 'category', select: '_id' })
+        .lean()
+        .exec();
 
-        reply.code(200).send(products);
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send(products);
+    } catch (err) {
+      reply.code(500).send({ message: err });
     }
-  );
+  });
 
   fastify.post<{ Body: { _id: string } }>(
     '/favourites',
@@ -162,39 +176,35 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.get<{ Querystring: IQuery }>(
-    '/cart',
-    { preValidation: [fastify.onlyCustomer] },
-    async function (request, reply) {
-      try {
-        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+  fastify.get('/cart', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
+    try {
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-        const customer = await Customer.findOne({ _id: user?._id })
-          .lean()
-          .exec();
+      const customer = await Customer.findOne({ _id: user?._id })
+        .lean()
+        .exec();
 
-        const productIds = customer?.cart?.map((item) => item.product._id);
+      const productIds = customer?.cart?.map((item) => item.product._id);
 
-        const products = await Product.find({ _id: { $in: productIds } })
-          .select('imageUrls title price category')
-          .populate({ path: 'category', select: '_id title' })
-          .lean()
-          .exec();
+      const products = await Product.find({ _id: { $in: productIds } })
+        .select('imageUrls title price category')
+        .populate({ path: 'category', select: '_id title' })
+        .lean()
+        .exec();
 
-        const cart = products.map((product) => {
-          return {
-            _id: product._id,
-            product,
-            count: customer?.cart?.find((item) => item.product._id?.toString() === product._id.toString())?.count,
-          };
-        });
+      const cart = products.map((product) => {
+        return {
+          _id: product._id,
+          product,
+          count: customer?.cart?.find((item) => item.product._id?.toString() === product._id.toString())?.count,
+        };
+      });
 
-        reply.code(200).send(cart);
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send(cart);
+    } catch (err) {
+      reply.code(500).send({ message: err });
     }
-  );
+  });
 
   fastify.post<{ Body: { _id: string } }>(
     '/cart',

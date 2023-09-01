@@ -18,7 +18,7 @@ const customerSchema = new Schema<ICustomer>({
   },
   cart: [{ product: { type: Schema.Types.ObjectId, ref: 'Product' }, count: Number }],
   orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
-  watchedProducts: [{ _id: { type: Schema.Types.ObjectId, ref: 'Product' }, dateCreated: Date }],
+  watchedProducts: [{ product: { type: Schema.Types.ObjectId, ref: 'Product' }, dateCreated: Date }],
   favouriteProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
   comparisons: [{ type: Schema.Types.ObjectId, ref: 'Comparison' }],
   configurations: [{ type: Schema.Types.ObjectId, ref: 'Configuration' }],

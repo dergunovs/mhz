@@ -14,8 +14,8 @@ export default async function (fastify: IFastifyInstance) {
 
         const foundUser =
           request.body.role === 'manager'
-            ? await Manager.findOne({ email }).lean().exec()
-            : await Customer.findOne({ email }).lean().exec();
+            ? await Manager.findOne({ email }).exec()
+            : await Customer.findOne({ email }).exec();
 
         if (!foundUser) {
           reply.code(404).send({ message: 'User not found' });
@@ -40,6 +40,9 @@ export default async function (fastify: IFastifyInstance) {
         };
 
         const token = fastify.jwt.sign(user, { expiresIn: '9h' });
+
+        foundUser.dateLoggedIn = new Date();
+        foundUser.save();
 
         reply.code(200).send({ ...user, token });
       } catch (err) {

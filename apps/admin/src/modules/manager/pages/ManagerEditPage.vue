@@ -2,6 +2,10 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
+    <div v-if="manager?.dateLoggedIn" :class="$style.login">
+      <b>Login date:</b> {{ formatDateTime(manager?.dateLoggedIn) }}
+    </div>
+
     <ManagerForm v-if="manager" :manager="manager" />
   </div>
 </template>
@@ -10,6 +14,8 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
+
+import { formatDateTime } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ManagerForm from '@/manager/components/ManagerForm.vue';
@@ -36,3 +42,9 @@ useHead({
   title,
 });
 </script>
+
+<style module lang="scss">
+.login {
+  text-align: right;
+}
+</style>

@@ -26,6 +26,12 @@ export interface ICartItem {
   count: number;
 }
 
+export interface IProductWatched {
+  _id: string;
+  product: IProduct;
+  dateCreated: Date;
+}
+
 export interface ICustomer extends IEntity {
   firstName?: string;
   lastName?: string;
@@ -35,7 +41,7 @@ export interface ICustomer extends IEntity {
   card?: string;
   cart?: ICartItem[];
   orders?: IOrder[];
-  watchedProducts?: IProduct[];
+  watchedProducts?: IProductWatched[];
   favouriteProducts?: IProduct[];
   comparisons?: IComparison[];
   configurations?: IConfiguration[];

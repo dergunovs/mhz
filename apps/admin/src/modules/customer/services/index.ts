@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import { Ref, ComputedRef } from 'vue';
 
 import { ICustomer } from 'mhz-types';
 import { api, useQuery, IPageQuery } from 'mhz-helpers';
@@ -22,4 +22,14 @@ export function getCustomers(query: Ref<IPageQuery | number>) {
   }
 
   return useQuery({ queryKey: [API_CUSTOMER, query], queryFn: fn });
+}
+
+export function getCustomer(id: ComputedRef<string>) {
+  async function fn(): Promise<ICustomer> {
+    const { data } = await api.get(`${API_CUSTOMER}/${id.value}`);
+
+    return data;
+  }
+
+  return useQuery({ queryKey: [API_CUSTOMER, id], queryFn: fn });
 }
