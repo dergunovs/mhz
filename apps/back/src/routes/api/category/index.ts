@@ -2,18 +2,14 @@ import { ICategory } from 'mhz-types';
 
 import Category from '../../../models/category.js';
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
-import { deleteFile, paginate } from '../../../helpers/index.js';
+import { deleteFile } from '../../../helpers/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', async function (request, reply) {
     try {
-      const { data, total } = await paginate(Category, {
-        page: request.query.page,
-        sort: request.query.sort,
-        dir: request.query.dir,
-      });
+      const categories = await Category.find().sort('title').lean().exec();
 
-      reply.code(200).send({ data, total });
+      reply.code(200).send(categories);
     } catch (err) {
       reply.code(500).send({ message: err });
     }
@@ -44,10 +40,16 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: ICategory }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
     try {
-      const category = new Category(request.body);
+      const count = await Category.find().countDocuments().exec();
 
-      await category.save();
-      reply.code(201).send({ message: 'created' });
+      if (count === 12) {
+        reply.code(500).send({ message: 'You have reached maximum categories count' });
+      } else {
+        const category = new Category(request.body);
+
+        await category.save();
+        reply.code(201).send({ message: 'created' });
+      }
     } catch (err) {
       reply.code(500).send({ message: err });
     }

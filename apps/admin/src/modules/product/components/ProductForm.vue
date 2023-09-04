@@ -22,11 +22,7 @@
       </UiField>
 
       <UiField label="Category" isRequired :error="error('category')">
-        <UiSelect
-          v-model="formData.category"
-          :options="allCategories"
-          @reachedBottom="scrollCategories(isLoadingCategories, setCategoryPage(categoriesPage + 1, categoriesPage))"
-        />
+        <UiSelect v-model="formData.category" :options="categories" />
       </UiField>
     </div>
 
@@ -141,22 +137,7 @@ const { mutate: mutateUploadFiles } = uploadFiles(
   '1200'
 );
 
-const {
-  page: categoriesPage,
-  allData: allCategories,
-  addData: addCategories,
-  handleScroll: scrollCategories,
-} = useInfiniteScroll<ICategory>();
-
-const { data: categoriesData, isLoading: isLoadingCategories } = getCategories(categoriesPage);
-const { data: categories, setPage: setCategoryPage } = usePagination(categoriesData);
-
-watch(
-  () => categories.value,
-  () => {
-    if (categories.value && !isLoadingCategories.value) addCategories(categories.value);
-  }
-);
+const { data: categories } = getCategories();
 
 const {
   page: manufacturersPage,
@@ -230,8 +211,6 @@ function handleDelete(id: string) {
 
 onMounted(() => {
   if (props.product) formData.value = clone(props.product);
-
-  if (categories.value) addCategories(categories.value);
   if (manufacturers.value) addManufacturers(manufacturers.value);
 
   watch(

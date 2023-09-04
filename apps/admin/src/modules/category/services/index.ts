@@ -1,27 +1,18 @@
-import { Ref, ComputedRef } from 'vue';
+import { ComputedRef } from 'vue';
 
 import { ICategory } from 'mhz-types';
-import { api, useQuery, useMutation, IPageQuery } from 'mhz-helpers';
+import { api, useQuery, useMutation } from 'mhz-helpers';
 
 import { API_CATEGORY } from '@/category/constants';
 
-export function getCategories(query: Ref<IPageQuery | number>) {
-  async function fn(): Promise<{ data: ICategory[]; total: number }> {
-    const params =
-      typeof query.value === 'number'
-        ? { page: query.value }
-        : {
-            page: query.value.page || 1,
-            sort: query.value.sort.value,
-            dir: query.value.sort.isAsc === false ? 'desc' : 'asc',
-          };
-
-    const { data } = await api.get(API_CATEGORY, { params });
+export function getCategories() {
+  async function fn(): Promise<ICategory[]> {
+    const { data } = await api.get(API_CATEGORY);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_CATEGORY, query], queryFn: fn });
+  return useQuery({ queryKey: [API_CATEGORY], queryFn: fn });
 }
 
 export function getCategory(id: ComputedRef<string>) {

@@ -12,19 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import { usePagination, usePage } from 'mhz-helpers';
-
 import CategoryCatalogList from '@/category/components/CategoryCatalogList.vue';
 
 import { getCategories } from '@/category/services';
 
 const emit = defineEmits(['update:modelValue']);
 
-const { query } = usePage();
-
-const { data } = getCategories(query);
-
-const { data: categories } = usePagination(data);
+const { data: categories } = getCategories();
 </script>
 
 <style module lang="scss">

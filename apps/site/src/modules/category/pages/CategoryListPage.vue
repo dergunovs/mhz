@@ -11,8 +11,6 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head';
 
-import { usePagination, usePage } from 'mhz-helpers';
-
 import PageTitle from '@/layout/components/PageTitle.vue';
 import CategoryCatalogList from '@/category/components/CategoryCatalogList.vue';
 
@@ -20,11 +18,7 @@ import { getCategories } from '@/category/services';
 import { URL_CATEGORY } from '@/category/constants';
 import { URL_MAIN } from '@/common/constants';
 
-const { query } = usePage();
-
-const { data } = getCategories(query);
-
-const { data: categories } = usePagination(data);
+const { data: categories } = getCategories();
 
 const title = 'Categories';
 

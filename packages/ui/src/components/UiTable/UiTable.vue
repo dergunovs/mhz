@@ -11,14 +11,14 @@
 
               <button v-if="header.value" type="button" @click="sort(header.value)" :class="$style.sort">
                 <span
-                  :data-current="props.modelValue.isAsc && props.modelValue.value === header.value"
+                  :data-current="props.modelValue?.isAsc && props.modelValue?.value === header.value"
                   :class="$style.arrow"
                   :data-loading="props.isLoading"
                 >
                   ↑
                 </span>
                 <span
-                  :data-current="!props.modelValue.isAsc && props.modelValue.value === header.value"
+                  :data-current="!props.modelValue?.isAsc && props.modelValue?.value === header.value"
                   :class="$style.arrow"
                   :data-loading="props.isLoading"
                 >
@@ -47,7 +47,7 @@ interface IHeader {
 
 interface IProps {
   headers: IHeader[];
-  modelValue: { value?: string; isAsc: boolean };
+  modelValue?: { value?: string; isAsc: boolean };
   isLoading?: boolean;
 }
 
@@ -69,7 +69,7 @@ function checkTableSize(): void {
 }
 
 function sort(value: string) {
-  props.modelValue.value === value
+  props.modelValue?.value === value
     ? emit('update:modelValue', { value, isAsc: !props.modelValue.isAsc })
     : emit('reset', value);
 }
