@@ -1,8 +1,8 @@
 <template>
   <div :class="$style.container" ref="containerElement">
     <UiInput
-      :modelValue="typeof props.modelValue === 'object' ? props.modelValue.title : props.modelValue"
-      @update="handleUpdate"
+      :modelValue="typeof props.modelValue === 'string' ? props.modelValue : props.modelValue?.title"
+      @update:modelValue="handleUpdate"
       @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
       placeholder="Choose variant"
@@ -54,7 +54,7 @@ interface IOption {
 }
 
 interface IProps {
-  modelValue: string | IOption;
+  modelValue?: string | IOption;
   options?: string[] | IOption[];
   isFilter?: boolean;
 }
@@ -64,12 +64,14 @@ const emit = defineEmits(['update:modelValue', 'reachedBottom']);
 
 const filterQuery = ref('');
 
+const isObject = computed(() => typeof props.options?.[0] === 'object');
+
 const optionsComputed = computed(() => {
   if (!props.options) return [];
 
   let optionsObject = props.options as IOption[];
 
-  if (typeof props.options[0] !== 'object') {
+  if (!isObject.value) {
     optionsObject = (props.options as IOption[]).map((option) => {
       return { _id: option as unknown as string, title: option as unknown as string };
     });
@@ -116,7 +118,7 @@ function showOptions() {
 }
 
 function setOption(option: IOption) {
-  emit('update:modelValue', typeof props.modelValue === 'object' ? option : option._id);
+  emit('update:modelValue', isObject.value ? option : option._id);
   hideOptions();
 }
 

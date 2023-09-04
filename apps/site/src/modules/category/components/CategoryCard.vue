@@ -28,11 +28,12 @@ const props = defineProps<IProps>();
 <style module lang="scss">
 .category {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 32px;
 }
 
 .imageBlock {
+  display: flex;
+  flex-shrink: 0;
   height: 128px;
 }
 

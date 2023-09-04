@@ -22,15 +22,26 @@ export function usePage(filter?: object) {
       value: route.query.sort?.toString(),
       isAsc: route.query.dir !== 'desc',
     },
-    filter: filter || {},
+    filter: { ...filter },
   });
 
-  function resetQuery(value: string) {
-    query.value = Object.assign(query.value, { page: 1, sort: { value, isAsc: true }, filter: {} });
+  function resetQuery(value: string | ISortOption) {
+    query.value =
+      typeof value === 'string'
+        ? Object.assign(query.value, { page: 1, sort: { value, isAsc: true }, filter: {} })
+        : { ...query.value, page: 1, sort: value };
   }
 
   function setQueryPage(pageToSet: number) {
     query.value.page = pageToSet;
+  }
+
+  function setQueryFilter(filterToSet?: object) {
+    query.value = {
+      filter: { ...filterToSet },
+      page: 1,
+      sort: query.value.sort,
+    };
   }
 
   watch(
@@ -48,5 +59,5 @@ export function usePage(filter?: object) {
     { deep: true }
   );
 
-  return { query, resetQuery, setQueryPage };
+  return { query, resetQuery, setQueryPage, setQueryFilter };
 }

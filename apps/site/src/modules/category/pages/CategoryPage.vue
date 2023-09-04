@@ -1,21 +1,20 @@
 <template>
-  <div>
-    <PageTitle :links="links">{{ category?.title }}</PageTitle>
+  <div :class="$style.container">
+    <div>
+      <PageTitle :links="links">{{ category?.title }}</PageTitle>
+      <CategoryCard v-if="category" :category="category" />
+    </div>
 
-    <CategoryCard v-if="category" :category="category" />
-
-    <h2 v-if="products?.length">Products</h2>
-
-    <div v-if="products?.length" :class="$style.products">
+    <div v-if="products?.length" :class="$style.container">
+      <ProductCatalogSort v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />
       <ProductCatalogList :products="products" />
-
       <UiPagination :page="query.page" :total="total" @update="(value) => setQueryPage(setPage(value, query.page))" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
 
@@ -25,6 +24,7 @@ import { usePage, usePagination } from 'mhz-helpers';
 import PageTitle from '@/layout/components/PageTitle.vue';
 import CategoryCard from '@/category/components/CategoryCard.vue';
 import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
+import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
 
 import { getCategory } from '@/category/services';
 import { getProducts } from '@/product/services';
@@ -35,13 +35,20 @@ const route = useRoute();
 
 const categoryId = computed(() => route.params.id.toString());
 
-const { query, setQueryPage } = usePage({ category: categoryId.value });
+const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: categoryId.value });
 
 const { data: category } = getCategory(categoryId);
 
 const { data } = getProducts(query);
 
 const { data: products, setPage, total } = usePagination(data);
+
+watch(
+  () => categoryId.value,
+  () => {
+    setQueryFilter({ category: categoryId.value });
+  }
+);
 
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
@@ -55,7 +62,7 @@ useHead({
 </script>
 
 <style module lang="scss">
-.products {
+.container {
   display: flex;
   flex-direction: column;
   gap: 32px;
