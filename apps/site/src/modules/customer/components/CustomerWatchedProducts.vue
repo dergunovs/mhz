@@ -21,7 +21,7 @@ const route = useRoute();
 watch(
   () => route.path,
   () => {
-    if (route.name === 'Product') refetch();
+    refetch();
   }
 );
 </script>

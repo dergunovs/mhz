@@ -7,7 +7,7 @@ export const manufacturerRoutes = [
     component: () => import('@/manufacturer/pages/ManufacturerListPage.vue'),
   },
   {
-    path: `${URL_MANUFACTURER}/:id`,
+    path: `${URL_MANUFACTURER}/:manufacturer`,
     name: 'Manufacturer',
     component: () => import('@/manufacturer/pages/ManufacturerPage.vue'),
   },

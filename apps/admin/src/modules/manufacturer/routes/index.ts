@@ -12,7 +12,7 @@ export const manufacturerRoutes = [
     component: () => import('@/manufacturer/pages/ManufacturerCreatePage.vue'),
   },
   {
-    path: `${URL_MANUFACTURER_EDIT}/:id`,
+    path: `${URL_MANUFACTURER_EDIT}/:manufacturer`,
     name: 'ManufacturerEdit',
     component: () => import('@/manufacturer/pages/ManufacturerEditPage.vue'),
   },

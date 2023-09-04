@@ -24,8 +24,10 @@ export function getManufacturers(query: Ref<IPageQuery | number>) {
   return useQuery({ queryKey: [API_MANUFACTURER, query], queryFn: fn });
 }
 
-export function getManufacturer(id: ComputedRef<string>) {
-  async function fn(): Promise<IManufacturer> {
+export function getManufacturer(id?: ComputedRef<string | string[]>) {
+  async function fn(): Promise<IManufacturer | null> {
+    if (!id?.value) return null;
+
     const { data } = await api.get(`${API_MANUFACTURER}/${id.value}`);
 
     return data;

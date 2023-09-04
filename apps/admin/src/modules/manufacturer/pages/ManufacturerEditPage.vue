@@ -20,7 +20,7 @@ import { URL_MANUFACTURER } from '@/manufacturer/constants';
 
 const route = useRoute();
 
-const manufacturerId = computed(() => route.params.id.toString());
+const manufacturerId = computed(() => route.params.manufacturer);
 
 const { data: manufacturer } = getManufacturer(manufacturerId);
 

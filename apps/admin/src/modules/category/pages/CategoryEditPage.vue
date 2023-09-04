@@ -20,7 +20,7 @@ import { URL_CATEGORY } from '@/category/constants';
 
 const route = useRoute();
 
-const categoryId = computed(() => route.params.id.toString());
+const categoryId = computed(() => route.params.category);
 
 const { data: category } = getCategory(categoryId);
 

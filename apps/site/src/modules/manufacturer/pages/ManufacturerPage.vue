@@ -1,21 +1,31 @@
 <template>
-  <div>
-    <PageTitle :links="links">{{ manufacturer?.title }}</PageTitle>
+  <div :class="$style.container">
+    <div>
+      <PageTitle :links="links">{{ manufacturer?.title }}</PageTitle>
+      <ManufacturerCard v-if="manufacturer" :manufacturer="manufacturer" />
+    </div>
 
-    <ManufacturerCard v-if="manufacturer" :manufacturer="manufacturer" />
+    <div :class="$style.products">
+      <ProductCatalogFilter />
 
-    <h2 v-if="products?.length">Products</h2>
+      <div :class="$style.container">
+        <ProductCatalogSort v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />
 
-    <div v-if="products?.length" :class="$style.products">
-      <ProductCatalogList :products="products" />
+        <ProductCatalogList v-if="products?.length" :products="products" />
 
-      <UiPagination :page="query.page" :total="total" @update="(value) => setQueryPage(setPage(value, query.page))" />
+        <UiPagination
+          v-if="products?.length"
+          :page="query.page"
+          :total="total"
+          @update="(value) => setQueryPage(setPage(value, query.page))"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
 
@@ -25,6 +35,8 @@ import { usePage, usePagination } from 'mhz-helpers';
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerCard from '@/manufacturer/components/ManufacturerCard.vue';
 import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
+import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
+import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
 
 import { getManufacturer } from '@/manufacturer/services';
 import { getProducts } from '@/product/services';
@@ -33,15 +45,22 @@ import { URL_MANUFACTURER } from '@/manufacturer/constants';
 
 const route = useRoute();
 
-const manufacturerId = computed(() => route.params.id.toString());
+const manufacturerId = computed(() => route.params.manufacturer);
 
-const { query, setQueryPage } = usePage({ manufacturer: manufacturerId.value });
+const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ manufacturer: manufacturerId.value });
 
 const { data: manufacturer } = getManufacturer(manufacturerId);
 
 const { data } = getProducts(query);
 
 const { data: products, setPage, total } = usePagination(data);
+
+watch(
+  () => manufacturerId.value,
+  () => {
+    setQueryFilter({ category: manufacturerId.value });
+  }
+);
 
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
@@ -55,9 +74,16 @@ useHead({
 </script>
 
 <style module lang="scss">
-.products {
+.container {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 32px;
+}
+
+.products {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
 }
 </style>

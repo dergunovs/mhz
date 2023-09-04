@@ -28,7 +28,11 @@
           :class="$style.option"
           tabindex="0"
           ref="optionElement"
-          :data-current="props.modelValue === option._id"
+          :data-current="
+            typeof props.modelValue === 'string'
+              ? props.modelValue === option._id
+              : props.modelValue?._id === option._id
+          "
         >
           {{ option.title }}
         </div>

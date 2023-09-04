@@ -20,7 +20,7 @@ import { URL_PRODUCT } from '@/product/constants';
 
 const route = useRoute();
 
-const productId = computed(() => route.params.id.toString());
+const productId = computed(() => route.params.product);
 
 const { data: product } = getProduct(productId);
 

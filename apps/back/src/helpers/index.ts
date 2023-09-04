@@ -60,7 +60,7 @@ export function decodeToken(decode: (token: string) => IUserToken | null, author
 export async function addProductToWatched(user: IUserToken | null, product: IProduct | null) {
   if (user?.role === 'customer' && product?._id) {
     const filter = { _id: user._id };
-    const limit = 6;
+    const limit = 8;
 
     const currentCustomer = await Customer.findOne(filter).exec();
 

@@ -20,7 +20,7 @@ import CustomerInfo from '@/customer/components/CustomerInfo.vue';
 
 const route = useRoute();
 
-const customerId = computed(() => route.params.id.toString());
+const customerId = computed(() => route.params.customer);
 
 const { data: customer } = getCustomer(customerId);
 

@@ -15,8 +15,10 @@ export function getCategories() {
   return useQuery({ queryKey: [API_CATEGORY], queryFn: fn });
 }
 
-export function getCategory(id: ComputedRef<string>) {
-  async function fn(): Promise<ICategory> {
+export function getCategory(id?: ComputedRef<string | string[]>) {
+  async function fn(): Promise<ICategory | null> {
+    if (!id?.value) return null;
+
     const { data } = await api.get(`${API_CATEGORY}/${id.value}`);
 
     return data;

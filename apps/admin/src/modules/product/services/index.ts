@@ -24,8 +24,10 @@ export function getProducts(query: Ref<IPageQuery | number>) {
   return useQuery({ queryKey: [API_PRODUCT, query], queryFn: fn });
 }
 
-export function getProduct(id: ComputedRef<string>) {
-  async function fn(): Promise<IProduct> {
+export function getProduct(id?: ComputedRef<string | string[]>) {
+  async function fn(): Promise<IProduct | null> {
+    if (!id?.value) return null;
+
     const { data } = await api.get(`${API_PRODUCT}/${id.value}`);
 
     return data;

@@ -51,7 +51,7 @@ const props = defineProps<IProps>();
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  min-width: 300px;
+  min-width: 240px;
 }
 
 .imageBlock {

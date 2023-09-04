@@ -12,7 +12,7 @@ export const categoryRoutes = [
     component: () => import('@/category/pages/CategoryCreatePage.vue'),
   },
   {
-    path: `${URL_CATEGORY_EDIT}/:id`,
+    path: `${URL_CATEGORY_EDIT}/:category`,
     name: 'CategoryEdit',
     component: () => import('@/category/pages/CategoryEditPage.vue'),
   },

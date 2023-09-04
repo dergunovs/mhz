@@ -7,7 +7,7 @@ export const categoryRoutes = [
     component: () => import('@/category/pages/CategoryListPage.vue'),
   },
   {
-    path: `${URL_CATEGORY}/:id`,
+    path: `${URL_CATEGORY}/:category`,
     name: 'Category',
     component: () => import('@/category/pages/CategoryPage.vue'),
   },

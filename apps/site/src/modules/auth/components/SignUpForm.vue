@@ -14,7 +14,7 @@
       </UiField>
 
       <UiField label="E-mail" isRequired :error="error('email')">
-        <UiInput v-model="formData.email" isFocus />
+        <UiInput v-model="formData.email" />
       </UiField>
 
       <UiField label="Password" isRequired :error="error('password')">

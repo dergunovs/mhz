@@ -7,7 +7,7 @@
         :data-header="props.isHeader"
         :alt="props.category.title"
         loading="lazy"
-        :height="props.isHeader ? 32 : 100"
+        :height="props.isHeader ? 24 : 100"
         crossorigin="anonymous"
       />
     </div>
@@ -47,6 +47,10 @@ const props = defineProps<IProps>();
     width: 240px;
     padding: 2px 16px;
 
+    .title {
+      font-size: 1rem;
+    }
+
     &:global(.router-link-active) {
       .title {
         color: var(--color-primary);
@@ -68,8 +72,8 @@ const props = defineProps<IProps>();
   height: 100px;
 
   &[data-header='true'] {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -79,8 +83,8 @@ const props = defineProps<IProps>();
 
   &[data-header='true'] {
     width: fit-content;
-    max-width: 32px;
-    max-height: 32px;
+    max-width: 24px;
+    max-height: 24px;
   }
 }
 

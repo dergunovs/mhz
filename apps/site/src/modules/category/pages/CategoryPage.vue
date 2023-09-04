@@ -5,10 +5,21 @@
       <CategoryCard v-if="category" :category="category" />
     </div>
 
-    <div v-if="products?.length" :class="$style.container">
-      <ProductCatalogSort v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />
-      <ProductCatalogList :products="products" />
-      <UiPagination :page="query.page" :total="total" @update="(value) => setQueryPage(setPage(value, query.page))" />
+    <div :class="$style.products">
+      <ProductCatalogFilter />
+
+      <div :class="$style.container">
+        <ProductCatalogSort v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />
+
+        <ProductCatalogList v-if="products?.length" :products="products" />
+
+        <UiPagination
+          v-if="products?.length"
+          :page="query.page"
+          :total="total"
+          @update="(value) => setQueryPage(setPage(value, query.page))"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +36,7 @@ import PageTitle from '@/layout/components/PageTitle.vue';
 import CategoryCard from '@/category/components/CategoryCard.vue';
 import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
+import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
 
 import { getCategory } from '@/category/services';
 import { getProducts } from '@/product/services';
@@ -33,7 +45,7 @@ import { URL_CATEGORY } from '@/category/constants';
 
 const route = useRoute();
 
-const categoryId = computed(() => route.params.id.toString());
+const categoryId = computed(() => route.params.category);
 
 const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: categoryId.value });
 
@@ -65,6 +77,13 @@ useHead({
 .container {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 32px;
+}
+
+.products {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
 }
 </style>

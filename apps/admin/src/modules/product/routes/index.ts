@@ -12,7 +12,7 @@ export const productRoutes = [
     component: () => import('@/product/pages/ProductCreatePage.vue'),
   },
   {
-    path: `${URL_PRODUCT_EDIT}/:id`,
+    path: `${URL_PRODUCT_EDIT}/:product`,
     name: 'ProductEdit',
     component: () => import('@/product/pages/ProductEditPage.vue'),
   },

@@ -24,8 +24,10 @@ export function getCustomers(query: Ref<IPageQuery | number>) {
   return useQuery({ queryKey: [API_CUSTOMER, query], queryFn: fn });
 }
 
-export function getCustomer(id: ComputedRef<string>) {
-  async function fn(): Promise<ICustomer> {
+export function getCustomer(id?: ComputedRef<string | string[]>) {
+  async function fn(): Promise<ICustomer | null> {
+    if (!id?.value) return null;
+
     const { data } = await api.get(`${API_CUSTOMER}/${id.value}`);
 
     return data;

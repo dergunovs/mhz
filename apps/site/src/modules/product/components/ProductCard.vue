@@ -104,12 +104,12 @@ const props = defineProps<IProps>();
 }
 
 .logoLink {
-  height: 64px;
+  height: 48px;
 }
 
 .logo {
   width: fit-content;
-  height: 64px;
+  height: 48px;
 }
 
 .field {

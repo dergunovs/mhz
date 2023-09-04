@@ -24,8 +24,10 @@ export function getManagers(query: Ref<IPageQuery | number>) {
   return useQuery({ queryKey: [API_MANAGER, query], queryFn: fn });
 }
 
-export function getManager(id: ComputedRef<string>) {
-  async function fn(): Promise<IManager> {
+export function getManager(id?: ComputedRef<string | string[]>) {
+  async function fn(): Promise<IManager | null> {
+    if (!id?.value) return null;
+
     const { data } = await api.get(`${API_MANAGER}/${id.value}`);
 
     return data;

@@ -26,7 +26,7 @@ import { URL_MAIN } from '@/common/constants';
 
 const route = useRoute();
 
-const managerId = computed(() => route.params.id.toString());
+const managerId = computed(() => route.params.manager);
 
 const { data: manager } = getManager(managerId);
 

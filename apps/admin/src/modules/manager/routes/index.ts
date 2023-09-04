@@ -12,7 +12,7 @@ export const managerRoutes = [
     component: () => import('@/manager/pages/ManagerCreatePage.vue'),
   },
   {
-    path: `${URL_MANAGER_EDIT}/:id`,
+    path: `${URL_MANAGER_EDIT}/:manager`,
     name: 'ManagerEdit',
     component: () => import('@/manager/pages/ManagerEditPage.vue'),
   },

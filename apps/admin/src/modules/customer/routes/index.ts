@@ -7,7 +7,7 @@ export const customerRoutes = [
     component: () => import('@/customer/pages/CustomerListPage.vue'),
   },
   {
-    path: `${URL_CUSTOMER}/:id`,
+    path: `${URL_CUSTOMER}/:customer`,
     name: 'Customer',
     component: () => import('@/customer/pages/CustomerPage.vue'),
   },
