@@ -1,9 +1,13 @@
 <template>
   <header :class="$style.header">
-    <div :class="$style.logoAndSearch">
+    <div :class="$style.main">
       <RouterLink :to="URL_MAIN">
         <ImageLogo :class="$style.logo" />
       </RouterLink>
+
+      <UiButton @click="isShowCatalog = !isShowCatalog" layout="secondary">Catalog</UiButton>
+
+      <CategoryCatalogPopup v-if="isShowCatalog" v-model="isShowCatalog" />
 
       <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" />
     </div>
@@ -30,12 +34,16 @@ import { ref, watch } from 'vue';
 import { UiButton, UiSearch } from 'mhz-ui';
 import { isAuth, logout, deleteAuthHeader } from 'mhz-helpers';
 
+import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue';
+
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { URL_CUSTOMER, URL_FAVOURITES } from '@/customer/constants';
 import { URL_CART } from '@/cart/constants';
 import { search } from '@/common/services';
+
+const isShowCatalog = ref(false);
 
 const searchQuery = ref('');
 
@@ -63,9 +71,9 @@ watch(
   border-bottom: 1px solid var(--color-gray);
 }
 
-.logoAndSearch {
+.main {
   display: flex;
-  gap: 64px;
+  gap: 32px;
   align-items: center;
 }
 

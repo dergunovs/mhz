@@ -1,6 +1,11 @@
 <template>
-  <div :class="$style.list">
-    <CategoryCatalogCard v-for="category in props.categories" :key="category._id" :category="category" />
+  <div :class="$style.list" :data-header="props.isHeader">
+    <CategoryCatalogCard
+      v-for="category in props.categories"
+      :key="category._id"
+      :category="category"
+      :isHeader="props.isHeader"
+    />
   </div>
 </template>
 
@@ -11,6 +16,7 @@ import CategoryCatalogCard from '@/category/components/CategoryCatalogCard.vue';
 
 interface IProps {
   categories: ICategory[];
+  isHeader?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -21,5 +27,10 @@ const props = defineProps<IProps>();
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 64px 32px;
+
+  &[data-header='true'] {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 8px;
+  }
 }
 </style>

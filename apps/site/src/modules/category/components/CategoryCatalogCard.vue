@@ -1,12 +1,13 @@
 <template>
-  <RouterLink :to="`${URL_CATEGORY}/${props.category._id}`" :class="$style.card">
-    <div :class="$style.imageBlock">
+  <RouterLink :to="`${URL_CATEGORY}/${props.category._id}`" :class="$style.card" :data-header="props.isHeader">
+    <div :class="$style.imageBlock" :data-header="props.isHeader">
       <img
         :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
         :class="$style.image"
+        :data-header="props.isHeader"
         :alt="props.category.title"
         loading="lazy"
-        height="100"
+        :height="props.isHeader ? 32 : 100"
         crossorigin="anonymous"
       />
     </div>
@@ -23,6 +24,7 @@ import { URL_CATEGORY } from '@/category/constants';
 
 interface IProps {
   category: ICategory;
+  isHeader?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -37,6 +39,21 @@ const props = defineProps<IProps>();
   width: 100%;
   text-decoration: none;
 
+  &[data-header='true'] {
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 240px;
+    padding: 2px 16px;
+
+    &:global(.router-link-active) {
+      .title {
+        color: var(--color-primary);
+      }
+    }
+  }
+
   &:hover {
     .title {
       color: var(--primary-dark);
@@ -49,11 +66,22 @@ const props = defineProps<IProps>();
   align-items: center;
   justify-content: center;
   height: 100px;
+
+  &[data-header='true'] {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .image {
   max-width: 80%;
   max-height: 100px;
+
+  &[data-header='true'] {
+    width: fit-content;
+    max-width: 32px;
+    max-height: 32px;
+  }
 }
 
 .title {
