@@ -1,7 +1,7 @@
 {
   "name": "mhz-site",
   "description": "mhz-site",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "dergunov.com",
   "license": "MIT",
   "type": "module",
@@ -51,7 +51,7 @@
     "vue-tsc": "1.8.8"
   },
   "engines": {
-    "npm": "10",
+    "npm": ">=9.8.1 || >=10.0.0",
     "node": ">=20.6.0"
   }
 }

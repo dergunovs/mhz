@@ -1,6 +1,6 @@
 {
   "name": "mhz-countries",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "mhz-countries",
   "author": "dergunov.com",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "directory": "packages/countries"
   },
   "engines": {
-    "npm": "10",
+    "npm": ">=9.8.1 || >=10.0.0",
     "node": ">=20.6.0"
   }
 }

@@ -14,8 +14,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20.6.0"
-      - name: Check npm version
-        run: npm -v
       - name: Install
         run: npm ci
       - name: Create Admin .env
