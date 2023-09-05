@@ -5,27 +5,13 @@
     <div :class="$style.container">
       <main :class="$style.main">
         <RouterView />
-
-        <CustomerWatchedProducts v-if="isShowWathedProducts" />
       </main>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-
-import { isAuth } from 'mhz-helpers';
-
 import TheHeader from '@/layout/components/TheHeader.vue';
-import CustomerWatchedProducts from '@/customer/components/CustomerWatchedProducts.vue';
-
-const route = useRoute();
-
-const isShowWathedProducts = computed(
-  () => isAuth.value && route.name && ['Product', 'Main'].includes(route.name.toString())
-);
 </script>
 
 <style module lang="scss">

@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <PageTitle :links="links">{{ product?.title }}</PageTitle>
+  <div v-if="product">
+    <PageTitle :links="links">{{ product.title }}</PageTitle>
 
-    <ProductCard v-if="product" :product="product" />
+    <ProductCard :product="product" />
+
+    <CustomerWatchedProducts />
   </div>
 </template>
 
@@ -13,6 +15,7 @@ import { useHead } from '@vueuse/head';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ProductCard from '@/product/components/ProductCard.vue';
+import CustomerWatchedProducts from '@/customer/components/CustomerWatchedProducts.vue';
 
 import { getProduct } from '@/product/services';
 import { URL_MAIN } from '@/common/constants';

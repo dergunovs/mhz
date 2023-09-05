@@ -64,7 +64,10 @@ export function decodeToken(decode: (token: string) => IUserToken | null, author
   return token ? decode(token) : null;
 }
 
-export async function addProductToWatched(userId: string | Schema.Types.ObjectId, productId: string) {
+export async function addProductToWatched(
+  userId: string | Schema.Types.ObjectId,
+  productId: string | Schema.Types.ObjectId
+) {
   const filter = { _id: userId };
   const limit = 8;
 
@@ -72,7 +75,7 @@ export async function addProductToWatched(userId: string | Schema.Types.ObjectId
 
   const watchedProductsIds = currentCustomer?.watchedProducts?.map((watched) => watched.product._id?.toString()) || [];
 
-  if (watchedProductsIds.includes(productId)) return;
+  if (watchedProductsIds.includes(productId.toString())) return;
 
   if (currentCustomer?.watchedProducts) {
     if (currentCustomer.watchedProducts.length === limit) {

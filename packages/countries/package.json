@@ -17,7 +17,7 @@
     "directory": "packages/countries"
   },
   "engines": {
-    "npm": ">=9.8.1 || >=10.0.0",
+    "npm": ">=9.8.1",
     "node": ">=20.6.0"
   }
 }

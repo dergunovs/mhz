@@ -7,8 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { onBeforeUnmount } from 'vue';
 
 import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 
@@ -16,12 +15,7 @@ import { getCustomerWatchedProducts } from '@/customer/services';
 
 const { data: products, refetch } = getCustomerWatchedProducts();
 
-const route = useRoute();
-
-watch(
-  () => route.path,
-  () => {
-    refetch();
-  }
-);
+onBeforeUnmount(() => {
+  refetch();
+});
 </script>
