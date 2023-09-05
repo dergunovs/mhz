@@ -71,7 +71,7 @@ export async function addProductToWatched(user: IUserToken | null, product: IPro
 
     if (currentCustomer?.watchedProducts && product._id) {
       if (currentCustomer.watchedProducts.length === limit) {
-        await Customer.updateOne(filter, { $pop: { watchedProducts: 1 } });
+        await Customer.updateOne(filter, { $pop: { watchedProducts: -1 } });
       }
 
       await Customer.updateOne(filter, {

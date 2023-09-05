@@ -46,7 +46,7 @@
     "packages/*"
   ],
   "engines": {
-    "npm": "9",
-    "node": "18"
+    "npm": "10",
+    "node": ">=20.6.0"
   }
 }
