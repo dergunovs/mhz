@@ -87,6 +87,7 @@ export interface IProduct extends IEntity {
   category: ICategory;
   manufacturer: IManufacturer;
   fields?: ICategoryField[];
+  views?: number;
 }
 
 export interface IOrder extends IEntity {

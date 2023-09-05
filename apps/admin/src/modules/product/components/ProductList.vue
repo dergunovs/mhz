@@ -26,6 +26,9 @@
           {{ product.isInStock ? 'Yes' : 'No' }}
         </td>
         <td data-no-wrap>
+          {{ product.views }}
+        </td>
+        <td data-no-wrap>
           {{ formatDate(product.dateCreated) }}
         </td>
         <td data-no-wrap>
@@ -57,6 +60,7 @@ const tableHeaders = [
   { value: 'manufacturer', title: 'Manufacturer' },
   { value: 'price', title: 'Price' },
   { value: 'isInStock', title: 'In stock' },
+  { value: 'views', title: 'Views' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },
 ];

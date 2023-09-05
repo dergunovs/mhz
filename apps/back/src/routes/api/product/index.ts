@@ -31,12 +31,17 @@ export default async function (fastify: IFastifyInstance) {
           { path: 'category', select: '_id title' },
           { path: 'manufacturer', select: '_id title logoUrl country' },
         ])
-        .lean()
         .exec();
 
       const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-      addProductToWatched(user, product);
+      if (user?._id && user?.role === 'customer' && product?._id) {
+        addProductToWatched(user._id, product._id);
+
+        product.views = product.views ? product.views + 1 : 1;
+
+        await product.save();
+      }
 
       reply.code(200).send(product);
     } catch (err) {

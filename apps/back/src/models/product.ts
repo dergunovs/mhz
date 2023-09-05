@@ -11,6 +11,7 @@ const productSchema = new Schema<IProduct>({
   category: { type: Schema.Types.ObjectId, ref: 'Category' },
   manufacturer: { type: Schema.Types.ObjectId, ref: 'Manufacturer' },
   fields: { type: [Object] },
+  views: { type: Number },
   dateCreated: { type: Date, default: Date.now },
   dateUpdated: { type: Date },
 });

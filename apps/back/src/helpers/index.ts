@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { Model, PopulateOptions } from 'mongoose';
+import { Model, PopulateOptions, Schema } from 'mongoose';
 import sharp from 'sharp';
-
-import { IProduct } from 'mhz-types';
 
 import { IUserToken } from '../interface/index.js';
 import Customer from '../models/customer.js';
@@ -57,28 +55,25 @@ export function decodeToken(decode: (token: string) => IUserToken | null, author
   return token ? decode(token) : null;
 }
 
-export async function addProductToWatched(user: IUserToken | null, product: IProduct | null) {
-  if (user?.role === 'customer' && product?._id) {
-    const filter = { _id: user._id };
-    const limit = 8;
+export async function addProductToWatched(userId: string | Schema.Types.ObjectId, productId: string) {
+  const filter = { _id: userId };
+  const limit = 8;
 
-    const currentCustomer = await Customer.findOne(filter).exec();
+  const currentCustomer = await Customer.findOne(filter).exec();
 
-    const watchedProductsIds =
-      currentCustomer?.watchedProducts?.map((watched) => watched.product._id?.toString()) || [];
+  const watchedProductsIds = currentCustomer?.watchedProducts?.map((watched) => watched.product._id?.toString()) || [];
 
-    if (watchedProductsIds.includes(product._id.toString())) return;
+  if (watchedProductsIds.includes(productId)) return;
 
-    if (currentCustomer?.watchedProducts && product._id) {
-      if (currentCustomer.watchedProducts.length === limit) {
-        await Customer.updateOne(filter, { $pop: { watchedProducts: -1 } });
-      }
-
-      await Customer.updateOne(filter, {
-        $push: { watchedProducts: { product: product._id.toString(), dateCreated: new Date() } },
-      });
+  if (currentCustomer?.watchedProducts) {
+    if (currentCustomer.watchedProducts.length === limit) {
+      await Customer.updateOne(filter, { $pop: { watchedProducts: -1 } });
     }
 
-    await currentCustomer?.save();
+    await Customer.updateOne(filter, {
+      $push: { watchedProducts: { product: productId, dateCreated: new Date() } },
+    });
   }
+
+  await currentCustomer?.save();
 }
