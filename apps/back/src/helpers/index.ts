@@ -1,10 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import { Model, PopulateOptions, Schema } from 'mongoose';
+import { Model, PopulateOptions, Schema, Types } from 'mongoose';
 import sharp from 'sharp';
+
+import { IFilterData } from 'mhz-types';
 
 import { IUserToken } from '../interface/index.js';
 import Customer from '../models/customer.js';
+import Product from '../models/product.js';
 
 export async function paginate<T>(
   Entity: Model<T>,
@@ -88,4 +91,48 @@ export async function addProductToWatched(
   }
 
   await currentCustomer?.save();
+}
+
+export async function getProductFilters(filtersRaw?: string) {
+  const filter = filtersRaw ? JSON.parse(filtersRaw) : {};
+
+  const filters = await Product.aggregate([
+    { $match: { category: new Types.ObjectId(filter.category) } },
+    { $unwind: '$fields' },
+    {
+      $group: {
+        _id: { title: '$fields.title', value: '$fields.fieldValue' },
+        title: { $first: '$fields.title' },
+        fieldType: { $first: '$fields.fieldType' },
+        fieldUnits: { $first: '$fields.fieldUnits' },
+        fieldValue: { $first: '$fields.fieldValue' },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $project: { _id: 0 },
+    },
+  ]);
+
+  const titles = [...new Set(filters.map((item) => item.title))];
+
+  const grouped: IFilterData = {};
+
+  titles.forEach((title) => {
+    grouped[title] = {
+      fieldType: 'string',
+      fieldUnits: '',
+      values: [],
+    };
+
+    filters.forEach((item) => {
+      if (item.title === title) {
+        grouped[title].fieldType = item.fieldType;
+        grouped[title].fieldUnits = item.fieldUnits;
+        grouped[title].values.push({ field: item.fieldValue, count: item.count });
+      }
+    });
+  });
+
+  return grouped;
 }

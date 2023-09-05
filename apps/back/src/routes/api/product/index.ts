@@ -2,7 +2,7 @@ import { IProduct } from 'mhz-types';
 
 import Product from '../../../models/product.js';
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
-import { deleteFile, paginate, decodeToken, addProductToWatched } from '../../../helpers/index.js';
+import { deleteFile, paginate, decodeToken, addProductToWatched, getProductFilters } from '../../../helpers/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', async function (request, reply) {
@@ -18,7 +18,9 @@ export default async function (fastify: IFastifyInstance) {
         filter: request.query.filter,
       });
 
-      reply.code(200).send({ data, total });
+      const filters = await getProductFilters(request.query.filter);
+
+      reply.code(200).send({ data, total, filters });
     } catch (err) {
       reply.code(500).send({ message: err });
     }

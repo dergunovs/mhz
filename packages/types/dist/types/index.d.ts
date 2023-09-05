@@ -120,3 +120,11 @@ export interface IConfiguration extends IEntity {
   keyboard: IProduct;
   mouse: IProduct;
 }
+
+export interface IFilterData {
+  [key: string]: {
+    fieldType: TCategoryFieldType;
+    fieldUnits?: string | number | boolean;
+    values: { field: string; count: number }[];
+  };
+}

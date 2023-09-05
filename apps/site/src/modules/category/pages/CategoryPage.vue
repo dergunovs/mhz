@@ -6,7 +6,7 @@
     </div>
 
     <div :class="$style.products">
-      <ProductCatalogFilter />
+      <ProductCatalogFilter v-if="data" :filters="data.filters" />
 
       <div :class="$style.container">
         <ProductCatalogSort v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />

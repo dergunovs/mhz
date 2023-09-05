@@ -1,8 +1,27 @@
 <template>
   <div :class="$style.filters">
-    <div>Filters</div>
+    <div>
+      <div v-for="(value, key) in props.filters" :key="key">
+        <div>
+          <b>{{ key }}:</b>
+        </div>
+        <div>{{ value.fieldType }}</div>
+        <div>{{ value.fieldUnits }}</div>
+        <div>{{ value.values }}</div>
+      </div>
+    </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { IFilterData } from 'mhz-types';
+
+interface IProps {
+  filters: IFilterData;
+}
+
+const props = defineProps<IProps>();
+</script>
 
 <style module lang="scss">
 .filters {
