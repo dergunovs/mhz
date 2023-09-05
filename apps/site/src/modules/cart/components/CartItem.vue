@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.cart">
     <div>
-      <img :src="`${PATH_UPLOAD}/${props.item.product.imageUrls[0]}`" width="128" crossorigin="anonymous" />
+      <img :src="`${PATH_UPLOAD}/${props.item.product.thumbUrls[0]}`" width="128" crossorigin="anonymous" />
     </div>
 
     <div :class="$style.text">

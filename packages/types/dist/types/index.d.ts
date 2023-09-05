@@ -84,6 +84,7 @@ export interface IProduct extends IEntity {
   price: number;
   isInStock: boolean;
   imageUrls: string[];
+  thumbUrls: string[];
   category: ICategory;
   manufacturer: IManufacturer;
   fields?: ICategoryField[];

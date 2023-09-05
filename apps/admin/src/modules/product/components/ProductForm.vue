@@ -95,6 +95,7 @@ const formData = ref<IProduct>({
   price: 0,
   isInStock: false,
   imageUrls: [],
+  thumbUrls: [],
   category: {} as ICategory,
   manufacturer: {} as IManufacturer,
   fields: [],
@@ -120,21 +121,29 @@ function removeImage(fileToRemove: File) {
 
 function deleteImage(imageToDelete: string) {
   formData.value.imageUrls = formData.value.imageUrls.filter((image) => image !== imageToDelete);
+  formData.value.thumbUrls = formData.value.thumbUrls.filter((image) => image !== imageToDelete);
 }
 
 function updateImages(urls: string[]) {
-  formData.value.imageUrls = [...urls];
+  const thumbs = urls.map((url) => `thumb-${url}.webp`);
+
+  formData.value.imageUrls = [...formData.value.imageUrls, ...urls];
+  formData.value.thumbUrls = [...formData.value.thumbUrls, ...thumbs];
 }
 
 const { mutate: mutateUploadFiles } = uploadFiles(
   {
     onSuccess: (data: string[]) => {
-      formData.value.imageUrls = [...data];
+      const thumbs = data.map((url) => `thumb-${url}.webp`);
+
+      formData.value.imageUrls = [...formData.value.imageUrls, ...data];
+      formData.value.thumbUrls = [...formData.value.thumbUrls, ...thumbs];
       images.value = [];
       toast.success('Images added');
     },
   },
-  '1200'
+  '1200',
+  true
 );
 
 const { data: categories } = getCategories();

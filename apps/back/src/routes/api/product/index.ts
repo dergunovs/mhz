@@ -84,6 +84,10 @@ export default async function (fastify: IFastifyInstance) {
           deleteFile(image);
         });
 
+        product?.thumbUrls?.forEach((thumb) => {
+          deleteFile(thumb);
+        });
+
         await product?.deleteOne();
 
         reply.code(200).send({ message: 'deleted' });

@@ -4,12 +4,12 @@ import util from 'util';
 import { pipeline } from 'stream';
 
 import { IFastifyInstance } from '../../../interface/index.js';
-import { deleteFile, resizeFile } from '../../../helpers/index.js';
+import { createThumb, deleteFile, resizeFile } from '../../../helpers/index.js';
 
 const pump = util.promisify(pipeline);
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.post<{ Querystring: { width: string } }>(
+  fastify.post<{ Querystring: { width: string; thumb: boolean } }>(
     '/',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -25,9 +25,8 @@ export default async function (fastify: IFastifyInstance) {
 
           await pump(file.file, fs.createWriteStream(path.resolve(`./public/upload/${filename}`)));
 
-          if (request.query.width) {
-            filename = await resizeFile(filename, request.query.width);
-          }
+          if (request.query.width) filename = await resizeFile(filename, request.query.width);
+          if (request.query.thumb) await createThumb(filename);
 
           filesToUpload.push(filename);
         }
@@ -38,7 +37,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Querystring: { width: string } }>(
+  fastify.post<{ Querystring: { width: string; thumb: boolean } }>(
     '/single',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -51,9 +50,8 @@ export default async function (fastify: IFastifyInstance) {
 
         await pump(file.file, fs.createWriteStream(path.resolve(`./public/upload/${filename}`)));
 
-        if (request.query.width) {
-          filename = await resizeFile(filename, request.query.width);
-        }
+        if (request.query.width) filename = await resizeFile(filename, request.query.width);
+        if (request.query.thumb) await createThumb(filename);
 
         reply.code(200).send(filename);
       } catch (err) {

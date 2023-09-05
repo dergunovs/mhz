@@ -83,7 +83,7 @@ export default async function (fastify: IFastifyInstance) {
         { $unwind: '$category' },
         {
           $project: {
-            imageUrls: 1,
+            thumbUrls: 1,
             title: 1,
             price: 1,
             category: { _id: '$category._id' },
@@ -108,7 +108,7 @@ export default async function (fastify: IFastifyInstance) {
         .exec();
 
       const products = await Product.find({ _id: { $in: customer?.favouriteProducts } })
-        .select('imageUrls title price category')
+        .select('thumbUrls title price category')
         .populate({ path: 'category', select: '_id' })
         .lean()
         .exec();
@@ -187,7 +187,7 @@ export default async function (fastify: IFastifyInstance) {
       const productIds = customer?.cart?.map((item) => item.product._id);
 
       const products = await Product.find({ _id: { $in: productIds } })
-        .select('imageUrls title price category')
+        .select('thumbUrls title price category')
         .populate({ path: 'category', select: '_id title' })
         .lean()
         .exec();

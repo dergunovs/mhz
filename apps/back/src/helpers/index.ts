@@ -49,6 +49,15 @@ export async function resizeFile(filename: string, width: string) {
   return `resized-${filename}`;
 }
 
+export async function createThumb(filename: string) {
+  await sharp(`./public/upload/${filename}`)
+    .resize(480)
+    .webp({ quality: 64 })
+    .toFile(`./public/upload/thumb-${filename}.webp`);
+
+  return `thumb-${filename}.webp`;
+}
+
 export function decodeToken(decode: (token: string) => IUserToken | null, authorizationHeader?: string) {
   const token = authorizationHeader ? authorizationHeader.split('Bearer ')[1] : undefined;
 

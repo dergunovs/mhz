@@ -41,13 +41,13 @@ export function uploadFile(options: object, width?: string) {
   return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
 }
 
-export function uploadFiles(options: object, width?: string) {
+export function uploadFiles(options: object, width?: string, thumb?: boolean) {
   async function fn(files: File[]): Promise<string[]> {
     const formData = new FormData();
 
     files.forEach((file) => formData.append('files', file));
 
-    const { data } = await api.post(API_UPLOAD, formData, { params: { width } });
+    const { data } = await api.post(API_UPLOAD, formData, { params: { width, thumb } });
 
     return data;
   }

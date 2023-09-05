@@ -2,7 +2,7 @@
   <div :class="$style.card">
     <RouterLink :to="`${URL_PRODUCT}/${props.product._id}`" :class="$style.imageBlock">
       <img
-        :src="`${PATH_UPLOAD}/${props.product.imageUrls[0]}`"
+        :src="`${PATH_UPLOAD}/${props.product.thumbUrls[0]}`"
         :class="$style.image"
         height="200"
         :alt="props.product.title"

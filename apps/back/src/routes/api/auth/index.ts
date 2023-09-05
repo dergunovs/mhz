@@ -42,7 +42,7 @@ export default async function (fastify: IFastifyInstance) {
         const token = fastify.jwt.sign(user, { expiresIn: '9h' });
 
         foundUser.dateLoggedIn = new Date();
-        foundUser.save();
+        await foundUser.save();
 
         reply.code(200).send({ ...user, token });
       } catch (err) {
