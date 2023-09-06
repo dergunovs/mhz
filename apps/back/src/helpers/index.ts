@@ -3,7 +3,7 @@ import path from 'path';
 import { Model, PopulateOptions, Schema, Types } from 'mongoose';
 import sharp from 'sharp';
 
-import { IFilterData } from 'mhz-types';
+import { IFilter } from 'mhz-types';
 
 import { IUserToken } from '../interface/index.js';
 import Customer from '../models/customer.js';
@@ -132,9 +132,15 @@ export async function getProductFilters(filtersRaw?: string) {
     { $project: { value: '$category.title', count: 1, _id: 0 } },
   ]);
 
+  const minAndMaxPrice = await Product.aggregate([
+    { $match: mappedFilter },
+    { $group: { _id: null, min: { $min: '$price' }, max: { $max: '$price' } } },
+    { $project: { _id: 0, price: ['$min', '$max'] } },
+  ]);
+
   const titles = [...new Set(filterByFields.map((item) => item.title))];
 
-  const groupedFields: IFilterData = {};
+  const groupedFields: IFilter = {};
 
   titles.forEach((title) => {
     groupedFields[title] = {
@@ -165,8 +171,11 @@ export async function getProductFilters(filtersRaw?: string) {
     }, {});
 
   return {
-    Category: { fieldValues: filterByCategory.sort((a, b) => a.value.localeCompare(b.value)) },
-    Manufacturer: { fieldValues: filterByManufacturer.sort((a, b) => a.value.localeCompare(b.value)) },
-    ...orderedFields,
+    price: minAndMaxPrice[0].price,
+    filters: {
+      Category: { fieldValues: filterByCategory.sort((a, b) => a.value.localeCompare(b.value)) },
+      Manufacturer: { fieldValues: filterByManufacturer.sort((a, b) => a.value.localeCompare(b.value)) },
+      ...orderedFields,
+    },
   };
 }

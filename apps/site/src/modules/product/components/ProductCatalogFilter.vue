@@ -1,7 +1,15 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.filters">
-      <div v-for="(item, key) in props.filters" :key="key" :class="$style.filter">
+      <div :class="[$style.filter, $style.price]">
+        <div :class="$style.title">Price</div>
+
+        <div :class="$style.range">
+          <UiRange :min="props.filters.price[0]" :max="props.filters.price[1]" v-model="price" />
+        </div>
+      </div>
+
+      <div v-for="(item, key) in props.filters.filters" :key="key" :class="$style.filter">
         <div v-if="route.name !== key">
           <div :class="$style.title">
             {{ key }}<template v-if="item.fieldUnits">, {{ item.fieldUnits }}</template>
@@ -32,13 +40,15 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { IFilterData } from 'mhz-types';
-import { UiCheckbox } from 'mhz-ui';
+import { UiCheckbox, UiRange } from 'mhz-ui';
 
 interface IProps {
   filters: IFilterData;
 }
 
 const props = defineProps<IProps>();
+
+const price = ref<[number, number]>([props.filters.price[0], props.filters.price[1]]);
 
 const choosenFilters = ref<{ title: string; values: string[] }[]>([]);
 
@@ -79,10 +89,20 @@ function updateFilters(title: string, value: string, isChecked: boolean) {
   display: none;
 }
 
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 64px;
+}
+
+.range {
+  padding: 0 12px;
+}
+
 .title {
   margin-bottom: 4px;
   font-weight: 700;
-  line-height: 1.2;
 }
 
 .values {

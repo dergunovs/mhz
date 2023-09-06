@@ -10,4 +10,5 @@ export { default as UiCheckbox } from './UiCheckbox/UiCheckbox.vue';
 export { default as UiModal } from './UiModal/UiModal.vue';
 export { default as UiBreadcrumbs } from './UiBreadcrumbs/UiBreadcrumbs.vue';
 export { default as UiSearch } from './UiSearch/UiSearch.vue';
+export { default as UiRange } from './UiRange/UiRange.vue';
 export { default as toast } from './toast/toast';

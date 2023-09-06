@@ -26,6 +26,7 @@
     "@tiptap/pm": "2.1.8",
     "@tiptap/starter-kit": "2.1.8",
     "@tiptap/vue-3": "2.1.8",
+    "@vueform/slider": "2.1.7",
     "@vueuse/core": "10.4.1",
     "@vueuse/integrations": "10.4.1",
     "perfect-debounce": "1.0.0",

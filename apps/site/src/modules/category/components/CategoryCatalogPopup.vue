@@ -36,7 +36,7 @@ const { data: categories } = getCategories();
 
 .popup {
   position: absolute;
-  top: 80px;
+  top: 76px;
   left: 244px;
   padding: 16px 0;
   background-color: var(--color-white);

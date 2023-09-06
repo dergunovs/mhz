@@ -121,9 +121,14 @@ export interface IConfiguration extends IEntity {
   mouse: IProduct;
 }
 
-export interface IFilterData {
+export interface IFilter {
   [key: string]: {
     fieldUnits?: string;
     fieldValues: { value: string | number | boolean; count: number }[];
   };
+}
+
+export interface IFilterData {
+  price: [number, number];
+  filters: IFilter;
 }
