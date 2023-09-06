@@ -94,10 +94,14 @@ export async function addProductToWatched(
 }
 
 export async function getProductFilters(filtersRaw?: string) {
-  const filter = filtersRaw ? JSON.parse(filtersRaw) : {};
+  const filter: object = filtersRaw ? JSON.parse(filtersRaw) : {};
 
-  const filters = await Product.aggregate([
-    { $match: { category: new Types.ObjectId(filter.category) } },
+  const mappedFilter = Object.fromEntries(
+    Object.entries(filter).map(([k, v]) => [k, ['category', 'manufacturer'].includes(k) ? new Types.ObjectId(v) : v])
+  );
+
+  const filterByFields = await Product.aggregate([
+    { $match: mappedFilter },
     { $unwind: '$fields' },
     {
       $group: {
@@ -112,22 +116,38 @@ export async function getProductFilters(filtersRaw?: string) {
     { $project: { _id: 0 } },
   ]);
 
-  const titles = [...new Set(filters.map((item) => item.title))];
+  const filterByManufacturer = await Product.aggregate([
+    { $match: mappedFilter },
+    { $group: { _id: '$manufacturer', count: { $sum: 1 } } },
+    { $lookup: { from: 'manufacturers', localField: '_id', foreignField: '_id', as: 'manufacturer' } },
+    { $unwind: '$manufacturer' },
+    { $project: { value: '$manufacturer.title', count: 1, _id: 0 } },
+  ]);
 
-  const grouped: IFilterData = {};
+  const filterByCategory = await Product.aggregate([
+    { $match: mappedFilter },
+    { $group: { _id: '$category', count: { $sum: 1 } } },
+    { $lookup: { from: 'categories', localField: '_id', foreignField: '_id', as: 'category' } },
+    { $unwind: '$category' },
+    { $project: { value: '$category.title', count: 1, _id: 0 } },
+  ]);
+
+  const titles = [...new Set(filterByFields.map((item) => item.title))];
+
+  const groupedFields: IFilterData = {};
 
   titles.forEach((title) => {
-    grouped[title] = {
+    groupedFields[title] = {
       fieldUnits: '',
       fieldValues: [],
     };
 
-    filters.forEach((item) => {
+    filterByFields.forEach((item) => {
       if (item.title === title) {
-        grouped[title].fieldUnits = item.fieldUnits;
-        grouped[title].fieldValues.push({ value: item.fieldValue, count: item.count });
+        groupedFields[title].fieldUnits = item.fieldUnits;
+        groupedFields[title].fieldValues.push({ value: item.fieldValue, count: item.count });
 
-        grouped[title].fieldValues.sort((a, b) =>
+        groupedFields[title].fieldValues.sort((a, b) =>
           item.fieldType === 'number'
             ? Number(a.value) - Number(b.value)
             : a.value.toString().localeCompare(b.value.toString())
@@ -136,13 +156,17 @@ export async function getProductFilters(filtersRaw?: string) {
     });
   });
 
-  const ordered = Object.keys(grouped)
+  const orderedFields = Object.keys(groupedFields)
     .sort()
     .reduce((obj: { [key: string]: object }, key) => {
-      obj[key] = grouped[key];
+      obj[key] = groupedFields[key];
 
       return obj;
     }, {});
 
-  return ordered;
+  return {
+    Category: { fieldValues: filterByCategory.sort((a, b) => a.value.localeCompare(b.value)) },
+    Manufacturer: { fieldValues: filterByManufacturer.sort((a, b) => a.value.localeCompare(b.value)) },
+    ...orderedFields,
+  };
 }

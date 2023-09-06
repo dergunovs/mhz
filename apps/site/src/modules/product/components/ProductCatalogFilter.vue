@@ -1,24 +1,26 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.filters">
-      <div v-for="(item, key) in props.filters" :key="key">
-        <div :class="$style.title">
-          {{ key }}<template v-if="item.fieldUnits">, {{ item.fieldUnits }}</template>
-        </div>
+      <div v-for="(item, key) in props.filters" :key="key" :class="$style.filter">
+        <div v-if="route.name !== key">
+          <div :class="$style.title">
+            {{ key }}<template v-if="item.fieldUnits">, {{ item.fieldUnits }}</template>
+          </div>
 
-        <div :class="$style.values">
-          <UiCheckbox
-            v-for="value in item.fieldValues"
-            :key="value.value.toString()"
-            :modelValue="
-              choosenFilters?.some(
-                (filter) => filter.title === key.toString() && filter.values.includes(value.value.toString())
-              )
-            "
-            @update:modelValue="updateFilters(key.toString(), value.value.toString(), $event)"
-            :label="`${value.value}`"
-            :subLabel="` (${value.count})`"
-          />
+          <div :class="$style.values">
+            <UiCheckbox
+              v-for="value in item.fieldValues"
+              :key="value.value.toString()"
+              :modelValue="
+                choosenFilters?.some(
+                  (filter) => filter.title === key.toString() && filter.values.includes(value.value.toString())
+                )
+              "
+              @update:modelValue="updateFilters(key.toString(), value.value.toString(), $event)"
+              :label="`${value.value}`"
+              :subLabel="` (${value.count})`"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -27,6 +29,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { IFilterData } from 'mhz-types';
 import { UiCheckbox } from 'mhz-ui';
@@ -38,6 +41,8 @@ interface IProps {
 const props = defineProps<IProps>();
 
 const choosenFilters = ref<{ title: string; values: string[] }[]>([]);
+
+const route = useRoute();
 
 function updateFilters(title: string, value: string, isChecked: boolean) {
   const currentFilter = choosenFilters.value.find((filter) => filter.title === title);
@@ -59,9 +64,8 @@ function updateFilters(title: string, value: string, isChecked: boolean) {
   display: flex;
   flex-shrink: 0;
   width: 240px;
-  padding: 16px;
-  border: 1px solid var(--color-gray);
-  border-radius: 16px;
+  padding-right: 16px;
+  border-right: 1px solid var(--color-gray);
 }
 
 .filters {
@@ -71,10 +75,14 @@ function updateFilters(title: string, value: string, isChecked: boolean) {
   gap: 16px;
 }
 
+.filter:empty {
+  display: none;
+}
+
 .title {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .values {
