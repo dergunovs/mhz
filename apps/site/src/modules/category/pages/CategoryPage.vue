@@ -5,20 +5,15 @@
       <CategoryCard v-if="category" :category="category" />
     </div>
 
-    <div :class="$style.products">
-      <ProductCatalogFilter v-if="data" :filters="data.filters" />
+    <div v-if="data && products?.length" :class="$style.products">
+      <ProductCatalogFilter :filters="data.filters" />
 
       <div :class="$style.container">
         <ProductCatalogSort v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />
 
-        <ProductCatalogList v-if="products?.length" :products="products" />
+        <ProductCatalogList :products="products" />
 
-        <UiPagination
-          v-if="products?.length"
-          :page="query.page"
-          :total="total"
-          @update="(value) => setQueryPage(setPage(value, query.page))"
-        />
+        <UiPagination :page="query.page" :total="total" @update="(value) => setQueryPage(setPage(value, query.page))" />
       </div>
     </div>
   </div>

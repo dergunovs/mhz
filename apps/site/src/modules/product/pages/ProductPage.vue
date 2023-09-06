@@ -4,7 +4,7 @@
 
     <ProductCard :product="product" />
 
-    <CustomerWatchedProducts />
+    <CustomerWatchedProducts v-if="isAuth" />
   </div>
 </template>
 
@@ -12,6 +12,8 @@
 import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
+
+import { isAuth } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ProductCard from '@/product/components/ProductCard.vue';

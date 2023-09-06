@@ -2,12 +2,14 @@
   <div>
     <PageTitle>{{ title }}</PageTitle>
 
-    <CustomerWatchedProducts />
+    <CustomerWatchedProducts v-if="isAuth" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useHead } from '@vueuse/head';
+
+import { isAuth } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import CustomerWatchedProducts from '@/customer/components/CustomerWatchedProducts.vue';

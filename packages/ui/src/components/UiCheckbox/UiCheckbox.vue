@@ -2,7 +2,11 @@
   <label @click.stop :data-disabled="props.isDisabled" :class="$style.checkbox">
     <span v-if="props.error" :class="$style.required">{{ props.error }}</span>
 
-    <span v-if="props.label">{{ props.label }}<span v-if="props.isRequired" :class="$style.required">*</span></span>
+    <span v-if="props.label">
+      <span>{{ props.label }}</span>
+      <span v-if="props.subLabel" :class="$style.subLabel">{{ props.subLabel }}</span>
+      <span v-if="props.isRequired" :class="$style.required">*</span>
+    </span>
 
     <input
       @change="handleChange"
@@ -42,6 +46,7 @@ interface IProps {
   initialValue?: InitialValue;
   modelValue?: InitialValue;
   label?: string;
+  subLabel?: string;
   labelSwitcher?: string;
   error?: string | boolean;
   isRequired?: boolean;
@@ -53,6 +58,7 @@ const props = withDefaults(defineProps<IProps>(), {
   modelValue: false,
   initialValue: false,
   label: '',
+  subLabel: '',
   labelSwitcher: '',
   error: false,
 });
@@ -218,6 +224,11 @@ function handleChange() {
   &[data-error='true'] {
     border-color: var(--color-error);
   }
+}
+
+.subLabel {
+  font-size: 0.875rem;
+  color: var(--color-gray-dark);
 }
 
 .required {

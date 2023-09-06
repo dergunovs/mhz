@@ -109,9 +109,7 @@ export async function getProductFilters(filtersRaw?: string) {
         count: { $sum: 1 },
       },
     },
-    {
-      $project: { _id: 0 },
-    },
+    { $project: { _id: 0 } },
   ]);
 
   const titles = [...new Set(filters.map((item) => item.title))];
@@ -120,19 +118,31 @@ export async function getProductFilters(filtersRaw?: string) {
 
   titles.forEach((title) => {
     grouped[title] = {
-      fieldType: 'string',
       fieldUnits: '',
-      values: [],
+      fieldValues: [],
     };
 
     filters.forEach((item) => {
       if (item.title === title) {
-        grouped[title].fieldType = item.fieldType;
         grouped[title].fieldUnits = item.fieldUnits;
-        grouped[title].values.push({ field: item.fieldValue, count: item.count });
+        grouped[title].fieldValues.push({ value: item.fieldValue, count: item.count });
+
+        grouped[title].fieldValues.sort((a, b) =>
+          item.fieldType === 'number'
+            ? Number(a.value) - Number(b.value)
+            : a.value.toString().localeCompare(b.value.toString())
+        );
       }
     });
   });
 
-  return grouped;
+  const ordered = Object.keys(grouped)
+    .sort()
+    .reduce((obj: { [key: string]: object }, key) => {
+      obj[key] = grouped[key];
+
+      return obj;
+    }, {});
+
+  return ordered;
 }

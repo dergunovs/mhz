@@ -123,8 +123,7 @@ export interface IConfiguration extends IEntity {
 
 export interface IFilterData {
   [key: string]: {
-    fieldType: TCategoryFieldType;
-    fieldUnits?: string | number | boolean;
-    values: { field: string; count: number }[];
+    fieldUnits?: string;
+    fieldValues: { value: string | number | boolean; count: number }[];
   };
 }
