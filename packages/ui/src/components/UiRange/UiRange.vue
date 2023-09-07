@@ -1,20 +1,19 @@
 <template>
-  <div :class="$style.container">
-    <Slider
-      :modelValue="props.modelValue"
-      @update:modelValue="(value: number) => emit('update:modelValue', value)"
-      :min="props.min"
-      :max="props.max"
-      tooltipPosition="bottom"
-    />
-  </div>
+  <Slider
+    :modelValue="props.modelValue"
+    @update:modelValue="(value: number) => emit('update:modelValue', value)"
+    :min="props.min"
+    :max="props.max"
+    tooltipPosition="bottom"
+    :class="$style.range"
+  />
 </template>
 
 <script setup lang="ts">
 import Slider from '@vueform/slider';
 
 interface IProps {
-  modelValue?: [number, number];
+  modelValue: [number, number];
   min: number;
   max: number;
 }
@@ -26,10 +25,6 @@ const emit = defineEmits(['update:modelValue']);
 <style src="@vueform/slider/themes/default.css"></style>
 
 <style module lang="scss">
-.container {
-  width: 100%;
-}
-
 :root {
   --slider-bg: var(--color-gray-light);
   --slider-connect-bg: var(--color-gray-dark);
@@ -43,5 +38,9 @@ const emit = defineEmits(['update:modelValue']);
   --slider-tooltip-px: 4px;
   --slider-tooltip-arrow-size: 4px;
   --slider-tooltip-distance: 2px;
+}
+
+.range {
+  width: 100%;
 }
 </style>

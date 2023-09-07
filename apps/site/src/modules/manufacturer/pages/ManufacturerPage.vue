@@ -6,15 +6,20 @@
     </div>
 
     <div :class="$style.products">
-      <ProductCatalogFilter v-if="data" :filters="data.filters" />
+      <ProductCatalogFilter v-if="data?.filters" :filters="data.filters" :key="manufacturerId.toString()" />
 
       <div :class="$style.container">
-        <ProductCatalogSort v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />
+        <ProductCatalogSort
+          v-show="products?.length"
+          v-model="query.sort"
+          :page="query.page"
+          @reset="(value) => resetQuery(value)"
+        />
 
         <ProductCatalogList v-if="products?.length" :products="products" />
 
         <UiPagination
-          v-if="products?.length"
+          v-show="products?.length"
           :page="query.page"
           :total="total"
           @update="(value) => setQueryPage(setPage(value, query.page))"

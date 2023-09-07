@@ -97,6 +97,8 @@ function updateFilters(title: string, value: string, isChecked: boolean) {
 }
 
 .range {
+  position: relative;
+  z-index: 0;
   padding: 0 12px;
 }
 
