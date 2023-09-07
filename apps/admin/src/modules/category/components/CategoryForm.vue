@@ -13,7 +13,6 @@
       :fields="formData.fields"
       :isShowCategoryFieldForm="isShowCategoryFieldForm"
       @edit="editCategoryField"
-      @update="updateFieldList"
     />
 
     <UiButton @click="showCategoryField" v-if="!isShowCategoryFieldForm" layout="secondary">
@@ -144,10 +143,6 @@ function updateCategoryField(fieldToUpdate: ICategoryField) {
 
 function deleteCategoryField(fieldId: string) {
   formData.value.fields = formData.value.fields?.filter((field) => field._id !== fieldId);
-}
-
-function updateFieldList(fields: ICategoryField[]) {
-  formData.value.fields = [...fields];
 }
 
 function submit() {

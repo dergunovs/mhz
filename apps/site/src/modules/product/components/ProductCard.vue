@@ -2,7 +2,7 @@
   <div>
     <div :class="$style.top">
       <div :class="$style.image">
-        <img :src="`${PATH_UPLOAD}/${product.imageUrls[0]}`" :alt="product.title" crossorigin="anonymous" />
+        <UiSlider :slides="props.product.imageUrls" :thumbs="props.product.thumbUrls" :path="`${PATH_UPLOAD}/`" />
       </div>
 
       <div :class="$style.fields">
@@ -64,6 +64,7 @@
 </template>
 
 <script setup lang="ts">
+import { UiSlider } from 'mhz-ui';
 import { IProduct } from 'mhz-types';
 import { isAuth } from 'mhz-helpers';
 
