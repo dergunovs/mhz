@@ -3,21 +3,25 @@ import { Ref, ComputedRef } from 'vue';
 import { IFilterData, IProduct } from 'mhz-types';
 import { api, useQuery, IPageQuery } from 'mhz-helpers';
 
-import { API_PRODUCT } from '@/product/constants';
+import { API_PRODUCT, API_PRODUCT_PRICE_RANGE, API_PRODUCT_FILTERS } from '@/product/constants';
 
-export function getProducts(query: Ref<IPageQuery | number>) {
+export function getProducts(query: Ref<IPageQuery | number>, initiator?: 'category' | 'manufacturer') {
   async function fn(): Promise<{ data: IProduct[]; total: number; filters: IFilterData }> {
     const params =
       typeof query.value === 'number'
         ? { page: query.value }
         : {
+            initiator,
             page: query.value.page || 1,
             sort: query.value.sort.value,
             dir: query.value.sort.isAsc === false ? 'desc' : 'asc',
-            filter: JSON.stringify(query.value.filter),
+            ...query.value.filter,
           };
 
-    const { data } = await api.get(API_PRODUCT, { params });
+    const { data } = await api.get(API_PRODUCT, {
+      params,
+      paramsSerializer: { indexes: null },
+    });
 
     return data;
   }
@@ -35,4 +39,28 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
   }
 
   return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
+}
+
+export function getProductPriceRange(initiator: 'category' | 'manufacturer', id?: ComputedRef<string | string[]>) {
+  async function fn(): Promise<[number, number] | null> {
+    if (!id?.value) return null;
+
+    const { data } = await api.get(`${API_PRODUCT_PRICE_RANGE}`, { params: { initiator, _id: id.value } });
+
+    return data;
+  }
+
+  return useQuery({ queryKey: [API_PRODUCT_PRICE_RANGE, id], queryFn: fn });
+}
+
+export function getProductFilters(initiator: 'category' | 'manufacturer', id?: ComputedRef<string | string[]>) {
+  async function fn(): Promise<IFilterData | null> {
+    if (!id?.value) return null;
+
+    const { data } = await api.get(`${API_PRODUCT_FILTERS}`, { params: { initiator, _id: id.value } });
+
+    return data;
+  }
+
+  return useQuery({ queryKey: [API_PRODUCT_FILTERS, id], queryFn: fn });
 }

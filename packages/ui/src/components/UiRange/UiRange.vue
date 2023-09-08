@@ -1,12 +1,13 @@
 <template>
-  <Slider
-    :modelValue="props.modelValue"
-    @update:modelValue="(value: number) => emit('update:modelValue', value)"
-    :min="props.min"
-    :max="props.max"
-    tooltipPosition="bottom"
-    :class="$style.range"
-  />
+  <div :class="$style.range">
+    <Slider
+      :modelValue="props.modelValue"
+      @update:modelValue="(value: number) => emit('update:modelValue', value)"
+      :min="props.min"
+      :max="props.max"
+      tooltipPosition="bottom"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">

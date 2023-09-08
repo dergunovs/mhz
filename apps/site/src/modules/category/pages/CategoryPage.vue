@@ -6,7 +6,14 @@
     </div>
 
     <div :class="$style.products">
-      <ProductCatalogFilter v-if="data?.filters" :filters="data.filters" :key="categoryId.toString()" />
+      <ProductCatalogFilter
+        v-if="priceRange && filters"
+        :filtersInitial="filters"
+        :filtersBase="data?.filters"
+        :priceRange="priceRange"
+        :key="categoryId.toString()"
+        @update="updateQuery"
+      />
 
       <div :class="$style.container">
         <ProductCatalogSort
@@ -44,7 +51,7 @@ import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
 import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
 
 import { getCategory } from '@/category/services';
-import { getProducts } from '@/product/services';
+import { getProducts, getProductPriceRange, getProductFilters } from '@/product/services';
 import { URL_MAIN } from '@/common/constants';
 import { URL_CATEGORY } from '@/category/constants';
 
@@ -52,18 +59,25 @@ const route = useRoute();
 
 const categoryId = computed(() => route.params.category);
 
-const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: categoryId.value });
+const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: [categoryId.value] });
 
 const { data: category } = getCategory(categoryId);
 
-const { data } = getProducts(query);
+const { data } = getProducts(query, 'category');
 
 const { data: products, setPage, total } = usePagination(data);
+
+const { data: priceRange } = getProductPriceRange('category', categoryId);
+const { data: filters } = getProductFilters('category', categoryId);
+
+function updateQuery(filtersToSet: object) {
+  setQueryFilter({ category: [categoryId.value], ...filtersToSet });
+}
 
 watch(
   () => categoryId.value,
   () => {
-    setQueryFilter({ category: categoryId.value });
+    setQueryFilter({ category: [categoryId.value] });
   }
 );
 

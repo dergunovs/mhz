@@ -60,7 +60,7 @@ export type TCategoryFieldType = "string" | "number" | "boolean";
 export interface ICategoryField extends IEntity {
   title: string;
   fieldType: TCategoryFieldType;
-  fieldValue: string | number | boolean;
+  fieldValue: string | boolean;
   fieldUnits?: string;
 }
 
@@ -121,14 +121,26 @@ export interface IConfiguration extends IEntity {
   mouse: IProduct;
 }
 
-export interface IFilter {
+export interface IFilterFieldValue {
+  value: string | number | boolean;
+  count: number;
+}
+
+export interface IFilterBaseValue {
+  count: number;
+  _id: string;
+  title: string;
+}
+
+export interface IFilterField {
   [key: string]: {
     fieldUnits?: string;
-    fieldValues: { value: string | number | boolean; count: number }[];
+    fieldValues: IFilterFieldValue[];
   };
 }
 
 export interface IFilterData {
-  price: [number, number];
-  filters: IFilter;
+  category: IFilterBaseValue[];
+  manufacturer: IFilterBaseValue[];
+  fields: IFilterField;
 }

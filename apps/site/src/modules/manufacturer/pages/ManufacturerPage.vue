@@ -6,7 +6,14 @@
     </div>
 
     <div :class="$style.products">
-      <ProductCatalogFilter v-if="data?.filters" :filters="data.filters" :key="manufacturerId.toString()" />
+      <ProductCatalogFilter
+        v-if="priceRange && filters"
+        :filtersInitial="filters"
+        :filtersBase="data?.filters"
+        :priceRange="priceRange"
+        :key="manufacturerId.toString()"
+        @update="updateQuery"
+      />
 
       <div :class="$style.container">
         <ProductCatalogSort
@@ -44,7 +51,7 @@ import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
 import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
 
 import { getManufacturer } from '@/manufacturer/services';
-import { getProducts } from '@/product/services';
+import { getProducts, getProductPriceRange, getProductFilters } from '@/product/services';
 import { URL_MAIN } from '@/common/constants';
 import { URL_MANUFACTURER } from '@/manufacturer/constants';
 
@@ -52,18 +59,25 @@ const route = useRoute();
 
 const manufacturerId = computed(() => route.params.manufacturer);
 
-const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ manufacturer: manufacturerId.value });
+const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ manufacturer: [manufacturerId.value] });
 
 const { data: manufacturer } = getManufacturer(manufacturerId);
 
-const { data } = getProducts(query);
+const { data } = getProducts(query, 'manufacturer');
 
 const { data: products, setPage, total } = usePagination(data);
+
+const { data: priceRange } = getProductPriceRange('manufacturer', manufacturerId);
+const { data: filters } = getProductFilters('manufacturer', manufacturerId);
+
+function updateQuery(filtersToSet: object) {
+  setQueryFilter({ manufacturer: [manufacturerId.value], ...filtersToSet });
+}
 
 watch(
   () => manufacturerId.value,
   () => {
-    setQueryFilter({ category: manufacturerId.value });
+    setQueryFilter({ category: [manufacturerId.value] });
   }
 );
 

@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 import { IProduct } from 'mhz-types';
 
 import Product from '../../../models/product.js';
@@ -8,23 +10,56 @@ export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', async function (request, reply) {
     try {
       const { data, total } = await paginate(Product, {
-        page: request.query.page,
-        sort: request.query.sort,
-        dir: request.query.dir,
+        ...request.query,
         populate: [
           { path: 'category', select: '_id title' },
           { path: 'manufacturer', select: '_id title' },
         ],
-        filter: request.query.filter,
       });
 
-      const filters = await getProductFilters(request.query.filter);
+      const filters = await getProductFilters(request.query, false);
 
       reply.code(200).send({ data, total, filters });
     } catch (err) {
       reply.code(500).send({ message: err });
     }
   });
+
+  fastify.get<{ Querystring: { _id: string; initiator: 'category' | 'manufacturer' } }>(
+    '/price',
+    async function (request, reply) {
+      try {
+        const defaultMinAndMaxPrice = await Product.aggregate([
+          { $match: { [request.query.initiator]: new Types.ObjectId(request.query._id) } },
+          { $group: { _id: null, min: { $min: '$price' }, max: { $max: '$price' } } },
+          { $project: { _id: 0, price: ['$min', '$max'] } },
+        ]);
+
+        reply.code(200).send(defaultMinAndMaxPrice[0].price);
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.get<{ Querystring: { _id: string; initiator: 'category' | 'manufacturer' } }>(
+    '/filters',
+    async function (request, reply) {
+      try {
+        const filters = await getProductFilters(
+          {
+            [request.query.initiator]: request.query._id,
+            initiator: request.query.initiator,
+          },
+          true
+        );
+
+        reply.code(200).send(filters);
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
 
   fastify.get<{ Params: { id: string } }>('/:id', async function (request, reply) {
     try {

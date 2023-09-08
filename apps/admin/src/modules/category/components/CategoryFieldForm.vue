@@ -57,7 +57,7 @@ watch(
   () => formData.value.fieldType,
   () => {
     if (formData.value.fieldType === 'string') formData.value.fieldValue = '';
-    if (formData.value.fieldType === 'number') formData.value.fieldValue = 0;
+    if (formData.value.fieldType === 'number') formData.value.fieldValue = '';
     if (formData.value.fieldType === 'boolean') formData.value.fieldValue = false;
 
     if (formData.value.fieldType !== 'number') formData.value.fieldUnits = undefined;

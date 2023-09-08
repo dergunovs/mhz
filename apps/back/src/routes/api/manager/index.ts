@@ -8,11 +8,7 @@ import { paginate } from '../../../helpers/index.js';
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
     try {
-      const { data, total } = await paginate(Manager, {
-        page: request.query.page,
-        sort: request.query.sort,
-        dir: request.query.dir,
-      });
+      const { data, total } = await paginate(Manager, request.query);
 
       reply.code(200).send({ data, total });
     } catch (err) {

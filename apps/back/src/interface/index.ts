@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { ObjectId } from 'mongoose';
+import { ObjectId, PopulateOptions } from 'mongoose';
 
 export interface IFastifyInstance extends FastifyInstance {
   onlyManager: () => void;
@@ -7,10 +7,15 @@ export interface IFastifyInstance extends FastifyInstance {
 }
 
 export interface IQuery {
-  page: string;
+  page?: string;
   sort?: string;
   dir?: 'asc' | 'desc';
-  filter?: string;
+  category?: string | string[];
+  manufacturer?: string | string[];
+  price?: [string, string];
+  fields?: [];
+  populate?: PopulateOptions[];
+  initiator?: 'category' | 'manufacturer';
 }
 
 export type TUserRole = 'customer' | 'manager';

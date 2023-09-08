@@ -5,30 +5,62 @@
         <div :class="$style.title">Price</div>
 
         <div :class="$style.range">
-          <UiRange :min="props.filters.price[0]" :max="props.filters.price[1]" v-model="price" />
+          <UiRange
+            :min="props.priceRange[0]"
+            :max="props.priceRange[1]"
+            :modelValue="choosenPrice"
+            @update:modelValue="updatePrice"
+          />
         </div>
       </div>
 
-      <div v-for="(item, key) in props.filters.filters" :key="key" :class="$style.filter">
-        <div v-if="route.name !== key">
-          <div :class="$style.title">
-            {{ key }}<template v-if="item.fieldUnits">, {{ item.fieldUnits }}</template>
-          </div>
+      <div v-if="route.name === 'Manufacturer'" :class="$style.filter">
+        <div :class="$style.title">Category</div>
 
-          <div :class="$style.values">
-            <UiCheckbox
-              v-for="value in item.fieldValues"
-              :key="value.value.toString()"
-              :modelValue="
-                choosenFilters?.some(
-                  (filter) => filter.title === key.toString() && filter.values.includes(value.value.toString())
-                )
-              "
-              @update:modelValue="updateFilters(key.toString(), value.value.toString(), $event)"
-              :label="`${value.value}`"
-              :subLabel="` (${value.count})`"
-            />
-          </div>
+        <div :class="$style.values">
+          <UiCheckbox
+            v-for="category in filters.category"
+            :key="category._id"
+            :modelValue="choosenCategories.some((choosen) => choosen._id === category._id)"
+            @update:modelValue="updateCategories(category, $event)"
+            :label="`${category.title}`"
+            :subLabel="` (${category.count})`"
+          />
+        </div>
+      </div>
+      <div v-if="route.name === 'Category'" :class="$style.filter">
+        <div :class="$style.title">Manufacturer</div>
+
+        <div :class="$style.values">
+          <UiCheckbox
+            v-for="manufacturer in filters.manufacturer"
+            :key="manufacturer._id"
+            :modelValue="choosenManufacturers.some((choosen) => choosen._id === manufacturer._id)"
+            @update:modelValue="updateManufacturers(manufacturer, $event)"
+            :label="`${manufacturer.title}`"
+            :subLabel="` (${manufacturer.count})`"
+          />
+        </div>
+      </div>
+
+      <div v-for="(item, key) in filters.fields" :key="key" :class="$style.filter">
+        <div :class="$style.title">
+          {{ key }}<template v-if="item.fieldUnits">, {{ item.fieldUnits }}</template>
+        </div>
+
+        <div :class="$style.values">
+          <UiCheckbox
+            v-for="value in item.fieldValues"
+            :key="value.value.toString()"
+            :modelValue="
+              choosenFields.some(
+                (field) => field.title === key.toString() && field.values.includes(value.value.toString())
+              )
+            "
+            @update:modelValue="updateFields(key.toString(), value.value.toString(), $event)"
+            :label="`${value.value}`"
+            :subLabel="` (${value.count})`"
+          />
         </div>
       </div>
     </div>
@@ -36,37 +68,90 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { IFilterData } from 'mhz-types';
+import { IFilterData, IFilterBaseValue } from 'mhz-types';
 import { UiCheckbox, UiRange } from 'mhz-ui';
+import { clone } from 'mhz-helpers';
 
 interface IProps {
-  filters: IFilterData;
+  filtersInitial: IFilterData;
+  filtersBase?: IFilterData;
+  priceRange: [number, number];
 }
 
 const props = defineProps<IProps>();
-
-const price = ref<[number, number]>([props.filters.price[0], props.filters.price[1]]);
-
-const choosenFilters = ref<{ title: string; values: string[] }[]>([]);
+const emit = defineEmits(['update']);
 
 const route = useRoute();
 
-function updateFilters(title: string, value: string, isChecked: boolean) {
-  const currentFilter = choosenFilters.value.find((filter) => filter.title === title);
+const choosenPrice = ref<[number, number]>([props.priceRange[0], props.priceRange[1]]);
+const choosenCategories = ref<IFilterBaseValue[]>([]);
+const choosenManufacturers = ref<IFilterBaseValue[]>([]);
+const choosenFields = ref<{ title: string; values: string[] }[]>([]);
+
+const filters = ref<IFilterData>(props.filtersInitial);
+
+function updatePrice(value: [number, number]) {
+  choosenPrice.value = [...value];
+}
+
+function updateFields(title: string, value: string, isChecked: boolean) {
+  const currentField = choosenFields.value.find((field) => field.title === title);
 
   if (isChecked) {
-    if (currentFilter) {
-      currentFilter.values = [...currentFilter.values, value];
+    if (currentField) {
+      currentField.values = [...currentField.values, value];
     } else {
-      choosenFilters.value = [...choosenFilters.value, { title, values: [value] }];
+      choosenFields.value = [...choosenFields.value, { title, values: [value] }];
     }
-  } else if (currentFilter) {
-    currentFilter.values = currentFilter.values.filter((currentValue) => currentValue !== value);
+  } else if (currentField) {
+    currentField.values = currentField.values.filter((currentValue) => currentValue !== value);
   }
 }
+
+function updateCategories(category: IFilterBaseValue, isChecked: boolean) {
+  choosenCategories.value = isChecked
+    ? [...choosenCategories.value, category]
+    : choosenCategories.value.filter((current) => current._id !== category._id);
+}
+
+function updateManufacturers(manufacturer: IFilterBaseValue, isChecked: boolean) {
+  choosenManufacturers.value = isChecked
+    ? [...choosenManufacturers.value, manufacturer]
+    : choosenManufacturers.value.filter((current) => current._id !== manufacturer._id);
+}
+
+const choosenFilters = computed(() => {
+  const price = { price: choosenPrice.value };
+
+  const category = { category: choosenCategories.value.map((cat) => cat._id) };
+
+  const manufacturer = { manufacturer: choosenManufacturers.value.map((man) => man._id) };
+
+  const fields = choosenFields.value.map((field) => {
+    return { [field.title]: field.values };
+  });
+
+  return route.name === 'Category' ? { ...price, ...manufacturer, fields } : { ...price, ...category, fields };
+});
+
+watch(
+  () => choosenFilters.value,
+  () => {
+    emit('update', choosenFilters.value);
+  }
+);
+
+watch(
+  () => props.filtersBase,
+  () => {
+    if (props.filtersInitial && props.filtersBase) {
+      filters.value = clone(props.filtersBase);
+    }
+  }
+);
 </script>
 
 <style module lang="scss">
@@ -83,10 +168,6 @@ function updateFilters(title: string, value: string, isChecked: boolean) {
   flex-direction: column;
   flex-grow: 1;
   gap: 16px;
-}
-
-.filter:empty {
-  display: none;
 }
 
 .price {
