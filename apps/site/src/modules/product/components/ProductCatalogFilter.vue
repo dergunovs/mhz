@@ -25,6 +25,7 @@
             @update:modelValue="updateCategories(category, $event)"
             :label="`${category.title}`"
             :subLabel="` (${category.count})`"
+            :isDisabled="category.count === 0"
           />
         </div>
       </div>
@@ -39,29 +40,29 @@
             @update:modelValue="updateManufacturers(manufacturer, $event)"
             :label="`${manufacturer.title}`"
             :subLabel="` (${manufacturer.count})`"
+            :isDisabled="manufacturer.count === 0"
           />
         </div>
       </div>
 
-      <div v-for="(item, key) in filters.fields" :key="key" :class="$style.filter">
-        <div :class="$style.title">
-          {{ key }}<template v-if="item.fieldUnits">, {{ item.fieldUnits }}</template>
-        </div>
-
-        <div :class="$style.values">
-          <UiCheckbox
-            v-for="value in item.fieldValues"
-            :key="value.value.toString()"
-            :modelValue="
-              choosenFields.some(
-                (field) => field.title === key.toString() && field.values.includes(value.value.toString())
-              )
-            "
-            @update:modelValue="updateFields(key.toString(), value.value.toString(), $event)"
-            :label="`${value.value}`"
-            :subLabel="` (${value.count})`"
-          />
-        </div>
+      <div v-for="(item, key, index) in filters.fields" :key="key" :class="$style.filter">
+        <UiSpoiler v-model="fieldSpoilers[index]" :title="item.fieldUnits ? `${key}, ${item.fieldUnits}` : `${key}`">
+          <div :class="$style.values">
+            <UiCheckbox
+              v-for="value in item.fieldValues"
+              :key="value.value.toString()"
+              :modelValue="
+                choosenFields.some(
+                  (field) => field.title === key.toString() && field.values.includes(value.value.toString())
+                )
+              "
+              @update:modelValue="updateFields(key.toString(), value.value.toString(), $event)"
+              :label="convertBooleanValue(value.value)"
+              :subLabel="` (${value.count})`"
+              :isDisabled="value.count === 0"
+            />
+          </div>
+        </UiSpoiler>
       </div>
     </div>
   </div>
@@ -72,7 +73,7 @@ import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { IFilterData, IFilterField, IFilterBaseValue, IFilterFieldValue } from 'mhz-types';
-import { UiCheckbox, UiRange } from 'mhz-ui';
+import { UiCheckbox, UiRange, UiSpoiler } from 'mhz-ui';
 import { clone } from 'mhz-helpers';
 
 interface IProps {
@@ -86,12 +87,20 @@ const emit = defineEmits(['update']);
 
 const route = useRoute();
 
+const fieldSpoilers = ref([]);
+
 const choosenPrice = ref<[number, number]>([props.priceRange[0], props.priceRange[1]]);
 const choosenCategories = ref<IFilterBaseValue[]>([]);
 const choosenManufacturers = ref<IFilterBaseValue[]>([]);
 const choosenFields = ref<{ title: string; values: string[] }[]>([]);
 
 const filters = ref<IFilterData>(props.filtersInitial);
+
+function convertBooleanValue(value: string | boolean) {
+  if (typeof value === 'string') return value;
+
+  return value === true ? 'Yes' : 'No';
+}
 
 function updatePrice(value: [number, number]) {
   choosenPrice.value = [...value];
@@ -141,7 +150,8 @@ watch(
   () => [choosenPrice.value, choosenCategories.value, choosenManufacturers.value, choosenFields.value],
   () => {
     emit('update', choosenFilters.value);
-  }
+  },
+  { deep: true }
 );
 
 function findNewCount(
@@ -191,7 +201,11 @@ function cloneFilterFields(filter: IFilterData) {
 watch(
   () => props.filtersBase,
   () => {
-    if (props.filtersInitial && props.filtersBase) {
+    if (
+      props.filtersInitial &&
+      props.filtersBase &&
+      Object.keys(props.filtersBase.fields).length === Object.keys(props.filtersInitial.fields).length
+    ) {
       const newCategoriesAndManufacturers = cloneFilter(props.filtersBase);
       const newFields = cloneFilterFields(props.filtersBase);
 

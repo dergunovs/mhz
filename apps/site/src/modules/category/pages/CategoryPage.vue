@@ -16,6 +16,8 @@
       />
 
       <div :class="$style.container">
+        <div v-if="!products?.length && !isLoading">No such products. Please, change your filters</div>
+
         <ProductCatalogSort
           v-show="products?.length"
           v-model="query.sort"
@@ -63,7 +65,7 @@ const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: 
 
 const { data: category } = getCategory(categoryId);
 
-const { data } = getProducts(query, 'category');
+const { data, isLoading } = getProducts(query, 'category');
 
 const { data: products, setPage, total } = usePagination(data);
 
