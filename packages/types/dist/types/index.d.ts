@@ -122,7 +122,7 @@ export interface IConfiguration extends IEntity {
 }
 
 export interface IFilterFieldValue {
-  value: string | number | boolean;
+  value: string | boolean;
   count: number;
 }
 

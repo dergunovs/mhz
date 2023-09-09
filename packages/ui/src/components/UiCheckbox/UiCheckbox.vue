@@ -228,7 +228,7 @@ function handleChange() {
 
 .subLabel {
   font-size: 0.875rem;
-  color: var(--color-gray-dark);
+  color: var(--color-gray-dark-extra);
 }
 
 .required {
