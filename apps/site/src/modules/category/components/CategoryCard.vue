@@ -3,8 +3,9 @@
     <div :class="$style.imageBlock">
       <img
         :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
+        :alt="props.category.title"
         :class="$style.image"
-        width="240"
+        width="96"
         crossorigin="anonymous"
       />
     </div>
@@ -34,5 +35,13 @@ const props = defineProps<IProps>();
 .imageBlock {
   display: flex;
   flex-shrink: 0;
+  max-width: 240px;
+  height: 96px;
+}
+
+.image {
+  width: fit-content;
+  height: fit-content;
+  max-height: 96px;
 }
 </style>

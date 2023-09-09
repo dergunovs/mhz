@@ -1,15 +1,19 @@
 <template>
   <div :class="$style.manufacturer">
-    <img
-      :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`"
-      :class="$style.image"
-      height="64"
-      crossorigin="anonymous"
-    />
+    <div :class="$style.imageBlock">
+      <img
+        :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`"
+        :alt="props.manufacturer.title"
+        :class="$style.image"
+        width="96"
+        crossorigin="anonymous"
+      />
+    </div>
 
-    <div>Country: {{ props.manufacturer.country }}</div>
-
-    <div v-html="props.manufacturer.description"></div>
+    <div>
+      <div v-html="props.manufacturer.description"></div>
+      <div>Country: {{ props.manufacturer.country }}</div>
+    </div>
   </div>
 </template>
 
@@ -28,12 +32,19 @@ const props = defineProps<IProps>();
 <style module lang="scss">
 .manufacturer {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 32px;
+}
+
+.imageBlock {
+  display: flex;
+  flex-shrink: 0;
+  max-width: 240px;
+  height: 96px;
 }
 
 .image {
   width: fit-content;
-  height: 64px;
+  height: fit-content;
+  max-height: 96px;
 }
 </style>

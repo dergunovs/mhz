@@ -138,7 +138,7 @@ const choosenFilters = computed(() => {
 });
 
 watch(
-  () => choosenFilters.value,
+  () => [choosenPrice.value, choosenCategories.value, choosenManufacturers.value, choosenFields.value],
   () => {
     emit('update', choosenFilters.value);
   }
