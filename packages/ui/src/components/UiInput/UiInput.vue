@@ -11,8 +11,10 @@
       @input="handleInput($event.target)"
       :disabled="props.isDisabled"
       :class="$style.input"
-      v-bind="$attrs"
       ref="input"
+      v-bind="$attrs"
+      v-maska
+      :data-maska="props.isPhone ? '+7 (###) ###-##-##' : null"
       :data-mode="props.mode"
       :data-center="props.isCenter"
       :data-append-icon="!!props.appendIcon"
@@ -26,6 +28,8 @@
 <script setup lang="ts">
 import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
 
+import { vMaska } from 'maska';
+
 interface IProps {
   modelValue?: string | number | boolean | null;
   isDisabled?: boolean;
@@ -33,6 +37,7 @@ interface IProps {
   appendIcon?: FunctionalComponent;
   isFocus?: boolean;
   isCenter?: boolean;
+  isPhone?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {

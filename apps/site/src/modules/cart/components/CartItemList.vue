@@ -1,6 +1,6 @@
 <template>
-  <div :class="$style.list">
-    <CartItem v-for="item in props.cart" :key="item._id" :item="item" />
+  <div :class="$style.list" :data-checkout="props.isCheckout">
+    <CartItem v-for="item in props.cart" :key="item._id" :item="item" :isCheckout="props.isCheckout" />
   </div>
 </template>
 
@@ -11,6 +11,7 @@ import CartItem from '@/cart/components/CartItem.vue';
 
 interface IProps {
   cart: ICartItem[];
+  isCheckout?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -21,5 +22,9 @@ const props = defineProps<IProps>();
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  &[data-checkout='true'] {
+    gap: 8px;
+  }
 }
 </style>

@@ -47,6 +47,22 @@ export function postCustomer(options: object) {
   return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
 }
 
+export function updateCustomer(options: object) {
+  async function fn(formData: Omit<ICustomer, 'password'>) {
+    await api.patch(API_CUSTOMER, formData);
+  }
+
+  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
+}
+
+export function deleteCustomer(options: object) {
+  async function fn() {
+    await api.delete(API_CUSTOMER);
+  }
+
+  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
+}
+
 export function addToFavourites(options: object) {
   async function fn(_id?: string) {
     const { data } = await api.post(API_CUSTOMER_FAVOURITES, { _id });

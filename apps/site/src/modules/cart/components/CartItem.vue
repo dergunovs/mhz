@@ -1,30 +1,30 @@
 <template>
   <div :class="$style.cart">
-    <div>
+    <div v-if="!props.isCheckout">
       <img :src="`${PATH_UPLOAD}/${props.item.product.thumbUrls[0]}`" width="128" crossorigin="anonymous" />
     </div>
 
-    <div :class="$style.text">
+    <div :class="$style.text" :data-checkout="props.isCheckout">
       <RouterLink :to="`${URL_PRODUCT}/${props.item.product._id}`">
         {{ props.item.product.title }}
       </RouterLink>
 
-      <div>
+      <div v-if="!props.isCheckout">
         <span>Category: </span>
         <RouterLink :to="`${URL_CATEGORY}/${props.item.product.category._id}`">
           {{ props.item.product.category.title }}
         </RouterLink>
       </div>
 
-      <ProductActionButtons :product="props.item.product" />
+      <ProductActionButtons v-if="!props.isCheckout" :product="props.item.product" />
     </div>
 
     <div :class="$style.price">
-      <div :class="$style.priceComputed">{{ priceComputed }} {{ CURRENCY }}</div>
+      <div v-if="!props.isCheckout" :class="$style.priceComputed">{{ priceComputed }} {{ CURRENCY }}</div>
       <div>{{ `${props.item.count} x ${props.item.product.price}` }} {{ CURRENCY }}</div>
     </div>
 
-    <div :class="$style.actions">
+    <div v-if="!props.isCheckout" :class="$style.actions">
       <CartItemCount
         :id="props.item._id"
         :count="props.item.count"
@@ -54,6 +54,7 @@ import { API_CUSTOMER_CART } from '@/customer/constants';
 
 interface IProps {
   item: ICartItem;
+  isCheckout?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -87,6 +88,10 @@ const { mutate: updateCount } = updateCountCart({
   flex-direction: column;
   gap: 8px;
   width: 400px;
+
+  &[data-checkout='true'] {
+    width: 240px;
+  }
 }
 
 .price {

@@ -1,23 +1,25 @@
 <template>
   <div>
-    <PageTitle>{{ title }}</PageTitle>
+    <PageTitle v-if="customer">{{ title }}</PageTitle>
 
-    <div>{{ customer }}</div>
+    <CustomerForm v-if="customer" :customer="customer" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useHead } from '@vueuse/head';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
+import CustomerForm from '@/customer/components/CustomerForm.vue';
 
 import { getCurrentCustomer } from '@/customer/services';
 
 const { data: customer } = getCurrentCustomer();
 
-const title = 'Customer info';
+const title = computed(() => `${customer.value?.firstName} ${customer.value?.lastName}`);
 
 useHead({
-  title,
+  title: () => title.value,
 });
 </script>

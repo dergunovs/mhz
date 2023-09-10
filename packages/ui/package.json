@@ -29,6 +29,7 @@
     "@vueform/slider": "2.1.7",
     "@vueuse/core": "10.4.1",
     "@vueuse/integrations": "10.4.1",
+    "maska": "2.1.10",
     "perfect-debounce": "1.0.0",
     "vue": "3.3.4",
     "vue-router": "4.2.4"

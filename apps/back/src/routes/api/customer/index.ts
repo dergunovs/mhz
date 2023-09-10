@@ -39,6 +39,30 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
+  fastify.patch<{ Body: ICustomer }>('/', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
+    try {
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
+      await Customer.findOneAndUpdate({ _id: user?._id }, { ...request.body, dateUpdated: new Date() });
+
+      reply.code(200).send({ message: 'updated' });
+    } catch (err) {
+      reply.code(500).send({ message: err });
+    }
+  });
+
+  fastify.delete('/', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
+    try {
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
+      await Customer.findOneAndDelete({ _id: user?._id });
+
+      reply.code(200).send({ message: 'deleted' });
+    } catch (err) {
+      reply.code(500).send({ message: err });
+    }
+  });
+
   fastify.get('/current', { preValidation: [fastify.onlyCustomer] }, async function (request, reply) {
     try {
       const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
@@ -305,9 +329,8 @@ export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Body: ICustomer }>('/', async function (request, reply) {
     try {
       const customer = new Customer(request.body);
-      const hashedPassword = await bcrypt.hash(customer.password, 10);
 
-      customer.password = hashedPassword;
+      customer.password = await bcrypt.hash(customer.password, 10);
 
       await customer.save();
 

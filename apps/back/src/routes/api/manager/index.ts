@@ -47,9 +47,8 @@ export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Body: IManager }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
     try {
       const manager = new Manager(request.body);
-      const hashedPassword = await bcrypt.hash(manager.password, 10);
 
-      manager.password = hashedPassword;
+      manager.password = await bcrypt.hash(manager.password, 10);
 
       await manager.save();
 

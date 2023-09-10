@@ -2,10 +2,12 @@
   <div>
     <PageTitle>{{ title }}</PageTitle>
 
-    <div :class="$style.cart">
+    <div v-if="cart?.length" :class="$style.cart">
       <CartItemList v-if="cart" :cart="cart" />
       <CartSummary v-if="cart" :cart="cart" />
     </div>
+
+    <div v-else>Cart is empty.</div>
   </div>
 </template>
 

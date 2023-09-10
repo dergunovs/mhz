@@ -62,9 +62,8 @@ export default async function (fastify: IFastifyInstance) {
       }
 
       const manager = new Manager(request.body);
-      const hashedPassword = await bcrypt.hash(manager.password, 10);
 
-      manager.password = hashedPassword;
+      manager.password = await bcrypt.hash(manager.password, 10);
 
       await manager.save();
 

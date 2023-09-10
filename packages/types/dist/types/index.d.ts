@@ -4,14 +4,6 @@ interface IEntity {
   dateUpdated?: Date;
 }
 
-export interface IManager extends IEntity {
-  firstName?: string;
-  lastName?: string;
-  password: string;
-  email: string;
-  dateLoggedIn?: Date;
-}
-
 export interface ICartItem {
   _id: string;
   product: IProduct;
@@ -24,19 +16,22 @@ export interface IProductWatched {
   dateCreated: Date;
 }
 
-export interface ICustomer extends IEntity {
+export interface IManager extends IEntity {
   firstName?: string;
   lastName?: string;
-  phone?: string;
   password: string;
   email: string;
+  dateLoggedIn?: Date;
+}
+
+export interface ICustomer extends IManager {
+  phone?: string;
   cart?: ICartItem[];
   orders?: IOrder[];
   watchedProducts?: IProductWatched[];
   favouriteProducts?: IProduct[];
   comparisons?: IComparison[];
   configurations?: IConfiguration[];
-  dateLoggedIn?: Date;
 }
 
 export type TCategoryFieldType = "string" | "number" | "boolean";
