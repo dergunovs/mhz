@@ -101,22 +101,6 @@ export async function getProductFilters(options: IQuery, isInitial: boolean): Pr
 
   const filter = isInitial ? filterInitial : filterBase;
 
-  const filterByFields = await Product.aggregate([
-    { $match: filter },
-    { $unwind: '$fields' },
-    {
-      $group: {
-        _id: { title: '$fields.title', value: '$fields.fieldValue' },
-        title: { $first: '$fields.title' },
-        fieldType: { $first: '$fields.fieldType' },
-        fieldUnits: { $first: '$fields.fieldUnits' },
-        fieldValue: { $first: '$fields.fieldValue' },
-        count: { $sum: 1 },
-      },
-    },
-    { $project: { _id: 0 } },
-  ]);
-
   const filterByManufacturer = await Product.aggregate([
     { $match: filter },
     { $group: { _id: '$manufacturer', count: { $sum: 1 } } },
@@ -133,6 +117,22 @@ export async function getProductFilters(options: IQuery, isInitial: boolean): Pr
     { $unwind: '$category' },
     { $project: { _id: 0 } },
     { $project: { _id: '$category._id', title: '$category.title', count: 1 } },
+  ]);
+
+  const filterByFields = await Product.aggregate([
+    { $match: filter },
+    { $unwind: '$fields' },
+    {
+      $group: {
+        _id: { title: '$fields.title', value: '$fields.fieldValue' },
+        title: { $first: '$fields.title' },
+        fieldType: { $first: '$fields.fieldType' },
+        fieldUnits: { $first: '$fields.fieldUnits' },
+        fieldValue: { $first: '$fields.fieldValue' },
+        count: { $sum: 1 },
+      },
+    },
+    { $project: { _id: 0 } },
   ]);
 
   const titles = [...new Set(filterByFields.map((item) => item.title))];

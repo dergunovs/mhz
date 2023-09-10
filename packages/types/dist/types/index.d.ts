@@ -4,14 +4,6 @@ interface IEntity {
   dateUpdated?: Date;
 }
 
-export interface IAdress {
-  region: string;
-  city: string;
-  street: string;
-  house: string;
-  room: string;
-}
-
 export interface IManager extends IEntity {
   firstName?: string;
   lastName?: string;
@@ -38,21 +30,13 @@ export interface ICustomer extends IEntity {
   phone?: string;
   password: string;
   email: string;
-  card?: string;
   cart?: ICartItem[];
   orders?: IOrder[];
   watchedProducts?: IProductWatched[];
   favouriteProducts?: IProduct[];
   comparisons?: IComparison[];
   configurations?: IConfiguration[];
-  adress?: IAdress;
   dateLoggedIn?: Date;
-}
-
-export interface IShipment extends IEntity {
-  adress: IAdress;
-  price: number;
-  duration: number;
 }
 
 export type TCategoryFieldType = "string" | "number" | "boolean";
@@ -91,23 +75,24 @@ export interface IProduct extends IEntity {
   views?: number;
 }
 
+export type TOrderStatus = "new" | "paid" | "canceled" | "done";
+
 export interface IOrder extends IEntity {
   products: { product: IProduct; count: number }[];
-  shipment: IShipment;
-  user: ICustomer;
-  status: "payment" | "delivery" | "done" | "canceled";
+  customer: ICustomer;
+  status: TOrderStatus;
 }
 
 export interface IComparison extends IEntity {
   products: IProduct[];
   category: ICategory;
-  user: ICustomer;
+  customer: ICustomer;
 }
 
 export interface IConfiguration extends IEntity {
   title: string;
   isShared: boolean;
-  user: ICustomer;
+  customer: ICustomer;
   processor: IProduct;
   cooler: IProduct;
   mainboard: IProduct;

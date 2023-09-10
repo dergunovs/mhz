@@ -29,41 +29,44 @@
           />
         </div>
       </div>
-      <div v-if="route.name === 'Category'" :class="$style.filter">
-        <div :class="$style.title">Manufacturer</div>
 
-        <div :class="$style.values">
-          <UiCheckbox
-            v-for="manufacturer in filters.manufacturer"
-            :key="manufacturer._id"
-            :modelValue="choosenManufacturers.some((choosen) => choosen._id === manufacturer._id)"
-            @update:modelValue="updateManufacturers(manufacturer, $event)"
-            :label="`${manufacturer.title}`"
-            :subLabel="` (${manufacturer.count})`"
-            :isDisabled="manufacturer.count === 0"
-          />
-        </div>
-      </div>
+      <template v-if="route.name === 'Category'">
+        <div :class="$style.filter">
+          <div :class="$style.title">Manufacturer</div>
 
-      <div v-for="(item, key, index) in filters.fields" :key="key" :class="$style.filter">
-        <UiSpoiler v-model="fieldSpoilers[index]" :title="item.fieldUnits ? `${key}, ${item.fieldUnits}` : `${key}`">
           <div :class="$style.values">
             <UiCheckbox
-              v-for="value in item.fieldValues"
-              :key="value.value.toString()"
-              :modelValue="
-                choosenFields.some(
-                  (field) => field.title === key.toString() && field.values.includes(value.value.toString())
-                )
-              "
-              @update:modelValue="updateFields(key.toString(), value.value.toString(), $event)"
-              :label="convertBooleanValue(value.value)"
-              :subLabel="` (${value.count})`"
-              :isDisabled="value.count === 0"
+              v-for="manufacturer in filters.manufacturer"
+              :key="manufacturer._id"
+              :modelValue="choosenManufacturers.some((choosen) => choosen._id === manufacturer._id)"
+              @update:modelValue="updateManufacturers(manufacturer, $event)"
+              :label="`${manufacturer.title}`"
+              :subLabel="` (${manufacturer.count})`"
+              :isDisabled="manufacturer.count === 0"
             />
           </div>
-        </UiSpoiler>
-      </div>
+        </div>
+
+        <div v-for="(item, key, index) in filters.fields" :key="key" :class="$style.filter">
+          <UiSpoiler v-model="fieldSpoilers[index]" :title="item.fieldUnits ? `${key}, ${item.fieldUnits}` : `${key}`">
+            <div :class="$style.values">
+              <UiCheckbox
+                v-for="value in item.fieldValues"
+                :key="value.value.toString()"
+                :modelValue="
+                  choosenFields.some(
+                    (field) => field.title === key.toString() && field.values.includes(value.value.toString())
+                  )
+                "
+                @update:modelValue="updateFields(key.toString(), value.value.toString(), $event)"
+                :label="convertBooleanValue(value.value)"
+                :subLabel="` (${value.count})`"
+                :isDisabled="value.count === 0"
+              />
+            </div>
+          </UiSpoiler>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -201,11 +204,7 @@ function cloneFilterFields(filter: IFilterData) {
 watch(
   () => props.filtersBase,
   () => {
-    if (
-      props.filtersInitial &&
-      props.filtersBase &&
-      Object.keys(props.filtersBase.fields).length === Object.keys(props.filtersInitial.fields).length
-    ) {
+    if (props.filtersInitial && props.filtersBase && Object.keys(props.filtersBase.fields).length) {
       const newCategoriesAndManufacturers = cloneFilter(props.filtersBase);
       const newFields = cloneFilterFields(props.filtersBase);
 

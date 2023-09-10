@@ -30,6 +30,7 @@ useHead({
 <style module lang="scss">
 .cart {
   display: flex;
+  gap: 64px;
   justify-content: space-between;
 }
 </style>

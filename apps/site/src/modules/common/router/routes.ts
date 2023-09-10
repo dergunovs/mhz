@@ -8,6 +8,7 @@ import { manufacturerRoutes } from '@/manufacturer/routes';
 import { productRoutes } from '@/product/routes';
 import { customerRoutes } from '@/customer/routes';
 import { cartRoutes } from '@/cart/routes';
+import { orderRoutes } from '@/order/router';
 
 export const routes: RouteRecordRaw[] = [
   ...cartRoutes,
@@ -16,6 +17,7 @@ export const routes: RouteRecordRaw[] = [
   ...manufacturerRoutes,
   ...productRoutes,
   ...customerRoutes,
+  ...orderRoutes,
 
   { path: URL_MAIN, name: 'Main', component: () => import('@/common/pages/MainPage.vue') },
 

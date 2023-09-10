@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import { getCookieToken } from 'mhz-helpers';
+import { deleteAuthHeader, getCookieToken, logout } from 'mhz-helpers';
 
 import { routes } from '@/common/router/routes';
 import { TOKEN_NAME, AUTH_URLS } from '@/auth/constants';
@@ -19,7 +19,7 @@ const token = getCookieToken(TOKEN_NAME);
 
 router.beforeEach((to, from, next) => {
   if (isAuthPages && !token) {
-    next({ path: URL_MAIN });
+    logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME);
   } else {
     next();
   }

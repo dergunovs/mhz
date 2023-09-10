@@ -16,7 +16,7 @@
       />
 
       <div :class="$style.container">
-        <div v-if="!products?.length && !isLoading">No such product. Please, change your filters</div>
+        <div v-if="!products?.length && !isLoading">No such products. Please, change your filters.</div>
 
         <ProductCatalogSort
           v-show="products?.length"

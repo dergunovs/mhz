@@ -4,7 +4,7 @@ import { IConfiguration } from 'mhz-types';
 
 const configurationSchema = new Schema<IConfiguration>({
   title: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  customer: { type: Schema.Types.ObjectId, ref: 'Customer', required: true },
   isShared: { type: Boolean, default: false },
   processor: { type: Schema.Types.ObjectId, ref: 'Product' },
   cooler: { type: Schema.Types.ObjectId, ref: 'Product' },
