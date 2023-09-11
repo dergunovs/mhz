@@ -33,7 +33,7 @@ export function getManufacturer(id?: ComputedRef<string | string[]>) {
     return data;
   }
 
-  return useQuery({ queryKey: [API_MANUFACTURER, id], queryFn: fn });
+  return useQuery({ queryKey: [API_MANUFACTURER, id], queryFn: fn, refetchOnMount: true });
 }
 
 export function postManufacturer(options: object) {
@@ -49,7 +49,7 @@ export function updateManufacturer(id: ComputedRef<string | undefined>, options:
     await api.patch(`${API_MANUFACTURER}/${id.value}`, formData);
   }
 
-  return useMutation({ mutationKey: [API_MANUFACTURER, id], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_MANUFACTURER], mutationFn: fn, ...options });
 }
 
 export function deleteManufacturer(options: object) {

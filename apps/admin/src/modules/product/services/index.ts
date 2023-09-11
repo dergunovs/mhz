@@ -33,7 +33,7 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
     return data;
   }
 
-  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
+  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn, refetchOnMount: true });
 }
 
 export function postProduct(options: object) {

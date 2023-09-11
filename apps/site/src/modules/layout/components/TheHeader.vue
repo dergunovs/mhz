@@ -14,8 +14,7 @@
 
     <div :class="$style.buttons">
       <template v-if="isAuth">
-        <RouterLink :to="URL_FAVOURITES">Favourites</RouterLink>
-        <RouterLink :to="URL_CUSTOMER">Profile</RouterLink>
+        <RouterLink :to="URL_CUSTOMER_PROFILE">Profile</RouterLink>
         <RouterLink :to="URL_CART">Cart</RouterLink>
         <UiButton @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
       </template>
@@ -39,7 +38,7 @@ import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue
 import ImageLogo from '@/common/assets/images/logo.svg';
 import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
-import { URL_CUSTOMER, URL_FAVOURITES } from '@/customer/constants';
+import { URL_CUSTOMER_PROFILE } from '@/customer/constants';
 import { URL_CART } from '@/cart/constants';
 import { search } from '@/common/services';
 

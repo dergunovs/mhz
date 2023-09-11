@@ -33,7 +33,7 @@ export function getOrder(id?: ComputedRef<string | string[]>) {
     return data;
   }
 
-  return useQuery({ queryKey: [API_ORDER, id], queryFn: fn });
+  return useQuery({ queryKey: [API_ORDER, id], queryFn: fn, refetchOnMount: true });
 }
 
 export function updateOrder(id: ComputedRef<string | undefined>, options: object) {

@@ -23,7 +23,7 @@ import { UiButton, UiModal } from 'mhz-ui';
 
 interface IProps {
   id?: string;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 const props = defineProps<IProps>();

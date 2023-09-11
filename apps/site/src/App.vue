@@ -15,7 +15,7 @@ import LayoutDefault from '@/layout/components/LayoutDefault.vue';
 import LayoutEmpty from '@/layout/components/LayoutEmpty.vue';
 
 import { checkAuth } from '@/auth/services';
-import { TOKEN_NAME, URL_LOGIN, AUTH_URLS } from '@/auth/constants';
+import { TOKEN_NAME, AUTH_URLS } from '@/auth/constants';
 import { URL_MAIN } from '@/common/constants';
 import { getCustomerFavouriteProducts } from '@/customer/services';
 
@@ -30,14 +30,13 @@ const isLoaded = ref(false);
 
 const layoutComponent = computed(() => (route.meta.layout === 'empty' ? LayoutEmpty : LayoutDefault));
 
-const isLoginPage = window.location.pathname === URL_LOGIN;
 const isAuthPages = AUTH_URLS.includes(window.location.pathname);
 
 const token = getCookieToken(TOKEN_NAME);
 
 const { refetch } = getCustomerFavouriteProducts({ enabled: false });
 
-if (!isLoginPage && token) {
+if (token) {
   setAuthHeader(token);
 
   checkAuth({

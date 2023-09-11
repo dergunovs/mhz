@@ -33,5 +33,5 @@ export function getManufacturer(id?: ComputedRef<string | string[]>) {
     return data;
   }
 
-  return useQuery({ queryKey: [API_MANUFACTURER, id], queryFn: fn });
+  return useQuery({ queryKey: [API_MANUFACTURER, id], queryFn: fn, refetchOnMount: true });
 }

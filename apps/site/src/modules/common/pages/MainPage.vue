@@ -2,7 +2,7 @@
   <div>
     <PageTitle>{{ title }}</PageTitle>
 
-    <CustomerWatchedProducts v-if="isAuth" />
+    <CustomerWatchedProducts v-if="isAuth" isScroll isTitle />
   </div>
 </template>
 

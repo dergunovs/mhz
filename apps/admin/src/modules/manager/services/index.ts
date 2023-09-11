@@ -33,7 +33,7 @@ export function getManager(id?: ComputedRef<string | string[]>) {
     return data;
   }
 
-  return useQuery({ queryKey: [API_MANAGER, id], queryFn: fn });
+  return useQuery({ queryKey: [API_MANAGER, id], queryFn: fn, refetchOnMount: true });
 }
 
 export function postManager(options: object) {

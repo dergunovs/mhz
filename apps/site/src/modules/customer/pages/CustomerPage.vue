@@ -2,7 +2,13 @@
   <div>
     <PageTitle v-if="customer">{{ title }}</PageTitle>
 
-    <CustomerForm v-if="customer" :customer="customer" />
+    <div :class="$style.page">
+      <CustomerNav />
+
+      <div>
+        <RouterView :customer="customer" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,7 +17,7 @@ import { computed } from 'vue';
 import { useHead } from '@vueuse/head';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
-import CustomerForm from '@/customer/components/CustomerForm.vue';
+import CustomerNav from '@/customer/components/CustomerNav.vue';
 
 import { getCurrentCustomer } from '@/customer/services';
 
@@ -23,3 +29,10 @@ useHead({
   title: () => title.value,
 });
 </script>
+
+<style module lang="scss">
+.page {
+  display: flex;
+  gap: 32px;
+}
+</style>
