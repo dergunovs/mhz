@@ -1,6 +1,7 @@
 import { ICategory } from 'mhz-types';
 
 import Category from '../../../models/category.js';
+
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { deleteFile } from '../../../helpers/index.js';
 

@@ -62,7 +62,6 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManager({
 
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManager(managerId, {
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANAGER, props.manager?._id] });
     await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
     toast.success('Manager updated');
   },

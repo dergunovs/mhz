@@ -1,9 +1,10 @@
 import bcrypt from 'bcryptjs';
 import { IManager } from 'mhz-types';
 
-import { IUserToken, IFastifyInstance, TUserRole } from '../../../interface/index.js';
 import Manager from '../../../models/manager.js';
 import Customer from '../../../models/customer.js';
+
+import { IUserToken, IFastifyInstance, TUserRole } from '../../../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Body: { email: string; password: string; role: TUserRole } }>(

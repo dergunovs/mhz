@@ -1,8 +1,8 @@
 import { Types } from 'mongoose';
-
 import { IProduct } from 'mhz-types';
 
 import Product from '../../../models/product.js';
+
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { deleteFile, paginate, decodeToken, addProductToWatched, getProductFilters } from '../../../helpers/index.js';
 

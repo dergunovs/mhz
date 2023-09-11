@@ -1,7 +1,7 @@
 import { ComputedRef, Ref } from 'vue';
 
-import { IOrder } from 'mhz-types';
-import { api, useQuery, IPageQuery } from 'mhz-helpers';
+import { IOrder, TOrderStatus } from 'mhz-types';
+import { api, useQuery, useMutation, IPageQuery } from 'mhz-helpers';
 
 import { API_ORDER } from '@/order/constants';
 
@@ -34,4 +34,20 @@ export function getOrder(id?: ComputedRef<string | string[]>) {
   }
 
   return useQuery({ queryKey: [API_ORDER, id], queryFn: fn });
+}
+
+export function updateOrder(id: ComputedRef<string | undefined>, options: object) {
+  async function fn(status: TOrderStatus) {
+    await api.patch(`${API_ORDER}/${id.value}`, { status });
+  }
+
+  return useMutation({ mutationKey: [API_ORDER, id], mutationFn: fn, ...options });
+}
+
+export function deleteOrder(id: ComputedRef<string | undefined>, options: object) {
+  async function fn() {
+    await api.delete(`${API_ORDER}/${id.value}`);
+  }
+
+  return useMutation({ mutationKey: [API_ORDER], mutationFn: fn, ...options });
 }

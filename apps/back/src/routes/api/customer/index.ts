@@ -3,6 +3,7 @@ import { ICustomer } from 'mhz-types';
 
 import Customer from '../../../models/customer.js';
 import Product from '../../../models/product.js';
+
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { decodeToken, paginate } from '../../../helpers/index.js';
 

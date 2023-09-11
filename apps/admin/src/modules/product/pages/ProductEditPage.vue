@@ -29,7 +29,7 @@ const title = 'Edit product';
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
   { url: URL_PRODUCT, title: 'Products' },
-  { url: route.path, title: product.value?.title },
+  { url: route.path, title: product.value?.title || '' },
 ]);
 
 useHead({

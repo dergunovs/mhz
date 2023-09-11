@@ -13,6 +13,7 @@
             {{ order._id }}
           </RouterLink>
         </td>
+        <td data-no-wrap>{{ order.price }}</td>
         <td data-no-wrap>{{ order.customer.firstName }} {{ order.customer.lastName }}</td>
         <td data-no-wrap>{{ order.status }}</td>
         <td data-no-wrap>
@@ -43,6 +44,7 @@ const emit = defineEmits(['update:modelValue', 'reset']);
 
 const tableHeaders = [
   { value: '_id', title: 'ID' },
+  { value: 'price', title: 'Price' },
   { value: 'customer', title: 'Customer' },
   { value: 'status', title: 'Status' },
   { value: 'dateCreated', title: 'Created' },

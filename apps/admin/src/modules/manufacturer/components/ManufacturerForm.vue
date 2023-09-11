@@ -76,7 +76,6 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
 
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer(manufacturerId, {
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER, props.manufacturer?._id] });
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer updated');
   },

@@ -1,7 +1,10 @@
-import Order from '../../../models/order.js';
-import Customer from '../../../models/customer.js';
+import { TOrderStatus } from 'mhz-types';
+
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { paginate, decodeToken } from '../../../helpers/index.js';
+
+import Order from '../../../models/order.js';
+import Customer from '../../../models/customer.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
@@ -25,7 +28,14 @@ export default async function (fastify: IFastifyInstance) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-        const order = await Order.findOne({ _id: request.params.id }).select('-__v').lean().exec();
+        const order = await Order.findOne({ _id: request.params.id })
+          .populate([
+            { path: 'customer', select: 'firstName lastName' },
+            { path: 'products.product', select: '_id title' },
+          ])
+          .select('-__v')
+          .lean()
+          .exec();
 
         const isOrderNotBelongToCustomer =
           user?.role === 'customer' && order?.customer.toString() !== user?._id.toString();
@@ -45,11 +55,17 @@ export default async function (fastify: IFastifyInstance) {
     try {
       const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-      const customer = await Customer.findOne({ _id: user?._id }).exec();
+      const customer = await Customer.findOne({ _id: user?._id })
+        .populate([{ path: 'cart.product', select: '_id price' }])
+        .exec();
 
       if (!customer) return;
 
-      const order = new Order({ products: customer.cart, customer: { _id: customer._id } });
+      const order = new Order({
+        products: customer.cart,
+        customer: { _id: customer._id },
+        price: customer.cart?.reduce((acc, item) => acc + item.count * item.product.price, 0),
+      });
 
       await order.save();
 
@@ -62,4 +78,34 @@ export default async function (fastify: IFastifyInstance) {
       reply.code(500).send({ message: err });
     }
   });
+
+  fastify.patch<{ Body: { status: TOrderStatus }; Params: { id: string } }>(
+    '/:id',
+    { preValidation: [fastify.onlyManager] },
+    async function (request, reply) {
+      try {
+        await Order.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
+
+        reply.code(200).send({ message: 'updated' });
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
+
+  fastify.delete<{ Params: { id: string } }>(
+    '/:id',
+    { preValidation: [fastify.onlyManager] },
+    async function (request, reply) {
+      try {
+        const order = await Order.findOne({ _id: request.params.id });
+
+        await order?.deleteOne();
+
+        reply.code(200).send({ message: 'deleted' });
+      } catch (err) {
+        reply.code(500).send({ message: err });
+      }
+    }
+  );
 }

@@ -177,7 +177,6 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postProduct({
 
 const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateProduct(productId, {
   onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_PRODUCT, props.product?._id] });
     await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product updated');
   },

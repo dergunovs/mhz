@@ -29,7 +29,7 @@ const title = 'Edit category';
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
   { url: URL_CATEGORY, title: 'Categories' },
-  { url: route.path, title: category.value?.title },
+  { url: route.path, title: category.value?.title || '' },
 ]);
 
 useHead({

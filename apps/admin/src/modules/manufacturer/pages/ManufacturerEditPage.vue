@@ -29,7 +29,7 @@ const title = 'Edit manufacturer';
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
   { url: URL_MANUFACTURER, title: 'Manufacturers' },
-  { url: route.path, title: manufacturer.value?.title },
+  { url: route.path, title: manufacturer.value?.title || '' },
 ]);
 
 useHead({

@@ -35,7 +35,7 @@ const title = 'Edit manager';
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
   { url: URL_MANAGER, title: 'Managers' },
-  { url: route.path, title: `${manager.value?.firstName} ${manager.value?.lastName}` },
+  { url: route.path, title: manager.value ? `${manager.value.firstName} ${manager.value.lastName}` : '' },
 ]);
 
 useHead({

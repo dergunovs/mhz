@@ -27,8 +27,8 @@
     <div v-if="props.customer.watchedProducts?.length">
       <div><b>Watched products:</b></div>
       <div v-for="item in props.customer.watchedProducts" :key="item._id">
-        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item.product._id}`">{{ item.product.title }}</RouterLink>
         {{ formatDateTime(item.dateCreated) }}
+        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item.product._id}`">{{ item.product.title }}</RouterLink>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 .uiToastBlock {
   position: fixed;
-  top: 32px;
+  top: 64px;
   right: 32px;
   z-index: 9999;
   display: flex;

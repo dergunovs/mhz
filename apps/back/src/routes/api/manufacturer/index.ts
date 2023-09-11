@@ -1,6 +1,7 @@
 import { IManufacturer } from 'mhz-types';
 
 import Manufacturer from '../../../models/manufacturer.js';
+
 import { IFastifyInstance, IQuery } from '../../../interface/index.js';
 import { deleteFile, paginate } from '../../../helpers/index.js';
 

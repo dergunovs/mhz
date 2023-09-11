@@ -11,6 +11,7 @@ const orderSchema = new Schema<IOrder>({
     },
   ],
   customer: { type: Schema.Types.ObjectId, required: true, ref: 'Customer' },
+  price: { type: Number },
   dateCreated: { type: Date, default: Date.now },
   dateUpdated: { type: Date },
 });

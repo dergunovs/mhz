@@ -70,12 +70,13 @@ export interface ICartItem {
   count: number;
 }
 
-export type TOrderStatus = "new" | "paid" | "canceled" | "done";
+export type TOrderStatus = "new" | "paid" | "cancelled" | "completed";
 
 export interface IOrder extends IEntity {
   products: ICartItem[];
   customer: ICustomer;
   status: TOrderStatus;
+  price: number;
 }
 
 export interface IComparison extends IEntity {

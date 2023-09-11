@@ -29,7 +29,7 @@ const title = 'Customer';
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
   { url: URL_CUSTOMER, title: 'Customers' },
-  { url: route.path, title: `${customer.value?.firstName} ${customer.value?.lastName}` },
+  { url: route.path, title: customer.value ? `${customer.value.firstName} ${customer.value.lastName}` : '' },
 ]);
 
 useHead({
