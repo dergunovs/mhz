@@ -125,6 +125,10 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  &:empty {
+    display: none;
+  }
 }
 
 .type {

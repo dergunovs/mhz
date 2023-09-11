@@ -19,6 +19,8 @@ function createFilterBase(filter: string | string[], filterName: string) {
 function createFilterFields(options: IQuery) {
   const fieldsFiltersRaw = Object.fromEntries(Object.entries(options).filter(([key]) => key.includes('fields[')));
 
+  if (!Object.keys(fieldsFiltersRaw).length) return {};
+
   const params = new URLSearchParams();
 
   Object.entries(fieldsFiltersRaw).forEach(([key, value]) => params.append(key, value));
@@ -27,28 +29,26 @@ function createFilterFields(options: IQuery) {
     JSON.stringify(qs.parse(params.toString()))
   ).fields;
 
-  const fieldsFilters = fieldsFiltersArray
-    ? {
-        $and: fieldsFiltersArray.map((filter) => {
-          return {
-            fields: {
-              $elemMatch: {
-                title: Object.keys(filter)[0],
-                fieldValue: {
-                  $in: Object.values(filter)[0].map((val) => {
-                    if (['true', 'false'].includes(val)) return JSON.parse(val);
+  if (!fieldsFiltersArray?.length) return {};
 
-                    return val;
-                  }),
-                },
-              },
+  return {
+    $and: fieldsFiltersArray.map((filter) => {
+      return {
+        fields: {
+          $elemMatch: {
+            title: Object.keys(filter)[0],
+            fieldValue: {
+              $in: Object.values(filter)[0].map((val) => {
+                if (['true', 'false'].includes(val)) return JSON.parse(val);
+
+                return val;
+              }),
             },
-          };
-        }),
-      }
-    : {};
-
-  return fieldsFilters;
+          },
+        },
+      };
+    }),
+  };
 }
 
 export async function paginate<T>(Entity: Model<T>, options: IQuery) {
@@ -76,7 +76,7 @@ export async function paginate<T>(Entity: Model<T>, options: IQuery) {
     .skip((page - 1) * limit)
     .limit(limit)
     .populate(options.populate || [])
-    .select('-password -__v')
+    .select(options.select || '-password -__v')
     .sort(sort)
     .lean()
     .exec();

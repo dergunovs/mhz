@@ -30,4 +30,12 @@ export default fp(async function (fastify) {
       reply.code(403).send({ message: 'Authentication error' });
     }
   });
+
+  fastify.decorate('onlyLoggedIn', async function (request: FastifyRequest, reply: FastifyReply) {
+    try {
+      await request.jwtVerify();
+    } catch (err) {
+      reply.code(403).send({ message: 'Authentication error' });
+    }
+  });
 });

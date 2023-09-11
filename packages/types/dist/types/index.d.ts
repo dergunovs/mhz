@@ -4,18 +4,6 @@ interface IEntity {
   dateUpdated?: Date;
 }
 
-export interface ICartItem {
-  _id: string;
-  product: IProduct;
-  count: number;
-}
-
-export interface IProductWatched {
-  _id: string;
-  product: IProduct;
-  dateCreated: Date;
-}
-
 export interface IManager extends IEntity {
   firstName?: string;
   lastName?: string;
@@ -70,10 +58,22 @@ export interface IProduct extends IEntity {
   views?: number;
 }
 
+export interface IProductWatched extends IEntity {
+  _id: string;
+  product: IProduct;
+  dateCreated: Date;
+}
+
+export interface ICartItem {
+  _id: string;
+  product: IProduct;
+  count: number;
+}
+
 export type TOrderStatus = "new" | "paid" | "canceled" | "done";
 
 export interface IOrder extends IEntity {
-  products: { product: IProduct; count: number }[];
+  products: ICartItem[];
   customer: ICustomer;
   status: TOrderStatus;
 }

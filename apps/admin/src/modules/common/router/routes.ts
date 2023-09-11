@@ -5,7 +5,6 @@ import { categoryRoutes } from '@/category/routes';
 import { manufacturerRoutes } from '@/manufacturer/routes';
 import { orderRoutes } from '@/order/routes';
 import { productRoutes } from '@/product/routes';
-import { shipmentRoutes } from '@/shipment/routes';
 import { managerRoutes } from '@/manager/routes';
 import { customerRoutes } from '@/customer/routes';
 
@@ -17,7 +16,6 @@ export const routes: RouteRecordRaw[] = [
   ...manufacturerRoutes,
   ...orderRoutes,
   ...productRoutes,
-  ...shipmentRoutes,
   ...managerRoutes,
   ...customerRoutes,
 

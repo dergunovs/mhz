@@ -15,6 +15,7 @@ export default async function (fastify: IFastifyInstance) {
           { path: 'category', select: '_id title' },
           { path: 'manufacturer', select: '_id title' },
         ],
+        select: '-description -fields -imageUrls -__v',
       });
 
       const filters = await getProductFilters(request.query, false);

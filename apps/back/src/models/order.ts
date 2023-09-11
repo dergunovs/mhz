@@ -7,7 +7,7 @@ const orderSchema = new Schema<IOrder>({
   products: [
     {
       product: { type: Schema.Types.ObjectId, ref: 'Product' },
-      count: { type: { Number } },
+      count: { type: Number },
     },
   ],
   customer: { type: Schema.Types.ObjectId, required: true, ref: 'Customer' },

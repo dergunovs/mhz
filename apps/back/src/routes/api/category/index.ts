@@ -7,7 +7,7 @@ import { deleteFile } from '../../../helpers/index.js';
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', async function (request, reply) {
     try {
-      const categories = await Category.find().sort('title').lean().exec();
+      const categories = await Category.find().select('-description -fields -__v').sort('title').lean().exec();
 
       reply.code(200).send(categories);
     } catch (err) {

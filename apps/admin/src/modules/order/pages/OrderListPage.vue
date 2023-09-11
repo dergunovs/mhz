@@ -2,17 +2,37 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <div>Orders</div>
+    <div :class="$style.page">
+      <OrderList :orders="orders" v-model="query.sort" @reset="(value) => resetQuery(value)" />
+
+      <UiPagination
+        v-show="orders?.length"
+        :page="query.page"
+        :total="total"
+        @update="(value) => setQueryPage(setPage(value, query.page))"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useHead } from '@vueuse/head';
 
-import PageTitle from '@/layout/components/PageTitle.vue';
+import { UiPagination } from 'mhz-ui';
+import { usePagination, usePage } from 'mhz-helpers';
 
+import PageTitle from '@/layout/components/PageTitle.vue';
+import OrderList from '@/order/components/OrderList.vue';
+
+import { getOrders } from '@/order/services';
 import { URL_ORDER } from '@/order/constants';
 import { URL_MAIN } from '@/common/constants';
+
+const { query, resetQuery, setQueryPage } = usePage();
+
+const { data } = getOrders(query);
+
+const { data: orders, total, setPage } = usePagination(data);
 
 const title = 'Orders';
 
@@ -25,3 +45,11 @@ useHead({
   title,
 });
 </script>
+
+<style module lang="scss">
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+</style>

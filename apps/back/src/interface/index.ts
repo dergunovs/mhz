@@ -4,6 +4,7 @@ import { ObjectId, PopulateOptions } from 'mongoose';
 export interface IFastifyInstance extends FastifyInstance {
   onlyManager: () => void;
   onlyCustomer: () => void;
+  onlyLoggedIn: () => void;
 }
 
 export interface IQuery {
@@ -14,6 +15,7 @@ export interface IQuery {
   manufacturer?: string | string[];
   price?: [string, string];
   fields?: [];
+  select?: string;
   populate?: PopulateOptions[];
   initiator?: 'category' | 'manufacturer';
 }

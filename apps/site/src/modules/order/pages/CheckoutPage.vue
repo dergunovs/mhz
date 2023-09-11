@@ -31,7 +31,7 @@
 
         <div :class="$style.price">{{ price }} {{ CURRENCY }}</div>
 
-        <UiButton @click="router.push(URL_PAYMENT)">Continue to payment</UiButton>
+        <UiButton @click="mutate">Continue to payment</UiButton>
       </div>
     </div>
   </div>
@@ -42,23 +42,38 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useHead } from '@vueuse/head';
 
-import { UiButton } from 'mhz-ui';
+import { UiButton, toast } from 'mhz-ui';
+import { useQueryClient } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ImageMap from '@/common/images/map.jpg';
 import CartItemList from '@/cart/components/CartItemList.vue';
 
+import { postOrder } from '@/order/services';
 import { getCurrentCustomer, getCustomerCart } from '@/customer/services';
-import { URL_PAYMENT } from '@/order/contants';
+import { API_ORDER, URL_PAYMENT } from '@/order/contants';
 import { CURRENCY } from '@/common/constants';
+import { API_CUSTOMER_CART } from '@/customer/constants';
 
 const router = useRouter();
+
+const queryClient = useQueryClient();
 
 const { data: customer } = getCurrentCustomer();
 
 const { data: cart } = getCustomerCart();
 
 const price = computed(() => cart.value?.reduce((acc, item) => acc + item.count * item.product.price, 0));
+
+const { mutate } = postOrder({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
+    await queryClient.refetchQueries({ queryKey: [API_ORDER] });
+    toast.success('Order created');
+
+    router.push(URL_PAYMENT);
+  },
+});
 
 const title = 'Checkout';
 

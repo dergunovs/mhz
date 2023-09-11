@@ -9,7 +9,10 @@ import { decodeToken, paginate } from '../../../helpers/index.js';
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
     try {
-      const { data, total } = await paginate(Customer, request.query);
+      const { data, total } = await paginate(Customer, {
+        ...request.query,
+        select: 'dateCreated dateUpdated email firstName lastName',
+      });
 
       reply.code(200).send({ data, total });
     } catch (err) {
@@ -28,7 +31,7 @@ export default async function (fastify: IFastifyInstance) {
             { path: 'favouriteProducts', select: '_id title' },
             { path: 'watchedProducts.product', select: '_id title' },
           ])
-          .select('-password -__v')
+          .select('-password -__v -orders')
           .lean()
           .exec();
 
@@ -68,7 +71,11 @@ export default async function (fastify: IFastifyInstance) {
       const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
       const customer = await Customer.findOne({ _id: user?._id })
-        .select('-password -__v')
+        .populate([
+          { path: 'favouriteProducts', select: '_id title' },
+          { path: 'watchedProducts.product', select: '_id title' },
+        ])
+        .select('-password -__v -orders -cart')
         .lean()
         .exec();
 

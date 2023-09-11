@@ -7,7 +7,7 @@ export const orderRoutes = [
     component: () => import('@/order/pages/OrderListPage.vue'),
   },
   {
-    path: `${URL_ORDER}/:id`,
+    path: `${URL_ORDER}/:order`,
     name: 'Order',
     component: () => import('@/order/pages/OrderPage.vue'),
   },

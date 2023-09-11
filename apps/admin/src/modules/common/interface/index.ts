@@ -10,4 +10,5 @@ export interface IEntitiesCount {
   manufacturers: number;
   managers: number;
   customers: number;
+  orders: number;
 }

@@ -12,11 +12,11 @@ import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
+import CustomerInfo from '@/customer/components/CustomerInfo.vue';
 
 import { getCustomer } from '@/customer/services';
 import { URL_CUSTOMER } from '@/customer/constants';
 import { URL_MAIN } from '@/common/constants';
-import CustomerInfo from '@/customer/components/CustomerInfo.vue';
 
 const route = useRoute();
 
