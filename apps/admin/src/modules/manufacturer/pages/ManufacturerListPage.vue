@@ -8,7 +8,7 @@
       <ManufacturerList :manufacturers="manufacturers" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
       <UiPagination
-        v-if="manufacturers?.length"
+        v-show="manufacturers?.length"
         :page="query.page"
         :total="total"
         @update="(value) => setQueryPage(setPage(value, query.page))"

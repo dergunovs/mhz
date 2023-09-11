@@ -8,7 +8,7 @@
       <ManagerList :managers="managers" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
       <UiPagination
-        v-if="managers?.length"
+        v-show="managers?.length"
         :page="query.page"
         :total="total"
         @update="(value) => setQueryPage(setPage(value, query.page))"

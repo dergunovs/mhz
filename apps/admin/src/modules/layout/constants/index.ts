@@ -22,6 +22,6 @@ export const NAV_ITEMS: INavItem[] = [
   { _id: '3', url: URL_CATEGORY, title: 'Categories', icon: IconNavCategory },
   { _id: '4', url: URL_MANUFACTURER, title: 'Manufacturers', icon: IconNavManufacturer },
   { _id: '5', url: URL_ORDER, title: 'Orders', icon: IconNavOrder },
-  { _id: '7', url: URL_MANAGER, title: 'Managers', icon: IconNavManager },
-  { _id: '8', url: URL_CUSTOMER, title: 'Customers', icon: IconNavCustomer },
+  { _id: '6', url: URL_MANAGER, title: 'Managers', icon: IconNavManager },
+  { _id: '7', url: URL_CUSTOMER, title: 'Customers', icon: IconNavCustomer },
 ];

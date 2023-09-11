@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "mhz-back",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "author": "dergunov.com",
   "license": "MIT",
   "main": "app.js",
@@ -28,7 +28,7 @@
     "@fastify/static": "6.11.0",
     "bcryptjs": "2.4.3",
     "dotenv": "16.3.1",
-    "fastify": "4.22.2",
+    "fastify": "4.23.0",
     "fastify-plugin": "4.5.1",
     "mhz-types": "*",
     "mongoose": "7.5.0",

@@ -6,7 +6,7 @@
       <CustomerList :customers="customers" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
       <UiPagination
-        v-if="customers?.length"
+        v-show="customers?.length"
         :page="query.page"
         :total="total"
         @update="(value) => setQueryPage(setPage(value, query.page))"

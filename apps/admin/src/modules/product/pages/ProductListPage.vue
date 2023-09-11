@@ -8,7 +8,7 @@
       <ProductList :products="products" v-model="query.sort" @reset="(value) => resetQuery(value)" />
 
       <UiPagination
-        v-if="products?.length"
+        v-show="products?.length"
         :page="query.page"
         :total="total"
         @update="(value) => setQueryPage(setPage(value, query.page))"
