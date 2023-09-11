@@ -1,11 +1,12 @@
 {
   "name": "mhz-site",
   "description": "mhz-site",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "dergunov.com",
   "license": "MIT",
   "type": "module",
   "main": "index.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dergunovs/mhz",
