@@ -31,7 +31,7 @@
         @update="(count) => updateCount({ count, _id: props.item.product._id })"
       />
 
-      <UiButton @click="mutate(props.item._id)" layout="plain">Remove from cart</UiButton>
+      <UiButton @click="mutateRemove(props.item._id)" layout="plain">Remove from cart</UiButton>
     </div>
   </div>
 </template>
@@ -63,7 +63,7 @@ const queryClient = useQueryClient();
 
 const priceComputed = computed(() => props.item.count * props.item.product.price);
 
-const { mutate } = removeFromCart({
+const { mutate: mutateRemove } = removeFromCart({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
     toast.success('Removed from cart');

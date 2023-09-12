@@ -5,7 +5,7 @@
     </button>
 
     <button
-      @click="isInFavourites ? remove(props.product._id) : add(props.product._id)"
+      @click="isInFavourites ? mutateRemove(props.product._id) : mutateAdd(props.product._id)"
       :class="$style.button"
       :data-active="isInFavourites"
       type="button"
@@ -40,14 +40,14 @@ const { data: favourites } = getCustomerFavouriteProducts();
 
 const isInFavourites = computed(() => favourites.value?.some((fav) => fav._id === props.product._id));
 
-const { mutate: add } = addToFavourites({
+const { mutate: mutateAdd } = addToFavourites({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_FAVOURITES] });
     toast.success('Added to favourites');
   },
 });
 
-const { mutate: remove } = removeFromFavourites({
+const { mutate: mutateRemove } = removeFromFavourites({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_FAVOURITES] });
     toast.success('Removed from favourites');

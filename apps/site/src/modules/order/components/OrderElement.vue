@@ -2,7 +2,10 @@
   <div>
     <RouterLink :to="`${URL_CUSTOMER_ORDERS}/${props.order._id}`">Order №{{ props.order._id }}</RouterLink>
     <div>{{ formatDateTime(props.order.dateCreated) }}</div>
-    <div>Status: {{ props.order.status }}, price: {{ props.order.price }} {{ CURRENCY }}</div>
+    <div>
+      Status: <span :class="$style.status" :data-status="props.order.status">{{ props.order.status }}</span
+      >, price: {{ props.order.price }} {{ CURRENCY }}
+    </div>
   </div>
 </template>
 
@@ -19,3 +22,15 @@ interface IProps {
 
 const props = defineProps<IProps>();
 </script>
+
+<style module lang="scss">
+.status {
+  &[data-status='completed'] {
+    color: var(--color-success);
+  }
+
+  &[data-status='cancelled'] {
+    color: var(--color-error);
+  }
+}
+</style>

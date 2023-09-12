@@ -71,13 +71,13 @@ export default async function (fastify: IFastifyInstance) {
         price: customer.cart?.reduce((acc, item) => acc + item.count * item.product.price, 0),
       });
 
-      await order.save();
+      const { id } = await order.save();
 
       customer.cart = [];
       customer.orders?.push(order);
 
       await customer.save();
-      reply.code(201).send({ message: 'created' });
+      reply.code(201).send({ id });
     } catch (err) {
       reply.code(500).send({ message: err });
     }
@@ -99,6 +99,8 @@ export default async function (fastify: IFastifyInstance) {
 
         if (isOrderNotBelongToCustomer) {
           reply.code(403).send({ message: 'forbidden' });
+        } else if (order?.status === 'paid' && request.body.status === 'paid') {
+          reply.code(500).send({ message: 'Order already have been paid' });
         } else {
           await Order.updateOne({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
           await order?.save();

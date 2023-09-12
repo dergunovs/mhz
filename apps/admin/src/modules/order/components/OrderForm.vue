@@ -24,10 +24,7 @@
 
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
-        <UiButton
-          @click="mutate('completed')"
-          :isDisabled="['cancelled', 'completed'].includes(props.order.status) || isLoading"
-        >
+        <UiButton @click="mutateUpdate('completed')" :isDisabled="props.order.status !== 'paid' || isLoading">
           Mark completed
         </UiButton>
 
@@ -46,7 +43,9 @@
       </div>
     </div>
 
-    <UiModal v-model="isShowConfirmCancel" isConfirm @confirm="mutate('cancelled')">Confirm cancel order?</UiModal>
+    <UiModal v-model="isShowConfirmCancel" isConfirm @confirm="mutateUpdate('cancelled')">
+      Confirm cancel order?
+    </UiModal>
 
     <UiModal v-model="isShowConfirmDelete" isConfirm @confirm="mutateDelete">Confirm delete?</UiModal>
   </div>
@@ -80,7 +79,7 @@ const isShowConfirmDelete = ref(false);
 
 const orderId = computed(() => props.order?._id);
 
-const { mutate, isLoading } = updateOrder(orderId, {
+const { mutate: mutateUpdate, isLoading } = updateOrder(orderId, {
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_ORDER] });
     toast.success('Order updated');

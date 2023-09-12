@@ -46,7 +46,7 @@ const formData = ref({
   password: '',
 });
 
-const { mutate } = setup({
+const { mutate: mutateSetup } = setup({
   onSuccess: () => {
     toast.success('Manager successfully added!');
     router.push(URL_LOGIN);
@@ -65,7 +65,7 @@ const rules = computed(() => {
 const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
-  if (isValid()) mutate(formData.value);
+  if (isValid()) mutateSetup(formData.value);
 }
 </script>
 

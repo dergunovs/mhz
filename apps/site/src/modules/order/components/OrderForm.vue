@@ -19,6 +19,12 @@
     </div>
 
     <div :class="$style.buttons">
+      <UiButton
+        v-if="props.order.status === 'new'"
+        @click="router.push({ path: URL_PAYMENT, query: { order: props.order._id } })"
+        >Pay</UiButton
+      >
+
       <UiButton @click="router.go(-1)" layout="secondary">Back</UiButton>
 
       <UiButton
@@ -29,20 +35,20 @@
       >
     </div>
 
-    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutate">Confirm cancel order?</UiModal>
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateUpdate('cancelled')">Confirm cancel order?</UiModal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { IOrder } from 'mhz-types';
 import { formatDateTime, useQueryClient } from 'mhz-helpers';
 import { UiButton, UiModal, toast } from 'mhz-ui';
 
-import { cancelOrder } from '@/order/services';
-import { API_ORDER } from '@/order/contants';
+import { updateOrder } from '@/order/services';
+import { API_ORDER, URL_PAYMENT } from '@/order/contants';
 import { URL_PRODUCT } from '@/product/constants';
 import { CURRENCY } from '@/common/constants';
 
@@ -58,14 +64,15 @@ const queryClient = useQueryClient();
 
 const isShowConfirm = ref(false);
 
-const orderId = computed(() => props.order?._id);
-
-const { mutate, isLoading } = cancelOrder(orderId, {
-  onSuccess: async () => {
-    await queryClient.refetchQueries({ queryKey: [API_ORDER] });
-    toast.success('Order cancelled');
+const { mutate: mutateUpdate, isLoading } = updateOrder(
+  {
+    onSuccess: async () => {
+      await queryClient.refetchQueries({ queryKey: [API_ORDER] });
+      toast.success('Order cancelled');
+    },
   },
-});
+  props.order._id
+);
 </script>
 
 <style module lang="scss">

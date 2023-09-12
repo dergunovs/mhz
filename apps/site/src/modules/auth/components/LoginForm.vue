@@ -39,7 +39,7 @@ const formData = ref({
 
 const { refetch } = getCustomerFavouriteProducts({ enabled: false });
 
-const { mutate } = login({
+const { mutate: mutateLogin } = login({
   onSuccess: (user: { token: string }) => {
     auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');
@@ -57,7 +57,7 @@ const rules = computed(() => {
 const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
-  if (isValid()) mutate(formData.value);
+  if (isValid()) mutateLogin(formData.value);
 }
 </script>
 

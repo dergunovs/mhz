@@ -35,12 +35,14 @@ watch(
   }
 );
 
+const controller = new AbortController();
+
 onMounted(() => {
-  if (props.isScroll) container.value?.addEventListener('wheel', (e) => scroll(e));
+  if (props.isScroll) container.value?.addEventListener('wheel', (e) => scroll(e), { signal: controller.signal });
 });
 
 onBeforeUnmount(() => {
-  if (props.isScroll) container.value?.removeEventListener('wheel', (e) => scroll(e));
+  if (props.isScroll) controller.abort();
 });
 </script>
 

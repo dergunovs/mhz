@@ -26,12 +26,12 @@
         </div>
       </div>
 
-      <div :class="$style.summary">
+      <div v-show="price" :class="$style.summary">
         <CartItemList v-if="cart" :cart="cart" isCheckout />
 
         <div :class="$style.price">{{ price }} {{ CURRENCY }}</div>
 
-        <UiButton @click="mutate">Continue to payment</UiButton>
+        <UiButton @click="mutatePostOrder">Continue to payment</UiButton>
       </div>
     </div>
   </div>
@@ -65,13 +65,13 @@ const { data: cart } = getCustomerCart();
 
 const price = computed(() => cart.value?.reduce((acc, item) => acc + item.count * item.product.price, 0));
 
-const { mutate } = postOrder({
-  onSuccess: async () => {
+const { mutate: mutatePostOrder } = postOrder({
+  onSuccess: async (data: string) => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
     await queryClient.refetchQueries({ queryKey: [API_ORDER] });
     toast.success('Order created');
 
-    router.push(URL_PAYMENT);
+    router.push({ path: URL_PAYMENT, query: { order: data } });
   },
 });
 

@@ -51,7 +51,7 @@ const formData = ref({
   password: '',
 });
 
-const { mutate } = postCustomer({
+const { mutate: mutatePostCustomer } = postCustomer({
   onSuccess: () => {
     toast.success('Successfully registered! Please login!');
     router.push(URL_LOGIN);
@@ -71,7 +71,7 @@ const rules = computed(() => {
 const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
-  if (isValid()) mutate(formData.value);
+  if (isValid()) mutatePostCustomer(formData.value);
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <UiButton :isDisabled="!isAuth" @click="mutate(props.id)">Add to cart</UiButton>
+  <UiButton :isDisabled="!isAuth" @click="mutateAdd(props.id)">Add to cart</UiButton>
 </template>
 
 <script setup lang="ts">
@@ -17,7 +17,7 @@ const props = defineProps<IProps>();
 
 const queryClient = useQueryClient();
 
-const { mutate } = addToCart({
+const { mutate: mutateAdd } = addToCart({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
     toast.success('Added to cart');
