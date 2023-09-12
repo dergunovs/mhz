@@ -7,12 +7,17 @@ import Order from '../../../models/order.js';
 import Customer from '../../../models/customer.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.onlyManager] }, async function (request, reply) {
+  fastify.get<{ Querystring: IQuery }>('/', { preValidation: [fastify.onlyLoggedIn] }, async function (request, reply) {
     try {
+      const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
+      const filter = user?.role === 'customer' ? { customer: user._id } : {};
+
       const { data, total } = await paginate(Order, {
         ...request.query,
+        ...filter,
         populate: [{ path: 'customer', select: 'firstName lastName' }],
-        select: '-products -__v',
+        select: '-products',
       });
 
       reply.code(200).send({ data, total });
@@ -33,12 +38,11 @@ export default async function (fastify: IFastifyInstance) {
             { path: 'customer', select: 'firstName lastName' },
             { path: 'products.product', select: '_id title' },
           ])
-          .select('-__v')
           .lean()
           .exec();
 
         const isOrderNotBelongToCustomer =
-          user?.role === 'customer' && order?.customer.toString() !== user?._id.toString();
+          user?.role === 'customer' && order?.customer?._id?.toString() !== user?._id.toString();
 
         if (isOrderNotBelongToCustomer) {
           reply.code(403).send({ message: 'forbidden' });
@@ -81,12 +85,26 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: { status: TOrderStatus }; Params: { id: string } }>(
     '/:id',
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
       try {
-        await Order.findOneAndUpdate({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
+        const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
 
-        reply.code(200).send({ message: 'updated' });
+        const order = await Order.findOne({ _id: request.params.id }).exec();
+
+        const isOrderNotBelongToCustomer =
+          user?.role === 'customer' &&
+          order?.customer?._id?.toString() !== user?._id.toString() &&
+          request.body.status !== 'cancelled';
+
+        if (isOrderNotBelongToCustomer) {
+          reply.code(403).send({ message: 'forbidden' });
+        } else {
+          await Order.updateOne({ _id: request.params.id }, { ...request.body, dateUpdated: new Date() });
+          await order?.save();
+
+          reply.code(200).send({ message: 'updated' });
+        }
       } catch (err) {
         reply.code(500).send({ message: err });
       }

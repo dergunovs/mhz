@@ -22,7 +22,7 @@ export default async function (fastify: IFastifyInstance) {
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       try {
-        const manager = await Manager.findOne({ _id: request.params.id }).select('-password -__v').lean().exec();
+        const manager = await Manager.findOne({ _id: request.params.id }).select('-password').lean().exec();
 
         reply.code(200).send(manager);
       } catch (err) {

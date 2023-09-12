@@ -15,15 +15,16 @@ import { CUSTOMER_NAV } from '@/customer/constants';
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  gap: 4px;
+  gap: 8px;
   width: 200px;
 }
 
 .item {
   width: 100%;
-  padding: 8px 16px;
+  padding: 12px 24px;
   text-decoration: none;
   background-color: var(--color-gray-light);
+  border-radius: 16px;
 
   &:global(.router-link-active) {
     font-weight: 700;

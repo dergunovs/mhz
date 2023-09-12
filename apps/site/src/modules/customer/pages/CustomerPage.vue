@@ -6,7 +6,7 @@
       <CustomerNav />
 
       <div>
-        <RouterView :customer="customer" />
+        <RouterView v-if="customer" :customer="customer" />
       </div>
     </div>
   </div>

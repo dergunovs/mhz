@@ -12,8 +12,8 @@ export const API_CUSTOMER_ORDERS = `${API_CUSTOMER}/orders`;
 export const API_CUSTOMER_CART = `${API_CUSTOMER}/cart`;
 
 export const CUSTOMER_NAV = [
-  { _id: '1', url: URL_CUSTOMER_PROFILE, title: 'Profile' },
-  { _id: '2', url: URL_CUSTOMER_ORDERS, title: 'Orders' },
+  { _id: '1', url: URL_CUSTOMER_ORDERS, title: 'Orders' },
+  { _id: '2', url: URL_CUSTOMER_PROFILE, title: 'Profile' },
   { _id: '3', url: URL_CUSTOMER_FAVOURITES, title: 'Favourites' },
   { _id: '4', url: URL_CUSTOMER_WATHED_PRODUCTS, title: 'Watched products' },
 ];

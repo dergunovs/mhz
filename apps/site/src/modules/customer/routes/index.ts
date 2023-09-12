@@ -23,14 +23,19 @@ export const customerRoutes = [
         component: () => import('@/customer/pages/WatchedProductsPage.vue'),
       },
       {
+        path: URL_CUSTOMER_PROFILE,
+        name: 'Profile',
+        component: () => import('@/customer/pages/ProfilePage.vue'),
+      },
+      {
         path: URL_CUSTOMER_ORDERS,
         name: 'Orders',
         component: () => import('@/customer/pages/OrdersPage.vue'),
       },
       {
-        path: URL_CUSTOMER_PROFILE,
-        name: 'Profile',
-        component: () => import('@/customer/pages/ProfilePage.vue'),
+        path: `${URL_CUSTOMER_ORDERS}/:order`,
+        name: 'Order',
+        component: () => import('@/customer/pages/OrderPage.vue'),
       },
     ],
   },

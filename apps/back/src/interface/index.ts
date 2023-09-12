@@ -18,6 +18,7 @@ export interface IQuery {
   select?: string;
   populate?: PopulateOptions[];
   initiator?: 'category' | 'manufacturer';
+  customer?: ObjectId | string;
 }
 
 export type TUserRole = 'customer' | 'manager';

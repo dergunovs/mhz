@@ -60,7 +60,9 @@ export async function paginate<T>(Entity: Model<T>, options: IQuery) {
     ? { price: { $gte: Number(options.price[0]), $lte: Number(options.price[1]) } }
     : {};
 
-  const filter = { ...categoryFilter, ...manufacturerFilter, ...priceFilter, ...fieldsFilters };
+  const customerFilter = options.customer ? { customer: options.customer } : {};
+
+  const filter = { ...categoryFilter, ...manufacturerFilter, ...priceFilter, ...fieldsFilters, ...customerFilter };
 
   const page = Number(options.page) || 1;
   const sort = options.sort === undefined ? '-dateCreated' : `${options.dir === 'desc' ? '-' : ''}${options.sort}`;
@@ -76,7 +78,7 @@ export async function paginate<T>(Entity: Model<T>, options: IQuery) {
     .skip((page - 1) * limit)
     .limit(limit)
     .populate(options.populate || [])
-    .select(options.select || '-password -__v')
+    .select(options.select || '-password')
     .sort(sort)
     .lean()
     .exec();

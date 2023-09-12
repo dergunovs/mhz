@@ -8,7 +8,7 @@ import { deleteFile, paginate } from '../../../helpers/index.js';
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/', async function (request, reply) {
     try {
-      const { data, total } = await paginate(Manufacturer, { ...request.query, select: '-description -__v' });
+      const { data, total } = await paginate(Manufacturer, { ...request.query, select: '-description' });
 
       reply.code(200).send({ data, total });
     } catch (err) {

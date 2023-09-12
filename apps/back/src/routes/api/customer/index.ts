@@ -32,7 +32,7 @@ export default async function (fastify: IFastifyInstance) {
             { path: 'favouriteProducts', select: '_id title' },
             { path: 'watchedProducts.product', select: '_id title' },
           ])
-          .select('-password -__v -orders')
+          .select('-password -orders')
           .lean()
           .exec();
 
@@ -76,7 +76,7 @@ export default async function (fastify: IFastifyInstance) {
           { path: 'favouriteProducts', select: '_id title' },
           { path: 'watchedProducts.product', select: '_id title' },
         ])
-        .select('-password -__v -orders -cart')
+        .select('-password -orders -cart')
         .lean()
         .exec();
 
