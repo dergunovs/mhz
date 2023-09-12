@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div><b>Price: </b>{{ props.order.price }}</div>
+      <div><b>Price: </b>{{ props.order.price }} {{ CURRENCY }}</div>
 
       <div><b>Created: </b>{{ formatDateTime(props.order.dateCreated) }}</div>
 
@@ -63,6 +63,7 @@ import { UiButton, UiModal, toast } from 'mhz-ui';
 import { updateOrder, deleteOrder } from '@/order/services';
 import { API_ORDER, URL_ORDER } from '@/order/constants';
 import { URL_PRODUCT_EDIT } from '@/product/constants';
+import { CURRENCY } from '@/common/constants';
 
 interface IProps {
   order: IOrder;

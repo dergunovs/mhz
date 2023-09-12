@@ -4,7 +4,7 @@
 
     <ProductCard :product="product" />
 
-    <CustomerWatchedProducts v-if="isAuth" />
+    <CustomerWatchedProducts v-if="isAuth" isScroll isTitle />
   </div>
 </template>
 

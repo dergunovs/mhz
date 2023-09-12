@@ -14,6 +14,7 @@ export const API_UPLOAD = 'upload';
 export const API_UPLOAD_SINGLE = `${API_UPLOAD}/single`;
 
 export const PATH_UPLOAD = import.meta.env.VITE_PATH_UPLOAD;
+export const CURRENCY = import.meta.env.VITE_CURRENCY;
 
 export const SEARCH_SCHEME = [
   { type: 'products', labels: ['title'], url: URL_PRODUCT_EDIT },

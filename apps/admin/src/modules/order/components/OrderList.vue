@@ -13,7 +13,7 @@
             {{ order._id }}
           </RouterLink>
         </td>
-        <td data-no-wrap>{{ order.price }}</td>
+        <td data-no-wrap>{{ order.price }} {{ CURRENCY }}</td>
         <td data-no-wrap>{{ order.customer.firstName }} {{ order.customer.lastName }}</td>
         <td data-no-wrap>{{ order.status }}</td>
         <td data-no-wrap>
@@ -33,6 +33,7 @@ import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 
 import { URL_ORDER } from '@/order/constants';
+import { CURRENCY } from '@/common/constants';
 
 interface IProps {
   orders?: IOrder[];

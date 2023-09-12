@@ -159,7 +159,9 @@ export default async function (fastify: IFastifyInstance) {
 
         const currentFavourites = currentCustomer?.favouriteProducts?.map((product) => product.toString()) || [];
 
-        if (currentFavourites.includes(request.body._id)) {
+        if (currentFavourites.length === 8) {
+          reply.code(500).send({ message: 'You have reached favourites limit' });
+        } else if (currentFavourites.includes(request.body._id)) {
           reply.code(500).send({ message: 'Already in your favourites' });
         } else {
           if (currentCustomer?.favouriteProducts) {

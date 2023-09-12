@@ -22,6 +22,7 @@ jobs:
           envkey_VITE_API: ${{ secrets.ENV_VITE_API }}
           envkey_VITE_PATH_UPLOAD: ${{ secrets.VITE_PATH_UPLOAD }}
           envkey_VITE_VERSION: ${npm_package_version}
+          envkey_VITE_CURRENCY: ${{ secrets.CURRENCY }}
           directory: apps/admin/
       - name: Create Site .env
         uses: SpicyPizza/create-envfile@v2.0.2
