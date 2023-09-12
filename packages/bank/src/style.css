@@ -1,0 +1,28 @@
+:root {
+  --color-primary: #2593e3;
+
+  --color-white: #fff;
+  --color-gray: #dfdfdf;
+  --color-black: #000;
+
+  --color-success: #01bd78;
+
+  --color-error: #d40019;
+}
+
+* {
+  font-family: sans-serif;
+  box-sizing: border-box;
+
+  &::selection {
+    color: var(--color-white);
+    background-color: var(--color-primary-dark);
+  }
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}

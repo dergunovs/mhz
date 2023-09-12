@@ -1,0 +1,35 @@
+{
+  "name": "mhz-bank",
+  "version": "1.0.11",
+  "description": "mhz-bank",
+  "author": "dergunov.com",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dergunovs/mhz",
+    "directory": "packages/bank"
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "ts": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "20.6.0",
+    "prettier": "3.0.3",
+    "typescript": "5.2.2",
+    "vite": "4.4.9",
+    "vite-plugin-dts": "3.5.3"
+  },
+  "engines": {
+    "npm": ">=9.8.1",
+    "node": ">=20.6.0"
+  }
+}
