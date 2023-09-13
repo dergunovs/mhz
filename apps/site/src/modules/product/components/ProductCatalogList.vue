@@ -1,6 +1,12 @@
 <template>
   <div ref="container" :class="$style.list" :data-scroll="props.isScroll">
-    <ProductCatalogCard v-for="product in props.products" :key="product._id" :product="product" />
+    <ProductCatalogCard
+      v-for="product in props.products"
+      :key="product._id"
+      :product="product"
+      :isConfiguration="props.isConfiguration"
+      @choice="(id) => emit('choice', id)"
+    />
   </div>
 </template>
 
@@ -15,9 +21,11 @@ import ProductCatalogCard from '@/product/components/ProductCatalogCard.vue';
 interface IProps {
   products: IProduct[];
   isScroll?: boolean;
+  isConfiguration?: boolean;
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['choice']);
 
 const route = useRoute();
 

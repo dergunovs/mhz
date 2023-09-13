@@ -5,14 +5,14 @@ import { api, useQuery } from 'mhz-helpers';
 
 import { API_CATEGORY } from '@/category/constants';
 
-export function getCategories() {
+export function getCategories(options?: object) {
   async function fn(): Promise<ICategory[]> {
     const { data } = await api.get(API_CATEGORY);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_CATEGORY], queryFn: fn });
+  return useQuery({ queryKey: [API_CATEGORY], queryFn: fn, ...options });
 }
 
 export function getCategory(id?: ComputedRef<string | string[]>) {

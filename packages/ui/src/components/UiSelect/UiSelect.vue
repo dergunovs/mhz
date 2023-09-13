@@ -2,7 +2,6 @@
   <div :class="$style.container" ref="containerElement">
     <UiInput
       :modelValue="typeof props.modelValue === 'string' ? props.modelValue : props.modelValue?.title"
-      @update:modelValue="handleUpdate"
       @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
       placeholder="Choose variant"
@@ -91,10 +90,6 @@ const isShowOptions = ref(false);
 const optionsElement = ref<HTMLElement>();
 const optionsInnerElement = ref<HTMLElement>();
 const optionElement = ref<HTMLElement[]>([]);
-
-function handleUpdate(value: string) {
-  emit('update:modelValue', value);
-}
 
 function setFocusedOptionIndex(index: number) {
   if (index < 0 || index === optionsComputed.value.length || props.isFilter) return;

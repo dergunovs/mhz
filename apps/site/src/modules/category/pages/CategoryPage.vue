@@ -12,6 +12,7 @@
         :filtersBase="data?.filters"
         :priceRange="priceRange"
         :key="categoryId.toString()"
+        isCategory
         @update="updateQuery"
       />
 

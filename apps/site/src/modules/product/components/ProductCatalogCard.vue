@@ -24,13 +24,16 @@
       </div>
     </div>
 
-    <ProductAddToCartButton v-if="props.product._id" :id="props.product._id" />
+    <ProductAddToCartButton v-if="props.product._id && !props.isConfiguration" :id="props.product._id" />
+
+    <UiButton @click="emit('choice', props.product._id)" isConfiguration>Choose</UiButton>
   </div>
 </template>
 
 <script setup lang="ts">
 import { IProduct } from 'mhz-types';
 import { isAuth } from 'mhz-helpers';
+import { UiButton } from 'mhz-ui';
 
 import ProductActionButtons from './ProductActionButtons.vue';
 import ProductAddToCartButton from '@/product/components/ProductAddToCartButton.vue';
@@ -40,9 +43,11 @@ import { URL_PRODUCT } from '@/product/constants';
 
 interface IProps {
   product: IProduct;
+  isConfiguration?: boolean;
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['choice']);
 </script>
 
 <style module lang="scss">

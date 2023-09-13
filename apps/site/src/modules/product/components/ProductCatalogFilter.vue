@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <div v-if="route.name === 'Manufacturer'" :class="$style.filter">
+      <div v-if="!props.isCategory" :class="$style.filter">
         <div :class="$style.title">Category</div>
 
         <div :class="$style.values">
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <template v-if="route.name === 'Category'">
+      <template v-if="props.isCategory">
         <div :class="$style.filter">
           <div :class="$style.title">Manufacturer</div>
 
@@ -73,7 +73,6 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
 
 import { IFilterData, IFilterField, IFilterBaseValue, IFilterFieldValue } from 'mhz-types';
 import { UiCheckbox, UiRange, UiSpoiler } from 'mhz-ui';
@@ -83,12 +82,11 @@ interface IProps {
   filtersInitial: IFilterData;
   filtersBase?: IFilterData;
   priceRange: [number, number];
+  isCategory?: boolean;
 }
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['update']);
-
-const route = useRoute();
 
 const fieldSpoilers = ref([]);
 
@@ -146,7 +144,7 @@ const choosenFilters = computed(() => {
     return { [field.title]: field.values };
   });
 
-  return route.name === 'Category' ? { ...price, ...manufacturer, fields } : { ...price, ...category, fields };
+  return props.isCategory ? { ...price, ...manufacturer, fields } : { ...price, ...category, fields };
 });
 
 watch(

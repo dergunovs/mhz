@@ -5,7 +5,11 @@ import { api, useQuery, IPageQuery } from 'mhz-helpers';
 
 import { API_PRODUCT, API_PRODUCT_PRICE_RANGE, API_PRODUCT_FILTERS } from '@/product/constants';
 
-export function getProducts(query: Ref<IPageQuery | number>, initiator?: 'category' | 'manufacturer') {
+export function getProducts(
+  query: Ref<IPageQuery | number>,
+  initiator?: 'category' | 'manufacturer',
+  enabled?: Ref<boolean>
+) {
   async function fn(): Promise<{ data: IProduct[]; total: number; filters: IFilterData }> {
     const params =
       typeof query.value === 'number'
@@ -26,7 +30,7 @@ export function getProducts(query: Ref<IPageQuery | number>, initiator?: 'catego
     return data;
   }
 
-  return useQuery({ queryKey: [API_PRODUCT, query], queryFn: fn });
+  return useQuery({ queryKey: [API_PRODUCT, query], queryFn: fn, enabled });
 }
 
 export function getProduct(id?: ComputedRef<string | string[]>) {
@@ -41,7 +45,10 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
   return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
 }
 
-export function getProductPriceRange(initiator: 'category' | 'manufacturer', id?: ComputedRef<string | string[]>) {
+export function getProductPriceRange(
+  initiator: 'category' | 'manufacturer',
+  id?: ComputedRef<string | string[]> | Ref<string | undefined>
+) {
   async function fn(): Promise<[number, number] | null> {
     if (!id?.value) return null;
 
@@ -53,7 +60,10 @@ export function getProductPriceRange(initiator: 'category' | 'manufacturer', id?
   return useQuery({ queryKey: [API_PRODUCT_PRICE_RANGE, id], queryFn: fn });
 }
 
-export function getProductFilters(initiator: 'category' | 'manufacturer', id?: ComputedRef<string | string[]>) {
+export function getProductFilters(
+  initiator: 'category' | 'manufacturer',
+  id?: ComputedRef<string | string[]> | Ref<string | undefined>
+) {
   async function fn(): Promise<IFilterData | null> {
     if (!id?.value) return null;
 

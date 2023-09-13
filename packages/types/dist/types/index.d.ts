@@ -85,24 +85,26 @@ export interface IComparison extends IEntity {
   customer: ICustomer;
 }
 
+export interface IConfigurationParts {
+  CPU?: IProduct;
+  Case?: IProduct;
+  Cooler?: IProduct;
+  GPU?: IProduct;
+  Keyboard?: IProduct;
+  Motherboard?: IProduct;
+  Monitor?: IProduct;
+  Mouse?: IProduct;
+  Mousepad?: IProduct;
+  PSU?: IProduct;
+  RAM?: IProduct;
+  SSD?: IProduct;
+}
+
 export interface IConfiguration extends IEntity {
   title: string;
   isShared?: boolean;
   customer?: ICustomer;
-  parts?: {
-    CPU: IProduct;
-    Case: IProduct;
-    Cooler: IProduct;
-    GPU: IProduct;
-    Keyboard: IProduct;
-    Motherboard: IProduct;
-    Monitor: IProduct;
-    Mouse: IProduct;
-    Mousepad: IProduct;
-    PSU: IProduct;
-    RAM: IProduct;
-    SSD: IProduct;
-  };
+  parts?: IConfigurationParts;
 }
 
 export interface IFilterFieldValue {

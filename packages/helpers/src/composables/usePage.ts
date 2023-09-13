@@ -45,7 +45,7 @@ export function usePage(filter?: object) {
   }
 
   watch(
-    () => query.value,
+    () => [query.value.page, query.value.sort.value, query.value.sort.isAsc],
     () => {
       router.push({
         path: route.path,
@@ -55,8 +55,7 @@ export function usePage(filter?: object) {
           dir: query.value.sort.isAsc ? 'asc' : 'desc',
         },
       });
-    },
-    { deep: true }
+    }
   );
 
   return { query, resetQuery, setQueryPage, setQueryFilter };

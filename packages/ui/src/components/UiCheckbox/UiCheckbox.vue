@@ -165,7 +165,7 @@ function handleChange() {
 }
 
 .fake {
-  z-index: 1;
+  z-index: 0;
   flex-shrink: 0;
   width: 20px;
   height: 20px;
