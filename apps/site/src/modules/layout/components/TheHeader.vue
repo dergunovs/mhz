@@ -2,10 +2,10 @@
   <header :class="$style.header">
     <div :class="$style.main">
       <RouterLink :to="URL_MAIN">
-        <ImageLogo :class="$style.logo" />
+        <IconLogo :class="$style.logo" />
       </RouterLink>
 
-      <UiButton @click="isShowCatalog = !isShowCatalog" layout="secondary">Catalog</UiButton>
+      <UiButton @click="isShowCatalog = !isShowCatalog" layout="secondary" :icon="IconCatalog">Catalog</UiButton>
 
       <CategoryCatalogPopup v-if="isShowCatalog" v-model="isShowCatalog" />
 
@@ -35,7 +35,9 @@ import { isAuth, logout, deleteAuthHeader } from 'mhz-helpers';
 
 import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue';
 
-import ImageLogo from '@/common/assets/images/logo.svg';
+import IconLogo from '@/layout/icons/logoText.svg';
+import IconCatalog from '@/layout/icons/catalog.svg?component';
+
 import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { URL_CUSTOMER_ORDERS } from '@/customer/constants';

@@ -17,11 +17,16 @@
       :data-maska="props.isPhone ? '+7 (###) ###-##-##' : null"
       :data-mode="props.mode"
       :data-center="props.isCenter"
-      :data-append-icon="!!props.appendIcon"
+      :data-append-icon="!!props.appendIcon || props.isCopy"
       :tabindex="props.mode === 'default' ? '0' : '-1'"
     />
 
-    <component v-if="props.appendIcon" :is="props.appendIcon" :class="$style.icon" />
+    <component
+      v-if="props.appendIcon || props.isCopy"
+      :is="props.isCopy ? IconCopy : props.appendIcon"
+      @click="handleIconClick"
+      :class="$style.icon"
+    />
   </div>
 </template>
 
@@ -29,6 +34,8 @@
 import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
 
 import { vMaska } from 'maska';
+
+import IconCopy from './icons/copy.svg?component';
 
 interface IProps {
   modelValue?: string | number | boolean | null;
@@ -38,6 +45,7 @@ interface IProps {
   isFocus?: boolean;
   isCenter?: boolean;
   isPhone?: boolean;
+  isCopy?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -53,6 +61,10 @@ function handleInput(target: EventTarget | null) {
 }
 
 const input = ref<HTMLElement>();
+
+function handleIconClick() {
+  if (props.isCopy && props.modelValue) navigator.clipboard.writeText(props.modelValue.toString());
+}
 
 onMounted(async () => {
   if (props.isFocus) {
@@ -124,5 +136,6 @@ onMounted(async () => {
   position: absolute;
   top: calc(50% - 8px);
   right: 16px;
+  cursor: pointer;
 }
 </style>

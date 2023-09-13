@@ -87,9 +87,9 @@ export interface IComparison extends IEntity {
 
 export interface IConfiguration extends IEntity {
   title: string;
-  isShared: boolean;
-  customer: ICustomer;
-  parts: {
+  isShared?: boolean;
+  customer?: ICustomer;
+  parts?: {
     CPU: IProduct;
     Case: IProduct;
     Cooler: IProduct;

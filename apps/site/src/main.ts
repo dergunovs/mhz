@@ -8,7 +8,7 @@ import App from './App.vue';
 
 import router from '@/common/router';
 
-import '@/common/assets/styles/main.scss';
+import '@/common/styles/main.scss';
 
 const app = createApp(App);
 const head = createHead();
