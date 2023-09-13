@@ -71,7 +71,7 @@
     "vite-plugin-static-copy": "0.17.0",
     "vite-svg-loader": "4.0.0",
     "vue-linters-config": "0.1.10",
-    "vue-tsc": "1.8.10"
+    "vue-tsc": "1.8.11"
   },
   "peerDependencies": {
     "vue": "3.3.4",

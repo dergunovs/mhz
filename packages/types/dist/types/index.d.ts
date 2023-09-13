@@ -89,17 +89,20 @@ export interface IConfiguration extends IEntity {
   title: string;
   isShared: boolean;
   customer: ICustomer;
-  processor: IProduct;
-  cooler: IProduct;
-  mainboard: IProduct;
-  ram: IProduct;
-  ssd: IProduct;
-  videocard: IProduct;
-  psu: IProduct;
-  case: IProduct;
-  monitor: IProduct;
-  keyboard: IProduct;
-  mouse: IProduct;
+  parts: {
+    CPU: IProduct;
+    Case: IProduct;
+    Cooler: IProduct;
+    GPU: IProduct;
+    Keyboard: IProduct;
+    Motherboard: IProduct;
+    Monitor: IProduct;
+    Mouse: IProduct;
+    Mousepad: IProduct;
+    PSU: IProduct;
+    RAM: IProduct;
+    SSD: IProduct;
+  };
 }
 
 export interface IFilterFieldValue {

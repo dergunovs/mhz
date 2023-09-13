@@ -22,13 +22,13 @@ import { CUSTOMER_NAV } from '@/customer/constants';
 .item {
   width: 100%;
   padding: 12px 24px;
+  color: var(--color-black);
   text-decoration: none;
   background-color: var(--color-gray-light);
   border-radius: 16px;
 
   &:global(.router-link-active) {
-    font-weight: 700;
-    color: var(--color-primary-dark);
+    color: var(--color-primary);
   }
 }
 </style>

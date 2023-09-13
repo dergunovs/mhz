@@ -1,5 +1,6 @@
 import {
   URL_CUSTOMER,
+  URL_CUSTOMER_CONFIGURATIONS,
   URL_CUSTOMER_FAVOURITES,
   URL_CUSTOMER_ORDERS,
   URL_CUSTOMER_PROFILE,
@@ -26,6 +27,11 @@ export const customerRoutes = [
         path: URL_CUSTOMER_PROFILE,
         name: 'Profile',
         component: () => import('@/customer/pages/ProfilePage.vue'),
+      },
+      {
+        path: URL_CUSTOMER_CONFIGURATIONS,
+        name: 'Configurations',
+        component: () => import('@/customer/pages/ConfigurationsPage.vue'),
       },
       {
         path: URL_CUSTOMER_ORDERS,

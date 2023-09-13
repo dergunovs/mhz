@@ -1,11 +1,14 @@
 <template>
   <div>
-    <RouterLink :to="`${URL_CUSTOMER_ORDERS}/${props.order._id}`">Order №{{ props.order._id }}</RouterLink>
-    <div>{{ formatDateTime(props.order.dateCreated) }}</div>
+    <RouterLink :to="`${URL_CUSTOMER_ORDERS}/${props.order._id}`"> Order №{{ props.order._id }} </RouterLink>
+
+    <div>Date: {{ formatDateTime(props.order.dateCreated) }}</div>
+
     <div>
-      Status: <span :class="$style.status" :data-status="props.order.status">{{ props.order.status }}</span
-      >, price: {{ props.order.price }} {{ CURRENCY }}
+      Status: <span :class="$style.status" :data-status="props.order.status">{{ props.order.status }}</span>
     </div>
+
+    <div>Price: {{ props.order.price }} {{ CURRENCY }}</div>
   </div>
 </template>
 
