@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import CustomerNav from '@/customer/components/CustomerNav.vue';

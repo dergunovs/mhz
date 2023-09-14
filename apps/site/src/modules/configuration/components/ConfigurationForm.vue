@@ -5,7 +5,7 @@
         <UiInput v-model="formData.title" />
       </UiField>
 
-      <template v-if="props.configuration?._id">
+      <template v-if="props.configuration">
         <UiCheckbox v-model="formData.isShared" isSwitcher labelSwitcher="Share configuration" />
 
         <UiField v-if="formData.isShared" label="Link">
@@ -17,13 +17,15 @@
         <b>Summary price: {{ price }} {{ CURRENCY }}</b>
       </div>
 
-      <UiButton :isDisabled="isLoading" type="submit">{{ props.configuration?._id ? 'Update' : 'Save' }}</UiButton>
+      <UiButton :isDisabled="isLoading" type="submit">{{ props.configuration ? 'Update' : 'Save' }}</UiButton>
 
       <UiButton @click="router.push(URL_CUSTOMER_CONFIGURATIONS)" :isDisabled="isLoading" layout="secondary">
         Back
       </UiButton>
 
-      <UiButton @click="isShowConfirm = true" :isDisabled="isLoading" layout="secondary">Delete</UiButton>
+      <UiButton v-if="props.configuration" @click="isShowConfirm = true" :isDisabled="isLoading" layout="secondary">
+        Delete
+      </UiButton>
     </div>
 
     <ConfigurationCategories
@@ -124,7 +126,7 @@ const { error, isValid } = useValidator(formData, rules);
 
 function handleSubmit() {
   if (isValid()) {
-    if (props.configuration?._id) {
+    if (props.configuration) {
       mutateUpdate(formData.value);
     } else {
       formData.value.customer = clone(customer.value);

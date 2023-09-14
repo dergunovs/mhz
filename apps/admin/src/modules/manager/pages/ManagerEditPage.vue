@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 
 import { formatDateTime } from 'mhz-helpers';
 

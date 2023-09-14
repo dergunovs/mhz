@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, computed, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 
 import { createBankPayment } from 'mhz-bank';
 import { UiModal, toast } from 'mhz-ui';

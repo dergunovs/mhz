@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 
 import { UiButton, toast } from 'mhz-ui';
 import { useQueryClient } from 'mhz-helpers';

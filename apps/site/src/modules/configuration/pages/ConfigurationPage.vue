@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
 import { clone, usePage, usePagination } from 'mhz-helpers';

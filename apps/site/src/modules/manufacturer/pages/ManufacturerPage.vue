@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { useHead } from '@vueuse/head';
+import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
 import { usePage, usePagination } from 'mhz-helpers';
