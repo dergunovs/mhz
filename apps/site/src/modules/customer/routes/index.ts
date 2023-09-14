@@ -5,6 +5,7 @@ import {
   URL_CUSTOMER_ORDERS,
   URL_CUSTOMER_PROFILE,
   URL_CUSTOMER_WATHED_PRODUCTS,
+  URL_CUSTOMER_CONFIGURATION_CREATE,
 } from '@/customer/constants';
 
 export const customerRoutes = [
@@ -32,6 +33,11 @@ export const customerRoutes = [
         path: URL_CUSTOMER_CONFIGURATIONS,
         name: 'Configurations',
         component: () => import('@/customer/pages/ConfigurationsPage.vue'),
+      },
+      {
+        path: URL_CUSTOMER_CONFIGURATION_CREATE,
+        name: 'ConfigurationCreate',
+        component: () => import('@/customer/pages/ConfigurationCreatePage.vue'),
       },
       {
         path: URL_CUSTOMER_ORDERS,

@@ -1,13 +1,10 @@
 <template>
   <div>
-    <PageTitle v-if="customer">{{ title }}</PageTitle>
+    <PageTitle v-if="customer && $route.name !== 'ConfigurationCreate'">{{ title }}</PageTitle>
 
     <div :class="$style.page">
-      <CustomerNav />
-
-      <div>
-        <RouterView v-if="customer" :customer="customer" />
-      </div>
+      <CustomerNav v-if="$route.name !== 'ConfigurationCreate'" />
+      <RouterView v-if="customer" :customer="customer" :class="$style.routerView" />
     </div>
   </div>
 </template>
@@ -33,6 +30,11 @@ useHead({
 <style module lang="scss">
 .page {
   display: flex;
+  flex-grow: 1;
   gap: 32px;
+}
+
+.routerView {
+  flex-grow: 1;
 }
 </style>

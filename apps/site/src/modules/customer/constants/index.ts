@@ -4,6 +4,7 @@ export const URL_CUSTOMER_WATHED_PRODUCTS = `${URL_CUSTOMER}/watched`;
 export const URL_CUSTOMER_ORDERS = `${URL_CUSTOMER}/orders`;
 export const URL_CUSTOMER_PROFILE = `${URL_CUSTOMER}/profile`;
 export const URL_CUSTOMER_CONFIGURATIONS = `${URL_CUSTOMER}/configurations`;
+export const URL_CUSTOMER_CONFIGURATION_CREATE = `${URL_CUSTOMER}/createConfiguration`;
 
 export const API_CUSTOMER = 'customer';
 export const API_CUSTOMER_CURRENT = `${API_CUSTOMER}/current`;

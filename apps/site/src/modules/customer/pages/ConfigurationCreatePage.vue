@@ -9,6 +9,7 @@
         :categories="categories"
         :currentCategory="currentCategory"
         :choosenProduct="choosenProduct"
+        isAuthor
       />
 
       <div :class="$style.products">

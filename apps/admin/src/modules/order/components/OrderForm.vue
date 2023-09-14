@@ -1,7 +1,12 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.order">
-      <div><b>Customer: </b>{{ props.order.customer.firstName }} {{ props.order.customer.lastName }}</div>
+      <div>
+        <b>Customer: </b>
+        <RouterLink :to="`${URL_CUSTOMER}/${props.order.customer._id}`">
+          {{ props.order.customer.firstName }} {{ props.order.customer.lastName }}
+        </RouterLink>
+      </div>
 
       <div>
         <b>Status: </b><span :class="$style.status" :data-status="props.order.status">{{ props.order.status }}</span>
@@ -63,6 +68,7 @@ import { updateOrder, deleteOrder } from '@/order/services';
 import { API_ORDER, URL_ORDER } from '@/order/constants';
 import { URL_PRODUCT_EDIT } from '@/product/constants';
 import { CURRENCY } from '@/common/constants';
+import { URL_CUSTOMER } from '@/customer/constants';
 
 interface IProps {
   order: IOrder;

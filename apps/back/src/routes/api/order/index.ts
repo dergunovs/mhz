@@ -41,8 +41,7 @@ export default async function (fastify: IFastifyInstance) {
           .lean()
           .exec();
 
-        const isOrderNotBelongToCustomer =
-          user?.role === 'customer' && order?.customer?._id?.toString() !== user?._id.toString();
+        const isOrderNotBelongToCustomer = user?.role === 'customer' && order?.customer?._id?.toString() !== user?._id;
 
         if (isOrderNotBelongToCustomer) {
           reply.code(403).send({ message: 'forbidden' });
@@ -94,7 +93,7 @@ export default async function (fastify: IFastifyInstance) {
 
         const isOrderNotBelongToCustomer =
           user?.role === 'customer' &&
-          order?.customer?._id?.toString() !== user?._id.toString() &&
+          order?.customer?._id?.toString() !== user?._id &&
           request.body.status !== 'cancelled';
 
         if (isOrderNotBelongToCustomer) {

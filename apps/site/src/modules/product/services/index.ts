@@ -47,7 +47,8 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
 
 export function getProductPriceRange(
   initiator: 'category' | 'manufacturer',
-  id?: ComputedRef<string | string[]> | Ref<string | undefined>
+  id?: ComputedRef<string | string[]> | Ref<string | undefined>,
+  enabled?: Ref<boolean>
 ) {
   async function fn(): Promise<[number, number] | null> {
     if (!id?.value) return null;
@@ -57,12 +58,13 @@ export function getProductPriceRange(
     return data;
   }
 
-  return useQuery({ queryKey: [API_PRODUCT_PRICE_RANGE, id], queryFn: fn });
+  return useQuery({ queryKey: [API_PRODUCT_PRICE_RANGE, id], queryFn: fn, enabled });
 }
 
 export function getProductFilters(
   initiator: 'category' | 'manufacturer',
-  id?: ComputedRef<string | string[]> | Ref<string | undefined>
+  id?: ComputedRef<string | string[]> | Ref<string | undefined>,
+  enabled?: Ref<boolean>
 ) {
   async function fn(): Promise<IFilterData | null> {
     if (!id?.value) return null;
@@ -72,5 +74,5 @@ export function getProductFilters(
     return data;
   }
 
-  return useQuery({ queryKey: [API_PRODUCT_FILTERS, id], queryFn: fn });
+  return useQuery({ queryKey: [API_PRODUCT_FILTERS, id], queryFn: fn, enabled });
 }

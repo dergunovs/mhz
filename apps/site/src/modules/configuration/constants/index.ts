@@ -1,2 +1,3 @@
 export const URL_CONFIGURATION = '/configurations';
-export const URL_CONFIGURATION_CREATE = `${URL_CONFIGURATION}/create`;
+
+export const API_CONFIGURATION = 'configuration';

@@ -36,7 +36,7 @@ const isShowConfirm = ref(false);
 
 const orderId = computed(() => route.query.order?.toString());
 
-const { data: order } = getOrder(orderId, {
+getOrder(orderId, {
   onSuccess: async (data: IOrder) => {
     if (data._id) {
       createBankPayment(
@@ -58,7 +58,7 @@ const { mutate: mutateUpdate } = updateOrder(
       router.push(URL_CUSTOMER_ORDERS);
     },
   },
-  order.value?._id
+  orderId.value
 );
 
 function handleBankAnswer(answer: string) {

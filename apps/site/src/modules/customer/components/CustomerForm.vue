@@ -1,20 +1,22 @@
 <template>
   <form @submit.prevent="submit" :class="$style.form">
-    <UiField label="First name" isRequired :error="error('firstName')">
-      <UiInput v-model="formData.firstName" isFocus />
-    </UiField>
+    <div :class="$style.fields">
+      <UiField label="First name" isRequired :error="error('firstName')">
+        <UiInput v-model="formData.firstName" isFocus />
+      </UiField>
 
-    <UiField label="Last name" isRequired :error="error('lastName')">
-      <UiInput v-model="formData.lastName" />
-    </UiField>
+      <UiField label="Last name" isRequired :error="error('lastName')">
+        <UiInput v-model="formData.lastName" />
+      </UiField>
 
-    <UiField label="Phone" isRequired :error="error('phone')">
-      <UiInput v-model="formData.phone" isPhone />
-    </UiField>
+      <UiField label="Phone" isRequired :error="error('phone')">
+        <UiInput v-model="formData.phone" isPhone />
+      </UiField>
 
-    <UiField label="Email" isRequired :error="error('email')">
-      <UiInput v-model="formData.email" />
-    </UiField>
+      <UiField label="Email" isRequired :error="error('email')">
+        <UiInput v-model="formData.email" />
+      </UiField>
+    </div>
 
     <div :class="$style.buttons">
       <UiButton type="submit" :isDisabled="isLoading">Update profile</UiButton>
@@ -93,6 +95,12 @@ onMounted(() => {
   flex-direction: column;
   gap: 24px;
   align-items: flex-start;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .buttons {

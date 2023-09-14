@@ -6,7 +6,8 @@
 
 <script setup lang="ts">
 import { IOrder } from 'mhz-types';
-import OrderElement from './OrderElement.vue';
+
+import OrderElement from '@/order/components/OrderElement.vue';
 
 interface IProps {
   orders: IOrder[];

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RouterLink :to="`${URL_CUSTOMER_ORDERS}/${props.order._id}`"> Order №{{ props.order._id }} </RouterLink>
+    <RouterLink :to="`${URL_CUSTOMER_ORDERS}/${props.order._id}`">№{{ props.order._id }}</RouterLink>
 
     <div>Date: {{ formatDateTime(props.order.dateCreated) }}</div>
 
@@ -28,6 +28,8 @@ const props = defineProps<IProps>();
 
 <style module lang="scss">
 .status {
+  font-weight: 700;
+
   &[data-status='completed'] {
     color: var(--color-success);
   }

@@ -9,14 +9,14 @@ import {
   API_CUSTOMER_WATCHED,
 } from '@/customer/constants';
 
-export function getCurrentCustomer() {
+export function getCurrentCustomer(options?: object) {
   async function fn(): Promise<ICustomer> {
     const { data } = await api.get(API_CUSTOMER_CURRENT);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_CUSTOMER], queryFn: fn });
+  return useQuery({ queryKey: [API_CUSTOMER], queryFn: fn, ...options });
 }
 
 export function getCustomerWatchedProducts() {

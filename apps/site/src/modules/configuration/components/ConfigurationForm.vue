@@ -1,86 +1,87 @@
 <template>
   <form @submit.prevent="handleSubmit" :class="$style.form">
-    <div :class="$style.fields">
+    <div v-if="!props.configuration || props.isAuthor" :class="$style.fields">
       <UiField label="Title" isRequired :error="error('title')">
         <UiInput v-model="formData.title" />
       </UiField>
 
-      <UiCheckbox v-model="formData.isShared" isSwitcher labelSwitcher="Share configuration" />
+      <template v-if="props.configuration?._id">
+        <UiCheckbox v-model="formData.isShared" isSwitcher labelSwitcher="Share configuration" />
 
-      <UiField v-if="formData.isShared" label="Link">
-        <UiInput isDisabled :modelValue="link" isCopy />
-      </UiField>
+        <UiField v-if="formData.isShared" label="Link">
+          <UiInput isDisabled :modelValue="link" isCopy />
+        </UiField>
+      </template>
 
       <div>
         <b>Summary price: {{ price }} {{ CURRENCY }}</b>
       </div>
 
-      <UiButton type="submit">Save configuration</UiButton>
+      <UiButton :isDisabled="isLoading" type="submit">{{ props.configuration?._id ? 'Update' : 'Save' }}</UiButton>
+
+      <UiButton @click="router.push(URL_CUSTOMER_CONFIGURATIONS)" :isDisabled="isLoading" layout="secondary">
+        Back
+      </UiButton>
+
+      <UiButton @click="isShowConfirm = true" :isDisabled="isLoading" layout="secondary">Delete</UiButton>
     </div>
 
-    <div :class="$style.categories">
-      <div v-for="category in props.categories" :key="category._id" :class="$style.category">
-        <button
-          @click="updateCategory(`${category._id}`)"
-          type="button"
-          :class="$style.title"
-          :data-current="props.currentCategory === category._id"
-        >
-          <img
-            :src="`${PATH_UPLOAD}/${category.iconUrl}`"
-            :class="$style.icon"
-            width="32"
-            height="32"
-            loading="lazy"
-            crossorigin="anonymous"
-          />
+    <ConfigurationCategories
+      :isAuthor="props.isAuthor"
+      :categories="categories"
+      :currentCategory="currentCategory"
+      :choosenParts="formData.parts"
+      @update="(id) => emit('update', id)"
+    />
 
-          {{ category.title }}
-        </button>
-
-        <div :class="$style.choosen">
-          <div>Choosen:</div>
-          <div v-if="formData.parts[category.title as keyof IConfigurationParts]">
-            {{ formData.parts[category.title as keyof IConfigurationParts]?.title }} -
-            {{ formData.parts[category.title as keyof IConfigurationParts]?.price }} {{ CURRENCY }}
-          </div>
-
-          <div v-else>-</div>
-        </div>
-      </div>
-    </div>
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete">Confirm delete?</UiModal>
   </form>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { UiButton, UiCheckbox, UiField, UiInput } from 'mhz-ui';
+import { UiButton, UiCheckbox, UiField, UiInput, UiModal, toast } from 'mhz-ui';
 import { ICategory, IConfiguration, IConfigurationParts, IProduct } from 'mhz-types';
-import { clone, required, useValidator } from 'mhz-helpers';
+import { clone, required, useValidator, useQueryClient } from 'mhz-helpers';
 
+import ConfigurationCategories from '@/configuration/components/ConfigurationCategories.vue';
+
+import { postConfiguration, updateConfiguration, deleteConfiguration } from '@/configuration/services';
 import { getCurrentCustomer } from '@/customer/services';
-import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
+import { CURRENCY } from '@/common/constants';
+import { API_CONFIGURATION } from '@/configuration/constants';
+import { URL_CUSTOMER_CONFIGURATIONS } from '@/customer/constants';
 
 interface IProps {
   categories: ICategory[];
   currentCategory: string;
   choosenProduct?: IProduct;
+  configuration?: IConfiguration;
+  isAuthor?: boolean;
 }
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['update']);
 
-const { data: customer } = getCurrentCustomer();
+const isEnableGetCustomer = computed(() => props.isAuthor || false);
+
+const router = useRouter();
+
+const queryClient = useQueryClient();
+
+const { data: customer } = getCurrentCustomer({ enabled: isEnableGetCustomer });
 
 const formData = ref<IConfiguration>({
   title: '',
   isShared: false,
-  customer: undefined,
   parts: {} as IConfigurationParts,
 });
 
-const link = computed(() => window.location.href);
+const isShowConfirm = ref(false);
+
+const link = computed(() => window.location.href.split('?')[0]);
 
 const price = computed(() => Object.values(formData.value.parts).reduce((acc, product) => acc + product.price, 0));
 
@@ -90,16 +91,46 @@ const rules = computed(() => {
   };
 });
 
+const { mutate: mutatePost, isLoading } = postConfiguration({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
+    toast.success('Configuration added');
+    router.push(URL_CUSTOMER_CONFIGURATIONS);
+  },
+});
+
+const { mutate: mutateUpdate } = updateConfiguration(
+  {
+    onSuccess: async () => {
+      await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
+      toast.success('Configuration updated');
+    },
+  },
+  props.configuration?._id
+);
+
+const { mutate: mutateDelete } = deleteConfiguration(
+  {
+    onSuccess: async () => {
+      await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
+      toast.success('Configuration deleted');
+      router.push(URL_CUSTOMER_CONFIGURATIONS);
+    },
+  },
+  props.configuration?._id
+);
+
 const { error, isValid } = useValidator(formData, rules);
 
 function handleSubmit() {
   if (isValid()) {
-    formData.value.customer = clone(customer.value);
+    if (props.configuration?._id) {
+      mutateUpdate(formData.value);
+    } else {
+      formData.value.customer = clone(customer.value);
+      mutatePost(formData.value);
+    }
   }
-}
-
-function updateCategory(id: string) {
-  emit('update', id);
 }
 
 watch(
@@ -112,6 +143,10 @@ watch(
     }
   }
 );
+
+onMounted(() => {
+  if (props.configuration) formData.value = clone(props.configuration);
+});
 </script>
 
 <style module lang="scss">
@@ -127,46 +162,5 @@ watch(
   flex-shrink: 0;
   gap: 16px;
   width: 240px;
-}
-
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 16px;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.category {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 25%;
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
-}
-
-.title {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 0;
-  font-size: 1rem;
-  cursor: pointer;
-  background: none;
-  border: 0;
-
-  &[data-current='true'] {
-    color: var(--color-primary);
-  }
-}
-
-.choosen {
-  font-size: 0.875rem;
-  line-height: 1.3;
-  color: var(--color-gray-dark-extra);
 }
 </style>
