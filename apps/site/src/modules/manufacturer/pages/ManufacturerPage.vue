@@ -1,7 +1,10 @@
 <template>
   <div :class="$style.container">
     <div>
-      <PageTitle :links="links">{{ manufacturer?.title }}</PageTitle>
+      <PageTitle :links="links">
+        {{ manufacturer?.title }} <span v-if="filters">({{ filters.category[0].count }} products)</span>
+      </PageTitle>
+
       <ManufacturerCard v-if="manufacturer" :manufacturer="manufacturer" />
     </div>
 

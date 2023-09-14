@@ -1,10 +1,9 @@
 <template>
   <div :class="$style.container">
     <div>
-      <PageTitle v-if="category && filters" :links="links">
-        {{ category?.title }} ({{ filters?.category[0].count }} products)
+      <PageTitle :links="links">
+        {{ category?.title }} <span v-if="filters">({{ filters.category[0].count }} products)</span>
       </PageTitle>
-
       <CategoryCard v-if="category" :category="category" />
     </div>
 

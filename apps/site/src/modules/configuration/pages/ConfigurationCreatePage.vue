@@ -96,6 +96,7 @@ function updateQuery(filtersToSet: object) {
 
 function handleChoice(choice: IProduct) {
   choosenProduct.value = clone(choice);
+  document.querySelector('main')?.scrollTo(0, 0);
 }
 
 const title = 'Create PC configuration';
@@ -108,7 +109,8 @@ useHead({
 <style module lang="scss">
 .page {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .container {

@@ -1,27 +1,5 @@
 <template>
   <form @submit.prevent="handleSubmit" :class="$style.form">
-    <div :class="$style.categories">
-      <div v-for="category in props.categories" :key="category._id" :class="$style.category">
-        <img
-          :src="`${PATH_UPLOAD}/${category.iconUrl}`"
-          :class="$style.icon"
-          width="32"
-          height="32"
-          loading="lazy"
-          crossorigin="anonymous"
-        />
-
-        <button
-          @click="updateCategory(`${category._id}`)"
-          type="button"
-          :class="$style.title"
-          :data-current="props.currentCategory === category._id"
-        >
-          {{ category.title }}
-        </button>
-      </div>
-    </div>
-
     <div :class="$style.fields">
       <UiField label="Title" isRequired :error="error('title')">
         <UiInput v-model="formData.title" />
@@ -33,7 +11,43 @@
         <UiInput isDisabled :modelValue="link" isCopy />
       </UiField>
 
+      <div>
+        <b>Summary price: {{ price }} {{ CURRENCY }}</b>
+      </div>
+
       <UiButton type="submit">Save configuration</UiButton>
+    </div>
+
+    <div :class="$style.categories">
+      <div v-for="category in props.categories" :key="category._id" :class="$style.category">
+        <button
+          @click="updateCategory(`${category._id}`)"
+          type="button"
+          :class="$style.title"
+          :data-current="props.currentCategory === category._id"
+        >
+          <img
+            :src="`${PATH_UPLOAD}/${category.iconUrl}`"
+            :class="$style.icon"
+            width="32"
+            height="32"
+            loading="lazy"
+            crossorigin="anonymous"
+          />
+
+          {{ category.title }}
+        </button>
+
+        <div :class="$style.choosen">
+          <div>Choosen:</div>
+          <div v-if="formData.parts[category.title as keyof IConfigurationParts]">
+            {{ formData.parts[category.title as keyof IConfigurationParts]?.title }} -
+            {{ formData.parts[category.title as keyof IConfigurationParts]?.price }} {{ CURRENCY }}
+          </div>
+
+          <div v-else>-</div>
+        </div>
+      </div>
     </div>
   </form>
 </template>
@@ -46,7 +60,7 @@ import { ICategory, IConfiguration, IConfigurationParts, IProduct } from 'mhz-ty
 import { clone, required, useValidator } from 'mhz-helpers';
 
 import { getCurrentCustomer } from '@/customer/services';
-import { PATH_UPLOAD } from '@/common/constants';
+import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
 
 interface IProps {
   categories: ICategory[];
@@ -67,6 +81,8 @@ const formData = ref<IConfiguration>({
 });
 
 const link = computed(() => window.location.href);
+
+const price = computed(() => Object.values(formData.value.parts).reduce((acc, product) => acc + product.price, 0));
 
 const rules = computed(() => {
   return {
@@ -101,23 +117,31 @@ watch(
 <style module lang="scss">
 .form {
   display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.fields {
+  display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  gap: 24px;
+  gap: 16px;
   width: 240px;
-  padding-right: 16px;
-  border-right: 1px solid var(--color-gray);
 }
 
 .categories {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .category {
   display: flex;
-  gap: 8px;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+  width: 25%;
 }
 
 .icon {
@@ -126,6 +150,10 @@ watch(
 }
 
 .title {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0;
   font-size: 1rem;
   cursor: pointer;
   background: none;
@@ -136,9 +164,9 @@ watch(
   }
 }
 
-.fields {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.choosen {
+  font-size: 0.875rem;
+  line-height: 1.3;
+  color: var(--color-gray-dark-extra);
 }
 </style>
