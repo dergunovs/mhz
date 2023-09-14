@@ -55,12 +55,12 @@ export function uploadFiles(options: object, width?: string, thumb?: boolean) {
   return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
 }
 
-export function deleteFile(options?: object) {
+export function deleteFile(thumb?: boolean) {
   async function fn(filename: string) {
-    await api.delete(`${API_UPLOAD}/${filename}`);
+    await api.delete(`${API_UPLOAD}/${filename}`, { params: { thumb } });
 
     return true;
   }
 
-  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn });
 }

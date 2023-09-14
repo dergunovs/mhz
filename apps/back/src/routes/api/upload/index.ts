@@ -60,12 +60,14 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string } }>(
+  fastify.delete<{ Params: { id: string }; Querystring: { thumb: boolean } }>(
     '/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       try {
         deleteFile(request.params.id);
+
+        if (request.query.thumb) deleteFile(`thumb-${request.params.id}.webp`);
 
         reply.code(200).send({ message: 'deleted' });
       } catch (err) {

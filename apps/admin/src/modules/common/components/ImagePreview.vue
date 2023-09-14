@@ -27,6 +27,7 @@ import { deleteFile } from '@/common/services';
 
 interface IProps {
   urls: string[];
+  isThumb?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -39,11 +40,11 @@ function updateIndex(event: { oldIndex: number; newIndex: number }) {
   emit('update', urlsSortable.value);
 }
 
-const { mutate: mutateDeleteFile } = deleteFile();
+const { mutate: mutateDeleteFile } = deleteFile(props.isThumb);
 
 function handleDeleteFile(url: string) {
   mutateDeleteFile(url);
-  emit('delete', url);
+  emit('delete', url, true);
 }
 
 function getUrls() {

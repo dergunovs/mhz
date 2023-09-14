@@ -53,6 +53,7 @@
     <ImagePreview
       v-if="formData.imageUrls.length"
       :urls="formData.imageUrls"
+      isThumb
       @update="updateImages"
       @delete="deleteImage"
     />
@@ -119,16 +120,21 @@ function removeImage(fileToRemove: File) {
   images.value = images.value.filter((file) => file.name !== fileToRemove.name);
 }
 
-function deleteImage(imageToDelete: string) {
+function deleteImage(imageToDelete: string, isThumb: boolean) {
   formData.value.imageUrls = formData.value.imageUrls.filter((image) => image !== imageToDelete);
-  formData.value.thumbUrls = formData.value.thumbUrls.filter((image) => image !== imageToDelete);
+
+  if (isThumb) {
+    const thumbToDelete = `thumb-${imageToDelete}.webp`;
+
+    formData.value.thumbUrls = formData.value.thumbUrls.filter((image) => image !== thumbToDelete);
+  }
 }
 
 function updateImages(urls: string[]) {
   const thumbs = urls.map((url) => `thumb-${url}.webp`);
 
-  formData.value.imageUrls = [...formData.value.imageUrls, ...urls];
-  formData.value.thumbUrls = [...formData.value.thumbUrls, ...thumbs];
+  formData.value.imageUrls = [...urls];
+  formData.value.thumbUrls = [...thumbs];
 }
 
 const { mutate: mutateUploadFiles } = uploadFiles(
