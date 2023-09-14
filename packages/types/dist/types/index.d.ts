@@ -104,7 +104,7 @@ export interface IConfiguration extends IEntity {
   title: string;
   isShared?: boolean;
   customer?: ICustomer;
-  parts?: IConfigurationParts;
+  parts: IConfigurationParts;
 }
 
 export interface IFilterFieldValue {

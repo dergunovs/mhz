@@ -12,7 +12,7 @@
         />
 
         <button
-          @click="updateConfiguration(`${category._id}`)"
+          @click="updateCategory(`${category._id}`)"
           type="button"
           :class="$style.title"
           :data-current="props.currentCategory === category._id"
@@ -39,10 +39,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 import { UiButton, UiCheckbox, UiField, UiInput } from 'mhz-ui';
-import { ICategory, IConfiguration } from 'mhz-types';
+import { ICategory, IConfiguration, IConfigurationParts, IProduct } from 'mhz-types';
 import { clone, required, useValidator } from 'mhz-helpers';
 
 import { getCurrentCustomer } from '@/customer/services';
@@ -51,6 +51,7 @@ import { PATH_UPLOAD } from '@/common/constants';
 interface IProps {
   categories: ICategory[];
   currentCategory: string;
+  choosenProduct?: IProduct;
 }
 
 const props = defineProps<IProps>();
@@ -61,6 +62,8 @@ const { data: customer } = getCurrentCustomer();
 const formData = ref<IConfiguration>({
   title: '',
   isShared: false,
+  customer: undefined,
+  parts: {} as IConfigurationParts,
 });
 
 const link = computed(() => window.location.href);
@@ -79,9 +82,20 @@ function handleSubmit() {
   }
 }
 
-function updateConfiguration(id: string) {
+function updateCategory(id: string) {
   emit('update', id);
 }
+
+watch(
+  () => props.choosenProduct,
+  () => {
+    if (props.choosenProduct) {
+      const key = props.choosenProduct.category.title as keyof IConfigurationParts;
+
+      formData.value.parts[key] = props.choosenProduct;
+    }
+  }
+);
 </script>
 
 <style module lang="scss">

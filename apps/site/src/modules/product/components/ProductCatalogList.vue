@@ -5,7 +5,7 @@
       :key="product._id"
       :product="product"
       :isConfiguration="props.isConfiguration"
-      @choice="(id) => emit('choice', id)"
+      @choice="(choosenProduct) => emit('choice', choosenProduct)"
     />
   </div>
 </template>

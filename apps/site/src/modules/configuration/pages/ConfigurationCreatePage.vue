@@ -8,6 +8,7 @@
         @update="updateCategory"
         :categories="categories"
         :currentCategory="currentCategory"
+        :choosenProduct="choosenProduct"
       />
 
       <div :class="$style.products">
@@ -50,8 +51,8 @@ import { ref } from 'vue';
 import { useHead } from '@vueuse/head';
 
 import { UiPagination } from 'mhz-ui';
-import { usePage, usePagination } from 'mhz-helpers';
-import { ICategory } from 'mhz-types';
+import { clone, usePage, usePagination } from 'mhz-helpers';
+import { ICategory, IProduct } from 'mhz-types';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ConfigurationForm from '@/configuration/components/ConfigurationForm.vue';
@@ -63,6 +64,7 @@ import { getProductFilters, getProductPriceRange, getProducts } from '@/product/
 import { getCategories } from '@/category/services';
 
 const currentCategory = ref<string>();
+const choosenProduct = ref<IProduct>();
 
 const isCurrentCategory = ref(false);
 
@@ -92,8 +94,8 @@ function updateQuery(filtersToSet: object) {
   setQueryFilter({ ...filtersToSet, category: [currentCategory.value] });
 }
 
-function handleChoice(id: string) {
-  alert(id);
+function handleChoice(choice: IProduct) {
+  choosenProduct.value = clone(choice);
 }
 
 const title = 'Create PC configuration';

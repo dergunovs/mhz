@@ -1,6 +1,10 @@
 <template>
   <div :class="$style.card">
-    <RouterLink :to="`${URL_PRODUCT}/${props.product._id}`" :class="$style.imageBlock">
+    <component
+      :is="props.isConfiguration ? 'div' : RouterLink"
+      :to="`${URL_PRODUCT}/${props.product._id}`"
+      :class="$style.imageBlock"
+    >
       <img
         :src="`${PATH_UPLOAD}/${props.product.thumbUrls[0]}`"
         :class="$style.image"
@@ -10,12 +14,16 @@
         loading="lazy"
         crossorigin="anonymous"
       />
-    </RouterLink>
+    </component>
 
     <div :class="$style.info">
-      <RouterLink :to="`${URL_PRODUCT}/${props.product._id}`" :class="$style.title">
+      <component
+        :is="props.isConfiguration ? 'div' : RouterLink"
+        :to="`${URL_PRODUCT}/${props.product._id}`"
+        :class="$style.title"
+      >
         {{ props.product.title }}
-      </RouterLink>
+      </component>
 
       <div :class="$style.priceBlock">
         <div :class="$style.price">{{ props.product.price }} {{ CURRENCY }}</div>
@@ -26,11 +34,13 @@
 
     <ProductAddToCartButton v-if="props.product._id && !props.isConfiguration" :id="props.product._id" />
 
-    <UiButton @click="emit('choice', props.product._id)" isConfiguration>Choose</UiButton>
+    <UiButton v-if="props.isConfiguration" @click="emit('choice', props.product)" isConfiguration>Choose</UiButton>
   </div>
 </template>
 
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 import { IProduct } from 'mhz-types';
 import { isAuth } from 'mhz-helpers';
 import { UiButton } from 'mhz-ui';
