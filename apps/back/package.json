@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "mhz-back",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "author": "dergunov.com",
   "license": "MIT",
   "main": "app.js",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.3",
-    "@types/node": "20.6.0",
+    "@types/node": "20.6.1",
     "@typescript-eslint/eslint-plugin": "6.7.0",
     "@typescript-eslint/parser": "6.7.0",
     "concurrently": "8.2.1",

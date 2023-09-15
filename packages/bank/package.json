@@ -1,6 +1,6 @@
 {
   "name": "mhz-bank",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "mhz-bank",
   "author": "dergunov.com",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.6.0",
+    "@types/node": "20.6.1",
     "prettier": "3.0.3",
     "typescript": "5.2.2",
     "vite": "4.4.9",

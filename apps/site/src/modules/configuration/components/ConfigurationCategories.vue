@@ -11,7 +11,7 @@
         v-for="category in sortedCategories"
         :key="category._id"
         :class="$style.category"
-        :data-current="props.currentCategory === category._id"
+        :data-current="props.currentCategory === category._id && isAuthor"
       >
         <component
           :is="props.isAuthor ? 'button' : 'div'"

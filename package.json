@@ -1,7 +1,7 @@
 {
   "name": "9000mhz",
   "description": "Fake PC hardware store monorepo",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "keywords": [
     "monorepo",
     "turborepo",
