@@ -32,18 +32,66 @@ export default async function (fastify: IFastifyInstance) {
       const configuration = await Configuration.findOne({ _id: request.params.id })
         .populate([
           { path: 'customer', select: 'firstName lastName' },
-          { path: 'parts.CPU', select: 'title price fields' },
-          { path: 'parts.Case', select: 'title price fields' },
-          { path: 'parts.Cooler', select: 'title price fields' },
-          { path: 'parts.GPU', select: 'title price fields' },
-          { path: 'parts.Keyboard', select: 'title price fields' },
-          { path: 'parts.Monitor', select: 'title price fields' },
-          { path: 'parts.Motherboard', select: 'title price fields' },
-          { path: 'parts.Mouse', select: 'title price fields' },
-          { path: 'parts.Mousepad', select: 'title price fields' },
-          { path: 'parts.PSU', select: 'title price fields' },
-          { path: 'parts.RAM', select: 'title price fields' },
-          { path: 'parts.SSD', select: 'title price fields' },
+          {
+            path: 'parts.CPU',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.Case',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.Cooler',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.GPU',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.Keyboard',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.Monitor',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.Motherboard',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.Mouse',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.Mousepad',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.PSU',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.RAM',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
+          {
+            path: 'parts.SSD',
+            select: 'title price fields category',
+            populate: { path: 'category', select: 'title' },
+          },
         ])
         .lean()
         .exec();

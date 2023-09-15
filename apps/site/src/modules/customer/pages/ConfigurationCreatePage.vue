@@ -72,7 +72,7 @@ const isCurrentCategory = ref(false);
 const { data: categories } = getCategories({
   refetchOnMount: true,
   onSuccess: (data: ICategory[]) => {
-    updateCategory(data[0]._id);
+    updateCategory(data.find((category) => category.title === 'Motherboard')?._id);
     isCurrentCategory.value = true;
   },
 });
@@ -112,6 +112,7 @@ useHead({
   display: flex;
   flex-direction: column;
   gap: 32px;
+  min-height: 100vh;
 }
 
 .container {

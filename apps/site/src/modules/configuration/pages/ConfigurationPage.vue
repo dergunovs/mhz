@@ -2,7 +2,7 @@
   <div>
     <PageTitle>{{ title }}</PageTitle>
 
-    <div :class="$style.page">
+    <div :class="$style.page" :data-scroll="isAuthor && !products?.length">
       <ConfigurationAuthor
         v-if="!isAuthor && configurationData?.configuration"
         :configuration="configurationData.configuration"
@@ -87,7 +87,7 @@ const isCategoryRequestDone = ref(false);
 const { data: categories } = getCategories({
   refetchOnMount: true,
   onSuccess: (data: ICategory[]) => {
-    updateCategory(data[0]._id);
+    updateCategory(data.find((category) => category.title === 'Motherboard')?._id);
     isCategoryRequestDone.value = true;
   },
 });
@@ -129,6 +129,10 @@ useHead({
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  &[data-scroll='true'] {
+    min-height: 100vh;
+  }
 }
 
 .container {
