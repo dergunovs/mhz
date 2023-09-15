@@ -1,51 +1,59 @@
 <template>
-  <div :class="$style.categories">
-    <div
-      v-for="category in sortedCategories"
-      :key="category._id"
-      :class="$style.category"
-      :data-current="props.currentCategory === category._id"
-    >
-      <component
-        :is="props.isAuthor ? 'button' : 'div'"
-        @click="updateCategory(`${category._id}`)"
-        type="button"
-        :class="$style.title"
-        :data-editable="props.isAuthor"
+  <div :class="$style.container">
+    <div :class="$style.errorMessages">
+      <div v-for="message in props.errorMessages" :key="message">
+        {{ message }}
+      </div>
+    </div>
+
+    <div :class="$style.categories">
+      <div
+        v-for="category in sortedCategories"
+        :key="category._id"
+        :class="$style.category"
+        :data-current="props.currentCategory === category._id"
       >
-        <img
-          :src="`${PATH_UPLOAD}/${category.iconUrl}`"
-          :class="$style.icon"
-          width="32"
-          height="32"
-          loading="lazy"
-          crossorigin="anonymous"
-        />
+        <component
+          :is="props.isAuthor ? 'button' : 'div'"
+          @click="updateCategory(`${category._id}`)"
+          type="button"
+          :class="$style.title"
+          :data-editable="props.isAuthor"
+        >
+          <img
+            :src="`${PATH_UPLOAD}/${category.iconUrl}`"
+            :class="$style.icon"
+            width="32"
+            height="32"
+            loading="lazy"
+            crossorigin="anonymous"
+          />
 
-        {{ category.title }}
-      </component>
+          {{ category.title }}
+        </component>
 
-      <div :class="$style.choosen">
-        <div v-if="currentProduct(category)">
-          <a
-            :href="`${URL_PRODUCT}/${currentProduct(category)?._id}`"
-            :class="$style.link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ currentProduct(category)?.title }}
-          </a>
+        <div :class="$style.choosen">
+          <div v-if="currentProduct(category)">
+            <a
+              :href="`${URL_PRODUCT}/${currentProduct(category)?._id}`"
+              :class="$style.link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ currentProduct(category)?.title }}
+            </a>
 
-          <div :class="$style.price">{{ currentProduct(category)?.price }} {{ CURRENCY }}</div>
+            <div :class="$style.price">{{ currentProduct(category)?.price }} {{ CURRENCY }}</div>
 
-          <ConfigurationCategoryFields :product="currentProduct(category)" />
+            <ConfigurationCategoryFields :product="currentProduct(category)" :errors="props.errors" />
 
-          <UiButton v-if="props.isAuthor" @click="emit('remove', category.title)" layout="plain">Remove</UiButton>
+            <UiButton v-if="props.isAuthor" @click="emit('remove', category.title)" layout="plain">Remove</UiButton>
+          </div>
+
+          <button v-else @click="updateCategory(`${category._id}`)" :class="$style.notChoosen" type="button">
+            Not choosen
+          </button>
         </div>
-
-        <button v-else @click="updateCategory(`${category._id}`)" :class="$style.notChoosen" type="button">
-          Not choosen
-        </button>
       </div>
     </div>
   </div>
@@ -63,12 +71,15 @@ import ConfigurationCategoryFields from '@/configuration/components/Configuratio
 import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
 import { URL_PRODUCT } from '@/product/constants';
 import { CONFIGURATION_CATEGORIES_ORDER } from '@/configuration/constants';
+import { IConfigurationError } from '@/configuration/interface';
 
 interface IProps {
   categories: ICategory[];
   currentCategory: string;
   choosenParts: IConfigurationParts;
   isAuthor?: boolean;
+  errors?: IConfigurationError[];
+  errorMessages?: string[];
 }
 
 const props = defineProps<IProps>();
@@ -90,6 +101,16 @@ function currentProduct(category: ICategory) {
 </script>
 
 <style module lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.errorMessages {
+  color: var(--color-error);
+}
+
 .categories {
   display: flex;
   flex-wrap: wrap;
@@ -135,20 +156,8 @@ function currentProduct(category: ICategory) {
   }
 }
 
-.choosen {
-  font-size: 0.875rem;
-  line-height: 1.3;
-  color: var(--color-gray-dark-extra);
-}
-
-.link {
-  font-size: 1rem;
-}
-
 .price {
-  font-size: 1rem;
   font-weight: 700;
-  color: var(--color-black);
 }
 
 .notChoosen {

@@ -35,6 +35,8 @@
       :categories="categories"
       :currentCategory="currentCategory"
       :choosenParts="formData.parts"
+      :errors="validation.errors"
+      :errorMessages="validation.messages"
       @update="(id) => emit('update', id)"
       @remove="removeProduct"
     />
@@ -59,6 +61,7 @@ import { CURRENCY } from '@/common/constants';
 import { API_CONFIGURATION } from '@/configuration/constants';
 import { API_CUSTOMER_CART, URL_CUSTOMER_CONFIGURATIONS } from '@/customer/constants';
 import { URL_CART } from '@/cart/constants';
+import { useConfigurationCheck } from '@/configuration/composables';
 
 interface IProps {
   categories: ICategory[];
@@ -149,7 +152,21 @@ function removeProduct(categoryTitle: keyof IConfigurationParts) {
 
 const { error, isValid } = useValidator(formData, rules);
 
+const { validation } = useConfigurationCheck(formData);
+
 function handleSubmit() {
+  if (!Object.keys(formData.value.parts).length) {
+    toast.error('Choose at least one PC part');
+
+    return;
+  }
+
+  if (validation.value.errors.length) {
+    toast.error('Please correct compability errors');
+
+    return;
+  }
+
   if (isValid()) {
     if (props.configuration) {
       mutateUpdate(formData.value);
