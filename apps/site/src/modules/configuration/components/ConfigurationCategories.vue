@@ -40,10 +40,12 @@
 
           <ConfigurationCategoryFields :product="currentProduct(category)" />
 
-          <UiButton @click="emit('remove', category.title)" layout="plain">Remove</UiButton>
+          <UiButton v-if="props.isAuthor" @click="emit('remove', category.title)" layout="plain">Remove</UiButton>
         </div>
 
-        <div v-else>Not choosen</div>
+        <button v-else @click="updateCategory(`${category._id}`)" :class="$style.notChoosen" type="button">
+          Not choosen
+        </button>
       </div>
     </div>
   </div>
@@ -147,5 +149,14 @@ function currentProduct(category: ICategory) {
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-black);
+}
+
+.notChoosen {
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--color-gray-dark-extra);
+  cursor: pointer;
+  background: none;
+  border: 0;
 }
 </style>

@@ -236,12 +236,13 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.post<{ Body: { _id: string } }>(
+  fastify.post<{ Body: { _id: string | string[] } }>(
     '/cart',
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       try {
         const user = decodeToken(fastify.jwt.decode, request.headers.authorization);
+
         const filter = { _id: user?._id };
 
         const currentCustomer = await Customer.findOne(filter).exec();
@@ -249,18 +250,43 @@ export default async function (fastify: IFastifyInstance) {
         const currentItems = currentCustomer?.cart?.map((product) => product.product._id?.toString());
         const currentCart = currentCustomer?.cart || [];
 
-        if (currentItems?.includes(request.body._id)) {
-          await Customer.updateOne(filter, {
-            cart: currentCart.map((item) => {
-              return item.product._id?.toString() === request.body._id
-                ? { product: item.product, count: item.count + 1 }
-                : item;
-            }),
-          });
+        if (typeof request.body._id === 'string') {
+          currentItems?.includes(request.body._id)
+            ? await Customer.updateOne(filter, {
+                cart: currentCart.map((item) => {
+                  return item.product._id?.toString() === request.body._id
+                    ? { product: item.product, count: item.count + 1 }
+                    : item;
+                }),
+              })
+            : await Customer.updateOne(filter, {
+                $push: { cart: { product: request.body._id, count: 1 } },
+              });
         } else {
-          await Customer.updateOne(filter, {
-            $push: { cart: { product: request.body._id, count: 1 } },
-          });
+          const productsToUpdateCount: string[] = [];
+          const productsToAdd: string[] = [];
+
+          for (const productId of request.body._id) {
+            currentItems?.includes(productId) ? productsToUpdateCount.push(productId) : productsToAdd.push(productId);
+          }
+
+          if (productsToUpdateCount.length) {
+            await Customer.updateOne(filter, {
+              cart: currentCart.map((item) => {
+                const isExists = productsToUpdateCount.some((productId) => item.product._id?.toString() === productId);
+
+                return isExists ? { product: item.product, count: item.count + 1 } : item;
+              }),
+            });
+          }
+
+          if (productsToAdd.length) {
+            for (const productId of productsToAdd) {
+              await Customer.updateOne(filter, {
+                $push: { cart: { product: productId, count: 1 } },
+              });
+            }
+          }
         }
 
         await currentCustomer?.save();

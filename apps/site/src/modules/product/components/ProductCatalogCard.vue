@@ -1,8 +1,9 @@
 <template>
   <div :class="$style.card">
     <component
-      :is="props.isConfiguration ? 'div' : RouterLink"
+      :is="props.isConfiguration ? 'button' : RouterLink"
       :to="`${URL_PRODUCT}/${props.product._id}`"
+      @click="props.isConfiguration && emit('choice', props.product)"
       :class="$style.imageBlock"
     >
       <img
@@ -75,6 +76,9 @@ const emit = defineEmits(['choice']);
   justify-content: center;
   width: 100%;
   height: 200px;
+  cursor: pointer;
+  background: none;
+  border: none;
 
   &:hover + .info .title {
     color: var(--color-primary-dark);

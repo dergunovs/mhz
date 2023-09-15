@@ -19,6 +19,8 @@
 
       <UiButton :isDisabled="isLoading" type="submit">{{ props.configuration ? 'Update' : 'Save' }}</UiButton>
 
+      <UiButton v-if="props.configuration" @click="handleAddToCart" :isDisabled="isLoading">Add to cart</UiButton>
+
       <UiButton @click="router.push(URL_CUSTOMER_CONFIGURATIONS)" :isDisabled="isLoading" layout="secondary">
         Back
       </UiButton>
@@ -52,10 +54,11 @@ import { clone, required, useValidator, useQueryClient } from 'mhz-helpers';
 import ConfigurationCategories from '@/configuration/components/ConfigurationCategories.vue';
 
 import { postConfiguration, updateConfiguration, deleteConfiguration } from '@/configuration/services';
-import { getCurrentCustomer } from '@/customer/services';
+import { addToCart, getCurrentCustomer } from '@/customer/services';
 import { CURRENCY } from '@/common/constants';
 import { API_CONFIGURATION } from '@/configuration/constants';
-import { URL_CUSTOMER_CONFIGURATIONS } from '@/customer/constants';
+import { API_CUSTOMER_CART, URL_CUSTOMER_CONFIGURATIONS } from '@/customer/constants';
+import { URL_CART } from '@/cart/constants';
 
 interface IProps {
   categories: ICategory[];
@@ -123,6 +126,22 @@ const { mutate: mutateDelete } = deleteConfiguration(
   },
   props.configuration?._id
 );
+
+const { mutate: mutateAddToCart } = addToCart({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CUSTOMER_CART] });
+    toast.success('Added products to cart');
+  },
+});
+
+function handleAddToCart() {
+  if (!props.configuration?.parts) return;
+
+  const productIds = Object.values(props.configuration?.parts).map((part: IProduct) => part._id);
+
+  mutateAddToCart(productIds);
+  router.push(URL_CART);
+}
 
 function removeProduct(categoryTitle: keyof IConfigurationParts) {
   delete formData.value.parts[categoryTitle];

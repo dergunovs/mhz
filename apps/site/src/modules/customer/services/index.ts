@@ -94,7 +94,7 @@ export function getCustomerCart(options?: object) {
 }
 
 export function addToCart(options: object) {
-  async function fn(_id?: string) {
+  async function fn(_id?: string | (string | undefined)[]) {
     const { data } = await api.post(API_CUSTOMER_CART, { _id });
 
     return data;
