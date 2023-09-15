@@ -22,13 +22,19 @@
       </component>
 
       <div :class="$style.choosen">
-        <div>Choosen:</div>
         <div v-if="props.choosenParts[category.title as keyof IConfigurationParts]">
-          {{ props.choosenParts[category.title as keyof IConfigurationParts]?.title }} -
-          {{ props.choosenParts[category.title as keyof IConfigurationParts]?.price }} {{ CURRENCY }}
+          <a
+            :href="`${URL_PRODUCT}/${props.choosenParts[category.title as keyof IConfigurationParts]?._id}`"
+            :class="$style.link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ props.choosenParts[category.title as keyof IConfigurationParts]?.title }}
+          </a>
+          - {{ props.choosenParts[category.title as keyof IConfigurationParts]?.price }} {{ CURRENCY }}
         </div>
 
-        <div v-else>-</div>
+        <div v-else>Not choosen</div>
       </div>
     </div>
   </div>
@@ -38,6 +44,7 @@
 import { ICategory, IConfigurationParts } from 'mhz-types';
 
 import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
+import { URL_PRODUCT } from '@/product/constants';
 
 interface IProps {
   categories: ICategory[];
@@ -85,8 +92,16 @@ function updateCategory(id: string) {
   background: none;
   border: 0;
 
+  &:hover:not([data-editable='false']) {
+    text-decoration: underline;
+  }
+
   &[data-current='true']:not([data-editable='false']) {
     color: var(--color-primary);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &[data-editable='false'] {
@@ -97,6 +112,10 @@ function updateCategory(id: string) {
 .choosen {
   font-size: 0.875rem;
   line-height: 1.3;
+  color: var(--color-gray-dark-extra);
+}
+
+.link {
   color: var(--color-gray-dark-extra);
 }
 </style>

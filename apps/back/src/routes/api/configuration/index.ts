@@ -50,7 +50,13 @@ export default async function (fastify: IFastifyInstance) {
 
       const isEditable = configuration?.customer?._id?.toString() === user?._id;
 
-      reply.code(200).send({ configuration, isEditable });
+      const isSharable = isEditable || configuration?.isShared;
+
+      if (isSharable) {
+        reply.code(200).send({ configuration, isEditable });
+      } else {
+        reply.code(403).send({ message: 'forbidden' });
+      }
     } catch (err) {
       reply.code(500).send({ message: err });
     }

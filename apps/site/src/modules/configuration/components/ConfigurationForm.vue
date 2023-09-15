@@ -6,7 +6,7 @@
       </UiField>
 
       <template v-if="props.configuration">
-        <UiCheckbox v-model="formData.isShared" isSwitcher labelSwitcher="Share configuration" />
+        <UiCheckbox v-model="formData.isShared" label="Share configuration" />
 
         <UiField v-if="formData.isShared" label="Link">
           <UiInput isDisabled :modelValue="link" isCopy />

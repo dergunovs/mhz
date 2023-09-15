@@ -3,6 +3,11 @@
     <PageTitle>{{ title }}</PageTitle>
 
     <div :class="$style.page">
+      <ConfigurationAuthor
+        v-if="!isAuthor && configurationData?.configuration"
+        :configuration="configurationData.configuration"
+      />
+
       <ConfigurationForm
         v-if="configurationData?.configuration && categories && currentCategory"
         @update="updateCategory"
@@ -59,6 +64,7 @@ import { ICategory, IProduct } from 'mhz-types';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ConfigurationForm from '@/configuration/components/ConfigurationForm.vue';
+import ConfigurationAuthor from '@/configuration/components/ConfigurationAuthor.vue';
 import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
 import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
