@@ -104,6 +104,7 @@ const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateCategory(cate
 
 const { mutate: mutateDelete } = deleteCategory({
   onSuccess: async () => {
+    queryClient.removeQueries({ queryKey: [API_CATEGORY] });
     await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
     toast.success('Category deleted');
     router.push(URL_CATEGORY);

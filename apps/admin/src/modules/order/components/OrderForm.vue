@@ -94,6 +94,7 @@ const { mutate: mutateUpdate, isLoading } = updateOrder(orderId, {
 
 const { mutate: mutateDelete } = deleteOrder(orderId, {
   onSuccess: async () => {
+    queryClient.removeQueries({ queryKey: [API_ORDER] });
     await queryClient.refetchQueries({ queryKey: [API_ORDER] });
     toast.success('Order deleted');
     router.push(URL_ORDER);

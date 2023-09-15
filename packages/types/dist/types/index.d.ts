@@ -91,8 +91,8 @@ export interface IConfigurationParts {
   Cooler?: IProduct;
   GPU?: IProduct;
   Keyboard?: IProduct;
-  Motherboard?: IProduct;
   Monitor?: IProduct;
+  Motherboard?: IProduct;
   Mouse?: IProduct;
   Mousepad?: IProduct;
   PSU?: IProduct;

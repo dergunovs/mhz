@@ -190,6 +190,7 @@ const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateProduct(produ
 
 const { mutate: mutateDelete } = deleteProduct({
   onSuccess: async () => {
+    queryClient.removeQueries({ queryKey: [API_PRODUCT] });
     await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product deleted');
     router.push(URL_PRODUCT);

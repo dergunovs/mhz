@@ -32,21 +32,27 @@ export default async function (fastify: IFastifyInstance) {
       const configuration = await Configuration.findOne({ _id: request.params.id })
         .populate([
           { path: 'customer', select: 'firstName lastName' },
-          { path: 'parts.CPU', select: 'title price' },
-          { path: 'parts.Case', select: 'title price' },
-          { path: 'parts.Cooler', select: 'title price' },
-          { path: 'parts.GPU', select: 'title price' },
-          { path: 'parts.Keyboard', select: 'title price' },
-          { path: 'parts.Motherboard', select: 'title price' },
-          { path: 'parts.Monitor', select: 'title price' },
-          { path: 'parts.Mouse', select: 'title price' },
-          { path: 'parts.Mousepad', select: 'title price' },
-          { path: 'parts.PSU', select: 'title price' },
-          { path: 'parts.RAM', select: 'title price' },
-          { path: 'parts.SSD', select: 'title price' },
+          { path: 'parts.CPU', select: 'title price fields' },
+          { path: 'parts.Case', select: 'title price fields' },
+          { path: 'parts.Cooler', select: 'title price fields' },
+          { path: 'parts.GPU', select: 'title price fields' },
+          { path: 'parts.Keyboard', select: 'title price fields' },
+          { path: 'parts.Monitor', select: 'title price fields' },
+          { path: 'parts.Motherboard', select: 'title price fields' },
+          { path: 'parts.Mouse', select: 'title price fields' },
+          { path: 'parts.Mousepad', select: 'title price fields' },
+          { path: 'parts.PSU', select: 'title price fields' },
+          { path: 'parts.RAM', select: 'title price fields' },
+          { path: 'parts.SSD', select: 'title price fields' },
         ])
         .lean()
         .exec();
+
+      if (!configuration) {
+        reply.code(404).send({ message: 'not found' });
+
+        return;
+      }
 
       const isEditable = configuration?.customer?._id?.toString() === user?._id;
 

@@ -34,6 +34,7 @@
       :currentCategory="currentCategory"
       :choosenParts="formData.parts"
       @update="(id) => emit('update', id)"
+      @remove="removeProduct"
     />
 
     <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete">Confirm delete?</UiModal>
@@ -85,7 +86,7 @@ const isShowConfirm = ref(false);
 
 const link = computed(() => window.location.href.split('?')[0]);
 
-const price = computed(() => Object.values(formData.value.parts).reduce((acc, product) => acc + product.price, 0));
+const price = computed(() => Object.values(formData.value.parts).reduce((acc, product) => acc + product?.price, 0));
 
 const rules = computed(() => {
   return {
@@ -114,6 +115,7 @@ const { mutate: mutateUpdate } = updateConfiguration(
 const { mutate: mutateDelete } = deleteConfiguration(
   {
     onSuccess: async () => {
+      queryClient.removeQueries({ queryKey: [API_CONFIGURATION] });
       await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
       toast.success('Configuration deleted');
       router.push(URL_CUSTOMER_CONFIGURATIONS);
@@ -121,6 +123,10 @@ const { mutate: mutateDelete } = deleteConfiguration(
   },
   props.configuration?._id
 );
+
+function removeProduct(categoryTitle: keyof IConfigurationParts) {
+  delete formData.value.parts[categoryTitle];
+}
 
 const { error, isValid } = useValidator(formData, rules);
 

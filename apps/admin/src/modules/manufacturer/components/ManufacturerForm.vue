@@ -83,6 +83,7 @@ const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer(
 
 const { mutate: mutateDelete } = deleteManufacturer({
   onSuccess: async () => {
+    queryClient.removeQueries({ queryKey: [API_MANUFACTURER] });
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer deleted');
     router.push(URL_MANUFACTURER);

@@ -69,6 +69,7 @@ const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManager(manag
 
 const { mutate: mutateDelete } = deleteManager({
   onSuccess: async () => {
+    queryClient.removeQueries({ queryKey: [API_MANAGER] });
     await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
     toast.success('Manager deleted');
     router.push(URL_MANAGER);

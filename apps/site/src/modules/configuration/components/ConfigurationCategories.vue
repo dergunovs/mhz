@@ -22,16 +22,21 @@
       </component>
 
       <div :class="$style.choosen">
-        <div v-if="props.choosenParts[category.title as keyof IConfigurationParts]">
+        <div v-if="currentProduct(category)">
           <a
-            :href="`${URL_PRODUCT}/${props.choosenParts[category.title as keyof IConfigurationParts]?._id}`"
+            :href="`${URL_PRODUCT}/${currentProduct(category)?._id}`"
             :class="$style.link"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {{ props.choosenParts[category.title as keyof IConfigurationParts]?.title }}
+            {{ currentProduct(category)?.title }}
           </a>
-          - {{ props.choosenParts[category.title as keyof IConfigurationParts]?.price }} {{ CURRENCY }}
+
+          <div :class="$style.price">{{ currentProduct(category)?.price }} {{ CURRENCY }}</div>
+
+          <ConfigurationCategoryFields :product="currentProduct(category)" />
+
+          <UiButton @click="emit('remove', category.title)" layout="plain">Remove</UiButton>
         </div>
 
         <div v-else>Not choosen</div>
@@ -42,6 +47,9 @@
 
 <script setup lang="ts">
 import { ICategory, IConfigurationParts } from 'mhz-types';
+import { UiButton } from 'mhz-ui';
+
+import ConfigurationCategoryFields from '@/configuration/components/ConfigurationCategoryFields.vue';
 
 import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
 import { URL_PRODUCT } from '@/product/constants';
@@ -54,10 +62,14 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update']);
+const emit = defineEmits(['update', 'remove']);
 
 function updateCategory(id: string) {
   if (props.isAuthor) emit('update', id);
+}
+
+function currentProduct(category: ICategory) {
+  return props.choosenParts[category.title as keyof IConfigurationParts];
 }
 </script>
 
@@ -116,6 +128,11 @@ function updateCategory(id: string) {
 }
 
 .link {
-  color: var(--color-gray-dark-extra);
+  font-size: 1rem;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 700;
 }
 </style>

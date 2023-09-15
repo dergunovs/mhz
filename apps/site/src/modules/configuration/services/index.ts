@@ -44,7 +44,7 @@ export function deleteConfiguration(options: object, id?: string) {
     await api.delete(`${API_CONFIGURATION}/${id}`);
   }
 
-  return useMutation({ mutationKey: [API_CONFIGURATION, id], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CONFIGURATION], mutationFn: fn, ...options });
 }
 
 export function postConfiguration(options: object) {
