@@ -56,7 +56,7 @@ interface IProps {
     url: string;
   }[];
   results?: {
-    [key: string]: { _id?: string }[] | { [key: string]: string }[];
+    [key: string]: { _id?: string }[] | { [key: string]: string }[] | undefined;
   };
   isSuccess: boolean;
 }
@@ -85,7 +85,7 @@ function clearSearch() {
 }
 
 const isResults = computed(() => {
-  return props.results ? Object.values(props.results).reduce((acc, val) => acc + val.length, 0) : false;
+  return props.results ? Object.values(props.results).reduce((acc, val) => acc + (val ? val.length : 0), 0) : false;
 });
 
 const containerElement = ref<HTMLElement>();

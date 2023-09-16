@@ -12,6 +12,8 @@ function checkFormat(
   motherboardFormat: TMotherboardFormat,
   caseFormat: TMotherboardFormat
 ): IConfigurationCheck | undefined {
+  if (!motherboardFormat || !caseFormat) return;
+
   if (
     (motherboardFormat === 'Standard-ATX' && ['Micro-ATX', 'Mini-ITX'].includes(caseFormat)) ||
     (motherboardFormat === 'Micro-ATX' && ['Mini-ITX'].includes(caseFormat))
@@ -27,6 +29,8 @@ function checkFormat(
 }
 
 function checkSocket(motherboardSocket?: string, cpuSocket?: string): IConfigurationCheck | undefined {
+  if (!motherboardSocket || !cpuSocket) return;
+
   if (motherboardSocket !== cpuSocket) {
     return {
       error: [
@@ -39,6 +43,8 @@ function checkSocket(motherboardSocket?: string, cpuSocket?: string): IConfigura
 }
 
 function checkRam(motherboardRamType?: string, ramType?: string): IConfigurationCheck | undefined {
+  if (!motherboardRamType || !ramType) return;
+
   if (motherboardRamType !== ramType) {
     return {
       error: [
@@ -63,6 +69,8 @@ function checkTdp(cpuTdp?: string, coolerTdp?: string): IConfigurationCheck | un
 }
 
 function checkHeight(coolerHeight?: string, caseHeight?: string): IConfigurationCheck | undefined {
+  if (!coolerHeight || !caseHeight) return;
+
   if (Number(caseHeight) < Number(coolerHeight)) {
     return {
       error: [
@@ -75,6 +83,8 @@ function checkHeight(coolerHeight?: string, caseHeight?: string): IConfiguration
 }
 
 function checkPower(gpuPower?: string, psuPower?: string): IConfigurationCheck | undefined {
+  if (!gpuPower || !psuPower) return;
+
   if (Number(psuPower) < Number(gpuPower)) {
     return {
       error: [

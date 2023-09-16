@@ -73,7 +73,7 @@ export async function paginate<T>(Entity: Model<T>, options: IQuery) {
 
   const total = Math.ceil(count / limit);
 
-  const data = await Entity.find()
+  const data = (await Entity.find()
     .find(filter)
     .skip((page - 1) * limit)
     .limit(limit)
@@ -81,7 +81,7 @@ export async function paginate<T>(Entity: Model<T>, options: IQuery) {
     .select(options.select || '-password')
     .sort(sort)
     .lean()
-    .exec();
+    .exec()) as T[];
 
   return {
     data,

@@ -1,8 +1,8 @@
 import { Ref } from 'vue';
 
 import { api, useQuery } from 'mhz-helpers';
+import { ISearchResults } from 'mhz-types';
 
-import { ISearchResults } from '@/common/interface';
 import { API_SEARCH } from '@/common/constants';
 
 export function search(query: Ref<string>, isAdmin?: boolean) {

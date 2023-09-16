@@ -32,3 +32,11 @@ export interface IUserToken {
   iat?: number;
   exp?: number;
 }
+
+export interface ILoginData {
+  email: string;
+  password: string;
+  role: TUserRole;
+}
+
+export type TInitiator = 'category' | 'manufacturer';

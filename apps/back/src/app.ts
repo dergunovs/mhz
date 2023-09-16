@@ -20,7 +20,7 @@ async function buildApp(options: AppOptions = {}) {
   const fastify = Fastify(options);
 
   fastify.register(autoload, { dir: path.join(dirname, 'plugins'), options: { ...options } });
-  fastify.register(autoload, { dir: path.join(dirname, 'routes'), options: { ...options } });
+  fastify.register(autoload, { dir: path.join(dirname, 'routes'), options: { ...options, prefix: '/api' } });
 
   return fastify;
 }

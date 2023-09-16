@@ -18,11 +18,16 @@ export const CONFIGURATION_CATEGORIES_ORDER = [
 ];
 
 export const CONFIGURATION_PRODUCT_FIELDS: { [key: string]: string[] } = {
-  CPU: ['TDP', 'Socket'],
-  Case: ['Format', 'Max cooler height'],
-  Cooler: ['Height', 'Dissipated power'],
-  GPU: ['Recommended power supply'],
   Motherboard: ['Format', 'Socket', 'RAM type'],
-  PSU: ['Power'],
-  RAM: ['Type'],
+  CPU: ['TDP', 'Socket', 'Cores'],
+  Cooler: ['Height', 'Dissipated power', 'Heat pipes'],
+  Case: ['Format', 'Max cooler height', 'Color'],
+  GPU: ['Memory', 'Recommended power supply'],
+  PSU: ['Power', 'Certificate 80 plus'],
+  RAM: ['Size', 'Type'],
+  SSD: ['Sequential read', 'Sequential write'],
+  Monitor: ['Resolution', 'Panel type'],
+  Keyboard: ['Keys type', 'Wireless'],
+  Mouse: ['Sensitivity', 'Wireless'],
+  Mousepad: ['Width', 'Length'],
 };

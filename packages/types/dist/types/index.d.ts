@@ -130,3 +130,16 @@ export interface IFilterData {
   manufacturer: IFilterBaseValue[];
   fields: IFilterField;
 }
+
+export interface ISearchResults {
+  [key: string]: IEntity[] | undefined;
+}
+
+export interface IEntitiesCount {
+  products: number;
+  categories: number;
+  manufacturers: number;
+  managers: number;
+  customers: number;
+  orders: number;
+}

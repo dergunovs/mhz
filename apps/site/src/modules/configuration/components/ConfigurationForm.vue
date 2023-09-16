@@ -30,7 +30,7 @@
       </UiButton>
     </div>
 
-    <ConfigurationCategories
+    <ConfigurationCategoryList
       :isAuthor="props.isAuthor"
       :categories="categories"
       :currentCategory="currentCategory"
@@ -53,7 +53,7 @@ import { UiButton, UiCheckbox, UiField, UiInput, UiModal, toast } from 'mhz-ui';
 import { ICategory, IConfiguration, IConfigurationParts, IProduct } from 'mhz-types';
 import { clone, required, useValidator, useQueryClient } from 'mhz-helpers';
 
-import ConfigurationCategories from '@/configuration/components/ConfigurationCategories.vue';
+import ConfigurationCategoryList from '@/configuration/components/ConfigurationCategoryList.vue';
 
 import { postConfiguration, updateConfiguration, deleteConfiguration } from '@/configuration/services';
 import { addToCart, getCurrentCustomer } from '@/customer/services';
