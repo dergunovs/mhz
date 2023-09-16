@@ -1,10 +1,10 @@
 import { IConfiguration } from 'mhz-types';
 
 import { configurationService } from '../services/configuration.js';
-import { IFastifyInstance, IQuery } from '../interface/index.js';
+import { IFastifyInstance, IQuery, IBaseError, IBaseReply } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery }>(
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IConfiguration[]; total: number } } }>(
     '/configuration',
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
@@ -18,7 +18,13 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.get<{ Params: { id: string } }>('/configuration/:id', async function (request, reply) {
+  fastify.get<{
+    Params: { id: string };
+    Reply: {
+      200: { configuration: IConfiguration | null; isEditable: boolean };
+      '4xx': IBaseError;
+    };
+  }>('/configuration/:id', async function (request, reply) {
     const { configuration, isEditable, isSharable } = await configurationService.getOne(
       request.params.id,
       fastify.jwt.decode,
@@ -32,7 +38,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.patch<{ Body: IConfiguration; Params: { id: string } }>(
+  fastify.patch<{ Body: IConfiguration; Params: { id: string }; Reply: { 200: IBaseReply } }>(
     '/configuration/:id',
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
@@ -42,7 +48,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: IConfiguration }>(
+  fastify.post<{ Body: IConfiguration; Reply: { 201: IBaseReply } }>(
     '/configuration',
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
@@ -52,7 +58,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string } }>(
+  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply; '4xx': IBaseError } }>(
     '/configuration/:id',
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {

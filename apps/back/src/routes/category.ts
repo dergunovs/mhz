@@ -1,22 +1,25 @@
 import { ICategory } from 'mhz-types';
 
-import { IFastifyInstance, IQuery } from '../interface/index.js';
+import { IFastifyInstance, IQuery, IBaseReply, IBaseError } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery }>('/category', async function (request, reply) {
+  fastify.get<{ Querystring: IQuery; Reply: { 200: ICategory[] } }>('/category', async function (request, reply) {
     const categories = await categoryService.getMany();
 
     reply.code(200).send(categories);
   });
 
-  fastify.get<{ Params: { id: string } }>('/category/:id', async function (request, reply) {
-    const category = await categoryService.getOne(request.params.id);
+  fastify.get<{ Params: { id: string }; Reply: { 200: ICategory | null } }>(
+    '/category/:id',
+    async function (request, reply) {
+      const category = await categoryService.getOne(request.params.id);
 
-    reply.code(200).send(category);
-  });
+      reply.code(200).send(category);
+    }
+  );
 
-  fastify.patch<{ Body: ICategory; Params: { id: string } }>(
+  fastify.patch<{ Body: ICategory; Params: { id: string }; Reply: { 200: IBaseReply } }>(
     '/category/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -26,7 +29,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: ICategory }>(
+  fastify.post<{ Body: ICategory; Reply: { 201: IBaseReply; '5xx': IBaseError } }>(
     '/category',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -40,7 +43,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string } }>(
+  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
     '/category/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

@@ -7,6 +7,14 @@ export interface IFastifyInstance extends FastifyInstance {
   onlyLoggedIn: () => void;
 }
 
+export interface IBaseReply {
+  message: string;
+}
+
+export interface IBaseError {
+  message: string;
+}
+
 export interface IQuery {
   page?: string;
   sort?: string;
@@ -31,6 +39,7 @@ export interface IUserToken {
   lastName?: string;
   iat?: number;
   exp?: number;
+  token?: string;
 }
 
 export interface ILoginData {

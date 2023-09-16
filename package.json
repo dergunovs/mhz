@@ -35,10 +35,10 @@
   "devDependencies": {
     "@commitlint/cli": "17.7.1",
     "@commitlint/config-conventional": "17.7.0",
-    "@turbo/gen": "1.10.13",
+    "@turbo/gen": "1.10.14",
     "husky": "8.0.3",
     "prettier": "3.0.3",
-    "turbo": "1.10.13"
+    "turbo": "1.10.14"
   },
   "packageManager": "npm@9.8.1",
   "workspaces": [

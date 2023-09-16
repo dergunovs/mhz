@@ -1,8 +1,8 @@
 import { uploadService } from '../services/upload.js';
-import { IFastifyInstance } from '../interface/index.js';
+import { IBaseError, IBaseReply, IFastifyInstance } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.post<{ Querystring: { width: string; thumb: boolean } }>(
+  fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string[] } }>(
     '/upload',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -12,7 +12,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Querystring: { width: string; thumb: boolean } }>(
+  fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string; '5xx': IBaseError } }>(
     '/upload/single',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -30,7 +30,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Querystring: { thumb: boolean } }>(
+  fastify.delete<{ Params: { id: string }; Querystring: { thumb: boolean }; Reply: { 200: IBaseReply } }>(
     '/upload/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

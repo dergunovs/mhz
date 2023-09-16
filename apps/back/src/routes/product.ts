@@ -1,22 +1,28 @@
-import { IProduct } from 'mhz-types';
+import { IFilterData, IProduct } from 'mhz-types';
 
-import { IFastifyInstance, IQuery, TInitiator } from '../interface/index.js';
+import { IBaseReply, IFastifyInstance, IQuery, TInitiator } from '../interface/index.js';
 import { productService } from '../services/product.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery }>('/product', async function (request, reply) {
-    const { data, total, filters } = await productService.getMany(request.query);
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IProduct[]; total: number; filters: IFilterData } } }>(
+    '/product',
+    async function (request, reply) {
+      const { data, total, filters } = await productService.getMany(request.query);
 
-    reply.code(200).send({ data, total, filters });
-  });
+      reply.code(200).send({ data, total, filters });
+    }
+  );
 
-  fastify.get<{ Params: { id: string } }>('/product/:id', async function (request, reply) {
-    const product = await productService.getOne(request.params.id, fastify.jwt.decode, request.headers.authorization);
+  fastify.get<{ Params: { id: string }; Reply: { 200: IProduct | null } }>(
+    '/product/:id',
+    async function (request, reply) {
+      const product = await productService.getOne(request.params.id, fastify.jwt.decode, request.headers.authorization);
 
-    reply.code(200).send(product);
-  });
+      reply.code(200).send(product);
+    }
+  );
 
-  fastify.get<{ Querystring: { _id: string; initiator: TInitiator } }>(
+  fastify.get<{ Querystring: { _id: string; initiator: TInitiator }; Reply: { 200: [number, number] } }>(
     '/product/price',
     async function (request, reply) {
       const priceRange = await productService.getPriceRange(request.query._id, request.query.initiator);
@@ -25,7 +31,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.get<{ Querystring: { _id: string; initiator: TInitiator } }>(
+  fastify.get<{ Querystring: { _id: string; initiator: TInitiator }; Reply: { 200: IFilterData } }>(
     '/product/filters',
     async function (request, reply) {
       const filters = await productService.getFilters(request.query._id, request.query.initiator);
@@ -34,7 +40,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.patch<{ Body: IProduct; Params: { id: string } }>(
+  fastify.patch<{ Body: IProduct; Params: { id: string }; Reply: { 200: IBaseReply } }>(
     '/product/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -44,7 +50,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: IProduct }>(
+  fastify.post<{ Body: IProduct; Reply: { 201: IBaseReply } }>(
     '/product',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -54,7 +60,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string } }>(
+  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
     '/product/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
