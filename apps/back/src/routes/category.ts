@@ -5,36 +5,24 @@ import { categoryService } from '../services/category.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery }>('/category', async function (request, reply) {
-    try {
-      const categories = await categoryService.getMany();
+    const categories = await categoryService.getMany();
 
-      reply.code(200).send(categories);
-    } catch (err) {
-      reply.code(500).send({ message: err });
-    }
+    reply.code(200).send(categories);
   });
 
   fastify.get<{ Params: { id: string } }>('/category/:id', async function (request, reply) {
-    try {
-      const category = await categoryService.getOne(request.params.id);
+    const category = await categoryService.getOne(request.params.id);
 
-      reply.code(200).send(category);
-    } catch (err) {
-      reply.code(500).send({ message: err });
-    }
+    reply.code(200).send(category);
   });
 
   fastify.patch<{ Body: ICategory; Params: { id: string } }>(
     '/category/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        await categoryService.update(request.params.id, request.body);
+      await categoryService.update(request.params.id, request.body);
 
-        reply.code(200).send({ message: 'Category updated' });
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send({ message: 'Category updated' });
     }
   );
 
@@ -42,16 +30,12 @@ export default async function (fastify: IFastifyInstance) {
     '/category',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        const isReachedLimit = await categoryService.create(request.body);
+      const isReachedLimit = await categoryService.create(request.body);
 
-        if (isReachedLimit) {
-          reply.code(500).send({ message: 'You have reached maximum categories count' });
-        } else {
-          reply.code(201).send({ message: 'Category created' });
-        }
-      } catch (err) {
-        reply.code(500).send({ message: err });
+      if (isReachedLimit) {
+        reply.code(500).send({ message: 'You have reached maximum categories count' });
+      } else {
+        reply.code(201).send({ message: 'Category created' });
       }
     }
   );
@@ -60,13 +44,9 @@ export default async function (fastify: IFastifyInstance) {
     '/category/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        await categoryService.delete(request.params.id);
+      await categoryService.delete(request.params.id);
 
-        reply.code(200).send({ message: 'Category deleted' });
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send({ message: 'Category deleted' });
     }
   );
 }

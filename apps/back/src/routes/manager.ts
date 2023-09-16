@@ -8,13 +8,9 @@ export default async function (fastify: IFastifyInstance) {
     '/manager',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        const { data, total } = await managerService.getMany(request.query);
+      const { data, total } = await managerService.getMany(request.query);
 
-        reply.code(200).send({ data, total });
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send({ data, total });
     }
   );
 
@@ -22,13 +18,9 @@ export default async function (fastify: IFastifyInstance) {
     '/manager/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        const manager = await managerService.getOne(request.params.id);
+      const manager = await managerService.getOne(request.params.id);
 
-        reply.code(200).send(manager);
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send(manager);
     }
   );
 
@@ -36,13 +28,9 @@ export default async function (fastify: IFastifyInstance) {
     '/manager/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        await managerService.update(request.params.id, request.body);
+      await managerService.update(request.params.id, request.body);
 
-        reply.code(200).send({ message: 'Manager updated' });
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send({ message: 'Manager updated' });
     }
   );
 
@@ -50,13 +38,9 @@ export default async function (fastify: IFastifyInstance) {
     '/manager',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        await managerService.create(request.body);
+      await managerService.create(request.body);
 
-        reply.code(201).send({ message: 'Manager created' });
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(201).send({ message: 'Manager created' });
     }
   );
 
@@ -64,13 +48,9 @@ export default async function (fastify: IFastifyInstance) {
     '/manager/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      try {
-        await managerService.delete(request.params.id);
+      await managerService.delete(request.params.id);
 
-        reply.code(200).send({ message: 'Manager deleted' });
-      } catch (err) {
-        reply.code(500).send({ message: err });
-      }
+      reply.code(200).send({ message: 'Manager deleted' });
     }
   );
 }
