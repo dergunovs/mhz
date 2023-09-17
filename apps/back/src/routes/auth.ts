@@ -2,22 +2,22 @@ import { IFastifyInstance } from '../interface/index.js';
 import { authService } from '../services/auth.js';
 import {
   TAuthLoginBody,
-  TAuthLoginResponse,
+  TAuthLoginReply,
   TAuthSetupBody,
   authCheckSchema,
   authLoginSchema,
   authSetupSchema,
 } from '../schemas/auth.js';
-import { TBaseResponse } from '../schemas/base.js';
+import { TBaseReply } from '../schemas/base.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Reply: { 200: TBaseResponse } }>('/auth/check', authCheckSchema, async function (request, reply) {
+  fastify.get<{ Reply: { 200: TBaseReply } }>('/auth/check', authCheckSchema, async function (request, reply) {
     await authService.check(request);
 
     return reply.code(200).send({ message: 'Auth checked' });
   });
 
-  fastify.post<{ Body: TAuthLoginBody; Reply: { 200: TAuthLoginResponse; '4xx': TBaseResponse } }>(
+  fastify.post<{ Body: TAuthLoginBody; Reply: { 200: TAuthLoginReply; '4xx': TBaseReply } }>(
     '/auth/login',
     authLoginSchema,
     async function (request, reply) {
@@ -33,7 +33,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: TAuthSetupBody; Reply: { 201: TBaseResponse; '5xx': TBaseResponse } }>(
+  fastify.post<{ Body: TAuthSetupBody; Reply: { 201: TBaseReply; '5xx': TBaseReply } }>(
     '/auth/setup',
     authSetupSchema,
     async function (request, reply) {

@@ -1,25 +1,46 @@
 import { ICategory } from 'mhz-types';
 
-import { IFastifyInstance, IQuery, IBaseReply, IBaseError } from '../interface/index.js';
+import { IFastifyInstance, IQuery } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
+import {
+  categoryGetManyScheme,
+  categoryGetOneScheme,
+  TCategory,
+  categoryScheme,
+  TCategoryParams,
+} from '../schemas/category.js';
+import { TBaseReply } from '../schemas/base.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: ICategory[] } }>('/category', async function (request, reply) {
-    const categories = await categoryService.getMany();
+  fastify.addSchema(categoryScheme);
 
-    reply.code(200).send(categories);
-  });
-
-  fastify.get<{ Params: { id: string }; Reply: { 200: ICategory | null } }>(
-    '/category/:id',
+  fastify.get<{ Querystring: IQuery; Reply: { 200: TCategory[] } }>(
+    '/category',
+    categoryGetManyScheme,
     async function (request, reply) {
-      const category = await categoryService.getOne(request.params.id);
+      const categories = await categoryService.getMany();
 
-      reply.code(200).send(category);
+      reply.code(200).send(categories);
     }
   );
 
-  fastify.patch<{ Body: ICategory; Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.get<{ Params: TCategoryParams; Reply: { 200: TCategory | null; '4xx': TBaseReply } }>(
+    '/category/:id',
+    categoryGetOneScheme,
+    async function (request, reply) {
+      const { category, isCategoryFound, isNotValidId } = await categoryService.getOne(request.params.id);
+
+      if (isCategoryFound) {
+        reply.code(200).send(category);
+      } else if (isNotValidId) {
+        reply.code(404).send({ message: 'Not Valid id' });
+      } else {
+        reply.code(404).send({ message: 'Category not found' });
+      }
+    }
+  );
+
+  fastify.patch<{ Body: ICategory; Params: { id: string }; Reply: { 200: TBaseReply } }>(
     '/category/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -29,7 +50,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: ICategory; Reply: { 201: IBaseReply; '5xx': IBaseError } }>(
+  fastify.post<{ Body: ICategory; Reply: { 201: TBaseReply; '5xx': TBaseReply } }>(
     '/category',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
@@ -43,7 +64,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: { id: string }; Reply: { 200: TBaseReply } }>(
     '/category/:id',
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
