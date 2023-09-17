@@ -31,7 +31,7 @@ export const loginBody = {
 
 export const setupBody = {
   type: 'object',
-  required: ['email', 'password', 'role'],
+  required: ['firstName', 'lastName', 'email', 'password'],
   additionalProperties: false,
   properties: {
     firstName: { type: 'string' },

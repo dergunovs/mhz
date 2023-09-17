@@ -21,7 +21,7 @@ export const authService = {
     const foundUser =
       role === 'manager' ? await Manager.findOne({ email }).exec() : await Customer.findOne({ email }).exec();
 
-    if (!foundUser || !foundUser.firstName || !foundUser.lastName) {
+    if (!foundUser?.firstName || !foundUser?.lastName) {
       return { user: undefined, isUserNotFound: true, isWrongPassword: false };
     }
 
@@ -44,7 +44,7 @@ export const authService = {
     foundUser.dateLoggedIn = new Date();
     await foundUser.save();
 
-    return { user: { ...user, token } as IUserToken, isUserFound: false, isWrongPassword: false };
+    return { user: { ...user, token }, isUserFound: false, isWrongPassword: false };
   },
 
   setup: async (managerToCreate: IManager) => {
