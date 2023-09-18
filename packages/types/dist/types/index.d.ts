@@ -27,7 +27,7 @@ export type TCategoryFieldType = "string" | "number" | "boolean";
 export interface ICategoryField extends IEntity {
   title: string;
   fieldType: TCategoryFieldType;
-  fieldValue: string | number | boolean;
+  fieldValue: string | boolean;
   fieldUnits?: string;
 }
 

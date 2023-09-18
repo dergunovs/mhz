@@ -1,10 +1,10 @@
 import type { JSONSchema, FromSchema } from 'json-schema-to-ts';
 
-import { baseReply } from './base.js';
+import { baseResponse } from './base.js';
 
 const tags = ['Auth'];
 
-export const loginReply = {
+export const loginResponse = {
   type: 'object',
   required: ['_id', 'email', 'role', 'firstName', 'lastName', 'token'],
   additionalProperties: false,
@@ -41,18 +41,18 @@ export const setupBody = {
   },
 } as const satisfies JSONSchema;
 
-export type TAuthLoginReply = FromSchema<typeof loginReply>;
+export type TAuthLoginResponse = FromSchema<typeof loginResponse>;
 export type TAuthLoginBody = FromSchema<typeof loginBody>;
 export type TAuthSetupBody = FromSchema<typeof setupBody>;
 
 export const authCheckSchema = {
-  schema: { tags, response: { 200: baseReply } },
+  schema: { tags, response: { 200: baseResponse } },
 };
 
 export const authLoginSchema = {
-  schema: { tags, response: { 200: loginReply }, body: loginBody },
+  schema: { tags, response: { 200: loginResponse }, body: loginBody },
 };
 
 export const authSetupSchema = {
-  schema: { tags, response: { 201: baseReply }, body: setupBody },
+  schema: { tags, response: { 201: baseResponse }, body: setupBody },
 };

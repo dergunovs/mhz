@@ -1,4 +1,3 @@
-import { isValidObjectId } from 'mongoose';
 import { ICategory } from 'mhz-types';
 
 import Category from '../models/category.js';
@@ -13,17 +12,9 @@ export const categoryService = {
   },
 
   getOne: async (_id: string) => {
-    const isNotValidId = !isValidObjectId(_id);
+    const category: ICategory | null = await Category.findOne({ _id }).lean().exec();
 
-    if (isNotValidId) {
-      return { category: null, isCategoryFound: false, isNotValidId };
-    } else {
-      const category: ICategory | null = await Category.findOne({ _id }).lean().exec();
-
-      const isCategoryFound = !!category;
-
-      return { category, isCategoryFound, isNotValidId };
-    }
+    return category;
   },
 
   update: async (_id: string, categoryToUpdate: ICategory) => {
