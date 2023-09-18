@@ -18,7 +18,6 @@ export interface ICustomer extends IManager {
   orders?: IOrder[];
   watchedProducts?: IProductWatched[];
   favouriteProducts?: IProduct[];
-  comparisons?: IComparison[];
   configurations?: IConfiguration[];
 }
 
