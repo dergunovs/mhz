@@ -1,17 +1,18 @@
 import { ICategory } from 'mhz-types';
+import { API_CATEGORY } from 'mhz-contracts';
 
-import { IFastifyInstance, IQuery, IBaseReply, IBaseError } from '../interface/index.js';
+import { IFastifyInstance, IQuery, IBaseReply } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: ICategory[] } }>('/category', async function (request, reply) {
+  fastify.get<{ Querystring: IQuery; Reply: { 200: ICategory[] } }>(API_CATEGORY, async function (request, reply) {
     const categories = await categoryService.getMany();
 
     reply.code(200).send(categories);
   });
 
   fastify.get<{ Params: { id: string }; Reply: { 200: ICategory | null } }>(
-    '/category/:id',
+    `${API_CATEGORY}/:id`,
     async function (request, reply) {
       const category = await categoryService.getOne(request.params.id);
 
@@ -20,7 +21,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.patch<{ Body: ICategory; Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/category/:id',
+    `${API_CATEGORY}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await categoryService.update(request.params.id, request.body);
@@ -29,8 +30,8 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: ICategory; Reply: { 201: IBaseReply; '5xx': IBaseError } }>(
-    '/category',
+  fastify.post<{ Body: ICategory; Reply: { 201: IBaseReply; '5xx': IBaseReply } }>(
+    API_CATEGORY,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       const isReachedLimit = await categoryService.create(request.body);
@@ -44,7 +45,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/category/:id',
+    `${API_CATEGORY}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await categoryService.delete(request.params.id);

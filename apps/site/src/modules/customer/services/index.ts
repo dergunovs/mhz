@@ -1,13 +1,12 @@
 import { api, useMutation, useQuery } from 'mhz-helpers';
 import { ICustomer, IProduct, ICartItem } from 'mhz-types';
-
 import {
   API_CUSTOMER,
   API_CUSTOMER_CART,
   API_CUSTOMER_CURRENT,
   API_CUSTOMER_FAVOURITES,
   API_CUSTOMER_WATCHED,
-} from '@/customer/constants';
+} from 'mhz-contracts';
 
 export function getCurrentCustomer(options?: object) {
   async function fn(): Promise<ICustomer> {

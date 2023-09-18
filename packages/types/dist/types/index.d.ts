@@ -27,27 +27,27 @@ export type TCategoryFieldType = "string" | "number" | "boolean";
 export interface ICategoryField extends IEntity {
   title: string;
   fieldType: TCategoryFieldType;
-  fieldValue: string | boolean;
+  fieldValue: string | boolean | number;
   fieldUnits?: string;
 }
 
 export interface ICategory extends IEntity {
   title: string;
-  description: string;
+  description?: string;
   iconUrl: string;
   fields?: ICategoryField[];
 }
 
 export interface IManufacturer extends IEntity {
   title: string;
-  description: string;
+  description?: string;
   country: string;
   logoUrl: string;
 }
 
 export interface IProduct extends IEntity {
   title: string;
-  description: string;
+  description?: string;
   price: number;
   isInStock: boolean;
   imageUrls: string[];

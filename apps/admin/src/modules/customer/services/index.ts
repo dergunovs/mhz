@@ -2,8 +2,7 @@ import { Ref, ComputedRef } from 'vue';
 
 import { ICustomer } from 'mhz-types';
 import { api, useQuery, IPageQuery } from 'mhz-helpers';
-
-import { API_CUSTOMER } from '@/customer/constants';
+import { API_CUSTOMER } from 'mhz-contracts';
 
 export function getCustomers(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: ICustomer[]; total: number }> {

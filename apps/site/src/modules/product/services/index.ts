@@ -2,8 +2,7 @@ import { Ref, ComputedRef } from 'vue';
 
 import { IFilterData, IProduct } from 'mhz-types';
 import { api, useQuery, IPageQuery } from 'mhz-helpers';
-
-import { API_PRODUCT, API_PRODUCT_PRICE_RANGE, API_PRODUCT_FILTERS } from '@/product/constants';
+import { API_PRODUCT, API_PRODUCT_PRICE_RANGE, API_PRODUCT_FILTERS } from 'mhz-contracts';
 
 export function getProducts(
   query: Ref<IPageQuery | number>,

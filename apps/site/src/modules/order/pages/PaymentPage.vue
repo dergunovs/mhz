@@ -19,12 +19,12 @@ import { createBankPayment } from 'mhz-bank';
 import { UiModal, toast } from 'mhz-ui';
 import { useQueryClient } from 'mhz-helpers';
 import { IOrder } from 'mhz-types';
+import { API_ORDER } from 'mhz-contracts';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 
 import { URL_CUSTOMER_ORDERS } from '@/customer/constants';
 import { updateOrder, getOrder } from '@/order/services';
-import { API_ORDER } from '@/order/contants';
 import { CURRENCY } from '@/common/constants';
 
 const route = useRoute();

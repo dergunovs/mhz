@@ -69,12 +69,13 @@ import { useRouter } from 'vue-router';
 import { UiField, UiInput, UiCheckbox, toast, UiEditor, UiSelect, UiUpload } from 'mhz-ui';
 import { ICategory, IProduct, IManufacturer, ICategoryField } from 'mhz-types';
 import { clone, usePagination, useInfiniteScroll, useValidator, required, useQueryClient } from 'mhz-helpers';
+import { API_PRODUCT } from 'mhz-contracts';
 
 import ProductFieldsForm from '@/product/components/ProductFieldsForm.vue';
 import ImagePreview from '@/common/components/ImagePreview.vue';
 import FormButtons from '@/common/components/FormButtons.vue';
 
-import { API_PRODUCT, URL_PRODUCT } from '@/product/constants';
+import { URL_PRODUCT } from '@/product/constants';
 import { postProduct, updateProduct, deleteProduct } from '@/product/services';
 import { getCategories } from '@/category/services';
 import { getManufacturers } from '@/manufacturer/services';

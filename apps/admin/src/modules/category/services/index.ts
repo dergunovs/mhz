@@ -2,8 +2,7 @@ import { ComputedRef } from 'vue';
 
 import { ICategory } from 'mhz-types';
 import { api, useQuery, useMutation } from 'mhz-helpers';
-
-import { API_CATEGORY } from '@/category/constants';
+import { API_CATEGORY } from 'mhz-contracts';
 
 export function getCategories() {
   async function fn(): Promise<ICategory[]> {

@@ -1,11 +1,12 @@
 import { IManager } from 'mhz-types';
+import { API_MANAGER } from 'mhz-contracts';
 
 import { IFastifyInstance, IQuery, IBaseReply } from '../interface/index.js';
 import { managerService } from '../services/manager.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManager[]; total: number } } }>(
-    '/manager',
+    API_MANAGER,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       const { data, total } = await managerService.getMany(request.query);
@@ -15,7 +16,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.get<{ Params: { id: string }; Reply: { 200: IManager | null } }>(
-    '/manager/:id',
+    `${API_MANAGER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       const manager = await managerService.getOne(request.params.id);
@@ -25,7 +26,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.patch<{ Body: IManager; Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/manager/:id',
+    `${API_MANAGER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await managerService.update(request.params.id, request.body);
@@ -35,7 +36,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.post<{ Body: IManager; Reply: { 201: IBaseReply } }>(
-    '/manager',
+    API_MANAGER,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await managerService.create(request.body);
@@ -45,7 +46,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/manager/:id',
+    `${API_MANAGER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await managerService.delete(request.params.id);

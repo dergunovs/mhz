@@ -46,9 +46,10 @@ import { useRouter } from 'vue-router';
 import { IOrder } from 'mhz-types';
 import { formatDateTime, useQueryClient } from 'mhz-helpers';
 import { UiButton, UiModal, toast } from 'mhz-ui';
+import { API_ORDER } from 'mhz-contracts';
 
 import { updateOrder } from '@/order/services';
-import { API_ORDER, URL_PAYMENT } from '@/order/contants';
+import { URL_PAYMENT } from '@/order/contants';
 import { URL_PRODUCT } from '@/product/constants';
 import { CURRENCY } from '@/common/constants';
 

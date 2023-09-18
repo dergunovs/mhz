@@ -1,11 +1,12 @@
 import { IOrder, TOrderStatus } from 'mhz-types';
+import { API_ORDER } from 'mhz-contracts';
 
-import { IBaseError, IBaseReply, IFastifyInstance, IQuery } from '../interface/index.js';
+import { IBaseReply, IFastifyInstance, IQuery } from '../interface/index.js';
 import { orderService } from '../services/order.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IOrder[]; total: number } } }>(
-    '/order',
+    API_ORDER,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
       const { data, total } = await orderService.getMany(
@@ -18,8 +19,8 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.get<{ Params: { id: string }; Reply: { 200: IOrder | null; '4xx': IBaseError } }>(
-    '/order/:id',
+  fastify.get<{ Params: { id: string }; Reply: { 200: IOrder | null; '4xx': IBaseReply } }>(
+    `${API_ORDER}/:id`,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
       const { order, isOrderNotBelongToCustomer } = await orderService.getOne(
@@ -39,8 +40,8 @@ export default async function (fastify: IFastifyInstance) {
   fastify.patch<{
     Body: { status: TOrderStatus };
     Params: { id: string };
-    Reply: { 200: IBaseReply; '4xx': IBaseError; '5xx': IBaseError };
-  }>('/order/:id', { preValidation: [fastify.onlyLoggedIn] }, async function (request, reply) {
+    Reply: { 200: IBaseReply; '4xx': IBaseReply; '5xx': IBaseReply };
+  }>(`${API_ORDER}/:id`, { preValidation: [fastify.onlyLoggedIn] }, async function (request, reply) {
     const { isOrderNotBelongToCustomer, isAlreadyPaid } = await orderService.update(
       request.params.id,
       request.body.status,
@@ -57,8 +58,8 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.post<{ Reply: { 201: { id: string }; '4xx': IBaseError } }>(
-    '/order',
+  fastify.post<{ Reply: { 201: { id: string }; '4xx': IBaseReply } }>(
+    API_ORDER,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       const { id, isCustomerExists } = await orderService.create(fastify.jwt.decode, request.headers.authorization);
@@ -72,7 +73,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/order/:id',
+    `${API_ORDER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await orderService.delete(request.params.id);

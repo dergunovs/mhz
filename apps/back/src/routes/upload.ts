@@ -1,9 +1,11 @@
+import { API_UPLOAD, API_UPLOAD_SINGLE } from 'mhz-contracts';
+
 import { uploadService } from '../services/upload.js';
-import { IBaseError, IBaseReply, IFastifyInstance } from '../interface/index.js';
+import { IBaseReply, IFastifyInstance } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string[] } }>(
-    '/upload',
+    API_UPLOAD,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       const filesToUpload = await uploadService.uploadMultiple(request.files, request.query.width, request.query.thumb);
@@ -12,8 +14,8 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string; '5xx': IBaseError } }>(
-    '/upload/single',
+  fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string; '5xx': IBaseReply } }>(
+    API_UPLOAD_SINGLE,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       const { filename, isFileExists } = await uploadService.uploadSingle(
@@ -31,7 +33,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.delete<{ Params: { id: string }; Querystring: { thumb: boolean }; Reply: { 200: IBaseReply } }>(
-    '/upload/:id',
+    `${API_UPLOAD}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await uploadService.delete(request.params.id, request.query.thumb);

@@ -1,7 +1,7 @@
 {
   "name": "mhz-admin",
   "description": "mhz-admin",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "author": "dergunov.com",
   "license": "MIT",
   "type": "module",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@unhead/vue": "1.7.4",
+    "mhz-contracts": "*",
     "mhz-countries": "*",
     "mhz-helpers": "*",
     "mhz-types": "*",

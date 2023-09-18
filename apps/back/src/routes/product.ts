@@ -1,11 +1,12 @@
 import { IFilterData, IProduct } from 'mhz-types';
+import { API_PRODUCT, API_PRODUCT_FILTERS, API_PRODUCT_PRICE_RANGE } from 'mhz-contracts';
 
 import { IBaseReply, IFastifyInstance, IQuery, TInitiator } from '../interface/index.js';
 import { productService } from '../services/product.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IProduct[]; total: number; filters: IFilterData } } }>(
-    '/product',
+    API_PRODUCT,
     async function (request, reply) {
       const { data, total, filters } = await productService.getMany(request.query);
 
@@ -14,7 +15,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.get<{ Params: { id: string }; Reply: { 200: IProduct | null } }>(
-    '/product/:id',
+    `${API_PRODUCT}/:id`,
     async function (request, reply) {
       const product = await productService.getOne(request.params.id, fastify.jwt.decode, request.headers.authorization);
 
@@ -23,7 +24,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.get<{ Querystring: { _id: string; initiator: TInitiator }; Reply: { 200: [number, number] } }>(
-    '/product/price',
+    API_PRODUCT_PRICE_RANGE,
     async function (request, reply) {
       const priceRange = await productService.getPriceRange(request.query._id, request.query.initiator);
 
@@ -32,7 +33,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.get<{ Querystring: { _id: string; initiator: TInitiator }; Reply: { 200: IFilterData } }>(
-    '/product/filters',
+    API_PRODUCT_FILTERS,
     async function (request, reply) {
       const filters = await productService.getFilters(request.query._id, request.query.initiator);
 
@@ -41,7 +42,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.patch<{ Body: IProduct; Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/product/:id',
+    `${API_PRODUCT}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await productService.update(request.params.id, request.body);
@@ -51,7 +52,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.post<{ Body: IProduct; Reply: { 201: IBaseReply } }>(
-    '/product',
+    API_PRODUCT,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await productService.create(request.body);
@@ -61,7 +62,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/product/:id',
+    `${API_PRODUCT}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       await productService.delete(request.params.id);

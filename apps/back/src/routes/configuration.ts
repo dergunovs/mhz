@@ -1,11 +1,12 @@
 import { IConfiguration } from 'mhz-types';
+import { API_CONFIGURATION } from 'mhz-contracts';
 
 import { configurationService } from '../services/configuration.js';
-import { IFastifyInstance, IQuery, IBaseError, IBaseReply } from '../interface/index.js';
+import { IFastifyInstance, IQuery, IBaseReply } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IConfiguration[]; total: number } } }>(
-    '/configuration',
+    API_CONFIGURATION,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
       const { data, total } = await configurationService.getMany(
@@ -22,9 +23,9 @@ export default async function (fastify: IFastifyInstance) {
     Params: { id: string };
     Reply: {
       200: { configuration: IConfiguration | null; isEditable: boolean };
-      '4xx': IBaseError;
+      '4xx': IBaseReply;
     };
-  }>('/configuration/:id', async function (request, reply) {
+  }>(`${API_CONFIGURATION}/:id`, async function (request, reply) {
     const { configuration, isEditable, isSharable } = await configurationService.getOne(
       request.params.id,
       fastify.jwt.decode,
@@ -39,7 +40,7 @@ export default async function (fastify: IFastifyInstance) {
   });
 
   fastify.patch<{ Body: IConfiguration; Params: { id: string }; Reply: { 200: IBaseReply } }>(
-    '/configuration/:id',
+    `${API_CONFIGURATION}/:id`,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       await configurationService.update(request.params.id, request.body);
@@ -49,7 +50,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.post<{ Body: IConfiguration; Reply: { 201: IBaseReply } }>(
-    '/configuration',
+    API_CONFIGURATION,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       await configurationService.create(request.body);
@@ -58,8 +59,8 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply; '4xx': IBaseError } }>(
-    '/configuration/:id',
+  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply; '4xx': IBaseReply } }>(
+    `${API_CONFIGURATION}/:id`,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
       const isDeletable = await configurationService.delete(

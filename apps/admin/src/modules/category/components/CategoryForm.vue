@@ -54,15 +54,16 @@ import { useRouter } from 'vue-router';
 import { UiField, UiInput, UiButton, UiUpload, toast, UiEditor } from 'mhz-ui';
 import { ICategory, ICategoryField } from 'mhz-types';
 import { clone, deleteTempId, useValidator, required, useQueryClient } from 'mhz-helpers';
+import { API_CATEGORY } from 'mhz-contracts';
 
 import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
 import CategoryFieldList from '@/category/components/CategoryFieldList.vue';
 import ImagePreview from '@/common/components/ImagePreview.vue';
 import FormButtons from '@/common/components/FormButtons.vue';
 
-import { API_CATEGORY, URL_CATEGORY } from '@/category/constants';
 import { postCategory, updateCategory, deleteCategory } from '@/category/services';
 import { uploadFile } from '@/common/services';
+import { URL_CATEGORY } from '@/category/constants';
 
 interface IProps {
   category?: ICategory;
