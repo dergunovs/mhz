@@ -1,13 +1,13 @@
 {
   "name": "mhz-bank",
-  "version": "1.0.13",
   "description": "mhz-bank",
-  "author": "dergunov.com",
+  "version": "1.0.14",
+  "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
-  "sideEffects": false,
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
+  "sideEffects": false,
   "files": [
     "dist/*"
   ],
