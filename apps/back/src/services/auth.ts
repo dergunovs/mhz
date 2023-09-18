@@ -12,16 +12,13 @@ export const authService = {
     await request.jwtVerify();
   },
 
-  login: async (
-    loginData: ILoginData,
-    sign: (payload: Omit<IUserToken, 'iat' | 'exp' | 'token'>, options: object) => string
-  ) => {
+  login: async (loginData: ILoginData, sign: (payload: IUserToken, options: object) => string) => {
     const { email, password, role } = loginData;
 
     const foundUser =
       role === 'manager' ? await Manager.findOne({ email }).exec() : await Customer.findOne({ email }).exec();
 
-    if (!foundUser || !foundUser.firstName || !foundUser.lastName) {
+    if (!foundUser) {
       return { user: undefined, isUserNotFound: true, isWrongPassword: false };
     }
 
@@ -31,7 +28,7 @@ export const authService = {
       return { user: undefined, isUserNotFound: false, isWrongPassword: true };
     }
 
-    const user = {
+    const user: IUserToken = {
       _id: foundUser._id,
       firstName: foundUser.firstName,
       lastName: foundUser.lastName,
@@ -44,7 +41,7 @@ export const authService = {
     foundUser.dateLoggedIn = new Date();
     await foundUser.save();
 
-    return { user: { ...user, token } as IUserToken, isUserFound: false, isWrongPassword: false };
+    return { user: { ...user, token }, isUserFound: false, isWrongPassword: false };
   },
 
   setup: async (managerToCreate: IManager) => {

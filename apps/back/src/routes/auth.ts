@@ -1,27 +1,17 @@
 import { IManager } from 'mhz-types';
 
-import { IFastifyInstance } from '../interface/index.js';
+import { IFastifyInstance, ILoginData, IUserToken, IBaseError, IBaseReply } from '../interface/index.js';
 import { authService } from '../services/auth.js';
-import {
-  TAuthLoginBody,
-  TAuthLoginResponse,
-  TAuthSetupBody,
-  authCheckSchema,
-  authLoginSchema,
-  authSetupSchema,
-} from '../schemas/auth.js';
-import { TBaseResponse } from '../schemas/base.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Reply: { 200: TBaseResponse } }>('/auth/check', authCheckSchema, async function (request, reply) {
+  fastify.get<{ Reply: { 200: IBaseReply } }>('/auth/check', async function (request, reply) {
     await authService.check(request);
 
     return reply.code(200).send({ message: 'Auth checked' });
   });
 
-  fastify.post<{ Body: TAuthLoginBody; Reply: { 200: TAuthLoginResponse; '4xx': TBaseResponse } }>(
+  fastify.post<{ Body: ILoginData; Reply: { 200: IUserToken; '4xx': IBaseError } }>(
     '/auth/login',
-    authLoginSchema,
     async function (request, reply) {
       const { user, isUserNotFound, isWrongPassword } = await authService.login(request.body, fastify.jwt.sign);
 
@@ -35,9 +25,8 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: IManager; Reply: { 201: TAuthSetupBody; '5xx': TBaseResponse } }>(
+  fastify.post<{ Body: IManager; Reply: { 201: IBaseReply; '5xx': IBaseError } }>(
     '/auth/setup',
-    authSetupSchema,
     async function (request, reply) {
       const isManagersExists = await authService.setup(request.body);
 

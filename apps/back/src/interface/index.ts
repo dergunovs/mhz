@@ -32,12 +32,14 @@ export interface IQuery {
 export type TUserRole = 'customer' | 'manager';
 
 export interface IUserToken {
-  _id: string;
+  _id: ObjectId | string;
   email: string;
   role: TUserRole;
-  firstName: string;
-  lastName: string;
-  token: string;
+  firstName?: string;
+  lastName?: string;
+  iat?: number;
+  exp?: number;
+  token?: string;
 }
 
 export interface ILoginData {
