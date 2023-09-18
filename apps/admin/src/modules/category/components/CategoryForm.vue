@@ -96,15 +96,12 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postCategory({
   },
 });
 
-const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateCategory(
-  {
-    onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
-      toast.success('Category updated');
-    },
+const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateCategory(categoryId, {
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
+    toast.success('Category updated');
   },
-  categoryId
-);
+});
 
 const { mutate: mutateDelete } = deleteCategory({
   onSuccess: async () => {

@@ -33,7 +33,7 @@ export interface ICategoryField extends IEntity {
 
 export interface ICategory extends IEntity {
   title: string;
-  description?: string;
+  description: string;
   iconUrl: string;
   fields?: ICategoryField[];
 }

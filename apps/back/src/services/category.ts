@@ -16,36 +16,18 @@ export const categoryService = {
     const isNotValidId = !isValidObjectId(_id);
 
     if (isNotValidId) {
-      return { category: null, isNotValidId };
+      return { category: null, isCategoryFound: false, isNotValidId };
     } else {
       const category: ICategory | null = await Category.findOne({ _id }).lean().exec();
 
-      if (category) {
-        return { category, isNotValidId };
-      } else {
-        return { category: null, isNotValidId: true };
-      }
+      const isCategoryFound = !!category;
+
+      return { category, isCategoryFound, isNotValidId };
     }
   },
 
   update: async (_id: string, categoryToUpdate: ICategory) => {
-    const isNotValidId = !isValidObjectId(_id);
-
-    if (isNotValidId) {
-      return { isNotValidId };
-    } else {
-      const category = await Category.findOne({ _id });
-
-      if (category) {
-        await Category.updateOne({ ...categoryToUpdate, dateUpdated: new Date() });
-
-        category.save();
-
-        return { isNotValidId };
-      } else {
-        return { isNotValidId: true };
-      }
-    }
+    await Category.findOneAndUpdate({ _id }, { ...categoryToUpdate, dateUpdated: new Date() });
   },
 
   create: async (categoryToCreate: ICategory) => {
@@ -65,22 +47,10 @@ export const categoryService = {
   },
 
   delete: async (_id: string) => {
-    const isNotValidId = !isValidObjectId(_id);
+    const category = await Category.findOne({ _id });
 
-    if (isNotValidId) {
-      return { isNotValidId };
-    } else {
-      const category = await Category.findOne({ _id });
+    deleteFile(category?.iconUrl);
 
-      if (category) {
-        deleteFile(category?.iconUrl);
-
-        await category?.deleteOne();
-
-        return { isNotValidId };
-      } else {
-        return { isNotValidId: true };
-      }
-    }
+    await category?.deleteOne();
   },
 };

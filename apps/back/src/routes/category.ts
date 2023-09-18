@@ -1,12 +1,5 @@
-import {
-  API_CATEGORY,
-  categoryScheme,
-  categoryGetManyScheme,
-  categoryGetOneScheme,
-  categoryUpdateOneScheme,
-  categoryCreateScheme,
-  categoryDeleteScheme,
-} from 'mhz-contracts';
+import { ICategory } from 'mhz-types';
+import { API_CATEGORY, categoryGetManyScheme, categoryGetOneScheme, categoryScheme } from 'mhz-contracts';
 import type { TBaseReply, TCategory, TCategoryParams } from 'mhz-contracts';
 
 import { IFastifyInstance, IQuery } from '../interface/index.js';
@@ -29,33 +22,31 @@ export default async function (fastify: IFastifyInstance) {
     `${API_CATEGORY}/:id`,
     categoryGetOneScheme,
     async function (request, reply) {
-      const { category, isNotValidId } = await categoryService.getOne(request.params.id);
+      const { category, isCategoryFound, isNotValidId } = await categoryService.getOne(request.params.id);
 
-      if (isNotValidId) {
-        reply.code(404).send({ message: 'Not Valid id' });
-      } else {
+      if (isCategoryFound) {
         reply.code(200).send(category);
-      }
-    }
-  );
-
-  fastify.patch<{ Body: TCategory; Params: TCategoryParams; Reply: { 200: TBaseReply; '4xx': TBaseReply } }>(
-    `${API_CATEGORY}/:id`,
-    { preValidation: [fastify.onlyManager], ...categoryUpdateOneScheme },
-    async function (request, reply) {
-      const { isNotValidId } = await categoryService.update(request.params.id, request.body);
-
-      if (isNotValidId) {
+      } else if (isNotValidId) {
         reply.code(404).send({ message: 'Not Valid id' });
       } else {
-        reply.code(200).send({ message: 'Category updated' });
+        reply.code(404).send({ message: 'Category not found' });
       }
     }
   );
 
-  fastify.post<{ Body: TCategory; Reply: { 201: TBaseReply; '5xx': TBaseReply } }>(
+  fastify.patch<{ Body: ICategory; Params: { id: string }; Reply: { 200: TBaseReply } }>(
+    `${API_CATEGORY}/:id`,
+    { preValidation: [fastify.onlyManager] },
+    async function (request, reply) {
+      await categoryService.update(request.params.id, request.body);
+
+      reply.code(200).send({ message: 'Category updated' });
+    }
+  );
+
+  fastify.post<{ Body: ICategory; Reply: { 201: TBaseReply; '5xx': TBaseReply } }>(
     API_CATEGORY,
-    { preValidation: [fastify.onlyManager], ...categoryCreateScheme },
+    { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       const isReachedLimit = await categoryService.create(request.body);
 
@@ -67,17 +58,13 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: TCategoryParams; Reply: { 200: TBaseReply; '4xx': TBaseReply } }>(
+  fastify.delete<{ Params: { id: string }; Reply: { 200: TBaseReply } }>(
     `${API_CATEGORY}/:id`,
-    { preValidation: [fastify.onlyManager], ...categoryDeleteScheme },
+    { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      const { isNotValidId } = await categoryService.delete(request.params.id);
+      await categoryService.delete(request.params.id);
 
-      if (isNotValidId) {
-        reply.code(404).send({ message: 'Not Valid id' });
-      } else {
-        reply.code(200).send({ message: 'Category deleted' });
-      }
+      reply.code(200).send({ message: 'Category deleted' });
     }
   );
 }
