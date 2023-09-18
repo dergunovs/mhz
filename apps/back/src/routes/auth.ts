@@ -1,3 +1,5 @@
+import { IManager } from 'mhz-types';
+
 import { IFastifyInstance } from '../interface/index.js';
 import { authService } from '../services/auth.js';
 import {
@@ -33,7 +35,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: TAuthSetupBody; Reply: { 201: TBaseResponse; '5xx': TBaseResponse } }>(
+  fastify.post<{ Body: IManager; Reply: { 201: TAuthSetupBody; '5xx': TBaseResponse } }>(
     '/auth/setup',
     authSetupSchema,
     async function (request, reply) {
