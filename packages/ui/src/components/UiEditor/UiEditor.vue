@@ -17,7 +17,7 @@ import { useEditor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 
 interface IProps {
-  modelValue: string;
+  modelValue?: string;
 }
 
 const props = defineProps<IProps>();
@@ -48,7 +48,7 @@ watch(
       return;
     }
 
-    editor.value?.commands.setContent(value, false);
+    editor.value?.commands.setContent(value || '', false);
   }
 );
 

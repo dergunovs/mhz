@@ -1,5 +1,7 @@
 import type { JSONSchema, FromSchema } from 'json-schema-to-ts';
 
+import { baseReply } from './base';
+
 const tags = ['Category'];
 
 export const categoryScheme = {
@@ -58,4 +60,16 @@ export const categoryGetManyScheme = {
 
 export const categoryGetOneScheme = {
   schema: { tags, response: { 200: categoryScheme }, params: categoryParams },
+};
+
+export const categoryUpdateOneScheme = {
+  schema: { tags, response: { 200: baseReply }, params: categoryParams, body: categoryScheme },
+};
+
+export const categoryCreateScheme = {
+  schema: { tags, response: { 201: baseReply }, body: categoryScheme },
+};
+
+export const categoryDeleteScheme = {
+  schema: { tags, response: { 200: baseReply }, params: categoryParams },
 };
