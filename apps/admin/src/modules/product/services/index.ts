@@ -1,9 +1,8 @@
 import { Ref, ComputedRef } from 'vue';
 
+import { API_PRODUCT } from 'mhz-contracts';
 import { IProduct, IFilterData } from 'mhz-types';
 import { api, useQuery, useMutation, IPageQuery } from 'mhz-helpers';
-
-import { API_PRODUCT } from '@/product/constants';
 
 export function getProducts(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: IProduct[]; total: number; filters: IFilterData }> {

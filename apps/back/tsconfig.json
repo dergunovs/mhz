@@ -2,20 +2,16 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "Node16",
-    "moduleResolution": "Node16",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "strict": true,
-    "jsx": "preserve",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "baseUrl": "./",
     "rootDir": "src",
-    "outDir": "build",
-    "allowSyntheticDefaultImports": true,
-    "declaration": true
+    "outDir": "build"
   },
 
   "include": ["src"],

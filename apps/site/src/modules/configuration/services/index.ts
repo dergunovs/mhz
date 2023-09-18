@@ -1,9 +1,8 @@
 import { Ref } from 'vue';
 
+import { API_CONFIGURATION } from 'mhz-contracts';
 import { IConfiguration } from 'mhz-types';
-import { IPageQuery, api, useMutation, useQuery } from 'mhz-helpers';
-
-import { API_CONFIGURATION } from '@/configuration/constants';
+import { api, useMutation, useQuery, IPageQuery } from 'mhz-helpers';
 
 export function getConfigurations(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: IConfiguration[]; total: number }> {

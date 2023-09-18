@@ -1,7 +1,5 @@
 export const URL_CONFIGURATION = '/configurations';
 
-export const API_CONFIGURATION = 'configuration';
-
 export const CONFIGURATION_CATEGORIES_ORDER = [
   'Motherboard',
   'CPU',

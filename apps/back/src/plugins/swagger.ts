@@ -9,7 +9,7 @@ dotenv.config();
 export default fp(async function (fastify) {
   fastify.register(swagger, {
     swagger: {
-      info: { title: '9000 Mhz swagger', version: '1.0.12' },
+      info: { title: '9000 Mhz swagger', version: '1.0.13' },
       externalDocs: { url: 'https://github.com/dergunovs/mhz', description: '9000 Mhz on Github' },
       host: 'localhost:5000',
       schemes: ['http'],

@@ -4,7 +4,7 @@ Fake PC hardware store monorepo.
 
 **Frontend:** TS, Vite, Vue, Tanstack Query.
 
-**Backend:** TS, Fastify, Mongoose, MongoDB.
+**Backend:** TS, Fastify, Mongoose, MongoDB, Swagger.
 
 **Site:** https://9000mhz.ru
 
@@ -23,3 +23,4 @@ Fake PC hardware store monorepo.
 5. `npm run build` - build all apps and packages
 6. `npm run dev` - start all apps and packages in dev mode
 7. Create first manager in admin app with url `/setup`
+8. Check out API documentation in dev mode with backend url `/api-docs`

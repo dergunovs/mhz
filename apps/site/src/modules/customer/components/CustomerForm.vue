@@ -32,12 +32,12 @@ import { ref, computed, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiModal, toast } from 'mhz-ui';
 import { ICustomer } from 'mhz-types';
-import { clone, useValidator, required, email, phone, logout, deleteAuthHeader, useQueryClient } from 'mhz-helpers';
+import { deleteAuthHeader, useQueryClient, clone, useValidator, required, email, phone, logout } from 'mhz-helpers';
+import { API_CUSTOMER } from 'mhz-contracts';
 
 import { updateCustomer, deleteCustomer } from '@/customer/services';
 import { URL_MAIN } from '@/common/constants';
 import { TOKEN_NAME } from '@/auth/constants';
-import { API_CUSTOMER } from '@/customer/constants';
 
 interface IProps {
   customer?: ICustomer;

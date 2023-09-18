@@ -1,6 +1,6 @@
 import type { JSONSchema, FromSchema } from 'json-schema-to-ts';
 
-import { baseReply } from './base.js';
+import { baseReply } from './base';
 
 const tags = ['Auth'];
 

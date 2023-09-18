@@ -5,16 +5,16 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
+    "jsx": "preserve",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
-    "baseUrl": "./",
-    "paths": { "@/*": ["src/modules/*"] },
-    "types": ["vite/client", "vite-svg-loader"]
+    "types": ["vite/client"],
+    "baseUrl": "./"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

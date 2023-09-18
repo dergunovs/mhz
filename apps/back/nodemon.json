@@ -1,6 +1,6 @@
 {
-  "ignore": ["node_modules", "public"],
   "watch": ["src"],
-  "exec": "tsc && node -r tsconfig-paths/register -r ts-node/register build/index.js",
-  "ext": "ts, js"
+  "ext": "ts",
+  "exec": "esbuild `find src \\( -name '*.ts' \\)` --platform=node --outdir=build --format=esm && node build",
+  "legacyWatch": true
 }

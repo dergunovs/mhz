@@ -61,11 +61,12 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { IOrder } from 'mhz-types';
-import { formatDateTime, useQueryClient } from 'mhz-helpers';
+import { useQueryClient, formatDateTime } from 'mhz-helpers';
 import { UiButton, UiModal, toast } from 'mhz-ui';
+import { API_ORDER } from 'mhz-contracts';
 
 import { updateOrder, deleteOrder } from '@/order/services';
-import { API_ORDER, URL_ORDER } from '@/order/constants';
+import { URL_ORDER } from '@/order/constants';
 import { URL_PRODUCT_EDIT } from '@/product/constants';
 import { CURRENCY } from '@/common/constants';
 import { URL_CUSTOMER } from '@/customer/constants';

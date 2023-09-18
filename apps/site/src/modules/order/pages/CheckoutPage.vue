@@ -43,6 +43,7 @@ import { useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
 import { UiButton, toast } from 'mhz-ui';
+import { API_ORDER, API_CUSTOMER_CART } from 'mhz-contracts';
 import { useQueryClient } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
@@ -51,9 +52,8 @@ import CartItemList from '@/cart/components/CartItemList.vue';
 
 import { postOrder } from '@/order/services';
 import { getCurrentCustomer, getCustomerCart } from '@/customer/services';
-import { API_ORDER, URL_PAYMENT } from '@/order/contants';
+import { URL_PAYMENT } from '@/order/contants';
 import { CURRENCY } from '@/common/constants';
-import { API_CUSTOMER_CART } from '@/customer/constants';
 
 const router = useRouter();
 

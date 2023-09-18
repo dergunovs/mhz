@@ -4,10 +4,10 @@
 
 <script setup lang="ts">
 import { UiButton, toast } from 'mhz-ui';
-import { isAuth, useQueryClient } from 'mhz-helpers';
+import { useQueryClient, isAuth } from 'mhz-helpers';
+import { API_CUSTOMER_CART } from 'mhz-contracts';
 
 import { addToCart } from '@/customer/services';
-import { API_CUSTOMER_CART } from '@/customer/constants';
 
 interface IProps {
   id: string;

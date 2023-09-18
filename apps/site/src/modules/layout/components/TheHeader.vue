@@ -31,7 +31,7 @@
 import { ref, watch } from 'vue';
 
 import { UiButton, UiSearch } from 'mhz-ui';
-import { isAuth, logout, deleteAuthHeader } from 'mhz-helpers';
+import { deleteAuthHeader, isAuth, logout } from 'mhz-helpers';
 
 import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue';
 

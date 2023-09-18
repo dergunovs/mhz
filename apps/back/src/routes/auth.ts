@@ -1,24 +1,18 @@
+import { API_CHECK_AUTH, API_LOGIN, API_SETUP, authCheckSchema, authLoginSchema, authSetupSchema } from 'mhz-contracts';
+import type { TBaseReply, TAuthLoginBody, TAuthLoginReply, TAuthSetupBody } from 'mhz-contracts';
+
 import { IFastifyInstance } from '../interface/index.js';
 import { authService } from '../services/auth.js';
-import {
-  TAuthLoginBody,
-  TAuthLoginReply,
-  TAuthSetupBody,
-  authCheckSchema,
-  authLoginSchema,
-  authSetupSchema,
-} from '../schemas/auth.js';
-import { TBaseReply } from '../schemas/base.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Reply: { 200: TBaseReply } }>('/auth/check', authCheckSchema, async function (request, reply) {
+  fastify.get<{ Reply: { 200: TBaseReply } }>(API_CHECK_AUTH, authCheckSchema, async function (request, reply) {
     await authService.check(request);
 
     return reply.code(200).send({ message: 'Auth checked' });
   });
 
   fastify.post<{ Body: TAuthLoginBody; Reply: { 200: TAuthLoginReply; '4xx': TBaseReply } }>(
-    '/auth/login',
+    API_LOGIN,
     authLoginSchema,
     async function (request, reply) {
       const { user, isUserNotFound, isWrongPassword } = await authService.login(request.body, fastify.jwt.sign);
@@ -34,7 +28,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.post<{ Body: TAuthSetupBody; Reply: { 201: TBaseReply; '5xx': TBaseReply } }>(
-    '/auth/setup',
+    API_SETUP,
     authSetupSchema,
     async function (request, reply) {
       const isManagersExists = await authService.setup(request.body);

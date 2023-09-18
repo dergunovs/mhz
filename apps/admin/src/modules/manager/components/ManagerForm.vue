@@ -26,11 +26,12 @@ import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, toast } from 'mhz-ui';
 import { IManager } from 'mhz-types';
-import { clone, useValidator, required, useQueryClient } from 'mhz-helpers';
+import { useQueryClient, clone, useValidator, required } from 'mhz-helpers';
+import { API_MANAGER } from 'mhz-contracts';
 
 import FormButtons from '@/common/components/FormButtons.vue';
 
-import { API_MANAGER, URL_MANAGER } from '@/manager/constants';
+import { URL_MANAGER } from '@/manager/constants';
 import { postManager, updateManager, deleteManager } from '@/manager/services';
 
 interface IProps {
