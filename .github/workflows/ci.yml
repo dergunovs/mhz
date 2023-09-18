@@ -69,7 +69,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "apps/back/build,apps/back/package.json,apps/back/.env,apps/back/public,apps/back/dump,apps/back/tsconfig.json"
+          source: "apps/back/build,apps/back/package.json,apps/back/.env,apps/back/public,apps/back/dump"
           target: ${{ secrets.SSH_PATH }}
       - name: Deploy Storybook
         uses: appleboy/scp-action@master
