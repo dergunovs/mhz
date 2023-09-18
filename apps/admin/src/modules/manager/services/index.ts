@@ -1,8 +1,9 @@
 import { ComputedRef, Ref } from 'vue';
 
-import { API_MANAGER } from 'mhz-contracts';
 import { IManager } from 'mhz-types';
 import { api, useMutation, useQuery, IPageQuery } from 'mhz-helpers';
+
+import { API_MANAGER } from '@/manager/constants';
 
 export function getManagers(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: IManager[]; total: number }> {

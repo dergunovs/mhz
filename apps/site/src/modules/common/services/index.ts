@@ -1,8 +1,9 @@
 import { Ref } from 'vue';
 
-import { API_SEARCH } from 'mhz-contracts';
 import { api, useQuery } from 'mhz-helpers';
 import { ISearchResults } from 'mhz-types';
+
+import { API_SEARCH } from '@/common/constants';
 
 export function search(query: Ref<string>, isAdmin?: boolean) {
   async function fn(): Promise<ISearchResults> {

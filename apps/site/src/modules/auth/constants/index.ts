@@ -10,6 +10,9 @@ import {
 } from '@/customer/constants';
 import { URL_CHECKOUT, URL_PAYMENT } from '@/order/contants';
 
+export const API_CHECK_AUTH = 'auth/check';
+export const API_LOGIN = 'auth/login';
+
 export const URL_LOGIN = '/login';
 export const URL_SIGN_UP = '/sign-up';
 

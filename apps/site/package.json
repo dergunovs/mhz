@@ -1,7 +1,7 @@
 {
   "name": "mhz-site",
   "description": "mhz-site",
-  "version": "1.0.13",
+  "version": "1.0.12",
   "author": "dergunov.com",
   "license": "MIT",
   "type": "module",
@@ -21,7 +21,6 @@
   "dependencies": {
     "@unhead/vue": "1.7.4",
     "mhz-bank": "*",
-    "mhz-contracts": "*",
     "mhz-helpers": "*",
     "mhz-types": "*",
     "mhz-ui": "*",

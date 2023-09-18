@@ -1,8 +1,9 @@
 import { Ref } from 'vue';
 
-import { API_UPLOAD, API_UPLOAD_SINGLE, API_SEARCH, API_COUNT } from 'mhz-contracts';
 import { api, useQuery, useMutation } from 'mhz-helpers';
 import { ISearchResults, IEntitiesCount } from 'mhz-types';
+
+import { API_UPLOAD, API_UPLOAD_SINGLE, API_SEARCH, API_COUNT } from '@/common/constants';
 
 export function search(query: Ref<string>, isAdmin?: boolean) {
   async function fn(): Promise<ISearchResults> {

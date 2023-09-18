@@ -41,7 +41,6 @@ import { computed } from 'vue';
 
 import { UiButton, toast } from 'mhz-ui';
 import { ICartItem } from 'mhz-types';
-import { API_CUSTOMER_CART } from 'mhz-contracts';
 import { useQueryClient } from 'mhz-helpers';
 
 import CartItemCount from '@/cart/components/CartItemCount.vue';
@@ -51,6 +50,7 @@ import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
 import { URL_CATEGORY } from '@/category/constants';
 import { URL_PRODUCT } from '@/product/constants';
 import { removeFromCart, updateCountCart } from '@/customer/services';
+import { API_CUSTOMER_CART } from '@/customer/constants';
 
 interface IProps {
   item: ICartItem;

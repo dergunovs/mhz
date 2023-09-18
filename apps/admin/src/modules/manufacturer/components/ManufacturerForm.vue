@@ -38,13 +38,12 @@ import { useRouter } from 'vue-router';
 import { UiField, UiInput, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
 import { IManufacturer } from 'mhz-types';
 import { countries } from 'mhz-countries';
-import { useQueryClient, clone, useValidator, required } from 'mhz-helpers';
-import { API_MANUFACTURER } from 'mhz-contracts';
+import { clone, useValidator, required, useQueryClient } from 'mhz-helpers';
 
 import ImagePreview from '@/common/components/ImagePreview.vue';
 import FormButtons from '@/common/components/FormButtons.vue';
 
-import { URL_MANUFACTURER } from '@/manufacturer/constants';
+import { API_MANUFACTURER, URL_MANUFACTURER } from '@/manufacturer/constants';
 import { postManufacturer, updateManufacturer, deleteManufacturer } from '@/manufacturer/services';
 import { uploadFile } from '@/common/services';
 

@@ -1,7 +1,7 @@
 {
   "name": "9000mhz",
   "description": "Fake PC hardware store monorepo",
-  "version": "1.0.13",
+  "version": "1.0.12",
   "keywords": [
     "monorepo",
     "turborepo",
@@ -26,7 +26,7 @@
     "ts": "turbo run ts --no-daemon",
     "dev": "turbo run dev --no-daemon",
     "build": "turbo run build --no-daemon",
-    "pub": "turbo run build --no-daemon --filter=mhz-ui --filter=mhz-countries --filter=mhz-types --filter=mhz-helpers --filter=mhz-bank --filter=mhz-contracts && changeset version && changeset publish",
+    "pub": "turbo run build --no-daemon --filter=mhz-ui --filter=mhz-countries --filter=mhz-types --filter=mhz-helpers --filter=mhz-bank && changeset version && changeset publish",
     "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --out=apps/back/dump"
   },
   "dependencies": {

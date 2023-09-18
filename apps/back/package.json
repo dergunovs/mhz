@@ -1,10 +1,11 @@
 {
   "name": "mhz-back",
   "description": "mhz-back",
-  "version": "1.0.13",
+  "version": "1.0.12",
   "author": "dergunov.com",
   "license": "MIT",
   "main": "app.js",
+  "types": "index.d.ts",
   "type": "module",
   "private": true,
   "repository": {
@@ -13,7 +14,7 @@
     "directory": "apps/back"
   },
   "scripts": {
-    "dev": "nodemon",
+    "dev": "concurrently -k -p \"[{name}]\" \"tsc -w\" \"nodemon\"",
     "start": "node build/index.js",
     "build": "tsc -p tsconfig.json",
     "lint": "eslint 'src/**/*.{js,ts}'",
@@ -22,17 +23,17 @@
   "dependencies": {
     "@fastify/autoload": "5.7.1",
     "@fastify/cors": "8.3.0",
-    "@fastify/helmet": "11.1.1",
+    "@fastify/helmet": "11.1.0",
     "@fastify/jwt": "7.2.1",
     "@fastify/multipart": "7.7.3",
-    "@fastify/static": "6.11.2",
+    "@fastify/static": "6.11.1",
     "@fastify/swagger": "8.10.0",
     "@fastify/swagger-ui": "1.9.3",
     "bcryptjs": "2.4.3",
     "dotenv": "16.3.1",
     "fastify": "4.23.2",
     "fastify-plugin": "4.5.1",
-    "mhz-contracts": "*",
+    "json-schema-to-ts": "2.9.2",
     "mhz-types": "*",
     "mongoose": "7.5.2",
     "qs": "6.11.2",
@@ -43,7 +44,7 @@
     "@types/node": "20.6.2",
     "@typescript-eslint/eslint-plugin": "6.7.0",
     "@typescript-eslint/parser": "6.7.0",
-    "esbuild": "0.18.20",
+    "concurrently": "8.2.1",
     "eslint": "8.49.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-import-resolver-typescript": "3.6.0",
@@ -52,6 +53,8 @@
     "fastify-linters-config": "0.0.7",
     "nodemon": "3.0.1",
     "prettier": "3.0.3",
+    "ts-node": "10.9.1",
+    "tsconfig-paths": "4.2.0",
     "typescript": "5.2.2"
   },
   "engines": {

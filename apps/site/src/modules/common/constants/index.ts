@@ -5,6 +5,8 @@ import { URL_MANUFACTURER } from '@/manufacturer/constants';
 export const URL_MAIN = '/';
 export const URL_ERROR = '/404';
 
+export const API_SEARCH = 'search';
+
 export const PATH_UPLOAD = import.meta.env.VITE_PATH_UPLOAD;
 export const CURRENCY = import.meta.env.VITE_CURRENCY;
 

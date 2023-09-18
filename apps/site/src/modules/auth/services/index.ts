@@ -1,7 +1,7 @@
-import { API_CHECK_AUTH, API_LOGIN } from 'mhz-contracts';
 import { api, useMutation, useQuery } from 'mhz-helpers';
 
 import { ILoginFormData } from '@/auth/interface';
+import { API_CHECK_AUTH, API_LOGIN } from '@/auth/constants';
 
 export function checkAuth(options: object) {
   async function fn() {

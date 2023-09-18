@@ -21,12 +21,12 @@ import { computed } from 'vue';
 
 import { IProduct } from 'mhz-types';
 import { toast } from 'mhz-ui';
-import { API_CUSTOMER_FAVOURITES } from 'mhz-contracts';
 import { useQueryClient } from 'mhz-helpers';
 
 import IconComparison from '@/product/icons/comparison.svg';
 import IconFavourites from '@/product/icons/favourites.svg';
 import { addToFavourites, removeFromFavourites, getCustomerFavouriteProducts } from '@/customer/services';
+import { API_CUSTOMER_FAVOURITES } from '@/customer/constants';
 
 interface IProps {
   product: IProduct;

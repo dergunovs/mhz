@@ -1,8 +1,9 @@
 import { Ref, ComputedRef } from 'vue';
 
-import { API_ORDER } from 'mhz-contracts';
-import { api, useMutation, useQuery, IPageQuery } from 'mhz-helpers';
+import { IPageQuery, api, useMutation, useQuery } from 'mhz-helpers';
 import { IOrder, TOrderStatus } from 'mhz-types';
+
+import { API_ORDER } from '@/order/contants';
 
 export function getOrders(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: IOrder[]; total: number }> {
