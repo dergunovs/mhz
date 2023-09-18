@@ -1,13 +1,19 @@
 <template>
-  <button
-    @click="isInFavourites ? mutateRemove(props.product._id) : mutateAdd(props.product._id)"
-    :class="$style.button"
-    :data-active="isInFavourites"
-    type="button"
-    :title="isInFavourites ? 'Remove from favourites' : 'Add to favourites'"
-  >
-    <IconFavourites />
-  </button>
+  <div :class="$style.buttons">
+    <button :class="$style.button" type="button" title="Compare product">
+      <IconComparison />
+    </button>
+
+    <button
+      @click="isInFavourites ? mutateRemove(props.product._id) : mutateAdd(props.product._id)"
+      :class="$style.button"
+      :data-active="isInFavourites"
+      type="button"
+      :title="isInFavourites ? 'Remove from favourites' : 'Add to favourites'"
+    >
+      <IconFavourites />
+    </button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +24,7 @@ import { toast } from 'mhz-ui';
 import { API_CUSTOMER_FAVOURITES } from 'mhz-contracts';
 import { useQueryClient } from 'mhz-helpers';
 
+import IconComparison from '@/product/icons/comparison.svg';
 import IconFavourites from '@/product/icons/favourites.svg';
 import { addToFavourites, removeFromFavourites, getCustomerFavouriteProducts } from '@/customer/services';
 
@@ -49,6 +56,12 @@ const { mutate: mutateRemove } = removeFromFavourites({
 </script>
 
 <style module lang="scss">
+.buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .button {
   display: flex;
   align-items: center;

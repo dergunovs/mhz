@@ -13,6 +13,7 @@ const customerSchema = new Schema<ICustomer>(
     orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
     watchedProducts: [{ product: { type: Schema.Types.ObjectId, ref: 'Product' }, dateCreated: { type: Date } }],
     favouriteProducts: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+    comparisons: [{ type: Schema.Types.ObjectId, ref: 'Comparison' }],
     configurations: [{ type: Schema.Types.ObjectId, ref: 'Configuration' }],
     dateLoggedIn: { type: Date },
     dateCreated: { type: Date, default: Date.now },
