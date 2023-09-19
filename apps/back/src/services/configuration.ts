@@ -5,7 +5,7 @@ import Configuration from '../models/configuration.js';
 import { decodeToken, paginate } from '../helpers/index.js';
 
 export const configurationService: IBaseService = {
-  getMany: async (query: IQuery, decode: (token: string) => IUserToken | null, token?: string) => {
+  getMany: async <T>(query?: IQuery, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const filter = user?.role === 'customer' ? { customer: user._id } : {};
@@ -17,10 +17,10 @@ export const configurationService: IBaseService = {
       select: '-parts',
     });
 
-    return { data, total };
+    return { data: data as T[], total };
   },
 
-  getOne: async (_id: string, decode: (token: string) => IUserToken | null, token?: string) => {
+  getOne: async <T>(_id: string, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const configuration: IConfiguration | null = await Configuration.findOne({ _id })
@@ -93,20 +93,20 @@ export const configurationService: IBaseService = {
     const isEditable = configuration?.customer?._id?.toString() === user?._id;
     const isSharable = isEditable || !!configuration?.isShared;
 
-    return { configuration, isEditable, isSharable };
+    return { data: configuration as T, isConfigurationEditable: isEditable, isConfigurationSharable: isSharable };
   },
 
-  update: async (_id: string, configurationToUpdate: IConfiguration) => {
-    await Configuration.findOneAndUpdate({ _id }, { ...configurationToUpdate, dateUpdated: new Date() });
+  update: async <T>(itemToUpdate: T, _id?: string) => {
+    await Configuration.findOneAndUpdate({ _id }, { ...itemToUpdate, dateUpdated: new Date() });
   },
 
-  create: async (configurationToCreate: IConfiguration) => {
+  create: async <T>(configurationToCreate: T) => {
     const configuration = new Configuration(configurationToCreate);
 
     await configuration.save();
   },
 
-  delete: async (_id: string, decode: (token: string) => IUserToken | null, token?: string) => {
+  delete: async (_id?: string, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const configuration = await Configuration.findOne({ _id });

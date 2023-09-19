@@ -19,9 +19,9 @@ export function getOrder(id?: ComputedRef<string | string[]>) {
   async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get<IOrder>(`${API_ORDER}/${id.value}`);
+    const { data } = await api.get<{ data: IOrder }>(`${API_ORDER}/${id.value}`);
 
-    return data;
+    return data.data;
   }
 
   return useQuery({ queryKey: [API_ORDER, id], queryFn: fn, refetchOnMount: true });

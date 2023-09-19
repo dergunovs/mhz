@@ -1,51 +1,51 @@
 import { API_MANAGER } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IManager } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IManager, IBaseParams, ISignUpData } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { managerService } from '../services/manager.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManager[]; total: number } } }>(
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManager[]; total?: number } } }>(
     API_MANAGER,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      const { data, total } = await managerService.getMany(request.query);
+      const { data, total } = await managerService.getMany<IManager>(request.query);
 
       reply.code(200).send({ data, total });
     }
   );
 
-  fastify.get<{ Params: { id: string }; Reply: { 200: IManager | null } }>(
+  fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IManager | null } } }>(
     `${API_MANAGER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      const manager = await managerService.getOne(request.params.id);
+      const data = await managerService.getOne<IManager>(request.params.id);
 
-      reply.code(200).send(manager);
+      reply.code(200).send(data);
     }
   );
 
-  fastify.patch<{ Body: IManager; Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.patch<{ Body: IManager; Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_MANAGER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      await managerService.update(request.params.id, request.body);
+      await managerService.update<IManager>(request.body, request.params.id);
 
       reply.code(200).send({ message: 'Manager updated' });
     }
   );
 
-  fastify.post<{ Body: IManager; Reply: { 201: IBaseReply } }>(
+  fastify.post<{ Body: ISignUpData; Reply: { 201: IBaseReply } }>(
     API_MANAGER,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      await managerService.create(request.body);
+      await managerService.create<ISignUpData>(request.body);
 
       reply.code(201).send({ message: 'Manager created' });
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_MANAGER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

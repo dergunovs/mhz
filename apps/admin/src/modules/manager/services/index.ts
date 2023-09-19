@@ -19,9 +19,9 @@ export function getManager(id?: ComputedRef<string | string[]>) {
   async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get<IManager>(`${API_MANAGER}/${id.value}`);
+    const { data } = await api.get<{ data: IManager }>(`${API_MANAGER}/${id.value}`);
 
-    return data;
+    return data.data;
   }
 
   return useQuery({ queryKey: [API_MANAGER, id], queryFn: fn, refetchOnMount: true });

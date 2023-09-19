@@ -1,5 +1,5 @@
 import { API_UPLOAD, API_UPLOAD_MULTIPLE, API_UPLOAD_SINGLE } from 'mhz-contracts';
-import type { IBaseReply } from 'mhz-contracts';
+import type { IBaseReply, IBaseParams } from 'mhz-contracts';
 
 import { uploadService } from '../services/upload.js';
 import { IFastifyInstance } from '../interface/index.js';
@@ -33,7 +33,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Querystring: { thumb: boolean }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Querystring: { thumb: boolean }; Reply: { 200: IBaseReply } }>(
     `${API_UPLOAD}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

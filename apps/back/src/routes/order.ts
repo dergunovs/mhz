@@ -1,15 +1,15 @@
 import { API_ORDER } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IOrder, TOrderStatus } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IOrder, TOrderStatus, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { orderService } from '../services/order.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IOrder[]; total: number } } }>(
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IOrder[]; total?: number } } }>(
     API_ORDER,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
-      const { data, total } = await orderService.getMany(
+      const { data, total } = await orderService.getMany<IOrder>(
         request.query,
         fastify.jwt.decode,
         request.headers.authorization
@@ -19,11 +19,11 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.get<{ Params: { id: string }; Reply: { 200: IOrder | null; '4xx': IBaseReply } }>(
+  fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IOrder | null }; '4xx': IBaseReply } }>(
     `${API_ORDER}/:id`,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
-      const { order, isOrderNotBelongToCustomer } = await orderService.getOne(
+      const { data, isOrderNotBelongToCustomer } = await orderService.getOne<IOrder>(
         request.params.id,
         fastify.jwt.decode,
         request.headers.authorization
@@ -32,27 +32,26 @@ export default async function (fastify: IFastifyInstance) {
       if (isOrderNotBelongToCustomer) {
         reply.code(403).send({ message: 'Forbidden' });
       } else {
-        reply.code(200).send(order);
+        reply.code(200).send({ data });
       }
     }
   );
 
   fastify.patch<{
     Body: { status: TOrderStatus };
-    Params: { id: string };
+    Params: IBaseParams;
     Reply: { 200: IBaseReply; '4xx': IBaseReply; '5xx': IBaseReply };
   }>(`${API_ORDER}/:id`, { preValidation: [fastify.onlyLoggedIn] }, async function (request, reply) {
-    const { isOrderNotBelongToCustomer, isAlreadyPaid } = await orderService.update(
+    const isPaymentError = await orderService.update<IOrder>(
+      undefined,
       request.params.id,
-      request.body.status,
       fastify.jwt.decode,
-      request.headers.authorization
+      request.headers.authorization,
+      request.body.status
     );
 
-    if (isOrderNotBelongToCustomer) {
-      reply.code(403).send({ message: 'Forbidden' });
-    } else if (isAlreadyPaid) {
-      reply.code(500).send({ message: 'Order already have been paid' });
+    if (isPaymentError) {
+      reply.code(403).send({ message: 'Payment error' });
     } else {
       reply.code(200).send({ message: 'Order updated' });
     }
@@ -62,17 +61,17 @@ export default async function (fastify: IFastifyInstance) {
     API_ORDER,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
-      const { id, isCustomerExists } = await orderService.create(fastify.jwt.decode, request.headers.authorization);
+      const id = await orderService.create<IOrder>(undefined, fastify.jwt.decode, request.headers.authorization);
 
-      if (isCustomerExists) {
-        reply.code(201).send(id);
+      if (id) {
+        reply.code(201).send(id.toString());
       } else {
         reply.code(404).send({ message: 'No such customer' });
       }
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_ORDER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

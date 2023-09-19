@@ -1,15 +1,15 @@
 import { API_CONFIGURATION } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IConfiguration } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IConfiguration, IBaseParams } from 'mhz-contracts';
 
 import { configurationService } from '../services/configuration.js';
 import { IFastifyInstance } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IConfiguration[]; total: number } } }>(
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IConfiguration[]; total?: number } } }>(
     API_CONFIGURATION,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {
-      const { data, total } = await configurationService.getMany(
+      const { data, total } = await configurationService.getMany<IConfiguration>(
         request.query,
         fastify.jwt.decode,
         request.headers.authorization
@@ -20,30 +20,31 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.get<{
-    Params: { id: string };
+    Params: IBaseParams;
     Reply: {
-      200: { configuration: IConfiguration | null; isEditable: boolean };
+      200: { data: IConfiguration | null; isConfigurationEditable?: boolean };
       '4xx': IBaseReply;
     };
   }>(`${API_CONFIGURATION}/:id`, async function (request, reply) {
-    const { configuration, isEditable, isSharable } = await configurationService.getOne(
-      request.params.id,
-      fastify.jwt.decode,
-      request.headers.authorization
-    );
+    const { data, isConfigurationEditable, isConfigurationSharable } =
+      await configurationService.getOne<IConfiguration>(
+        request.params.id,
+        fastify.jwt.decode,
+        request.headers.authorization
+      );
 
-    if (isSharable) {
-      reply.code(200).send({ configuration, isEditable });
+    if (isConfigurationSharable) {
+      reply.code(200).send({ data, isConfigurationEditable });
     } else {
       reply.code(403).send({ message: 'Forbidden' });
     }
   });
 
-  fastify.patch<{ Body: IConfiguration; Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.patch<{ Body: IConfiguration; Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_CONFIGURATION}/:id`,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
-      await configurationService.update(request.params.id, request.body);
+      await configurationService.update<IConfiguration>(request.body, request.params.id);
 
       reply.code(200).send({ message: 'Configuration updated' });
     }
@@ -53,13 +54,13 @@ export default async function (fastify: IFastifyInstance) {
     API_CONFIGURATION,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
-      await configurationService.create(request.body);
+      await configurationService.create<IConfiguration>(request.body);
 
       reply.code(201).send({ message: 'Configuration created' });
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply; '4xx': IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply; '4xx': IBaseReply } }>(
     `${API_CONFIGURATION}/:id`,
     { preValidation: [fastify.onlyLoggedIn] },
     async function (request, reply) {

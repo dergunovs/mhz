@@ -5,29 +5,29 @@ import {
   API_CUSTOMER_FAVOURITES,
   API_CUSTOMER_WATCHED,
 } from 'mhz-contracts';
-import type { IQuery, IBaseReply, ICartItem, ICustomer, IProduct, ISignUpData } from 'mhz-contracts';
+import type { IQuery, IBaseReply, ICartItem, ICustomer, IProduct, ISignUpData, IBaseParams } from 'mhz-contracts';
 
 import { customerService } from '../services/customer.js';
 import { IFastifyInstance } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: ICustomer[]; total: number } } }>(
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: ICustomer[]; total?: number } } }>(
     API_CUSTOMER,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      const { data, total } = await customerService.getMany(request.query);
+      const { data, total } = await customerService.getMany<ICustomer>(request.query);
 
       reply.code(200).send({ data, total });
     }
   );
 
-  fastify.get<{ Params: { id: string }; Reply: { 200: ICustomer | null } }>(
+  fastify.get<{ Params: IBaseParams; Reply: { 200: { data: ICustomer | null } } }>(
     `${API_CUSTOMER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      const customer = await customerService.getOne(request.params.id);
+      const data = await customerService.getOne<ICustomer>(request.params.id);
 
-      reply.code(200).send(customer);
+      reply.code(200).send(data);
     }
   );
 
@@ -75,7 +75,12 @@ export default async function (fastify: IFastifyInstance) {
     API_CUSTOMER,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
-      await customerService.update(request.body, fastify.jwt.decode, request.headers.authorization);
+      await customerService.update<ICustomer>(
+        request.body,
+        undefined,
+        fastify.jwt.decode,
+        request.headers.authorization
+      );
 
       reply.code(200).send({ message: 'Customer updated' });
     }
@@ -101,7 +106,7 @@ export default async function (fastify: IFastifyInstance) {
   );
 
   fastify.post<{ Body: ISignUpData; Reply: { 201: IBaseReply } }>('/customer', async function (request, reply) {
-    await customerService.create(request.body);
+    await customerService.create<ISignUpData>(request.body);
 
     reply.code(201).send({ message: 'Customer created' });
   });
@@ -140,13 +145,13 @@ export default async function (fastify: IFastifyInstance) {
     API_CUSTOMER,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
-      await customerService.delete(fastify.jwt.decode, request.headers.authorization);
+      await customerService.delete(undefined, fastify.jwt.decode, request.headers.authorization);
 
       reply.code(200).send({ message: 'Customer deleted' });
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply; '5xx': IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply; '5xx': IBaseReply } }>(
     `${API_CUSTOMER_FAVOURITES}/:id`,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
@@ -164,7 +169,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply; '5xx': IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply; '5xx': IBaseReply } }>(
     `${API_CUSTOMER_CART}/:id`,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {

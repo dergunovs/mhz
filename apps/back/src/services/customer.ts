@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import type { ICartItem, ICustomer, ICustomerService, IProduct, IQuery, ISignUpData, IUserToken } from 'mhz-contracts';
+import type { ICartItem, ICustomer, ICustomerService, IProduct, IQuery, IUserToken } from 'mhz-contracts';
 
 import Customer from '../models/customer.js';
 import Product from '../models/product.js';
@@ -7,16 +7,16 @@ import Product from '../models/product.js';
 import { decodeToken, paginate } from '../helpers/index.js';
 
 export const customerService: ICustomerService = {
-  getMany: async (query: IQuery) => {
+  getMany: async <T>(query?: IQuery) => {
     const { data, total } = await paginate(Customer, {
       ...query,
       select: 'dateCreated dateUpdated email firstName lastName',
     });
 
-    return { data, total };
+    return { data: data as T[], total };
   },
 
-  getOne: async (_id: string) => {
+  getOne: async <T>(_id: string) => {
     const customer: ICustomer | null = await Customer.findOne({ _id })
       .populate([
         { path: 'cart.product', select: '_id title' },
@@ -27,7 +27,7 @@ export const customerService: ICustomerService = {
       .lean()
       .exec();
 
-    return customer;
+    return { data: customer as T };
   },
 
   getCurrent: async (decode: (token: string) => IUserToken | null, token?: string) => {
@@ -124,10 +124,10 @@ export const customerService: ICustomerService = {
     return products;
   },
 
-  update: async (customerToUpdate: ICustomer, decode: (token: string) => IUserToken | null, token?: string) => {
+  update: async <T>(itemToUpdate: T, _id?: string, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
-    await Customer.findOneAndUpdate({ _id: user?._id }, { ...customerToUpdate, dateUpdated: new Date() });
+    await Customer.findOneAndUpdate({ _id: user?._id }, { ...itemToUpdate, dateUpdated: new Date() });
   },
 
   updateCart: async (_id: string, count: string, decode: (token: string) => IUserToken | null, token?: string) => {
@@ -155,7 +155,7 @@ export const customerService: ICustomerService = {
     }
   },
 
-  create: async (customerToCreate: ISignUpData) => {
+  create: async <T>(customerToCreate: T) => {
     const customer = new Customer(customerToCreate);
 
     customer.password = await bcrypt.hash(customer.password, 10);
@@ -236,7 +236,7 @@ export const customerService: ICustomerService = {
     await currentCustomer?.save();
   },
 
-  delete: async (decode: (token: string) => IUserToken | null, token?: string) => {
+  delete: async (_id?: string, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     await Customer.findOneAndDelete({ _id: user?._id });

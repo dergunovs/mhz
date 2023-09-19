@@ -3,15 +3,12 @@
     <PageTitle>{{ title }}</PageTitle>
 
     <div :class="$style.page" :data-scroll="isAuthor && !products?.length">
-      <ConfigurationAuthor
-        v-if="!isAuthor && configurationData?.configuration"
-        :configuration="configurationData.configuration"
-      />
+      <ConfigurationAuthor v-if="!isAuthor && configurationData?.data" :configuration="configurationData.data" />
 
       <ConfigurationForm
-        v-if="configurationData?.configuration && categories && currentCategory"
+        v-if="configurationData?.data && categories && currentCategory"
         @update="updateCategory"
-        :configuration="configurationData.configuration"
+        :configuration="configurationData.data"
         :categories="categories"
         :currentCategory="currentCategory"
         :choosenProduct="choosenProduct"
@@ -92,7 +89,7 @@ const { data: categories } = getCategories({
   },
 });
 
-const isAuthor = computed(() => !!configurationData.value?.isEditable && isCategoryRequestDone.value);
+const isAuthor = computed(() => !!configurationData.value?.isConfigurationEditable && isCategoryRequestDone.value);
 
 const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: [currentCategory.value] });
 

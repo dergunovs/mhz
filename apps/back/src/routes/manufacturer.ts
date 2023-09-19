@@ -1,33 +1,33 @@
 import { API_MANUFACTURER } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IManufacturer } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IManufacturer, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { manufacturerService } from '../services/manufacturer.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManufacturer[]; total: number } } }>(
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManufacturer[]; total?: number } } }>(
     API_MANUFACTURER,
     async function (request, reply) {
-      const { data, total } = await manufacturerService.getMany(request.query);
+      const { data, total } = await manufacturerService.getMany<IManufacturer>(request.query);
 
       reply.code(200).send({ data, total });
     }
   );
 
-  fastify.get<{ Params: { id: string }; Reply: { 200: IManufacturer | null } }>(
+  fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IManufacturer | null } } }>(
     `${API_MANUFACTURER}/:id`,
     async function (request, reply) {
-      const manufacturer = await manufacturerService.getOne(request.params.id);
+      const data = await manufacturerService.getOne<IManufacturer>(request.params.id);
 
-      reply.code(200).send(manufacturer);
+      reply.code(200).send(data);
     }
   );
 
-  fastify.patch<{ Body: IManufacturer; Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.patch<{ Body: IManufacturer; Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_MANUFACTURER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      await manufacturerService.update(request.params.id, request.body);
+      await manufacturerService.update<IManufacturer>(request.body, request.params.id);
 
       reply.code(200).send({ message: 'Manufacturer updated' });
     }
@@ -37,13 +37,13 @@ export default async function (fastify: IFastifyInstance) {
     API_MANUFACTURER,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      await manufacturerService.create(request.body);
+      await manufacturerService.create<IManufacturer>(request.body);
 
       reply.code(201).send({ message: 'Manufacturer created' });
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_MANUFACTURER}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

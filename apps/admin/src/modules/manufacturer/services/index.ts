@@ -19,9 +19,9 @@ export function getManufacturer(id?: ComputedRef<string | string[]>) {
   async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get<IManufacturer>(`${API_MANUFACTURER}/${id.value}`);
+    const { data } = await api.get<{ data: IManufacturer }>(`${API_MANUFACTURER}/${id.value}`);
 
-    return data;
+    return data.data;
   }
 
   return useQuery({ queryKey: [API_MANUFACTURER, id], queryFn: fn, refetchOnMount: true });

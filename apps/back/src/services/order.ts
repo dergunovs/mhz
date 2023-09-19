@@ -6,7 +6,7 @@ import Customer from '../models/customer.js';
 import { decodeToken, paginate } from '../helpers/index.js';
 
 export const orderService: IBaseService = {
-  getMany: async (query: IQuery, decode: (token: string) => IUserToken | null, token?: string) => {
+  getMany: async <T>(query?: IQuery, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const filter = user?.role === 'customer' ? { customer: user._id } : {};
@@ -18,10 +18,10 @@ export const orderService: IBaseService = {
       select: '-products',
     });
 
-    return { data, total };
+    return { data: data as T[], total };
   },
 
-  getOne: async (_id: string, decode: (token: string) => IUserToken | null, token?: string) => {
+  getOne: async <T>(_id: string, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const order: IOrder | null = await Order.findOne({ _id })
@@ -34,10 +34,16 @@ export const orderService: IBaseService = {
 
     const isOrderNotBelongToCustomer = user?.role === 'customer' && order?.customer?._id?.toString() !== user?._id;
 
-    return { order, isOrderNotBelongToCustomer };
+    return { data: order as T, isOrderNotBelongToCustomer };
   },
 
-  update: async (_id: string, status: TOrderStatus, decode: (token: string) => IUserToken | null, token?: string) => {
+  update: async <T>(
+    itemToUpdate?: T,
+    _id?: string,
+    decode?: (token: string) => IUserToken | null,
+    token?: string,
+    status?: TOrderStatus
+  ) => {
     const user = decodeToken(decode, token);
 
     const order = await Order.findOne({ _id }).exec();
@@ -45,28 +51,24 @@ export const orderService: IBaseService = {
     const isOrderNotBelongToCustomer =
       user?.role === 'customer' && order?.customer?._id?.toString() !== user?._id && status !== 'cancelled';
 
-    const isAlreadyPaid = order?.status === 'paid' && status === 'paid';
+    const isPayError = order?.status === 'paid' && status === 'paid';
 
-    if (!isOrderNotBelongToCustomer || !isAlreadyPaid) {
+    if (!isOrderNotBelongToCustomer || !isPayError) {
       await Order.updateOne({ _id }, { status, dateUpdated: new Date() });
       await order?.save();
     }
 
-    return { isOrderNotBelongToCustomer, isAlreadyPaid };
+    return isPayError || isOrderNotBelongToCustomer;
   },
 
-  create: async (decode: (token: string) => IUserToken | null, token?: string) => {
+  create: async <T>(itemToCreate?: T, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const customer = await Customer.findOne({ _id: user?._id })
       .populate([{ path: 'cart.product', select: '_id price' }])
       .exec();
 
-    const isCustomerExists = !!customer;
-
-    if (!isCustomerExists) {
-      return { id: '', isCustomerExists: false };
-    }
+    if (!customer) return;
 
     const order = new Order({
       products: customer.cart,
@@ -83,10 +85,10 @@ export const orderService: IBaseService = {
 
     await customer.save();
 
-    return { id, isCustomerExists: true };
+    return id;
   },
 
-  delete: async (_id: string) => {
+  delete: async (_id?: string) => {
     const order = await Order.findOne({ _id });
 
     await order?.deleteOne();

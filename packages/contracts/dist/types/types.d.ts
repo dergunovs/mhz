@@ -140,6 +140,10 @@ export interface IBaseReply {
   message: string;
 }
 
+export interface IBaseParams {
+  id: string;
+}
+
 export interface PopulateOptions {
   path: string;
   select?: string;
@@ -186,4 +190,10 @@ export interface ISignUpData {
   lastName: string;
   email: string;
   password: string;
+}
+
+export interface IFileToUpload {
+  type: "file";
+  filename: string;
+  file: NodeJS.ReadableStream;
 }

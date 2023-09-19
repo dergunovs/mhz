@@ -5,29 +5,29 @@ import Manufacturer from '../models/manufacturer.js';
 import { paginate, deleteFile } from '../helpers/index.js';
 
 export const manufacturerService: IBaseService = {
-  getMany: async (query: IQuery) => {
+  getMany: async <T>(query?: IQuery) => {
     const { data, total } = await paginate(Manufacturer, { ...query, select: '-description' });
 
-    return { data, total };
+    return { data: data as T[], total };
   },
 
-  getOne: async (_id: string) => {
+  getOne: async <T>(_id: string) => {
     const manufacturer: IManufacturer | null = await Manufacturer.findOne({ _id }).lean().exec();
 
-    return manufacturer;
+    return { data: manufacturer as T };
   },
 
-  update: async (_id: string, manufacturerToUpdate: IManufacturer) => {
-    await Manufacturer.findOneAndUpdate({ _id }, { ...manufacturerToUpdate, dateUpdated: new Date() });
+  update: async <T>(itemToUpdate: T, _id?: string) => {
+    await Manufacturer.findOneAndUpdate({ _id }, { ...itemToUpdate, dateUpdated: new Date() });
   },
 
-  create: async (manufacturerToCreate: IManufacturer) => {
+  create: async <T>(manufacturerToCreate: T) => {
     const manufacturer = new Manufacturer(manufacturerToCreate);
 
     await manufacturer.save();
   },
 
-  delete: async (_id: string) => {
+  delete: async (_id?: string) => {
     const manufacturer = await Manufacturer.findOne({ _id });
 
     deleteFile(manufacturer?.logoUrl);

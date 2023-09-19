@@ -1,44 +1,155 @@
+import {
+  ICartItem,
+  ICustomer,
+  IFilterData,
+  IProduct,
+  ISearchResults,
+  ISignUpData,
+  IUserToken,
+  TInitiator,
+  IQuery,
+  TOrderStatus,
+} from "./types";
+
 export interface IBaseService {
-  getMany: (...params: any) => any;
-  getOne: (...params: any) => any;
-  update: (...params: any) => any;
-  create: (...params: any) => any;
-  delete: (...params: any) => any;
+  getMany: <T>(
+    query?: IQuery,
+    decode?: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<{ data: T[]; total?: number; filters?: IFilterData }>;
+
+  getOne: <T>(
+    id: string,
+    decode?: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<{
+    data: T | null;
+    isConfigurationEditable?: boolean;
+    isConfigurationSharable?: boolean;
+    isOrderNotBelongToCustomer?: boolean;
+  }>;
+
+  update: <T>(
+    itemToUpdate?: T,
+    _id?: string,
+    decode?: (token: string) => IUserToken | null,
+    token?: string,
+    status?: TOrderStatus,
+  ) => Promise<void | boolean>;
+
+  create: <T>(
+    item?: T,
+    decode?: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<string | boolean | void>;
+
+  delete: (
+    _id?: string,
+    decode?: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<void | boolean>;
 }
 
 export interface ICustomerService extends IBaseService {
-  getCurrent: (...params: any) => any;
-  getCart: (...params: any) => any;
-  getWatchedProducts: (...params: any) => any;
-  getFavouriteProducts: (...params: any) => any;
-  updateCart: (...params: any) => any;
-  createFavourite: (...params: any) => any;
-  addToCart: (...params: any) => any;
-  deleteFromCart: (...params: any) => any;
-  deleteFavourite: (...params: any) => any;
+  getCurrent: (
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<ICustomer | null>;
+
+  getCart: (
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<ICartItem[]>;
+
+  getWatchedProducts: (
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<IProduct[]>;
+
+  getFavouriteProducts: (
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<IProduct[]>;
+
+  updateCart: (
+    _id: string,
+    count: string,
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<boolean>;
+
+  createFavourite: (
+    _id: string,
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<{ isReachedLimit: boolean; isAlreadyExists: boolean }>;
+
+  addToCart: (
+    _id: string | string[],
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<void>;
+
+  deleteFromCart: (
+    _id: string,
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<boolean>;
+
+  deleteFavourite: (
+    _id: string,
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<boolean>;
 }
 
 export interface IProductService extends IBaseService {
-  getPriceRange: (...params: any) => any;
-  getFilters: (...params: any) => any;
+  getPriceRange: (
+    _id: string,
+    initiator: TInitiator,
+  ) => Promise<[number, number]>;
+
+  getFilters: (
+    id: string,
+    initiator: TInitiator,
+  ) => Promise<IFilterData | undefined>;
 }
 
 export interface IAuthService {
-  check: (...params: any) => any;
-  login: (...params: any) => any;
-  setup: (...params: any) => any;
+  check: (request: { jwtVerify: () => Promise<void> }) => Promise<void>;
+
+  login: (
+    loginData: ILoginData,
+    sign: (payload: IUserToken, options: object) => string,
+  ) => Promise<{
+    user?: IUserToken;
+    isUserNotFound: boolean;
+    isWrongPassword: boolean;
+  }>;
+
+  setup: (manager: ISignUpData) => Promise<boolean>;
 }
 
 export interface ISearchService {
-  search: (...params: any) => any;
+  search: (search: string, isAdmin: boolean) => Promise<ISearchResults>;
 }
 
 export interface IStatsService {
-  count: (...params: any) => any;
+  count: () => Promise<IEntitiesCount>;
 }
 
 export interface IUploadService {
-  uploadMultiple: (...params: any) => any;
-  uploadSingle: (...params: any) => any;
-  delete: (...params: any) => any;
+  uploadMultiple: (
+    getFiles: () => AsyncIterableIterator<IFileToUpload>,
+    width: string,
+    isThumb: boolean,
+  ) => Promise<string[]>;
+
+  uploadSingle: (
+    getFile: () => Promise<IFileToUpload | undefined>,
+    width: string,
+    isThumb: boolean,
+  ) => Promise<{ filename: string; isFileExists: boolean }>;
+
+  delete: (_id: string, isThumb: boolean) => Promise<void>;
 }

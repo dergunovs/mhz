@@ -1,12 +1,12 @@
 import { Types } from 'mongoose';
-import type { IProduct, IProductService, IQuery, IUserToken, TInitiator } from 'mhz-contracts';
+import type { IProductService, IQuery, IUserToken, TInitiator } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 
 import { decodeToken, paginate, getProductFilters, addProductToWatched, deleteFile } from '../helpers/index.js';
 
 export const productService: IProductService = {
-  getMany: async (query: IQuery) => {
+  getMany: async <T>(query?: IQuery) => {
     const { data, total } = await paginate(Product, {
       ...query,
       populate: [
@@ -18,10 +18,10 @@ export const productService: IProductService = {
 
     const filters = await getProductFilters(query, false);
 
-    return { data, total, filters };
+    return { data: data as T[], total, filters };
   },
 
-  getOne: async (_id: string, decode: (token: string) => IUserToken | null, token?: string) => {
+  getOne: async <T>(_id: string, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const product = await Product.findOne({ _id })
@@ -39,7 +39,7 @@ export const productService: IProductService = {
       await product.save();
     }
 
-    return product as IProduct;
+    return { data: product as T };
   },
 
   getPriceRange: async (_id: string, initiator: TInitiator) => {
@@ -58,17 +58,17 @@ export const productService: IProductService = {
     return filters;
   },
 
-  update: async (_id: string, productToUpdate: IProduct) => {
-    await Product.findOneAndUpdate({ _id }, { ...productToUpdate, dateUpdated: new Date() });
+  update: async <T>(itemToUpdate: T, _id?: string) => {
+    await Product.findOneAndUpdate({ _id }, { ...itemToUpdate, dateUpdated: new Date() });
   },
 
-  create: async (productToCreate: IProduct) => {
+  create: async <T>(productToCreate: T) => {
     const product = new Product(productToCreate);
 
     await product.save();
   },
 
-  delete: async (_id: string) => {
+  delete: async (_id?: string) => {
     const product = await Product.findOne({ _id });
 
     product?.imageUrls.forEach((image) => {

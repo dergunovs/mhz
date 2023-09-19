@@ -29,9 +29,9 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
   async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get<IProduct>(`${API_PRODUCT}/${id.value}`);
+    const { data } = await api.get<{ data: IProduct }>(`${API_PRODUCT}/${id.value}`);
 
-    return data;
+    return data.data;
   }
 
   return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });

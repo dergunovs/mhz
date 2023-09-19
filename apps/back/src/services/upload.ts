@@ -2,15 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import util from 'util';
 import { pipeline } from 'stream';
-import { MultipartFile } from '@fastify/multipart';
-import type { IUploadService } from 'mhz-contracts';
+import type { IFileToUpload, IUploadService } from 'mhz-contracts';
 
 import { createThumb, deleteFile, resizeFile } from '../helpers/index.js';
 
 const pump = util.promisify(pipeline);
 
 export const uploadService: IUploadService = {
-  uploadMultiple: async (getFiles: () => AsyncIterableIterator<MultipartFile>, width: string, isThumb: boolean) => {
+  uploadMultiple: async (getFiles: () => AsyncIterableIterator<IFileToUpload>, width: string, isThumb: boolean) => {
     const files = getFiles();
 
     const filesToUpload: string[] = [];
@@ -29,7 +28,7 @@ export const uploadService: IUploadService = {
     return filesToUpload;
   },
 
-  uploadSingle: async (getFile: () => Promise<MultipartFile | undefined>, width: string, isThumb: boolean) => {
+  uploadSingle: async (getFile: () => Promise<IFileToUpload | undefined>, width: string, isThumb: boolean) => {
     const file = await getFile();
 
     const isFileExists = !!file;

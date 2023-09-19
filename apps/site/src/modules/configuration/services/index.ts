@@ -19,7 +19,7 @@ export function getConfiguration(id?: string | string[]) {
   async function fn() {
     if (!id) return null;
 
-    const { data } = await api.get<{ configuration: IConfiguration; isEditable: boolean }>(
+    const { data } = await api.get<{ data: IConfiguration; isConfigurationEditable: boolean }>(
       `${API_CONFIGURATION}/${id}`
     );
 

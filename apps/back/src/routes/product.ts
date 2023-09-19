@@ -1,25 +1,29 @@
 import { API_PRODUCT, API_PRODUCT_FILTERS, API_PRODUCT_PRICE_RANGE } from 'mhz-contracts';
-import type { IQuery, TInitiator, IBaseReply, IFilterData, IProduct } from 'mhz-contracts';
+import type { IQuery, TInitiator, IBaseReply, IFilterData, IProduct, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { productService } from '../services/product.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IProduct[]; total: number; filters: IFilterData } } }>(
+  fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IProduct[]; total?: number; filters?: IFilterData } } }>(
     API_PRODUCT,
     async function (request, reply) {
-      const { data, total, filters } = await productService.getMany(request.query);
+      const { data, total, filters } = await productService.getMany<IProduct>(request.query);
 
       reply.code(200).send({ data, total, filters });
     }
   );
 
-  fastify.get<{ Params: { id: string }; Reply: { 200: IProduct | null } }>(
+  fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IProduct | null } } }>(
     `${API_PRODUCT}/:id`,
     async function (request, reply) {
-      const product = await productService.getOne(request.params.id, fastify.jwt.decode, request.headers.authorization);
+      const data = await productService.getOne<IProduct>(
+        request.params.id,
+        fastify.jwt.decode,
+        request.headers.authorization
+      );
 
-      reply.code(200).send(product);
+      reply.code(200).send(data);
     }
   );
 
@@ -41,11 +45,11 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.patch<{ Body: IProduct; Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.patch<{ Body: IProduct; Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_PRODUCT}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      await productService.update(request.params.id, request.body);
+      await productService.update<IProduct>(request.body, request.params.id);
 
       reply.code(200).send({ message: 'Product updated' });
     }
@@ -55,13 +59,13 @@ export default async function (fastify: IFastifyInstance) {
     API_PRODUCT,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      await productService.create(request.body);
+      await productService.create<IProduct>(request.body);
 
       reply.code(201).send({ message: 'Product created' });
     }
   );
 
-  fastify.delete<{ Params: { id: string }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_PRODUCT}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

@@ -5,9 +5,9 @@ import { API_CATEGORY, ICategory, IBaseReply } from 'mhz-contracts';
 
 export function getCategories(options?: object) {
   async function fn() {
-    const { data } = await api.get<ICategory[]>(API_CATEGORY);
+    const { data } = await api.get<{ data: ICategory[] }>(API_CATEGORY);
 
-    return data;
+    return data.data;
   }
 
   return useQuery({ queryKey: [API_CATEGORY], queryFn: fn, ...options });
@@ -17,9 +17,9 @@ export function getCategory(id?: ComputedRef<string | string[]>) {
   async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get<ICategory>(`${API_CATEGORY}/${id.value}`);
+    const { data } = await api.get<{ data: ICategory }>(`${API_CATEGORY}/${id.value}`);
 
-    return data;
+    return data.data;
   }
 
   return useQuery({ queryKey: [API_CATEGORY, id], queryFn: fn, refetchOnMount: true });

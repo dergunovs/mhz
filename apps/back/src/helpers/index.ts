@@ -15,7 +15,9 @@ function createFilterBase(filter: string | string[], filterName: string) {
     : { [filterName]: { $in: filter.map((id) => new Types.ObjectId(id)) } };
 }
 
-function createFilterFields(options: IQuery) {
+function createFilterFields(options?: IQuery) {
+  if (!options) return;
+
   const fieldsFiltersRaw = Object.fromEntries(Object.entries(options).filter(([key]) => key.includes('fields[')));
 
   if (!Object.keys(fieldsFiltersRaw).length) return {};
@@ -50,21 +52,21 @@ function createFilterFields(options: IQuery) {
   };
 }
 
-export async function paginate<T>(Entity: Model<T>, options: IQuery) {
-  const categoryFilter = options.category ? createFilterBase(options.category, 'category') : {};
-  const manufacturerFilter = options.manufacturer ? createFilterBase(options.manufacturer, 'manufacturer') : {};
+export async function paginate<T>(Entity: Model<T>, options?: IQuery) {
+  const categoryFilter = options?.category ? createFilterBase(options?.category, 'category') : {};
+  const manufacturerFilter = options?.manufacturer ? createFilterBase(options?.manufacturer, 'manufacturer') : {};
   const fieldsFilters = createFilterFields(options);
 
-  const priceFilter = options.price
+  const priceFilter = options?.price
     ? { price: { $gte: Number(options.price[0]), $lte: Number(options.price[1]) } }
     : {};
 
-  const customerFilter = options.customer ? { customer: options.customer } : {};
+  const customerFilter = options?.customer ? { customer: options.customer } : {};
 
   const filter = { ...categoryFilter, ...manufacturerFilter, ...priceFilter, ...fieldsFilters, ...customerFilter };
 
-  const page = Number(options.page) || 1;
-  const sort = options.sort === undefined ? '-dateCreated' : `${options.dir === 'desc' ? '-' : ''}${options.sort}`;
+  const page = Number(options?.page) || 1;
+  const sort = options?.sort === undefined ? '-dateCreated' : `${options.dir === 'desc' ? '-' : ''}${options.sort}`;
 
   const limit = 12;
 
@@ -76,8 +78,8 @@ export async function paginate<T>(Entity: Model<T>, options: IQuery) {
     .find(filter)
     .skip((page - 1) * limit)
     .limit(limit)
-    .populate(options.populate || [])
-    .select(options.select || '-password')
+    .populate(options?.populate || [])
+    .select(options?.select || '-password')
     .sort(sort)
     .lean()
     .exec()) as T[];
@@ -88,7 +90,9 @@ export async function paginate<T>(Entity: Model<T>, options: IQuery) {
   };
 }
 
-export async function getProductFilters(options: IQuery, isInitial: boolean): Promise<IFilterData> {
+export async function getProductFilters(options?: IQuery, isInitial?: boolean): Promise<IFilterData | undefined> {
+  if (!options || !isInitial) return;
+
   const categoryFilter = options.category ? createFilterBase(options.category, 'category') : {};
   const manufacturerFilter = options.manufacturer ? createFilterBase(options.manufacturer, 'manufacturer') : {};
   const fieldsFilters = createFilterFields(options);
@@ -201,10 +205,10 @@ export async function addProductToWatched(
   await currentCustomer?.save();
 }
 
-export function decodeToken(decode: (token: string) => IUserToken | null, authorizationHeader?: string) {
+export function decodeToken(decode?: (token: string) => IUserToken | null, authorizationHeader?: string) {
   const token = authorizationHeader ? authorizationHeader.split('Bearer ')[1] : undefined;
 
-  return token ? decode(token) : null;
+  return token && decode ? decode(token) : null;
 }
 
 export function deleteFile(filename?: string) {

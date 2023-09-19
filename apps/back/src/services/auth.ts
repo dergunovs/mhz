@@ -1,4 +1,3 @@
-import { FastifyRequest } from 'fastify';
 import bcrypt from 'bcryptjs';
 import type { IUserToken, ILoginData, ISignUpData, IAuthService } from 'mhz-contracts';
 
@@ -6,7 +5,7 @@ import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
 
 export const authService: IAuthService = {
-  check: async (request: FastifyRequest) => {
+  check: async (request: { jwtVerify: () => Promise<void> }) => {
     await request.jwtVerify();
   },
 
@@ -39,7 +38,7 @@ export const authService: IAuthService = {
     foundUser.dateLoggedIn = new Date();
     await foundUser.save();
 
-    return { user: { ...user, token }, isUserFound: false, isWrongPassword: false };
+    return { user: { ...user, token }, isUserNotFound: false, isWrongPassword: false };
   },
 
   setup: async (managerToCreate: ISignUpData) => {

@@ -6,23 +6,23 @@ import Manager from '../models/manager.js';
 import { paginate } from '../helpers/index.js';
 
 export const managerService: IBaseService = {
-  getMany: async (query: IQuery) => {
+  getMany: async <T>(query?: IQuery) => {
     const { data, total } = await paginate(Manager, query);
 
-    return { data, total };
+    return { data: data as T[], total };
   },
 
-  getOne: async (_id: string) => {
+  getOne: async <T>(_id: string) => {
     const manager: IManager | null = await Manager.findOne({ _id }).lean().exec();
 
-    return manager;
+    return { data: manager as T };
   },
 
-  update: async (_id: string, managerToUpdate: IManager) => {
-    await Manager.findOneAndUpdate({ _id }, { ...managerToUpdate, dateUpdated: new Date() });
+  update: async <T>(itemToUpdate: T, _id?: string) => {
+    await Manager.findOneAndUpdate({ _id }, { ...itemToUpdate, dateUpdated: new Date() });
   },
 
-  create: async (managerToCreate: IManager) => {
+  create: async <T>(managerToCreate: T) => {
     const manager = new Manager(managerToCreate);
 
     manager.password = await bcrypt.hash(manager.password, 10);
@@ -30,7 +30,7 @@ export const managerService: IBaseService = {
     await manager.save();
   },
 
-  delete: async (_id: string) => {
+  delete: async (_id?: string) => {
     const manager = await Manager.findOne({ _id });
 
     await manager?.deleteOne();
