@@ -1,11 +1,11 @@
 import bcrypt from 'bcryptjs';
-import type { IManager, IQuery } from 'mhz-contracts';
+import type { IManager, IBaseService, IQuery } from 'mhz-contracts';
 
 import Manager from '../models/manager.js';
 
 import { paginate } from '../helpers/index.js';
 
-export const managerService = {
+export const managerService: IBaseService = {
   getMany: async (query: IQuery) => {
     const { data, total } = await paginate(Manager, query);
 

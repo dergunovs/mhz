@@ -9,6 +9,7 @@ import {
   ISearchResults,
   IEntitiesCount,
   IBaseReply,
+  API_UPLOAD_MULTIPLE,
 } from 'mhz-contracts';
 
 export function search(query: Ref<string>, isAdmin?: boolean) {
@@ -53,12 +54,12 @@ export function uploadFiles(options: object, width?: string, thumb?: boolean) {
 
     files.forEach((file) => formData.append('files', file));
 
-    const { data } = await api.post<string[]>(API_UPLOAD, formData, { params: { width, thumb } });
+    const { data } = await api.post<string[]>(API_UPLOAD_MULTIPLE, formData, { params: { width, thumb } });
 
     return data;
   }
 
-  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_UPLOAD_MULTIPLE], mutationFn: fn, ...options });
 }
 
 export function deleteFile(thumb?: boolean) {

@@ -1,11 +1,11 @@
 import { Types } from 'mongoose';
-import type { IProduct, IQuery, IUserToken, TInitiator } from 'mhz-contracts';
+import type { IProduct, IProductService, IQuery, IUserToken, TInitiator } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 
 import { decodeToken, paginate, getProductFilters, addProductToWatched, deleteFile } from '../helpers/index.js';
 
-export const productService = {
+export const productService: IProductService = {
   getMany: async (query: IQuery) => {
     const { data, total } = await paginate(Product, {
       ...query,

@@ -27,4 +27,5 @@ export const API_SEARCH = "/search";
 export const API_STATS_COUNT = "/stats/count";
 
 export const API_UPLOAD = "/upload";
+export const API_UPLOAD_MULTIPLE = `${API_UPLOAD}/multiple`;
 export const API_UPLOAD_SINGLE = `${API_UPLOAD}/single`;

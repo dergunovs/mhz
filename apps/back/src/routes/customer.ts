@@ -5,7 +5,7 @@ import {
   API_CUSTOMER_FAVOURITES,
   API_CUSTOMER_WATCHED,
 } from 'mhz-contracts';
-import type { IQuery, IBaseReply, ICartItem, ICustomer, IProduct } from 'mhz-contracts';
+import type { IQuery, IBaseReply, ICartItem, ICustomer, IProduct, ISignUpData } from 'mhz-contracts';
 
 import { customerService } from '../services/customer.js';
 import { IFastifyInstance } from '../interface/index.js';
@@ -100,7 +100,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: ICustomer; Reply: { 201: IBaseReply } }>('/customer', async function (request, reply) {
+  fastify.post<{ Body: ISignUpData; Reply: { 201: IBaseReply } }>('/customer', async function (request, reply) {
     await customerService.create(request.body);
 
     reply.code(201).send({ message: 'Customer created' });

@@ -1,4 +1,13 @@
-import type { ICategory, ICustomer, IManager, IManufacturer, IOrder, IProduct, ISearchResults } from 'mhz-contracts';
+import type {
+  ICategory,
+  ICustomer,
+  IManager,
+  IManufacturer,
+  IOrder,
+  IProduct,
+  ISearchResults,
+  ISearchService,
+} from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';
@@ -7,7 +16,7 @@ import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
 import Order from '../models/order.js';
 
-export const searchService = {
+export const searchService: ISearchService = {
   search: async (search: string, isAdmin: boolean) => {
     let results: ISearchResults = {};
 

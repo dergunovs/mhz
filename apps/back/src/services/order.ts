@@ -1,11 +1,11 @@
-import type { IOrder, TOrderStatus, IQuery, IUserToken } from 'mhz-contracts';
+import type { IOrder, TOrderStatus, IQuery, IUserToken, IBaseService } from 'mhz-contracts';
 
 import Order from '../models/order.js';
 import Customer from '../models/customer.js';
 
 import { decodeToken, paginate } from '../helpers/index.js';
 
-export const orderService = {
+export const orderService: IBaseService = {
   getMany: async (query: IQuery, decode: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 

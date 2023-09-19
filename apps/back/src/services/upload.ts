@@ -3,12 +3,13 @@ import path from 'path';
 import util from 'util';
 import { pipeline } from 'stream';
 import { MultipartFile } from '@fastify/multipart';
+import type { IUploadService } from 'mhz-contracts';
 
 import { createThumb, deleteFile, resizeFile } from '../helpers/index.js';
 
 const pump = util.promisify(pipeline);
 
-export const uploadService = {
+export const uploadService: IUploadService = {
   uploadMultiple: async (getFiles: () => AsyncIterableIterator<MultipartFile>, width: string, isThumb: boolean) => {
     const files = getFiles();
 

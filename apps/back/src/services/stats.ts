@@ -1,4 +1,4 @@
-import type { IEntitiesCount } from 'mhz-contracts';
+import type { IEntitiesCount, IStatsService } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';
@@ -7,7 +7,7 @@ import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
 import Order from '../models/order.js';
 
-export const countService = {
+export const countService: IStatsService = {
   count: async () => {
     let count = {};
 

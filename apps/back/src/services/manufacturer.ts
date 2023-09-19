@@ -1,10 +1,10 @@
-import type { IManufacturer, IQuery } from 'mhz-contracts';
+import type { IBaseService, IManufacturer, IQuery } from 'mhz-contracts';
 
 import Manufacturer from '../models/manufacturer.js';
 
 import { paginate, deleteFile } from '../helpers/index.js';
 
-export const manufacturerService = {
+export const manufacturerService: IBaseService = {
   getMany: async (query: IQuery) => {
     const { data, total } = await paginate(Manufacturer, { ...query, select: '-description' });
 

@@ -1,4 +1,4 @@
-import { API_UPLOAD, API_UPLOAD_SINGLE } from 'mhz-contracts';
+import { API_UPLOAD, API_UPLOAD_MULTIPLE, API_UPLOAD_SINGLE } from 'mhz-contracts';
 import type { IBaseReply } from 'mhz-contracts';
 
 import { uploadService } from '../services/upload.js';
@@ -6,7 +6,7 @@ import { IFastifyInstance } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string[] } }>(
-    API_UPLOAD,
+    API_UPLOAD_MULTIPLE,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
       const filesToUpload = await uploadService.uploadMultiple(request.files, request.query.width, request.query.thumb);

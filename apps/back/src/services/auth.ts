@@ -1,11 +1,11 @@
 import { FastifyRequest } from 'fastify';
 import bcrypt from 'bcryptjs';
-import type { IManager, IUserToken, ILoginData } from 'mhz-contracts';
+import type { IUserToken, ILoginData, ISignUpData, IAuthService } from 'mhz-contracts';
 
 import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
 
-export const authService = {
+export const authService: IAuthService = {
   check: async (request: FastifyRequest) => {
     await request.jwtVerify();
   },
@@ -42,7 +42,7 @@ export const authService = {
     return { user: { ...user, token }, isUserFound: false, isWrongPassword: false };
   },
 
-  setup: async (managerToCreate: IManager) => {
+  setup: async (managerToCreate: ISignUpData) => {
     const managers = await Manager.find().lean().exec();
 
     if (managers.length) return true;

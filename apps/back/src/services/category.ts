@@ -1,10 +1,10 @@
-import type { ICategory } from 'mhz-contracts';
+import type { ICategory, IBaseService } from 'mhz-contracts';
 
 import Category from '../models/category.js';
 
 import { deleteFile } from '../helpers/index.js';
 
-export const categoryService = {
+export const categoryService: IBaseService = {
   getMany: async () => {
     const categories: ICategory[] = await Category.find().select('-description -fields').sort('title').lean().exec();
 

@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs';
-import type { ICartItem, ICustomer, IProduct, IQuery, IUserToken } from 'mhz-contracts';
+import type { ICartItem, ICustomer, ICustomerService, IProduct, IQuery, ISignUpData, IUserToken } from 'mhz-contracts';
 
 import Customer from '../models/customer.js';
 import Product from '../models/product.js';
 
 import { decodeToken, paginate } from '../helpers/index.js';
 
-export const customerService = {
+export const customerService: ICustomerService = {
   getMany: async (query: IQuery) => {
     const { data, total } = await paginate(Customer, {
       ...query,
@@ -155,7 +155,7 @@ export const customerService = {
     }
   },
 
-  create: async (customerToCreate: ICustomer) => {
+  create: async (customerToCreate: ISignUpData) => {
     const customer = new Customer(customerToCreate);
 
     customer.password = await bcrypt.hash(customer.password, 10);
