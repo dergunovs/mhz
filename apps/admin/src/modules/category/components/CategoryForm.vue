@@ -85,8 +85,6 @@ const isShowCategoryFieldForm = ref(false);
 
 const editableCategoryField = ref<ICategoryField>();
 
-const categoryId = computed(() => props.category?._id);
-
 const { mutate: mutatePost, isLoading: isLoadingPost } = postCategory({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
@@ -95,7 +93,7 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postCategory({
   },
 });
 
-const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateCategory(categoryId, {
+const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateCategory({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CATEGORY] });
     toast.success('Category updated');

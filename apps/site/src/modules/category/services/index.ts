@@ -4,8 +4,8 @@ import { api, useQuery } from 'mhz-helpers';
 import { API_CATEGORY, ICategory } from 'mhz-contracts';
 
 export function getCategories(options?: object) {
-  async function fn(): Promise<ICategory[]> {
-    const { data } = await api.get(API_CATEGORY);
+  async function fn() {
+    const { data } = await api.get<ICategory[]>(API_CATEGORY);
 
     return data;
   }
@@ -14,10 +14,10 @@ export function getCategories(options?: object) {
 }
 
 export function getCategory(id?: ComputedRef<string | string[]>) {
-  async function fn(): Promise<ICategory | null> {
+  async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get(`${API_CATEGORY}/${id.value}`);
+    const { data } = await api.get<ICategory>(`${API_CATEGORY}/${id.value}`);
 
     return data;
   }

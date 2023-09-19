@@ -1,20 +1,13 @@
 import { Ref, ComputedRef } from 'vue';
 
-import { api, useQuery, useMutation, IPageQuery } from 'mhz-helpers';
-import { API_PRODUCT, IProduct, IFilterData } from 'mhz-contracts';
+import { api, useQuery, useMutation, IPageQuery, convertParams } from 'mhz-helpers';
+import { API_PRODUCT, IProduct, IFilterData, IBaseReply } from 'mhz-contracts';
 
 export function getProducts(query: Ref<IPageQuery | number>) {
-  async function fn(): Promise<{ data: IProduct[]; total: number; filters: IFilterData }> {
-    const params =
-      typeof query.value === 'number'
-        ? { page: query.value }
-        : {
-            page: query.value.page || 1,
-            sort: query.value.sort.value,
-            dir: query.value.sort.isAsc === false ? 'desc' : 'asc',
-          };
+  async function fn() {
+    const params = convertParams(query);
 
-    const { data } = await api.get(API_PRODUCT, { params });
+    const { data } = await api.get<{ data: IProduct[]; total: number; filters: IFilterData }>(API_PRODUCT, { params });
 
     return data;
   }
@@ -23,10 +16,10 @@ export function getProducts(query: Ref<IPageQuery | number>) {
 }
 
 export function getProduct(id?: ComputedRef<string | string[]>) {
-  async function fn(): Promise<IProduct | null> {
+  async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get(`${API_PRODUCT}/${id.value}`);
+    const { data } = await api.get<IProduct>(`${API_PRODUCT}/${id.value}`);
 
     return data;
   }
@@ -36,23 +29,31 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
 
 export function postProduct(options: object) {
   async function fn(formData: IProduct) {
-    await api.post(API_PRODUCT, formData);
+    const { data } = await api.post<IBaseReply>(API_PRODUCT, formData);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_PRODUCT], mutationFn: fn, ...options });
 }
 
-export function updateProduct(id: ComputedRef<string | undefined>, options: object) {
+export function updateProduct(options: object) {
   async function fn(formData: IProduct) {
-    await api.patch(`${API_PRODUCT}/${id.value}`, formData);
+    const { data } = await api.patch<IBaseReply>(`${API_PRODUCT}/${formData._id}`, formData);
+
+    return data;
   }
 
-  return useMutation({ mutationKey: [API_PRODUCT, id], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_PRODUCT], mutationFn: fn, ...options });
 }
 
 export function deleteProduct(options: object) {
   async function fn(id?: string) {
-    await api.delete(`${API_PRODUCT}/${id}`);
+    if (!id) return null;
+
+    const { data } = await api.delete<IBaseReply>(`${API_PRODUCT}/${id}`);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_PRODUCT], mutationFn: fn, ...options });

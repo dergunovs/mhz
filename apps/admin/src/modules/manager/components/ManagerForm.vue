@@ -50,8 +50,6 @@ const formData = ref<IManager>({
   password: '',
 });
 
-const managerId = computed(() => props.manager?._id);
-
 const { mutate: mutatePost, isLoading: isLoadingPost } = postManager({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
@@ -60,7 +58,7 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManager({
   },
 });
 
-const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManager(managerId, {
+const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManager({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANAGER] });
     toast.success('Manager updated');

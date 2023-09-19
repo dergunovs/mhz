@@ -1,20 +1,13 @@
 import { Ref, ComputedRef } from 'vue';
 
-import { api, useQuery, IPageQuery } from 'mhz-helpers';
+import { api, useQuery, IPageQuery, convertParams } from 'mhz-helpers';
 import { API_MANUFACTURER, IManufacturer } from 'mhz-contracts';
 
 export function getManufacturers(query: Ref<IPageQuery | number>) {
-  async function fn(): Promise<{ data: IManufacturer[]; total: number }> {
-    const params =
-      typeof query.value === 'number'
-        ? { page: query.value }
-        : {
-            page: query.value.page || 1,
-            sort: query.value.sort.value,
-            dir: query.value.sort.isAsc === false ? 'desc' : 'asc',
-          };
+  async function fn() {
+    const params = convertParams(query);
 
-    const { data } = await api.get(API_MANUFACTURER, { params });
+    const { data } = await api.get<{ data: IManufacturer[]; total: number }>(API_MANUFACTURER, { params });
 
     return data;
   }
@@ -23,10 +16,10 @@ export function getManufacturers(query: Ref<IPageQuery | number>) {
 }
 
 export function getManufacturer(id?: ComputedRef<string | string[]>) {
-  async function fn(): Promise<IManufacturer | null> {
+  async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get(`${API_MANUFACTURER}/${id.value}`);
+    const { data } = await api.get<IManufacturer>(`${API_MANUFACTURER}/${id.value}`);
 
     return data;
   }

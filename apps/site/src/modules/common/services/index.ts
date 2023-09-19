@@ -4,8 +4,8 @@ import { api, useQuery } from 'mhz-helpers';
 import { API_SEARCH, ISearchResults } from 'mhz-contracts';
 
 export function search(query: Ref<string>, isAdmin?: boolean) {
-  async function fn(): Promise<ISearchResults> {
-    const { data } = await api.get(API_SEARCH, { params: { search: query.value, isAdmin } });
+  async function fn() {
+    const { data } = await api.get<ISearchResults>(API_SEARCH, { params: { search: query.value, isAdmin } });
 
     return data;
   }

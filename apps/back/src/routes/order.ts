@@ -58,14 +58,14 @@ export default async function (fastify: IFastifyInstance) {
     }
   });
 
-  fastify.post<{ Reply: { 201: { id: string }; '4xx': IBaseReply } }>(
+  fastify.post<{ Reply: { 201: string; '4xx': IBaseReply } }>(
     API_ORDER,
     { preValidation: [fastify.onlyCustomer] },
     async function (request, reply) {
       const { id, isCustomerExists } = await orderService.create(fastify.jwt.decode, request.headers.authorization);
 
       if (isCustomerExists) {
-        reply.code(201).send({ id });
+        reply.code(201).send(id);
       } else {
         reply.code(404).send({ message: 'No such customer' });
       }

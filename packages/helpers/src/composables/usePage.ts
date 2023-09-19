@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { ref, watch, Ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 export interface ISortOption {
@@ -10,6 +10,18 @@ export interface IPageQuery {
   page: number;
   sort: ISortOption;
   filter: object;
+}
+
+export function convertParams(params: Ref<IPageQuery | number>, initiator?: string) {
+  return typeof params.value === 'number'
+    ? { page: params.value }
+    : {
+        initiator,
+        page: params.value.page || 1,
+        sort: params.value.sort.value,
+        dir: params.value.sort.isAsc === false ? 'desc' : 'asc',
+        ...params.value.filter,
+      };
 }
 
 export function usePage(filter?: object) {

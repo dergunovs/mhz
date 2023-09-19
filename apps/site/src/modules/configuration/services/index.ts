@@ -1,13 +1,13 @@
 import { Ref } from 'vue';
 
-import { IPageQuery, api, useMutation, useQuery } from 'mhz-helpers';
-import { API_CONFIGURATION, IConfiguration } from 'mhz-contracts';
+import { IPageQuery, api, convertParams, useMutation, useQuery } from 'mhz-helpers';
+import { API_CONFIGURATION, IBaseReply, IConfiguration } from 'mhz-contracts';
 
 export function getConfigurations(query: Ref<IPageQuery | number>) {
-  async function fn(): Promise<{ data: IConfiguration[]; total: number }> {
-    const params = typeof query.value === 'number' ? { page: query.value } : { page: query.value.page || 1 };
+  async function fn() {
+    const params = convertParams(query);
 
-    const { data } = await api.get(API_CONFIGURATION, { params });
+    const { data } = await api.get<{ data: IConfiguration[]; total: number }>(API_CONFIGURATION, { params });
 
     return data;
   }
@@ -16,10 +16,12 @@ export function getConfigurations(query: Ref<IPageQuery | number>) {
 }
 
 export function getConfiguration(id?: string | string[]) {
-  async function fn(): Promise<{ configuration: IConfiguration; isEditable: boolean } | null> {
+  async function fn() {
     if (!id) return null;
 
-    const { data } = await api.get(`${API_CONFIGURATION}/${id}`);
+    const { data } = await api.get<{ configuration: IConfiguration; isEditable: boolean }>(
+      `${API_CONFIGURATION}/${id}`
+    );
 
     return data;
   }
@@ -27,19 +29,11 @@ export function getConfiguration(id?: string | string[]) {
   return useQuery({ queryKey: [API_CONFIGURATION, id], queryFn: fn, refetchOnMount: true });
 }
 
-export function updateConfiguration(options: object, id?: string) {
+export function updateConfiguration(options: object) {
   async function fn(formData: IConfiguration) {
-    if (!id) return null;
+    const { data } = await api.patch<IBaseReply>(`${API_CONFIGURATION}/${formData._id}`, formData);
 
-    await api.patch(`${API_CONFIGURATION}/${id}`, formData);
-  }
-
-  return useMutation({ mutationKey: [API_CONFIGURATION, id], mutationFn: fn, ...options });
-}
-
-export function deleteConfiguration(options: object, id?: string) {
-  async function fn() {
-    await api.delete(`${API_CONFIGURATION}/${id}`);
+    return data;
   }
 
   return useMutation({ mutationKey: [API_CONFIGURATION], mutationFn: fn, ...options });
@@ -47,7 +41,21 @@ export function deleteConfiguration(options: object, id?: string) {
 
 export function postConfiguration(options: object) {
   async function fn(formData: IConfiguration) {
-    await api.post(API_CONFIGURATION, formData);
+    const { data } = await api.post<IBaseReply>(API_CONFIGURATION, formData);
+
+    return data;
+  }
+
+  return useMutation({ mutationKey: [API_CONFIGURATION], mutationFn: fn, ...options });
+}
+
+export function deleteConfiguration(options: object, id?: string) {
+  async function fn() {
+    if (!id) return null;
+
+    const { data } = await api.delete<IBaseReply>(`${API_CONFIGURATION}/${id}`);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_CONFIGURATION], mutationFn: fn, ...options });

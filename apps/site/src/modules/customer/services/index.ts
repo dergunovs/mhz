@@ -8,11 +8,13 @@ import {
   ICustomer,
   IProduct,
   ICartItem,
+  ISignUpData,
+  IBaseReply,
 } from 'mhz-contracts';
 
 export function getCurrentCustomer(options?: object) {
-  async function fn(): Promise<ICustomer> {
-    const { data } = await api.get(API_CUSTOMER_CURRENT);
+  async function fn() {
+    const { data } = await api.get<ICustomer>(API_CUSTOMER_CURRENT);
 
     return data;
   }
@@ -21,8 +23,8 @@ export function getCurrentCustomer(options?: object) {
 }
 
 export function getCustomerWatchedProducts() {
-  async function fn(): Promise<IProduct[]> {
-    const { data } = await api.get(API_CUSTOMER_WATCHED);
+  async function fn() {
+    const { data } = await api.get<IProduct[]>(API_CUSTOMER_WATCHED);
 
     return data;
   }
@@ -31,8 +33,8 @@ export function getCustomerWatchedProducts() {
 }
 
 export function getCustomerFavouriteProducts(options?: object) {
-  async function fn(): Promise<IProduct[]> {
-    const { data } = await api.get(API_CUSTOMER_FAVOURITES);
+  async function fn() {
+    const { data } = await api.get<IProduct[]>(API_CUSTOMER_FAVOURITES);
 
     return data;
   }
@@ -41,8 +43,10 @@ export function getCustomerFavouriteProducts(options?: object) {
 }
 
 export function postCustomer(options: object) {
-  async function fn(formData: ICustomer) {
-    await api.post(API_CUSTOMER, formData);
+  async function fn(formData: ISignUpData) {
+    const { data } = await api.post<IBaseReply>(API_CUSTOMER, formData);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
@@ -50,7 +54,9 @@ export function postCustomer(options: object) {
 
 export function updateCustomer(options: object) {
   async function fn(formData: Omit<ICustomer, 'password'>) {
-    await api.patch(API_CUSTOMER, formData);
+    const { data } = await api.patch<IBaseReply>(API_CUSTOMER, formData);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
@@ -58,7 +64,9 @@ export function updateCustomer(options: object) {
 
 export function deleteCustomer(options: object) {
   async function fn() {
-    await api.delete(API_CUSTOMER);
+    const { data } = await api.delete<IBaseReply>(API_CUSTOMER);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
@@ -66,7 +74,9 @@ export function deleteCustomer(options: object) {
 
 export function addToFavourites(options: object) {
   async function fn(_id?: string) {
-    const { data } = await api.post(API_CUSTOMER_FAVOURITES, { _id });
+    if (!_id) return null;
+
+    const { data } = await api.post<IBaseReply>(API_CUSTOMER_FAVOURITES, { _id });
 
     return data;
   }
@@ -76,7 +86,9 @@ export function addToFavourites(options: object) {
 
 export function removeFromFavourites(options: object) {
   async function fn(_id?: string) {
-    const { data } = await api.delete(`${API_CUSTOMER_FAVOURITES}/${_id}`);
+    if (!_id) return null;
+
+    const { data } = await api.delete<IBaseReply>(`${API_CUSTOMER_FAVOURITES}/${_id}`);
 
     return data;
   }
@@ -85,8 +97,8 @@ export function removeFromFavourites(options: object) {
 }
 
 export function getCustomerCart(options?: object) {
-  async function fn(): Promise<ICartItem[]> {
-    const { data } = await api.get(API_CUSTOMER_CART);
+  async function fn() {
+    const { data } = await api.get<ICartItem[]>(API_CUSTOMER_CART);
 
     return data;
   }
@@ -96,7 +108,9 @@ export function getCustomerCart(options?: object) {
 
 export function addToCart(options: object) {
   async function fn(_id?: string | (string | undefined)[]) {
-    const { data } = await api.post(API_CUSTOMER_CART, { _id });
+    if (!_id) return null;
+
+    const { data } = await api.post<IBaseReply>(API_CUSTOMER_CART, { _id });
 
     return data;
   }
@@ -106,7 +120,9 @@ export function addToCart(options: object) {
 
 export function removeFromCart(options: object) {
   async function fn(_id?: string) {
-    const { data } = await api.delete(`${API_CUSTOMER_CART}/${_id}`);
+    if (!_id) return null;
+
+    const { data } = await api.delete<IBaseReply>(`${API_CUSTOMER_CART}/${_id}`);
 
     return data;
   }
@@ -116,7 +132,7 @@ export function removeFromCart(options: object) {
 
 export function updateCountCart(options: object) {
   async function fn(product: { count: number; _id?: string }) {
-    const { data } = await api.patch(API_CUSTOMER_CART, product);
+    const { data } = await api.patch<IBaseReply>(API_CUSTOMER_CART, product);
 
     return data;
   }

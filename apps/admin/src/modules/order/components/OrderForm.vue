@@ -52,7 +52,7 @@
       Confirm cancel order?
     </UiModal>
 
-    <UiModal v-model="isShowConfirmDelete" isConfirm @confirm="mutateDelete">Confirm delete?</UiModal>
+    <UiModal v-model="isShowConfirmDelete" isConfirm @confirm="mutateDelete(orderId)">Confirm delete?</UiModal>
   </div>
 </template>
 
@@ -92,7 +92,7 @@ const { mutate: mutateUpdate, isLoading } = updateOrder(orderId, {
   },
 });
 
-const { mutate: mutateDelete } = deleteOrder(orderId, {
+const { mutate: mutateDelete } = deleteOrder({
   onSuccess: async () => {
     queryClient.removeQueries({ queryKey: [API_ORDER] });
     await queryClient.refetchQueries({ queryKey: [API_ORDER] });

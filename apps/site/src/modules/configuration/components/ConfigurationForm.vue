@@ -114,15 +114,12 @@ const { mutate: mutatePost, isLoading } = postConfiguration({
   },
 });
 
-const { mutate: mutateUpdate } = updateConfiguration(
-  {
-    onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
-      toast.success('Configuration updated');
-    },
+const { mutate: mutateUpdate } = updateConfiguration({
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
+    toast.success('Configuration updated');
   },
-  props.configuration?._id
-);
+});
 
 const { mutate: mutateDelete } = deleteConfiguration(
   {

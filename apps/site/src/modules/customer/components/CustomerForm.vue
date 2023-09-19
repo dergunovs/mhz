@@ -9,10 +9,6 @@
         <UiInput v-model="formData.lastName" />
       </UiField>
 
-      <UiField label="Phone" isRequired :error="error('phone')">
-        <UiInput v-model="formData.phone" isPhone />
-      </UiField>
-
       <UiField label="Email" isRequired :error="error('email')">
         <UiInput v-model="formData.email" />
       </UiField>
@@ -31,7 +27,7 @@
 import { ref, computed, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiModal, toast } from 'mhz-ui';
-import { clone, useValidator, required, email, phone, logout, deleteAuthHeader, useQueryClient } from 'mhz-helpers';
+import { clone, useValidator, required, email, logout, deleteAuthHeader, useQueryClient } from 'mhz-helpers';
 import { API_CUSTOMER, ICustomer } from 'mhz-contracts';
 
 import { updateCustomer, deleteCustomer } from '@/customer/services';
@@ -49,7 +45,6 @@ const queryClient = useQueryClient();
 const formData = ref<Omit<ICustomer, 'password'>>({
   firstName: '',
   lastName: '',
-  phone: '',
   email: '',
 });
 
@@ -72,7 +67,6 @@ const rules = computed(() => {
   return {
     firstName: required,
     lastName: required,
-    phone: [required, phone],
     email: [required, email],
   };
 });

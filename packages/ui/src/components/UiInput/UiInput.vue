@@ -13,8 +13,6 @@
       :class="$style.input"
       ref="input"
       v-bind="$attrs"
-      v-maska
-      :data-maska="props.isPhone ? '+7 (###) ###-##-##' : null"
       :data-mode="props.mode"
       :data-center="props.isCenter"
       :data-append-icon="!!props.appendIcon || props.isCopy"
@@ -33,8 +31,6 @@
 <script setup lang="ts">
 import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
 
-import { vMaska } from 'maska';
-
 import IconCopy from './icons/copy.svg?component';
 
 interface IProps {
@@ -44,7 +40,6 @@ interface IProps {
   appendIcon?: FunctionalComponent;
   isFocus?: boolean;
   isCenter?: boolean;
-  isPhone?: boolean;
   isCopy?: boolean;
 }
 

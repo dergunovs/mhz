@@ -64,8 +64,6 @@ const formData = ref<IManufacturer>({
   country: '',
 });
 
-const manufacturerId = computed(() => props.manufacturer?._id);
-
 const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
@@ -74,7 +72,7 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
   },
 });
 
-const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer(manufacturerId, {
+const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer updated');

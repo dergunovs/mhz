@@ -1,13 +1,13 @@
 import { Ref, ComputedRef } from 'vue';
 
-import { IPageQuery, api, useMutation, useQuery } from 'mhz-helpers';
-import { API_ORDER, IOrder, TOrderStatus } from 'mhz-contracts';
+import { IPageQuery, api, convertParams, useMutation, useQuery } from 'mhz-helpers';
+import { API_ORDER, IBaseReply, IOrder, TOrderStatus } from 'mhz-contracts';
 
 export function getOrders(query: Ref<IPageQuery | number>) {
-  async function fn(): Promise<{ data: IOrder[]; total: number }> {
-    const params = typeof query.value === 'number' ? { page: query.value } : { page: query.value.page || 1 };
+  async function fn() {
+    const params = convertParams(query);
 
-    const { data } = await api.get(API_ORDER, { params });
+    const { data } = await api.get<{ data: IOrder[]; total: number }>(API_ORDER, { params });
 
     return data;
   }
@@ -16,10 +16,10 @@ export function getOrders(query: Ref<IPageQuery | number>) {
 }
 
 export function getOrder(id?: ComputedRef<string | string[] | undefined>, options?: object) {
-  async function fn(): Promise<IOrder | null> {
+  async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get(`${API_ORDER}/${id.value}`);
+    const { data } = await api.get<IOrder>(`${API_ORDER}/${id.value}`);
 
     return data;
   }
@@ -31,17 +31,19 @@ export function updateOrder(options: object, id?: string) {
   async function fn(status: TOrderStatus) {
     if (!id) return null;
 
-    await api.patch(`${API_ORDER}/${id}`, { status });
+    const { data } = await api.patch<IBaseReply>(`${API_ORDER}/${id}`, { status });
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_ORDER, id], mutationFn: fn, ...options });
 }
 
 export function postOrder(options: object) {
-  async function fn(): Promise<string | undefined> {
-    const { data } = await api.post(API_ORDER);
+  async function fn() {
+    const { data } = await api.post<string>(API_ORDER);
 
-    return data.id;
+    return data;
   }
 
   return useMutation({ mutationKey: [API_ORDER], mutationFn: fn, ...options });

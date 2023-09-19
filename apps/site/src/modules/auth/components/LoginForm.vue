@@ -23,6 +23,7 @@ import { ref, computed } from 'vue';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email, useAuth, setAuthHeader } from 'mhz-helpers';
+import { ILoginData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
 import { login } from '@/auth/services';
@@ -32,14 +33,15 @@ import { getCustomerFavouriteProducts } from '@/customer/services';
 
 const { auth } = useAuth();
 
-const formData = ref({
+const formData = ref<ILoginData>({
   email: '',
   password: '',
+  role: 'customer',
 });
 
 const { refetch } = getCustomerFavouriteProducts({ enabled: false });
 
-const { mutate: mutateLogin } = login('customer', {
+const { mutate: mutateLogin } = login({
   onSuccess: (user: { token: string }) => {
     auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');

@@ -8,11 +8,12 @@ import {
   API_STATS_COUNT,
   ISearchResults,
   IEntitiesCount,
+  IBaseReply,
 } from 'mhz-contracts';
 
 export function search(query: Ref<string>, isAdmin?: boolean) {
-  async function fn(): Promise<ISearchResults> {
-    const { data } = await api.get(API_SEARCH, { params: { search: query.value, isAdmin } });
+  async function fn() {
+    const { data } = await api.get<ISearchResults>(API_SEARCH, { params: { search: query.value, isAdmin } });
 
     return data;
   }
@@ -21,8 +22,8 @@ export function search(query: Ref<string>, isAdmin?: boolean) {
 }
 
 export function getEntitiesCount() {
-  async function fn(): Promise<IEntitiesCount> {
-    const { data } = await api.get(API_STATS_COUNT);
+  async function fn() {
+    const { data } = await api.get<IEntitiesCount>(API_STATS_COUNT);
 
     return data;
   }
@@ -31,14 +32,14 @@ export function getEntitiesCount() {
 }
 
 export function uploadFile(options: object, width?: string) {
-  async function fn(file?: File): Promise<string> {
+  async function fn(file?: File) {
     if (!file) throw new Error();
 
     const formData = new FormData();
 
     formData.append('file', file);
 
-    const { data } = await api.post(API_UPLOAD_SINGLE, formData, { params: { width } });
+    const { data } = await api.post<string>(API_UPLOAD_SINGLE, formData, { params: { width } });
 
     return data;
   }
@@ -47,12 +48,12 @@ export function uploadFile(options: object, width?: string) {
 }
 
 export function uploadFiles(options: object, width?: string, thumb?: boolean) {
-  async function fn(files: File[]): Promise<string[]> {
+  async function fn(files: File[]) {
     const formData = new FormData();
 
     files.forEach((file) => formData.append('files', file));
 
-    const { data } = await api.post(API_UPLOAD, formData, { params: { width, thumb } });
+    const { data } = await api.post<string[]>(API_UPLOAD, formData, { params: { width, thumb } });
 
     return data;
   }
@@ -62,9 +63,9 @@ export function uploadFiles(options: object, width?: string, thumb?: boolean) {
 
 export function deleteFile(thumb?: boolean) {
   async function fn(filename: string) {
-    await api.delete(`${API_UPLOAD}/${filename}`, { params: { thumb } });
+    const { data } = await api.delete<IBaseReply>(`${API_UPLOAD}/${filename}`, { params: { thumb } });
 
-    return true;
+    return data;
   }
 
   return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn });

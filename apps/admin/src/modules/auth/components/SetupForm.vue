@@ -32,6 +32,7 @@ import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email } from 'mhz-helpers';
+import { ISignUpData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
 import { setup } from '@/auth/services';
@@ -39,7 +40,7 @@ import { URL_LOGIN } from '@/auth/constants';
 
 const router = useRouter();
 
-const formData = ref({
+const formData = ref<ISignUpData>({
   firstName: '',
   lastName: '',
   email: '',

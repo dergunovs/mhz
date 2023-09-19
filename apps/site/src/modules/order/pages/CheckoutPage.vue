@@ -6,7 +6,7 @@
       <div :class="$style.checkout">
         <div>
           <div><b>Customer</b></div>
-          <div>{{ customer?.firstName }} {{ customer?.lastName }}, {{ customer?.phone }}, {{ customer?.email }}</div>
+          <div>{{ customer?.firstName }} {{ customer?.lastName }}, {{ customer?.email }}</div>
         </div>
 
         <div>

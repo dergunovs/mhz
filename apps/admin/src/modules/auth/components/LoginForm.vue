@@ -23,6 +23,7 @@ import { ref, computed } from 'vue';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email, useAuth, setAuthHeader } from 'mhz-helpers';
+import { ILoginData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
 import { login } from '@/auth/services';
@@ -31,12 +32,13 @@ import { URL_MAIN } from '@/common/constants';
 
 const { auth } = useAuth();
 
-const formData = ref({
+const formData = ref<ILoginData>({
   email: '',
   password: '',
+  role: 'manager',
 });
 
-const { mutate: mutateLogin } = login('manager', {
+const { mutate: mutateLogin } = login({
   onSuccess: (user: { token: string }) => {
     auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');

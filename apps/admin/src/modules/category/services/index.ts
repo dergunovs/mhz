@@ -1,23 +1,23 @@
 import { ComputedRef } from 'vue';
 
 import { api, useQuery, useMutation } from 'mhz-helpers';
-import { API_CATEGORY, ICategory } from 'mhz-contracts';
+import { API_CATEGORY, ICategory, IBaseReply } from 'mhz-contracts';
 
-export function getCategories() {
-  async function fn(): Promise<ICategory[]> {
-    const { data } = await api.get(API_CATEGORY);
+export function getCategories(options?: object) {
+  async function fn() {
+    const { data } = await api.get<ICategory[]>(API_CATEGORY);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_CATEGORY], queryFn: fn });
+  return useQuery({ queryKey: [API_CATEGORY], queryFn: fn, ...options });
 }
 
 export function getCategory(id?: ComputedRef<string | string[]>) {
-  async function fn(): Promise<ICategory | null> {
+  async function fn() {
     if (!id?.value) return null;
 
-    const { data } = await api.get(`${API_CATEGORY}/${id.value}`);
+    const { data } = await api.get<ICategory>(`${API_CATEGORY}/${id.value}`);
 
     return data;
   }
@@ -27,23 +27,31 @@ export function getCategory(id?: ComputedRef<string | string[]>) {
 
 export function postCategory(options: object) {
   async function fn(formData: ICategory) {
-    await api.post(API_CATEGORY, formData);
+    const { data } = await api.post<IBaseReply>(API_CATEGORY, formData);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_CATEGORY], mutationFn: fn, ...options });
 }
 
-export function updateCategory(id: ComputedRef<string | undefined>, options: object) {
+export function updateCategory(options: object) {
   async function fn(formData: ICategory) {
-    await api.patch(`${API_CATEGORY}/${id.value}`, formData);
+    const { data } = await api.patch<IBaseReply>(`${API_CATEGORY}/${formData._id}`, formData);
+
+    return data;
   }
 
-  return useMutation({ mutationKey: [API_CATEGORY, id], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CATEGORY], mutationFn: fn, ...options });
 }
 
 export function deleteCategory(options: object) {
   async function fn(id?: string) {
-    await api.delete(`${API_CATEGORY}/${id}`);
+    if (!id) return null;
+
+    const { data } = await api.delete<IBaseReply>(`${API_CATEGORY}/${id}`);
+
+    return data;
   }
 
   return useMutation({ mutationKey: [API_CATEGORY], mutationFn: fn, ...options });

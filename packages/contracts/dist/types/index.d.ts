@@ -34,12 +34,10 @@ export interface IManager extends IEntity {
 }
 
 export interface ICustomer extends IManager {
-  phone?: string;
   cart?: ICartItem[];
   orders?: IOrder[];
   watchedProducts?: IProductWatched[];
   favouriteProducts?: IProduct[];
-  comparisons?: IComparison[];
   configurations?: IConfiguration[];
 }
 
@@ -98,12 +96,6 @@ export interface IOrder extends IEntity {
   customer: ICustomer;
   status: TOrderStatus;
   price: number;
-}
-
-export interface IComparison extends IEntity {
-  products: IProduct[];
-  category: ICategory;
-  customer: ICustomer;
 }
 
 export interface IConfigurationParts {
@@ -208,4 +200,11 @@ export interface ILoginData {
   email: string;
   password: string;
   role: TUserRole;
+}
+
+export interface ISignUpData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }

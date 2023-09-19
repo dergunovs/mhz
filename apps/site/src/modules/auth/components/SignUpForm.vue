@@ -13,10 +13,6 @@
         <UiInput v-model="formData.lastName" />
       </UiField>
 
-      <UiField label="Phone" isRequired :error="error('phone')">
-        <UiInput v-model="formData.phone" isPhone />
-      </UiField>
-
       <UiField label="E-mail" isRequired :error="error('email')">
         <UiInput v-model="formData.email" />
       </UiField>
@@ -35,7 +31,8 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
-import { useValidator, required, email, phone } from 'mhz-helpers';
+import { useValidator, required, email } from 'mhz-helpers';
+import { ISignUpData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
 import { postCustomer } from '@/customer/services';
@@ -43,11 +40,10 @@ import { URL_LOGIN } from '@/auth/constants';
 
 const router = useRouter();
 
-const formData = ref({
+const formData = ref<ISignUpData>({
   firstName: '',
   lastName: '',
   email: '',
-  phone: '',
   password: '',
 });
 
@@ -63,7 +59,6 @@ const rules = computed(() => {
     firstName: required,
     lastName: required,
     email: [required, email],
-    phone: [required, phone],
     password: required,
   };
 });
