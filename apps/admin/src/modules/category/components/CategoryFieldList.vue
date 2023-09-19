@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { UiButton } from 'mhz-ui';
-import { ICategoryField } from 'mhz-types';
+import { ICategoryField } from 'mhz-contracts';
 
 interface IProps {
   fields: ICategoryField[];

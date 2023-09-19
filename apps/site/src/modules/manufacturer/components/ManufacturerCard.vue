@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { IManufacturer } from 'mhz-types';
+import { IManufacturer } from 'mhz-contracts';
 
 import { PATH_UPLOAD } from '@/common/constants';
 

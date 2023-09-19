@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import fp from 'fastify-plugin';
 import jwt from '@fastify/jwt';
 
-import { IUserToken } from '../interface/index.js';
+import type { IUserToken } from 'mhz-contracts';
 
 export default fp(async function (fastify) {
   const secret = process.env.SECRET;

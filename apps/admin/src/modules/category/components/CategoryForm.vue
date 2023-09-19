@@ -52,9 +52,8 @@ import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiButton, UiUpload, toast, UiEditor } from 'mhz-ui';
-import { ICategory, ICategoryField } from 'mhz-types';
 import { clone, deleteTempId, useValidator, required, useQueryClient } from 'mhz-helpers';
-import { API_CATEGORY } from 'mhz-contracts';
+import { API_CATEGORY, ICategory, ICategoryField } from 'mhz-contracts';
 
 import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
 import CategoryFieldList from '@/category/components/CategoryFieldList.vue';

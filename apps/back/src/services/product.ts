@@ -1,10 +1,9 @@
 import { Types } from 'mongoose';
-import { IProduct } from 'mhz-types';
+import type { IProduct, IQuery, IUserToken, TInitiator } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 
 import { decodeToken, paginate, getProductFilters, addProductToWatched, deleteFile } from '../helpers/index.js';
-import { IQuery, IUserToken, TInitiator } from '../interface/index.js';
 
 export const productService = {
   getMany: async (query: IQuery) => {

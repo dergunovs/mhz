@@ -36,7 +36,7 @@ const formData = ref({
   password: '',
 });
 
-const { mutate: mutateLogin } = login({
+const { mutate: mutateLogin } = login('manager', {
   onSuccess: (user: { token: string }) => {
     auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');

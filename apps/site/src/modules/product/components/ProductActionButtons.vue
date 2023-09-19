@@ -19,10 +19,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { IProduct } from 'mhz-types';
 import { toast } from 'mhz-ui';
 import { useQueryClient } from 'mhz-helpers';
-import { API_CUSTOMER_FAVOURITES } from 'mhz-contracts';
+import { API_CUSTOMER_FAVOURITES, IProduct } from 'mhz-contracts';
 
 import IconComparison from '@/product/icons/comparison.svg';
 import IconFavourites from '@/product/icons/favourites.svg';

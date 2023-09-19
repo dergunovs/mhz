@@ -31,9 +31,8 @@
 import { ref, computed, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiModal, toast } from 'mhz-ui';
-import { ICustomer } from 'mhz-types';
 import { clone, useValidator, required, email, phone, logout, deleteAuthHeader, useQueryClient } from 'mhz-helpers';
-import { API_CUSTOMER } from 'mhz-contracts';
+import { API_CUSTOMER, ICustomer } from 'mhz-contracts';
 
 import { updateCustomer, deleteCustomer } from '@/customer/services';
 import { URL_MAIN } from '@/common/constants';

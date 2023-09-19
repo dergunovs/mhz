@@ -1,4 +1,4 @@
-import { IEntitiesCount } from 'mhz-types';
+import type { IEntitiesCount } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';

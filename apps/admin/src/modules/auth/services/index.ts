@@ -1,5 +1,5 @@
 import { api, useMutation, useQuery } from 'mhz-helpers';
-import { API_AUTH_CHECK, API_AUTH_LOGIN, API_AUTH_SETUP } from 'mhz-contracts';
+import { API_AUTH_CHECK, API_AUTH_LOGIN, API_AUTH_SETUP, TUserRole } from 'mhz-contracts';
 
 import { ILoginFormData } from '@/auth/interface';
 
@@ -22,9 +22,9 @@ export function setup(options: object) {
   return useMutation({ mutationKey: [API_AUTH_SETUP], mutationFn: fn, ...options });
 }
 
-export function login(options: object) {
+export function login(role: TUserRole, options: object) {
   async function fn(formData: ILoginFormData): Promise<string> {
-    const { data } = await api.post(API_AUTH_LOGIN, { ...formData, role: 'manager' });
+    const { data } = await api.post(API_AUTH_LOGIN, { ...formData, role });
 
     return data;
   }

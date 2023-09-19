@@ -1,7 +1,7 @@
-import { IFilterData, IProduct } from 'mhz-types';
 import { API_PRODUCT, API_PRODUCT_FILTERS, API_PRODUCT_PRICE_RANGE } from 'mhz-contracts';
+import type { IQuery, TInitiator, IBaseReply, IFilterData, IProduct } from 'mhz-contracts';
 
-import { IBaseReply, IFastifyInstance, IQuery, TInitiator } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 import { productService } from '../services/product.js';
 
 export default async function (fastify: IFastifyInstance) {

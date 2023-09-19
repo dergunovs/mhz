@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ICustomer } from 'mhz-types';
+import { ICustomer } from 'mhz-contracts';
 
 import CustomerForm from '@/customer/components/CustomerForm.vue';
 

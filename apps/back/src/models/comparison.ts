@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { IComparison } from 'mhz-types';
+import type { IComparison } from 'mhz-contracts';
 
 const comparisonSchema = new Schema<IComparison>(
   {

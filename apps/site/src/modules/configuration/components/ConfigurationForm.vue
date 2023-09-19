@@ -50,9 +50,15 @@ import { ref, computed, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiCheckbox, UiField, UiInput, UiModal, toast } from 'mhz-ui';
-import { ICategory, IConfiguration, IConfigurationParts, IProduct } from 'mhz-types';
 import { clone, required, useValidator, useQueryClient } from 'mhz-helpers';
-import { API_CUSTOMER_CART, API_CONFIGURATION } from 'mhz-contracts';
+import {
+  API_CUSTOMER_CART,
+  API_CONFIGURATION,
+  ICategory,
+  IConfiguration,
+  IConfigurationParts,
+  IProduct,
+} from 'mhz-contracts';
 
 import ConfigurationCategoryList from '@/configuration/components/ConfigurationCategoryList.vue';
 

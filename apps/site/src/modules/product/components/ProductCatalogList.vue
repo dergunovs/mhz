@@ -14,7 +14,7 @@
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { IProduct } from 'mhz-types';
+import { IProduct } from 'mhz-contracts';
 
 import ProductCatalogCard from '@/product/components/ProductCatalogCard.vue';
 

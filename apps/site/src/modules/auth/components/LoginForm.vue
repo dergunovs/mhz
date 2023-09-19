@@ -39,7 +39,7 @@ const formData = ref({
 
 const { refetch } = getCustomerFavouriteProducts({ enabled: false });
 
-const { mutate: mutateLogin } = login({
+const { mutate: mutateLogin } = login('customer', {
   onSuccess: (user: { token: string }) => {
     auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');

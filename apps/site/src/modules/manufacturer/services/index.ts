@@ -1,8 +1,7 @@
 import { Ref, ComputedRef } from 'vue';
 
-import { IManufacturer } from 'mhz-types';
 import { api, useQuery, IPageQuery } from 'mhz-helpers';
-import { API_MANUFACTURER } from 'mhz-contracts';
+import { API_MANUFACTURER, IManufacturer } from 'mhz-contracts';
 
 export function getManufacturers(query: Ref<IPageQuery | number>) {
   async function fn(): Promise<{ data: IManufacturer[]; total: number }> {

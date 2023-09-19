@@ -4,9 +4,8 @@ import sharp from 'sharp';
 import qs from 'qs';
 import { Model, Schema, Types } from 'mongoose';
 
-import { IFilterField, IFilterData, IFilterFieldValue } from 'mhz-types';
+import type { IFilterField, IFilterData, IFilterFieldValue, IQuery, IUserToken } from 'mhz-contracts';
 
-import { IQuery, IUserToken } from '../interface/index.js';
 import Customer from '../models/customer.js';
 import Product from '../models/product.js';
 

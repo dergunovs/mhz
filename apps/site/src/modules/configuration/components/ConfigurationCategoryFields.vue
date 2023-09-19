@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { IProduct } from 'mhz-types';
+import { IProduct } from 'mhz-contracts';
 
 import { CONFIGURATION_PRODUCT_FIELDS } from '@/configuration/constants';
 import { IConfigurationError } from '@/configuration/interface';

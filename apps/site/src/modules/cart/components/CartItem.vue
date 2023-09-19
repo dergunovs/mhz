@@ -40,9 +40,8 @@
 import { computed } from 'vue';
 
 import { UiButton, toast } from 'mhz-ui';
-import { ICartItem } from 'mhz-types';
 import { useQueryClient } from 'mhz-helpers';
-import { API_CUSTOMER_CART } from 'mhz-contracts';
+import { API_CUSTOMER_CART, ICartItem } from 'mhz-contracts';
 
 import CartItemCount from '@/cart/components/CartItemCount.vue';
 import ProductActionButtons from '@/product/components/ProductActionButtons.vue';

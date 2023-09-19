@@ -1,11 +1,9 @@
 import { FastifyRequest } from 'fastify';
 import bcrypt from 'bcryptjs';
-import { IManager } from 'mhz-types';
+import type { IManager, IUserToken, ILoginData } from 'mhz-contracts';
 
 import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
-
-import { IUserToken, ILoginData } from '../interface/index.js';
 
 export const authService = {
   check: async (request: FastifyRequest) => {

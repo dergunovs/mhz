@@ -60,7 +60,7 @@ import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
 import { clone, usePage, usePagination } from 'mhz-helpers';
-import { ICategory, IProduct } from 'mhz-types';
+import { ICategory, IProduct } from 'mhz-contracts';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ConfigurationForm from '@/configuration/components/ConfigurationForm.vue';

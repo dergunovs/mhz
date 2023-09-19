@@ -1,7 +1,7 @@
-import { IOrder, TOrderStatus } from 'mhz-types';
 import { API_ORDER } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IOrder, TOrderStatus } from 'mhz-contracts';
 
-import { IBaseReply, IFastifyInstance, IQuery } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 import { orderService } from '../services/order.js';
 
 export default async function (fastify: IFastifyInstance) {

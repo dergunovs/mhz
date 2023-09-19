@@ -1,7 +1,7 @@
-import { ICategory } from 'mhz-types';
 import { API_CATEGORY } from 'mhz-contracts';
+import type { IQuery, IBaseReply, ICategory } from 'mhz-contracts';
 
-import { IFastifyInstance, IQuery, IBaseReply } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
 
 export default async function (fastify: IFastifyInstance) {

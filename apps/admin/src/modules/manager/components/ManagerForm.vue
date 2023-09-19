@@ -25,9 +25,8 @@ import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, toast } from 'mhz-ui';
-import { IManager } from 'mhz-types';
 import { clone, useValidator, required, useQueryClient } from 'mhz-helpers';
-import { API_MANAGER } from 'mhz-contracts';
+import { API_MANAGER, IManager } from 'mhz-contracts';
 
 import FormButtons from '@/common/components/FormButtons.vue';
 

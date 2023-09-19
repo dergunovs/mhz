@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { formatDateTime } from 'mhz-helpers';
-import { IOrder } from 'mhz-types';
+import { IOrder } from 'mhz-contracts';
 
 import { CURRENCY } from '@/common/constants';
 import { URL_CUSTOMER_ORDERS } from '@/customer/constants';

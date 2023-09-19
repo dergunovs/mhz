@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { IProduct } from 'mhz-types';
+import type { IProduct } from 'mhz-contracts';
 
 const productSchema = new Schema<IProduct>(
   {

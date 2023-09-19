@@ -1,11 +1,10 @@
 import bcrypt from 'bcryptjs';
-import { ICartItem, ICustomer, IProduct } from 'mhz-types';
+import type { ICartItem, ICustomer, IProduct, IQuery, IUserToken } from 'mhz-contracts';
 
 import Customer from '../models/customer.js';
 import Product from '../models/product.js';
 
 import { decodeToken, paginate } from '../helpers/index.js';
-import { IQuery, IUserToken } from '../interface/index.js';
 
 export const customerService = {
   getMany: async (query: IQuery) => {

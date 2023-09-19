@@ -74,7 +74,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 
-import { IFilterData, IFilterField, IFilterBaseValue, IFilterFieldValue } from 'mhz-types';
+import { IFilterData, IFilterField, IFilterBaseValue, IFilterFieldValue } from 'mhz-contracts';
 import { UiCheckbox, UiRange, UiSpoiler } from 'mhz-ui';
 import { clone } from 'mhz-helpers';
 

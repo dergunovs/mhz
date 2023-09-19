@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { formatDateTime } from 'mhz-helpers';
-import { IConfiguration } from 'mhz-types';
+import { IConfiguration } from 'mhz-contracts';
 
 import { URL_CONFIGURATION } from '@/configuration/constants';
 

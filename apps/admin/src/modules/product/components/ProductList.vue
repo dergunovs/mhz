@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { IProduct } from 'mhz-types';
+import { IProduct } from 'mhz-contracts';
 import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 

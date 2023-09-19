@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { IOrder } from 'mhz-types';
+import { IOrder } from 'mhz-contracts';
 
 import OrderElement from '@/order/components/OrderElement.vue';
 

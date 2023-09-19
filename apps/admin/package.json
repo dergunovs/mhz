@@ -1,7 +1,7 @@
 {
   "name": "mhz-admin",
   "description": "mhz-admin",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -23,7 +23,6 @@
     "mhz-contracts": "*",
     "mhz-countries": "*",
     "mhz-helpers": "*",
-    "mhz-types": "*",
     "mhz-ui": "*",
     "sortablejs": "1.15.0",
     "sortablejs-vue3": "1.2.9",

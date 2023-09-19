@@ -1,5 +1,5 @@
-import { ISearchResults } from 'mhz-types';
 import { API_SEARCH } from 'mhz-contracts';
+import type { ISearchResults } from 'mhz-contracts';
 
 import { searchService } from '../services/search.js';
 import { IFastifyInstance } from '../interface/index.js';

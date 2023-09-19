@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 import { UiSlider } from 'mhz-ui';
-import { IProduct } from 'mhz-types';
+import { IProduct } from 'mhz-contracts';
 import { isAuth } from 'mhz-helpers';
 
 import ProductActionButtons from '@/product/components/ProductActionButtons.vue';

@@ -1,4 +1,4 @@
-import { ICategory } from 'mhz-types';
+import type { ICategory } from 'mhz-contracts';
 
 import Category from '../models/category.js';
 

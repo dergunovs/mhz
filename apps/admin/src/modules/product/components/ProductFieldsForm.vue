@@ -16,7 +16,7 @@
 import { onMounted, ref, watch } from 'vue';
 
 import { UiCheckbox, UiField, UiInput } from 'mhz-ui';
-import { ICategoryField } from 'mhz-types';
+import { ICategoryField } from 'mhz-contracts';
 import { deleteId } from 'mhz-helpers';
 
 interface IProps {

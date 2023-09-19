@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ICartItem } from 'mhz-types';
+import { ICartItem } from 'mhz-contracts';
 
 import CartItem from '@/cart/components/CartItem.vue';
 

@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { IConfiguration } from 'mhz-types';
+import type { IConfiguration } from 'mhz-contracts';
 
 const configurationSchema = new Schema<IConfiguration>(
   {

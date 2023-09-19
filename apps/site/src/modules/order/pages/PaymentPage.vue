@@ -18,8 +18,7 @@ import { useHead } from '@unhead/vue';
 import { createBankPayment } from 'mhz-bank';
 import { UiModal, toast } from 'mhz-ui';
 import { useQueryClient } from 'mhz-helpers';
-import { IOrder } from 'mhz-types';
-import { API_ORDER } from 'mhz-contracts';
+import { API_ORDER, IOrder } from 'mhz-contracts';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 

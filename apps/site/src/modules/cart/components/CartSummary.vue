@@ -17,7 +17,7 @@
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { ICartItem } from 'mhz-types';
+import { ICartItem } from 'mhz-contracts';
 import { UiButton } from 'mhz-ui';
 
 import { CURRENCY } from '@/common/constants';

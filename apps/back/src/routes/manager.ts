@@ -1,7 +1,7 @@
-import { IManager } from 'mhz-types';
 import { API_MANAGER } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IManager } from 'mhz-contracts';
 
-import { IFastifyInstance, IQuery, IBaseReply } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 import { managerService } from '../services/manager.js';
 
 export default async function (fastify: IFastifyInstance) {

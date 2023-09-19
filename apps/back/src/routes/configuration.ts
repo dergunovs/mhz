@@ -1,8 +1,8 @@
-import { IConfiguration } from 'mhz-types';
 import { API_CONFIGURATION } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IConfiguration } from 'mhz-contracts';
 
 import { configurationService } from '../services/configuration.js';
-import { IFastifyInstance, IQuery, IBaseReply } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IConfiguration[]; total: number } } }>(

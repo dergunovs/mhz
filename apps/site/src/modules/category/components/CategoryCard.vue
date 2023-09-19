@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ICategory } from 'mhz-types';
+import { ICategory } from 'mhz-contracts';
 
 import { PATH_UPLOAD } from '@/common/constants';
 

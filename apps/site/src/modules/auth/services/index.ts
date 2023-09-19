@@ -1,5 +1,5 @@
 import { api, useMutation, useQuery } from 'mhz-helpers';
-import { API_AUTH_CHECK, API_AUTH_LOGIN } from 'mhz-contracts';
+import { API_AUTH_CHECK, API_AUTH_LOGIN, TUserRole } from 'mhz-contracts';
 
 import { ILoginFormData } from '@/auth/interface';
 
@@ -13,9 +13,9 @@ export function checkAuth(options: object) {
   return useQuery({ queryKey: [API_AUTH_CHECK], queryFn: fn, ...options });
 }
 
-export function login(options: object) {
+export function login(role: TUserRole, options: object) {
   async function fn(formData: ILoginFormData): Promise<string> {
-    const { data } = await api.post(API_AUTH_LOGIN, { ...formData, role: 'customer' });
+    const { data } = await api.post(API_AUTH_LOGIN, { ...formData, role });
 
     return data;
   }

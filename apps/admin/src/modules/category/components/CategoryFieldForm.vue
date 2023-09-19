@@ -32,7 +32,7 @@
 import { ref, computed, watch, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiSelect } from 'mhz-ui';
-import { ICategoryField } from 'mhz-types';
+import { ICategoryField } from 'mhz-contracts';
 import { clone, createTempId, useValidator, required } from 'mhz-helpers';
 
 interface IProps {

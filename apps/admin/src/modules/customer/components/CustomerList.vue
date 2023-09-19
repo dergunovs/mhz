@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ICustomer } from 'mhz-types';
+import { ICustomer } from 'mhz-contracts';
 import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 

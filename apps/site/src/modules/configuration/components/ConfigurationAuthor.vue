@@ -22,7 +22,7 @@
 import { computed } from 'vue';
 
 import { formatDateTime } from 'mhz-helpers';
-import { IConfiguration } from 'mhz-types';
+import { IConfiguration } from 'mhz-contracts';
 
 import { CURRENCY } from '@/common/constants';
 

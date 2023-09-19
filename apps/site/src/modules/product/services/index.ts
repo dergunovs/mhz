@@ -1,14 +1,16 @@
 import { Ref, ComputedRef } from 'vue';
 
-import { IFilterData, IProduct } from 'mhz-types';
 import { api, useQuery, IPageQuery } from 'mhz-helpers';
-import { API_PRODUCT, API_PRODUCT_PRICE_RANGE, API_PRODUCT_FILTERS } from 'mhz-contracts';
+import {
+  API_PRODUCT,
+  API_PRODUCT_PRICE_RANGE,
+  API_PRODUCT_FILTERS,
+  IFilterData,
+  IProduct,
+  TInitiator,
+} from 'mhz-contracts';
 
-export function getProducts(
-  query: Ref<IPageQuery | number>,
-  initiator?: 'category' | 'manufacturer',
-  enabled?: Ref<boolean>
-) {
+export function getProducts(query: Ref<IPageQuery | number>, initiator?: TInitiator, enabled?: Ref<boolean>) {
   async function fn(): Promise<{ data: IProduct[]; total: number; filters: IFilterData }> {
     const params =
       typeof query.value === 'number'
@@ -45,7 +47,7 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
 }
 
 export function getProductPriceRange(
-  initiator: 'category' | 'manufacturer',
+  initiator: TInitiator,
   id?: ComputedRef<string | string[]> | Ref<string | undefined>,
   enabled?: Ref<boolean>
 ) {
@@ -61,7 +63,7 @@ export function getProductPriceRange(
 }
 
 export function getProductFilters(
-  initiator: 'category' | 'manufacturer',
+  initiator: TInitiator,
   id?: ComputedRef<string | string[]> | Ref<string | undefined>,
   enabled?: Ref<boolean>
 ) {

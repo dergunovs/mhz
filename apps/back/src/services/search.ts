@@ -1,4 +1,4 @@
-import { ICategory, ICustomer, IManager, IManufacturer, IOrder, IProduct, ISearchResults } from 'mhz-types';
+import type { ICategory, ICustomer, IManager, IManufacturer, IOrder, IProduct, ISearchResults } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';

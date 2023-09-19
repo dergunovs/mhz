@@ -1,6 +1,6 @@
 import { Ref, computed } from 'vue';
 
-import { IConfiguration, IConfigurationParts } from 'mhz-types';
+import { IConfiguration, IConfigurationParts } from 'mhz-contracts';
 
 import { TMotherboardFormat, IConfigurationCheck, IConfigurationError } from '@/configuration/interface';
 

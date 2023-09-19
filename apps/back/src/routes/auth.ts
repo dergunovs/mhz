@@ -1,7 +1,7 @@
-import { IManager } from 'mhz-types';
 import { API_AUTH_CHECK, API_AUTH_LOGIN, API_AUTH_SETUP } from 'mhz-contracts';
+import type { ILoginData, IUserToken, IBaseReply, IManager } from 'mhz-contracts';
 
-import { IFastifyInstance, ILoginData, IUserToken, IBaseReply } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 import { authService } from '../services/auth.js';
 
 export default async function (fastify: IFastifyInstance) {

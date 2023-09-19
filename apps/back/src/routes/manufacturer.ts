@@ -1,7 +1,7 @@
-import { IManufacturer } from 'mhz-types';
 import { API_MANUFACTURER } from 'mhz-contracts';
+import type { IQuery, IBaseReply, IManufacturer } from 'mhz-contracts';
 
-import { IBaseReply, IFastifyInstance, IQuery } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 import { manufacturerService } from '../services/manufacturer.js';
 
 export default async function (fastify: IFastifyInstance) {

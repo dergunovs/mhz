@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { formatDateTime } from 'mhz-helpers';
-import { ICustomer } from 'mhz-types';
+import { ICustomer } from 'mhz-contracts';
 
 import { URL_PRODUCT_EDIT } from '@/product/constants';
 

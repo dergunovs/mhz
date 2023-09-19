@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 
-import { IProduct } from 'mhz-types';
+import { IProduct } from 'mhz-contracts';
 import { isAuth } from 'mhz-helpers';
 import { UiButton } from 'mhz-ui';
 

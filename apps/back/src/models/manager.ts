@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { IManager } from 'mhz-types';
+import type { IManager } from 'mhz-contracts';
 
 const managerSchema = new Schema<IManager>(
   {

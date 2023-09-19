@@ -36,10 +36,9 @@ import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
-import { IManufacturer } from 'mhz-types';
 import { countries } from 'mhz-countries';
 import { clone, useValidator, required, useQueryClient } from 'mhz-helpers';
-import { API_MANUFACTURER } from 'mhz-contracts';
+import { API_MANUFACTURER, IManufacturer } from 'mhz-contracts';
 
 import ImagePreview from '@/common/components/ImagePreview.vue';
 import FormButtons from '@/common/components/FormButtons.vue';

@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ICategory } from 'mhz-types';
+import { ICategory } from 'mhz-contracts';
 import { UiTable } from 'mhz-ui';
 import { formatDate } from 'mhz-helpers';
 

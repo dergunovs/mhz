@@ -1,10 +1,9 @@
 import bcrypt from 'bcryptjs';
-import { IManager } from 'mhz-types';
+import type { IManager, IQuery } from 'mhz-contracts';
 
 import Manager from '../models/manager.js';
 
 import { paginate } from '../helpers/index.js';
-import { IQuery } from '../interface/index.js';
 
 export const managerService = {
   getMany: async (query: IQuery) => {

@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { IConfiguration } from 'mhz-types';
+import { IConfiguration } from 'mhz-contracts';
 
 import ConfigurationElement from '@/configuration/components/ConfigurationElement.vue';
 

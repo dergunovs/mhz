@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { ICategory, IConfigurationParts } from 'mhz-types';
+import { ICategory, IConfigurationParts } from 'mhz-contracts';
 import { clone } from 'mhz-helpers';
 
 import ConfigurationCategory from '@/configuration/components/ConfigurationCategory.vue';

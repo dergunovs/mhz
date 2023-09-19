@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { IOrder } from 'mhz-types';
+import type { IOrder } from 'mhz-contracts';
 
 const orderSchema = new Schema<IOrder>(
   {

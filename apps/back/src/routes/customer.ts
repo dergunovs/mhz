@@ -1,4 +1,3 @@
-import { ICartItem, ICustomer, IProduct } from 'mhz-types';
 import {
   API_CUSTOMER,
   API_CUSTOMER_CURRENT,
@@ -6,9 +5,10 @@ import {
   API_CUSTOMER_FAVOURITES,
   API_CUSTOMER_WATCHED,
 } from 'mhz-contracts';
+import type { IQuery, IBaseReply, ICartItem, ICustomer, IProduct } from 'mhz-contracts';
 
 import { customerService } from '../services/customer.js';
-import { IFastifyInstance, IQuery, IBaseReply } from '../interface/index.js';
+import { IFastifyInstance } from '../interface/index.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: ICustomer[]; total: number } } }>(

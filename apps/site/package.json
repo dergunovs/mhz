@@ -1,7 +1,7 @@
 {
   "name": "mhz-site",
   "description": "mhz-site",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -23,7 +23,6 @@
     "mhz-bank": "*",
     "mhz-contracts": "*",
     "mhz-helpers": "*",
-    "mhz-types": "*",
     "mhz-ui": "*",
     "vue": "3.3.4",
     "vue-router": "4.2.4"

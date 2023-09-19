@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ICategory, IConfigurationParts } from 'mhz-types';
+import { ICategory, IConfigurationParts } from 'mhz-contracts';
 
 import ConfigurationCategoryFields from '@/configuration/components/ConfigurationCategoryFields.vue';
 

@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ICategory } from 'mhz-types';
+import { ICategory } from 'mhz-contracts';
 
 import CategoryCatalogCard from '@/category/components/CategoryCatalogCard.vue';
 

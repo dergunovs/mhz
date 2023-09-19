@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-import { ICategory } from 'mhz-types';
+import type { ICategory } from 'mhz-contracts';
 
 const categorySchema = new Schema<ICategory>(
   {
