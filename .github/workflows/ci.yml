@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: "20.6.0"
       - name: Install
-        run: npm ci
+        run: npm i
       - name: Create Admin .env
         uses: SpicyPizza/create-envfile@v2.0.2
         with:
