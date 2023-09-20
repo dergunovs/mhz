@@ -1,17 +1,17 @@
 <template>
   <div :class="$style.manufacturer">
-    <div :class="$style.imageBlock">
-      <img
-        :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`"
-        :alt="props.manufacturer.title"
-        :class="$style.image"
-        width="96"
-        crossorigin="anonymous"
-      />
-    </div>
+    <img
+      :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`"
+      :alt="props.manufacturer.title"
+      :class="$style.image"
+      width="125"
+      height="100"
+      crossorigin="anonymous"
+    />
 
     <div>
       <div v-html="props.manufacturer.description"></div>
+      <br />
       <div>Country: {{ props.manufacturer.country }}</div>
     </div>
   </div>
@@ -33,18 +33,6 @@ const props = defineProps<IProps>();
 .manufacturer {
   display: flex;
   gap: 32px;
-}
-
-.imageBlock {
-  display: flex;
-  flex-shrink: 0;
-  max-width: 240px;
-  height: 96px;
-}
-
-.image {
-  width: fit-content;
-  height: fit-content;
-  max-height: 96px;
+  align-items: flex-start;
 }
 </style>

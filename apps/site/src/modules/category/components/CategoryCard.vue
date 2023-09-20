@@ -28,5 +28,6 @@ const props = defineProps<IProps>();
 .category {
   display: flex;
   gap: 32px;
+  align-items: flex-start;
 }
 </style>

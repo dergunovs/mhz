@@ -1,14 +1,13 @@
 <template>
   <RouterLink :to="`${URL_MANUFACTURER}/${props.manufacturer._id}`" :class="$style.card">
-    <div :class="$style.imageBlock">
-      <img
-        :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`"
-        :class="$style.image"
-        :alt="props.manufacturer.title"
-        loading="lazy"
-        crossorigin="anonymous"
-      />
-    </div>
+    <img
+      :src="`${PATH_UPLOAD}/${props.manufacturer.logoUrl}`"
+      :class="$style.image"
+      :alt="props.manufacturer.title"
+      width="500"
+      height="400"
+      crossorigin="anonymous"
+    />
 
     <div :class="$style.title">{{ props.manufacturer.title }} ({{ props.manufacturer.country }})</div>
   </RouterLink>
@@ -32,6 +31,7 @@ const props = defineProps<IProps>();
   display: flex;
   flex-direction: column;
   gap: 16px;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   text-decoration: none;
@@ -43,21 +43,13 @@ const props = defineProps<IProps>();
   }
 }
 
-.imageBlock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.image {
-  max-width: 80%;
-  max-height: 100px;
-}
-
 .title {
   font-size: 1.125rem;
   color: var(--color-black);
   text-align: center;
+}
+
+.image {
+  width: 50%;
 }
 </style>

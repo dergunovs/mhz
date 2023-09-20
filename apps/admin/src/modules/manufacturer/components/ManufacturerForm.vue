@@ -121,16 +121,13 @@ function removeLogoFile() {
   logoFile.value = undefined;
 }
 
-const { mutate: mutateUploadFile } = uploadFile(
-  {
-    onSuccess: (data: string) => {
-      formData.value.logoUrl = data;
-      removeLogoFile();
-      toast.success('Logo added');
-    },
+const { mutate: mutateUploadFile } = uploadFile({
+  onSuccess: (data: string) => {
+    formData.value.logoUrl = data;
+    removeLogoFile();
+    toast.success('Logo added');
   },
-  '500'
-);
+});
 
 onMounted(() => {
   if (props.manufacturer) formData.value = clone(props.manufacturer);
