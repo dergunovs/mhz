@@ -1,7 +1,7 @@
 {
   "name": "mhz-bank",
   "description": "mhz-bank",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -22,7 +22,7 @@
     "ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.6.2",
+    "@types/node": "20.6.3",
     "prettier": "3.0.3",
     "typescript": "5.2.2",
     "vite": "4.4.9",

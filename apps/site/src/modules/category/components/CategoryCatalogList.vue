@@ -26,11 +26,11 @@ const props = defineProps<IProps>();
 .list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 64px 32px;
+  gap: 48px 16px;
 
   &[data-header='true'] {
     grid-template-columns: repeat(1, 1fr);
-    gap: 4px;
+    gap: 8px;
   }
 }
 </style>

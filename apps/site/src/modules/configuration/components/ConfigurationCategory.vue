@@ -10,9 +10,8 @@
       <img
         :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
         :class="$style.icon"
-        width="32"
-        height="32"
-        loading="lazy"
+        width="24"
+        height="24"
         crossorigin="anonymous"
       />
 
@@ -94,11 +93,6 @@ function currentProduct(category: ICategory) {
   &[data-current='true'] {
     background-color: var(--color-gray-light-extra);
   }
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
 }
 
 .title {

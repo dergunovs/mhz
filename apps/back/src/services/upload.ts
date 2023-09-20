@@ -9,9 +9,7 @@ import { createThumb, deleteFile, resizeFile } from '../helpers/index.js';
 const pump = util.promisify(pipeline);
 
 export const uploadService: IUploadService = {
-  uploadMultiple: async (getFiles: () => AsyncIterableIterator<IFileToUpload>, width: string, isThumb: boolean) => {
-    const files = getFiles();
-
+  uploadMultiple: async (files: AsyncIterableIterator<IFileToUpload>, width: string, isThumb: boolean) => {
     const filesToUpload: string[] = [];
 
     for await (const file of files) {
@@ -28,9 +26,7 @@ export const uploadService: IUploadService = {
     return filesToUpload;
   },
 
-  uploadSingle: async (getFile: () => Promise<IFileToUpload | undefined>, width: string, isThumb: boolean) => {
-    const file = await getFile();
-
+  uploadSingle: async (file: IFileToUpload | undefined, width: string, isThumb: boolean) => {
     const isFileExists = !!file;
 
     if (!isFileExists) {
@@ -50,9 +46,9 @@ export const uploadService: IUploadService = {
     return { filename, isFileExists: true };
   },
 
-  delete: async (_id: string, isThumb: boolean) => {
+  delete: async (_id: string, thumb: string) => {
     deleteFile(_id);
 
-    if (isThumb) deleteFile(`thumb-${_id}.webp`);
+    if (thumb === 'true') deleteFile(`thumb-${_id}.webp`);
   },
 };

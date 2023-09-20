@@ -1,16 +1,13 @@
 <template>
   <RouterLink :to="`${URL_CATEGORY}/${props.category._id}`" :class="$style.card" :data-header="props.isHeader">
-    <div :class="$style.imageBlock" :data-header="props.isHeader">
-      <img
-        :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
-        :class="$style.image"
-        :data-header="props.isHeader"
-        :alt="props.category.title"
-        loading="lazy"
-        :height="props.isHeader ? 24 : 100"
-        crossorigin="anonymous"
-      />
-    </div>
+    <img
+      :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
+      :alt="props.category.title"
+      loading="lazy"
+      :width="props.isHeader ? 24 : 80"
+      :height="props.isHeader ? 24 : 80"
+      crossorigin="anonymous"
+    />
 
     <div :class="$style.title">{{ props.category.title }}</div>
   </RouterLink>
@@ -34,14 +31,14 @@ const props = defineProps<IProps>();
 .card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   text-decoration: none;
 
   &[data-header='true'] {
     flex-direction: row;
-    gap: 8px;
     align-items: center;
     justify-content: flex-start;
     width: 240px;
@@ -62,29 +59,6 @@ const props = defineProps<IProps>();
     .title {
       color: var(--primary-dark);
     }
-  }
-}
-
-.imageBlock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-
-  &[data-header='true'] {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-.image {
-  max-width: 80%;
-  max-height: 100px;
-
-  &[data-header='true'] {
-    width: fit-content;
-    max-width: 24px;
-    max-height: 24px;
   }
 }
 

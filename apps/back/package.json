@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "mhz-back",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@fastify/autoload": "5.7.1",
-    "@fastify/cors": "8.3.0",
+    "@fastify/cors": "8.4.0",
     "@fastify/helmet": "11.1.1",
     "@fastify/jwt": "7.2.1",
     "@fastify/multipart": "7.7.3",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.4",
-    "@types/node": "20.6.2",
+    "@types/node": "20.6.3",
     "@typescript-eslint/eslint-plugin": "6.7.2",
     "@typescript-eslint/parser": "6.7.2",
     "esbuild": "0.18.20",

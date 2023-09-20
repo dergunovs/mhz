@@ -34,7 +34,7 @@
       isSingle
       isRequired
       :isDisabled="!!formData.iconUrl"
-      :extensions="['png']"
+      :extensions="['svg']"
       :error="error('iconUrl')"
       @add="addIconFile"
       @remove="removeIconFile"
@@ -171,16 +171,13 @@ function removeIconFile() {
   iconFile.value = undefined;
 }
 
-const { mutate: mutateUploadFile } = uploadFile(
-  {
-    onSuccess: (data: string) => {
-      formData.value.iconUrl = data;
-      removeIconFile();
-      toast.success('Icon added');
-    },
+const { mutate: mutateUploadFile } = uploadFile({
+  onSuccess: (data: string) => {
+    formData.value.iconUrl = data;
+    removeIconFile();
+    toast.success('Icon added');
   },
-  '500'
-);
+});
 
 onMounted(() => {
   if (props.category) formData.value = clone(props.category);

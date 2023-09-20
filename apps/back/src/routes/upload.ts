@@ -9,7 +9,9 @@ export default async function (fastify: IFastifyInstance) {
     API_UPLOAD_MULTIPLE,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
-      const filesToUpload = await uploadService.uploadMultiple(request.files, request.query.width, request.query.thumb);
+      const files = request.files();
+
+      const filesToUpload = await uploadService.uploadMultiple(files, request.query.width, request.query.thumb);
 
       reply.code(200).send(filesToUpload);
     }
@@ -19,8 +21,10 @@ export default async function (fastify: IFastifyInstance) {
     API_UPLOAD_SINGLE,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {
+      const file = await request.file();
+
       const { filename, isFileExists } = await uploadService.uploadSingle(
-        request.file,
+        file,
         request.query.width,
         request.query.thumb
       );
@@ -33,7 +37,7 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: IBaseParams; Querystring: { thumb: boolean }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Querystring: { thumb: string }; Reply: { 200: IBaseReply } }>(
     `${API_UPLOAD}/:id`,
     { preValidation: [fastify.onlyManager] },
     async function (request, reply) {

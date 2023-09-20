@@ -66,7 +66,6 @@ const sortedCategories = computed(() => {
 .categories {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 8px;
   align-items: flex-start;
   width: 100%;
 }

@@ -1,14 +1,12 @@
 <template>
   <div :class="$style.category">
-    <div :class="$style.imageBlock">
-      <img
-        :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
-        :alt="props.category.title"
-        :class="$style.image"
-        width="96"
-        crossorigin="anonymous"
-      />
-    </div>
+    <img
+      :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
+      :alt="props.category.title"
+      height="80"
+      width="80"
+      crossorigin="anonymous"
+    />
 
     <div v-html="props.category.description"></div>
   </div>
@@ -30,18 +28,5 @@ const props = defineProps<IProps>();
 .category {
   display: flex;
   gap: 32px;
-}
-
-.imageBlock {
-  display: flex;
-  flex-shrink: 0;
-  max-width: 240px;
-  height: 96px;
-}
-
-.image {
-  width: fit-content;
-  height: fit-content;
-  max-height: 96px;
 }
 </style>
