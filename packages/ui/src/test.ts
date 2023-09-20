@@ -7,7 +7,10 @@ export function wrapperFactory(
 ) {
   return shallowMount(component, {
     global: {
-      stubs: { ...stubs },
+      stubs: {
+        RouterLink: { template: '<a><slot></slot></a>' },
+        ...stubs,
+      },
       mocks,
     },
     props,

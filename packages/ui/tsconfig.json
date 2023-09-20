@@ -11,7 +11,7 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vite/client", "vite-svg-loader", "vitest"],
+    "types": ["vite/client", "vite-svg-loader", "vitest", "vitest/globals"],
     "baseUrl": "./",
     "paths": { "@/*": ["src/*"] }
   },

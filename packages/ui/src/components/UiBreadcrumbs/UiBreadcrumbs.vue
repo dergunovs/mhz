@@ -7,24 +7,32 @@
       itemprop="itemListElement"
       itemscope
       itemtype="https://schema.org/ListItem"
+      data-test="ui-breadcrumb"
     >
       <component
         :is="index === props.links.length - 1 ? 'div' : linkComponent"
         :to="link.url"
         :class="$style.link"
         :data-link="index !== props.links.length - 1"
-        :data-white="props.color === 'white'"
+        :data-color="props.color"
         :itemid="link.url"
         itemtype="https://schema.org/Thing"
         itemscope
         itemprop="item"
+        data-test="ui-breadcrumb-link"
       >
-        <span itemprop="name">{{ link.title }}</span>
+        <span itemprop="name" data-test="ui-breadcrumb-title">{{ link.title }}</span>
       </component>
 
-      <span v-if="index !== props.links.length - 1" :class="$style.slash" :data-white="props.color === 'white'">/</span>
+      <span
+        v-if="index !== props.links.length - 1"
+        :class="$style.slash"
+        :data-color="props.color"
+        data-test="ui-breadcrumb-slash"
+        >/</span
+      >
 
-      <meta itemprop="position" :content="(index + 1).toString()" />
+      <meta itemprop="position" :content="(index + 1).toString()" data-test="ui-breadcrumb-position" />
     </div>
   </div>
 </template>
@@ -32,6 +40,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+
+import { DEFAULT_COLOR } from './constants';
 
 interface ILink {
   url: string;
@@ -44,7 +54,7 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  color: 'default',
+  color: DEFAULT_COLOR,
 });
 
 declare const window: Window & typeof globalThis & { IS_STORYBOOK: boolean };
@@ -76,7 +86,7 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
     }
   }
 
-  &[data-white='true'] {
+  &[data-color='white'] {
     color: var(--color-white);
 
     &:hover {
@@ -88,7 +98,7 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
 .slash {
   color: var(--color-gray-dark);
 
-  &[data-white='true'] {
+  &[data-color='white'] {
     color: var(--color-white);
   }
 }
