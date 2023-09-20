@@ -3,7 +3,7 @@
     :headers="tableHeaders"
     :isLoading="!props.manufacturers?.length"
     :modelValue="props.modelValue"
-    @update:modelValue="(value) => emit('update:modelValue', value)"
+    @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
     @reset="(value: string) => emit('reset', value)"
   >
     <template v-if="props.manufacturers?.length">

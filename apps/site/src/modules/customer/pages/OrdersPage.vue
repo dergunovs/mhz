@@ -6,7 +6,7 @@
       v-show="orders?.length"
       :page="query.page"
       :total="total"
-      @update="(value) => setQueryPage(setPage(value, query.page))"
+      @update="(value: number) => setQueryPage(setPage(value, query.page))"
     />
   </div>
 </template>

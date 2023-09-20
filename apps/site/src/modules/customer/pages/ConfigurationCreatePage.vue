@@ -30,7 +30,7 @@
             v-show="products?.length"
             v-model="query.sort"
             :page="query.page"
-            @reset="(value) => resetQuery(value)"
+            @reset="(value: string) => resetQuery(value)"
           />
 
           <ProductCatalogList v-if="products?.length" :products="products" isConfiguration @choice="handleChoice" />
@@ -39,7 +39,7 @@
             v-show="products?.length"
             :page="query.page"
             :total="total"
-            @update="(value) => setQueryPage(setPage(value, query.page))"
+            @update="(value: number) => setQueryPage(setPage(value, query.page))"
           />
         </div>
       </div>

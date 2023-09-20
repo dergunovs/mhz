@@ -5,13 +5,17 @@
     <div :class="$style.page">
       <RouterLink :to="URL_MANUFACTURER_CREATE">Add manufacturer</RouterLink>
 
-      <ManufacturerList :manufacturers="manufacturers" v-model="query.sort" @reset="(value) => resetQuery(value)" />
+      <ManufacturerList
+        :manufacturers="manufacturers"
+        v-model="query.sort"
+        @reset="(value: ISortOption) => resetQuery(value)"
+      />
 
       <UiPagination
         v-show="manufacturers?.length"
         :page="query.page"
         :total="total"
-        @update="(value) => setQueryPage(setPage(value, query.page))"
+        @update="(value: number) => setQueryPage(setPage(value, query.page))"
       />
     </div>
   </div>
@@ -21,7 +25,7 @@
 import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
-import { usePagination, usePage } from 'mhz-helpers';
+import { usePagination, usePage, ISortOption } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';

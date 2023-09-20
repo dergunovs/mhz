@@ -1,6 +1,12 @@
 <template>
-  <button :class="$style.button" :data-layout="props.layout" :type="props.type" :disabled="props.isDisabled">
-    <component v-if="props.icon" :is="props.icon" />
+  <button
+    :class="$style.button"
+    :data-layout="props.layout"
+    :type="props.type"
+    :disabled="props.isDisabled"
+    data-test="ui-button"
+  >
+    <component v-if="props.icon" :is="props.icon" data-test="ui-button-icon" />
 
     <slot></slot>
   </button>
@@ -8,6 +14,8 @@
 
 <script setup lang="ts">
 import { FunctionalComponent } from 'vue';
+
+import { DEFAULT_LAYOUT, DEFAULT_TYPE, DEFAULT_ICON } from './constants';
 
 interface IProps {
   layout?: 'primary' | 'secondary' | 'plain';
@@ -17,9 +25,9 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  layout: 'primary',
-  type: 'button',
-  icon: undefined,
+  layout: DEFAULT_LAYOUT,
+  type: DEFAULT_TYPE,
+  icon: DEFAULT_ICON,
 });
 </script>
 

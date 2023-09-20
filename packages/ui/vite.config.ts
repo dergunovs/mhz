@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import fs from 'fs';
 import path from 'path';
 import { defineConfig } from 'vite';
@@ -44,6 +46,15 @@ export default defineConfig({
         additionalData: `@import "@/assets/styles/breakpoints.scss";`,
       },
     },
+  },
+
+  test: {
+    clearMocks: true,
+    environment: 'happy-dom',
+    include: ['**/*.spec.ts'],
+    coverage: { provider: 'v8', reporter: ['text'], include: ['src/**/Ui*.vue'], all: true },
+    testTimeout: 20000,
+    css: false,
   },
 
   plugins: [

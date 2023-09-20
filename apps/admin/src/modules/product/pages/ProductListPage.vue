@@ -5,13 +5,13 @@
     <div :class="$style.page">
       <RouterLink :to="URL_PRODUCT_CREATE">Add product</RouterLink>
 
-      <ProductList :products="products" v-model="query.sort" @reset="(value) => resetQuery(value)" />
+      <ProductList :products="products" v-model="query.sort" @reset="(value: ISortOption) => resetQuery(value)" />
 
       <UiPagination
         v-show="products?.length"
         :page="query.page"
         :total="total"
-        @update="(value) => setQueryPage(setPage(value, query.page))"
+        @update="(value: number) => setQueryPage(setPage(value, query.page))"
       />
     </div>
   </div>
@@ -21,7 +21,7 @@
 import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
-import { usePagination, usePage } from 'mhz-helpers';
+import { usePagination, usePage, ISortOption } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ProductList from '@/product/components/ProductList.vue';

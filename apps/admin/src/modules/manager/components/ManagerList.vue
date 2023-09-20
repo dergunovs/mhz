@@ -3,8 +3,8 @@
     :headers="tableHeaders"
     :isLoading="!props.managers?.length"
     :modelValue="props.modelValue"
-    @update:modelValue="(value) => emit('update:modelValue', value)"
-    @reset="(value) => emit('reset', value)"
+    @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
+    @reset="(value: string) => emit('reset', value)"
   >
     <template v-if="props.managers?.length">
       <tr v-for="manager in props.managers" :key="manager._id">

@@ -3,8 +3,8 @@
     :headers="tableHeaders"
     :isLoading="!props.customers?.length"
     :modelValue="props.modelValue"
-    @update:modelValue="(value) => emit('update:modelValue', value)"
-    @reset="(value) => emit('reset', value)"
+    @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
+    @reset="(value: string) => emit('reset', value)"
   >
     <template v-if="props.customers?.length">
       <tr v-for="customer in props.customers" :key="customer._id">
