@@ -1,15 +1,32 @@
 <template>
-  <div v-if="props.modelValue" @mousedown="emit('update:modelValue', false)" :class="$style.container">
-    <div @mousedown.stop :class="$style.modal">
+  <div
+    v-if="props.modelValue"
+    @mousedown="emit('update:modelValue', false)"
+    :class="$style.container"
+    data-test="ui-modal-container"
+  >
+    <div @mousedown.stop :class="$style.modal" data-test="ui-modal">
       <div :class="$style.header">
-        <button @click="emit('update:modelValue', false)" :class="$style.close" type="button">×</button>
+        <button
+          @click="emit('update:modelValue', false)"
+          :class="$style.close"
+          type="button"
+          data-test="ui-modal-close"
+        >
+          ×
+        </button>
       </div>
 
-      <slot></slot>
+      <div data-test="ui-modal-slot">
+        <slot></slot>
+      </div>
 
       <div v-if="props.isConfirm" :class="$style.buttons">
-        <UiButton @click="handleConfirm">Confirm</UiButton>
-        <UiButton layout="secondary" @click="emit('update:modelValue', false)">Cancel</UiButton>
+        <UiButton @click="handleConfirm" data-test="ui-modal-confirm">Confirm</UiButton>
+
+        <UiButton layout="secondary" @click="emit('update:modelValue', false)" data-test="ui-modal-cancel">
+          Cancel
+        </UiButton>
       </div>
     </div>
   </div>

@@ -1,14 +1,16 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { useArgs } from '@storybook/preview-api';
-import { html } from '@/utils';
 
+import { MODEL_VALUE, IS_CONFIRM } from './constants';
+
+import { html } from '@/utils';
 import { UiModal, UiButton } from '@/components';
 
 const meta = {
   component: UiModal,
   args: {
-    modelValue: false,
-    isConfirm: false,
+    modelValue: MODEL_VALUE,
+    isConfirm: IS_CONFIRM,
   },
   parameters: {
     docs: {
