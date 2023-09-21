@@ -91,7 +91,7 @@ export async function paginate<T>(Entity: Model<T>, options?: IQuery) {
 }
 
 export async function getProductFilters(options?: IQuery, isInitial?: boolean): Promise<IFilterData | undefined> {
-  if (!options || !isInitial) return;
+  if (!options) return;
 
   const categoryFilter = options.category ? createFilterBase(options.category, 'category') : {};
   const manufacturerFilter = options.manufacturer ? createFilterBase(options.manufacturer, 'manufacturer') : {};
