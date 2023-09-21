@@ -1,12 +1,19 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.actions">
-      <button v-for="action in actions" :key="action._id" @click="action.method()" :class="$style.action" type="button">
+      <button
+        v-for="action in actions"
+        :key="action._id"
+        @click="action.method()"
+        :class="$style.action"
+        type="button"
+        data-test="ui-editor-button"
+      >
         {{ action.name }}
       </button>
     </div>
 
-    <EditorContent :editor="editor" :class="$style.editor" />
+    <EditorContent :editor="editor" :class="$style.editor" data-test="ui-editor" />
   </div>
 </template>
 
@@ -22,6 +29,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['update:modelValue']);
+
 const content = computed(() => props.modelValue);
 
 const editor = useEditor({
