@@ -5,6 +5,7 @@
     :class="$style.inputBlock"
     :data-mode="props.mode"
     :tabindex="props.mode === 'default' ? '-1' : '0'"
+    data-test="ui-input-block"
   >
     <input
       :value="props.modelValue"
@@ -17,6 +18,7 @@
       :data-center="props.isCenter"
       :data-append-icon="!!props.appendIcon || props.isCopy"
       :tabindex="props.mode === 'default' ? '0' : '-1'"
+      data-test="ui-input"
     />
 
     <component
@@ -24,6 +26,8 @@
       :is="props.isCopy ? IconCopy : props.appendIcon"
       @click="handleIconClick"
       :class="$style.icon"
+      :data-copy="props.isCopy"
+      data-test="ui-input-icon"
     />
   </div>
 </template>

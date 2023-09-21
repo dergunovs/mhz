@@ -1,12 +1,14 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { html } from '@/utils';
 
+import { MODEL_VALUE } from './constants';
+
+import { html } from '@/utils';
 import { UiInput } from '@/components';
 
 const meta = {
   component: UiInput,
   args: {
-    modelValue: 'Text',
+    modelValue: MODEL_VALUE,
   },
   parameters: {
     docs: {
