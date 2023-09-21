@@ -1,16 +1,44 @@
 <template>
   <div :class="$style.pagination">
-    <button @click="handleUpdate(1)" :disabled="page === 1" :class="$style.button" type="button">&lt;&lt;</button>
-    <button @click="handleUpdate(props.page - 1)" :disabled="page === 1" :class="$style.button" type="button">
+    <button
+      @click="handleUpdate(1)"
+      :disabled="page === 1"
+      :class="$style.button"
+      type="button"
+      data-test="ui-pagination-first"
+    >
+      &lt;&lt;
+    </button>
+
+    <button
+      @click="handleUpdate(props.page - 1)"
+      :disabled="page === 1"
+      :class="$style.button"
+      type="button"
+      data-test="ui-pagination-prev"
+    >
       &lt;
     </button>
 
-    <div :class="$style.text">{{ page }} of {{ total }}</div>
+    <div :class="$style.text" data-test="ui-pagination">{{ page }} of {{ total }}</div>
 
-    <button @click="handleUpdate(props.page + 1)" :disabled="page === total" :class="$style.button" type="button">
+    <button
+      @click="handleUpdate(props.page + 1)"
+      :disabled="page === total"
+      :class="$style.button"
+      type="button"
+      data-test="ui-pagination-next"
+    >
       >
     </button>
-    <button @click="handleUpdate(props.total)" :disabled="page === total" :class="$style.button" type="button">
+
+    <button
+      @click="handleUpdate(props.total)"
+      :disabled="page === total"
+      :class="$style.button"
+      type="button"
+      data-test="ui-pagination-last"
+    >
       >>
     </button>
   </div>

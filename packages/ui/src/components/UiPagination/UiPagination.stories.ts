@@ -1,13 +1,15 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { html } from '@/utils';
 
+import { PAGE, TOTAL } from './constants';
+
+import { html } from '@/utils';
 import { UiPagination } from '@/components';
 
 const meta = {
   component: UiPagination,
   args: {
-    page: 1,
-    total: 20,
+    page: PAGE,
+    total: TOTAL,
   },
   parameters: {
     docs: {
