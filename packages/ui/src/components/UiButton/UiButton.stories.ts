@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { html } from '@/utils';
 
+import { DEFAULT_SLOT } from './constants';
+
+import { html } from '@/utils';
 import { UiButton } from '@/components';
 
 const meta = {
@@ -35,9 +37,9 @@ export default meta;
 export const Primary: Story = {
   render: (args, { argTypes }) => ({
     components: { UiButton },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args, argTypes, DEFAULT_SLOT }),
 
-    template: html` <UiButton v-bind="args">Button text</UiButton>`,
+    template: html` <UiButton v-bind="args">{{DEFAULT_SLOT}}</UiButton>`,
   }),
   argTypes,
 };

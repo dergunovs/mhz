@@ -24,7 +24,7 @@
             :modelValue="choosenCategories.some((choosen) => choosen._id === category._id)"
             @update:modelValue="updateCategories(category, $event)"
             :label="`${category.title}`"
-            :subLabel="` (${category.count})`"
+            :labelSub="` (${category.count})`"
             :isDisabled="category.count === 0"
           />
         </div>
@@ -41,7 +41,7 @@
               :modelValue="choosenManufacturers.some((choosen) => choosen._id === manufacturer._id)"
               @update:modelValue="updateManufacturers(manufacturer, $event)"
               :label="`${manufacturer.title}`"
-              :subLabel="` (${manufacturer.count})`"
+              :labelSub="` (${manufacturer.count})`"
               :isDisabled="manufacturer.count === 0"
             />
           </div>
@@ -60,7 +60,7 @@
                 "
                 @update:modelValue="updateFields(key.toString(), value.value.toString(), $event)"
                 :label="convertBooleanValue(value.value)"
-                :subLabel="` (${value.count})`"
+                :labelSub="` (${value.count})`"
                 :isDisabled="value.count === 0"
               />
             </div>

@@ -1,11 +1,11 @@
 <template>
-  <label @click.stop :data-disabled="props.isDisabled" :class="$style.checkbox">
-    <span v-if="props.error" :class="$style.required">{{ props.error }}</span>
+  <label @click.stop :data-disabled="props.isDisabled" :class="$style.checkbox" data-test="ui-checkbox">
+    <span v-if="props.error" :class="$style.required" data-test="ui-checkbox-error">{{ props.error }}</span>
 
     <span v-if="props.label">
-      <span>{{ props.label }}</span>
-      <span v-if="props.subLabel" :class="$style.subLabel">{{ props.subLabel }}</span>
-      <span v-if="props.isRequired" :class="$style.required">*</span>
+      <span data-test="ui-checkbox-label">{{ props.label }}</span>
+      <span v-if="props.labelSub" :class="$style.labelSub" data-test="ui-checkbox-label-sub">{{ props.labelSub }}</span>
+      <span v-if="props.isRequired" :class="$style.required" data-test="ui-checkbox-required">*</span>
     </span>
 
     <input
@@ -17,28 +17,32 @@
       :disabled="props.isDisabled"
       :class="$style.input"
       tabindex="-1"
+      data-test="ui-checkbox-input"
     />
 
     <div
       @keydown.space="checkbox?.click()"
       :data-switcher="props.isSwitcher"
       :data-disabled="props.isDisabled"
-      :data-error="props.error"
+      :data-error="!!props.error"
       :class="$style.fake"
       tabindex="0"
+      data-test="ui-checkbox-fake"
     >
-      <div v-if="!props.isSwitcher" :class="[$style.line, $style.leftLine]"></div>
-      <div v-if="!props.isSwitcher" :class="[$style.line, $style.rightLine]"></div>
+      <div v-if="!props.isSwitcher" :class="[$style.line, $style.leftLine]" data-test="ui-checkbox-line"></div>
+      <div v-if="!props.isSwitcher" :class="[$style.line, $style.rightLine]" data-test="ui-checkbox-line"></div>
     </div>
 
     <span v-if="props.labelSwitcher">
-      {{ props.labelSwitcher }}<span v-if="props.isRequired" :class="$style.required">*</span>
+      <span data-test="ui-checkbox-label-switcher">{{ props.labelSwitcher }}</span>
+      <span v-if="props.isRequired" :class="$style.required" data-test="ui-checkbox-required-switcher">*</span>
     </span>
   </label>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { DEFAULT_LABEL, DEFAULT_MODEL_VALUE } from './constants';
 
 type InitialValue = boolean | string | number;
 
@@ -46,7 +50,7 @@ interface IProps {
   initialValue?: InitialValue;
   modelValue?: InitialValue;
   label?: string;
-  subLabel?: string;
+  labelSub?: string;
   labelSwitcher?: string;
   error?: string | boolean;
   isRequired?: boolean;
@@ -55,11 +59,11 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  modelValue: false,
-  initialValue: false,
-  label: '',
-  subLabel: '',
-  labelSwitcher: '',
+  modelValue: DEFAULT_MODEL_VALUE,
+  initialValue: DEFAULT_MODEL_VALUE,
+  label: DEFAULT_LABEL,
+  labelSub: DEFAULT_LABEL,
+  labelSwitcher: DEFAULT_LABEL,
   error: false,
 });
 
@@ -226,7 +230,7 @@ function handleChange() {
   }
 }
 
-.subLabel {
+.labelSub {
   font-size: 0.875rem;
   color: var(--color-gray-dark-extra);
 }

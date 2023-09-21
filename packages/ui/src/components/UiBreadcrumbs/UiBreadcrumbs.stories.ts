@@ -1,16 +1,14 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { html } from '@/utils';
 
+import { LINKS } from './constants';
+
+import { html } from '@/utils';
 import { UiBreadcrumbs } from '@/components';
 
 const meta = {
   component: UiBreadcrumbs,
   args: {
-    links: [
-      { url: '/', title: 'Main' },
-      { url: '/category', title: 'Category' },
-      { url: '/cpu', title: 'CPU' },
-    ],
+    links: LINKS,
   },
   parameters: {
     docs: {
