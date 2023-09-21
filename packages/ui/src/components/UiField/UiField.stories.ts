@@ -1,13 +1,15 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { html } from '@/utils';
 
+import { ERROR, LABEL } from './constants';
+
+import { html } from '@/utils';
 import { UiField, UiInput } from '@/components';
 
 const meta = {
   component: UiField,
   args: {
-    label: 'Label',
-    error: 'Error',
+    label: LABEL,
+    error: ERROR,
     isRequired: true,
   },
   parameters: {

@@ -1,10 +1,15 @@
 <template>
   <div :class="$style.field">
-    <label>{{ props.label }}<span v-if="props.isRequired" :class="$style.error">*</span></label>
+    <label>
+      <span data-test="ui-field-label">{{ props.label }}</span>
+      <span v-if="props.isRequired" :class="$style.error" data-test="ui-field-required">*</span>
+    </label>
 
-    <slot></slot>
+    <div data-test="ui-field">
+      <slot></slot>
+    </div>
 
-    <div v-show="!!props.error" :class="$style.error">{{ props.error }}</div>
+    <div v-if="!!props.error" :class="$style.error" data-test="ui-field-error">{{ props.error }}</div>
   </div>
 </template>
 
