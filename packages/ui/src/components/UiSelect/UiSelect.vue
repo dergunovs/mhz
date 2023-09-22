@@ -6,13 +6,14 @@
       mode="select"
       placeholder="Choose variant"
       :appendIcon="isShowOptions ? IconOpened : IconClosed"
+      data-test="ui-select-input"
     />
 
     <div v-if="props.isFilter && isShowOptions" :class="$style.filter">
-      <UiInput v-model="filterQuery" placeholder="Filter Variants" isFocus />
+      <UiInput v-model="filterQuery" placeholder="Filter Variants" isFocus data-test="ui-select-input-filter" />
     </div>
 
-    <div v-if="isShowOptions" :class="$style.options" ref="optionsElement">
+    <div v-if="isShowOptions" :class="$style.options" ref="optionsElement" data-test="ui-select-options">
       <div v-if="optionsComputed.length" ref="optionsInnerElement">
         <div
           v-for="(option, index) in optionsComputed"
@@ -32,12 +33,15 @@
               ? props.modelValue === option._id
               : props.modelValue?._id === option._id
           "
+          data-test="ui-select-option"
         >
           {{ option.title }}
         </div>
       </div>
 
-      <div v-else @click="hideOptions" :class="$style.option" tabindex="0">No results</div>
+      <div v-else @click="hideOptions" :class="$style.option" tabindex="0" data-test="ui-select-no-results">
+        No results
+      </div>
     </div>
   </div>
 </template>

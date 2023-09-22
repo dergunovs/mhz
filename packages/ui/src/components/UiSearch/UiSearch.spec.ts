@@ -72,12 +72,12 @@ describe('UiSearch', async () => {
     const newValue = 'test';
     const inputComponent = wrapper.findComponent(search) as VueWrapper;
 
-    inputComponent.vm.$emit('update:modelValue', newValue);
+    await inputComponent.vm.$emit('update:modelValue', newValue);
 
     expect(wrapper.emitted()).not.toHaveProperty('update:modelValue');
 
     await new Promise((r) => {
-      setTimeout(r, DEBOUNCE_TIME * 2);
+      setTimeout(r, DEBOUNCE_TIME + 10);
     });
 
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
