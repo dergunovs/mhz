@@ -1,15 +1,17 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { useArgs } from '@storybook/preview-api';
-import { html } from '@/utils';
 
+import { MODEL_VALUE, MIN, MAX } from './constants';
+
+import { html } from '@/utils';
 import { UiRange } from '@/components';
 
 const meta = {
   component: UiRange,
   args: {
-    modelValue: [100, 600],
-    min: 10,
-    max: 1000,
+    modelValue: MODEL_VALUE,
+    min: MIN,
+    max: MAX,
   },
   parameters: {
     docs: {

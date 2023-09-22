@@ -1,22 +1,18 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { useArgs } from '@storybook/preview-api';
-import { html } from '@/utils';
 
+import { MODEL_VALUE, IS_SUCCESS, RESULTS, SEARCH_SCHEME } from './constants';
+
+import { html } from '@/utils';
 import { UiSearch } from '@/components';
 
 const meta = {
   component: UiSearch,
   args: {
-    modelValue: '',
-    isSuccess: true,
-    results: {
-      products: [{ _id: '1', title: 'AMD Ryzen 7700X' }],
-      manufacturers: [{ _id: '1', title: 'AMD' }],
-    },
-    searchScheme: [
-      { type: 'products', labels: ['title'], url: '/' },
-      { type: 'manufacturers', labels: ['title'], url: '/' },
-    ],
+    modelValue: MODEL_VALUE,
+    isSuccess: IS_SUCCESS,
+    results: RESULTS,
+    searchScheme: SEARCH_SCHEME,
   },
   parameters: {
     docs: {

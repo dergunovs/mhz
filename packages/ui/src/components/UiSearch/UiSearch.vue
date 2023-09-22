@@ -3,21 +3,27 @@
     <UiInput
       :modelValue="props.modelValue"
       @update:modelValue="updateValue"
+      @click="showResults"
+      @keyup.esc="hideResults"
       :appendIcon="IconSearch"
       placeholder="Search"
-      @click="isShowResults = true"
-      @keyup.esc="hideResults"
+      data-test="ui-search"
     />
 
-    <div v-if="isShowResults && props.modelValue.length" :class="$style.results">
-      <template v-if="props.modelValue.length < 3">Please enter 3 or more symbols</template>
-      <template v-if="props.modelValue.length > 2 && !props.isSuccess">Loading...</template>
-      <template v-if="props.modelValue.length > 2 && !isResults && props.isSuccess">No results</template>
+    <div v-if="isShowResults && props.modelValue.length" :class="$style.results" data-test="ui-search-results">
+      <template v-if="props.modelValue.length < 3">{{ ENTER_MORE_SYMBOLS }}</template>
+      <template v-if="props.modelValue.length > 2 && !props.isSuccess">{{ LOADING }}</template>
+      <template v-if="props.modelValue.length > 2 && !isResults && props.isSuccess">{{ NO_RESULTS }}</template>
 
-      <template v-if="props.modelValue.length > 2 && isResults">
-        <div v-for="result in props.searchScheme" :key="result.type" :class="$style.resultsInner">
+      <template v-if="props.modelValue.length > 2 && isResults && props.isSuccess">
+        <div
+          v-for="result in props.searchScheme"
+          :key="result.type"
+          :class="$style.resultsInner"
+          data-test="ui-search-result"
+        >
           <template v-if="results?.[result.type]?.length">
-            <div :class="$style.type">{{ result.type }}:</div>
+            <div :class="$style.type" data-test="ui-search-result-type">{{ result.type }}:</div>
 
             <component
               :is="linkComponent"
@@ -26,8 +32,9 @@
               :to="`${result.url}/${item._id}`"
               @click="clearSearch"
               :class="$style.link"
+              data-test="ui-search-result-link"
             >
-              <span v-for="label in result.labels" :key="label">
+              <span v-for="label in result.labels" :key="label" data-test="ui-search-result-label">
                 {{ item[label as keyof object] }}
               </span>
             </component>
@@ -47,17 +54,22 @@ import { debounce } from 'perfect-debounce';
 
 import UiInput from '../UiInput/UiInput.vue';
 import IconSearch from './icons/search.svg?component';
+import { DEBOUNCE_TIME, ENTER_MORE_SYMBOLS, LOADING, NO_RESULTS } from './constants';
+
+interface ISearchScheme {
+  type: string;
+  labels: string[];
+  url: string;
+}
+
+interface ISearchResult {
+  [key: string]: { _id?: string }[] | { [key: string]: string }[] | undefined;
+}
 
 interface IProps {
   modelValue: string;
-  searchScheme: {
-    type: string;
-    labels: string[];
-    url: string;
-  }[];
-  results?: {
-    [key: string]: { _id?: string }[] | { [key: string]: string }[] | undefined;
-  };
+  searchScheme: ISearchScheme[];
+  results?: ISearchResult;
   isSuccess: boolean;
 }
 
@@ -69,10 +81,14 @@ const isShowResults = ref(false);
 
 const debounced = debounce(async (value: string) => {
   emit('update:modelValue', value);
-}, 300);
+}, DEBOUNCE_TIME);
 
 async function updateValue(value: string) {
   await debounced(value);
+}
+
+function showResults() {
+  isShowResults.value = true;
 }
 
 function hideResults() {

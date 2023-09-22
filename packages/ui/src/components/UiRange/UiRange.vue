@@ -6,6 +6,7 @@
       :min="props.min"
       :max="props.max"
       tooltipPosition="bottom"
+      data-test="ui-range"
     />
   </div>
 </template>
