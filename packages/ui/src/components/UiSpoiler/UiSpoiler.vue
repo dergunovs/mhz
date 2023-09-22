@@ -1,13 +1,18 @@
 <template>
   <div :class="$style.container">
-    <button @click="emit('update:modelValue', !props.modelValue)" :class="$style.titleBlock" type="button">
+    <button
+      @click="emit('update:modelValue', !props.modelValue)"
+      :class="$style.titleBlock"
+      type="button"
+      data-test="ui-spoiler-button"
+    >
       <div :class="$style.title">
         <IconArrow :data-expanded="props.modelValue" :class="$style.icon" width="16" height="16" />
-        <span :class="$style.titleText">{{ props.title }}</span>
+        <span :class="$style.titleText" data-test="ui-spoiler-button-title">{{ props.title }}</span>
       </div>
     </button>
 
-    <div v-show="props.modelValue" :class="$style.spoiler">
+    <div v-show="props.modelValue" :class="$style.spoiler" data-test="ui-spoiler">
       <slot></slot>
     </div>
   </div>

@@ -1,14 +1,16 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { useArgs } from '@storybook/preview-api';
-import { html } from '@/utils';
 
+import { TITLE, MODEL_VALUE } from './constants';
+
+import { html } from '@/utils';
 import { UiSpoiler } from '@/components';
 
 const meta = {
   component: UiSpoiler,
   args: {
-    title: 'Spoiler',
-    modelValue: false,
+    title: TITLE,
+    modelValue: MODEL_VALUE,
   },
   parameters: {
     docs: {

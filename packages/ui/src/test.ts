@@ -1,6 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import { Component } from 'vue';
 
+document.body.innerHTML = '<div id="app"></div>';
+
 export function wrapperFactory(
   component: Component,
   { mocks, props, slots, stubs }: { mocks?: object; props?: object; slots?: object; stubs?: object }
@@ -15,5 +17,6 @@ export function wrapperFactory(
     },
     props,
     slots,
+    attachTo: document.getElementById('app') as HTMLElement,
   });
 }
