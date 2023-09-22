@@ -8,12 +8,13 @@
         type="button"
         :class="$style.thumb"
         :data-active="currentSlide === index"
+        data-test="ui-slider-thumb"
       >
         <img
           :src="props.path ? `${props.path}${thumb}` : thumb"
           width="64"
           height="64"
-          :alt="`Thumb-${index}`"
+          :alt="`thumb-${index}`"
           crossorigin="anonymous"
         />
       </button>
@@ -22,8 +23,10 @@
     <div :class="$style.slide">
       <img
         :src="props.path ? `${props.path}${props.slides[currentSlide]}` : props.slides[currentSlide]"
-        :alt="`Slide-${currentSlide}`"
+        :alt="`slide-${currentSlide}`"
         crossorigin="anonymous"
+        :data-slide="currentSlide"
+        data-test="ui-slider-slide"
       />
     </div>
   </div>
