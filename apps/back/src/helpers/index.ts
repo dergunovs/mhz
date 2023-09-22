@@ -2,9 +2,18 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 import qs from 'qs';
-import { Model, Schema, Types } from 'mongoose';
+import { Model, Schema, Types, Document } from 'mongoose';
 
-import type { IFilterField, IFilterData, IFilterFieldValue, IQuery, IUserToken } from 'mhz-contracts';
+import type {
+  IFilterField,
+  IFilterData,
+  IFilterFieldValue,
+  IQuery,
+  IUserToken,
+  ICategory,
+  IProduct,
+  IManufacturer,
+} from 'mhz-contracts';
 
 import Customer from '../models/customer.js';
 import Product from '../models/product.js';
@@ -209,6 +218,18 @@ export function decodeToken(decode?: (token: string) => IUserToken | null, autho
   const token = authorizationHeader ? authorizationHeader.split('Bearer ')[1] : undefined;
 
   return token && decode ? decode(token) : null;
+}
+
+export async function addView(
+  entity:
+    | (Document<unknown, object, IProduct | ICategory | IManufacturer> & (IProduct | ICategory | IManufacturer))
+    | null
+) {
+  if (!entity) return;
+
+  entity.views = entity.views ? entity.views + 1 : 1;
+
+  await entity.save();
 }
 
 export function deleteFile(filename?: string) {

@@ -8,6 +8,9 @@
           </RouterLink>
         </td>
         <td data-no-wrap>
+          {{ category.views }}
+        </td>
+        <td data-no-wrap>
           {{ formatDate(category.dateCreated) }}
         </td>
         <td data-no-wrap>
@@ -31,5 +34,5 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const tableHeaders = [{ title: 'Category' }, { title: 'Created' }, { title: 'Updated' }];
+const tableHeaders = [{ title: 'Category' }, { title: 'Views' }, { title: 'Created' }, { title: 'Updated' }];
 </script>

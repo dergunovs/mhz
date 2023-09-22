@@ -1,8 +1,8 @@
-import type { IBaseService, IManufacturer, IQuery } from 'mhz-contracts';
+import type { IBaseService, IQuery } from 'mhz-contracts';
 
 import Manufacturer from '../models/manufacturer.js';
 
-import { paginate, deleteFile } from '../helpers/index.js';
+import { paginate, deleteFile, addView } from '../helpers/index.js';
 
 export const manufacturerService: IBaseService = {
   getMany: async <T>(query?: IQuery) => {
@@ -12,7 +12,9 @@ export const manufacturerService: IBaseService = {
   },
 
   getOne: async <T>(_id: string) => {
-    const manufacturer: IManufacturer | null = await Manufacturer.findOne({ _id }).lean().exec();
+    const manufacturer = await Manufacturer.findOne({ _id }).exec();
+
+    addView(manufacturer);
 
     return { data: manufacturer as T };
   },

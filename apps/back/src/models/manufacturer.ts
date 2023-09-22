@@ -8,6 +8,7 @@ const manufacturerSchema = new Schema<IManufacturer>(
     description: { type: String, required: true },
     logoUrl: { type: String, required: true },
     country: { type: String, required: true },
+    views: { type: Number },
     dateCreated: { type: Date, default: Date.now },
     dateUpdated: { type: Date },
   },

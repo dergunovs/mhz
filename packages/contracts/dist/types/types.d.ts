@@ -34,6 +34,7 @@ export interface ICategory extends IEntity {
   description?: string;
   iconUrl: string;
   fields?: ICategoryField[];
+  views?: number;
 }
 
 export interface IManufacturer extends IEntity {
@@ -41,6 +42,7 @@ export interface IManufacturer extends IEntity {
   description?: string;
   country: string;
   logoUrl: string;
+  views?: number;
 }
 
 export interface IProduct extends IEntity {

@@ -2,7 +2,7 @@ import type { ICategory, IBaseService } from 'mhz-contracts';
 
 import Category from '../models/category.js';
 
-import { deleteFile } from '../helpers/index.js';
+import { deleteFile, addView } from '../helpers/index.js';
 
 export const categoryService: IBaseService = {
   getMany: async <T>() => {
@@ -12,7 +12,9 @@ export const categoryService: IBaseService = {
   },
 
   getOne: async <T>(_id: string) => {
-    const category: ICategory | null = await Category.findOne({ _id }).lean().exec();
+    const category = await Category.findOne({ _id }).exec();
+
+    addView(category);
 
     return { data: category as T };
   },

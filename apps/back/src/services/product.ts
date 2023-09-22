@@ -3,7 +3,14 @@ import type { IProductService, IQuery, IUserToken, TInitiator } from 'mhz-contra
 
 import Product from '../models/product.js';
 
-import { decodeToken, paginate, getProductFilters, addProductToWatched, deleteFile } from '../helpers/index.js';
+import {
+  decodeToken,
+  paginate,
+  getProductFilters,
+  addProductToWatched,
+  deleteFile,
+  addView,
+} from '../helpers/index.js';
 
 export const productService: IProductService = {
   getMany: async <T>(query?: IQuery) => {
@@ -33,11 +40,9 @@ export const productService: IProductService = {
 
     if (user?._id && user?.role === 'customer' && product?._id) {
       addProductToWatched(user._id, product._id);
-
-      product.views = product.views ? product.views + 1 : 1;
-
-      await product.save();
     }
+
+    addView(product);
 
     return { data: product as T };
   },

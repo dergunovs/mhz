@@ -17,6 +17,7 @@ const categorySchema = new Schema<ICategory>(
         },
       ],
     },
+    views: { type: Number },
     dateCreated: { type: Date, default: Date.now },
     dateUpdated: { type: Date },
   },

@@ -17,6 +17,9 @@
           {{ manufacturer.country }}
         </td>
         <td data-no-wrap>
+          {{ manufacturer.views }}
+        </td>
+        <td data-no-wrap>
           {{ formatDate(manufacturer.dateCreated) }}
         </td>
         <td data-no-wrap>
@@ -45,6 +48,7 @@ const emit = defineEmits(['update:modelValue', 'reset']);
 const tableHeaders = [
   { value: 'title', title: 'Manufacturer' },
   { value: 'country', title: 'Country' },
+  { value: 'views', title: 'Views' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },
 ];
