@@ -2,45 +2,54 @@
   <div :class="$style.container">
     <div :class="$style.upload">
       <div v-if="props.label">
-        <span>{{ props.label }}</span>
-        <span v-if="props.isRequired" :class="$style.error">*</span>
+        <span data-test="ui-upload-label">{{ props.label }}</span>
+        <span v-if="props.isRequired" :class="$style.error" data-test="ui-upload-required">*</span>
       </div>
 
       <div :class="$style.addButton">
         <UiButton
-          :layout="props.layout"
+          @click="emulateFileClickInput"
+          layout="secondary"
           :isDisabled="
             props.isDisabled || (props.isSingle && props.files.length >= 1) || (props.isSingle && !!props.file)
           "
-          @click="emulateFileClickInput"
           :icon="IconUpload"
+          data-test="ui-upload-add"
         >
           Add file<template v-if="!props.isSingle">s</template>
         </UiButton>
 
-        <div :class="$style.text" :data-error="!!props.error">Size up to 10 Mb, {{ props.extensions.join(', ') }}.</div>
+        <div :class="$style.text" :data-error="!!props.error" data-test="ui-upload-text">
+          Size up to {{ FILE_SIZE_LIMIT / (1024 * 1024) }} Mb, {{ props.extensions.join(', ') }}.
+        </div>
       </div>
 
       <input
+        type="file"
+        @input="handleFileChange($event.target)"
         ref="input"
         :class="$style.input"
         :key="inputKey"
-        type="file"
         :accept="accept"
         :multiple="!props.isSingle"
-        @input="handleFileChange($event.target)"
+        data-test="ui-upload-input"
       />
 
       <template v-if="props.files?.length && !props.file">
-        <div v-for="(fileToUpload, index) in files" :key="`${fileToUpload}-${index}`" :class="$style.files">
-          <div :class="$style.name">{{ fileToUpload.name }}</div>
-          <UiButton @click="remove(fileToUpload)" layout="plain">Remove</UiButton>
+        <div
+          v-for="(fileToUpload, index) in files"
+          :key="`${fileToUpload}-${index}`"
+          :class="$style.file"
+          data-test="ui-upload-file"
+        >
+          <div :class="$style.name" data-test="ui-upload-file-name">{{ fileToUpload.name }}</div>
+          <UiButton @click="remove(fileToUpload)" layout="plain" data-test="ui-upload-file-remove">Remove</UiButton>
         </div>
       </template>
 
-      <div v-if="props.isSingle && props.file" :class="$style.files">
-        <div :class="$style.name">{{ props.file.name }}</div>
-        <UiButton @click="remove(props.file)" layout="plain">Remove</UiButton>
+      <div v-if="props.isSingle && props.file" :class="$style.file" data-test="ui-upload-file-single">
+        <div :class="$style.name" data-test="ui-upload-file-name-single">{{ props.file.name }}</div>
+        <UiButton @click="remove(props.file)" layout="plain" data-test="ui-upload-file-remove-single">Remove</UiButton>
       </div>
     </div>
 
@@ -49,7 +58,7 @@
       :class="$style.uploadButton"
       :data-label="!!props.label"
     >
-      <UiButton @click="emit('upload')">Upload</UiButton>
+      <UiButton @click="emit('upload')" data-test="ui-upload">Upload</UiButton>
     </div>
   </div>
 </template>
@@ -58,11 +67,10 @@
 import { ref, computed } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
-
+import { FILE_SIZE_LIMIT } from './constants';
 import IconUpload from './icons/upload.svg?component';
 
 interface IProps {
-  layout?: 'primary' | 'secondary';
   label?: string;
   file?: File;
   files?: File[] | never[];
@@ -74,7 +82,6 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  layout: 'secondary',
   label: undefined,
   error: undefined,
   file: undefined,
@@ -102,14 +109,14 @@ function handleFileChange(target: EventTarget | null) {
   if (props.isSingle) {
     const file = (target as HTMLInputElement).files?.[0];
 
-    if (file?.size && file.size < 10 * 1024 * 1024) emit('add', file);
+    if (file?.size && file.size < FILE_SIZE_LIMIT) emit('add', file);
   } else {
     const files = (target as HTMLInputElement).files;
 
     if (files === null) return;
 
     for (let index = 0; index < files.length; index++) {
-      if (files[index].size && files[index].size < 10 * 1024 * 1024) emit('add', files[index]);
+      if (files[index].size && files[index].size < FILE_SIZE_LIMIT) emit('add', files[index]);
     }
   }
 }
@@ -154,7 +161,7 @@ function handleFileChange(target: EventTarget | null) {
   text-overflow: ellipsis;
 }
 
-.files {
+.file {
   display: flex;
   gap: 8px;
   align-items: center;

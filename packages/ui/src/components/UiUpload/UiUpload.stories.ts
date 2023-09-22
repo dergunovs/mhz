@@ -1,7 +1,9 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { useArgs } from '@storybook/preview-api';
-import { html } from '@/utils';
 
+import { LABEL } from './constants';
+
+import { html } from '@/utils';
 import { UiUpload } from '@/components';
 
 let files: File[] = [];
@@ -10,7 +12,7 @@ let file;
 const meta = {
   component: UiUpload,
   args: {
-    label: 'Label',
+    label: LABEL,
     files,
     file,
   },
