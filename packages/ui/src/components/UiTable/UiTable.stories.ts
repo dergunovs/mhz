@@ -1,19 +1,16 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { useArgs } from '@storybook/preview-api';
-import { html } from '@/utils';
 
+import { HEADERS, MODEL_VALUE, DEFAULT_SLOT } from './constants';
+
+import { html } from '@/utils';
 import { UiTable } from '@/components';
 
 const meta = {
   component: UiTable,
   args: {
-    headers: [
-      { value: 'position', title: 'Position' },
-      { value: 'team', title: 'Team' },
-      { value: 'games', title: 'Games' },
-      { value: 'points', title: 'Points' },
-    ],
-    modelValue: { value: 'position', isAsc: true },
+    headers: HEADERS,
+    modelValue: MODEL_VALUE,
   },
   parameters: {
     docs: {
@@ -35,26 +32,18 @@ export default meta;
 export const Primary: Story = {
   render: (args, { argTypes, updateArgs }) => ({
     components: { UiTable },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, argTypes, updateArgs, DEFAULT_SLOT }),
 
     template: html` <UiTable v-bind="args" @update:modelValue="update">
       <tr>
         <td>1</td>
         <td>Frosinone</td>
-        <td>38</td>
-        <td>80</td>
+        <td>Frosinone.it</td>
       </tr>
       <tr>
         <td>2</td>
         <td>Genoa</td>
-        <td>38</td>
-        <td>73</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Bari</td>
-        <td>38</td>
-        <td>65</td>
+        <td>Genoa.it</td>
       </tr>
     </UiTable>`,
 
