@@ -4,10 +4,12 @@ import type { IBaseReply, IBaseParams } from 'mhz-contracts';
 import { uploadService } from '../services/upload.js';
 import { IFastifyInstance } from '../interface/index.js';
 
+const schema = { tags: ['Upload'] };
+
 export default async function (fastify: IFastifyInstance) {
   fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string[] } }>(
     API_UPLOAD_MULTIPLE,
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyManager], schema },
     async function (request, reply) {
       const files = request.files();
 
@@ -19,7 +21,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string; '5xx': IBaseReply } }>(
     API_UPLOAD_SINGLE,
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyManager], schema },
     async function (request, reply) {
       const file = await request.file();
 
@@ -39,7 +41,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: IBaseParams; Querystring: { thumb: string }; Reply: { 200: IBaseReply } }>(
     `${API_UPLOAD}/:id`,
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyManager], schema },
     async function (request, reply) {
       await uploadService.delete(request.params.id, request.query.thumb);
 

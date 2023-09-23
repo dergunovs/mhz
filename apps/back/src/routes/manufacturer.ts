@@ -4,9 +4,12 @@ import type { IQuery, IBaseReply, IManufacturer, IBaseParams } from 'mhz-contrac
 import { IFastifyInstance } from '../interface/index.js';
 import { manufacturerService } from '../services/manufacturer.js';
 
+const schema = { tags: ['Manufacturer'] };
+
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManufacturer[]; total?: number } } }>(
     API_MANUFACTURER,
+    { schema },
     async function (request, reply) {
       const { data, total } = await manufacturerService.getMany<IManufacturer>(request.query);
 
@@ -16,6 +19,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IManufacturer | null } } }>(
     `${API_MANUFACTURER}/:id`,
+    { schema },
     async function (request, reply) {
       const data = await manufacturerService.getOne<IManufacturer>(request.params.id);
 
@@ -25,7 +29,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: IManufacturer; Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_MANUFACTURER}/:id`,
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyManager], schema },
     async function (request, reply) {
       await manufacturerService.update<IManufacturer>(request.body, request.params.id);
 
@@ -35,7 +39,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: IManufacturer; Reply: { 201: IBaseReply } }>(
     API_MANUFACTURER,
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyManager], schema },
     async function (request, reply) {
       await manufacturerService.create<IManufacturer>(request.body);
 
@@ -45,7 +49,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_MANUFACTURER}/:id`,
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyManager], schema },
     async function (request, reply) {
       await manufacturerService.delete(request.params.id);
 

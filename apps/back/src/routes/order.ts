@@ -4,10 +4,12 @@ import type { IQuery, IBaseReply, IOrder, TOrderStatus, IBaseParams } from 'mhz-
 import { IFastifyInstance } from '../interface/index.js';
 import { orderService } from '../services/order.js';
 
+const schema = { tags: ['Order'] };
+
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IOrder[]; total?: number } } }>(
     API_ORDER,
-    { preValidation: [fastify.onlyLoggedIn] },
+    { preValidation: [fastify.onlyLoggedIn], schema },
     async function (request, reply) {
       const { data, total } = await orderService.getMany<IOrder>(
         request.query,
@@ -21,7 +23,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IOrder | null }; '4xx': IBaseReply } }>(
     `${API_ORDER}/:id`,
-    { preValidation: [fastify.onlyLoggedIn] },
+    { preValidation: [fastify.onlyLoggedIn], schema },
     async function (request, reply) {
       const { data, isOrderNotBelongToCustomer } = await orderService.getOne<IOrder>(
         request.params.id,
@@ -41,7 +43,7 @@ export default async function (fastify: IFastifyInstance) {
     Body: { status: TOrderStatus };
     Params: IBaseParams;
     Reply: { 200: IBaseReply; '4xx': IBaseReply; '5xx': IBaseReply };
-  }>(`${API_ORDER}/:id`, { preValidation: [fastify.onlyLoggedIn] }, async function (request, reply) {
+  }>(`${API_ORDER}/:id`, { preValidation: [fastify.onlyLoggedIn], schema }, async function (request, reply) {
     const isPaymentError = await orderService.update<IOrder>(
       undefined,
       request.params.id,
@@ -59,7 +61,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Reply: { 201: string; '4xx': IBaseReply } }>(
     API_ORDER,
-    { preValidation: [fastify.onlyCustomer] },
+    { preValidation: [fastify.onlyCustomer], schema },
     async function (request, reply) {
       const id = await orderService.create<IOrder>(undefined, fastify.jwt.decode, request.headers.authorization);
 
@@ -73,7 +75,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_ORDER}/:id`,
-    { preValidation: [fastify.onlyManager] },
+    { preValidation: [fastify.onlyManager], schema },
     async function (request, reply) {
       await orderService.delete(request.params.id);
 
