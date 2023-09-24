@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
+    "strictNullChecks": true,
     "baseUrl": "./",
     "rootDir": "src",
     "outDir": "build"

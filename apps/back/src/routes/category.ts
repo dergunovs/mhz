@@ -3,10 +3,15 @@ import type { IQuery, IBaseReply, ICategory, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
+import { categoryFieldTypeSchema, categoryFieldSchema, categorySchema } from '../schemas/category.js';
 
 const schema = { tags: ['Category'] };
 
 export default async function (fastify: IFastifyInstance) {
+  fastify.addSchema(categoryFieldTypeSchema);
+  fastify.addSchema(categoryFieldSchema);
+  fastify.addSchema(categorySchema);
+
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: ICategory[] } } }>(
     API_CATEGORY,
     { schema },

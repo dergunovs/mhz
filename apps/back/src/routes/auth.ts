@@ -3,10 +3,16 @@ import type { ILoginData, IUserToken, IBaseReply, ISignUpData } from 'mhz-contra
 
 import { IFastifyInstance } from '../interface/index.js';
 import { authService } from '../services/auth.js';
+import { userRoleSchema, userTokenSchema, loginDataSchema, signUpDataSchema } from '../schemas/auth.js';
 
 const schema = { tags: ['Auth'] };
 
 export default async function (fastify: IFastifyInstance) {
+  fastify.addSchema(userRoleSchema);
+  fastify.addSchema(userTokenSchema);
+  fastify.addSchema(loginDataSchema);
+  fastify.addSchema(signUpDataSchema);
+
   fastify.get<{ Reply: { 200: IBaseReply } }>(API_AUTH_CHECK, { schema }, async function (request, reply) {
     await authService.check(request);
 

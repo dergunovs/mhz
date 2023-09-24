@@ -1,7 +1,7 @@
 export interface IEntity {
   _id?: string;
-  dateCreated?: Date;
-  dateUpdated?: Date;
+  dateCreated?: Date | string;
+  dateUpdated?: Date | string;
 }
 
 export interface IManager extends IEntity {
@@ -9,7 +9,7 @@ export interface IManager extends IEntity {
   lastName?: string;
   password: string;
   email: string;
-  dateLoggedIn?: Date;
+  dateLoggedIn?: Date | string;
 }
 
 export interface ICustomer extends IManager {
@@ -61,7 +61,7 @@ export interface IProduct extends IEntity {
 export interface IProductWatched extends IEntity {
   _id: string;
   product: IProduct;
-  dateCreated: Date;
+  dateCreated: Date | string;
 }
 
 export interface ICartItem {
