@@ -13,6 +13,7 @@ import type {
   ICategory,
   IProduct,
   IManufacturer,
+  IQueryPopulated,
 } from 'mhz-contracts';
 
 import Customer from '../models/customer.js';
@@ -61,7 +62,7 @@ function createFilterFields(options?: IQuery) {
   };
 }
 
-export async function paginate<T>(Entity: Model<T>, options?: IQuery) {
+export async function paginate<T>(Entity: Model<T>, options?: IQueryPopulated) {
   const categoryFilter = options?.category ? createFilterBase(options?.category, 'category') : {};
   const manufacturerFilter = options?.manufacturer ? createFilterBase(options?.manufacturer, 'manufacturer') : {};
   const fieldsFilters = createFilterFields(options);

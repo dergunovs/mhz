@@ -125,8 +125,20 @@ export interface IFilterData {
   fields: IFilterField;
 }
 
+export interface ISearchResult {
+  _id: string;
+  title?: string;
+  firstName?: string;
+  lastName?: string;
+}
+
 export interface ISearchResults {
-  [key: string]: IEntity[] | undefined;
+  products: ISearchResult[];
+  categories: ISearchResult[];
+  manufacturers: ISearchResult[];
+  managers?: ISearchResult[];
+  customers?: ISearchResult[];
+  orders?: ISearchResult[];
 }
 
 export interface IEntitiesCount {
@@ -146,12 +158,6 @@ export interface IBaseParams {
   id: string;
 }
 
-export interface PopulateOptions {
-  path: string;
-  select?: string;
-  populate?: { path: string; select?: string };
-}
-
 export type TInitiator = "category" | "manufacturer";
 
 export type TSortDir = "asc" | "desc";
@@ -163,11 +169,20 @@ export interface IQuery {
   category?: string | string[];
   manufacturer?: string | string[];
   price?: [string, string];
-  fields?: [];
-  select?: string;
-  populate?: PopulateOptions[];
+  fields?: string[];
   initiator?: TInitiator;
   customer?: string;
+}
+
+export interface PopulateOptions {
+  path: string;
+  select?: string;
+  populate?: { path: string; select?: string };
+}
+
+export interface IQueryPopulated extends IQuery {
+  select?: string;
+  populate?: PopulateOptions[];
 }
 
 export type TUserRole = "customer" | "manager";

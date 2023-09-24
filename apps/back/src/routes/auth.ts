@@ -3,17 +3,23 @@ import type { ILoginData, IUserToken, IBaseReply, ISignUpData } from 'mhz-contra
 
 import { IFastifyInstance } from '../interface/index.js';
 import { authService } from '../services/auth.js';
-import { userRoleSchema, userTokenSchema, loginDataSchema, signUpDataSchema } from '../schemas/auth.js';
-
-const schema = { tags: ['Auth'] };
+import {
+  userRoleModel,
+  userTokenModel,
+  loginDataModel,
+  signUpDataModel,
+  authCheckSchema,
+  authLoginSchema,
+  authSignUpSchema,
+} from '../schemas/auth.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.addSchema(userRoleSchema);
-  fastify.addSchema(userTokenSchema);
-  fastify.addSchema(loginDataSchema);
-  fastify.addSchema(signUpDataSchema);
+  fastify.addSchema(userRoleModel);
+  fastify.addSchema(userTokenModel);
+  fastify.addSchema(loginDataModel);
+  fastify.addSchema(signUpDataModel);
 
-  fastify.get<{ Reply: { 200: IBaseReply } }>(API_AUTH_CHECK, { schema }, async function (request, reply) {
+  fastify.get<{ Reply: { 200: IBaseReply } }>(API_AUTH_CHECK, authCheckSchema, async function (request, reply) {
     await authService.check(request);
 
     return reply.code(200).send({ message: 'Auth checked' });
@@ -21,7 +27,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: ILoginData; Reply: { 200: IUserToken; '4xx': IBaseReply } }>(
     API_AUTH_LOGIN,
-    { schema },
+    authLoginSchema,
     async function (request, reply) {
       const { user, isUserNotFound, isWrongPassword } = await authService.login(request.body, fastify.jwt.sign);
 
@@ -37,7 +43,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: ISignUpData; Reply: { 201: IBaseReply; '5xx': IBaseReply } }>(
     API_AUTH_SETUP,
-    { schema },
+    authSignUpSchema,
     async function (request, reply) {
       const isManagersExists = await authService.setup(request.body);
 

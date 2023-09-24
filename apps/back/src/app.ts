@@ -2,9 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import Fastify, { FastifyServerOptions } from 'fastify';
 import autoload from '@fastify/autoload';
-
 import { Schema, connect } from 'mongoose';
-
 import dotenv from 'dotenv';
 
 dotenv.config();

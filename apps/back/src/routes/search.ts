@@ -3,13 +3,14 @@ import type { ISearchResults } from 'mhz-contracts';
 
 import { searchService } from '../services/search.js';
 import { IFastifyInstance } from '../interface/index.js';
-
-const schema = { tags: ['Search'] };
+import { searchResultsModel, searchSchema } from '../schemas/search.js';
 
 export default async function (fastify: IFastifyInstance) {
+  fastify.addSchema(searchResultsModel);
+
   fastify.get<{ Querystring: { search: string; isAdmin: boolean }; Reply: { 200: ISearchResults } }>(
     API_SEARCH,
-    { schema },
+    searchSchema,
     async function (request, reply) {
       const results = await searchService.search(request.query.search, request.query.isAdmin);
 

@@ -3,18 +3,23 @@ import type { IQuery, IBaseReply, ICategory, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
-import { categoryFieldTypeSchema, categoryFieldSchema, categorySchema } from '../schemas/category.js';
-
-const schema = { tags: ['Category'] };
+import {
+  categoryFieldModel,
+  categoryModel,
+  categoryGetManySchema,
+  categoryGetOneSchema,
+  categoryUpdateSchema,
+  categoryCreateSchema,
+  categoryDeleteSchema,
+} from '../schemas/category.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.addSchema(categoryFieldTypeSchema);
-  fastify.addSchema(categoryFieldSchema);
-  fastify.addSchema(categorySchema);
+  fastify.addSchema(categoryFieldModel);
+  fastify.addSchema(categoryModel);
 
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: ICategory[] } } }>(
     API_CATEGORY,
-    { schema },
+    categoryGetManySchema,
     async function (request, reply) {
       const data = await categoryService.getMany<ICategory>();
 
@@ -24,7 +29,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Params: IBaseParams; Reply: { 200: { data: ICategory | null } } }>(
     `${API_CATEGORY}/:id`,
-    { schema },
+    categoryGetOneSchema,
     async function (request, reply) {
       const data = await categoryService.getOne<ICategory>(request.params.id);
 
@@ -34,7 +39,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: ICategory; Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_CATEGORY}/:id`,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...categoryUpdateSchema },
     async function (request, reply) {
       await categoryService.update<ICategory>(request.body, request.params.id);
 
@@ -44,7 +49,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: ICategory; Reply: { 201: IBaseReply; '5xx': IBaseReply } }>(
     API_CATEGORY,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...categoryCreateSchema },
     async function (request, reply) {
       const isReachedLimit = await categoryService.create<ICategory>(request.body);
 
@@ -58,7 +63,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_CATEGORY}/:id`,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...categoryDeleteSchema },
     async function (request, reply) {
       await categoryService.delete(request.params.id);
 
