@@ -62,14 +62,10 @@ interface ISearchScheme {
   url: string;
 }
 
-interface ISearchResult {
-  [key: string]: { _id?: string }[] | { [key: string]: string }[] | undefined;
-}
-
 interface IProps {
   modelValue: string;
   searchScheme: ISearchScheme[];
-  results?: ISearchResult;
+  results?: { [key: string]: { _id: string }[] };
   isSuccess: boolean;
 }
 

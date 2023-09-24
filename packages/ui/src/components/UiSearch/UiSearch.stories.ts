@@ -24,7 +24,6 @@ const meta = {
 } satisfies Meta<typeof UiSearch>;
 
 const argTypes = {
-  results: { description: '{_id: string, ...}[]' },
   searchScheme: { description: '{ type: string; labels: string[]; url: string }[]' },
 };
 
