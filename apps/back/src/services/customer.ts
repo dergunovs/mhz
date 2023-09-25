@@ -19,9 +19,21 @@ export const customerService: ICustomerService = {
   getOne: async <T>(_id: string) => {
     const customer: ICustomer | null = await Customer.findOne({ _id })
       .populate([
-        { path: 'cart.product', select: '_id title' },
-        { path: 'favouriteProducts', select: '_id title' },
-        { path: 'watchedProducts.product', select: '_id title' },
+        {
+          path: 'cart.product',
+          select: 'title price thumbUrls category',
+          populate: { path: 'category', select: 'title' },
+        },
+        {
+          path: 'favouriteProducts',
+          select: 'title price thumbUrls category',
+          populate: { path: 'category', select: 'title' },
+        },
+        {
+          path: 'watchedProducts.product',
+          select: 'title price thumbUrls category',
+          populate: { path: 'category', select: 'title' },
+        },
       ])
       .select('-password -orders')
       .lean()
@@ -35,8 +47,16 @@ export const customerService: ICustomerService = {
 
     const customer: ICustomer | null = await Customer.findOne({ _id: user?._id })
       .populate([
-        { path: 'favouriteProducts', select: '_id title' },
-        { path: 'watchedProducts.product', select: '_id title' },
+        {
+          path: 'favouriteProducts',
+          select: 'title price thumbUrls category',
+          populate: { path: 'category', select: 'title' },
+        },
+        {
+          path: 'watchedProducts.product',
+          select: 'title price thumbUrls category',
+          populate: { path: 'category', select: 'title' },
+        },
       ])
       .select('-password -orders -cart')
       .lean()
@@ -56,7 +76,7 @@ export const customerService: ICustomerService = {
 
     const products: IProduct[] = await Product.find({ _id: { $in: productIds } })
       .select('thumbUrls title price category')
-      .populate({ path: 'category', select: '_id title' })
+      .populate({ path: 'category', select: 'title' })
       .lean()
       .exec();
 
@@ -98,7 +118,7 @@ export const customerService: ICustomerService = {
           thumbUrls: 1,
           title: 1,
           price: 1,
-          category: { _id: '$category._id' },
+          category: { _id: '$category._id', title: '$category.title' },
           index: { $indexOfArray: [customerProducts, '$_id'] },
         },
       },
@@ -117,7 +137,7 @@ export const customerService: ICustomerService = {
 
     const products: IProduct[] = await Product.find({ _id: { $in: customer?.favouriteProducts } })
       .select('thumbUrls title price category')
-      .populate({ path: 'category', select: '_id' })
+      .populate({ path: 'category', select: 'title' })
       .lean()
       .exec();
 

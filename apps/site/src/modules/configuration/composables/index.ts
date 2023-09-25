@@ -4,8 +4,12 @@ import { IConfiguration, IConfigurationParts } from 'mhz-contracts';
 
 import { TMotherboardFormat, IConfigurationCheck, IConfigurationError } from '@/configuration/interface';
 
-function getFieldValue(partsToSearch: IConfigurationParts, category: keyof IConfigurationParts, title: string) {
-  return partsToSearch[category]?.fields?.find((field) => field.title === title)?.fieldValue.toString();
+function getFieldValue(
+  partsToSearch: IConfigurationParts | undefined,
+  category: keyof IConfigurationParts,
+  title: string
+) {
+  return partsToSearch?.[category]?.fields?.find((field) => field.title === title)?.fieldValue.toString();
 }
 
 function checkFormat(

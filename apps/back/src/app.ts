@@ -5,6 +5,8 @@ import autoload from '@fastify/autoload';
 import { Schema, connect } from 'mongoose';
 import dotenv from 'dotenv';
 
+import { addSchemas } from './schemas/addSchemas.js';
+
 dotenv.config();
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -23,6 +25,8 @@ async function buildApp(options: AppOptions = {}) {
   fastify.setErrorHandler(function (error, request, reply) {
     reply.status(500).send({ message: error.message || 'Server error' });
   });
+
+  addSchemas(fastify);
 
   return fastify;
 }

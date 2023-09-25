@@ -41,7 +41,7 @@ export const categoryModel: JSONSchemaType<ICategory> = {
 };
 
 export const categoryReply: JSONSchemaType<{ data: ICategory | null }> = {
-  $id: 'CategoryResponse',
+  $id: 'CategoryReply',
   type: 'object',
   properties: {
     data: { $ref: 'Category' },
@@ -52,7 +52,7 @@ export const categoryReply: JSONSchemaType<{ data: ICategory | null }> = {
 };
 
 export const categoriesReply: JSONSchemaType<{ data: ICategory[] }> = {
-  $id: 'CategoriesResponse',
+  $id: 'CategoriesReply',
   type: 'object',
   properties: {
     data: { type: 'array', items: categoryModel },
@@ -75,7 +75,7 @@ export const categoryUpdateSchema = {
 };
 
 export const categoryCreateSchema = {
-  schema: { tags, response: { 201: baseReply } },
+  schema: { tags, response: { 201: baseReply }, body: categoryModel },
 };
 
 export const categoryDeleteSchema = {

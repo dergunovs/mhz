@@ -3,13 +3,18 @@ import type { IQuery, IBaseReply, IConfiguration, IBaseParams } from 'mhz-contra
 
 import { configurationService } from '../services/configuration.js';
 import { IFastifyInstance } from '../interface/index.js';
-
-const schema = { tags: ['Configuration'] };
+import {
+  configurationGetManySchema,
+  configurationGetOneSchema,
+  configurationUpdateSchema,
+  configurationCreateSchema,
+  configurationDeleteSchema,
+} from '../schemas/configuration.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IConfiguration[]; total?: number } } }>(
     API_CONFIGURATION,
-    { preValidation: [fastify.onlyLoggedIn], schema },
+    { preValidation: [fastify.onlyLoggedIn], ...configurationGetManySchema },
     async function (request, reply) {
       const { data, total } = await configurationService.getMany<IConfiguration>(
         request.query,
@@ -27,7 +32,7 @@ export default async function (fastify: IFastifyInstance) {
       200: { data: IConfiguration | null; isConfigurationEditable?: boolean };
       '4xx': IBaseReply;
     };
-  }>(`${API_CONFIGURATION}/:id`, { schema }, async function (request, reply) {
+  }>(`${API_CONFIGURATION}/:id`, configurationGetOneSchema, async function (request, reply) {
     const { data, isConfigurationEditable, isConfigurationSharable } =
       await configurationService.getOne<IConfiguration>(
         request.params.id,
@@ -44,7 +49,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: IConfiguration; Params: IBaseParams; Reply: { 200: IBaseReply } }>(
     `${API_CONFIGURATION}/:id`,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...configurationUpdateSchema },
     async function (request, reply) {
       await configurationService.update<IConfiguration>(request.body, request.params.id);
 
@@ -54,7 +59,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: IConfiguration; Reply: { 201: IBaseReply } }>(
     API_CONFIGURATION,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...configurationCreateSchema },
     async function (request, reply) {
       await configurationService.create<IConfiguration>(request.body);
 
@@ -64,7 +69,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply; '4xx': IBaseReply } }>(
     `${API_CONFIGURATION}/:id`,
-    { preValidation: [fastify.onlyLoggedIn], schema },
+    { preValidation: [fastify.onlyLoggedIn], ...configurationDeleteSchema },
     async function (request, reply) {
       const isDeletable = await configurationService.delete(
         request.params.id,

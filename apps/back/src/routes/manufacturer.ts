@@ -4,7 +4,6 @@ import type { IQuery, IBaseReply, IManufacturer, IBaseParams } from 'mhz-contrac
 import { IFastifyInstance } from '../interface/index.js';
 import { manufacturerService } from '../services/manufacturer.js';
 import {
-  manufacturerModel,
   manufacturerGetManySchema,
   manufacturerGetOneSchema,
   manufacturerUpdateSchema,
@@ -13,8 +12,6 @@ import {
 } from '../schemas/manufacturer.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.addSchema(manufacturerModel);
-
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManufacturer[]; total?: number } } }>(
     API_MANUFACTURER,
     manufacturerGetManySchema,

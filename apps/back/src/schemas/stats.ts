@@ -4,7 +4,7 @@ import type { IEntitiesCount } from 'mhz-contracts';
 const tags = ['Stats'];
 
 export const statsCountModel: JSONSchemaType<IEntitiesCount> = {
-  $id: 'SearchResults',
+  $id: 'StatsCount',
   type: 'object',
   properties: {
     products: { type: 'number' },

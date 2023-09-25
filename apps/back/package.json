@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "mhz-back",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -42,8 +42,8 @@
   "devDependencies": {
     "@types/bcryptjs": "2.4.4",
     "@types/node": "20.6.5",
-    "@typescript-eslint/eslint-plugin": "6.7.2",
-    "@typescript-eslint/parser": "6.7.2",
+    "@typescript-eslint/eslint-plugin": "6.7.3",
+    "@typescript-eslint/parser": "6.7.3",
     "esbuild": "0.18.20",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",

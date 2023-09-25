@@ -24,7 +24,7 @@ export const manufacturerModel: JSONSchemaType<IManufacturer> = {
 };
 
 export const manufacturerReply: JSONSchemaType<{ data: IManufacturer | null }> = {
-  $id: 'ManufacturerResponse',
+  $id: 'ManufacturerReply',
   type: 'object',
   properties: {
     data: { $ref: 'Manufacturer' },
@@ -34,8 +34,8 @@ export const manufacturerReply: JSONSchemaType<{ data: IManufacturer | null }> =
   additionalProperties: false,
 };
 
-export const manufacturersReply: JSONSchemaType<{ data: IManufacturer[] }> = {
-  $id: 'ManufacturersResponse',
+export const manufacturersReply: JSONSchemaType<{ data: IManufacturer[]; total: number }> = {
+  $id: 'ManufacturersReply',
   type: 'object',
   properties: {
     data: { type: 'array', items: manufacturerModel },

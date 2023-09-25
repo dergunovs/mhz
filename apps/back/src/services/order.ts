@@ -14,7 +14,7 @@ export const orderService: IBaseService = {
     const { data, total } = await paginate(Order, {
       ...query,
       ...filter,
-      populate: [{ path: 'customer', select: 'firstName lastName' }],
+      populate: [{ path: 'customer', select: 'firstName lastName email' }],
       select: '-products',
     });
 
@@ -26,8 +26,12 @@ export const orderService: IBaseService = {
 
     const order: IOrder | null = await Order.findOne({ _id })
       .populate([
-        { path: 'customer', select: 'firstName lastName' },
-        { path: 'products.product', select: '_id title' },
+        { path: 'customer', select: 'firstName lastName email' },
+        {
+          path: 'products.product',
+          select: 'title price thumbUrls category',
+          populate: { path: 'category', select: 'title' },
+        },
       ])
       .lean()
       .exec();
@@ -65,7 +69,7 @@ export const orderService: IBaseService = {
     const user = decodeToken(decode, token);
 
     const customer = await Customer.findOne({ _id: user?._id })
-      .populate([{ path: 'cart.product', select: '_id price' }])
+      .populate([{ path: 'cart.product', select: 'price' }])
       .exec();
 
     if (!customer) return;

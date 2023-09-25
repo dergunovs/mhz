@@ -24,7 +24,7 @@ export const managerModel: JSONSchemaType<IManager> = {
 };
 
 export const managerReply: JSONSchemaType<{ data: IManager | null }> = {
-  $id: 'ManagerResponse',
+  $id: 'ManagerReply',
   type: 'object',
   properties: {
     data: { $ref: 'Manager' },
@@ -34,8 +34,8 @@ export const managerReply: JSONSchemaType<{ data: IManager | null }> = {
   additionalProperties: false,
 };
 
-export const managersReply: JSONSchemaType<{ data: IManager[] }> = {
-  $id: 'ManagersResponse',
+export const managersReply: JSONSchemaType<{ data: IManager[]; total: number }> = {
+  $id: 'ManagersReply',
   type: 'object',
   properties: {
     data: { type: 'array', items: managerModel },

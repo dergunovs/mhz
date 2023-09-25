@@ -17,8 +17,8 @@ export const productService: IProductService = {
     const { data, total } = await paginate(Product, {
       ...query,
       populate: [
-        { path: 'category', select: '_id title' },
-        { path: 'manufacturer', select: '_id title' },
+        { path: 'category', select: 'title' },
+        { path: 'manufacturer', select: 'title' },
       ],
       select: '-description -imageUrls',
     });
@@ -33,8 +33,8 @@ export const productService: IProductService = {
 
     const product = await Product.findOne({ _id })
       .populate([
-        { path: 'category', select: '_id title' },
-        { path: 'manufacturer', select: '_id title logoUrl country' },
+        { path: 'category', select: 'title' },
+        { path: 'manufacturer', select: 'title logoUrl country' },
       ])
       .exec();
 

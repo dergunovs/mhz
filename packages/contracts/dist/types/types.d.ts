@@ -49,11 +49,11 @@ export interface IProduct extends IEntity {
   title: string;
   description?: string;
   price: number;
-  isInStock: boolean;
+  isInStock?: boolean;
   imageUrls?: string[];
   thumbUrls: string[];
   category: ICategory;
-  manufacturer: IManufacturer;
+  manufacturer?: IManufacturer;
   fields?: ICategoryField[];
   views?: number;
 }
@@ -73,7 +73,7 @@ export interface ICartItem {
 export type TOrderStatus = "new" | "paid" | "cancelled" | "completed";
 
 export interface IOrder extends IEntity {
-  products: ICartItem[];
+  products?: ICartItem[];
   customer: ICustomer;
   status: TOrderStatus;
   price: number;
@@ -98,7 +98,7 @@ export interface IConfiguration extends IEntity {
   title: string;
   isShared?: boolean;
   customer?: ICustomer;
-  parts: IConfigurationParts;
+  parts?: IConfigurationParts;
 }
 
 export interface IFilterFieldValue {

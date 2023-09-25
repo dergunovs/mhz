@@ -17,7 +17,7 @@
           {{ product.category.title }}
         </td>
         <td data-no-wrap>
-          {{ product.manufacturer.title }}
+          {{ product.manufacturer?.title }}
         </td>
         <td data-no-wrap>
           {{ product.price }}

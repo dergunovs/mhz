@@ -32,5 +32,9 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const price = computed(() => Object.values(props.configuration.parts).reduce((acc, product) => acc + product.price, 0));
+const price = computed<number>(() => {
+  return props.configuration.parts
+    ? Object.values(props.configuration.parts).reduce((acc, product) => acc + product.price, 0)
+    : 0;
+});
 </script>

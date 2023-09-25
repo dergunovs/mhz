@@ -3,11 +3,9 @@ import type { IEntitiesCount } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { countService } from '../services/stats.js';
-import { statsCountSchema, statsCountModel } from '../schemas/stats.js';
+import { statsCountSchema } from '../schemas/stats.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.addSchema(statsCountModel);
-
   fastify.get<{ Reply: { 200: IEntitiesCount } }>(
     API_STATS_COUNT,
     { preValidation: [fastify.onlyManager], ...statsCountSchema },

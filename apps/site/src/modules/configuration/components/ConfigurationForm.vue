@@ -98,7 +98,11 @@ const isShowConfirm = ref(false);
 
 const link = computed(() => window.location.href.split('?')[0]);
 
-const price = computed(() => Object.values(formData.value.parts).reduce((acc, product) => acc + product?.price, 0));
+const price = computed(() => {
+  return formData.value.parts
+    ? Object.values(formData.value.parts).reduce((acc, product) => acc + product?.price, 0)
+    : 0;
+});
 
 const rules = computed(() => {
   return {
@@ -150,7 +154,7 @@ function handleAddToCart() {
 }
 
 function removeProduct(categoryTitle: keyof IConfigurationParts) {
-  delete formData.value.parts[categoryTitle];
+  delete formData.value.parts?.[categoryTitle];
 }
 
 const { error, isValid } = useValidator(formData, rules);
@@ -158,7 +162,7 @@ const { error, isValid } = useValidator(formData, rules);
 const { validation } = useConfigurationCheck(formData);
 
 function handleSubmit() {
-  if (!Object.keys(formData.value.parts).length) {
+  if (formData.value.parts && !Object.keys(formData.value.parts).length) {
     toast.error('Choose at least one PC part');
 
     return;
@@ -183,7 +187,7 @@ function handleSubmit() {
 watch(
   () => props.choosenProduct,
   () => {
-    if (props.choosenProduct) {
+    if (props.choosenProduct && formData.value.parts) {
       const key = props.choosenProduct.category.title as keyof IConfigurationParts;
 
       formData.value.parts[key] = props.choosenProduct;

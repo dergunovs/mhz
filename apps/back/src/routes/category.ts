@@ -4,8 +4,6 @@ import type { IQuery, IBaseReply, ICategory, IBaseParams } from 'mhz-contracts';
 import { IFastifyInstance } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
 import {
-  categoryFieldModel,
-  categoryModel,
   categoryGetManySchema,
   categoryGetOneSchema,
   categoryUpdateSchema,
@@ -14,9 +12,6 @@ import {
 } from '../schemas/category.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.addSchema(categoryFieldModel);
-  fastify.addSchema(categoryModel);
-
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: ICategory[] } } }>(
     API_CATEGORY,
     categoryGetManySchema,

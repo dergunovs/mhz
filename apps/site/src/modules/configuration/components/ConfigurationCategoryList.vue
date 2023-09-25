@@ -36,7 +36,7 @@ import { IConfigurationError } from '@/configuration/interface';
 interface IProps {
   categories: ICategory[];
   currentCategory: string;
-  choosenParts: IConfigurationParts;
+  choosenParts?: IConfigurationParts;
   isAuthor?: boolean;
   errors?: IConfigurationError[];
   errorMessages?: string[];

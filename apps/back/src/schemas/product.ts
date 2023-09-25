@@ -2,8 +2,6 @@ import type { JSONSchemaType } from 'ajv';
 import type { IFilterBaseValue, IFilterData, IFilterField, IProduct, TInitiator } from 'mhz-contracts';
 
 import { baseParams, baseReply, queryParams } from './base.js';
-import { categoryModel } from './category.js';
-import { manufacturerModel } from './manufacturer.js';
 
 const tags = ['Product'];
 
@@ -17,11 +15,11 @@ export const productModel: JSONSchemaType<IProduct> = {
     title: { type: 'string' },
     description: { type: 'string', nullable: true },
     price: { type: 'number' },
-    isInStock: { type: 'boolean' },
+    isInStock: { type: 'boolean', nullable: true },
     imageUrls: { type: 'array', items: { type: 'string' }, nullable: true },
     thumbUrls: { type: 'array', items: { type: 'string' } },
-    category: categoryModel,
-    manufacturer: manufacturerModel,
+    category: { type: 'object', $ref: 'Category' },
+    manufacturer: { type: 'object', $ref: 'Manufacturer', nullable: true },
     fields: {
       type: 'array',
       items: {
@@ -33,12 +31,12 @@ export const productModel: JSONSchemaType<IProduct> = {
     },
     views: { type: 'number', nullable: true },
   },
-  required: ['title', 'price', 'isInStock', 'thumbUrls', 'category', 'manufacturer'],
+  required: ['title', 'price', 'thumbUrls', 'category'],
   $schema: 'http://json-schema.org/draft-07/schema#',
   additionalProperties: false,
 };
 
-export const productFilterBase: JSONSchemaType<IFilterBaseValue> = {
+export const productFilterBaseModel: JSONSchemaType<IFilterBaseValue> = {
   $id: 'ProductFilterBase',
   type: 'object',
   properties: {
@@ -51,7 +49,7 @@ export const productFilterBase: JSONSchemaType<IFilterBaseValue> = {
   additionalProperties: false,
 };
 
-export const productFilterField: JSONSchemaType<Omit<IFilterField, 'fieldValues'>> = {
+export const productFilterFieldModel: JSONSchemaType<Omit<IFilterField, 'fieldValues'>> = {
   $id: 'ProductFilterField',
   type: 'object',
   additionalProperties: {
@@ -77,7 +75,7 @@ export const productFilterField: JSONSchemaType<Omit<IFilterField, 'fieldValues'
   $schema: 'http://json-schema.org/draft-07/schema#',
 };
 
-export const productFilter: JSONSchemaType<IFilterData> = {
+export const productFilterModel: JSONSchemaType<IFilterData> = {
   $id: 'ProductFilter',
   type: 'object',
   properties: {
@@ -107,7 +105,7 @@ export const productReply: JSONSchemaType<{ data: IProduct | null }> = {
   additionalProperties: false,
 };
 
-export const productsReply: JSONSchemaType<{ data: IProduct[] }> = {
+export const productsReply: JSONSchemaType<{ data: IProduct[]; total: number; filters: IFilterData }> = {
   $id: 'ProductsReply',
   type: 'object',
   properties: {
@@ -152,7 +150,7 @@ export const productPriceRangeSchema = {
 };
 
 export const productFiltersSchema = {
-  schema: { tags, response: { 200: productFilter }, query: productQuery },
+  schema: { tags, response: { 200: productFilterModel }, query: productQuery },
 };
 
 export const productUpdateSchema = {

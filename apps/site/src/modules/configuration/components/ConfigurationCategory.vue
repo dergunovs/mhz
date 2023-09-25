@@ -65,7 +65,7 @@ interface IProps {
   category: ICategory;
   currentCategory: string;
   isAuthor?: boolean;
-  choosenParts: IConfigurationParts;
+  choosenParts?: IConfigurationParts;
   errors?: IConfigurationError[];
 }
 
@@ -77,7 +77,7 @@ function updateCategory(id?: string) {
 }
 
 function currentProduct(category: ICategory) {
-  return props.choosenParts[category.title as keyof IConfigurationParts];
+  return props.choosenParts?.[category.title as keyof IConfigurationParts];
 }
 </script>
 

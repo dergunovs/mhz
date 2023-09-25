@@ -4,7 +4,6 @@ import type { IQuery, IBaseReply, IManager, IBaseParams, ISignUpData } from 'mhz
 import { IFastifyInstance } from '../interface/index.js';
 import { managerService } from '../services/manager.js';
 import {
-  managerModel,
   managerGetManySchema,
   managerGetOneSchema,
   managerUpdateSchema,
@@ -13,8 +12,6 @@ import {
 } from '../schemas/manager.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.addSchema(managerModel);
-
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IManager[]; total?: number } } }>(
     API_MANAGER,
     { preValidation: [fastify.onlyManager], ...managerGetManySchema },

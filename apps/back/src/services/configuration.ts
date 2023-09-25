@@ -13,7 +13,7 @@ export const configurationService: IBaseService = {
     const { data, total } = await paginate(Configuration, {
       ...query,
       ...filter,
-      populate: [{ path: 'customer', select: 'firstName lastName' }],
+      populate: [{ path: 'customer', select: 'firstName lastName email' }],
       select: '-parts',
     });
 
@@ -25,65 +25,65 @@ export const configurationService: IBaseService = {
 
     const configuration: IConfiguration | null = await Configuration.findOne({ _id })
       .populate([
-        { path: 'customer', select: 'firstName lastName' },
+        { path: 'customer', select: 'firstName lastName email' },
         {
           path: 'parts.CPU',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.Case',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.Cooler',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.GPU',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.Keyboard',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.Monitor',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.Motherboard',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.Mouse',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.Mousepad',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.PSU',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.RAM',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
         {
           path: 'parts.SSD',
-          select: 'title price fields category',
+          select: 'title price fields thumbUrls category',
           populate: { path: 'category', select: 'title' },
         },
       ])

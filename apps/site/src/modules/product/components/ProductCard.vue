@@ -12,12 +12,12 @@
 
       <div :class="$style.fields">
         <div :class="$style.fieldsTop">
-          <RouterLink :to="`${URL_MANUFACTURER}/${props.product.manufacturer._id}`" :class="$style.logoLink">
+          <RouterLink :to="`${URL_MANUFACTURER}/${props.product.manufacturer?._id}`" :class="$style.logoLink">
             <img
-              :src="`${PATH_UPLOAD}/${props.product.manufacturer.logoUrl}`"
+              :src="`${PATH_UPLOAD}/${props.product.manufacturer?.logoUrl}`"
               height="64"
-              :alt="props.product.manufacturer.title"
-              :title="props.product.manufacturer.title"
+              :alt="props.product.manufacturer?.title"
+              :title="props.product.manufacturer?.title"
               :class="$style.logo"
               crossorigin="anonymous"
             />
@@ -25,10 +25,10 @@
 
           <div>
             Manufacturer:
-            <RouterLink :to="`${URL_MANUFACTURER}/${props.product.manufacturer._id}`">
-              {{ props.product.manufacturer.title }}
+            <RouterLink :to="`${URL_MANUFACTURER}/${props.product.manufacturer?._id}`">
+              {{ props.product.manufacturer?.title }}
             </RouterLink>
-            ({{ props.product.manufacturer.country }})
+            ({{ props.product.manufacturer?.country }})
           </div>
 
           <div>

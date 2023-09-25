@@ -9,13 +9,27 @@ import type { IQuery, IBaseReply, ICartItem, ICustomer, IProduct, ISignUpData, I
 
 import { customerService } from '../services/customer.js';
 import { IFastifyInstance } from '../interface/index.js';
-
-const schema = { tags: ['Customer'] };
+import {
+  customerGetManySchema,
+  customerGetOneSchema,
+  customerGetCurrentSchema,
+  customerGetCartSchema,
+  customerGetWatchedSchema,
+  customerGetFavouritesSchema,
+  customerUpdateSchema,
+  customerUpdateCartSchema,
+  customerCreateSchema,
+  customerAddToCartSchema,
+  customerCreteFavouriteSchema,
+  customerDeleteSchema,
+  customerDeleteFavouriteSchema,
+  customerDeleteFromCartSchema,
+} from '../schemas/customer.js';
 
 export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: ICustomer[]; total?: number } } }>(
     API_CUSTOMER,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...customerGetManySchema },
     async function (request, reply) {
       const { data, total } = await customerService.getMany<ICustomer>(request.query);
 
@@ -25,7 +39,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Params: IBaseParams; Reply: { 200: { data: ICustomer | null } } }>(
     `${API_CUSTOMER}/:id`,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...customerGetOneSchema },
     async function (request, reply) {
       const data = await customerService.getOne<ICustomer>(request.params.id);
 
@@ -35,7 +49,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Reply: { 200: ICustomer | null } }>(
     API_CUSTOMER_CURRENT,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerGetCurrentSchema },
     async function (request, reply) {
       const customer = await customerService.getCurrent(fastify.jwt.decode, request.headers.authorization);
 
@@ -45,7 +59,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Reply: { 200: ICartItem[] } }>(
     API_CUSTOMER_CART,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerGetCartSchema },
     async function (request, reply) {
       const cart = await customerService.getCart(fastify.jwt.decode, request.headers.authorization);
 
@@ -55,7 +69,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Reply: { 200: IProduct[] } }>(
     API_CUSTOMER_WATCHED,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerGetWatchedSchema },
     async function (request, reply) {
       const products = await customerService.getWatchedProducts(fastify.jwt.decode, request.headers.authorization);
 
@@ -65,7 +79,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.get<{ Reply: { 200: IProduct[] } }>(
     API_CUSTOMER_FAVOURITES,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerGetFavouritesSchema },
     async function (request, reply) {
       const products = await customerService.getFavouriteProducts(fastify.jwt.decode, request.headers.authorization);
 
@@ -75,7 +89,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: ICustomer; Reply: { 200: IBaseReply } }>(
     API_CUSTOMER,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerUpdateSchema },
     async function (request, reply) {
       await customerService.update<ICustomer>(
         request.body,
@@ -90,7 +104,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.patch<{ Body: { _id: string; count: string }; Reply: { 200: IBaseReply; '5xx': IBaseReply } }>(
     API_CUSTOMER_CART,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerUpdateCartSchema },
     async function (request, reply) {
       const isProductInCard = await customerService.updateCart(
         request.body._id,
@@ -109,7 +123,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: ISignUpData; Reply: { 201: IBaseReply } }>(
     '/customer',
-    { schema },
+    customerCreateSchema,
     async function (request, reply) {
       await customerService.create<ISignUpData>(request.body);
 
@@ -119,7 +133,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: { _id: string | string[] }; Reply: { 201: IBaseReply } }>(
     API_CUSTOMER_CART,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerAddToCartSchema },
     async function (request, reply) {
       await customerService.addToCart(request.body._id, fastify.jwt.decode, request.headers.authorization);
 
@@ -129,7 +143,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.post<{ Body: { _id: string }; Reply: { 201: IBaseReply; '5xx': IBaseReply } }>(
     API_CUSTOMER_FAVOURITES,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerCreteFavouriteSchema },
     async function (request, reply) {
       const { isReachedLimit, isAlreadyExists } = await customerService.createFavourite(
         request.body._id,
@@ -149,7 +163,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Reply: { 200: IBaseReply } }>(
     API_CUSTOMER,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerDeleteSchema },
     async function (request, reply) {
       await customerService.delete(undefined, fastify.jwt.decode, request.headers.authorization);
 
@@ -159,7 +173,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply; '5xx': IBaseReply } }>(
     `${API_CUSTOMER_FAVOURITES}/:id`,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerDeleteFavouriteSchema },
     async function (request, reply) {
       const isProductExists = await customerService.deleteFavourite(
         request.params.id,
@@ -177,7 +191,7 @@ export default async function (fastify: IFastifyInstance) {
 
   fastify.delete<{ Params: IBaseParams; Reply: { 200: IBaseReply; '5xx': IBaseReply } }>(
     `${API_CUSTOMER_CART}/:id`,
-    { preValidation: [fastify.onlyCustomer], schema },
+    { preValidation: [fastify.onlyCustomer], ...customerDeleteFromCartSchema },
     async function (request, reply) {
       const isProductInCard = await customerService.deleteFromCart(
         request.params.id,

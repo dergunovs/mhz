@@ -4,10 +4,6 @@ import type { IQuery, TInitiator, IBaseReply, IFilterData, IProduct, IBaseParams
 import { IFastifyInstance } from '../interface/index.js';
 import { productService } from '../services/product.js';
 import {
-  productFilterBase,
-  productFilterField,
-  productFilter,
-  productModel,
   productGetManySchema,
   productGetOneSchema,
   productPriceRangeSchema,
@@ -18,11 +14,6 @@ import {
 } from '../schemas/product.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.addSchema(productFilterBase);
-  fastify.addSchema(productFilterField);
-  fastify.addSchema(productFilter);
-  fastify.addSchema(productModel);
-
   fastify.get<{ Querystring: IQuery; Reply: { 200: { data: IProduct[]; total?: number; filters?: IFilterData } } }>(
     API_PRODUCT,
     productGetManySchema,
