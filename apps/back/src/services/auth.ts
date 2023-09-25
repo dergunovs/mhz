@@ -15,7 +15,7 @@ export const authService: IAuthService = {
     const foundUser =
       role === 'manager' ? await Manager.findOne({ email }).exec() : await Customer.findOne({ email }).exec();
 
-    if (!foundUser) {
+    if (!foundUser?.password) {
       return { user: undefined, isUserNotFound: true, isWrongPassword: false };
     }
 
@@ -47,6 +47,8 @@ export const authService: IAuthService = {
     if (managers.length) return true;
 
     const manager = new Manager(managerToCreate);
+
+    if (!manager.password) return true;
 
     manager.password = await bcrypt.hash(manager.password, 10);
 

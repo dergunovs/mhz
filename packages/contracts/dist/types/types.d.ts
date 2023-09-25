@@ -7,7 +7,7 @@ export interface IEntity {
 export interface IManager extends IEntity {
   firstName?: string;
   lastName?: string;
-  password: string;
+  password?: string;
   email: string;
   dateLoggedIn?: Date | string;
 }

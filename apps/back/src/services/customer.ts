@@ -158,6 +158,8 @@ export const customerService: ICustomerService = {
   create: async <T>(customerToCreate: T) => {
     const customer = new Customer(customerToCreate);
 
+    if (!customer.password) return;
+
     customer.password = await bcrypt.hash(customer.password, 10);
 
     await customer.save();

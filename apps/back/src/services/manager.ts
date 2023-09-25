@@ -25,6 +25,8 @@ export const managerService: IBaseService = {
   create: async <T>(managerToCreate: T) => {
     const manager = new Manager(managerToCreate);
 
+    if (!manager.password) return;
+
     manager.password = await bcrypt.hash(manager.password, 10);
 
     await manager.save();
