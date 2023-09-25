@@ -141,15 +141,15 @@ export interface IStatsService {
 export interface IUploadService {
   uploadMultiple: (
     getFiles: AsyncIterableIterator<IFileToUpload>,
-    width: string,
-    isThumb: boolean,
+    width?: string,
+    thumb?: string,
   ) => Promise<string[]>;
 
   uploadSingle: (
     getFile: IFileToUpload | undefined,
-    width: string,
-    isThumb: boolean,
+    width?: string,
+    thumb?: string,
   ) => Promise<{ filename: string; isFileExists: boolean }>;
 
-  delete: (_id: string, thumb: string) => Promise<void>;
+  delete: (_id: string, thumb?: string) => Promise<void>;
 }

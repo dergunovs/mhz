@@ -214,3 +214,8 @@ export interface IFileToUpload {
   filename: string;
   file: NodeJS.ReadableStream;
 }
+
+export interface IUploadQuery {
+  thumb?: string;
+  width?: string;
+}

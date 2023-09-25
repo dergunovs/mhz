@@ -40,7 +40,7 @@ export const categoryModel: JSONSchemaType<ICategory> = {
   additionalProperties: false,
 };
 
-export const categoryResponse: JSONSchemaType<{ data: ICategory | null }> = {
+export const categoryReply: JSONSchemaType<{ data: ICategory | null }> = {
   $id: 'CategoryResponse',
   type: 'object',
   properties: {
@@ -51,7 +51,7 @@ export const categoryResponse: JSONSchemaType<{ data: ICategory | null }> = {
   additionalProperties: false,
 };
 
-export const categoriesResponse: JSONSchemaType<{ data: ICategory[] }> = {
+export const categoriesReply: JSONSchemaType<{ data: ICategory[] }> = {
   $id: 'CategoriesResponse',
   type: 'object',
   properties: {
@@ -63,11 +63,11 @@ export const categoriesResponse: JSONSchemaType<{ data: ICategory[] }> = {
 };
 
 export const categoryGetManySchema = {
-  schema: { tags, response: { 200: categoriesResponse }, query: queryParams },
+  schema: { tags, response: { 200: categoriesReply }, query: queryParams },
 };
 
 export const categoryGetOneSchema = {
-  schema: { tags, response: { 200: categoryResponse }, params: baseParams },
+  schema: { tags, response: { 200: categoryReply }, params: baseParams },
 };
 
 export const categoryUpdateSchema = {

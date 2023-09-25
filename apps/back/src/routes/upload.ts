@@ -1,15 +1,14 @@
 import { API_UPLOAD, API_UPLOAD_MULTIPLE, API_UPLOAD_SINGLE } from 'mhz-contracts';
-import type { IBaseReply, IBaseParams } from 'mhz-contracts';
+import type { IBaseReply, IBaseParams, IUploadQuery } from 'mhz-contracts';
 
 import { uploadService } from '../services/upload.js';
 import { IFastifyInstance } from '../interface/index.js';
-
-const schema = { tags: ['Upload'] };
+import { uploadMultipleSchema, uploadSingleSchema, uploadDeleteSchema } from '../schemas/upload.js';
 
 export default async function (fastify: IFastifyInstance) {
-  fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string[] } }>(
+  fastify.post<{ Querystring: IUploadQuery; Reply: { 200: string[] } }>(
     API_UPLOAD_MULTIPLE,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...uploadMultipleSchema },
     async function (request, reply) {
       const files = request.files();
 
@@ -19,9 +18,9 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Querystring: { width: string; thumb: boolean }; Reply: { 200: string; '5xx': IBaseReply } }>(
+  fastify.post<{ Querystring: IUploadQuery; Reply: { 200: string; '5xx': IBaseReply } }>(
     API_UPLOAD_SINGLE,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...uploadSingleSchema },
     async function (request, reply) {
       const file = await request.file();
 
@@ -39,9 +38,9 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.delete<{ Params: IBaseParams; Querystring: { thumb: string }; Reply: { 200: IBaseReply } }>(
+  fastify.delete<{ Params: IBaseParams; Querystring: IUploadQuery; Reply: { 200: IBaseReply } }>(
     `${API_UPLOAD}/:id`,
-    { preValidation: [fastify.onlyManager], schema },
+    { preValidation: [fastify.onlyManager], ...uploadDeleteSchema },
     async function (request, reply) {
       await uploadService.delete(request.params.id, request.query.thumb);
 

@@ -30,6 +30,7 @@ export const searchResultsModel: JSONSchemaType<ISearchResults> = {
   },
   required: ['products', 'categories', 'manufacturers'],
   $schema: 'http://json-schema.org/draft-07/schema#',
+  additionalProperties: false,
 };
 
 export const searchSchema = {

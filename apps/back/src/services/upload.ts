@@ -9,7 +9,7 @@ import { createThumb, deleteFile, resizeFile } from '../helpers/index.js';
 const pump = util.promisify(pipeline);
 
 export const uploadService: IUploadService = {
-  uploadMultiple: async (files: AsyncIterableIterator<IFileToUpload>, width: string, isThumb: boolean) => {
+  uploadMultiple: async (files: AsyncIterableIterator<IFileToUpload>, width?: string, thumb?: string) => {
     const filesToUpload: string[] = [];
 
     for await (const file of files) {
@@ -18,7 +18,7 @@ export const uploadService: IUploadService = {
       await pump(file.file, fs.createWriteStream(path.resolve(`./public/upload/${filename}`)));
 
       if (width) filename = await resizeFile(filename, width);
-      if (isThumb) await createThumb(filename);
+      if (thumb === 'true') await createThumb(filename);
 
       filesToUpload.push(filename);
     }
@@ -26,7 +26,7 @@ export const uploadService: IUploadService = {
     return filesToUpload;
   },
 
-  uploadSingle: async (file: IFileToUpload | undefined, width: string, isThumb: boolean) => {
+  uploadSingle: async (file: IFileToUpload | undefined, width?: string, thumb?: string) => {
     const isFileExists = !!file;
 
     if (!isFileExists) {
@@ -41,12 +41,12 @@ export const uploadService: IUploadService = {
     await pump(file.file, fs.createWriteStream(path.resolve(`./public/upload/${filename}`)));
 
     if (width) filename = await resizeFile(filename, width);
-    if (isThumb) await createThumb(filename);
+    if (thumb === 'true') await createThumb(filename);
 
     return { filename, isFileExists: true };
   },
 
-  delete: async (_id: string, thumb: string) => {
+  delete: async (_id: string, thumb?: string) => {
     deleteFile(_id);
 
     if (thumb === 'true') deleteFile(`thumb-${_id}.webp`);
