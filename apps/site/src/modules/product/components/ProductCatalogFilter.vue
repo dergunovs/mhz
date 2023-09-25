@@ -48,10 +48,10 @@
         </div>
 
         <div v-for="(item, key, index) in filters.fields" :key="key" :class="$style.filter">
-          <UiSpoiler v-model="fieldSpoilers[index]" :title="item.fieldUnits ? `${key}, ${item.fieldUnits}` : `${key}`">
+          <UiSpoiler v-model="fieldSpoilers[index]" :title="item?.fieldUnits ? `${key}, ${item.fieldUnits}` : `${key}`">
             <div :class="$style.values">
               <UiCheckbox
-                v-for="value in item.fieldValues"
+                v-for="value in item?.fieldValues"
                 :key="value.value.toString()"
                 :modelValue="
                   choosenFields.some(
@@ -169,15 +169,15 @@ function findNewCount(
   return found.filter(Boolean)[0] || 0;
 }
 
-function findNewFieldCount(newFilters: IFilterField, title: string, values: IFilterFieldValue[]) {
+function findNewFieldCount(newFilters: IFilterField, title: string, values?: IFilterFieldValue[]) {
   const found: IFilterFieldValue[] = [];
 
   Object.entries(newFilters).forEach(([newTitle, newValues]) => {
     if (title === newTitle) {
-      values.forEach((oldValue) => {
+      values?.forEach((oldValue) => {
         let value = { value: oldValue.value, count: 0 };
 
-        newValues.fieldValues.forEach((newValue) => {
+        newValues?.fieldValues?.forEach((newValue) => {
           if (oldValue.value === newValue.value) {
             value = newValue;
           }
@@ -224,7 +224,7 @@ watch(
         Object.entries(oldFields).map(([title, values]) => {
           return [
             title,
-            { fieldUnits: values.fieldUnits, fieldValues: findNewFieldCount(newFields, title, values.fieldValues) },
+            { fieldUnits: values?.fieldUnits, fieldValues: findNewFieldCount(newFields, title, values?.fieldValues) },
           ];
         })
       );

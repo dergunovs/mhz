@@ -51,7 +51,7 @@
     />
 
     <ImagePreview
-      v-if="formData.imageUrls.length"
+      v-if="formData.imageUrls?.length"
       :urls="formData.imageUrls"
       isThumb
       @update="updateImages"
@@ -121,7 +121,7 @@ function removeImage(fileToRemove: File) {
 }
 
 function deleteImage(imageToDelete: string, isThumb: boolean) {
-  formData.value.imageUrls = formData.value.imageUrls.filter((image) => image !== imageToDelete);
+  formData.value.imageUrls = formData.value.imageUrls?.filter((image) => image !== imageToDelete);
 
   if (isThumb) {
     const thumbToDelete = `thumb-${imageToDelete}.webp`;
@@ -142,7 +142,7 @@ const { mutate: mutateUploadFiles } = uploadFiles(
     onSuccess: (data: string[]) => {
       const thumbs = data.map((url) => `thumb-${url}.webp`);
 
-      formData.value.imageUrls = [...formData.value.imageUrls, ...data];
+      formData.value.imageUrls = [...(formData.value.imageUrls || []), ...data];
       formData.value.thumbUrls = [...formData.value.thumbUrls, ...thumbs];
       images.value = [];
       toast.success('Images added');

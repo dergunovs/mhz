@@ -2,7 +2,12 @@
   <div>
     <div :class="$style.top">
       <div :class="$style.image">
-        <UiSlider :slides="props.product.imageUrls" :thumbs="props.product.thumbUrls" :path="`${PATH_UPLOAD}/`" />
+        <UiSlider
+          v-if="props.product.imageUrls"
+          :slides="props.product.imageUrls"
+          :thumbs="props.product.thumbUrls"
+          :path="`${PATH_UPLOAD}/`"
+        />
       </div>
 
       <div :class="$style.fields">
