@@ -76,7 +76,7 @@ export const productService: IProductService = {
   delete: async (_id?: string) => {
     const product = await Product.findOne({ _id });
 
-    product?.imageUrls.forEach((image) => {
+    product?.imageUrls?.forEach((image) => {
       deleteFile(image);
     });
 

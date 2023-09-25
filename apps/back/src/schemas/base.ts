@@ -35,7 +35,7 @@ export const baseParams: JSONSchemaType<IBaseParams> = {
   additionalProperties: false,
 };
 
-export const queryParams: JSONSchemaType<IQuery> = {
+export const queryParams: JSONSchemaType<Omit<IQuery, 'fields'>> = {
   $id: 'QueryParams',
   type: 'object',
   properties: {
@@ -51,10 +51,8 @@ export const queryParams: JSONSchemaType<IQuery> = {
       maxItems: 2,
       nullable: true,
     },
-    fields: { type: 'array', items: { type: 'string' }, nullable: true },
     initiator: { enum: ['category', 'manufacturer'], type: 'string', nullable: true },
     customer: { type: 'string', nullable: true },
   },
   $schema: 'http://json-schema.org/draft-07/schema#',
-  additionalProperties: false,
 };

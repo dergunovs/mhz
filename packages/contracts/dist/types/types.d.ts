@@ -32,7 +32,7 @@ export interface ICategoryField extends IEntity {
 export interface ICategory extends IEntity {
   title: string;
   description?: string;
-  iconUrl: string;
+  iconUrl?: string;
   fields?: ICategoryField[];
   views?: number;
 }
@@ -40,8 +40,8 @@ export interface ICategory extends IEntity {
 export interface IManufacturer extends IEntity {
   title: string;
   description?: string;
-  country: string;
-  logoUrl: string;
+  country?: string;
+  logoUrl?: string;
   views?: number;
 }
 
@@ -50,7 +50,7 @@ export interface IProduct extends IEntity {
   description?: string;
   price: number;
   isInStock: boolean;
-  imageUrls: string[];
+  imageUrls?: string[];
   thumbUrls: string[];
   category: ICategory;
   manufacturer: IManufacturer;
@@ -113,10 +113,12 @@ export interface IFilterBaseValue {
 }
 
 export interface IFilterField {
-  [key: string]: {
-    fieldUnits?: string;
-    fieldValues: IFilterFieldValue[];
-  };
+  [key: string]:
+    | {
+        fieldUnits?: string;
+        fieldValues?: IFilterFieldValue[];
+      }
+    | undefined;
 }
 
 export interface IFilterData {

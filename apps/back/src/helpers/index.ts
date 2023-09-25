@@ -7,7 +7,6 @@ import { Model, Schema, Types, Document } from 'mongoose';
 import type {
   IFilterField,
   IFilterData,
-  IFilterFieldValue,
   IQuery,
   IUserToken,
   ICategory,
@@ -162,10 +161,10 @@ export async function getProductFilters(options?: IQuery, isInitial?: boolean): 
 
     filterByFields.forEach((item) => {
       if (item.title === title) {
-        groupedFields[title].fieldUnits = item.fieldUnits;
-        groupedFields[title].fieldValues.push({ value: item.fieldValue, count: item.count });
+        (groupedFields[title] as IFilterField).fieldUnits = item.fieldUnits;
+        groupedFields[title]?.fieldValues?.push({ value: item.fieldValue, count: item.count });
 
-        groupedFields[title].fieldValues.sort((a, b) =>
+        groupedFields[title]?.fieldValues?.sort((a, b) =>
           item.fieldType === 'number'
             ? Number(a.value) - Number(b.value)
             : a.value.toString().localeCompare(b.value.toString())
@@ -176,7 +175,7 @@ export async function getProductFilters(options?: IQuery, isInitial?: boolean): 
 
   const orderedFields = Object.keys(groupedFields)
     .sort()
-    .reduce((obj: { [key: string]: { fieldUnits?: string; fieldValues: IFilterFieldValue[] } }, key) => {
+    .reduce((obj: IFilterField, key) => {
       obj[key] = groupedFields[key];
 
       return obj;
