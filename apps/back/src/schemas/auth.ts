@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { TUserRole, IUserToken, ILoginData, ISignUpData } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseReply } from './base.js';
 
 const tags = ['Auth'];
@@ -55,14 +56,14 @@ export const signUpDataModel: JSONSchemaType<ISignUpData> = {
   additionalProperties: false,
 };
 
-export const authCheckSchema = {
+export const authCheckSchema: ISchema = {
   schema: { tags, response: { 200: baseReply } },
 };
 
-export const authLoginSchema = {
+export const authLoginSchema: ISchema = {
   schema: { tags, response: { 200: userTokenModel }, body: loginDataModel },
 };
 
-export const authSignUpSchema = {
+export const authSignUpSchema: ISchema = {
   schema: { tags, response: { 201: baseReply }, body: signUpDataModel },
 };

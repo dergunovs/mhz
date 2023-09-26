@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { IFilterBaseValue, IFilterData, IFilterField, IProduct, TInitiator } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply, queryParams } from './base.js';
 
 const tags = ['Product'];
@@ -137,30 +138,37 @@ export const productPriceRangeReply: JSONSchemaType<number[]> = {
   maxItems: 2,
 };
 
-export const productGetManySchema = {
-  schema: { tags, response: { 200: productsReply }, query: queryParams },
+export const productGetManySchema: ISchema = {
+  schema: { tags, response: { 200: productsReply }, querystring: queryParams },
 };
 
-export const productGetOneSchema = {
+export const productGetOneSchema: ISchema = {
   schema: { tags, response: { 200: productReply }, params: baseParams },
 };
 
-export const productPriceRangeSchema = {
-  schema: { tags, response: { 200: productPriceRangeReply }, query: productQuery },
+export const productPriceRangeSchema: ISchema = {
+  schema: { tags, response: { 200: productPriceRangeReply }, querystring: productQuery },
 };
 
-export const productFiltersSchema = {
-  schema: { tags, response: { 200: productFilterModel }, query: productQuery },
+export const productFiltersSchema: ISchema = {
+  schema: { tags, response: { 200: productFilterModel }, querystring: productQuery },
 };
 
-export const productUpdateSchema = {
-  schema: { tags, response: { 200: baseReply }, body: productModel, params: baseParams },
+export const productUpdateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: baseReply },
+    body: productModel,
+    params: baseParams,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const productCreateSchema = {
-  schema: { tags, response: { 201: baseReply }, body: productModel },
+export const productCreateSchema: ISchema = {
+  schema: { tags, response: { 201: baseReply }, body: productModel, security: [{ token: [] }], summary: 'manager' },
 };
 
-export const productDeleteSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const productDeleteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'manager' },
 };

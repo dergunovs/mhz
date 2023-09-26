@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { ICategoryField, ICategory } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply, queryParams } from './base.js';
 
 const tags = ['Category'];
@@ -62,22 +63,35 @@ export const categoriesReply: JSONSchemaType<{ data: ICategory[] }> = {
   additionalProperties: false,
 };
 
-export const categoryGetManySchema = {
-  schema: { tags, response: { 200: categoriesReply }, query: queryParams },
+export const categoryGetManySchema: ISchema = {
+  schema: { tags, response: { 200: categoriesReply }, querystring: queryParams },
 };
 
-export const categoryGetOneSchema = {
+export const categoryGetOneSchema: ISchema = {
   schema: { tags, response: { 200: categoryReply }, params: baseParams },
 };
 
-export const categoryUpdateSchema = {
-  schema: { tags, response: { 200: baseReply }, body: categoryModel, params: baseParams },
+export const categoryUpdateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: baseReply },
+    body: categoryModel,
+    params: baseParams,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const categoryCreateSchema = {
-  schema: { tags, response: { 201: baseReply }, body: categoryModel },
+export const categoryCreateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 201: baseReply },
+    body: categoryModel,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const categoryDeleteSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const categoryDeleteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'manager' },
 };

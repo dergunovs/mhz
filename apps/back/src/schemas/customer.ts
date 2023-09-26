@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { ICartItem, ICustomer, IProduct, IProductWatched } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply, queryParams } from './base.js';
 import { signUpDataModel } from './auth.js';
 
@@ -151,58 +152,64 @@ export const addToCartBody: JSONSchemaType<{ _id: string | string[] }> = {
   additionalProperties: false,
 };
 
-export const customerGetManySchema = {
-  schema: { tags, response: { 200: customersReply }, query: queryParams },
+export const customerGetManySchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: customersReply },
+    querystring: queryParams,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const customerGetOneSchema = {
-  schema: { tags, response: { 200: customerReply }, params: baseParams },
+export const customerGetOneSchema: ISchema = {
+  schema: { tags, response: { 200: customerReply }, params: baseParams, security: [{ token: [] }], summary: 'manager' },
 };
 
-export const customerGetCurrentSchema = {
-  schema: { tags, response: { 200: customerModel } },
+export const customerGetCurrentSchema: ISchema = {
+  schema: { tags, response: { 200: customerModel }, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerGetCartSchema = {
-  schema: { tags, response: { 200: cartReply } },
+export const customerGetCartSchema: ISchema = {
+  schema: { tags, response: { 200: cartReply }, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerGetWatchedSchema = {
-  schema: { tags, response: { 200: watchedReply } },
+export const customerGetWatchedSchema: ISchema = {
+  schema: { tags, response: { 200: watchedReply }, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerGetFavouritesSchema = {
-  schema: { tags, response: { 200: favouritesReply } },
+export const customerGetFavouritesSchema: ISchema = {
+  schema: { tags, response: { 200: favouritesReply }, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerUpdateSchema = {
-  schema: { tags, response: { 200: baseReply }, body: customerReply },
+export const customerUpdateSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, body: customerReply, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerUpdateCartSchema = {
-  schema: { tags, response: { 200: baseReply }, body: updateCartBody },
+export const customerUpdateCartSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, body: updateCartBody, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerCreateSchema = {
+export const customerCreateSchema: ISchema = {
   schema: { tags, response: { 201: baseReply }, body: signUpDataModel },
 };
 
-export const customerAddToCartSchema = {
-  schema: { tags, response: { 201: baseReply }, body: addToCartBody },
+export const customerAddToCartSchema: ISchema = {
+  schema: { tags, response: { 201: baseReply }, body: addToCartBody, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerCreteFavouriteSchema = {
-  schema: { tags, response: { 201: baseReply }, body: baseParams },
+export const customerCreteFavouriteSchema: ISchema = {
+  schema: { tags, response: { 201: baseReply }, body: baseParams, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerDeleteSchema = {
-  schema: { tags, response: { 200: baseReply } },
+export const customerDeleteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerDeleteFavouriteSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const customerDeleteFavouriteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const customerDeleteFromCartSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const customerDeleteFromCartSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'customer' },
 };

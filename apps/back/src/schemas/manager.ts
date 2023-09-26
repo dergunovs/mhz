@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { IManager } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply, queryParams } from './base.js';
 
 const tags = ['Manager'];
@@ -46,22 +47,35 @@ export const managersReply: JSONSchemaType<{ data: IManager[]; total: number }> 
   additionalProperties: false,
 };
 
-export const managerGetManySchema = {
-  schema: { tags, response: { 200: managersReply }, query: queryParams },
+export const managerGetManySchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: managersReply },
+    querystring: queryParams,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const managerGetOneSchema = {
-  schema: { tags, response: { 200: managerReply }, params: baseParams },
+export const managerGetOneSchema: ISchema = {
+  schema: { tags, response: { 200: managerReply }, params: baseParams, security: [{ token: [] }], summary: 'manager' },
 };
 
-export const managerUpdateSchema = {
-  schema: { tags, response: { 200: baseReply }, body: managerModel, params: baseParams },
+export const managerUpdateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: baseReply },
+    body: managerModel,
+    params: baseParams,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const managerCreateSchema = {
-  schema: { tags, response: { 201: baseReply } },
+export const managerCreateSchema: ISchema = {
+  schema: { tags, response: { 201: baseReply }, security: [{ token: [] }], summary: 'manager' },
 };
 
-export const managerDeleteSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const managerDeleteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'manager' },
 };

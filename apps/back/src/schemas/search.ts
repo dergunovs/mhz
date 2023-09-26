@@ -1,6 +1,8 @@
 import type { JSONSchemaType } from 'ajv';
 import type { ISearchResult, ISearchResults } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
+
 const tags = ['Search'];
 
 export const searchResultModel: JSONSchemaType<ISearchResult> = {
@@ -33,6 +35,6 @@ export const searchResultsModel: JSONSchemaType<ISearchResults> = {
   additionalProperties: false,
 };
 
-export const searchSchema = {
+export const searchSchema: ISchema = {
   schema: { tags, response: { 200: searchResultsModel } },
 };

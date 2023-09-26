@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { IConfiguration } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply, queryParams } from './base.js';
 
 const tags = ['Configuration'];
@@ -63,22 +64,41 @@ export const configurationsReply: JSONSchemaType<{ data: IConfiguration[]; total
   additionalProperties: false,
 };
 
-export const configurationGetManySchema = {
-  schema: { tags, response: { 200: configurationsReply }, query: queryParams },
+export const configurationGetManySchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: configurationsReply },
+    querystring: queryParams,
+    security: [{ token: [] }],
+    summary: 'any',
+  },
 };
 
-export const configurationGetOneSchema = {
+export const configurationGetOneSchema: ISchema = {
   schema: { tags, response: { 200: configurationReply }, params: baseParams },
 };
 
-export const configurationUpdateSchema = {
-  schema: { tags, response: { 200: baseReply }, body: configurationModel, params: baseParams },
+export const configurationUpdateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: baseReply },
+    body: configurationModel,
+    params: baseParams,
+    security: [{ token: [] }],
+    summary: 'customer',
+  },
 };
 
-export const configurationCreateSchema = {
-  schema: { tags, response: { 201: baseReply }, body: configurationModel },
+export const configurationCreateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 201: baseReply },
+    body: configurationModel,
+    security: [{ token: [] }],
+    summary: 'customer',
+  },
 };
 
-export const configurationDeleteSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const configurationDeleteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'any' },
 };

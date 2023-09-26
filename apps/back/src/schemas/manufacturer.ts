@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { IManufacturer } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply, queryParams } from './base.js';
 
 const tags = ['Manufacturer'];
@@ -46,22 +47,29 @@ export const manufacturersReply: JSONSchemaType<{ data: IManufacturer[]; total: 
   additionalProperties: false,
 };
 
-export const manufacturerGetManySchema = {
-  schema: { tags, response: { 200: manufacturersReply }, query: queryParams },
+export const manufacturerGetManySchema: ISchema = {
+  schema: { tags, response: { 200: manufacturersReply }, querystring: queryParams },
 };
 
-export const manufacturerGetOneSchema = {
+export const manufacturerGetOneSchema: ISchema = {
   schema: { tags, response: { 200: manufacturerReply }, params: baseParams },
 };
 
-export const manufacturerUpdateSchema = {
-  schema: { tags, response: { 200: baseReply }, body: manufacturerModel, params: baseParams },
+export const manufacturerUpdateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: baseReply },
+    body: manufacturerModel,
+    params: baseParams,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const manufacturerCreateSchema = {
-  schema: { tags, response: { 201: baseReply } },
+export const manufacturerCreateSchema: ISchema = {
+  schema: { tags, response: { 201: baseReply }, security: [{ token: [] }], summary: 'manager' },
 };
 
-export const manufacturerDeleteSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const manufacturerDeleteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'manager' },
 };

@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { IOrder, TOrderStatus } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply, queryParams } from './base.js';
 
 const tags = ['Order'];
@@ -66,22 +67,29 @@ export const ordersUpdateBody: JSONSchemaType<{ status: TOrderStatus }> = {
   additionalProperties: false,
 };
 
-export const orderGetManySchema = {
-  schema: { tags, response: { 200: ordersReply }, query: queryParams },
+export const orderGetManySchema: ISchema = {
+  schema: { tags, response: { 200: ordersReply }, querystring: queryParams, security: [{ token: [] }], summary: 'any' },
 };
 
-export const orderGetOneSchema = {
-  schema: { tags, response: { 200: orderReply }, params: baseParams },
+export const orderGetOneSchema: ISchema = {
+  schema: { tags, response: { 200: orderReply }, params: baseParams, security: [{ token: [] }], summary: 'any' },
 };
 
-export const orderUpdateSchema = {
-  schema: { tags, response: { 200: baseReply }, body: ordersUpdateBody, params: baseParams },
+export const orderUpdateSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: baseReply },
+    body: ordersUpdateBody,
+    params: baseParams,
+    security: [{ token: [] }],
+    summary: 'any',
+  },
 };
 
-export const orderCreateSchema = {
-  schema: { tags, response: { 201: orderCreateReply } },
+export const orderCreateSchema: ISchema = {
+  schema: { tags, response: { 201: orderCreateReply }, security: [{ token: [] }], summary: 'customer' },
 };
 
-export const orderDeleteSchema = {
-  schema: { tags, response: { 200: baseReply }, params: baseParams },
+export const orderDeleteSchema: ISchema = {
+  schema: { tags, response: { 200: baseReply }, params: baseParams, security: [{ token: [] }], summary: 'manager' },
 };

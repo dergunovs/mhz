@@ -1,6 +1,7 @@
 import type { JSONSchemaType } from 'ajv';
 import type { IUploadQuery } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
 import { baseParams, baseReply } from './base.js';
 
 const tags = ['Upload'];
@@ -29,14 +30,33 @@ export const uploadSingleReply: JSONSchemaType<string> = {
   $schema: 'http://json-schema.org/draft-07/schema#',
 };
 
-export const uploadMultipleSchema = {
-  schema: { tags, response: { 200: uploadMultipleReply }, query: uploadQueryModel },
+export const uploadMultipleSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: uploadMultipleReply },
+    querystring: uploadQueryModel,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const uploadSingleSchema = {
-  schema: { tags, response: { 200: uploadSingleReply }, query: uploadQueryModel },
+export const uploadSingleSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: uploadSingleReply },
+    querystring: uploadQueryModel,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };
 
-export const uploadDeleteSchema = {
-  schema: { tags, response: { 200: baseReply }, query: uploadQueryModel, params: baseParams },
+export const uploadDeleteSchema: ISchema = {
+  schema: {
+    tags,
+    response: { 200: baseReply },
+    querystring: uploadQueryModel,
+    params: baseParams,
+    security: [{ token: [] }],
+    summary: 'manager',
+  },
 };

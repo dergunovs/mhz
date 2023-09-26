@@ -15,13 +15,20 @@ export default fp(async function (fastify) {
       schemes: ['http'],
       consumes: ['application/json'],
       produces: ['application/json'],
+      securityDefinitions: {
+        token: { type: 'apiKey', name: 'Authorization', in: 'header' },
+      },
     },
   });
 
   if (process.env.IS_DEV) {
     fastify.register(swaggerUi, {
       routePrefix: '/api-docs',
-      uiConfig: { docExpansion: 'list' },
+      uiConfig: {
+        docExpansion: 'list',
+        defaultModelsExpandDepth: 0,
+        tryItOutEnabled: true,
+      },
     });
   }
 });

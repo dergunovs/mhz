@@ -35,13 +35,13 @@
     "fastify": "4.23.2",
     "fastify-plugin": "4.5.1",
     "mhz-contracts": "*",
-    "mongoose": "7.5.2",
+    "mongoose": "7.5.3",
     "qs": "6.11.2",
     "sharp": "0.32.6"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.4",
-    "@types/node": "20.6.5",
+    "@types/node": "20.7.0",
     "@typescript-eslint/eslint-plugin": "6.7.3",
     "@typescript-eslint/parser": "6.7.3",
     "esbuild": "0.18.20",

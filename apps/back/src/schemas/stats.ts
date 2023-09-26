@@ -1,6 +1,8 @@
 import type { JSONSchemaType } from 'ajv';
 import type { IEntitiesCount } from 'mhz-contracts';
 
+import { ISchema } from '../interface/index.js';
+
 const tags = ['Stats'];
 
 export const statsCountModel: JSONSchemaType<IEntitiesCount> = {
@@ -19,6 +21,6 @@ export const statsCountModel: JSONSchemaType<IEntitiesCount> = {
   additionalProperties: false,
 };
 
-export const statsCountSchema = {
-  schema: { tags, response: { 200: statsCountModel } },
+export const statsCountSchema: ISchema = {
+  schema: { tags, response: { 200: statsCountModel }, security: [{ token: [] }], summary: 'manager' },
 };
