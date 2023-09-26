@@ -9,7 +9,7 @@
 
       <CategoryCatalogPopup v-if="isShowCatalog" v-model="isShowCatalog" />
 
-      <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" />
+      <TheSearch />
     </div>
 
     <div :class="$style.buttons">
@@ -28,34 +28,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
-import { UiButton, UiSearch } from 'mhz-ui';
+import { UiButton } from 'mhz-ui';
 import { isAuth, logout, deleteAuthHeader } from 'mhz-helpers';
 
+import TheSearch from '@/layout/components/TheSearch.vue';
 import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue';
-
 import IconLogo from '@/layout/icons/logoText.svg';
 import IconCatalog from '@/layout/icons/catalog.svg?component';
 
-import { SEARCH_SCHEME, URL_MAIN } from '@/common/constants';
+import { URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { URL_CUSTOMER_ORDERS } from '@/customer/constants';
 import { URL_CART } from '@/cart/constants';
-import { search } from '@/common/services';
 
 const isShowCatalog = ref(false);
-
-const searchQuery = ref('');
-
-const { data: results, refetch, isSuccess } = search(searchQuery);
-
-watch(
-  () => searchQuery.value,
-  () => {
-    if (searchQuery.value.length > 2) refetch();
-  }
-);
 </script>
 
 <style module lang="scss">

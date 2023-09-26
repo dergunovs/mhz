@@ -12,9 +12,9 @@ import {
   API_UPLOAD_MULTIPLE,
 } from 'mhz-contracts';
 
-export function search(query: Ref<string>, isAdmin?: boolean) {
+export function search(query: Ref<string>) {
   async function fn() {
-    const { data } = await api.get<ISearchResults>(API_SEARCH, { params: { search: query.value, isAdmin } });
+    const { data } = await api.get<ISearchResults>(API_SEARCH, { params: { search: query.value } });
 
     return data as unknown as { [key: string]: { _id: string }[] };
   }

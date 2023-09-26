@@ -7,7 +7,7 @@
             {{ category.title }}
           </RouterLink>
         </td>
-        <td data-no-wrap>
+        <td>
           {{ category.views }}
         </td>
         <td data-no-wrap>

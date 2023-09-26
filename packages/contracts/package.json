@@ -1,7 +1,7 @@
 {
   "name": "mhz-contracts",
   "description": "mhz-contracts",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",

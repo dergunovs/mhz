@@ -6,7 +6,7 @@ import { baseParams, baseReply } from './base.js';
 
 const tags = ['Upload'];
 
-export const uploadQueryModel: JSONSchemaType<IUploadQuery> = {
+export const uploadQuery: JSONSchemaType<IUploadQuery> = {
   $id: 'UploadQuery',
   type: 'object',
   properties: {
@@ -34,7 +34,7 @@ export const uploadMultipleSchema: ISchema = {
   schema: {
     tags,
     response: { 200: uploadMultipleReply },
-    querystring: uploadQueryModel,
+    querystring: uploadQuery,
     security: [{ token: [] }],
     summary: 'manager',
   },
@@ -44,7 +44,7 @@ export const uploadSingleSchema: ISchema = {
   schema: {
     tags,
     response: { 200: uploadSingleReply },
-    querystring: uploadQueryModel,
+    querystring: uploadQuery,
     security: [{ token: [] }],
     summary: 'manager',
   },
@@ -54,7 +54,7 @@ export const uploadDeleteSchema: ISchema = {
   schema: {
     tags,
     response: { 200: baseReply },
-    querystring: uploadQueryModel,
+    querystring: uploadQuery,
     params: baseParams,
     security: [{ token: [] }],
     summary: 'manager',

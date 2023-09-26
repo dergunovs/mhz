@@ -5,18 +5,17 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
-import { isAuth } from 'mhz-helpers';
+import { useAuth } from 'mhz-helpers';
 
 import LoginForm from '@/auth/components/LoginForm.vue';
 
 import { URL_MAIN } from '@/common/constants';
 
-const router = useRouter();
+const { redirectIfAuth } = useAuth();
 
-if (isAuth.value) router.push(URL_MAIN);
+redirectIfAuth(URL_MAIN);
 
 useHead({
   title: 'Login',

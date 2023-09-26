@@ -1,7 +1,6 @@
 <template>
   <RouterLink :to="props.navItem.url" :class="$style.navItem">
-    <component :is="props.navItem.icon" :class="$style.icon" />
-    {{ props.navItem.title }}
+    <component :is="props.navItem.icon" :class="$style.icon" /> {{ props.navItem.title }}
   </RouterLink>
 </template>
 

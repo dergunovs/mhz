@@ -40,7 +40,12 @@ export function useAuth() {
     router.push(url);
   }
 
+  function redirectIfAuth(url: string) {
+    if (isAuth.value) router.push(url);
+  }
+
   return {
     auth,
+    redirectIfAuth,
   };
 }

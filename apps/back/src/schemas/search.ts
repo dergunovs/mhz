@@ -35,6 +35,17 @@ export const searchResultsModel: JSONSchemaType<ISearchResults> = {
   additionalProperties: false,
 };
 
+export const searchQuery: JSONSchemaType<{ search: string }> = {
+  $id: 'SearchQuery',
+  type: 'object',
+  properties: {
+    search: { type: 'string' },
+  },
+  required: ['search'],
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  additionalProperties: false,
+};
+
 export const searchSchema: ISchema = {
-  schema: { tags, response: { 200: searchResultsModel } },
+  schema: { tags, response: { 200: searchResultsModel }, querystring: searchQuery },
 };

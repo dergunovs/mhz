@@ -13,19 +13,19 @@
             {{ product.title }}
           </RouterLink>
         </td>
-        <td data-no-wrap>
+        <td>
           {{ product.category.title }}
         </td>
         <td data-no-wrap>
           {{ product.manufacturer?.title }}
         </td>
-        <td data-no-wrap>
+        <td>
           {{ product.price }}
         </td>
-        <td data-no-wrap>
+        <td>
           {{ product.isInStock ? 'Yes' : 'No' }}
         </td>
-        <td data-no-wrap>
+        <td>
           {{ product.views }}
         </td>
         <td data-no-wrap>

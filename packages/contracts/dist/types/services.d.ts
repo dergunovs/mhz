@@ -131,7 +131,11 @@ export interface IAuthService {
 }
 
 export interface ISearchService {
-  search: (search: string, isAdmin: boolean) => Promise<ISearchResults>;
+  search: (
+    search: string,
+    decode: (token: string) => IUserToken | null,
+    token?: string,
+  ) => Promise<ISearchResults>;
 }
 
 export interface IStatsService {

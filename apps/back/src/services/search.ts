@@ -1,4 +1,4 @@
-import type { ISearchResult, ISearchResults, ISearchService } from 'mhz-contracts';
+import type { ISearchResult, ISearchResults, ISearchService, IUserToken } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';
@@ -7,8 +7,12 @@ import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
 import Order from '../models/order.js';
 
+import { decodeToken } from '../helpers/index.js';
+
 export const searchService: ISearchService = {
-  search: async (search: string, isAdmin: boolean) => {
+  search: async (search: string, decode: (token: string) => IUserToken | null, token?: string) => {
+    const user = decodeToken(decode, token);
+
     let results: ISearchResults = {
       products: [],
       categories: [],
@@ -64,14 +68,14 @@ export const searchService: ISearchService = {
       const orders: ISearchResult[] = await Order.aggregate([
         { $addFields: { convertedId: { $toString: '$_id' } } },
         { $match: { convertedId: { $regex: search, $options: 'i' } } },
-        { $project: { convertedId: 0, status: 0, products: 0, customer: 0, dateCreated: 0, __v: 0 } },
+        { $project: { convertedId: 0, status: 0, products: 0, customer: 0, dateCreated: 0 } },
       ]);
 
       return orders;
     }
 
     await Promise.all(
-      isAdmin
+      user?.role === 'manager'
         ? [findProducts(), findCategories(), findManufacturers(), findManagers(), findCustomers(), findOrders()]
         : [findProducts(), findCategories(), findManufacturers()]
     ).then(([products, categories, manufacturers, managers, customers, orders]) => {

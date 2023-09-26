@@ -16,7 +16,7 @@
         <td data-no-wrap>
           {{ manufacturer.country }}
         </td>
-        <td data-no-wrap>
+        <td>
           {{ manufacturer.views }}
         </td>
         <td data-no-wrap>
