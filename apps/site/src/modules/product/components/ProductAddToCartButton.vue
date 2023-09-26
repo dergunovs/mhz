@@ -1,5 +1,7 @@
 <template>
-  <UiButton :isDisabled="!isAuth" @click="mutateAdd(props.id)">Add to cart</UiButton>
+  <UiButton :isDisabled="!isAuth" @click="mutateAdd(props.id)">
+    {{ isAuth ? 'Add to cart' : 'Sign up to buy a product' }}
+  </UiButton>
 </template>
 
 <script setup lang="ts">

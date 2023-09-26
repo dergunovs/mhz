@@ -1,10 +1,11 @@
-import { API_CATEGORY } from 'mhz-contracts';
+import { API_CATEGORY, API_CATEGORY_POPULAR } from 'mhz-contracts';
 import type { IQuery, IBaseReply, ICategory, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { categoryService } from '../services/category.js';
 import {
   categoryGetManySchema,
+  categoryGetPopularSchema,
   categoryGetOneSchema,
   categoryUpdateSchema,
   categoryCreateSchema,
@@ -17,6 +18,16 @@ export default async function (fastify: IFastifyInstance) {
     categoryGetManySchema,
     async function (request, reply) {
       const data = await categoryService.getMany<ICategory>();
+
+      reply.code(200).send(data);
+    }
+  );
+
+  fastify.get<{ Reply: { 200: ICategory[] } }>(
+    API_CATEGORY_POPULAR,
+    categoryGetPopularSchema,
+    async function (request, reply) {
+      const data = await categoryService.getPopular<ICategory>();
 
       reply.code(200).send(data);
     }

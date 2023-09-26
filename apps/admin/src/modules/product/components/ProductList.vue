@@ -19,9 +19,7 @@
         <td data-no-wrap>
           {{ product.manufacturer?.title }}
         </td>
-        <td>
-          {{ product.price }}
-        </td>
+        <td data-no-wrap>{{ product.price }} {{ CURRENCY }}</td>
         <td>
           {{ product.isInStock ? 'Yes' : 'No' }}
         </td>
@@ -45,6 +43,7 @@ import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 
 import { URL_PRODUCT_EDIT } from '@/product/constants';
+import { CURRENCY } from '@/common/constants';
 
 interface IProps {
   products?: IProduct[];

@@ -8,6 +8,7 @@ import {
   IFilterData,
   IProduct,
   TInitiator,
+  API_PRODUCT_POPULAR,
 } from 'mhz-contracts';
 
 export function getProducts(query: Ref<IPageQuery | number>, initiator?: TInitiator, enabled?: Ref<boolean>) {
@@ -23,18 +24,6 @@ export function getProducts(query: Ref<IPageQuery | number>, initiator?: TInitia
   }
 
   return useQuery({ queryKey: [API_PRODUCT, query], queryFn: fn, enabled });
-}
-
-export function getProduct(id?: ComputedRef<string | string[]>) {
-  async function fn() {
-    if (!id?.value) return null;
-
-    const { data } = await api.get<{ data: IProduct }>(`${API_PRODUCT}/${id.value}`);
-
-    return data.data;
-  }
-
-  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
 }
 
 export function getProductPriceRange(
@@ -69,4 +58,26 @@ export function getProductFilters(
   }
 
   return useQuery({ queryKey: [API_PRODUCT_FILTERS, id], queryFn: fn, enabled });
+}
+
+export function getProductsPopular() {
+  async function fn() {
+    const { data } = await api.get<IProduct[]>(API_PRODUCT_POPULAR);
+
+    return data;
+  }
+
+  return useQuery({ queryKey: [API_PRODUCT_POPULAR], queryFn: fn });
+}
+
+export function getProduct(id?: ComputedRef<string | string[]>) {
+  async function fn() {
+    if (!id?.value) return null;
+
+    const { data } = await api.get<{ data: IProduct }>(`${API_PRODUCT}/${id.value}`);
+
+    return data.data;
+  }
+
+  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
 }

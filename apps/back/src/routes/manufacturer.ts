@@ -1,10 +1,11 @@
-import { API_MANUFACTURER } from 'mhz-contracts';
+import { API_MANUFACTURER, API_MANUFACTURER_POPULAR } from 'mhz-contracts';
 import type { IQuery, IBaseReply, IManufacturer, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { manufacturerService } from '../services/manufacturer.js';
 import {
   manufacturerGetManySchema,
+  manufacturerGetPopularSchema,
   manufacturerGetOneSchema,
   manufacturerUpdateSchema,
   manufacturerCreateSchema,
@@ -19,6 +20,16 @@ export default async function (fastify: IFastifyInstance) {
       const { data, total } = await manufacturerService.getMany<IManufacturer>(request.query);
 
       reply.code(200).send({ data, total });
+    }
+  );
+
+  fastify.get<{ Reply: { 200: IManufacturer[] } }>(
+    API_MANUFACTURER_POPULAR,
+    manufacturerGetPopularSchema,
+    async function (request, reply) {
+      const data = await manufacturerService.getPopular<IManufacturer>();
+
+      reply.code(200).send(data);
     }
   );
 

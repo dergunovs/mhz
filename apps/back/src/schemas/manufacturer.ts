@@ -47,8 +47,19 @@ export const manufacturersReply: JSONSchemaType<{ data: IManufacturer[]; total: 
   additionalProperties: false,
 };
 
+export const manufacturersPopularReply: JSONSchemaType<IManufacturer[]> = {
+  $id: 'ManufacturersPopularReply',
+  type: 'array',
+  items: manufacturerModel,
+  $schema: 'http://json-schema.org/draft-07/schema#',
+};
+
 export const manufacturerGetManySchema: ISchema = {
   schema: { tags, response: { 200: manufacturersReply }, querystring: queryParams },
+};
+
+export const manufacturerGetPopularSchema: ISchema = {
+  schema: { tags, response: { 200: manufacturersPopularReply } },
 };
 
 export const manufacturerGetOneSchema: ISchema = {

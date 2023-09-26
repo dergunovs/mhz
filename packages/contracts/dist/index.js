@@ -3,6 +3,7 @@ export const API_AUTH_LOGIN = "/auth/login";
 export const API_AUTH_SETUP = "/auth/setup";
 
 export const API_CATEGORY = "/category";
+export const API_CATEGORY_POPULAR = `${API_CATEGORY}/popular`;
 
 export const API_CONFIGURATION = "/configuration";
 
@@ -15,12 +16,14 @@ export const API_CUSTOMER_CART = `${API_CUSTOMER}/cart`;
 export const API_MANAGER = "/manager";
 
 export const API_MANUFACTURER = "/manufacturer";
+export const API_MANUFACTURER_POPULAR = `${API_MANUFACTURER}/popular`;
 
 export const API_ORDER = "/order";
 
 export const API_PRODUCT = "/product";
 export const API_PRODUCT_PRICE_RANGE = `${API_PRODUCT}/price`;
 export const API_PRODUCT_FILTERS = `${API_PRODUCT}/filters`;
+export const API_PRODUCT_POPULAR = `${API_PRODUCT}/popular`;
 
 export const API_SEARCH = "/search";
 

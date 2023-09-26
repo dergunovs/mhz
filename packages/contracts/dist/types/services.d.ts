@@ -103,7 +103,17 @@ export interface ICustomerService extends IBaseService {
   ) => Promise<boolean>;
 }
 
+export interface ICategoryService extends IBaseService {
+  getPopular: <T>() => Promise<T[]>;
+}
+
+export interface IManufacturerService extends IBaseService {
+  getPopular: <T>() => Promise<T[]>;
+}
+
 export interface IProductService extends IBaseService {
+  getPopular: <T>() => Promise<T[]>;
+
   getPriceRange: (
     _id: string,
     initiator: TInitiator,

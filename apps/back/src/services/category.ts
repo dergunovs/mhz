@@ -1,14 +1,25 @@
-import type { ICategory, IBaseService } from 'mhz-contracts';
+import type { ICategory, ICategoryService } from 'mhz-contracts';
 
 import Category from '../models/category.js';
 
 import { deleteFile, addView } from '../helpers/index.js';
 
-export const categoryService: IBaseService = {
+export const categoryService: ICategoryService = {
   getMany: async <T>() => {
     const categories: ICategory[] = await Category.find().select('-description -fields').sort('title').lean().exec();
 
     return { data: categories as T[] };
+  },
+
+  getPopular: async <T>() => {
+    const categories: ICategory[] = await Category.find()
+      .select('-description -fields')
+      .sort('-views')
+      .limit(6)
+      .lean()
+      .exec();
+
+    return categories as T[];
   },
 
   getOne: async <T>(_id: string) => {

@@ -63,8 +63,19 @@ export const categoriesReply: JSONSchemaType<{ data: ICategory[] }> = {
   additionalProperties: false,
 };
 
+export const categoriesPopularReply: JSONSchemaType<ICategory[]> = {
+  $id: 'CategoriesPopularReply',
+  type: 'array',
+  items: categoryModel,
+  $schema: 'http://json-schema.org/draft-07/schema#',
+};
+
 export const categoryGetManySchema: ISchema = {
   schema: { tags, response: { 200: categoriesReply }, querystring: queryParams },
+};
+
+export const categoryGetPopularSchema: ISchema = {
+  schema: { tags, response: { 200: categoriesPopularReply } },
 };
 
 export const categoryGetOneSchema: ISchema = {

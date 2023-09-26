@@ -1,13 +1,14 @@
-import { API_PRODUCT, API_PRODUCT_FILTERS, API_PRODUCT_PRICE_RANGE } from 'mhz-contracts';
+import { API_PRODUCT, API_PRODUCT_FILTERS, API_PRODUCT_PRICE_RANGE, API_PRODUCT_POPULAR } from 'mhz-contracts';
 import type { IQuery, TInitiator, IBaseReply, IFilterData, IProduct, IBaseParams } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { productService } from '../services/product.js';
 import {
   productGetManySchema,
-  productGetOneSchema,
+  productGetPopularSchema,
   productPriceRangeSchema,
   productFiltersSchema,
+  productGetOneSchema,
   productUpdateSchema,
   productCreateSchema,
   productDeleteSchema,
@@ -21,20 +22,6 @@ export default async function (fastify: IFastifyInstance) {
       const { data, total, filters } = await productService.getMany<IProduct>(request.query);
 
       reply.code(200).send({ data, total, filters });
-    }
-  );
-
-  fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IProduct | null } } }>(
-    `${API_PRODUCT}/:id`,
-    productGetOneSchema,
-    async function (request, reply) {
-      const data = await productService.getOne<IProduct>(
-        request.params.id,
-        fastify.jwt.decode,
-        request.headers.authorization
-      );
-
-      reply.code(200).send(data);
     }
   );
 
@@ -55,6 +42,30 @@ export default async function (fastify: IFastifyInstance) {
       const filters = await productService.getFilters(request.query._id, request.query.initiator);
 
       reply.code(200).send(filters);
+    }
+  );
+
+  fastify.get<{ Reply: { 200: IProduct[] } }>(
+    API_PRODUCT_POPULAR,
+    productGetPopularSchema,
+    async function (request, reply) {
+      const data = await productService.getPopular<IProduct>();
+
+      reply.code(200).send(data);
+    }
+  );
+
+  fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IProduct | null } } }>(
+    `${API_PRODUCT}/:id`,
+    productGetOneSchema,
+    async function (request, reply) {
+      const data = await productService.getOne<IProduct>(
+        request.params.id,
+        fastify.jwt.decode,
+        request.headers.authorization
+      );
+
+      reply.code(200).send(data);
     }
   );
 

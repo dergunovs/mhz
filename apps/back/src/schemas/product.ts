@@ -119,6 +119,13 @@ export const productsReply: JSONSchemaType<{ data: IProduct[]; total: number; fi
   additionalProperties: false,
 };
 
+export const productsPopularReply: JSONSchemaType<IProduct[]> = {
+  $id: 'ProductsPopularReply',
+  type: 'array',
+  items: productModel,
+  $schema: 'http://json-schema.org/draft-07/schema#',
+};
+
 export const productQuery: JSONSchemaType<{ _id: string; initiator: TInitiator }> = {
   $id: 'ProductQuery',
   type: 'object',
@@ -142,16 +149,20 @@ export const productGetManySchema: ISchema = {
   schema: { tags, response: { 200: productsReply }, querystring: queryParams },
 };
 
-export const productGetOneSchema: ISchema = {
-  schema: { tags, response: { 200: productReply }, params: baseParams },
-};
-
 export const productPriceRangeSchema: ISchema = {
   schema: { tags, response: { 200: productPriceRangeReply }, querystring: productQuery },
 };
 
 export const productFiltersSchema: ISchema = {
   schema: { tags, response: { 200: productFilterModel }, querystring: productQuery },
+};
+
+export const productGetPopularSchema: ISchema = {
+  schema: { tags, response: { 200: productsPopularReply } },
+};
+
+export const productGetOneSchema: ISchema = {
+  schema: { tags, response: { 200: productReply }, params: baseParams },
 };
 
 export const productUpdateSchema: ISchema = {

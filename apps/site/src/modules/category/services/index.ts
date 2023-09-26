@@ -1,7 +1,7 @@
 import { ComputedRef } from 'vue';
 
 import { api, useQuery } from 'mhz-helpers';
-import { API_CATEGORY, ICategory } from 'mhz-contracts';
+import { API_CATEGORY, API_CATEGORY_POPULAR, ICategory } from 'mhz-contracts';
 
 export function getCategories(options?: object) {
   async function fn() {
@@ -11,6 +11,16 @@ export function getCategories(options?: object) {
   }
 
   return useQuery({ queryKey: [API_CATEGORY], queryFn: fn, ...options });
+}
+
+export function getCategoriesPopular() {
+  async function fn() {
+    const { data } = await api.get<ICategory[]>(API_CATEGORY_POPULAR);
+
+    return data;
+  }
+
+  return useQuery({ queryKey: [API_CATEGORY_POPULAR], queryFn: fn });
 }
 
 export function getCategory(id?: ComputedRef<string | string[]>) {

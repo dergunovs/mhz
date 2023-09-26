@@ -1,14 +1,25 @@
-import type { IBaseService, IQuery } from 'mhz-contracts';
+import type { IManufacturer, IManufacturerService, IQuery } from 'mhz-contracts';
 
 import Manufacturer from '../models/manufacturer.js';
 
 import { paginate, deleteFile, addView } from '../helpers/index.js';
 
-export const manufacturerService: IBaseService = {
+export const manufacturerService: IManufacturerService = {
   getMany: async <T>(query?: IQuery) => {
     const { data, total } = await paginate(Manufacturer, { ...query, select: '-description' });
 
     return { data: data as T[], total };
+  },
+
+  getPopular: async <T>() => {
+    const manufacturers: IManufacturer[] = await Manufacturer.find()
+      .select('-description')
+      .sort('-views')
+      .limit(6)
+      .lean()
+      .exec();
+
+    return manufacturers as T[];
   },
 
   getOne: async <T>(_id: string) => {

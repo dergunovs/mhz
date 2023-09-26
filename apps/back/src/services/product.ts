@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import type { IProductService, IQuery, IUserToken, TInitiator } from 'mhz-contracts';
+import type { IProductService, IQuery, IUserToken, TInitiator, IProduct } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 
@@ -26,6 +26,21 @@ export const productService: IProductService = {
     const filters = await getProductFilters(query, false);
 
     return { data: data as T[], total, filters };
+  },
+
+  getPopular: async <T>() => {
+    const products: IProduct[] = await Product.find()
+      .populate([
+        { path: 'category', select: 'title' },
+        { path: 'manufacturer', select: 'title' },
+      ])
+      .select('-description')
+      .sort('-description -imageUrls')
+      .limit(4)
+      .lean()
+      .exec();
+
+    return products as T[];
   },
 
   getOne: async <T>(_id: string, decode?: (token: string) => IUserToken | null, token?: string) => {

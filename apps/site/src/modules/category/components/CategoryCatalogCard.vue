@@ -4,8 +4,8 @@
       :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
       :alt="props.category.title"
       loading="lazy"
-      :width="props.isHeader ? 24 : 80"
-      :height="props.isHeader ? 24 : 80"
+      :width="props.isHeader ? 24 : 64"
+      :height="props.isHeader ? 24 : 64"
       crossorigin="anonymous"
     />
 
