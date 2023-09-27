@@ -15,8 +15,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "lint": "eslint **/*.{js,ts,vue} && stylelint **/*.{scss,vue}",
     "ts": "vue-tsc --noEmit",
-    "lint": "eslint **/*.{js,ts,vue} && stylelint **/*.{scss,vue}"
+    "test": "vitest run"
   },
   "dependencies": {
     "@unhead/vue": "1.7.4",
@@ -34,12 +35,15 @@
     "@typescript-eslint/eslint-plugin": "6.7.3",
     "@typescript-eslint/parser": "6.7.3",
     "@vitejs/plugin-vue": "4.3.4",
+    "@vitest/coverage-v8": "0.34.5",
+    "@vue/test-utils": "2.4.1",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-import-resolver-typescript": "3.6.1",
     "eslint-plugin-import": "2.28.1",
     "eslint-plugin-prettier": "5.0.0",
     "eslint-plugin-vue": "9.17.0",
+    "happy-dom": "12.2.0",
     "postcss-html": "1.5.0",
     "prettier": "3.0.3",
     "sass": "1.68.0",
@@ -51,6 +55,7 @@
     "typescript": "5.2.2",
     "vite": "4.4.9",
     "vite-svg-loader": "4.0.0",
+    "vitest": "0.34.5",
     "vue-linters-config": "0.1.12",
     "vue-tsc": "1.8.15"
   },

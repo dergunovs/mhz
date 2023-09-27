@@ -1,6 +1,6 @@
 <template>
   <div>
-    <component v-if="isLoaded" :is="layoutComponent" />
+    <component v-if="isLoaded" :is="layoutComponent" :data-layout="layoutComponent.name" data-test="app-layout" />
   </div>
 </template>
 
@@ -26,7 +26,9 @@ useHead({
 
 const isLoaded = ref(false);
 
-const layoutComponent = computed(() => (route.meta.layout === 'empty' ? LayoutEmpty : LayoutDefault));
+const layoutComponent = computed(() => {
+  return route.meta.layout === 'empty' ? LayoutEmpty : LayoutDefault;
+});
 
 const isLoginPage = window.location.pathname === URL_LOGIN;
 

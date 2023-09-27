@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -15,11 +17,24 @@ export default defineConfig({
 
   resolve: { alias: { '@': resolve(__dirname, './src/modules') } },
 
-  plugins: [vue(), svgLoader()],
+  plugins: [
+    vue(),
+    svgLoader(),
+    { name: 'vitest-setup', config: () => ({ test: { setupFiles: ['./vitest.setup.ts'] } }) },
+  ],
 
   css: {
     preprocessorOptions: {
       scss: { additionalData: `@import "mhz-ui/dist/breakpoints";` },
     },
+  },
+
+  test: {
+    clearMocks: true,
+    environment: 'happy-dom',
+    include: ['**/*.spec.ts'],
+    coverage: { provider: 'v8', reporter: ['text'], include: ['**/*.vue'], all: true },
+    testTimeout: 20000,
+    css: false,
   },
 });

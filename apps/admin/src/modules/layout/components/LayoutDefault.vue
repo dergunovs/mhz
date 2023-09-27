@@ -15,6 +15,8 @@
 <script setup lang="ts">
 import TheHeader from '@/layout/components/TheHeader.vue';
 import NavList from '@/layout/components/NavList.vue';
+
+defineOptions({ name: 'LayoutDefault' });
 </script>
 
 <style module lang="scss">

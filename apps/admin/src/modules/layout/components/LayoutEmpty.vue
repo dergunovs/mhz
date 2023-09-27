@@ -4,6 +4,10 @@
   </div>
 </template>
 
+<script setup lang="ts">
+defineOptions({ name: 'LayoutEmpty' });
+</script>
+
 <style module lang="scss">
 .layout {
   display: flex;
