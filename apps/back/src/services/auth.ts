@@ -1,8 +1,10 @@
 import bcrypt from 'bcryptjs';
-import type { IUserToken, ILoginData, ISignUpData, IAuthService } from 'mhz-contracts';
+import type { IUserToken, ILoginData, ISignUpData } from 'mhz-contracts';
 
 import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
+
+import { IAuthService } from '../interface/index.js';
 
 export const authService: IAuthService = {
   check: async (request: { jwtVerify: () => Promise<void> }) => {

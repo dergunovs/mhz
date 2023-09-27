@@ -1,4 +1,4 @@
-import type { IStatsService } from 'mhz-contracts';
+import type { IEntitiesCount } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';
@@ -6,6 +6,8 @@ import Manufacturer from '../models/manufacturer.js';
 import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
 import Order from '../models/order.js';
+
+import { IStatsService } from '../interface/index.js';
 
 export const countService: IStatsService = {
   count: async () => {
@@ -22,6 +24,6 @@ export const countService: IStatsService = {
       count = { products, categories, manufacturers, managers, customers, orders };
     });
 
-    return count;
+    return count as IEntitiesCount;
   },
 };

@@ -1,8 +1,9 @@
-import type { ICategory, ICategoryService } from 'mhz-contracts';
+import type { ICategory } from 'mhz-contracts';
 
 import Category from '../models/category.js';
 
 import { deleteFile, addView } from '../helpers/index.js';
+import { ICategoryService } from '../interface/index.js';
 
 export const categoryService: ICategoryService = {
   getMany: async <T>() => {

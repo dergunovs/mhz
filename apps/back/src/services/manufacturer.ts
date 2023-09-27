@@ -1,8 +1,9 @@
-import type { IManufacturer, IManufacturerService, IQuery } from 'mhz-contracts';
+import type { IManufacturer, IQuery } from 'mhz-contracts';
 
 import Manufacturer from '../models/manufacturer.js';
 
 import { paginate, deleteFile, addView } from '../helpers/index.js';
+import { IManufacturerService } from '../interface/index.js';
 
 export const manufacturerService: IManufacturerService = {
   getMany: async <T>(query?: IQuery) => {

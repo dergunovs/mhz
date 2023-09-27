@@ -1,4 +1,4 @@
-import type { ISearchResult, ISearchResults, ISearchService, IUserToken } from 'mhz-contracts';
+import type { ISearchResult, ISearchResults, IUserToken } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';
@@ -8,6 +8,7 @@ import Customer from '../models/customer.js';
 import Order from '../models/order.js';
 
 import { decodeToken } from '../helpers/index.js';
+import { ISearchService } from '../interface/index.js';
 
 export const searchService: ISearchService = {
   search: async (search: string, decode: (token: string) => IUserToken | null, token?: string) => {

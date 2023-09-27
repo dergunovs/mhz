@@ -2,9 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import util from 'util';
 import { pipeline } from 'stream';
-import type { IFileToUpload, IUploadService } from 'mhz-contracts';
+import type { IFileToUpload } from 'mhz-contracts';
 
 import { createThumb, deleteFile, resizeFile } from '../helpers/index.js';
+import { IUploadService } from '../interface/index.js';
 
 const pump = util.promisify(pipeline);
 

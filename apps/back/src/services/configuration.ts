@@ -1,8 +1,9 @@
-import type { IConfiguration, IBaseService, IQuery, IUserToken } from 'mhz-contracts';
+import type { IConfiguration, IQuery, IUserToken } from 'mhz-contracts';
 
 import Configuration from '../models/configuration.js';
 
 import { decodeToken, paginate } from '../helpers/index.js';
+import { IBaseService } from '../interface/index.js';
 
 export const configurationService: IBaseService = {
   getMany: async <T>(query?: IQuery, decode?: (token: string) => IUserToken | null, token?: string) => {

@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "mhz-ui",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -70,12 +70,12 @@
     "stylelint-prettier": "4.0.2",
     "typescript": "5.2.2",
     "vite": "4.4.9",
-    "vite-plugin-dts": "3.5.4",
+    "vite-plugin-dts": "3.6.0",
     "vite-plugin-static-copy": "0.17.0",
     "vite-svg-loader": "4.0.0",
     "vitest": "0.34.5",
     "vue-linters-config": "0.1.12",
-    "vue-tsc": "1.8.14"
+    "vue-tsc": "1.8.15"
   },
   "peerDependencies": {
     "vue": "3.3.4",

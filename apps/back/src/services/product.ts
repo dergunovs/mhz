@@ -1,7 +1,9 @@
 import { Types } from 'mongoose';
-import type { IProductService, IQuery, IUserToken, TInitiator, IProduct } from 'mhz-contracts';
+import type { IQuery, IUserToken, TInitiator, IProduct } from 'mhz-contracts';
 
 import Product from '../models/product.js';
+
+import { IProductService } from '../interface/index.js';
 
 import {
   decodeToken,
