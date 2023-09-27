@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<IProps>(), {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
   justify-content: center;
   height: 40px;
@@ -91,6 +91,7 @@ const props = withDefaults(defineProps<IProps>(), {
     text-decoration: underline;
     background: none;
     border: none;
+    border-radius: 0;
 
     &:hover {
       color: var(--color-primary-dark);

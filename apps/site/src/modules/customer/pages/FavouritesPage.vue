@@ -5,9 +5,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+
 import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 
 import { getCustomerFavouriteProducts } from '@/customer/services';
 
-const { data: products } = getCustomerFavouriteProducts();
+const { data: products } = getCustomerFavouriteProducts(ref(true));
 </script>

@@ -14,14 +14,19 @@
 
     <div :class="$style.buttons">
       <template v-if="isAuth">
-        <RouterLink :to="URL_CUSTOMER_ORDERS">Profile</RouterLink>
-        <RouterLink :to="URL_CART">Cart</RouterLink>
-        <UiButton @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
+        <UiButton @click="$router.push(URL_CUSTOMER_ORDERS)" layout="plain" :icon="IconProfile">Profile</UiButton>
+
+        <UiButton @click="$router.push(URL_CART)" layout="plain" :icon="IconCart">Cart</UiButton>
+
+        <UiButton @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain" :icon="IconLogout">
+          Logout
+        </UiButton>
       </template>
 
       <template v-else>
-        <RouterLink :to="URL_SIGN_UP">Sign up</RouterLink>
-        <RouterLink :to="URL_LOGIN">Login</RouterLink>
+        <UiButton @click="$router.push(URL_SIGN_UP)" layout="plain" :icon="IconSignUp">Sign up</UiButton>
+
+        <UiButton @click="$router.push(URL_LOGIN)" layout="plain" :icon="IconLogin">Login</UiButton>
       </template>
     </div>
   </header>
@@ -35,8 +40,14 @@ import { isAuth, logout, deleteAuthHeader } from 'mhz-helpers';
 
 import TheSearch from '@/layout/components/TheSearch.vue';
 import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue';
+
 import IconLogo from '@/layout/icons/logoText.svg';
 import IconCatalog from '@/layout/icons/catalog.svg?component';
+import IconProfile from '@/layout/icons/profile.svg?component';
+import IconCart from '@/layout/icons/cart.svg?component';
+import IconLogout from '@/layout/icons/logout.svg?component';
+import IconSignUp from '@/layout/icons/signup.svg?component';
+import IconLogin from '@/layout/icons/login.svg?component';
 
 import { URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
@@ -73,6 +84,6 @@ const isShowCatalog = ref(false);
 
 .buttons {
   display: flex;
-  gap: 16px;
+  gap: 32px;
 }
 </style>

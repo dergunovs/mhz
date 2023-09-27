@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 
 import { DEFAULT_SLOT } from './constants';
+import IconTest from './icons/test.svg?component';
 
 import { html } from '@/utils';
 import { UiButton } from '@/components';
@@ -40,6 +41,16 @@ export const Primary: Story = {
     setup: () => ({ args, argTypes, DEFAULT_SLOT }),
 
     template: html` <UiButton v-bind="args">{{DEFAULT_SLOT}}</UiButton>`,
+  }),
+  argTypes,
+};
+
+export const Icon: Story = {
+  render: (args, { argTypes }) => ({
+    components: { UiButton },
+    setup: () => ({ args, argTypes, DEFAULT_SLOT, IconTest }),
+
+    template: html` <UiButton v-bind="args" :icon="IconTest">{{DEFAULT_SLOT}}</UiButton>`,
   }),
   argTypes,
 };

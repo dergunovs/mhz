@@ -1,10 +1,12 @@
 <template>
   <button
     @click="isInFavourites ? mutateRemove(props.product._id) : mutateAdd(props.product._id)"
+    :title="isInFavourites ? 'Remove from favourites' : 'Add to favourites'"
+    :disabled="!isAuth"
     :class="$style.button"
+    :data-disabled="!isAuth"
     :data-active="isInFavourites"
     type="button"
-    :title="isInFavourites ? 'Remove from favourites' : 'Add to favourites'"
   >
     <IconFavourites />
   </button>
@@ -14,7 +16,7 @@
 import { computed } from 'vue';
 
 import { toast } from 'mhz-ui';
-import { useQueryClient } from 'mhz-helpers';
+import { isAuth, useQueryClient } from 'mhz-helpers';
 import { API_CUSTOMER_FAVOURITES, IProduct } from 'mhz-contracts';
 
 import IconFavourites from '@/product/icons/favourites.svg';
@@ -28,7 +30,7 @@ const props = defineProps<IProps>();
 
 const queryClient = useQueryClient();
 
-const { data: favourites } = getCustomerFavouriteProducts();
+const { data: favourites } = getCustomerFavouriteProducts(isAuth);
 
 const isInFavourites = computed(() => favourites.value?.some((fav) => fav._id === props.product._id));
 
@@ -65,6 +67,11 @@ const { mutate: mutateRemove } = removeFromFavourites({
 
   &[data-active='true'] {
     background-color: var(--color-primary-light);
+  }
+
+  &[data-disabled='true'] {
+    cursor: default;
+    opacity: 0.5;
   }
 }
 </style>

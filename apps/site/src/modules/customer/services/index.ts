@@ -1,3 +1,5 @@
+import { Ref } from 'vue';
+
 import { api, useMutation, useQuery } from 'mhz-helpers';
 import {
   API_CUSTOMER,
@@ -32,14 +34,14 @@ export function getCustomerWatchedProducts() {
   return useQuery({ queryKey: [API_CUSTOMER_WATCHED], queryFn: fn });
 }
 
-export function getCustomerFavouriteProducts(options?: object) {
+export function getCustomerFavouriteProducts(isEnabled: Ref<boolean>) {
   async function fn() {
     const { data } = await api.get<IProduct[]>(API_CUSTOMER_FAVOURITES);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_CUSTOMER_FAVOURITES], queryFn: fn, ...options });
+  return useQuery({ queryKey: [API_CUSTOMER_FAVOURITES], queryFn: fn, enabled: isEnabled });
 }
 
 export function postCustomer(options: object) {
@@ -76,7 +78,7 @@ export function addToFavourites(options: object) {
   async function fn(_id?: string) {
     if (!_id) return null;
 
-    const { data } = await api.post<IBaseReply>(API_CUSTOMER_FAVOURITES, { _id });
+    const { data } = await api.post<IBaseReply>(API_CUSTOMER_FAVOURITES, { id: _id });
 
     return data;
   }
@@ -96,14 +98,14 @@ export function removeFromFavourites(options: object) {
   return useMutation({ mutationKey: [API_CUSTOMER_FAVOURITES], mutationFn: fn, ...options });
 }
 
-export function getCustomerCart(options?: object) {
+export function getCustomerCart(isEnabled: Ref<boolean>) {
   async function fn() {
     const { data } = await api.get<ICartItem[]>(API_CUSTOMER_CART);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_CUSTOMER_CART], queryFn: fn, ...options });
+  return useQuery({ queryKey: [API_CUSTOMER_CART], queryFn: fn, enabled: isEnabled });
 }
 
 export function addToCart(options: object) {

@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useHead } from '@unhead/vue';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
@@ -20,7 +21,7 @@ import CartSummary from '@/cart/components/CartSummary.vue';
 
 import { getCustomerCart } from '@/customer/services';
 
-const { data: cart } = getCustomerCart();
+const { data: cart } = getCustomerCart(ref(true));
 
 const title = 'Cart';
 

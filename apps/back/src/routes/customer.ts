@@ -141,12 +141,12 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.post<{ Body: { _id: string }; Reply: { 201: IBaseReply; '5xx': IBaseReply } }>(
+  fastify.post<{ Body: { id: string }; Reply: { 201: IBaseReply; '5xx': IBaseReply } }>(
     API_CUSTOMER_FAVOURITES,
     { preValidation: [fastify.onlyCustomer], ...customerCreteFavouriteSchema },
     async function (request, reply) {
       const { isReachedLimit, isAlreadyExists } = await customerService.createFavourite(
-        request.body._id,
+        request.body.id,
         fastify.jwt.decode,
         request.headers.authorization
       );

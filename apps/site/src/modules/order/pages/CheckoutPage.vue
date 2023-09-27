@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
@@ -61,7 +61,7 @@ const queryClient = useQueryClient();
 
 const { data: customer } = getCurrentCustomer();
 
-const { data: cart } = getCustomerCart();
+const { data: cart } = getCustomerCart(ref(true));
 
 const price = computed(() => cart.value?.reduce((acc, item) => acc + item.count * item.product.price, 0));
 

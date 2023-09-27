@@ -17,7 +17,7 @@ import LayoutEmpty from '@/layout/components/LayoutEmpty.vue';
 import { checkAuth } from '@/auth/services';
 import { TOKEN_NAME, AUTH_URLS } from '@/auth/constants';
 import { URL_MAIN } from '@/common/constants';
-import { getCustomerFavouriteProducts } from '@/customer/services';
+import { getCustomerFavouriteProducts, getCustomerCart } from '@/customer/services';
 
 const route = useRoute();
 const router = useRouter();
@@ -34,7 +34,8 @@ const isAuthPages = AUTH_URLS.includes(window.location.pathname);
 
 const token = getCookieToken(TOKEN_NAME);
 
-const { refetch } = getCustomerFavouriteProducts({ enabled: false });
+const { refetch: getFavouriteProducts } = getCustomerFavouriteProducts(ref(false));
+const { refetch: getCart } = getCustomerCart(ref(false));
 
 if (token) {
   setAuthHeader(token);
@@ -42,7 +43,8 @@ if (token) {
   checkAuth({
     onSuccess: () => {
       setAuth(true);
-      refetch();
+      getFavouriteProducts();
+      getCart();
     },
   });
 }

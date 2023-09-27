@@ -29,7 +29,7 @@
       <div :class="$style.priceBlock">
         <div :class="$style.price">{{ props.product.price }} {{ CURRENCY }}</div>
 
-        <ProductActionButtons v-if="isAuth" :product="props.product" />
+        <ProductActionButtons :product="props.product" />
       </div>
     </div>
 
@@ -43,7 +43,6 @@
 import { RouterLink } from 'vue-router';
 
 import { IProduct } from 'mhz-contracts';
-import { isAuth } from 'mhz-helpers';
 import { UiButton } from 'mhz-ui';
 
 import ProductActionButtons from './ProductActionButtons.vue';
