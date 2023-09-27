@@ -4,6 +4,7 @@
       v-for="manufacturer in props.manufacturers"
       :key="manufacturer._id"
       :manufacturer="manufacturer"
+      :isShowTitle="props.isShowTitle"
     />
   </div>
 </template>
@@ -15,6 +16,7 @@ import ManufacturerCatalogCard from '@/manufacturer/components/ManufacturerCatal
 
 interface IProps {
   manufacturers: IManufacturer[];
+  isShowTitle?: boolean;
 }
 
 const props = defineProps<IProps>();

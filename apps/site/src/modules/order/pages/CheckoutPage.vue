@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
@@ -54,6 +54,7 @@ import { postOrder } from '@/order/services';
 import { getCurrentCustomer, getCustomerCart } from '@/customer/services';
 import { URL_PAYMENT } from '@/order/contants';
 import { CURRENCY } from '@/common/constants';
+import { useCart } from '@/cart/composables';
 
 const router = useRouter();
 
@@ -63,7 +64,7 @@ const { data: customer } = getCurrentCustomer();
 
 const { data: cart } = getCustomerCart(ref(true));
 
-const price = computed(() => cart.value?.reduce((acc, item) => acc + item.count * item.product.price, 0));
+const { price } = useCart(cart);
 
 const { mutate: mutatePostOrder } = postOrder({
   onSuccess: async (data: string) => {

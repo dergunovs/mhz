@@ -42,7 +42,7 @@ const props = defineProps<IProps>();
     align-items: center;
     justify-content: flex-start;
     width: 240px;
-    padding: 2px 16px;
+    padding: 4px 16px;
 
     .title {
       font-size: 1rem;

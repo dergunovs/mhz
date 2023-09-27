@@ -16,7 +16,7 @@
       <template v-if="isAuth">
         <UiButton @click="$router.push(URL_CUSTOMER_ORDERS)" layout="plain" :icon="IconProfile">Profile</UiButton>
 
-        <UiButton @click="$router.push(URL_CART)" layout="plain" :icon="IconCart">Cart</UiButton>
+        <CartHeaderButton />
 
         <UiButton @click="logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME)" layout="plain" :icon="IconLogout">
           Logout
@@ -39,12 +39,12 @@ import { UiButton } from 'mhz-ui';
 import { isAuth, logout, deleteAuthHeader } from 'mhz-helpers';
 
 import TheSearch from '@/layout/components/TheSearch.vue';
+import CartHeaderButton from '@/cart/components/CartHeaderButton.vue';
 import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue';
 
 import IconLogo from '@/layout/icons/logoText.svg';
 import IconCatalog from '@/layout/icons/catalog.svg?component';
 import IconProfile from '@/layout/icons/profile.svg?component';
-import IconCart from '@/layout/icons/cart.svg?component';
 import IconLogout from '@/layout/icons/logout.svg?component';
 import IconSignUp from '@/layout/icons/signup.svg?component';
 import IconLogin from '@/layout/icons/login.svg?component';
@@ -52,7 +52,6 @@ import IconLogin from '@/layout/icons/login.svg?component';
 import { URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { URL_CUSTOMER_ORDERS } from '@/customer/constants';
-import { URL_CART } from '@/cart/constants';
 
 const isShowCatalog = ref(false);
 </script>

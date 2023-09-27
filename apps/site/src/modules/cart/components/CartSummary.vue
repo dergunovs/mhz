@@ -3,7 +3,7 @@
     <div :class="$style.title">Summary</div>
 
     <div :class="$style.priceBlock">
-      <span>{{ items }} item<template v-if="items > 1">s</template></span>
+      <span>{{ count }} item<template v-if="count && count > 1">s</template></span>
       <span :class="$style.price">{{ price }} {{ CURRENCY }}</span>
     </div>
 
@@ -20,6 +20,7 @@ import { useRouter } from 'vue-router';
 import { ICartItem } from 'mhz-contracts';
 import { UiButton } from 'mhz-ui';
 
+import { useCart } from '@/cart/composables';
 import { CURRENCY } from '@/common/constants';
 import { URL_CHECKOUT } from '@/order/contants';
 
@@ -31,8 +32,9 @@ const props = defineProps<IProps>();
 
 const router = useRouter();
 
-const price = computed(() => props.cart.reduce((acc, item) => acc + item.count * item.product.price, 0));
-const items = computed(() => props.cart.reduce((acc, item) => acc + item.count, 0));
+const cartComputed = computed(() => props.cart);
+
+const { count, price } = useCart(cartComputed);
 </script>
 
 <style module lang="scss">

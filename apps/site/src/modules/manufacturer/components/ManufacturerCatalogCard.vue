@@ -9,7 +9,9 @@
       crossorigin="anonymous"
     />
 
-    <div :class="$style.title">{{ props.manufacturer.title }} ({{ props.manufacturer.country }})</div>
+    <div :class="$style.title" v-if="props.isShowTitle">
+      {{ props.manufacturer.title }} ({{ props.manufacturer.country }})
+    </div>
   </RouterLink>
 </template>
 
@@ -21,6 +23,7 @@ import { URL_MANUFACTURER } from '@/manufacturer/constants';
 
 interface IProps {
   manufacturer: IManufacturer;
+  isShowTitle?: boolean;
 }
 
 const props = defineProps<IProps>();

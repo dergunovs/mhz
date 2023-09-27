@@ -3,7 +3,7 @@
     <PageTitle :links="links">{{ title }}</PageTitle>
 
     <div :class="$style.page">
-      <ManufacturerCatalogList v-if="manufacturers?.length" :manufacturers="manufacturers" />
+      <ManufacturerCatalogList v-if="manufacturers?.length" :manufacturers="manufacturers" isShowTitle />
 
       <UiPagination
         v-if="manufacturers?.length"
