@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Popular manufacturer</h2>
+    <h2>Popular manufacturers</h2>
 
     <ManufacturerCatalogList v-if="manufacturers?.length" :manufacturers="manufacturers" />
   </div>

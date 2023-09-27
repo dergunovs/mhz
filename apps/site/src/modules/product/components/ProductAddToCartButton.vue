@@ -1,5 +1,5 @@
 <template>
-  <UiButton :isDisabled="!isAuth" @click="mutateAdd(props.id)">
+  <UiButton @click="mutateAdd(props.id)" :isAccent="!!cartCount" :isDisabled="!isAuth">
     {{ cartCount ? `Add more to cart (${cartCount})` : 'Add to cart' }}
   </UiButton>
 </template>

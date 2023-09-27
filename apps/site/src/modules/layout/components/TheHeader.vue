@@ -1,7 +1,7 @@
 <template>
   <header :class="$style.header">
     <div :class="$style.main">
-      <RouterLink :to="URL_MAIN">
+      <RouterLink :to="URL_MAIN" aria-label="Logo">
         <IconLogo :class="$style.logo" />
       </RouterLink>
 

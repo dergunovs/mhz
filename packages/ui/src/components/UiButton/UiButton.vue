@@ -2,8 +2,9 @@
   <button
     :class="$style.button"
     :data-layout="props.layout"
-    :type="props.type"
+    :data-accent="props.isAccent"
     :disabled="props.isDisabled"
+    :type="props.type"
     data-test="ui-button"
   >
     <component v-if="props.icon" :is="props.icon" data-test="ui-button-icon" />
@@ -21,6 +22,7 @@ interface IProps {
   layout?: 'primary' | 'secondary' | 'plain';
   type?: 'submit' | 'button';
   isDisabled?: boolean;
+  isAccent?: boolean;
   icon?: FunctionalComponent;
 }
 
@@ -64,6 +66,14 @@ const props = withDefaults(defineProps<IProps>(), {
     color: var(--color-gray-dark-extra);
     cursor: default;
     background: var(--color-gray-light-extra);
+  }
+
+  &[data-accent='true'] {
+    background-color: var(--color-accent);
+
+    &:hover {
+      background: var(--color-accent-dark);
+    }
   }
 
   &[data-layout='secondary'] {
