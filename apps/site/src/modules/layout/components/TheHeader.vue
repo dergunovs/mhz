@@ -91,4 +91,14 @@ const isShowCatalog = ref(false);
     padding: 16px 32px;
   }
 }
+
+@media (max-width: $tablet) {
+  .header {
+    padding: 16px;
+  }
+
+  .main {
+    gap: 24px;
+  }
+}
 </style>

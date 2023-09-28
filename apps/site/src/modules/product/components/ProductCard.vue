@@ -148,4 +148,10 @@ const props = defineProps<IProps>();
   justify-content: space-between;
   font-size: 1.25rem;
 }
+
+@media (max-width: $notebook) {
+  .fieldTitle {
+    width: 180px;
+  }
+}
 </style>

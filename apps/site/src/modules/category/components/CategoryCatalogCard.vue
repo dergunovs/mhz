@@ -67,4 +67,12 @@ const props = defineProps<IProps>();
   color: var(--color-black);
   text-align: center;
 }
+
+@media (max-width: $tablet) {
+  .card {
+    &[data-header='true'] {
+      padding: 2px 16px;
+    }
+  }
+}
 </style>

@@ -280,4 +280,10 @@ watch(
     width: 200px;
   }
 }
+
+@media (max-width: $tablet) {
+  .container {
+    width: 240px;
+  }
+}
 </style>

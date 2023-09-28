@@ -43,4 +43,17 @@ const { data: categories } = getCategories();
   border: 1px solid var(--color-gray);
   border-radius: 16px;
 }
+
+@media (max-width: $notebook) {
+  .popup {
+    left: 212px;
+  }
+}
+
+@media (max-width: $tablet) {
+  .popup {
+    left: 188px;
+    padding: 8px 0;
+  }
+}
 </style>

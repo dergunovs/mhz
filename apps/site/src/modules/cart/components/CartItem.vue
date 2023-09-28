@@ -112,4 +112,18 @@ const { mutate: updateCount } = updateCountCart({
   flex-direction: column;
   gap: 8px;
 }
+
+@media (max-width: $notebook) {
+  .cart {
+    gap: 16px;
+  }
+
+  .text {
+    width: 240px;
+  }
+
+  .priceComputed {
+    width: 148px;
+  }
+}
 </style>

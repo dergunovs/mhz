@@ -41,4 +41,10 @@ import TheHeader from '@/layout/components/TheHeader.vue';
     padding: 32px;
   }
 }
+
+@media (max-width: $tablet) {
+  .main {
+    padding: 32px 16px;
+  }
+}
 </style>

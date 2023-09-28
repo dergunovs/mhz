@@ -114,4 +114,10 @@ useHead({
   text-wrap: nowrap;
   border-top: 1px solid var(--color-gray);
 }
+
+@media (max-width: $tablet) {
+  .checkout {
+    width: 50%;
+  }
+}
 </style>

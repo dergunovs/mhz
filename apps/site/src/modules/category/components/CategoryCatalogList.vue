@@ -33,4 +33,12 @@ const props = defineProps<IProps>();
     gap: 8px;
   }
 }
+
+@media (max-width: $tablet) {
+  .list {
+    &[data-header='true'] {
+      gap: 4px;
+    }
+  }
+}
 </style>

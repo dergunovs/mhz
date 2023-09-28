@@ -153,4 +153,10 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
   gap: 4px;
   text-decoration: none;
 }
+
+@media (max-width: $tablet) {
+  .container {
+    width: 280px;
+  }
+}
 </style>

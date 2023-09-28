@@ -73,4 +73,11 @@ onBeforeUnmount(() => {
     gap: 48px 16px;
   }
 }
+
+@media (max-width: $tablet) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px 32px;
+  }
+}
 </style>
