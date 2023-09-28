@@ -1,16 +1,14 @@
 <template>
-  <div>
+  <div :class="$style.page">
     <PageTitle>{{ title }}</PageTitle>
 
-    <div :class="$style.page">
-      <ProductPopularList />
+    <ProductPopularList />
 
-      <CategoryPopularList />
+    <CategoryPopularList />
 
-      <ManufacturerPopularList />
+    <ManufacturerPopularList />
 
-      <CustomerWatchedProducts v-if="isAuth" isScroll isTitle />
-    </div>
+    <CustomerWatchedProducts v-if="isAuth" isScroll isTitle />
   </div>
 </template>
 
@@ -36,6 +34,6 @@ useHead({
 .page {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 32px;
 }
 </style>

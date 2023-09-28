@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$style.container">
     <PageTitle>{{ title }}</PageTitle>
 
     <div v-if="cart?.length" :class="$style.cart">
@@ -31,6 +31,12 @@ useHead({
 </script>
 
 <style module lang="scss">
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .cart {
   display: flex;
   gap: 64px;

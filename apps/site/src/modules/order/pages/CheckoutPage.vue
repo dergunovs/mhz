@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$style.page">
     <PageTitle>{{ title }}</PageTitle>
 
     <div :class="$style.container">
@@ -84,6 +84,12 @@ useHead({
 </script>
 
 <style module lang="scss">
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .container {
   display: flex;
   gap: 64px;

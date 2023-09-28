@@ -1,47 +1,45 @@
 <template>
-  <div>
+  <div :class="$style.page">
     <PageTitle>{{ title }}</PageTitle>
 
-    <div :class="$style.page">
-      <ConfigurationForm
-        v-if="categories && currentCategory"
-        @update="updateCategory"
-        :categories="categories"
-        :currentCategory="currentCategory"
-        :choosenProduct="choosenProduct"
-        isAuthor
+    <ConfigurationForm
+      v-if="categories && currentCategory"
+      @update="updateCategory"
+      :categories="categories"
+      :currentCategory="currentCategory"
+      :choosenProduct="choosenProduct"
+      isAuthor
+    />
+
+    <div :class="$style.products">
+      <ProductCatalogFilter
+        v-if="priceRange && filters"
+        :filtersInitial="filters"
+        :filtersBase="data?.filters"
+        :priceRange="priceRange"
+        :key="currentCategory"
+        isCategory
+        @update="updateQuery"
       />
 
-      <div :class="$style.products">
-        <ProductCatalogFilter
-          v-if="priceRange && filters"
-          :filtersInitial="filters"
-          :filtersBase="data?.filters"
-          :priceRange="priceRange"
-          :key="currentCategory"
-          isCategory
-          @update="updateQuery"
+      <div :class="$style.container">
+        <div v-if="!products?.length && !isLoading">No such products. Please, change your filters</div>
+
+        <ProductCatalogSort
+          v-show="products?.length"
+          v-model="query.sort"
+          :page="query.page"
+          @reset="(value: string) => resetQuery(value)"
         />
 
-        <div :class="$style.container">
-          <div v-if="!products?.length && !isLoading">No such products. Please, change your filters</div>
+        <ProductCatalogList v-if="products?.length" :products="products" isConfiguration @choice="handleChoice" />
 
-          <ProductCatalogSort
-            v-show="products?.length"
-            v-model="query.sort"
-            :page="query.page"
-            @reset="(value: string) => resetQuery(value)"
-          />
-
-          <ProductCatalogList v-if="products?.length" :products="products" isConfiguration @choice="handleChoice" />
-
-          <UiPagination
-            v-show="products?.length"
-            :page="query.page"
-            :total="total"
-            @update="(value: number) => setQueryPage(setPage(value, query.page))"
-          />
-        </div>
+        <UiPagination
+          v-show="products?.length"
+          :page="query.page"
+          :total="total"
+          @update="(value: number) => setQueryPage(setPage(value, query.page))"
+        />
       </div>
     </div>
   </div>
@@ -126,5 +124,11 @@ useHead({
   display: flex;
   gap: 32px;
   align-items: flex-start;
+}
+
+@media (max-width: $notebook) {
+  .products {
+    gap: 16px;
+  }
 }
 </style>

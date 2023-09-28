@@ -214,4 +214,15 @@ onMounted(() => {
   gap: 12px;
   width: 240px;
 }
+
+@media (max-width: $notebook) {
+  .form {
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .fields {
+    width: 200px;
+  }
+}
 </style>

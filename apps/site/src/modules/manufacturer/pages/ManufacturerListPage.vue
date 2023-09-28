@@ -1,17 +1,15 @@
 <template>
-  <div>
+  <div :class="$style.page">
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <div :class="$style.page">
-      <ManufacturerCatalogList v-if="manufacturers?.length" :manufacturers="manufacturers" isShowTitle />
+    <ManufacturerCatalogList v-if="manufacturers?.length" :manufacturers="manufacturers" isShowTitle />
 
-      <UiPagination
-        v-if="manufacturers?.length"
-        :page="query.page"
-        :total="total"
-        @update="(value: number) => setQueryPage(setPage(value, query.page))"
-      />
-    </div>
+    <UiPagination
+      v-if="manufacturers?.length"
+      :page="query.page"
+      :total="total"
+      @update="(value: number) => setQueryPage(setPage(value, query.page))"
+    />
   </div>
 </template>
 

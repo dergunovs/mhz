@@ -35,4 +35,10 @@ import TheHeader from '@/layout/components/TheHeader.vue';
   padding: 32px 64px;
   overflow-y: auto;
 }
+
+@media (max-width: $notebook) {
+  .main {
+    padding: 32px;
+  }
+}
 </style>

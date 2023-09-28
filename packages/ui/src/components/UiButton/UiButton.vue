@@ -18,7 +18,7 @@ import { FunctionalComponent } from 'vue';
 import { DEFAULT_LAYOUT, DEFAULT_TYPE, DEFAULT_ICON } from './constants';
 
 interface IProps {
-  layout?: 'primary' | 'secondary' | 'plain' | 'accent';
+  layout?: 'primary' | 'secondary' | 'plain' | 'accent' | 'gradient';
   type?: 'submit' | 'button';
   isDisabled?: boolean;
   icon?: FunctionalComponent;
@@ -67,9 +67,17 @@ const props = withDefaults(defineProps<IProps>(), {
   }
 
   &[data-layout='accent'] {
+    background: var(--color-accent);
+
+    &:hover {
+      background: var(--color-accent-dark);
+    }
+  }
+
+  &[data-layout='gradient'] {
     font-weight: 700;
     background: linear-gradient(340deg, var(--color-accent) 20%, var(--color-accent-light) 96%);
-    border: 2px solid var(--color-accent);
+    border: linear-gradient(340deg, var(--color-accent) 20%, var(--color-accent-light) 96%);
 
     &:hover {
       filter: hue-rotate(15deg);

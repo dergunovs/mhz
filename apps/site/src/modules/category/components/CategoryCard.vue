@@ -3,6 +3,7 @@
     <img
       :src="`${PATH_UPLOAD}/${props.category.iconUrl}`"
       :alt="props.category.title"
+      :class="$style.image"
       height="80"
       width="80"
       crossorigin="anonymous"
@@ -29,5 +30,9 @@ const props = defineProps<IProps>();
   display: flex;
   gap: 32px;
   align-items: flex-start;
+}
+
+.image {
+  flex-shrink: 0;
 }
 </style>

@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <div :class="$style.page">
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <div :class="$style.page">
-      <CategoryCatalogList v-if="categories?.length" :categories="categories" />
-    </div>
+    <CategoryCatalogList v-if="categories?.length" :categories="categories" />
   </div>
 </template>
 

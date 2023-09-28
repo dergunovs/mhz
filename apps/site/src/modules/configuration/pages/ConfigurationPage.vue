@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div :class="$style.page">
     <PageTitle>{{ title }}</PageTitle>
 
-    <div :class="$style.page" :data-scroll="isAuthor && !products?.length">
+    <div :data-scroll="isAuthor && !products?.length">
       <ConfigurationAuthor v-if="!isAuthor && configurationData?.data" :configuration="configurationData.data" />
 
       <ConfigurationForm
@@ -143,5 +143,11 @@ useHead({
   display: flex;
   gap: 32px;
   align-items: flex-start;
+}
+
+@media (max-width: $notebook) {
+  .products {
+    gap: 16px;
+  }
 }
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <Suspense>
-    <component v-if="isLoaded" :is="layoutComponent" />
-  </Suspense>
+  <component v-if="isLoaded" :is="layoutComponent" />
 </template>
 
 <script setup lang="ts">

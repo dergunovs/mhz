@@ -5,7 +5,7 @@
         <IconLogo :class="$style.logo" />
       </RouterLink>
 
-      <UiButton @click="isShowCatalog = !isShowCatalog" layout="accent" :icon="IconCatalog">Catalog</UiButton>
+      <UiButton @click="isShowCatalog = !isShowCatalog" layout="gradient" :icon="IconCatalog">Catalog</UiButton>
 
       <CategoryCatalogPopup v-if="isShowCatalog" v-model="isShowCatalog" />
 
@@ -84,5 +84,11 @@ const isShowCatalog = ref(false);
 .buttons {
   display: flex;
   gap: 32px;
+}
+
+@media (max-width: $notebook) {
+  .header {
+    padding: 16px 32px;
+  }
 }
 </style>

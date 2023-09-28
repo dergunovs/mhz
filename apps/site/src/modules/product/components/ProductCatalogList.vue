@@ -67,4 +67,10 @@ onBeforeUnmount(() => {
     overflow-x: auto;
   }
 }
+
+@media (max-width: $notebook) {
+  .list {
+    gap: 48px 16px;
+  }
+}
 </style>

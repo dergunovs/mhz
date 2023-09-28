@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$style.payment">
     <PageTitle>{{ title }}</PageTitle>
 
     <div id="bank"></div>
@@ -88,3 +88,11 @@ useHead({
   title,
 });
 </script>
+
+<style module lang="scss">
+.payment {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+</style>

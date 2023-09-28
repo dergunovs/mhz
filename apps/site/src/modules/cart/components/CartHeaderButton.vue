@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
     <UiButton @click="$router.push(URL_CART)" layout="plain" :icon="IconCart">Cart</UiButton>
-    <div :class="$style.count">{{ count }}</div>
+    <div v-if="count" :class="$style.count">{{ count }}</div>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ const { count } = useCart(cart);
 .count {
   position: absolute;
   top: -12px;
-  right: -20px;
+  right: -24px;
   display: flex;
   align-items: center;
   justify-content: center;

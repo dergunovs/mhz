@@ -1,12 +1,10 @@
 <template>
   <div :class="$style.container">
-    <div>
-      <PageTitle :links="links">
-        {{ manufacturer?.title }} <span v-if="filters">({{ filters.category[0].count }} products)</span>
-      </PageTitle>
+    <PageTitle :links="links">
+      {{ manufacturer?.title }} <span v-if="filters">({{ filters.category[0].count }} products)</span>
+    </PageTitle>
 
-      <ManufacturerCard v-if="manufacturer" :manufacturer="manufacturer" />
-    </div>
+    <ManufacturerCard v-if="manufacturer" :manufacturer="manufacturer" />
 
     <div :class="$style.products">
       <ProductCatalogFilter
@@ -109,5 +107,11 @@ useHead({
   display: flex;
   gap: 32px;
   align-items: flex-start;
+}
+
+@media (max-width: $notebook) {
+  .products {
+    gap: 16px;
+  }
 }
 </style>

@@ -274,4 +274,10 @@ watch(
   flex-direction: column;
   gap: 4px;
 }
+
+@media (max-width: $notebook) {
+  .container {
+    width: 200px;
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="product">
+  <div v-if="product" :class="$style.product">
     <PageTitle :links="links">{{ product.title }}</PageTitle>
 
     <ProductCard :product="product" />
@@ -48,3 +48,11 @@ useHead({
   title: () => product.value?.title || 'Product',
 });
 </script>
+
+<style module lang="scss">
+.product {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+</style>
