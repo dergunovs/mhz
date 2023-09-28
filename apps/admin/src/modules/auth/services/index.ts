@@ -9,7 +9,7 @@ import {
   IUserToken,
 } from 'mhz-contracts';
 
-export function checkAuth(options: object) {
+export function checkAuth(options: { onSuccess: () => void }) {
   async function fn() {
     const { data } = await api.get<IBaseReply>(API_AUTH_CHECK);
 

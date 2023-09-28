@@ -36,7 +36,6 @@ const token = getCookieToken(TOKEN_NAME);
 
 if (!isLoginPage && token) {
   setAuthHeader(token);
-
   checkAuth({
     onSuccess: () => {
       setAuth(true);

@@ -5,7 +5,6 @@ import { createHead } from '@unhead/vue';
 
 import { VueQueryPlugin } from 'mhz-helpers';
 import type { UseQueryReturnType } from 'mhz-helpers';
-import { IBaseReply } from 'mhz-contracts';
 
 import { routes } from '@/common/router/routes';
 
@@ -38,6 +37,6 @@ export function wrapperFactory(
   });
 }
 
-export const mockBaseReply = {
-  data: ref({ message: 'ok' }),
-} as UseQueryReturnType<IBaseReply, unknown>;
+export function mockQueryReply<T>(reply: object) {
+  return { data: ref(reply) } as UseQueryReturnType<T, unknown>;
+}

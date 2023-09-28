@@ -1,18 +1,27 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { IBaseReply } from 'mhz-contracts';
 import * as helpers from 'mhz-helpers';
 
 import App from './App.vue';
 
-import { mockBaseReply, wrapperFactory, router } from '@/common/test';
+import { mockQueryReply, wrapperFactory, router } from '@/common/test';
 import { TOKEN_NAME } from '@/auth/constants';
 import { URL_CATEGORY } from '@/category/constants';
 
 import * as authServices from '@/auth/services';
 
 const spyGetCookieToken = vi.spyOn(helpers, 'getCookieToken').mockImplementation((token: string) => token);
-const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader').mockImplementation((token: string) => token);
-const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockImplementation(() => mockBaseReply);
+
+const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader').mockImplementation((): Promise<void> => Promise.resolve());
+
+const spySetAuth = vi.spyOn(helpers, 'setAuth').mockImplementation((): Promise<void> => Promise.resolve());
+
+const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockImplementation((options: { onSuccess: () => void }) => {
+  options.onSuccess();
+
+  return mockQueryReply<IBaseReply>({ message: 'ok' });
+});
 
 let wrapper: VueWrapper;
 
@@ -44,9 +53,11 @@ describe('App', async () => {
     expect(spyGetCookieToken).toBeCalledWith(TOKEN_NAME);
 
     expect(spySetAuthHeader).toBeCalledTimes(0);
+    expect(spyCheckAuth).toBeCalledTimes(0);
+    expect(spySetAuth).toBeCalledTimes(0);
   });
 
-  it('sets auth if token exists and page is not login', async () => {
+  it('shows default layout and sets auth if token exists and page is not login', async () => {
     wrapper.unmount();
 
     Object.defineProperty(window, 'location', {
@@ -67,6 +78,9 @@ describe('App', async () => {
     expect(spySetAuthHeader).toBeCalledWith(TOKEN_NAME);
 
     expect(spyCheckAuth).toBeCalledTimes(1);
+
+    expect(spySetAuth).toBeCalledTimes(1);
+    expect(spySetAuth).toBeCalledWith(true);
 
     expect(wrapperNotLogin.find(layout).attributes('data-layout')).toBe('LayoutDefault');
   });
