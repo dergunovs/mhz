@@ -2,7 +2,6 @@
   <button
     :class="$style.button"
     :data-layout="props.layout"
-    :data-accent="props.isAccent"
     :disabled="props.isDisabled"
     :type="props.type"
     data-test="ui-button"
@@ -19,10 +18,9 @@ import { FunctionalComponent } from 'vue';
 import { DEFAULT_LAYOUT, DEFAULT_TYPE, DEFAULT_ICON } from './constants';
 
 interface IProps {
-  layout?: 'primary' | 'secondary' | 'plain';
+  layout?: 'primary' | 'secondary' | 'plain' | 'accent';
   type?: 'submit' | 'button';
   isDisabled?: boolean;
-  isAccent?: boolean;
   icon?: FunctionalComponent;
 }
 
@@ -68,11 +66,13 @@ const props = withDefaults(defineProps<IProps>(), {
     background: var(--color-gray-light-extra);
   }
 
-  &[data-accent='true'] {
-    background-color: var(--color-accent);
+  &[data-layout='accent'] {
+    font-weight: 700;
+    background: linear-gradient(340deg, var(--color-accent) 20%, var(--color-accent-light) 96%);
+    border: 2px solid var(--color-accent);
 
     &:hover {
-      background: var(--color-accent-dark);
+      filter: hue-rotate(15deg);
     }
   }
 

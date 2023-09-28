@@ -5,7 +5,7 @@
         <IconLogo :class="$style.logo" />
       </RouterLink>
 
-      <UiButton @click="isShowCatalog = !isShowCatalog" layout="secondary" :icon="IconCatalog">Catalog</UiButton>
+      <UiButton @click="isShowCatalog = !isShowCatalog" layout="accent" :icon="IconCatalog">Catalog</UiButton>
 
       <CategoryCatalogPopup v-if="isShowCatalog" v-model="isShowCatalog" />
 

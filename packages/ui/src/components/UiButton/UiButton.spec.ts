@@ -40,14 +40,6 @@ describe('UiButton', async () => {
     expect(wrapper.find(button).attributes('type')).toBe(DEFAULT_TYPE);
   });
 
-  it('sets accent color variant by props', async () => {
-    expect(wrapper.find(button).attributes('data-accent')).toBe('false');
-
-    await wrapper.setProps({ isAccent: true });
-
-    expect(wrapper.find(button).attributes('data-accent')).toBe('true');
-  });
-
   it('shows icon by props', async () => {
     expect(wrapper.find(buttonIcon).exists()).toBe(false);
 

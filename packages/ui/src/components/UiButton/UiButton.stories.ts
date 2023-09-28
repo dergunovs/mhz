@@ -21,8 +21,8 @@ const meta = {
 const argTypes = {
   layout: {
     control: 'select',
-    options: ['primary', 'secondary', 'plain'],
-    description: 'primary | secondary | plain',
+    options: ['primary', 'secondary', 'plain', 'accent'],
+    description: 'primary | secondary | plain | accent',
   },
   type: {
     control: 'select',
