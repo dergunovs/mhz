@@ -1,7 +1,7 @@
 {
   "name": "mhz-admin",
   "description": "9000 Mhz admin panel",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -31,11 +31,11 @@
     "vue-router": "4.2.5"
   },
   "devDependencies": {
-    "@types/node": "20.7.1",
+    "@types/node": "20.7.2",
     "@typescript-eslint/eslint-plugin": "6.7.3",
     "@typescript-eslint/parser": "6.7.3",
     "@vitejs/plugin-vue": "4.3.4",
-    "@vitest/coverage-v8": "0.34.5",
+    "@vitest/coverage-v8": "0.34.6",
     "@vue/test-utils": "2.4.1",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
@@ -55,7 +55,7 @@
     "typescript": "5.2.2",
     "vite": "4.4.9",
     "vite-svg-loader": "4.0.0",
-    "vitest": "0.34.5",
+    "vitest": "0.34.6",
     "vue-linters-config": "0.1.12",
     "vue-tsc": "1.8.15"
   },
