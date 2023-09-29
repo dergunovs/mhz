@@ -5,6 +5,7 @@ import { URL_MANAGER, URL_MANAGER_EDIT } from '@/manager/constants';
 import { URL_CATEGORY, URL_CATEGORY_EDIT } from '@/category/constants';
 import { URL_PRODUCT, URL_PRODUCT_EDIT } from '@/product/constants';
 import { URL_MANUFACTURER, URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
+import { URL_BANNER } from '@/banner/constants';
 
 import { INavItem } from '@/layout/interface';
 
@@ -15,6 +16,7 @@ import IconNavManufacturer from '@/layout/icons/nav-manufacturer.svg?component';
 import IconNavOrder from '@/layout/icons/nav-order.svg?component';
 import IconNavManager from '@/layout/icons/nav-manager.svg?component';
 import IconNavCustomer from '@/layout/icons/nav-customer.svg?component';
+import IconNavBanner from '@/layout/icons/nav-banner.svg?component';
 
 export const NAV_ITEMS: INavItem[] = [
   { _id: '1', url: URL_MAIN, title: 'Main', icon: IconNavMain },
@@ -24,6 +26,7 @@ export const NAV_ITEMS: INavItem[] = [
   { _id: '5', url: URL_ORDER, title: 'Orders', icon: IconNavOrder },
   { _id: '6', url: URL_MANAGER, title: 'Managers', icon: IconNavManager },
   { _id: '7', url: URL_CUSTOMER, title: 'Customers', icon: IconNavCustomer },
+  { _id: '8', url: URL_BANNER, title: 'Banners', icon: IconNavBanner },
 ];
 
 export const SEARCH_SCHEME = [

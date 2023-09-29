@@ -37,7 +37,7 @@ import { CURRENCY } from '@/common/constants';
 
 interface IProps {
   orders?: IOrder[];
-  modelValue: ISortOption;
+  modelValue?: ISortOption;
 }
 
 const props = defineProps<IProps>();

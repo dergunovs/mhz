@@ -106,6 +106,10 @@ export interface IProductService extends IBaseService {
   getFilters: (id: string, initiator: TInitiator) => Promise<IFilterData | undefined>;
 }
 
+export interface IBannerService extends IBaseService {
+  getActive: <T>() => Promise<T[]>;
+}
+
 export interface IAuthService {
   check: (request: { jwtVerify: () => Promise<void> }) => Promise<void>;
 

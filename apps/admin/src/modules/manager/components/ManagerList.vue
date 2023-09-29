@@ -34,7 +34,7 @@ import { URL_MANAGER_EDIT } from '@/manager/constants';
 
 interface IProps {
   managers?: IManager[];
-  modelValue: ISortOption;
+  modelValue?: ISortOption;
 }
 
 const props = defineProps<IProps>();

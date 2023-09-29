@@ -1,3 +1,6 @@
+export const API_BANNER = "/banner";
+export const API_BANNER_ACTIVE = `${API_BANNER}/active`;
+
 export const API_AUTH_CHECK = "/auth/check";
 export const API_AUTH_LOGIN = "/auth/login";
 export const API_AUTH_SETUP = "/auth/setup";

@@ -79,6 +79,14 @@ export interface IOrder extends IEntity {
   price: number;
 }
 
+export interface IBanner extends IEntity {
+  isActive: boolean;
+  text: string;
+  product: IProduct;
+  imageUrl: string;
+  color: string;
+}
+
 export interface IConfigurationParts {
   CPU?: IProduct;
   Case?: IProduct;

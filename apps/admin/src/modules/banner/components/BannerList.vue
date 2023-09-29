@@ -1,24 +1,24 @@
 <template>
   <UiTable
     :headers="tableHeaders"
-    :isLoading="!props.customers?.length"
+    :isLoading="!props.banners?.length"
     :modelValue="props.modelValue"
     @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
     @reset="(value: string) => emit('reset', value)"
   >
-    <template v-if="props.customers?.length">
-      <tr v-for="customer in props.customers" :key="customer._id">
+    <template v-if="props.banners?.length">
+      <tr v-for="banner in props.banners" :key="banner._id">
         <td data-grow>
-          <RouterLink :to="`${URL_CUSTOMER}/${customer._id}`">
-            {{ customer.email }}
+          <RouterLink :to="`${URL_BANNER_EDIT}/${banner._id}`">
+            {{ banner.product.title }}
           </RouterLink>
         </td>
-        <td data-no-wrap>{{ customer.firstName }} {{ customer.lastName }}</td>
+        <td data-no-wrap>{{ banner.isActive }}</td>
         <td data-no-wrap>
-          {{ formatDate(customer.dateCreated) }}
+          {{ formatDate(banner.dateCreated) }}
         </td>
         <td data-no-wrap>
-          {{ formatDate(customer.dateUpdated) }}
+          {{ formatDate(banner.dateUpdated) }}
         </td>
       </tr>
     </template>
@@ -26,14 +26,14 @@
 </template>
 
 <script setup lang="ts">
-import { ICustomer } from 'mhz-contracts';
+import { IBanner } from 'mhz-contracts';
 import { UiTable } from 'mhz-ui';
 import { formatDate, ISortOption } from 'mhz-helpers';
 
-import { URL_CUSTOMER } from '@/customer/constants';
+import { URL_BANNER_EDIT } from '@/banner/constants';
 
 interface IProps {
-  customers?: ICustomer[];
+  banners?: IBanner[];
   modelValue?: ISortOption;
 }
 
@@ -41,8 +41,8 @@ const props = defineProps<IProps>();
 const emit = defineEmits(['update:modelValue', 'reset']);
 
 const tableHeaders = [
-  { value: 'email', title: 'Email' },
-  { value: 'lastName', title: 'Name' },
+  { value: 'product', title: 'Product' },
+  { value: 'isActive', title: 'Is active' },
   { value: 'dateCreated', title: 'Created' },
   { value: 'dateUpdated', title: 'Updated' },
 ];

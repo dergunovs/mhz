@@ -1,3 +1,5 @@
+export declare const API_BANNER = "/banner";
+export declare const API_BANNER_ACTIVE = "/banner/active";
 export declare const API_AUTH_CHECK = "/auth/check";
 export declare const API_AUTH_LOGIN = "/auth/login";
 export declare const API_AUTH_SETUP = "/auth/setup";

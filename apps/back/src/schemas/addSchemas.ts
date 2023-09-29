@@ -7,6 +7,7 @@ import { cartItemModel, productWatchedModel, customerModel } from '../schemas/cu
 import { managerModel } from '../schemas/manager.js';
 import { manufacturerModel } from '../schemas/manufacturer.js';
 import { orderModel } from '../schemas/order.js';
+import { bannerModel } from '../schemas/banner.js';
 import {
   productFilterBaseModel,
   productFilterFieldModel,
@@ -21,6 +22,8 @@ export function addSchemas(fastify: FastifyInstance) {
   fastify.addSchema(userTokenModel);
   fastify.addSchema(loginDataModel);
   fastify.addSchema(signUpDataModel);
+
+  fastify.addSchema(bannerModel);
 
   fastify.addSchema(categoryFieldModel);
   fastify.addSchema(categoryModel);

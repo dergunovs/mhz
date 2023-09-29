@@ -39,7 +39,7 @@ import { URL_MANUFACTURER_EDIT } from '@/manufacturer/constants';
 
 interface IProps {
   manufacturers?: IManufacturer[];
-  modelValue: ISortOption;
+  modelValue?: ISortOption;
 }
 
 const props = defineProps<IProps>();
