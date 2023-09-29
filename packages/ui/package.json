@@ -1,6 +1,6 @@
 {
   "name": "mhz-ui",
-  "description": "mhz-ui",
+  "description": "9000 Mhz ui kit",
   "version": "1.0.27",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
@@ -57,7 +57,7 @@
     "eslint-plugin-vue": "9.17.0",
     "happy-dom": "12.2.1",
     "postcss-html": "1.5.0",
-    "postcss-scss": "4.0.8",
+    "postcss-scss": "4.0.9",
     "prettier": "3.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
