@@ -14,11 +14,8 @@ const router = createRouter({
   },
 });
 
-const isAuthPages = AUTH_URLS.includes(window.location.pathname);
-const token = getCookieToken(TOKEN_NAME);
-
 router.beforeEach((to, from, next) => {
-  if (isAuthPages && !token) {
+  if (AUTH_URLS.includes(to.path) && !getCookieToken(TOKEN_NAME)) {
     logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME);
   } else {
     next();

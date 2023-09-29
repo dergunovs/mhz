@@ -1,6 +1,8 @@
 <template>
   <div :class="$style.page">
-    <PageTitle>{{ title }}</PageTitle>
+    <div :class="$style.top">
+      <ConfigurationAd />
+    </div>
 
     <ProductPopularList />
 
@@ -17,16 +19,14 @@ import { useHead } from '@unhead/vue';
 
 import { isAuth } from 'mhz-helpers';
 
-import PageTitle from '@/layout/components/PageTitle.vue';
+import ConfigurationAd from '@/configuration/components/ConfigurationAd.vue';
 import CustomerWatchedProducts from '@/customer/components/CustomerWatchedProducts.vue';
 import ProductPopularList from '@/product/components/ProductPopularList.vue';
 import CategoryPopularList from '@/category/components/CategoryPopularList.vue';
 import ManufacturerPopularList from '@/manufacturer/components/ManufacturerPopularList.vue';
 
-const title = 'Main page';
-
 useHead({
-  title,
+  title: 'Main page',
 });
 </script>
 
@@ -34,6 +34,11 @@ useHead({
 .page {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 64px;
+}
+
+.top {
+  display: flex;
+  gap: 16px;
 }
 </style>
