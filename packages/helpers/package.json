@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "9000 Mhz frontend helpers and composables",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -31,7 +31,7 @@
     "vue-router": "4.2.5"
   },
   "devDependencies": {
-    "@types/node": "20.7.2",
+    "@types/node": "20.8.0",
     "@typescript-eslint/eslint-plugin": "6.7.3",
     "@typescript-eslint/parser": "6.7.3",
     "@vitejs/plugin-vue": "4.3.4",

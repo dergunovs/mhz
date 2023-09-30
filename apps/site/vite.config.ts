@@ -20,6 +20,9 @@ export default defineConfig({
     vue(),
     svgLoader(),
     VitePWA({
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,svg,png,jpg,webp,woff2}'],
+      },
       manifest: {
         name: '9000 Mhz',
         short_name: '9000 Mhz',
