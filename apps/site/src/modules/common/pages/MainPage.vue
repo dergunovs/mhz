@@ -28,7 +28,7 @@ import CategoryPopularList from '@/category/components/CategoryPopularList.vue';
 import ManufacturerPopularList from '@/manufacturer/components/ManufacturerPopularList.vue';
 
 useHead({
-  title: 'Main page',
+  title: '9000 Mhz - fake PC hardwate store',
 });
 </script>
 

@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   server: {
@@ -15,7 +16,24 @@ export default defineConfig({
 
   resolve: { alias: { '@': resolve(__dirname, './src/modules') } },
 
-  plugins: [vue(), svgLoader()],
+  plugins: [
+    vue(),
+    svgLoader(),
+    VitePWA({
+      manifest: {
+        name: '9000 Mhz',
+        short_name: '9000 Mhz',
+        description: 'Fake PC hardware store',
+        theme_color: '#ffffff',
+        icons: [
+          { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: 'pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        ],
+      },
+    }),
+  ],
 
   css: {
     preprocessorOptions: {

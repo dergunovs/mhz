@@ -8,7 +8,7 @@ import { manufacturerRoutes } from '@/manufacturer/routes';
 import { productRoutes } from '@/product/routes';
 import { customerRoutes } from '@/customer/routes';
 import { cartRoutes } from '@/cart/routes';
-import { orderRoutes } from '@/order/router';
+import { orderRoutes } from '@/order/routes';
 import { configurationRoutes } from '@/configuration/routes';
 
 export const routes: RouteRecordRaw[] = [

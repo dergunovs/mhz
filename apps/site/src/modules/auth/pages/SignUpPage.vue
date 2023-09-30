@@ -18,7 +18,7 @@ const { redirectIfAuth } = useAuth();
 redirectIfAuth(URL_MAIN);
 
 useHead({
-  title: 'Setup',
+  title: 'Sign up',
 });
 </script>
 

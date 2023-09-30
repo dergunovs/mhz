@@ -15,6 +15,7 @@
         :class="$style.bullet"
         :data-current="index - 1 === currentSlide"
         type="button"
+        aria-label="bullet"
       ></button>
     </div>
   </div>
