@@ -86,7 +86,7 @@ const props = withDefaults(defineProps<IProps>(), {
 
   &[data-layout='secondary'] {
     color: var(--color-primary);
-    background-color: var(--color-white);
+    background-color: var(--color-transparent);
     border-color: var(--color-primary);
 
     &:hover {

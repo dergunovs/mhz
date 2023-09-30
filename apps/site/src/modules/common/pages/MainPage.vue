@@ -2,6 +2,7 @@
   <div :class="$style.page">
     <div :class="$style.top">
       <ConfigurationAd />
+      <BannerSlider />
     </div>
 
     <ProductPopularList />
@@ -20,6 +21,7 @@ import { useHead } from '@unhead/vue';
 import { isAuth } from 'mhz-helpers';
 
 import ConfigurationAd from '@/configuration/components/ConfigurationAd.vue';
+import BannerSlider from '@/banner/components/BannerSlider.vue';
 import CustomerWatchedProducts from '@/customer/components/CustomerWatchedProducts.vue';
 import ProductPopularList from '@/product/components/ProductPopularList.vue';
 import CategoryPopularList from '@/category/components/CategoryPopularList.vue';

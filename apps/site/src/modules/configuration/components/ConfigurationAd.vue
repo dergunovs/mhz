@@ -28,6 +28,7 @@ import { URL_CUSTOMER_CONFIGURATION_CREATE } from '@/customer/constants';
   cursor: pointer;
   background-color: var(--color-accent);
   border-radius: 8px;
+  transition: all 200ms;
 
   &:hover {
     color: var(--color-white);
