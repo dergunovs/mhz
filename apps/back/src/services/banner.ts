@@ -23,7 +23,7 @@ export const bannerService: IBannerService = {
       .populate([
         { path: 'product', select: 'title price thumbUrls category', populate: { path: 'category', select: 'title' } },
       ])
-      .sort('dateCreated')
+      .sort('-dateCreated')
       .limit(4)
       .lean()
       .exec();

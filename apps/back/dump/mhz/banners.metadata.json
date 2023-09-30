@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"d4e9623fee2c416eabb6b6e0295847a8","collectionName":"banners","type":"collection"}
