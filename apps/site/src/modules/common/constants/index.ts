@@ -1,5 +1,4 @@
 export const URL_MAIN = '/';
-export const URL_ABOUT = '/about';
 export const URL_PRIVACY = '/privacy';
 export const URL_ERROR = '/404';
 

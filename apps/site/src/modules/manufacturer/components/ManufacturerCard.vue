@@ -35,4 +35,10 @@ const props = defineProps<IProps>();
   gap: 32px;
   align-items: flex-start;
 }
+
+.image {
+  flex-shrink: 0;
+  width: 125px;
+  height: 100px;
+}
 </style>

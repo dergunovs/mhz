@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.container">
+  <div :class="$style.page">
     <PageTitle :links="links">
       {{ manufacturer?.title }} <span v-if="filters">({{ filters.category[0].count }} products)</span>
     </PageTitle>
@@ -96,6 +96,13 @@ useHead({
 </script>
 
 <style module lang="scss">
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: calc(100vh - 128px);
+}
+
 .container {
   display: flex;
   flex-direction: column;

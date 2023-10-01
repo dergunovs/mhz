@@ -19,6 +19,7 @@
       :data-append-icon="!!props.appendIcon || props.isCopy"
       :tabindex="props.mode === 'default' ? '0' : '-1'"
       data-test="ui-input"
+      aria-label="input"
     />
 
     <component

@@ -39,6 +39,7 @@ useHead({
   display: flex;
   flex-grow: 1;
   gap: 32px;
+  min-height: calc(100vh - 128px);
 }
 
 .routerView {

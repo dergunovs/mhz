@@ -13,7 +13,6 @@
       <div :class="$style.inner">
         <RouterLink :to="URL_CATEGORY" :class="$style.link">Categories</RouterLink>
         <RouterLink :to="URL_MANUFACTURER" :class="$style.link">Manufacturers</RouterLink>
-        <RouterLink :to="URL_ABOUT" :class="$style.link">About us</RouterLink>
         <RouterLink :to="URL_PRIVACY" :class="$style.link">Privacy policy</RouterLink>
       </div>
 
@@ -42,7 +41,7 @@ import { email, required, useValidator } from 'mhz-helpers';
 
 import IconLogoWhite from '@/layout/icons/logo-text-white.svg?url';
 
-import { URL_MAIN, URL_ABOUT, URL_PRIVACY } from '@/common/constants';
+import { URL_MAIN, URL_PRIVACY } from '@/common/constants';
 import { URL_CATEGORY } from '@/category/constants';
 import { URL_MANUFACTURER } from '@/manufacturer/constants';
 

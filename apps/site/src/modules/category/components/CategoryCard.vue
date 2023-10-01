@@ -34,5 +34,7 @@ const props = defineProps<IProps>();
 
 .image {
   flex-shrink: 0;
+  width: 80px;
+  height: 80px;
 }
 </style>

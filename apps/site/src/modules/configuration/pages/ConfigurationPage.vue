@@ -2,7 +2,7 @@
   <div :class="$style.page">
     <PageTitle>{{ title }}</PageTitle>
 
-    <div :data-scroll="isAuthor && !products?.length">
+    <div>
       <ConfigurationAuthor v-if="!isAuthor && configurationData?.data" :configuration="configurationData.data" />
 
       <ConfigurationForm
@@ -126,10 +126,7 @@ useHead({
   display: flex;
   flex-direction: column;
   gap: 32px;
-
-  &[data-scroll='true'] {
-    min-height: 100vh;
-  }
+  min-height: calc(100vh - 128px);
 }
 
 .container {

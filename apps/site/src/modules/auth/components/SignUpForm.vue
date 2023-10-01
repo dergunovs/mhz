@@ -5,6 +5,8 @@
     <h2>Sign up</h2>
 
     <form @submit.prevent="submit" :class="$style.form">
+      <p>We remind you that this is not a real online store. You can use any data.</p>
+
       <UiField label="First name" isRequired :error="error('firstName')">
         <UiInput v-model="formData.firstName" isFocus />
       </UiField>

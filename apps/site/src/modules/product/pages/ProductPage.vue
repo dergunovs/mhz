@@ -1,8 +1,8 @@
 <template>
-  <div v-if="product" :class="$style.product">
-    <PageTitle :links="links">{{ product.title }}</PageTitle>
+  <div :class="$style.product">
+    <PageTitle :links="links">{{ product?.title }}</PageTitle>
 
-    <ProductCard :product="product" />
+    <ProductCard v-if="product" :product="product" />
 
     <CustomerWatchedProducts v-if="isAuth" isScroll isTitle />
   </div>
@@ -54,5 +54,6 @@ useHead({
   display: flex;
   flex-direction: column;
   gap: 32px;
+  min-height: calc(100vh - 128px);
 }
 </style>
