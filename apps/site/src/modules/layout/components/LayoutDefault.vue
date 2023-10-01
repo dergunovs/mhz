@@ -4,7 +4,11 @@
 
     <div :class="$style.container">
       <main :class="$style.main">
-        <RouterView />
+        <div :class="$style.inner">
+          <RouterView />
+        </div>
+
+        <TheFooter />
       </main>
     </div>
   </div>
@@ -12,6 +16,7 @@
 
 <script setup lang="ts">
 import TheHeader from '@/layout/components/TheHeader.vue';
+import TheFooter from '@/layout/components/TheFooter.vue';
 </script>
 
 <style module lang="scss">
@@ -29,21 +34,25 @@ import TheHeader from '@/layout/components/TheHeader.vue';
 }
 
 .main {
+  display: flex;
   flex: 1;
-  height: calc(100vh - 64px);
-  min-height: calc(100vh - 128px);
-  padding: 32px 64px;
+  flex-direction: column;
   overflow-y: auto;
 }
 
+.inner {
+  flex: 1;
+  padding: 32px 64px;
+}
+
 @media (max-width: $notebook) {
-  .main {
+  .inner {
     padding: 32px;
   }
 }
 
 @media (max-width: $tablet) {
-  .main {
+  .inner {
     padding: 32px 16px;
   }
 }

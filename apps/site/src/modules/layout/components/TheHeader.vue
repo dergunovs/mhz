@@ -42,7 +42,7 @@ import TheSearch from '@/layout/components/TheSearch.vue';
 import CartHeaderButton from '@/cart/components/CartHeaderButton.vue';
 import CategoryCatalogPopup from '@/category/components/CategoryCatalogPopup.vue';
 
-import IconLogo from '@/layout/icons/logoText.svg';
+import IconLogo from '@/layout/icons/logo-text.svg';
 import IconCatalog from '@/layout/icons/catalog.svg?component';
 import IconProfile from '@/layout/icons/profile.svg?component';
 import IconLogout from '@/layout/icons/logout.svg?component';

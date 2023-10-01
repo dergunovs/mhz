@@ -25,7 +25,7 @@ import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, toast } from 'mhz-ui';
-import { clone, useValidator, required, useQueryClient } from 'mhz-helpers';
+import { clone, useValidator, required, useQueryClient, email } from 'mhz-helpers';
 import { API_MANAGER, IManager } from 'mhz-contracts';
 
 import FormButtons from '@/common/components/FormButtons.vue';
@@ -78,7 +78,7 @@ const rules = computed(() => {
   return {
     firstName: required,
     lastName: required,
-    email: required,
+    email: [required, email],
     password: !props.manager?._id && required,
   };
 });

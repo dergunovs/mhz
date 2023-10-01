@@ -9,8 +9,8 @@ import { URL_MAIN } from '@/common/constants';
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    return savedPosition ? savedPosition : { top: 0 };
+  scrollBehavior() {
+    document.querySelector('main')?.scrollTo(0, 0);
   },
 });
 
