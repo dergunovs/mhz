@@ -10,8 +10,6 @@ Fake PC hardware store monorepo.
 
 **Storybook:** https://ui.9000mhz.ru
 
-**Design:** https://www.figma.com/file/TOqDhQK83b2x4zM0Gtev94/9000-MHz
-
 **Live coding:** https://youtube.com/playlist?list=PLOICX-WjKEZcwBaFQAfogv0vUvjcnr3Lj
 
 ## Installation
