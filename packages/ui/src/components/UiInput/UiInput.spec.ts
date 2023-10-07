@@ -10,8 +10,8 @@ import { wrapperFactory } from '@/test';
 
 const writeText = vi.fn();
 
-Object.assign(navigator, {
-  clipboard: { writeText },
+Object.defineProperty(navigator, 'clipboard', {
+  value: { writeText },
 });
 
 let wrapper: VueWrapper;
