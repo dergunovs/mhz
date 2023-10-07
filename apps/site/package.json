@@ -1,7 +1,7 @@
 {
   "name": "mhz-site",
   "description": "9000 Mhz client site",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -28,11 +28,11 @@
     "vue-router": "4.2.5"
   },
   "devDependencies": {
-    "@types/node": "20.8.0",
-    "@typescript-eslint/eslint-plugin": "6.7.3",
-    "@typescript-eslint/parser": "6.7.3",
-    "@vitejs/plugin-vue": "4.3.4",
-    "eslint": "8.50.0",
+    "@types/node": "20.8.3",
+    "@typescript-eslint/eslint-plugin": "6.7.4",
+    "@typescript-eslint/parser": "6.7.4",
+    "@vitejs/plugin-vue": "4.4.0",
+    "eslint": "8.51.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-import-resolver-typescript": "3.6.1",
     "eslint-plugin-import": "2.28.1",
@@ -40,18 +40,18 @@
     "eslint-plugin-vue": "9.17.0",
     "postcss-html": "1.5.0",
     "prettier": "3.0.3",
-    "sass": "1.68.0",
+    "sass": "1.69.0",
     "stylelint": "15.10.3",
     "stylelint-config-recess-order": "4.3.0",
     "stylelint-config-recommended-scss": "13.0.0",
     "stylelint-config-recommended-vue": "1.5.0",
     "stylelint-prettier": "4.0.2",
     "typescript": "5.2.2",
-    "vite": "4.4.9",
+    "vite": "4.4.11",
     "vite-plugin-pwa": "0.16.5",
     "vite-svg-loader": "4.0.0",
     "vue-linters-config": "0.1.12",
-    "vue-tsc": "1.8.15"
+    "vue-tsc": "1.8.16"
   },
   "engines": {
     "npm": ">=9.8.1",
