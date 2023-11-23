@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-turbo run lint --no-daemon && turbo run ts --no-daemon
+npm run lint --no-daemon && npm run ts --no-daemon
