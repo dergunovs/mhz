@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "9000 Mhz frontend helpers and composables",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -22,7 +22,7 @@
     "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/vue-query": "4.37.1",
+    "@tanstack/vue-query": "5.14.4",
     "@vueuse/core": "10.7.0",
     "@vueuse/integrations": "10.7.0",
     "async-validator": "4.2.5",

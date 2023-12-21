@@ -29,7 +29,7 @@
 
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
-        <UiButton @click="mutateUpdate('completed')" :isDisabled="props.order.status !== 'paid' || isLoading">
+        <UiButton @click="mutateUpdate('completed')" :isDisabled="props.order.status !== 'paid' || isPending">
           Mark completed
         </UiButton>
 
@@ -40,11 +40,11 @@
         <UiButton
           @click="isShowConfirmCancel = true"
           layout="secondary"
-          :isDisabled="['cancelled', 'completed'].includes(props.order.status) || isLoading"
+          :isDisabled="['cancelled', 'completed'].includes(props.order.status) || isPending"
           >Cancel order</UiButton
         >
 
-        <UiButton @click="isShowConfirmDelete = true" layout="secondary" :isDisabled="isLoading">Delete</UiButton>
+        <UiButton @click="isShowConfirmDelete = true" layout="secondary" :isDisabled="isPending">Delete</UiButton>
       </div>
     </div>
 
@@ -85,7 +85,7 @@ const isShowConfirmDelete = ref(false);
 
 const orderId = computed(() => props.order?._id);
 
-const { mutate: mutateUpdate, isLoading } = updateOrder(orderId, {
+const { mutate: mutateUpdate, isPending } = updateOrder(orderId, {
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_ORDER] });
     toast.success('Order updated');

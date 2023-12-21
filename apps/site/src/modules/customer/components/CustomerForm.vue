@@ -15,8 +15,8 @@
     </div>
 
     <div :class="$style.buttons">
-      <UiButton type="submit" :isDisabled="isLoading">Update profile</UiButton>
-      <UiButton @click="isShowConfirm = true" layout="secondary" :isDisabled="isLoading">Delete</UiButton>
+      <UiButton type="submit" :isDisabled="isPending">Update profile</UiButton>
+      <UiButton @click="isShowConfirm = true" layout="secondary" :isDisabled="isPending">Delete</UiButton>
     </div>
 
     <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete">Confirm delete?</UiModal>
@@ -50,7 +50,7 @@ const formData = ref<Omit<ICustomer, 'password'>>({
 
 const isShowConfirm = ref(false);
 
-const { mutate: mutateUpdate, isLoading } = updateCustomer({
+const { mutate: mutateUpdate, isPending } = updateCustomer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CUSTOMER] });
     toast.success('Profile updated');

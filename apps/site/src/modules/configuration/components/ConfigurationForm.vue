@@ -17,15 +17,15 @@
         <b>Summary price: {{ price }} {{ CURRENCY }}</b>
       </div>
 
-      <UiButton :isDisabled="isLoading" type="submit">{{ props.configuration ? 'Update' : 'Save' }}</UiButton>
+      <UiButton :isDisabled="isPending" type="submit">{{ props.configuration ? 'Update' : 'Save' }}</UiButton>
 
-      <UiButton v-if="props.configuration" @click="handleAddToCart" :isDisabled="isLoading">Add to cart</UiButton>
+      <UiButton v-if="props.configuration" @click="handleAddToCart" :isDisabled="isPending">Add to cart</UiButton>
 
-      <UiButton @click="router.push(URL_CUSTOMER_CONFIGURATIONS)" :isDisabled="isLoading" layout="secondary">
+      <UiButton @click="router.push(URL_CUSTOMER_CONFIGURATIONS)" :isDisabled="isPending" layout="secondary">
         Back
       </UiButton>
 
-      <UiButton v-if="props.configuration" @click="isShowConfirm = true" :isDisabled="isLoading" layout="secondary">
+      <UiButton v-if="props.configuration" @click="isShowConfirm = true" :isDisabled="isPending" layout="secondary">
         Delete
       </UiButton>
     </div>
@@ -110,7 +110,7 @@ const rules = computed(() => {
   };
 });
 
-const { mutate: mutatePost, isLoading } = postConfiguration({
+const { mutate: mutatePost, isPending } = postConfiguration({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
     toast.success('Configuration added');

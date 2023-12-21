@@ -64,7 +64,7 @@ const formData = ref<IManufacturer>({
   country: '',
 });
 
-const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
+const { mutate: mutatePost, isPending: isLoadingPost } = postManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer added');
@@ -72,7 +72,7 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postManufacturer({
   },
 });
 
-const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateManufacturer({
+const { mutate: mutateUpdate, isPending: isLoadingUpdate } = updateManufacturer({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_MANUFACTURER] });
     toast.success('Manufacturer updated');

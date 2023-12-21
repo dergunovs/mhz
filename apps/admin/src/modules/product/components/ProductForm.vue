@@ -171,7 +171,7 @@ watch(
   }
 );
 
-const { mutate: mutatePost, isLoading: isLoadingPost } = postProduct({
+const { mutate: mutatePost, isPending: isLoadingPost } = postProduct({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product added');
@@ -179,7 +179,7 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postProduct({
   },
 });
 
-const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateProduct({
+const { mutate: mutateUpdate, isPending: isLoadingUpdate } = updateProduct({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_PRODUCT] });
     toast.success('Product updated');

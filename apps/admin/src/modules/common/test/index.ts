@@ -38,5 +38,5 @@ export function wrapperFactory(
 }
 
 export function mockQueryReply<T>(reply: object) {
-  return { data: ref(reply) } as UseQueryReturnType<T, unknown>;
+  return { data: ref(reply) } as UseQueryReturnType<T, Error>;
 }

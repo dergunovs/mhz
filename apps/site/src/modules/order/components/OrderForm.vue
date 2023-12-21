@@ -30,7 +30,7 @@
       <UiButton
         @click="isShowConfirm = true"
         layout="secondary"
-        :isDisabled="['cancelled', 'completed'].includes(props.order.status) || isLoading"
+        :isDisabled="['cancelled', 'completed'].includes(props.order.status) || isPending"
         >Cancel order</UiButton
       >
     </div>
@@ -64,7 +64,7 @@ const queryClient = useQueryClient();
 
 const isShowConfirm = ref(false);
 
-const { mutate: mutateUpdate, isLoading } = updateOrder(
+const { mutate: mutateUpdate, isPending } = updateOrder(
   {
     onSuccess: async () => {
       await queryClient.refetchQueries({ queryKey: [API_ORDER] });

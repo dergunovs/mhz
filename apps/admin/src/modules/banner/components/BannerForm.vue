@@ -71,7 +71,7 @@ const formData = ref<IBanner>({
   product: {} as IProduct,
 });
 
-const { mutate: mutatePost, isLoading: isLoadingPost } = postBanner({
+const { mutate: mutatePost, isPending: isLoadingPost } = postBanner({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_BANNER] });
     toast.success('Banner added');
@@ -79,7 +79,7 @@ const { mutate: mutatePost, isLoading: isLoadingPost } = postBanner({
   },
 });
 
-const { mutate: mutateUpdate, isLoading: isLoadingUpdate } = updateBanner({
+const { mutate: mutateUpdate, isPending: isLoadingUpdate } = updateBanner({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_BANNER] });
     toast.success('Banner updated');
