@@ -12,10 +12,7 @@ import { URL_CATEGORY } from '@/category/constants';
 import * as authServices from '@/auth/services';
 
 const spyGetCookieToken = vi.spyOn(helpers, 'getCookieToken').mockImplementation((token: string) => token);
-
 const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader').mockImplementation(() => Promise.resolve());
-
-const spySetAuth = vi.spyOn(helpers, 'setAuth').mockImplementation(() => Promise.resolve());
 
 const spyCheckAuth = vi
   .spyOn(authServices, 'checkAuth')
@@ -52,7 +49,6 @@ describe('App', async () => {
 
     expect(spySetAuthHeader).toBeCalledTimes(0);
     expect(spyCheckAuth).toBeCalledTimes(0);
-    expect(spySetAuth).toBeCalledTimes(0);
   });
 
   it('shows default layout and sets auth if token exists and page is not login', async () => {
@@ -76,9 +72,6 @@ describe('App', async () => {
     expect(spySetAuthHeader).toBeCalledWith(TOKEN_NAME);
 
     expect(spyCheckAuth).toBeCalledTimes(1);
-
-    expect(spySetAuth).toBeCalledTimes(1);
-    expect(spySetAuth).toBeCalledWith(true);
 
     expect(wrapperNotLogin.find(layout).attributes('data-layout')).toBe('LayoutDefault');
   });
