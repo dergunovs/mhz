@@ -46,12 +46,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
 import { clone, usePage, usePagination } from 'mhz-helpers';
-import { ICategory, IProduct } from 'mhz-contracts';
+import { IProduct } from 'mhz-contracts';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ConfigurationForm from '@/configuration/components/ConfigurationForm.vue';
@@ -67,13 +67,12 @@ const choosenProduct = ref<IProduct>();
 
 const isCurrentCategory = ref(false);
 
-const { data: categories } = getCategories({
-  refetchOnMount: true,
-  onSuccess: (data: ICategory[]) => {
-    updateCategory(data.find((category) => category.title === 'Motherboard')?._id);
-    isCurrentCategory.value = true;
-  },
-});
+const { data: categories } = getCategories();
+
+watch(
+  () => categories.value,
+  () => getProductsAfterCategorySelect()
+);
 
 const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: [currentCategory.value] });
 
@@ -97,6 +96,15 @@ function handleChoice(choice: IProduct) {
   choosenProduct.value = clone(choice);
   document.querySelector('main')?.scrollTo(0, 0);
 }
+
+function getProductsAfterCategorySelect() {
+  updateCategory(categories.value?.find((category) => category.title === 'Motherboard')?._id);
+  isCurrentCategory.value = true;
+}
+
+onMounted(() => {
+  getProductsAfterCategorySelect();
+});
 
 const title = 'Create PC configuration';
 

@@ -24,5 +24,5 @@ export function getCustomer(id?: ComputedRef<string | string[]>) {
     return data.data;
   }
 
-  return useQuery({ queryKey: [API_CUSTOMER, id], queryFn: fn, refetchOnMount: true });
+  return useQuery({ queryKey: [API_CUSTOMER, id], queryFn: fn });
 }

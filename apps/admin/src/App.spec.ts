@@ -13,15 +13,13 @@ import * as authServices from '@/auth/services';
 
 const spyGetCookieToken = vi.spyOn(helpers, 'getCookieToken').mockImplementation((token: string) => token);
 
-const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader').mockImplementation((): Promise<void> => Promise.resolve());
+const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader').mockImplementation(() => Promise.resolve());
 
-const spySetAuth = vi.spyOn(helpers, 'setAuth').mockImplementation((): Promise<void> => Promise.resolve());
+const spySetAuth = vi.spyOn(helpers, 'setAuth').mockImplementation(() => Promise.resolve());
 
-const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockImplementation((options: { onSuccess: () => void }) => {
-  options.onSuccess();
-
-  return mockQueryReply<IBaseReply>({ message: 'ok' });
-});
+const spyCheckAuth = vi
+  .spyOn(authServices, 'checkAuth')
+  .mockImplementation(() => Promise.resolve(mockQueryReply<IBaseReply>({ message: 'ok' })));
 
 let wrapper: VueWrapper;
 

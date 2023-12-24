@@ -22,7 +22,7 @@ export function getCategory(id?: ComputedRef<string | string[]>) {
     return data.data;
   }
 
-  return useQuery({ queryKey: [API_CATEGORY, id], queryFn: fn, refetchOnMount: true });
+  return useQuery({ queryKey: [API_CATEGORY, id], queryFn: fn });
 }
 
 export function postCategory(options: object) {

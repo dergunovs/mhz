@@ -1,4 +1,4 @@
-import { api, useMutation, useQuery } from 'mhz-helpers';
+import { api, useMutation, useQuery, setAuth } from 'mhz-helpers';
 import {
   API_AUTH_CHECK,
   API_AUTH_LOGIN,
@@ -9,14 +9,19 @@ import {
   IUserToken,
 } from 'mhz-contracts';
 
-export function checkAuth(options: { onSuccess: () => void }) {
+export async function checkAuth() {
   async function fn() {
     const { data } = await api.get<IBaseReply>(API_AUTH_CHECK);
+
+    if (data.message) setAuth(true);
 
     return data;
   }
 
-  return useQuery({ queryKey: [API_AUTH_CHECK], queryFn: fn, ...options });
+  return useQuery({
+    queryKey: [API_AUTH_CHECK],
+    queryFn: fn,
+  });
 }
 
 export function setup(options: object) {

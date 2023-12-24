@@ -7,7 +7,7 @@ import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
-import { getCookieToken, setAuth, setAuthHeader } from 'mhz-helpers';
+import { getCookieToken, setAuthHeader } from 'mhz-helpers';
 
 import LayoutDefault from '@/layout/components/LayoutDefault.vue';
 import LayoutEmpty from '@/layout/components/LayoutEmpty.vue';
@@ -38,13 +38,10 @@ const { refetch: getCart } = getCustomerCart(ref(false));
 if (token) {
   setAuthHeader(token);
 
-  checkAuth({
-    onSuccess: () => {
-      setAuth(true);
-      getFavouriteProducts();
-      getCart();
-    },
-  });
+  checkAuth();
+
+  getFavouriteProducts();
+  getCart();
 }
 
 if (isAuthPages && !token) router.push(URL_MAIN);

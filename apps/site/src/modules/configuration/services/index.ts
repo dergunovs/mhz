@@ -26,7 +26,7 @@ export function getConfiguration(id?: string | string[]) {
     return data;
   }
 
-  return useQuery({ queryKey: [API_CONFIGURATION, id], queryFn: fn, refetchOnMount: true });
+  return useQuery({ queryKey: [API_CONFIGURATION, id], queryFn: fn });
 }
 
 export function updateConfiguration(options: object) {

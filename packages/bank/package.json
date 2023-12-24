@@ -1,7 +1,7 @@
 {
   "name": "mhz-bank",
   "description": "9000 Mhz fake bank app",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",

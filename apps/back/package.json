@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "9000 Mhz backend",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -50,7 +50,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.1",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-prettier": "5.1.0",
+    "eslint-plugin-prettier": "5.1.2",
     "fastify-linters-config": "0.0.9",
     "nodemon": "3.0.2",
     "prettier": "3.1.1",

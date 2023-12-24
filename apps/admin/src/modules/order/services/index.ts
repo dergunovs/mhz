@@ -24,7 +24,7 @@ export function getOrder(id?: ComputedRef<string | string[]>) {
     return data.data;
   }
 
-  return useQuery({ queryKey: [API_ORDER, id], queryFn: fn, refetchOnMount: true });
+  return useQuery({ queryKey: [API_ORDER, id], queryFn: fn });
 }
 
 export function updateOrder(id: ComputedRef<string | undefined>, options: object) {

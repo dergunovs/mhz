@@ -15,7 +15,7 @@ export function getOrders(query: Ref<IPageQuery | number>) {
   return useQuery({ queryKey: [API_ORDER, query], queryFn: fn });
 }
 
-export function getOrder(id?: ComputedRef<string | string[] | undefined>, options?: object) {
+export function getOrder(id?: ComputedRef<string | string[] | undefined>) {
   async function fn() {
     if (!id?.value) return null;
 
@@ -24,7 +24,7 @@ export function getOrder(id?: ComputedRef<string | string[] | undefined>, option
     return data.data;
   }
 
-  return useQuery({ queryKey: [API_ORDER, id], queryFn: fn, refetchOnMount: true, ...options });
+  return useQuery({ queryKey: [API_ORDER, id], queryFn: fn });
 }
 
 export function updateOrder(options: object, id?: string) {

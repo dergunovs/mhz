@@ -17,7 +17,7 @@ import { UiButton } from 'mhz-ui';
 import { logout, deleteAuthHeader } from 'mhz-helpers';
 
 import TheSearch from '@/layout/components/TheSearch.vue';
-import ImageLogo from '@/common/assets/images/logo.svg';
+import ImageLogo from '@/common/images/logo.svg';
 
 import { URL_MAIN } from '@/common/constants';
 import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';

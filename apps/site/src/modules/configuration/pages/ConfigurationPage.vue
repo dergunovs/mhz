@@ -51,13 +51,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
 import { clone, usePage, usePagination } from 'mhz-helpers';
-import { ICategory, IProduct } from 'mhz-contracts';
+import { IProduct } from 'mhz-contracts';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ConfigurationForm from '@/configuration/components/ConfigurationForm.vue';
@@ -79,17 +79,16 @@ const configurationId = computed(() => route.params.configuration);
 
 const { data: configurationData } = getConfiguration(configurationId.value);
 
-const isCategoryRequestDone = ref(false);
+const isCurrentCategory = ref(false);
 
-const { data: categories } = getCategories({
-  refetchOnMount: true,
-  onSuccess: (data: ICategory[]) => {
-    updateCategory(data.find((category) => category.title === 'Motherboard')?._id);
-    isCategoryRequestDone.value = true;
-  },
-});
+const { data: categories } = getCategories();
 
-const isAuthor = computed(() => !!configurationData.value?.isConfigurationEditable && isCategoryRequestDone.value);
+watch(
+  () => categories.value,
+  () => getProductsAfterCategorySelect()
+);
+
+const isAuthor = computed(() => !!configurationData.value?.isConfigurationEditable && isCurrentCategory.value);
 
 const { query, setQueryPage, resetQuery, setQueryFilter } = usePage({ category: [currentCategory.value] });
 
@@ -113,6 +112,15 @@ function handleChoice(choice: IProduct) {
   choosenProduct.value = clone(choice);
   document.querySelector('main')?.scrollTo(0, 0);
 }
+
+function getProductsAfterCategorySelect() {
+  updateCategory(categories.value?.find((category) => category.title === 'Motherboard')?._id);
+  isCurrentCategory.value = true;
+}
+
+onMounted(() => {
+  getProductsAfterCategorySelect();
+});
 
 const title = 'PC configuration';
 

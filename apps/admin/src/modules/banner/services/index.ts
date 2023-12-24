@@ -24,7 +24,7 @@ export function getBanner(id?: ComputedRef<string | string[]>) {
     return data.data;
   }
 
-  return useQuery({ queryKey: [API_BANNER, id], queryFn: fn, refetchOnMount: true });
+  return useQuery({ queryKey: [API_BANNER, id], queryFn: fn });
 }
 
 export function postBanner(options: object) {

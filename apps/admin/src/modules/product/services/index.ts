@@ -24,7 +24,7 @@ export function getProduct(id?: ComputedRef<string | string[]>) {
     return data.data;
   }
 
-  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn, refetchOnMount: true });
+  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
 }
 
 export function postProduct(options: object) {
