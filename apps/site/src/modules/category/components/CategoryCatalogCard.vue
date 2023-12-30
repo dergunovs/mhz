@@ -75,4 +75,14 @@ const props = defineProps<IProps>();
     }
   }
 }
+
+@media (max-width: $mobile) {
+  .card {
+    &[data-header='true'] {
+      .title {
+        font-size: 1.125rem;
+      }
+    }
+  }
+}
 </style>

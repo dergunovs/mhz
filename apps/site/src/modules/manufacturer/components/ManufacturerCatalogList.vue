@@ -28,4 +28,10 @@ const props = defineProps<IProps>();
   grid-template-columns: repeat(6, 1fr);
   gap: 48px 16px;
 }
+
+@media (max-width: $mobile) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 </style>

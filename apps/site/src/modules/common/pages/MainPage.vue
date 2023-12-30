@@ -43,4 +43,10 @@ useHead({
   display: flex;
   gap: 16px;
 }
+
+@media (max-width: $mobile) {
+  .top {
+    flex-direction: column;
+  }
+}
 </style>

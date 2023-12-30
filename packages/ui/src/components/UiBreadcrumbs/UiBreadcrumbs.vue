@@ -65,6 +65,7 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
 <style module lang="scss">
 .breadcrumbs {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
 }
 

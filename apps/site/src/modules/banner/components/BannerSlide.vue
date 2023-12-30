@@ -130,4 +130,27 @@ const background = computed(() => props.banner.color);
     height: 240px;
   }
 }
+
+@media (max-width: $mobile) {
+  .slide {
+    flex-direction: column;
+    padding: 32px 16px;
+  }
+
+  .inner {
+    width: 100%;
+  }
+
+  .priceBlock {
+    gap: 16px;
+  }
+
+  .price {
+    flex-shrink: 0;
+    width: 120px;
+    padding: 24px;
+    font-size: 1.25rem;
+    white-space: nowrap;
+  }
+}
 </style>

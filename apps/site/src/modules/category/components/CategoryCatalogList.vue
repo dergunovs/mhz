@@ -41,4 +41,14 @@ const props = defineProps<IProps>();
     }
   }
 }
+
+@media (max-width: $mobile) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+
+    &[data-header='true'] {
+      gap: 8px;
+    }
+  }
+}
 </style>

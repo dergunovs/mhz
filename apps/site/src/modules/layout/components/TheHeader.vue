@@ -9,11 +9,13 @@
 
       <CategoryCatalogPopup v-if="isShowCatalog" v-model="isShowCatalog" />
 
-      <TheSearch />
+      <TheSearch :isMobileVisible="isMobileVisible" />
     </div>
 
     <div :class="$style.buttons">
       <template v-if="isAuth">
+        <UiButton @click="toggleSearch" layout="plain" :icon="IconSearch">Search</UiButton>
+
         <UiButton @click="$router.push(URL_CUSTOMER_ORDERS)" layout="plain" :icon="IconProfile">Profile</UiButton>
 
         <CartHeaderButton />
@@ -24,6 +26,8 @@
       </template>
 
       <template v-else>
+        <UiButton @click="toggleSearch" layout="plain" :icon="IconSearch">Search</UiButton>
+
         <UiButton @click="$router.push(URL_SIGN_UP)" layout="plain" :icon="IconSignUp">Sign up</UiButton>
 
         <UiButton @click="$router.push(URL_LOGIN)" layout="plain" :icon="IconLogin">Login</UiButton>
@@ -48,12 +52,19 @@ import IconProfile from '@/layout/icons/profile.svg?component';
 import IconLogout from '@/layout/icons/logout.svg?component';
 import IconSignUp from '@/layout/icons/signup.svg?component';
 import IconLogin from '@/layout/icons/login.svg?component';
+import IconSearch from '@/layout/icons/search.svg?component';
 
 import { URL_MAIN } from '@/common/constants';
 import { URL_LOGIN, URL_SIGN_UP, TOKEN_NAME } from '@/auth/constants';
 import { URL_CUSTOMER_ORDERS } from '@/customer/constants';
 
 const isShowCatalog = ref(false);
+
+const isMobileVisible = ref(false);
+
+function toggleSearch() {
+  isMobileVisible.value = !isMobileVisible.value;
+}
 </script>
 
 <style module lang="scss">
@@ -99,6 +110,25 @@ const isShowCatalog = ref(false);
 
   .main {
     gap: 24px;
+  }
+}
+
+@media (max-width: $mobile) {
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    height: 114px;
+  }
+
+  .main {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .buttons {
+    gap: 12px;
+    justify-content: space-between;
+    width: 100%;
   }
 }
 </style>

@@ -154,4 +154,20 @@ const props = defineProps<IProps>();
     width: 180px;
   }
 }
+
+@media (max-width: $mobile) {
+  .top {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}
 </style>

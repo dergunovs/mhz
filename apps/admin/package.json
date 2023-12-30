@@ -1,7 +1,7 @@
 {
   "name": "mhz-admin",
   "description": "9000 Mhz admin panel",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -27,14 +27,14 @@
     "mhz-ui": "*",
     "sortablejs": "1.15.1",
     "sortablejs-vue3": "1.2.11",
-    "vue": "3.3.13",
+    "vue": "3.4.1",
     "vue-router": "4.2.5"
   },
   "devDependencies": {
-    "@types/node": "20.10.5",
-    "@typescript-eslint/eslint-plugin": "6.15.0",
-    "@typescript-eslint/parser": "6.15.0",
-    "@vitejs/plugin-vue": "4.5.2",
+    "@types/node": "20.10.6",
+    "@typescript-eslint/eslint-plugin": "6.16.0",
+    "@typescript-eslint/parser": "6.16.0",
+    "@vitejs/plugin-vue": "5.0.1",
     "@vitest/coverage-v8": "1.1.0",
     "@vue/test-utils": "2.4.3",
     "eslint": "8.56.0",
@@ -46,8 +46,8 @@
     "happy-dom": "12.10.3",
     "postcss-html": "1.5.0",
     "prettier": "3.1.1",
-    "sass": "1.69.5",
-    "stylelint": "16.0.2",
+    "sass": "1.69.6",
+    "stylelint": "16.1.0",
     "stylelint-config-recess-order": "4.4.0",
     "stylelint-config-recommended-scss": "14.0.0",
     "stylelint-config-recommended-vue": "1.5.0",
@@ -57,7 +57,7 @@
     "vite-svg-loader": "5.1.0",
     "vitest": "1.1.0",
     "vue-linters-config": "0.1.13",
-    "vue-tsc": "1.8.26"
+    "vue-tsc": "1.8.27"
   },
   "engines": {
     "npm": ">=10.2.3",

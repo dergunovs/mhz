@@ -109,4 +109,11 @@ function submit() {
     padding: 48px 16px;
   }
 }
+
+@media (max-width: $mobile) {
+  .innerBlock {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
 </style>

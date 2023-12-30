@@ -56,4 +56,12 @@ const { data: categories } = getCategories();
     padding: 8px 0;
   }
 }
+
+@media (max-width: $mobile) {
+  .popup {
+    top: 64px;
+    right: 16px;
+    left: auto;
+  }
+}
 </style>

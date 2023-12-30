@@ -48,4 +48,14 @@ import { URL_CUSTOMER_CONFIGURATION_CREATE } from '@/customer/constants';
   color: var(--color-white);
   text-align: right;
 }
+
+@media (max-width: $mobile) {
+  .ad {
+    width: 100%;
+  }
+
+  .title br {
+    display: none;
+  }
+}
 </style>

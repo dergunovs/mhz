@@ -37,4 +37,10 @@ const props = defineProps<IProps>();
   width: 80px;
   height: 80px;
 }
+
+@media (max-width: $mobile) {
+  .category {
+    flex-direction: column;
+  }
+}
 </style>
