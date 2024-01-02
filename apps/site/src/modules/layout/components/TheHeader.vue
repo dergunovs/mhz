@@ -117,7 +117,7 @@ function toggleSearch() {
   .header {
     flex-direction: column;
     gap: 16px;
-    height: 114px;
+    padding: 12px 16px;
   }
 
   .main {
@@ -126,9 +126,14 @@ function toggleSearch() {
   }
 
   .buttons {
+    position: fixed;
+    bottom: 0;
     gap: 12px;
     justify-content: space-between;
     width: 100%;
+    padding: 12px 16px;
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-gray);
   }
 }
 </style>

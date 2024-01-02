@@ -42,4 +42,10 @@ useHead({
   gap: 64px;
   justify-content: space-between;
 }
+
+@media (max-width: $mobile) {
+  .cart {
+    flex-direction: column;
+  }
+}
 </style>

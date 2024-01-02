@@ -7,15 +7,22 @@
     <CategoryCard v-if="category" :category="category" />
 
     <div :class="$style.products">
-      <ProductCatalogFilter
-        v-if="priceRange && filters"
-        :filtersInitial="filters"
-        :filtersBase="data?.filters"
-        :priceRange="priceRange"
-        :key="categoryId.toString()"
-        isCategory
-        @update="updateQuery"
-      />
+      <div :class="$style.showFiltersButtons">
+        <UiButton @click="toggleFilters" :icon="IconFilter" layout="plain">Show filters</UiButton>
+      </div>
+
+      <div :class="[$style.filters, isShowFilters && $style.filtersVisible]">
+        <ProductCatalogFilter
+          v-if="priceRange && filters"
+          :filtersInitial="filters"
+          :filtersBase="data?.filters"
+          :priceRange="priceRange"
+          :key="categoryId.toString()"
+          isCategory
+          @update="updateQuery"
+          @hideFilters="toggleFilters"
+        />
+      </div>
 
       <div :class="$style.container">
         <div v-if="!products?.length && !isLoading">No such products. Please, change your filters</div>
@@ -41,11 +48,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue';
+import { computed, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
-import { UiPagination } from 'mhz-ui';
+import { UiButton, UiPagination } from 'mhz-ui';
 import { usePage, usePagination } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
@@ -54,12 +61,16 @@ import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
 import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
 
+import IconFilter from '@/category/icons/filters.svg?component';
+
 import { getCategory } from '@/category/services';
 import { getProducts, getProductPriceRange, getProductFilters } from '@/product/services';
 import { URL_MAIN } from '@/common/constants';
 import { URL_CATEGORY } from '@/category/constants';
 
 const route = useRoute();
+
+const isShowFilters = ref(false);
 
 const categoryId = computed(() => route.params.category);
 
@@ -91,6 +102,10 @@ const links = computed(() => [
   { url: `${URL_CATEGORY}/${category.value?._id}`, title: category.value?.title },
 ]);
 
+function toggleFilters() {
+  isShowFilters.value = !isShowFilters.value;
+}
+
 useHead({
   title: () => category.value?.title || 'Category',
 });
@@ -117,9 +132,39 @@ useHead({
   align-items: flex-start;
 }
 
+.showFiltersButtons {
+  display: none;
+}
+
 @media (max-width: $notebook) {
   .products {
     gap: 16px;
+  }
+}
+
+@media (max-width: $mobile) {
+  .products {
+    flex-direction: column;
+  }
+
+  .showFiltersButtons {
+    display: block;
+  }
+
+  .filters {
+    display: none;
+
+    &.filtersVisible {
+      position: absolute;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      padding: 32px 16px 104px 16px;
+      overflow-y: hidden;
+      background: var(--color-white);
+    }
   }
 }
 </style>

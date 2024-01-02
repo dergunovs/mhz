@@ -120,4 +120,14 @@ useHead({
     width: 50%;
   }
 }
+
+@media (max-width: $mobile) {
+  .container {
+    flex-direction: column;
+  }
+
+  .checkout {
+    width: 100%;
+  }
+}
 </style>

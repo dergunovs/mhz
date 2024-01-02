@@ -111,6 +111,10 @@ function submit() {
 }
 
 @media (max-width: $mobile) {
+  .footer {
+    padding: 48px 16px 64px 16px;
+  }
+
   .innerBlock {
     flex-direction: column;
     gap: 32px;

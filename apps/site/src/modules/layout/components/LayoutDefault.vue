@@ -56,11 +56,4 @@ import TheFooter from '@/layout/components/TheFooter.vue';
     padding: 32px 16px;
   }
 }
-
-@media (max-width: $mobile) {
-  .container {
-    height: calc(100vh - 114px);
-    margin-top: 114px;
-  }
-}
 </style>

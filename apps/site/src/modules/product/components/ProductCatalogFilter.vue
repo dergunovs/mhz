@@ -68,6 +68,10 @@
         </div>
       </template>
     </div>
+
+    <div :class="$style.backButton">
+      <UiButton @click="emit('hideFilters')">Return to products</UiButton>
+    </div>
   </div>
 </template>
 
@@ -75,7 +79,7 @@
 import { computed, ref, watch } from 'vue';
 
 import { IFilterData, IFilterField, IFilterBaseValue, IFilterFieldValue } from 'mhz-contracts';
-import { UiCheckbox, UiRange, UiSpoiler } from 'mhz-ui';
+import { UiButton, UiCheckbox, UiRange, UiSpoiler } from 'mhz-ui';
 import { clone } from 'mhz-helpers';
 
 interface IProps {
@@ -86,7 +90,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update']);
+const emit = defineEmits(['update', 'hideFilters']);
 
 const fieldSpoilers = ref([]);
 
@@ -254,6 +258,7 @@ watch(
 .price {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: 4px;
   height: 64px;
 }
@@ -275,6 +280,10 @@ watch(
   gap: 4px;
 }
 
+.backButton {
+  display: none;
+}
+
 @media (max-width: $notebook) {
   .container {
     width: 200px;
@@ -284,6 +293,21 @@ watch(
 @media (max-width: $tablet) {
   .container {
     width: 240px;
+  }
+}
+
+@media (max-width: $mobile) {
+  .container {
+    width: 100%;
+    padding-left: 16px;
+    overflow-y: auto;
+    border-right: none;
+  }
+
+  .backButton {
+    position: fixed;
+    bottom: 32px;
+    display: block;
   }
 }
 </style>

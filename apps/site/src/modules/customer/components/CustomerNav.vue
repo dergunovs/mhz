@@ -31,4 +31,16 @@ import { CUSTOMER_NAV } from '@/customer/constants';
     color: var(--color-primary);
   }
 }
+
+@media (max-width: $mobile) {
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .item {
+    width: calc(50% - 4px);
+  }
+}
 </style>

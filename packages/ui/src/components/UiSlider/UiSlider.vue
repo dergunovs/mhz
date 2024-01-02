@@ -75,4 +75,15 @@ const currentSlide = ref(0);
 .slide {
   flex-grow: 1;
 }
+
+@media (max-width: $mobile) {
+  .container {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+
+  .thumbs {
+    flex-direction: row;
+  }
+}
 </style>

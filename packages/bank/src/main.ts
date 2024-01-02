@@ -46,7 +46,7 @@ export function createBankPayment(
     srcdoc="${srcdoc}"
     id="bankFrame"
     title="Mhz Bank payment"
-    width="342"
+    width="320"
     height="380"
     referrerpolicy="no-referrer"
     sandbox="allow-scripts"

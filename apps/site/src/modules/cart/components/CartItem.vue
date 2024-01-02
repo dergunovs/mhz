@@ -126,4 +126,18 @@ const { mutate: updateCount } = updateCountCart({
     width: 148px;
   }
 }
+
+@media (max-width: $mobile) {
+  .cart {
+    flex-direction: column;
+  }
+
+  .text {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+}
 </style>
