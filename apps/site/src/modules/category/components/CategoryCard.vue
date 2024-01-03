@@ -41,6 +41,7 @@ const props = defineProps<IProps>();
 @media (max-width: $mobile) {
   .category {
     flex-direction: column;
+    order: 2;
   }
 }
 </style>

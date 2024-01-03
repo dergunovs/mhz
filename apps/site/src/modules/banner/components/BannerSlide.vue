@@ -134,7 +134,8 @@ const background = computed(() => props.banner.color);
 @media (max-width: $mobile) {
   .slide {
     flex-direction: column;
-    padding: 32px 16px;
+    align-items: center;
+    padding: 32px 16px 48px 16px;
   }
 
   .inner {

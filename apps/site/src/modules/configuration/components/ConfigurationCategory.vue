@@ -151,4 +151,10 @@ function currentProduct(category: ICategory) {
     width: 33.33%;
   }
 }
+
+@media (max-width: $tablet) {
+  .category {
+    width: 50%;
+  }
+}
 </style>

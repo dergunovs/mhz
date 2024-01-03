@@ -61,7 +61,7 @@ import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
 import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
 
-import IconFilter from '@/category/icons/filters.svg?component';
+import IconFilter from '@/layout/icons/filters.svg?component';
 
 import { getCategory } from '@/category/services';
 import { getProducts, getProductPriceRange, getProductFilters } from '@/product/services';
@@ -165,6 +165,10 @@ useHead({
       overflow-y: hidden;
       background: var(--color-white);
     }
+  }
+
+  .container {
+    width: 100%;
   }
 }
 </style>

@@ -225,4 +225,14 @@ onMounted(() => {
     width: 200px;
   }
 }
+
+@media (max-width: $notebook) {
+  .form {
+    flex-direction: column;
+  }
+
+  .fields {
+    width: 100%;
+  }
+}
 </style>

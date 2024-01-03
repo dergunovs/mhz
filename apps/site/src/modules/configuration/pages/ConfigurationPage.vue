@@ -16,15 +16,22 @@
       />
 
       <div v-if="isAuthor" :class="$style.products">
-        <ProductCatalogFilter
-          v-if="priceRange && filters"
-          :filtersInitial="filters"
-          :filtersBase="data?.filters"
-          :priceRange="priceRange"
-          :key="currentCategory"
-          isCategory
-          @update="updateQuery"
-        />
+        <div :class="$style.showFiltersButtons">
+          <UiButton @click="toggleFilters" :icon="IconFilter" layout="plain">Show filters</UiButton>
+        </div>
+
+        <div :class="[$style.filters, isShowFilters && $style.filtersVisible]">
+          <ProductCatalogFilter
+            v-if="priceRange && filters"
+            :filtersInitial="filters"
+            :filtersBase="data?.filters"
+            :priceRange="priceRange"
+            :key="currentCategory"
+            isCategory
+            @update="updateQuery"
+            @hideFilters="toggleFilters"
+          />
+        </div>
 
         <div :class="$style.container">
           <div v-if="!products?.length && !isLoading">No such products. Please, change your filters</div>
@@ -55,7 +62,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useHead } from '@unhead/vue';
 
-import { UiPagination } from 'mhz-ui';
+import { UiPagination, UiButton } from 'mhz-ui';
 import { clone, usePage, usePagination } from 'mhz-helpers';
 import { IProduct } from 'mhz-contracts';
 
@@ -66,12 +73,16 @@ import ProductCatalogList from '@/product/components/ProductCatalogList.vue';
 import ProductCatalogSort from '@/product/components/ProductCatalogSort.vue';
 import ProductCatalogFilter from '@/product/components/ProductCatalogFilter.vue';
 
+import IconFilter from '@/layout/icons/filters.svg?component';
+
 import { getProductFilters, getProductPriceRange, getProducts } from '@/product/services';
 import { getCategories } from '@/category/services';
 import { getConfiguration } from '@/configuration/services';
 
 const currentCategory = ref<string>();
 const choosenProduct = ref<IProduct>();
+
+const isShowFilters = ref(false);
 
 const route = useRoute();
 
@@ -118,6 +129,10 @@ function getProductsAfterCategorySelect() {
   isCurrentCategory.value = true;
 }
 
+function toggleFilters() {
+  isShowFilters.value = !isShowFilters.value;
+}
+
 onMounted(() => {
   getProductsAfterCategorySelect();
 });
@@ -150,9 +165,43 @@ useHead({
   align-items: flex-start;
 }
 
+.showFiltersButtons {
+  display: none;
+}
+
 @media (max-width: $notebook) {
   .products {
     gap: 16px;
+  }
+}
+
+@media (max-width: $mobile) {
+  .products {
+    flex-direction: column;
+  }
+
+  .showFiltersButtons {
+    display: block;
+  }
+
+  .filters {
+    display: none;
+
+    &.filtersVisible {
+      position: absolute;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      padding: 32px 16px 104px 16px;
+      overflow-y: hidden;
+      background: var(--color-white);
+    }
+  }
+
+  .container {
+    width: 100%;
   }
 }
 </style>
