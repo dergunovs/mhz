@@ -78,7 +78,7 @@ const currentSlide = ref(0);
 
 @media (max-width: $mobile) {
   .container {
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 16px;
   }
 

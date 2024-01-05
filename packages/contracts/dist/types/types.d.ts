@@ -152,12 +152,14 @@ export interface ISearchResults {
 }
 
 export interface IEntitiesCount {
-  products: number;
-  categories: number;
-  manufacturers: number;
-  managers: number;
-  customers: number;
-  orders: number;
+  labels: string[];
+  data: number[];
+}
+
+export interface IEntitiesReply {
+  base: IEntitiesCount;
+  categories: IEntitiesCount;
+  manufacturers: IEntitiesCount;
 }
 
 export interface IBaseReply {

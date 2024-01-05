@@ -1,5 +1,5 @@
 import type { JSONSchemaType } from 'ajv';
-import type { IEntitiesCount } from 'mhz-contracts';
+import type { IEntitiesCount, IEntitiesReply } from 'mhz-contracts';
 
 import { ISchema } from '../interface/index.js';
 
@@ -9,18 +9,27 @@ export const statsCountModel: JSONSchemaType<IEntitiesCount> = {
   $id: 'StatsCount',
   type: 'object',
   properties: {
-    products: { type: 'number' },
-    categories: { type: 'number' },
-    manufacturers: { type: 'number' },
-    managers: { type: 'number' },
-    customers: { type: 'number' },
-    orders: { type: 'number' },
+    labels: { type: 'array', items: { type: 'string' } },
+    data: { type: 'array', items: { type: 'number' } },
   },
-  required: ['products', 'categories', 'manufacturers', 'managers', 'customers', 'orders'],
+  required: ['labels', 'data'],
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  additionalProperties: false,
+};
+
+export const statsCountReply: JSONSchemaType<IEntitiesReply> = {
+  $id: 'StatsCountReply',
+  type: 'object',
+  properties: {
+    base: { type: 'object', $ref: 'StatsCount', required: ['labels', 'data'] },
+    categories: { type: 'object', $ref: 'StatsCount', required: ['labels', 'data'] },
+    manufacturers: { type: 'object', $ref: 'StatsCount', required: ['labels', 'data'] },
+  },
+  required: ['base', 'categories', 'manufacturers'],
   $schema: 'http://json-schema.org/draft-07/schema#',
   additionalProperties: false,
 };
 
 export const statsCountSchema: ISchema = {
-  schema: { tags, response: { 200: statsCountModel }, security: [{ token: [] }], summary: 'manager' },
+  schema: { tags, response: { 200: statsCountReply }, security: [{ token: [] }], summary: 'manager' },
 };

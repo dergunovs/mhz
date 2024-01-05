@@ -13,4 +13,5 @@ export { default as UiSearch } from './UiSearch/UiSearch.vue';
 export { default as UiRange } from './UiRange/UiRange.vue';
 export { default as UiSlider } from './UiSlider/UiSlider.vue';
 export { default as UiSpoiler } from './UiSpoiler/UiSpoiler.vue';
+export { default as UiChart } from './UiChart/UiChart.vue';
 export { default as toast } from './toast/toast';

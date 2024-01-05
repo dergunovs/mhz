@@ -7,9 +7,9 @@ import {
   API_SEARCH,
   API_STATS_COUNT,
   ISearchResults,
-  IEntitiesCount,
   IBaseReply,
   API_UPLOAD_MULTIPLE,
+  IEntitiesReply,
 } from 'mhz-contracts';
 
 export function search(query: Ref<string>) {
@@ -24,7 +24,7 @@ export function search(query: Ref<string>) {
 
 export function getEntitiesCount() {
   async function fn() {
-    const { data } = await api.get<IEntitiesCount>(API_STATS_COUNT);
+    const { data } = await api.get<IEntitiesReply>(API_STATS_COUNT);
 
     return data;
   }

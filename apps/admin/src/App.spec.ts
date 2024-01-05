@@ -16,7 +16,7 @@ const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader').mockImplementation((
 
 const spyCheckAuth = vi
   .spyOn(authServices, 'checkAuth')
-  .mockImplementation(() => Promise.resolve(mockQueryReply<IBaseReply>({ message: 'ok' })));
+  .mockImplementation(() => mockQueryReply<IBaseReply>({ message: 'ok' }));
 
 let wrapper: VueWrapper;
 

@@ -2,7 +2,6 @@ import type { FastifyInstance, FastifySchema } from 'fastify';
 
 import type {
   ILoginData,
-  IEntitiesCount,
   ICartItem,
   ICustomer,
   IFilterData,
@@ -14,6 +13,7 @@ import type {
   IQuery,
   TOrderStatus,
   IFileToUpload,
+  IEntitiesReply,
 } from 'mhz-contracts';
 
 export interface IFastifyInstance extends FastifyInstance {
@@ -130,7 +130,7 @@ export interface ISearchService {
 }
 
 export interface IStatsService {
-  count: () => Promise<IEntitiesCount>;
+  count: () => Promise<IEntitiesReply>;
 }
 
 export interface IUploadService {

@@ -1,7 +1,7 @@
 {
   "name": "9000mhz",
   "description": "Fake PC hardware store monorepo",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://9000mhz.ru",
@@ -24,12 +24,12 @@
     "@changesets/cli": "2.27.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "18.4.3",
-    "@commitlint/config-conventional": "18.4.3",
-    "@turbo/gen": "1.11.2",
+    "@commitlint/cli": "18.4.4",
+    "@commitlint/config-conventional": "18.4.4",
+    "@turbo/gen": "1.11.3",
     "husky": "8.0.3",
     "prettier": "3.1.1",
-    "turbo": "1.11.2"
+    "turbo": "1.11.3"
   },
   "packageManager": "npm@10.2.3",
   "workspaces": [

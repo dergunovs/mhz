@@ -1,29 +1,59 @@
-import type { IEntitiesCount } from 'mhz-contracts';
+import type { IEntitiesReply } from 'mhz-contracts';
 
-import Product from '../models/product.js';
 import Category from '../models/category.js';
 import Manufacturer from '../models/manufacturer.js';
 import Manager from '../models/manager.js';
 import Customer from '../models/customer.js';
 import Order from '../models/order.js';
 
+import Product from '../models/product.js';
+
 import { IStatsService } from '../interface/index.js';
 
 export const countService: IStatsService = {
   count: async () => {
-    let count = {};
+    const count: IEntitiesReply = {
+      base: { labels: ['Categories', 'Manufacturers', 'Managers', 'Customers', 'Orders'], data: [] },
+      categories: { labels: [], data: [] },
+      manufacturers: { labels: [], data: [] },
+    };
 
     await Promise.all([
-      await Product.estimatedDocumentCount(),
       await Category.estimatedDocumentCount(),
       await Manufacturer.estimatedDocumentCount(),
       await Manager.estimatedDocumentCount(),
       await Customer.estimatedDocumentCount(),
       await Order.estimatedDocumentCount(),
-    ]).then(([products, categories, manufacturers, managers, customers, orders]) => {
-      count = { products, categories, manufacturers, managers, customers, orders };
+    ]).then(([categories, manufacturers, managers, customers, orders]) => {
+      count.base.data.push(categories, manufacturers, managers, customers, orders);
     });
 
-    return count as IEntitiesCount;
+    const categories = await Product.aggregate([
+      { $group: { _id: '$category', count: { $sum: 1 } } },
+      { $lookup: { from: 'categories', localField: '_id', foreignField: '_id', as: 'category' } },
+      { $unwind: '$category' },
+      { $project: { _id: 0 } },
+      { $project: { _id: '$category._id', label: '$category.title', count: 1 } },
+    ]);
+
+    categories.forEach((category) => {
+      count.categories.labels.push(category.label);
+      count.categories.data.push(category.count);
+    });
+
+    const manufacturers = await Product.aggregate([
+      { $group: { _id: '$manufacturer', count: { $sum: 1 } } },
+      { $lookup: { from: 'manufacturers', localField: '_id', foreignField: '_id', as: 'manufacturer' } },
+      { $unwind: '$manufacturer' },
+      { $project: { _id: 0 } },
+      { $project: { _id: '$manufacturer._id', label: '$manufacturer.title', count: 1 } },
+    ]);
+
+    manufacturers.forEach((manufacturer) => {
+      count.manufacturers.labels.push(manufacturer.label);
+      count.manufacturers.data.push(manufacturer.count);
+    });
+
+    return count;
   },
 };
