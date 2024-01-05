@@ -38,4 +38,4 @@ export function vueQueryOptions(
 }
 
 export { VueQueryPlugin, useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
-export type { UseQueryReturnType } from '@tanstack/vue-query';
+export type { UseQueryReturnType, UseMutationReturnType } from '@tanstack/vue-query';

@@ -6,14 +6,14 @@
 
     <form @submit.prevent="submit" :class="$style.form">
       <UiField label="E-mail" isRequired :error="error('email')">
-        <UiInput v-model="formData.email" isFocus />
+        <UiInput v-model="formData.email" isFocus data-test="login-form-email" />
       </UiField>
 
       <UiField label="Password" isRequired :error="error('password')">
-        <UiInput v-model="formData.password" type="password" />
+        <UiInput v-model="formData.password" type="password" data-test="login-form-password" />
       </UiField>
 
-      <UiButton type="submit">Submit</UiButton>
+      <UiButton type="submit" data-test="login-form-button">Submit</UiButton>
     </form>
   </div>
 </template>

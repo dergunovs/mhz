@@ -1,8 +1,14 @@
 <template>
   <div :class="$style.chart">
-    <div :class="$style.title">{{ props.title }}</div>
+    <div :class="$style.title" data-test="ui-chart-title">{{ props.title }}</div>
 
-    <component :is="chartComponent" :options="chartOptions" :data="chartData" />
+    <component
+      :is="chartComponent"
+      :options="chartOptions"
+      :data="chartData"
+      :data-type="props.type"
+      data-test="ui-chart"
+    />
   </div>
 </template>
 
@@ -15,8 +21,8 @@ import { Chart, Title, Tooltip, BarElement, CategoryScale, LinearScale, Colors, 
 interface IProps {
   labels: string[];
   data: number[];
-  type: 'Bar' | 'Pie';
   title: string;
+  type?: 'Bar' | 'Pie';
 }
 
 const props = withDefaults(defineProps<IProps>(), {

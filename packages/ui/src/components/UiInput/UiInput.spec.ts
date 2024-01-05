@@ -80,6 +80,10 @@ describe('UiInput', async () => {
     await wrapper.find(inputBlock).trigger('click');
 
     expect(wrapper.emitted('toggle')).toHaveLength(1);
+
+    await wrapper.find(inputBlock).trigger('keydown.space');
+
+    expect(wrapper.emitted('toggle')).toHaveLength(2);
   });
 
   it('disables input by props', async () => {
