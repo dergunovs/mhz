@@ -70,7 +70,7 @@
     </div>
 
     <div :class="$style.backButton">
-      <UiButton @click="emit('hideFilters')">Return to products</UiButton>
+      <UiButton @click="emit('hide')">Return to products</UiButton>
     </div>
   </div>
 </template>
@@ -90,7 +90,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update', 'hideFilters']);
+const emit = defineEmits(['update', 'hide']);
 
 const fieldSpoilers = ref([]);
 
