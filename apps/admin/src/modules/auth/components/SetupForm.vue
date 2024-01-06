@@ -6,22 +6,22 @@
 
     <form @submit.prevent="submit" :class="$style.form">
       <UiField label="First name" isRequired :error="error('firstName')">
-        <UiInput v-model="formData.firstName" isFocus />
+        <UiInput v-model="formData.firstName" isFocus data-test="setup-form-first-name" />
       </UiField>
 
       <UiField label="Last name" isRequired :error="error('lastName')">
-        <UiInput v-model="formData.lastName" />
+        <UiInput v-model="formData.lastName" data-test="setup-form-last-name" />
       </UiField>
 
       <UiField label="E-mail" isRequired :error="error('email')">
-        <UiInput v-model="formData.email" />
+        <UiInput v-model="formData.email" data-test="setup-form-email" />
       </UiField>
 
       <UiField label="Password" isRequired :error="error('password')">
-        <UiInput v-model="formData.password" type="password" />
+        <UiInput v-model="formData.password" type="password" data-test="setup-form-password" />
       </UiField>
 
-      <UiButton type="submit">Submit</UiButton>
+      <UiButton type="submit" data-test="setup-form-button">Submit</UiButton>
     </form>
   </div>
 </template>

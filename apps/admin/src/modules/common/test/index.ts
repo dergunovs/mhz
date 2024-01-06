@@ -1,6 +1,5 @@
 import { Component, ref } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import { vi } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import { createHead } from '@unhead/vue';
 
@@ -29,7 +28,7 @@ export function wrapperFactory(
       stubs: {
         RouterLink: { template: '<a><slot></slot></a>' },
         UiField: { template: '<fieldset><slot></slot></fieldset>' },
-        UiInput: { template: '<input />' },
+        UiInput: { template: '<input type="text"/>' },
         UiButton: { template: '<button><slot></slot></button>' },
         ...stubs,
       },
@@ -45,6 +44,6 @@ export function mockQueryReply<T>(reply: object) {
   return { data: ref(reply) } as UseQueryReturnType<T, Error>;
 }
 
-export function mockMutationReply<T, T2>() {
-  return { mutate: vi.fn() } as unknown as UseMutationReturnType<T, Error, T2, unknown>;
+export function mockMutationReply<T, T2>(mutate: () => void) {
+  return { mutate } as unknown as UseMutationReturnType<T, Error, T2, unknown>;
 }
