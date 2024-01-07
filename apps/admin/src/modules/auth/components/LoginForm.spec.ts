@@ -53,11 +53,11 @@ describe('LoginForm', async () => {
   });
 
   it('handles login by form submit', async () => {
-    await wrapper.findComponent(loginFormEmail).setValue(EMAIL);
-    await wrapper.findComponent(loginFormPassword).setValue(PASSWORD);
-
     expect(spyLogin).toBeCalledTimes(1);
     expect(spyHelpers).toBeCalledTimes(1);
+
+    await wrapper.findComponent(loginFormEmail).setValue(EMAIL);
+    await wrapper.findComponent(loginFormPassword).setValue(PASSWORD);
 
     await wrapper.find(loginFormButton).trigger('click');
 
