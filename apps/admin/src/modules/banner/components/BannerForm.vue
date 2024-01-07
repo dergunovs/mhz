@@ -1,11 +1,11 @@
 <template>
-  <form @submit.prevent="props.banner?._id ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.banner?._id ? update() : submit()" :class="$style.form" data-test="banner-form">
     <UiField label="Text" isRequired :error="error('text')">
-      <UiInput v-model="formData.text" isFocus />
+      <UiInput v-model="formData.text" isFocus data-test="banner-form-text" />
     </UiField>
 
     <UiField label="Color" isRequired :error="error('color')">
-      <UiInput v-model="formData.color" />
+      <UiInput v-model="formData.color" data-test="banner-form-color" />
     </UiField>
 
     <UiField label="Product" isRequired :error="error('product')">
@@ -13,10 +13,18 @@
         v-model="formData.product"
         :options="allProducts"
         @reachedBottom="scrollProducts(isLoadingProducts, setProductsPage(productsPage + 1, productsPage))"
+        :data-product-id="formData.product._id"
+        data-test="banner-form-product"
       />
     </UiField>
 
-    <UiCheckbox label="Is active" v-model="formData.isActive" isRequired :error="error('isActive')" />
+    <UiCheckbox
+      label="Is active"
+      v-model="formData.isActive"
+      isRequired
+      :error="error('isActive')"
+      data-test="banner-form-is-active"
+    />
 
     <UiUpload
       label="Upload image"
@@ -31,9 +39,19 @@
       @upload="mutateUploadFile(imageFile)"
     />
 
-    <ImagePreview v-if="formData.imageUrl" :urls="[formData.imageUrl]" @delete="formData.imageUrl = ''" />
+    <ImagePreview
+      v-if="formData.imageUrl"
+      :urls="[formData.imageUrl]"
+      @delete="formData.imageUrl = ''"
+      data-test="banner-form-image-preview"
+    />
 
-    <FormButtons :id="props.banner?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
+    <FormButtons
+      :id="props.banner?._id"
+      :isLoading="isLoadingPost || isLoadingUpdate"
+      @delete="handleDelete"
+      data-test="banner-form-buttons"
+    />
   </form>
 </template>
 

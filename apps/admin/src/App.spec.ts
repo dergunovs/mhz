@@ -12,11 +12,8 @@ import { URL_CATEGORY } from '@/category/constants';
 import * as authServices from '@/auth/services';
 
 const spyGetCookieToken = vi.spyOn(helpers, 'getCookieToken').mockImplementation((token: string) => token);
-const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader').mockImplementation(() => Promise.resolve());
-
-const spyCheckAuth = vi
-  .spyOn(authServices, 'checkAuth')
-  .mockImplementation(() => mockQueryReply<IBaseReply>({ message: 'ok' }));
+const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader');
+const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockReturnValue(mockQueryReply<IBaseReply>({ message: 'ok' }));
 
 let wrapper: VueWrapper;
 

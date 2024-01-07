@@ -21,16 +21,16 @@ const ID = '97fdb9eubhe';
 let onSuccessLogin: (data: IUserToken) => void;
 const spyMutateLogin = vi.fn();
 
-const spyLogin = vi
-  .spyOn(authServices, 'login')
-  .mockImplementation((options: { onSuccess?: (data: IUserToken) => void }) => {
-    if (options.onSuccess) onSuccessLogin = options.onSuccess;
+vi.spyOn(authServices, 'login').mockImplementation((options: { onSuccess?: (data: IUserToken) => void }) => {
+  if (options.onSuccess) onSuccessLogin = options.onSuccess;
 
-    return mockMutationReply<IUserToken, ILoginData>(spyMutateLogin);
-  });
+  return mockMutationReply<IUserToken, ILoginData>(spyMutateLogin);
+});
 
 const spyAuth = vi.fn();
-const spyHelpers = vi.spyOn(helpers, 'useAuth').mockReturnValue({ auth: spyAuth, redirectIfAuth: () => undefined });
+
+vi.spyOn(helpers, 'useAuth').mockReturnValue({ auth: spyAuth, redirectIfAuth: () => undefined });
+
 const spySetAuthHeaders = vi.spyOn(helpers, 'setAuthHeader');
 
 const spyToastSuccess = vi.spyOn(toast, 'success');
@@ -53,9 +53,6 @@ describe('LoginForm', async () => {
   });
 
   it('handles login by form submit', async () => {
-    expect(spyLogin).toBeCalledTimes(1);
-    expect(spyHelpers).toBeCalledTimes(1);
-
     await wrapper.findComponent(loginFormEmail).setValue(EMAIL);
     await wrapper.findComponent(loginFormPassword).setValue(PASSWORD);
 

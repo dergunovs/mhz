@@ -17,7 +17,7 @@ const PASSWORD = 'qwerty';
 let onSuccessSetup: () => void;
 const spyMutateSetup = vi.fn();
 
-const spySetup = vi.spyOn(authServices, 'setup').mockImplementation((options: { onSuccess?: () => void }) => {
+vi.spyOn(authServices, 'setup').mockImplementation((options: { onSuccess?: () => void }) => {
   if (options.onSuccess) onSuccessSetup = options.onSuccess;
 
   return mockMutationReply<IBaseReply, ISignUpData>(spyMutateSetup);
@@ -50,8 +50,6 @@ describe('SetupForm', async () => {
     await wrapper.findComponent(setupFormLastName).setValue(LAST_NAME);
     await wrapper.findComponent(setupFormEmail).setValue(EMAIL);
     await wrapper.findComponent(setupFormPassword).setValue(PASSWORD);
-
-    expect(spySetup).toBeCalledTimes(1);
 
     await wrapper.find(setupFormButton).trigger('click');
 

@@ -5,11 +5,12 @@
     :modelValue="props.modelValue"
     @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
     @reset="(value: string) => emit('reset', value)"
+    data-test="banner-list-table"
   >
     <template v-if="props.banners?.length">
-      <tr v-for="banner in props.banners" :key="banner._id">
+      <tr v-for="banner in props.banners" :key="banner._id" data-test="banner-list-row">
         <td data-grow>
-          <RouterLink :to="`${URL_BANNER_EDIT}/${banner._id}`">
+          <RouterLink :to="`${URL_BANNER_EDIT}/${banner._id}`" data-test="banner-list-link">
             {{ banner.product.title }}
           </RouterLink>
         </td>
