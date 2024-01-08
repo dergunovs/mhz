@@ -54,7 +54,7 @@ vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
 const spyRouterPush = vi.spyOn(router, 'push');
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
-const BANNER = BANNERS[0];
+const BANNER = BANNERS.data[0];
 const QUERY_KEY = { queryKey: [API_BANNER] };
 
 let wrapper: VueWrapper;

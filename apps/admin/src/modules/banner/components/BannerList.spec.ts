@@ -19,7 +19,7 @@ const bannerListLink = '[data-test="banner-list-link"]';
 beforeEach(() => {
   wrapper = wrapperFactory(BannerList, {
     props: {
-      banners: BANNERS,
+      banners: BANNERS.data,
       modelValue: MODELVALUE,
     },
   });
@@ -33,7 +33,7 @@ describe('BannerList', async () => {
   });
 
   it('shows rows if banner props', async () => {
-    expect(wrapper.findAll(bannerListRow).length).toEqual(BANNERS.length);
+    expect(wrapper.findAll(bannerListRow).length).toEqual(BANNERS.data.length);
 
     await wrapper.setProps({ banners: [] });
 
@@ -41,13 +41,17 @@ describe('BannerList', async () => {
   });
 
   it('generated link to banner', async () => {
-    const LINK = `${URL_BANNER_EDIT}/${BANNERS[0]._id}`;
+    const LINK = `${URL_BANNER_EDIT}/${BANNERS.data[0]._id}`;
 
     expect(wrapper.find(bannerListLink).attributes('to')).toEqual(LINK);
   });
 
   it('shows banner content in cells', async () => {
-    expect(wrapper.find(bannerListLink).text()).toEqual(BANNERS[0].product.title);
+    expect(wrapper.find(bannerListLink).text()).toEqual(BANNERS.data[0].product.title);
+  });
+
+  it('passes modelValue props to table', async () => {
+    expect(wrapper.findComponent<DefineComponent>(bannerListTable).vm.$attrs.modelValue).toEqual(MODELVALUE);
   });
 
   it('emits sort option by table emit', async () => {

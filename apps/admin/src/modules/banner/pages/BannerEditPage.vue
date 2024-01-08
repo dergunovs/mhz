@@ -2,7 +2,7 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <BannerForm v-if="banner" :banner="banner" />
+    <BannerForm v-if="banner" :banner="banner" data-test="banner-edit-page-form" />
   </div>
 </template>
 

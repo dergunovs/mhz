@@ -5,7 +5,12 @@
     <div :class="$style.page">
       <RouterLink :to="URL_BANNER_CREATE">Add banner</RouterLink>
 
-      <BannerList :banners="banners" v-model="query.sort" @reset="(value: ISortOption) => resetQuery(value)" />
+      <BannerList
+        :banners="banners"
+        v-model="query.sort"
+        @reset="(value: ISortOption) => resetQuery(value)"
+        data-test="banner-list-page-list"
+      />
 
       <UiPagination
         v-show="banners?.length"

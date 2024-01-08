@@ -1,29 +1,31 @@
 <template>
-  <UiTable
-    :headers="tableHeaders"
-    :isLoading="!props.banners?.length"
-    :modelValue="props.modelValue"
-    @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
-    @reset="(value: string) => emit('reset', value)"
-    data-test="banner-list-table"
-  >
-    <template v-if="props.banners?.length">
-      <tr v-for="banner in props.banners" :key="banner._id" data-test="banner-list-row">
-        <td data-grow>
-          <RouterLink :to="`${URL_BANNER_EDIT}/${banner._id}`" data-test="banner-list-link">
-            {{ banner.product.title }}
-          </RouterLink>
-        </td>
-        <td data-no-wrap>{{ banner.isActive }}</td>
-        <td data-no-wrap>
-          {{ formatDate(banner.dateCreated) }}
-        </td>
-        <td data-no-wrap>
-          {{ formatDate(banner.dateUpdated) }}
-        </td>
-      </tr>
-    </template>
-  </UiTable>
+  <div>
+    <UiTable
+      :headers="tableHeaders"
+      :isLoading="!props.banners?.length"
+      :modelValue="props.modelValue"
+      @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
+      @reset="(value: string) => emit('reset', value)"
+      data-test="banner-list-table"
+    >
+      <template v-if="props.banners?.length">
+        <tr v-for="banner in props.banners" :key="banner._id" data-test="banner-list-row">
+          <td data-grow>
+            <RouterLink :to="`${URL_BANNER_EDIT}/${banner._id}`" data-test="banner-list-link">
+              {{ banner.product.title }}
+            </RouterLink>
+          </td>
+          <td data-no-wrap>{{ banner.isActive }}</td>
+          <td data-no-wrap>
+            {{ formatDate(banner.dateCreated) }}
+          </td>
+          <td data-no-wrap>
+            {{ formatDate(banner.dateUpdated) }}
+          </td>
+        </tr>
+      </template>
+    </UiTable>
+  </div>
 </template>
 
 <script setup lang="ts">
