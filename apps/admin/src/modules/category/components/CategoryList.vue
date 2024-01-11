@@ -1,9 +1,9 @@
 <template>
   <UiTable :headers="tableHeaders" :isLoading="!props.categories?.length">
     <template v-if="props.categories?.length">
-      <tr v-for="category in props.categories" :key="category._id">
+      <tr v-for="category in props.categories" :key="category._id" data-test="category-list-row">
         <td data-grow>
-          <RouterLink :to="`${URL_CATEGORY_EDIT}/${category._id}`">
+          <RouterLink :to="`${URL_CATEGORY_EDIT}/${category._id}`" data-test="category-list-link">
             {{ category.title }}
           </RouterLink>
         </td>

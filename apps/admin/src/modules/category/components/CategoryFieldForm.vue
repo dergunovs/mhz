@@ -1,16 +1,24 @@
 <template>
-  <form @submit.prevent="props.categoryField ? update() : submit()" :class="$style.form">
+  <form
+    @submit.prevent="props.categoryField ? update() : submit()"
+    :class="$style.form"
+    data-test="category-field-form"
+  >
     <div :class="$style.fields">
       <UiField label="Field title" isRequired :error="error('title')">
-        <UiInput v-model="formData.title" isFocus />
+        <UiInput v-model="formData.title" isFocus data-test="category-field-form-title" />
       </UiField>
 
       <UiField label="Field type" isRequired :error="error('fieldType')">
-        <UiSelect v-model="formData.fieldType" :options="fieldTypeOptions" />
+        <UiSelect
+          v-model="formData.fieldType"
+          :options="CATEGORY_FIELD_TYPE_OPTIONS"
+          data-test="category-field-form-type"
+        />
       </UiField>
 
       <UiField v-if="formData.fieldType === 'number'" label="Field units" isRequired :error="error('fieldUnits')">
-        <UiInput v-model="formData.fieldUnits" />
+        <UiInput v-model="formData.fieldUnits" data-test="category-field-form-units" />
       </UiField>
     </div>
 
@@ -20,10 +28,17 @@
           {{ props.categoryField ? 'Update Field' : 'Submit Field' }}
         </UiButton>
 
-        <UiButton @click="emit('hide')" layout="secondary">Cancel</UiButton>
+        <UiButton @click="emit('hide')" layout="secondary" data-test="category-field-form-cancel">Cancel</UiButton>
       </div>
 
-      <UiButton v-if="props.categoryField?._id" @click="remove" layout="secondary">Delete</UiButton>
+      <UiButton
+        v-if="props.categoryField?._id"
+        @click="remove"
+        layout="secondary"
+        data-test="category-field-form-delete"
+      >
+        Delete
+      </UiButton>
     </div>
   </form>
 </template>
@@ -35,14 +50,14 @@ import { UiField, UiInput, UiButton, UiSelect } from 'mhz-ui';
 import { ICategoryField } from 'mhz-contracts';
 import { clone, createTempId, useValidator, required } from 'mhz-helpers';
 
+import { CATEGORY_FIELD_TYPE_OPTIONS } from '@/category/constants';
+
 interface IProps {
   categoryField?: ICategoryField;
 }
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['add', 'update', 'delete', 'hide']);
-
-const fieldTypeOptions = ['string', 'number', 'boolean'];
 
 const formData = ref<ICategoryField>({
   title: '',
