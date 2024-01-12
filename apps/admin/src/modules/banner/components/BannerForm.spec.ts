@@ -90,7 +90,7 @@ describe('BannerForm', async () => {
     expect(wrapper.findComponent(bannerFormImagePreview).attributes('urls')).toBe(BANNER.imageUrl);
   });
 
-  it('shows image preview if banner got an image', async () => {
+  it('shows image preview if banner has image', async () => {
     expect(wrapper.findComponent(bannerFormImagePreview).exists()).toBe(true);
 
     await wrapper.setProps({ banner: undefined });
@@ -131,7 +131,7 @@ describe('BannerForm', async () => {
     onSuccessDelete();
 
     expect(spyRemoveQueries).toBeCalledTimes(1);
-    expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRemoveQueries).toBeCalledWith(QUERY_KEY);
 
     expect(spyRefetchQueries).toBeCalledTimes(1);
     expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);

@@ -1,11 +1,11 @@
 <template>
-  <form @submit.prevent="props.category?._id ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.category?._id ? update() : submit()" :class="$style.form" data-test="category-form">
     <UiField label="Title" isRequired :error="error('title')">
-      <UiInput v-model="formData.title" isFocus />
+      <UiInput v-model="formData.title" isFocus data-test="category-form-title" />
     </UiField>
 
     <UiField label="Description" isRequired :error="error('description')">
-      <UiEditor v-model="formData.description" />
+      <UiEditor v-model="formData.description" data-test="category-form-description" />
     </UiField>
 
     <CategoryFieldList
@@ -13,9 +13,15 @@
       :fields="formData.fields"
       :isShowCategoryFieldForm="isShowCategoryFieldForm"
       @edit="editCategoryField"
+      data-test="category-form-field-list"
     />
 
-    <UiButton @click="showCategoryField" v-if="!isShowCategoryFieldForm" layout="secondary">
+    <UiButton
+      @click="showCategoryField"
+      v-if="!isShowCategoryFieldForm"
+      layout="secondary"
+      data-test="category-form-add-category"
+    >
       Add Category Field
     </UiButton>
 
@@ -26,6 +32,7 @@
       @update="updateCategoryField"
       @delete="deleteCategoryField"
       @hide="isShowCategoryFieldForm = false"
+      data-test="category-form-field-form"
     />
 
     <UiUpload
@@ -41,9 +48,19 @@
       @upload="mutateUploadFile(iconFile)"
     />
 
-    <ImagePreview v-if="formData.iconUrl" :urls="[formData.iconUrl]" @delete="formData.iconUrl = ''" />
+    <ImagePreview
+      v-if="formData.iconUrl"
+      :urls="[formData.iconUrl]"
+      @delete="formData.iconUrl = ''"
+      data-test="category-form-icon"
+    />
 
-    <FormButtons :id="props.category?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
+    <FormButtons
+      :id="props.category?._id"
+      :isLoading="isLoadingPost || isLoadingUpdate"
+      @delete="handleDelete"
+      data-test="category-form-buttons"
+    />
   </form>
 </template>
 
