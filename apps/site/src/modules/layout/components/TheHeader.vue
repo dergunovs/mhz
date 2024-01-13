@@ -13,9 +13,11 @@
     </div>
 
     <div :class="$style.buttons">
-      <template v-if="isAuth">
+      <div :class="$style.search">
         <UiButton @click="toggleSearch" layout="plain" :icon="IconSearch">Search</UiButton>
+      </div>
 
+      <template v-if="isAuth">
         <UiButton @click="$router.push(URL_CUSTOMER_ORDERS)" layout="plain" :icon="IconProfile">Profile</UiButton>
 
         <CartHeaderButton />
@@ -26,8 +28,6 @@
       </template>
 
       <template v-else>
-        <UiButton @click="toggleSearch" layout="plain" :icon="IconSearch">Search</UiButton>
-
         <UiButton @click="$router.push(URL_SIGN_UP)" layout="plain" :icon="IconSignUp">Sign up</UiButton>
 
         <UiButton @click="$router.push(URL_LOGIN)" layout="plain" :icon="IconLogin">Login</UiButton>
@@ -97,6 +97,10 @@ function toggleSearch() {
   gap: 32px;
 }
 
+.search {
+  display: none;
+}
+
 @media (max-width: $notebook) {
   .header {
     padding: 16px 32px;
@@ -134,6 +138,10 @@ function toggleSearch() {
     padding: 12px 16px;
     background-color: var(--color-white);
     border-top: 1px solid var(--color-gray);
+  }
+
+  .search {
+    display: flex;
   }
 }
 </style>
