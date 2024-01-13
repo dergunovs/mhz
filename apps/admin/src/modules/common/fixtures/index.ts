@@ -1,0 +1,50 @@
+import { IEntitiesReply } from 'mhz-contracts';
+
+export const COUNT: IEntitiesReply = {
+  base: {
+    labels: ['Categories', 'Manufacturers', 'Managers', 'Customers', 'Orders'],
+    data: [12, 20, 1, 1, 12],
+  },
+  categories: {
+    labels: [
+      'Mousepad',
+      'Monitor',
+      'CPU',
+      'Keyboard',
+      'PSU',
+      'Cooler',
+      'Case',
+      'Mouse',
+      'Motherboard',
+      'GPU',
+      'SSD',
+      'RAM',
+    ],
+    data: [13, 20, 15, 16, 15, 12, 16, 13, 20, 20, 20, 20],
+  },
+  manufacturers: {
+    labels: [
+      'MSI',
+      'ASRock',
+      'be quiet!',
+      'HyperX',
+      'Samsung',
+      'Fractal Design',
+      'Lian Li',
+      'Zalman',
+      'G.Skill',
+      'AMD',
+      'Thermaltake',
+      'Logitech',
+      'ASUS',
+      'GIGABYTE',
+      'Intel',
+      'Deepcool',
+      'Razer',
+      'Palit',
+      'Western Digital',
+      'Apacer',
+    ],
+    data: [18, 4, 6, 7, 12, 3, 2, 7, 7, 11, 13, 13, 24, 27, 8, 12, 9, 5, 4, 8],
+  },
+};

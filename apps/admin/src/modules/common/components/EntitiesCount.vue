@@ -1,17 +1,23 @@
 <template>
   <div v-if="count" :class="$style.stats">
     <div :class="$style.top">
-      <UiChart title="Base stats" :labels="count.base.labels" :data="count.base.data" />
+      <UiChart title="Base stats" :labels="count.base.labels" :data="count.base.data" data-test="entities-count-base" />
 
       <UiChart
         title="Products by categories"
         type="Pie"
         :labels="count.categories.labels"
         :data="count.categories.data"
+        data-test="entities-count-product-categories"
       />
     </div>
 
-    <UiChart title="Products by manufacturers" :labels="count.manufacturers.labels" :data="count.manufacturers.data" />
+    <UiChart
+      title="Products by manufacturers"
+      :labels="count.manufacturers.labels"
+      :data="count.manufacturers.data"
+      data-test="entities-count-product-manufacturers"
+    />
   </div>
 </template>
 

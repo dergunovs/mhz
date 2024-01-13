@@ -34,6 +34,7 @@ export function wrapperFactory(
         UiSelect: { template: '<select />' },
         UiCheckbox: { template: '<input type="checkbox" />' },
         UiUpload: { template: '<input type="file" />' },
+        UiModal: { template: '<div><slot></slot></div>' },
         ...stubs,
       },
       mocks,
