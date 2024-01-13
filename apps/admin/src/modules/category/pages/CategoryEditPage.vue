@@ -2,7 +2,7 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <CategoryForm v-if="category" :category="category" />
+    <CategoryForm v-if="category" :category="category" data-test="category-edit-page-form" />
   </div>
 </template>
 

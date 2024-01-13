@@ -5,7 +5,7 @@
     <div :class="$style.page">
       <RouterLink :to="URL_CATEGORY_CREATE">Add category</RouterLink>
 
-      <CategoryList :categories="categories" />
+      <CategoryList :categories="categories" data-test="category-list-page-list" />
     </div>
   </div>
 </template>
