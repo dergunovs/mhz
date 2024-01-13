@@ -69,9 +69,7 @@ export const customerService: ICustomerService = {
   getCart: async (decode: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
-    const customer = await Customer.findOne({ _id: user?._id })
-      .lean()
-      .exec();
+    const customer = await Customer.findOne({ _id: user?._id }).lean().exec();
 
     const productIds = customer?.cart?.map((item) => item.product._id);
 
@@ -95,9 +93,7 @@ export const customerService: ICustomerService = {
   getWatchedProducts: async (decode: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
-    const customer = await Customer.findOne({ _id: user?._id })
-      .lean()
-      .exec();
+    const customer = await Customer.findOne({ _id: user?._id }).lean().exec();
 
     const customerProducts = customer?.watchedProducts
       ?.sort((a, b) => Number(b.dateCreated) - Number(a.dateCreated))
@@ -132,9 +128,7 @@ export const customerService: ICustomerService = {
   getFavouriteProducts: async (decode: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
-    const customer = await Customer.findOne({ _id: user?._id })
-      .lean()
-      .exec();
+    const customer = await Customer.findOne({ _id: user?._id }).lean().exec();
 
     const products: IProduct[] = await Product.find({ _id: { $in: customer?.favouriteProducts } })
       .select('thumbUrls title price category')
