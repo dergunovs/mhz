@@ -4,11 +4,18 @@
       Image<template v-if="props.urls.length > 1">s <i>(sortable)</i></template>
     </div>
 
-    <Sortable :list="props.urls" :itemKey="(item) => item" tag="div" @end="updateIndex" :class="$style.images">
+    <Sortable
+      :list="props.urls"
+      :itemKey="(item) => item"
+      tag="div"
+      @end="updateIndex"
+      :class="$style.images"
+      data-test="image-preview-sortable"
+    >
       <template #item="{ element }">
         <div :class="$style.image" :key="element">
           <img :src="`${PATH_UPLOAD}/${element}`" width="200" alt="Image" loading="lazy" crossorigin="anonymous" />
-          <UiButton @click="handleDeleteFile(element)" layout="plain">Delete</UiButton>
+          <UiButton @click="handleDeleteFile(element)" layout="plain" data-test="image-preview-delete">Delete</UiButton>
         </div>
       </template>
     </Sortable>
