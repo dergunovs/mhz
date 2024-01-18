@@ -5,7 +5,12 @@
     <div :class="$style.page">
       <RouterLink :to="URL_MANAGER_CREATE">Add manager</RouterLink>
 
-      <ManagerList :managers="managers" v-model="query.sort" @reset="(value: ISortOption) => resetQuery(value)" />
+      <ManagerList
+        :managers="managers"
+        v-model="query.sort"
+        @reset="(value: ISortOption) => resetQuery(value)"
+        data-test="manager-list-page-list"
+      />
 
       <UiPagination
         v-show="managers?.length"

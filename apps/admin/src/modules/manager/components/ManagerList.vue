@@ -7,9 +7,9 @@
     @reset="(value: string) => emit('reset', value)"
   >
     <template v-if="props.managers?.length">
-      <tr v-for="manager in props.managers" :key="manager._id">
+      <tr v-for="manager in props.managers" :key="manager._id" data-test="manager-list-row">
         <td data-grow>
-          <RouterLink :to="`${URL_MANAGER_EDIT}/${manager._id}`">
+          <RouterLink :to="`${URL_MANAGER_EDIT}/${manager._id}`" data-test="manager-list-link">
             {{ manager.email }}
           </RouterLink>
         </td>

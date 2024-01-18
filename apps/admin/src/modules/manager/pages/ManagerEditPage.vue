@@ -6,7 +6,7 @@
       <b>Login date:</b> {{ formatDateTime(manager?.dateLoggedIn) }}
     </div>
 
-    <ManagerForm v-if="manager" :manager="manager" />
+    <ManagerForm v-if="manager" :manager="manager" data-test="manager-edit-page-form" />
   </div>
 </template>
 

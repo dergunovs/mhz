@@ -1,22 +1,27 @@
 <template>
-  <form @submit.prevent="props.manager?._id ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.manager?._id ? update() : submit()" :class="$style.form" data-test="manager-form">
     <UiField label="First name" isRequired :error="error('firstName')">
-      <UiInput v-model="formData.firstName" isFocus />
+      <UiInput v-model="formData.firstName" isFocus data-test="manager-form-first-name" />
     </UiField>
 
     <UiField label="Last name" isRequired :error="error('lastName')">
-      <UiInput v-model="formData.lastName" />
+      <UiInput v-model="formData.lastName" data-test="manager-form-last-name" />
     </UiField>
 
     <UiField label="Email" isRequired :error="error('email')">
-      <UiInput v-model="formData.email" />
+      <UiInput v-model="formData.email" data-test="manager-form-email" />
     </UiField>
 
     <UiField v-if="!props.manager?._id" label="Password" isRequired :error="error('password')">
-      <UiInput v-model="formData.password" />
+      <UiInput v-model="formData.password" data-test="manager-form-password" />
     </UiField>
 
-    <FormButtons :id="props.manager?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
+    <FormButtons
+      :id="props.manager?._id"
+      :isLoading="isLoadingPost || isLoadingUpdate"
+      @delete="handleDelete"
+      data-test="manager-form-buttons"
+    />
   </form>
 </template>
 
