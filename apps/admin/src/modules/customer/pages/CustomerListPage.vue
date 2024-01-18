@@ -3,7 +3,12 @@
     <PageTitle :links="links">{{ title }}</PageTitle>
 
     <div :class="$style.page">
-      <CustomerList :customers="customers" v-model="query.sort" @reset="(value: ISortOption) => resetQuery(value)" />
+      <CustomerList
+        :customers="customers"
+        v-model="query.sort"
+        @reset="(value: ISortOption) => resetQuery(value)"
+        data-test="customer-list-page-list"
+      />
 
       <UiPagination
         v-show="customers?.length"

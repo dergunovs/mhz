@@ -1,8 +1,8 @@
 <template>
   <div :class="$style.container">
-    <UiBreadcrumbs v-if="props.links?.length" :links="props.links" color="white" />
+    <UiBreadcrumbs v-if="props.links?.length" :links="props.links" color="white" data-test="page-title-breadcrumbs" />
 
-    <h1>
+    <h1 data-test="page-title-header">
       <slot></slot>
     </h1>
   </div>
@@ -11,8 +11,10 @@
 <script setup lang="ts">
 import { UiBreadcrumbs } from 'mhz-ui';
 
+import { IPageTitleLink } from '@/layout/interface';
+
 interface IProps {
-  links?: { url: string; title?: string }[];
+  links?: IPageTitleLink[];
 }
 
 const props = defineProps<IProps>();

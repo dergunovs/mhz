@@ -9,10 +9,10 @@ import IconTest from './icons/test.svg?component';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const button = '[data-test="ui-button"]';
 const buttonIcon = '[data-test="ui-button-icon"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiButton, {

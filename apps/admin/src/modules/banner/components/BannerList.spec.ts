@@ -10,11 +10,11 @@ import { BANNERS } from '@/banner/fixtures';
 
 const MODELVALUE = { value: '_id', isAsc: true };
 
-let wrapper: VueWrapper;
-
 const bannerListTable = '[data-test="banner-list-table"]';
 const bannerListRow = '[data-test="banner-list-row"]';
 const bannerListLink = '[data-test="banner-list-link"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(BannerList, {

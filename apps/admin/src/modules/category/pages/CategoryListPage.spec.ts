@@ -11,9 +11,9 @@ import { CATEGORIES } from '@/category/fixtures';
 
 const spyGetCategories = vi.spyOn(categoryServices, 'getCategories').mockReturnValue(mockQueryReply(CATEGORIES.data));
 
-let wrapper: VueWrapper;
-
 const categoryList = '[data-test="category-list-page-list"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(CategoryListPage, {});

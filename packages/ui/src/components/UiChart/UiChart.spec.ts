@@ -6,10 +6,10 @@ import UiChart from './UiChart.vue';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const chart = '[data-test="ui-chart"]';
 const chartTitle = '[data-test="ui-chart-title"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiChart, {

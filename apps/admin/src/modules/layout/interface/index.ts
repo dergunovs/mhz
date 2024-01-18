@@ -6,3 +6,8 @@ export interface INavItem {
   title: string;
   icon: FunctionalComponent;
 }
+
+export interface IPageTitleLink {
+  url: string;
+  title?: string;
+}

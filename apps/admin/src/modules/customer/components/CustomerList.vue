@@ -7,9 +7,9 @@
     @reset="(value: string) => emit('reset', value)"
   >
     <template v-if="props.customers?.length">
-      <tr v-for="customer in props.customers" :key="customer._id">
+      <tr v-for="customer in props.customers" :key="customer._id" data-test="customer-list-row">
         <td data-grow>
-          <RouterLink :to="`${URL_CUSTOMER}/${customer._id}`">
+          <RouterLink :to="`${URL_CUSTOMER}/${customer._id}`" data-test="customer-list-link">
             {{ customer.email }}
           </RouterLink>
         </td>

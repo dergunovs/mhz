@@ -6,10 +6,10 @@ import { MODEL_VALUE } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const editor = '[data-test="ui-editor"]';
 const editorButton = '[data-test="ui-editor-button"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiEditor, {

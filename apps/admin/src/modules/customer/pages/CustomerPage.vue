@@ -2,7 +2,7 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <CustomerInfo v-if="customer" :customer="customer" />
+    <CustomerInfo v-if="customer" :customer="customer" data-test="customer-page-info" />
   </div>
 </template>
 

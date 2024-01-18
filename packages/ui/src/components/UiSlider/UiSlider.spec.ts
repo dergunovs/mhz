@@ -13,13 +13,13 @@ import thumb3 from '@/components/UiSlider/images/thumb-3.webp';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
+const slides = [slide1, slide2, slide3];
+const thumbs = [thumb1, thumb2, thumb3];
 
 const sliderThumb = '[data-test="ui-slider-thumb"]';
 const sliderSlide = '[data-test="ui-slider-slide"]';
 
-const slides = [slide1, slide2, slide3];
-const thumbs = [thumb1, thumb2, thumb3];
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiSlider, {

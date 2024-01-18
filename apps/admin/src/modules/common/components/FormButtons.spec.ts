@@ -6,16 +6,16 @@ import FormButtons from './FormButtons.vue';
 
 import { wrapperFactory, router } from '@/common/test';
 
-let wrapper: VueWrapper;
+const spyRouterGo = vi.spyOn(router, 'go');
+
+const ID = '2534534534534';
 
 const formButtonsSubmit = '[data-test="form-buttons-submit"]';
 const formButtonsBack = '[data-test="form-buttons-back"]';
 const formButtonsDelete = '[data-test="form-buttons-delete"]';
 const formButtonsConfitmModal = '[data-test="form-buttons-confirm-modal"]';
 
-const spyRouterGo = vi.spyOn(router, 'go');
-
-const ID = '2534534534534';
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(FormButtons, {
@@ -59,6 +59,8 @@ describe('FormButtons', async () => {
   });
 
   it('pushed to previous page by back button click', async () => {
+    expect(spyRouterGo).toBeCalledTimes(0);
+
     await wrapper.findComponent(formButtonsBack).trigger('click');
 
     expect(spyRouterGo).toBeCalledTimes(1);

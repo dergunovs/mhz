@@ -13,9 +13,9 @@ const CATEGORY = CATEGORIES.data[0];
 
 const spyGetCategory = vi.spyOn(categoryServices, 'getCategory').mockReturnValue(mockQueryReply(CATEGORY));
 
-let wrapper: VueWrapper;
-
 const categoryEditPageForm = '[data-test="category-edit-page-form"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(CategoryEditPage, {});

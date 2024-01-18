@@ -13,9 +13,9 @@ const BANNER = BANNERS.data[0];
 
 const spyGetBanner = vi.spyOn(bannerServices, 'getBanner').mockReturnValue(mockQueryReply(BANNER));
 
-let wrapper: VueWrapper;
-
 const bannerEditPageForm = '[data-test="banner-edit-page-form"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(BannerEditPage, {});

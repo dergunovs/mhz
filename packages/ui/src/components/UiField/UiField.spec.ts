@@ -6,12 +6,12 @@ import { LABEL, ERROR, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const field = '[data-test="ui-field"]';
 const fieldLabel = '[data-test="ui-field-label"]';
 const fieldRequired = '[data-test="ui-field-required"]';
 const fieldError = '[data-test="ui-field-error"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiField, {

@@ -54,6 +54,8 @@ describe('ImagePreview', async () => {
   });
 
   it('deletes image by delete button click', async () => {
+    expect(spyMutateDelete).toBeCalledTimes(0);
+
     await wrapper.findComponent(imagePreviewDelete).trigger('click');
 
     expect(spyMutateDelete).toBeCalledTimes(1);

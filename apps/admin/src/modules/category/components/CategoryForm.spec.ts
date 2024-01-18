@@ -52,8 +52,6 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 
 const QUERY_KEY = { queryKey: [API_CATEGORY] };
 
-let wrapper: VueWrapper;
-
 const categoryForm = '[data-test="category-form"]';
 const categoryFormTitle = '[data-test="category-form-title"]';
 const categoryFormDescription = '[data-test="category-form-description"]';
@@ -62,6 +60,8 @@ const categoryFormAddCategory = '[data-test="category-form-add-category"]';
 const categoryFormFieldForm = '[data-test="category-form-field-form"]';
 const categoryFormIcon = '[data-test="category-form-icon"]';
 const categoryFormButtons = '[data-test="category-form-buttons"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(CategoryForm, {
@@ -139,6 +139,10 @@ describe('CategoryForm', async () => {
   });
 
   it('updates category', async () => {
+    expect(spyMutateUpdate).toBeCalledTimes(0);
+    expect(spyRefetchQueries).toBeCalledTimes(0);
+    expect(spyToastSuccess).toBeCalledTimes(0);
+
     const NEW_CATEGORY_TITLE = 'yo';
 
     await wrapper.findComponent(categoryFormTitle).setValue(NEW_CATEGORY_TITLE);
@@ -159,6 +163,12 @@ describe('CategoryForm', async () => {
   });
 
   it('deletes banner', async () => {
+    expect(spyMutateDelete).toBeCalledTimes(0);
+    expect(spyRemoveQueries).toBeCalledTimes(0);
+    expect(spyRefetchQueries).toBeCalledTimes(0);
+    expect(spyToastSuccess).toBeCalledTimes(0);
+    expect(spyRouterPush).toBeCalledTimes(0);
+
     wrapper.findComponent<DefineComponent>(categoryFormButtons).vm.$emit('delete', CATEGORY.data._id);
 
     expect(spyMutateDelete).toBeCalledTimes(1);
@@ -182,6 +192,11 @@ describe('CategoryForm', async () => {
 
   it('creates category', async () => {
     wrapper.unmount();
+
+    expect(spyMutatePost).toBeCalledTimes(0);
+    expect(spyRefetchQueries).toBeCalledTimes(0);
+    expect(spyToastSuccess).toBeCalledTimes(0);
+    expect(spyRouterPush).toBeCalledTimes(0);
 
     const wrapperWithoutCategory = wrapperFactory(CategoryForm, {});
 

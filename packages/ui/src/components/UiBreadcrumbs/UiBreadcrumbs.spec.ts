@@ -7,13 +7,13 @@ import { DEFAULT_COLOR, LINKS } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const breadcrumb = '[data-test="ui-breadcrumb"]';
 const breadcrumbLink = '[data-test="ui-breadcrumb-link"]';
 const breadcrumbTitle = '[data-test="ui-breadcrumb-title"]';
 const breadcrumbSlash = '[data-test="ui-breadcrumb-slash"]';
 const breadcrumbPosition = '[data-test="ui-breadcrumb-position"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiBreadcrumbs, {

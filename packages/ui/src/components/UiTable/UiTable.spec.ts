@@ -6,13 +6,13 @@ import { HEADERS, MODEL_VALUE, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const tableHeader = '[data-test="ui-table-header"]';
 const tableHeaderTitle = '[data-test="ui-table-header-title"]';
 const tableHeaderSort = '[data-test="ui-table-header-sort"]';
 const tableHeaderSortAsc = '[data-test="ui-table-header-sort-asc"]';
 const tableHeaderSortDesc = '[data-test="ui-table-header-sort-desc"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiTable, {

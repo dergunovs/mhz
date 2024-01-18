@@ -6,14 +6,14 @@ import { MODEL_VALUE, IS_CONFIRM, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const modal = '[data-test="ui-modal"]';
 const modalContainer = '[data-test="ui-modal-container"]';
 const modalClose = '[data-test="ui-modal-close"]';
 const modalSlot = '[data-test="ui-modal-slot"]';
 const modalConfirm = '[data-test="ui-modal-confirm"]';
 const modalCancel = '[data-test="ui-modal-cancel"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiModal, {

@@ -8,7 +8,9 @@
       <TheSearch />
     </div>
 
-    <UiButton @click="logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME)" layout="plain">Logout</UiButton>
+    <UiButton @click="logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME)" layout="plain" data-test="header-logout">
+      Logout
+    </UiButton>
   </header>
 </template>
 

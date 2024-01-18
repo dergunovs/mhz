@@ -17,14 +17,14 @@ import {
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const search = '[data-test="ui-search"]';
 const searchResults = '[data-test="ui-search-results"]';
 const searchResult = '[data-test="ui-search-result"]';
 const searchResultType = '[data-test="ui-search-result-type"]';
 const searchResultLink = '[data-test="ui-search-result-link"]';
 const searchResultLabel = '[data-test="ui-search-result-label"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiSearch, {

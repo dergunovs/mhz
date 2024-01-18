@@ -57,8 +57,6 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 const BANNER = BANNERS.data[0];
 const QUERY_KEY = { queryKey: [API_BANNER] };
 
-let wrapper: VueWrapper;
-
 const bannerForm = '[data-test="banner-form"]';
 const bannerFormText = '[data-test="banner-form-text"]';
 const bannerFormColor = '[data-test="banner-form-color"]';
@@ -66,6 +64,8 @@ const bannerFormProduct = '[data-test="banner-form-product"]';
 const bannerFormIsActive = '[data-test="banner-form-is-active"]';
 const bannerFormImagePreview = '[data-test="banner-form-image-preview"]';
 const bannerFormButtons = '[data-test="banner-form-buttons"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(BannerForm, {
@@ -103,6 +103,10 @@ describe('BannerForm', async () => {
   });
 
   it('updates banner', async () => {
+    expect(spyMutateUpdate).toBeCalledTimes(0);
+    expect(spyRefetchQueries).toBeCalledTimes(0);
+    expect(spyToastSuccess).toBeCalledTimes(0);
+
     const NEW_BANNER_TEXT = 'yo';
 
     await wrapper.findComponent(bannerFormText).setValue(NEW_BANNER_TEXT);
@@ -123,6 +127,12 @@ describe('BannerForm', async () => {
   });
 
   it('deletes banner', async () => {
+    expect(spyMutateDelete).toBeCalledTimes(0);
+    expect(spyRemoveQueries).toBeCalledTimes(0);
+    expect(spyRefetchQueries).toBeCalledTimes(0);
+    expect(spyToastSuccess).toBeCalledTimes(0);
+    expect(spyRouterPush).toBeCalledTimes(0);
+
     wrapper.findComponent<DefineComponent>(bannerFormButtons).vm.$emit('delete', BANNER._id);
 
     expect(spyMutateDelete).toBeCalledTimes(1);
@@ -146,6 +156,11 @@ describe('BannerForm', async () => {
 
   it('creates banner', async () => {
     wrapper.unmount();
+
+    expect(spyMutatePost).toBeCalledTimes(0);
+    expect(spyRefetchQueries).toBeCalledTimes(0);
+    expect(spyToastSuccess).toBeCalledTimes(0);
+    expect(spyRouterPush).toBeCalledTimes(0);
 
     const wrapperWithoutBanner = wrapperFactory(BannerForm, {});
 

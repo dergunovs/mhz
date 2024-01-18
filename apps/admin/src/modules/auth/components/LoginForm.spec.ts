@@ -35,11 +35,11 @@ const spySetAuthHeaders = vi.spyOn(helpers, 'setAuthHeader');
 
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
-let wrapper: VueWrapper;
-
 const loginFormEmail = '[data-test="login-form-email"]';
 const loginFormPassword = '[data-test="login-form-password"]';
 const loginFormButton = '[data-test="login-form-button"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(LoginForm, {});
@@ -53,6 +53,10 @@ describe('LoginForm', async () => {
   });
 
   it('handles login by form submit', async () => {
+    expect(spyMutateLogin).toBeCalledTimes(0);
+    expect(spyAuth).toBeCalledTimes(0);
+    expect(spyToastSuccess).toBeCalledTimes(0);
+
     await wrapper.findComponent(loginFormEmail).setValue(EMAIL);
     await wrapper.findComponent(loginFormPassword).setValue(PASSWORD);
 

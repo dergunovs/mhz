@@ -7,10 +7,10 @@ import { wrapperFactory } from '@/common/test';
 import { URL_CATEGORY_EDIT } from '@/category/constants';
 import { CATEGORIES } from '@/category/fixtures';
 
-let wrapper: VueWrapper;
-
 const categoryListRow = '[data-test="category-list-row"]';
 const categoryListLink = '[data-test="category-list-link"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(CategoryList, {

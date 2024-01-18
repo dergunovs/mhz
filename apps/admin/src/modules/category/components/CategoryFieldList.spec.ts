@@ -8,13 +8,13 @@ import { CATEGORY } from '@/category/fixtures';
 
 const FIELDS = CATEGORY.data.fields;
 
-let wrapper: VueWrapper;
-
 const categoryField = '[data-test="category-field-list-field"]';
 const categoryFieldTitle = '[data-test="category-field-list-field-title"]';
 const categoryFieldType = '[data-test="category-field-list-field-type"]';
 const categoryFieldUnits = '[data-test="category-field-list-field-units"]';
 const categoryFieldEdit = '[data-test="category-field-list-field-edit"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(CategoryFieldList, {

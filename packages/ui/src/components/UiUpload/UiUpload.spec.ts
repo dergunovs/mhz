@@ -6,8 +6,6 @@ import { LABEL, FILE, FILES } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const upload = '[data-test="ui-upload"]';
 const uploadLabel = '[data-test="ui-upload-label"]';
 const uploadRequired = '[data-test="ui-upload-required"]';
@@ -19,6 +17,8 @@ const uploadFileName = '[data-test="ui-upload-file-name"]';
 const uploadFileNameSingle = '[data-test="ui-upload-file-name-single"]';
 const uploadFileRemove = '[data-test="ui-upload-file-remove"]';
 const uploadFileRemoveSingle = '[data-test="ui-upload-file-remove-single"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiUpload, {

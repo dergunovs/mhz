@@ -6,11 +6,11 @@ import { TITLE, MODEL_VALUE } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const spoiler = '[data-test="ui-spoiler"]';
 const spoilerButton = '[data-test="ui-spoiler-button"]';
 const spoilerButtonTitle = '[data-test="ui-spoiler-button-title"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiSpoiler, {

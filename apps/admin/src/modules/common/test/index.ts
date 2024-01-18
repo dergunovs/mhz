@@ -29,6 +29,7 @@ export function wrapperFactory(
         RouterLink: { template: '<a><slot></slot></a>' },
         UiField: { template: '<fieldset><slot></slot></fieldset>' },
         UiInput: { template: '<input type="text"/>' },
+        UiSearch: { template: '<input type="text"/>' },
         UiButton: { template: '<button><slot></slot></button>' },
         UiTable: { template: '<table><tbody><slot></slot></tbody></table>' },
         UiSelect: { template: '<select />' },
@@ -46,8 +47,8 @@ export function wrapperFactory(
   });
 }
 
-export function mockQueryReply<T>(reply: object) {
-  return { data: ref(reply) } as UseQueryReturnType<T, Error>;
+export function mockQueryReply<T>(reply: object, refetch?: () => void) {
+  return { data: ref(reply), refetch, isSuccess: true } as unknown as UseQueryReturnType<T, Error>;
 }
 
 export function mockMutationReply<T, T2>(mutate: () => void) {

@@ -11,9 +11,9 @@ import { BANNERS } from '@/banner/fixtures';
 
 const spyGetBanners = vi.spyOn(bannerServices, 'getBanners').mockReturnValue(mockQueryReply(BANNERS));
 
-let wrapper: VueWrapper;
-
 const bannerList = '[data-test="banner-list-page-list"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(BannerListPage, {});

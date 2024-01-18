@@ -15,9 +15,9 @@ const spyGetCookieToken = vi.spyOn(helpers, 'getCookieToken').mockImplementation
 const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader');
 const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockReturnValue(mockQueryReply<IBaseReply>({ message: 'ok' }));
 
-let wrapper: VueWrapper;
-
 const layout = '[data-test="app-layout"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(App, {});

@@ -6,13 +6,13 @@ import { PAGE, TOTAL } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const pagination = '[data-test="ui-pagination"]';
 const paginationFirst = '[data-test="ui-pagination-first"]';
 const paginationPrev = '[data-test="ui-pagination-prev"]';
 const paginationNext = '[data-test="ui-pagination-next"]';
 const paginationLast = '[data-test="ui-pagination-last"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiPagination, {

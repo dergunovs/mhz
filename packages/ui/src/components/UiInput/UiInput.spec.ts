@@ -14,11 +14,11 @@ Object.defineProperty(navigator, 'clipboard', {
   value: { writeText },
 });
 
-let wrapper: VueWrapper;
-
 const input = '[data-test="ui-input"]';
 const inputBlock = '[data-test="ui-input-block"]';
 const inputIcon = '[data-test="ui-input-icon"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiInput, {

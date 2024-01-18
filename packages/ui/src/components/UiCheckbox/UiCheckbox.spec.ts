@@ -6,8 +6,6 @@ import UiCheckbox from './UiCheckbox.vue';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const checkbox = '[data-test="ui-checkbox"]';
 const checkboxInput = '[data-test="ui-checkbox-input"]';
 const checkboxFake = '[data-test="ui-checkbox-fake"]';
@@ -18,6 +16,8 @@ const checkboxLabelSub = '[data-test="ui-checkbox-label-sub"]';
 const checkboxLabelSwitcher = '[data-test="ui-checkbox-label-switcher"]';
 const checkboxRequired = '[data-test="ui-checkbox-required"]';
 const checkboxRequiredSwitcher = '[data-test="ui-checkbox-required-switcher"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiCheckbox, {

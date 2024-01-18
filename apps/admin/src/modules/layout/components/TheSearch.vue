@@ -1,6 +1,12 @@
 <template>
   <div>
-    <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" />
+    <UiSearch
+      v-model="searchQuery"
+      :searchScheme="SEARCH_SCHEME"
+      :results="results"
+      :isSuccess="isSuccess"
+      data-test="search"
+    />
   </div>
 </template>
 

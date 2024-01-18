@@ -22,14 +22,14 @@ const NEW_CATEGORY_FIELD: ICategoryField = {
   fieldUnits: 'pts',
 };
 
-let wrapper: VueWrapper;
-
 const categoryFieldForm = '[data-test="category-field-form"]';
 const categoryFieldFormTitle = '[data-test="category-field-form-title"]';
 const categoryFieldFormType = '[data-test="category-field-form-type"]';
 const categoryFieldFormUnits = '[data-test="category-field-form-units"]';
 const categoryFieldFormCancel = '[data-test="category-field-form-cancel"]';
 const categoryFieldFormDelete = '[data-test="category-field-form-delete"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(CategoryFieldForm, {});

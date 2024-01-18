@@ -1,34 +1,51 @@
 <template>
   <div :class="$style.customer">
     <div>
-      <b>Customer: </b>{{ props.customer.firstName }} {{ props.customer.lastName }}
-      <a :href="`mailto:${props.customer.email}`">{{ props.customer.email }} </a>
+      <b>Customer: </b>
+      <span data-test="customer-info-name">{{ props.customer.firstName }} {{ props.customer.lastName }}</span>
+      <a :href="`mailto:${props.customer.email}`" data-test="customer-info-email">{{ props.customer.email }} </a>
     </div>
 
-    <div><b>Created: </b>{{ formatDateTime(props.customer.dateCreated) }}</div>
+    <div>
+      <b>Created: </b>
+      <span data-test="customer-info-created">{{ formatDateTime(props.customer.dateCreated) }}</span>
+    </div>
 
-    <div><b>Login date: </b>{{ formatDateTime(props.customer.dateLoggedIn) }}</div>
+    <div>
+      <b>Login date: </b>
+      <span data-test="customer-info-login">{{ formatDateTime(props.customer.dateLoggedIn) }}</span>
+    </div>
 
-    <div v-if="props.customer.cart?.length">
+    <div v-if="props.customer.cart?.length" data-test="customer-info-cart">
       <div><b>Cart:</b></div>
-      <div v-for="item in props.customer.cart" :key="item._id">
-        {{ item.count }} x
-        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item.product._id}`">{{ item.product.title }}</RouterLink>
+      <div v-for="item in props.customer.cart" :key="item._id" data-test="customer-info-cart-item">
+        <span data-test="customer-info-cart-item-count">{{ item.count }}</span> x
+        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item.product._id}`" data-test="customer-info-cart-item-title">
+          {{ item.product.title }}
+        </RouterLink>
       </div>
     </div>
 
-    <div v-if="props.customer.favouriteProducts?.length">
+    <div v-if="props.customer.favouriteProducts?.length" data-test="customer-info-favourites">
       <div><b>Favourites:</b></div>
-      <div v-for="item in props.customer.favouriteProducts" :key="item._id">
-        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item._id}`">{{ item.title }}</RouterLink>
+      <div v-for="item in props.customer.favouriteProducts" :key="item._id" data-test="customer-info-favourites-item">
+        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item._id}`" data-test="customer-info-favourites-title">
+          {{ item.title }}
+        </RouterLink>
       </div>
     </div>
 
-    <div v-if="props.customer.watchedProducts?.length">
+    <div v-if="props.customer.watchedProducts?.length" data-test="customer-info-watched-products">
       <div><b>Watched products:</b></div>
-      <div v-for="item in props.customer.watchedProducts" :key="item._id">
-        {{ formatDateTime(item.dateCreated) }}
-        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item.product._id}`">{{ item.product.title }}</RouterLink>
+      <div
+        v-for="item in props.customer.watchedProducts"
+        :key="item._id"
+        data-test="customer-info-watched-products-item"
+      >
+        <RouterLink :to="`${URL_PRODUCT_EDIT}/${item.product._id}`" data-test="customer-info-watched-products-title">
+          {{ item.product.title }}
+        </RouterLink>
+        - <span data-test="customer-info-watched-products-date">{{ formatDateTime(item.dateCreated) }}</span>
       </div>
     </div>
   </div>

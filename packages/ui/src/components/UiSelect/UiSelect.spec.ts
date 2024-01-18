@@ -6,13 +6,13 @@ import { MODEL_VALUE, OPTIONS, IS_FILTER, OPTIONS_OBJECTS } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-let wrapper: VueWrapper;
-
 const selectInput = '[data-test="ui-select-input"]';
 const selectInputFilter = '[data-test="ui-select-input-filter"]';
 const selectOptions = '[data-test="ui-select-options"]';
 const selectOption = '[data-test="ui-select-option"]';
 const selectNoResults = '[data-test="ui-select-no-results"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiSelect, {

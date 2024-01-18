@@ -11,11 +11,11 @@ import * as commonServices from '@/common/services';
 
 const spyGetCount = vi.spyOn(commonServices, 'getEntitiesCount').mockReturnValue(mockQueryReply(COUNT));
 
-let wrapper: VueWrapper;
-
 const entitiesCountBase = '[data-test="entities-count-base"]';
 const entitiesCountProductCategories = '[data-test="entities-count-product-categories"]';
 const entitiesCountProductManufacturers = '[data-test="entities-count-product-manufacturers"]';
+
+let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(EntitiesCount, {});
