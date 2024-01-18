@@ -2,7 +2,7 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <ProductForm v-if="product" :product="product" />
+    <ProductForm v-if="product" :product="product" data-test="product-edit-page-form" />
   </div>
 </template>
 

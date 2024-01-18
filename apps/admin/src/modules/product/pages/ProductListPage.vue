@@ -5,7 +5,12 @@
     <div :class="$style.page">
       <RouterLink :to="URL_PRODUCT_CREATE">Add product</RouterLink>
 
-      <ProductList :products="products" v-model="query.sort" @reset="(value: ISortOption) => resetQuery(value)" />
+      <ProductList
+        :products="products"
+        v-model="query.sort"
+        @reset="(value: ISortOption) => resetQuery(value)"
+        data-test="product-list-page-list"
+      />
 
       <UiPagination
         v-show="products?.length"

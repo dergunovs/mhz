@@ -2,7 +2,7 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <OrderForm v-if="order" :order="order" />
+    <OrderForm v-if="order" :order="order" data-test="order-page-form" />
   </div>
 </template>
 
