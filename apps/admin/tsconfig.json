@@ -13,8 +13,8 @@
     "noEmit": true,
     "baseUrl": "./",
     "paths": { "@/*": ["src/modules/*"] },
-    "types": ["vite/client", "vite-svg-loader"]
+    "types": ["vite/client", "vite-svg-loader"],
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
 }

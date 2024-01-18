@@ -1,15 +1,19 @@
 <template>
-  <form @submit.prevent="props.manufacturer?._id ? update() : submit()" :class="$style.form">
+  <form
+    @submit.prevent="props.manufacturer?._id ? update() : submit()"
+    :class="$style.form"
+    data-test="manufacturer-form"
+  >
     <UiField label="Title" isRequired :error="error('title')">
-      <UiInput v-model="formData.title" isFocus />
+      <UiInput v-model="formData.title" isFocus data-test="manufacturer-form-title" />
     </UiField>
 
     <UiField label="Description" isRequired :error="error('description')">
-      <UiEditor v-model="formData.description" />
+      <UiEditor v-model="formData.description" data-test="manufacturer-form-description" />
     </UiField>
 
     <UiField label="Country" isRequired :error="error('country')">
-      <UiSelect v-model="formData.country" :options="countries" isFilter />
+      <UiSelect v-model="formData.country" :options="countries" isFilter data-test="manufacturer-form-country" />
     </UiField>
 
     <UiUpload
@@ -25,9 +29,19 @@
       @upload="mutateUploadFile(logoFile)"
     />
 
-    <ImagePreview v-if="formData.logoUrl" :urls="[formData.logoUrl]" @delete="formData.logoUrl = ''" />
+    <ImagePreview
+      v-if="formData.logoUrl"
+      :urls="[formData.logoUrl]"
+      @delete="formData.logoUrl = ''"
+      data-test="manufacturer-form-logo"
+    />
 
-    <FormButtons :id="props.manufacturer?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
+    <FormButtons
+      :id="props.manufacturer?._id"
+      :isLoading="isLoadingPost || isLoadingUpdate"
+      @delete="handleDelete"
+      data-test="manufacturer-form-buttons"
+    />
   </form>
 </template>
 

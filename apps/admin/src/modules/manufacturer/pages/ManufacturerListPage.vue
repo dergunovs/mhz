@@ -9,6 +9,7 @@
         :manufacturers="manufacturers"
         v-model="query.sort"
         @reset="(value: ISortOption) => resetQuery(value)"
+        data-test="manufacturer-list-page-list"
       />
 
       <UiPagination

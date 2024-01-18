@@ -2,7 +2,7 @@
   <div>
     <PageTitle :links="links">{{ title }}</PageTitle>
 
-    <ManufacturerForm v-if="manufacturer" :manufacturer="manufacturer" />
+    <ManufacturerForm v-if="manufacturer" :manufacturer="manufacturer" data-test="manufacturer-edit-page-form" />
   </div>
 </template>
 
