@@ -1,7 +1,7 @@
 {
   "name": "mhz-bank",
   "description": "9000 Mhz fake bank app",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -22,11 +22,11 @@
     "ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.11.0",
-    "prettier": "3.2.1",
+    "@types/node": "20.11.5",
+    "prettier": "3.2.4",
     "typescript": "5.3.3",
     "vite": "5.0.11",
-    "vite-plugin-dts": "3.7.0"
+    "vite-plugin-dts": "3.7.1"
   },
   "engines": {
     "npm": ">=10.2.3",
