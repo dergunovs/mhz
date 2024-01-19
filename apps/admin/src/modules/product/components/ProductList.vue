@@ -7,9 +7,9 @@
     @reset="(value: string) => emit('reset', value)"
   >
     <template v-if="props.products?.length">
-      <tr v-for="product in props.products" :key="product._id">
+      <tr v-for="product in props.products" :key="product._id" data-test="product-list-row">
         <td data-grow>
-          <RouterLink :to="`${URL_PRODUCT_EDIT}/${product._id}`">
+          <RouterLink :to="`${URL_PRODUCT_EDIT}/${product._id}`" data-test="product-list-link">
             {{ product.title }}
           </RouterLink>
         </td>

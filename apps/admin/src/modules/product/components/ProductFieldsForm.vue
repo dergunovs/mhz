@@ -2,11 +2,16 @@
   <div :class="$style.container">
     <h3>Specs</h3>
 
-    <div v-for="field in formData" :key="field._id">
-      <UiCheckbox v-if="field.fieldType === 'boolean'" v-model="field.fieldValue" :label="field.title" />
+    <div v-for="field in formData" :key="field._id" data-test="product-fields-form-field">
+      <UiCheckbox
+        v-if="field.fieldType === 'boolean'"
+        v-model="field.fieldValue"
+        :label="field.title"
+        data-test="product-fields-form-boolean"
+      />
 
       <UiField v-else :label="field.fieldUnits ? `${field.title}, ${field.fieldUnits}` : field.title">
-        <UiInput v-model="field.fieldValue" />
+        <UiInput v-model="field.fieldValue" data-test="product-fields-form-value" />
       </UiField>
     </div>
   </div>
@@ -40,7 +45,8 @@ watch(
   () => formData.value,
   () => {
     emit('update', formData.value);
-  }
+  },
+  { deep: true }
 );
 
 function getFields() {

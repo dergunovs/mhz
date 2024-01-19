@@ -14,6 +14,7 @@ export const PRODUCTS: {
       price: 31200,
       isInStock: true,
       thumbUrls: ['thumb-resized-1692371580194-12.jpg.webp'],
+      imageUrls: ['resized-1692371580194-12.jpg'],
       category: {
         _id: '64d62e42a635811931410ea9',
         title: 'RAM',
@@ -23,6 +24,11 @@ export const PRODUCTS: {
         title: 'G.Skill',
       },
       fields: [
+        {
+          title: 'Onboard graphics',
+          fieldType: 'boolean',
+          fieldValue: false,
+        },
         {
           title: 'Size',
           fieldType: 'number',

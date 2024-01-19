@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent="props.product?._id ? update() : submit()" :class="$style.form">
+  <form @submit.prevent="props.product?._id ? update() : submit()" :class="$style.form" data-test="product-form">
     <div :class="$style.row">
       <UiField label="Title" isRequired :error="error('title')">
-        <UiInput v-model="formData.title" isFocus />
+        <UiInput v-model="formData.title" isFocus data-test="product-form-title" />
       </UiField>
 
       <UiField label="Price" isRequired :error="error('price')">
-        <UiInput v-model="formData.price" type="number" />
+        <UiInput v-model="formData.price" type="number" data-test="product-form-price" />
       </UiField>
     </div>
 
@@ -18,18 +18,25 @@
           @reachedBottom="
             scrollManufacturers(isLoadingManufacturers, setManufacturerPage(manufacturersPage + 1, manufacturersPage))
           "
+          data-test="product-form-manufacturer"
         />
       </UiField>
 
       <UiField label="Category" isRequired :error="error('category')">
-        <UiSelect v-model="formData.category" :options="categories" />
+        <UiSelect v-model="formData.category" :options="categories" data-test="product-form-category" />
       </UiField>
     </div>
 
-    <UiCheckbox label="In stock" v-model="formData.isInStock" isRequired :error="error('isInStock')" />
+    <UiCheckbox
+      label="In stock"
+      v-model="formData.isInStock"
+      isRequired
+      :error="error('isInStock')"
+      data-test="product-form-stock"
+    />
 
     <UiField label="Description" isRequired :error="error('description')">
-      <UiEditor v-model="formData.description" />
+      <UiEditor v-model="formData.description" data-test="product-form-description" />
     </UiField>
 
     <ProductFieldsForm
@@ -37,6 +44,7 @@
       :fields="currentFields"
       :updates="categoryUpdates"
       @update="updateFields"
+      data-test="product-form-fields"
     />
 
     <UiUpload
@@ -56,9 +64,15 @@
       isThumb
       @update="updateImages"
       @delete="deleteImage"
+      data-test="product-form-images"
     />
 
-    <FormButtons :id="props.product?._id" :isLoading="isLoadingPost || isLoadingUpdate" @delete="handleDelete" />
+    <FormButtons
+      :id="props.product?._id"
+      :isLoading="isLoadingPost || isLoadingUpdate"
+      @delete="handleDelete"
+      data-test="product-form-buttons"
+    />
   </form>
 </template>
 
