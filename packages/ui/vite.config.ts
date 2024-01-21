@@ -55,6 +55,7 @@ export default defineConfig({
     coverage: { provider: 'v8', reporter: ['text'], include: ['src/**/Ui*.vue'], all: true },
     testTimeout: 20000,
     css: false,
+    typecheck: { enabled: false },
   },
 
   plugins: [

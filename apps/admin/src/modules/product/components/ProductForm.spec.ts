@@ -121,6 +121,26 @@ describe('ProductForm', async () => {
     expect(spyGetCategories).toBeCalledTimes(1);
   });
 
+  it('updates fields by child component emit', async () => {
+    const NEW_FIELDS: ICategoryField[] = [];
+
+    expect(
+      wrapper.findComponent<DefineComponent<{ fields: ICategoryField[] }>>(productFormFields).vm.$props.fields
+    ).toEqual(PRODUCT.fields);
+
+    wrapper.findComponent<DefineComponent>(productFormFields).vm.$emit('update', NEW_FIELDS);
+
+    expect((wrapper.vm as unknown as { formData: { fields: ICategoryField[] } }).formData.fields).toEqual(NEW_FIELDS);
+  });
+
+  it('updates child fields component by category updated', async () => {
+    expect((wrapper.vm as unknown as { categoryUpdates: number }).categoryUpdates).toEqual(0);
+
+    await wrapper.findComponent(productFormCategory).setValue([]);
+
+    expect((wrapper.vm as unknown as { categoryUpdates: number }).categoryUpdates).toEqual(1);
+  });
+
   it('updates product', async () => {
     expect(spyMutateUpdate).toBeCalledTimes(0);
     expect(spyRefetchQueries).toBeCalledTimes(0);
