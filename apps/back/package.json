@@ -18,7 +18,8 @@
     "start": "node build/index.js",
     "build": "tsc -p tsconfig.json",
     "lint": "eslint 'src/**/*.{js,ts}'",
-    "ts": "tsc -p tsconfig.json --noEmit"
+    "ts": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@fastify/autoload": "5.8.0",
@@ -54,7 +55,8 @@
     "fastify-linters-config": "0.0.9",
     "nodemon": "3.0.3",
     "prettier": "3.2.4",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "vitest": "1.2.1"
   },
   "engines": {
     "npm": ">=10.2.3",
