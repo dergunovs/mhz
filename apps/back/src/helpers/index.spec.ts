@@ -1,12 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import sharp from 'sharp';
 
 import { describe, expect, test, vi } from 'vitest';
 import { Document } from 'mongoose';
 
 import type { ICategory, IManufacturer, IProduct } from 'mhz-contracts';
 
-import { decodeToken, addView, deleteFile, resizeFile } from '.';
+import * as helpers from '.';
 
 const spyUnlink = vi.spyOn(fs, 'unlinkSync').mockReturnValue();
 
@@ -22,7 +23,7 @@ describe('helpers', () => {
       const token = 'Bearer 123';
       const tokenWithoutBearer = token.split('Bearer ')[1];
 
-      const decodedToken = decodeToken(decode, token);
+      const decodedToken = helpers.decodeToken(decode, token);
 
       expect(decode).toBeCalledTimes(1);
       expect(decode).toBeCalledWith(tokenWithoutBearer);
@@ -31,7 +32,7 @@ describe('helpers', () => {
     });
 
     test('returns null without args', async () => {
-      const decodedToken = decodeToken();
+      const decodedToken = helpers.decodeToken();
 
       expect(decodedToken).toEqual(null);
     });
@@ -46,7 +47,7 @@ describe('helpers', () => {
         | (Document<unknown, object, ICategory | IProduct | IManufacturer> & (ICategory | IProduct | IManufacturer))
         | null;
 
-      addView(entity);
+      helpers.addView(entity);
 
       expect(spySave).toBeCalledTimes(1);
       expect(entity?.views).toEqual(views + 1);
@@ -57,7 +58,7 @@ describe('helpers', () => {
     test('deletes file', async () => {
       const filename = 'test.txt';
 
-      deleteFile(filename);
+      helpers.deleteFile(filename);
 
       expect(spyUnlink).toBeCalledTimes(1);
       expect(spyUnlink).toBeCalledWith(path.resolve(`./public/upload/${filename}`));
@@ -69,7 +70,10 @@ describe('helpers', () => {
       const filename = 'test.txt';
       const width = '500';
 
-      const resizedFilename = await resizeFile(filename, width);
+      const resizedFilename = await helpers.resizeFile(filename, width);
+
+      expect(sharp).toBeCalledTimes(1);
+      expect(sharp).toBeCalledWith(`./public/upload/${filename}`);
 
       expect(resize).toBeCalledTimes(1);
       expect(resize).toBeCalledWith(Number(width));
