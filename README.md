@@ -17,8 +17,9 @@ Fake PC hardware store monorepo.
 1. Install Node.js 20 https://nodejs.org
 2. Install MongoDB 7 https://www.mongodb.com/try/download/community
 3. `npm install` - install deps from root folder
-4. Create .env files in `/apps` subfolders
-5. `npm run build` - build all apps and packages
-6. `npm run dev` - start all apps and packages in dev mode
-7. Create first manager at admin app url `/setup`
-8. Swagger is availiable at backend url `/api-docs`
+4. Create .env files in `/apps` subfolders, examples included
+5. Run `mongorestore --drop` in `/apps/back` folder to restore database dump (optional)
+6. `npm run build` - build all apps and packages
+7. `npm run dev` - start all apps and packages in dev mode
+8. Create first manager at admin app url `/setup`
+9. Swagger is availiable at backend url `/api-docs`
