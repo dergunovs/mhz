@@ -8,13 +8,13 @@ import ImagePreview from './ImagePreview.vue';
 import { mockMutationReply, wrapperFactory } from '@/common/test';
 import * as commonServices from '@/common/services';
 
+const URLS = ['1.jpg', '2.jpg'];
+
 const spyMutateDelete = vi.fn();
 
 vi.spyOn(commonServices, 'deleteFile').mockImplementation(() => {
-  return mockMutationReply<IBaseReply, string>(spyMutateDelete);
+  return mockMutationReply<IBaseReply, { url: string; isThumb: boolean }>(spyMutateDelete);
 });
-
-const URLS = ['1.jpg', '2.jpg'];
 
 const imagePreviewSortable = '[data-test="image-preview-sortable"]';
 const imagePreviewDelete = '[data-test="image-preview-delete"]';

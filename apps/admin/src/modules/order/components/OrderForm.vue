@@ -44,7 +44,7 @@
     <div :class="$style.buttons">
       <div :class="$style.buttonsInner">
         <UiButton
-          @click="mutateUpdate(ORDER_COMPLETED)"
+          @click="mutateUpdate({ status: ORDER_COMPLETED, id: orderId })"
           :isDisabled="props.order.status !== 'paid' || isPending"
           data-test="order-form-complete"
         >
@@ -76,7 +76,7 @@
     <UiModal
       v-model="isShowConfirmCancel"
       isConfirm
-      @confirm="mutateUpdate(ORDER_CANCELLED)"
+      @confirm="mutateUpdate({ status: ORDER_CANCELLED, id: orderId })"
       data-test="order-form-cancel-confirm"
     >
       Confirm cancel order?

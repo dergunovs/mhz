@@ -55,7 +55,7 @@
       :extensions="['jpg', 'png']"
       @add="addImage"
       @remove="removeImage"
-      @upload="mutateUploadFiles(images)"
+      @upload="mutateUploadFiles({ files: images, width: '1200', isThumb: true })"
     />
 
     <ImagePreview
@@ -151,20 +151,16 @@ function updateImages(urls: string[]) {
   formData.value.thumbUrls = [...thumbs];
 }
 
-const { mutate: mutateUploadFiles } = uploadFiles(
-  {
-    onSuccess: (data: string[]) => {
-      const thumbs = data.map((url) => `thumb-${url}.webp`);
+const { mutate: mutateUploadFiles } = uploadFiles({
+  onSuccess: (data: string[]) => {
+    const thumbs = data.map((url) => `thumb-${url}.webp`);
 
-      formData.value.imageUrls = [...(formData.value.imageUrls || []), ...data];
-      formData.value.thumbUrls = [...formData.value.thumbUrls, ...thumbs];
-      images.value = [];
-      toast.success('Images added');
-    },
+    formData.value.imageUrls = [...(formData.value.imageUrls || []), ...data];
+    formData.value.thumbUrls = [...formData.value.thumbUrls, ...thumbs];
+    images.value = [];
+    toast.success('Images added');
   },
-  '1200',
-  true
-);
+});
 
 const { data: categories } = getCategories();
 

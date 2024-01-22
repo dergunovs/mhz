@@ -47,10 +47,10 @@ function updateIndex(event: { oldIndex: number; newIndex: number }) {
   emit('update', urlsSortable.value);
 }
 
-const { mutate: mutateDeleteFile } = deleteFile(props.isThumb);
+const { mutate: mutateDeleteFile } = deleteFile();
 
 function handleDeleteFile(url: string) {
-  mutateDeleteFile(url);
+  mutateDeleteFile({ url, isThumb: props.isThumb });
   emit('delete', url, true);
 }
 

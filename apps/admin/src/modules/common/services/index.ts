@@ -1,73 +1,26 @@
 import { Ref } from 'vue';
 
-import { api, useQuery, useMutation } from 'mhz-helpers';
-import {
-  API_UPLOAD,
-  API_UPLOAD_SINGLE,
-  API_SEARCH,
-  API_STATS_COUNT,
-  ISearchResults,
-  IBaseReply,
-  API_UPLOAD_MULTIPLE,
-  IEntitiesReply,
-} from 'mhz-contracts';
+import { useQuery, useMutation } from 'mhz-helpers';
+import { API_UPLOAD, API_SEARCH, API_STATS_COUNT, API_UPLOAD_MULTIPLE } from 'mhz-contracts';
+
+import { deleteFileApi, getEntitiesCountApi, searchApi, uploadFileApi, uploadFilesApi } from '@/common/services/api';
 
 export function search(query: Ref<string>) {
-  async function fn() {
-    const { data } = await api.get<ISearchResults>(API_SEARCH, { params: { search: query.value } });
-
-    return data as unknown as { [key: string]: { _id: string }[] };
-  }
-
-  return useQuery({ queryKey: [API_SEARCH, query], queryFn: fn, enabled: false });
+  return useQuery({ queryKey: [API_SEARCH, query], queryFn: () => searchApi(query), enabled: false });
 }
 
 export function getEntitiesCount() {
-  async function fn() {
-    const { data } = await api.get<IEntitiesReply>(API_STATS_COUNT);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_STATS_COUNT], queryFn: fn });
+  return useQuery({ queryKey: [API_STATS_COUNT], queryFn: getEntitiesCountApi });
 }
 
-export function uploadFile(options: object, width?: string) {
-  async function fn(file?: File) {
-    if (!file) throw new Error();
-
-    const formData = new FormData();
-
-    formData.append('file', file);
-
-    const { data } = await api.post<string>(API_UPLOAD_SINGLE, formData, { params: { width } });
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn, ...options });
+export function uploadFile(options: object) {
+  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: uploadFileApi, ...options });
 }
 
-export function uploadFiles(options: object, width?: string, thumb?: boolean) {
-  async function fn(files: File[]) {
-    const formData = new FormData();
-
-    files.forEach((file) => formData.append('files', file));
-
-    const { data } = await api.post<string[]>(API_UPLOAD_MULTIPLE, formData, { params: { width, thumb } });
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_UPLOAD_MULTIPLE], mutationFn: fn, ...options });
+export function uploadFiles(options: object) {
+  return useMutation({ mutationKey: [API_UPLOAD_MULTIPLE], mutationFn: uploadFilesApi, ...options });
 }
 
-export function deleteFile(thumb?: boolean) {
-  async function fn(filename: string) {
-    const { data } = await api.delete<IBaseReply>(`${API_UPLOAD}/${filename}`, { params: { thumb } });
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: fn });
+export function deleteFile() {
+  return useMutation({ mutationKey: [API_UPLOAD], mutationFn: deleteFileApi });
 }

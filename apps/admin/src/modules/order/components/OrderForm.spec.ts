@@ -24,7 +24,7 @@ vi.spyOn(orderServices, 'updateOrder').mockImplementation(
   (id: ComputedRef<string | undefined>, options: { onSuccess?: () => void }) => {
     if (options.onSuccess) onSuccessUpdate = options.onSuccess;
 
-    return mockMutationReply<IBaseReply, TOrderStatus>(spyMutateUpdate);
+    return mockMutationReply<IBaseReply, { status: TOrderStatus }>(spyMutateUpdate);
   }
 );
 
@@ -109,7 +109,7 @@ describe('OrderForm', async () => {
     await wrapper.findComponent(orderFormComplete).trigger('click');
 
     expect(spyMutateUpdate).toBeCalledTimes(1);
-    expect(spyMutateUpdate).toBeCalledWith(ORDER_COMPLETED);
+    expect(spyMutateUpdate).toBeCalledWith({ status: ORDER_COMPLETED, id: ORDER._id });
 
     onSuccessUpdate();
 
@@ -142,7 +142,7 @@ describe('OrderForm', async () => {
     wrapper.findComponent<DefineComponent>(orderFormCancelConfirm).vm.$emit('confirm');
 
     expect(spyMutateUpdate).toBeCalledTimes(1);
-    expect(spyMutateUpdate).toBeCalledWith(ORDER_CANCELLED);
+    expect(spyMutateUpdate).toBeCalledWith({ status: ORDER_CANCELLED, id: ORDER._id });
 
     onSuccessUpdate();
 
