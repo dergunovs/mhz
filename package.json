@@ -18,7 +18,7 @@
     "dev": "turbo run dev --no-daemon",
     "build": "turbo run build --no-daemon",
     "pub": "turbo run build --no-daemon --filter=mhz-ui --filter=mhz-countries --filter=mhz-helpers --filter=mhz-bank && changeset version && changeset publish",
-    "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --out=apps/back/dump"
+    "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --excludeCollection=configurations --out=apps/back/dump"
   },
   "dependencies": {
     "@changesets/cli": "2.27.1"
