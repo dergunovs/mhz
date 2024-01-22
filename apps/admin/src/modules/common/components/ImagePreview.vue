@@ -14,7 +14,7 @@
     >
       <template #item="{ element }">
         <div :class="$style.image" :key="element">
-          <img :src="`${PATH_UPLOAD}/${element}`" width="200" alt="Image" loading="lazy" crossorigin="anonymous" />
+          <img :src="`${PATH_UPLOAD}/${element}`" width="200" alt="Image" crossorigin="anonymous" />
           <UiButton @click="handleDeleteFile(element)" layout="plain" data-test="image-preview-delete">Delete</UiButton>
         </div>
       </template>

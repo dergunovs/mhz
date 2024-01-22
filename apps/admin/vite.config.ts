@@ -30,6 +30,8 @@ export default defineConfig({
   },
 
   test: {
+    alias: { '@': resolve(__dirname, './src/modules') },
+    cache: false,
     clearMocks: true,
     environment: 'happy-dom',
     include: ['**/*.spec.ts'],
