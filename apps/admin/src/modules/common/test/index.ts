@@ -21,9 +21,7 @@ export function wrapperFactory(
   return shallowMount(component, {
     global: {
       plugins: [router, VueQueryPlugin],
-      provide: {
-        usehead: head,
-      },
+      provide: { usehead: head },
 
       stubs: {
         RouterLink: { template: '<a><slot></slot></a>' },

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi, beforeAll } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IBaseReply } from 'mhz-contracts';
 import * as helpers from 'mhz-helpers';
@@ -18,6 +18,11 @@ const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockReturnValue(mockQue
 const layout = '[data-test="app-layout"]';
 
 let wrapper: VueWrapper;
+
+beforeAll(async () => {
+  router.push('/');
+  await router.isReady();
+});
 
 beforeEach(() => {
   wrapper = wrapperFactory(App, {});

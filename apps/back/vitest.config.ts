@@ -5,7 +5,5 @@ export default defineConfig({
     cache: false,
     clearMocks: true,
     include: ['**/*.spec.ts'],
-    testTimeout: 20000,
-    typecheck: { enabled: false },
   },
 });
