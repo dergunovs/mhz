@@ -1,29 +1,28 @@
 import { Ref, ComputedRef } from 'vue';
 
-import { api, useQuery, IPageQuery, convertParams } from 'mhz-helpers';
+import { useQuery, IPageQuery } from 'mhz-helpers';
 import {
   API_PRODUCT,
   API_PRODUCT_PRICE_RANGE,
   API_PRODUCT_FILTERS,
-  IFilterData,
-  IProduct,
   TInitiator,
   API_PRODUCT_POPULAR,
 } from 'mhz-contracts';
 
+import {
+  getProductApi,
+  getProductFiltersApi,
+  getProductPriceRangeApi,
+  getProductsApi,
+  getProductsPopularApi,
+} from '@/product/services/api';
+
 export function getProducts(query: Ref<IPageQuery | number>, initiator?: TInitiator, enabled?: Ref<boolean>) {
-  async function fn() {
-    const params = convertParams(query, initiator);
-
-    const { data } = await api.get<{ data: IProduct[]; total: number; filters: IFilterData }>(API_PRODUCT, {
-      params,
-      paramsSerializer: { indexes: null },
-    });
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_PRODUCT, query], queryFn: fn, enabled });
+  return useQuery({
+    queryKey: [API_PRODUCT, query],
+    queryFn: () => getProductsApi(query, initiator),
+    enabled,
+  });
 }
 
 export function getProductPriceRange(
@@ -31,17 +30,11 @@ export function getProductPriceRange(
   id?: ComputedRef<string | string[]> | Ref<string | undefined>,
   enabled?: Ref<boolean>
 ) {
-  async function fn() {
-    if (!id?.value) return null;
-
-    const { data } = await api.get<[number, number]>(`${API_PRODUCT_PRICE_RANGE}`, {
-      params: { initiator, _id: id.value },
-    });
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_PRODUCT_PRICE_RANGE, id], queryFn: fn, enabled });
+  return useQuery({
+    queryKey: [API_PRODUCT_PRICE_RANGE, id],
+    queryFn: () => getProductPriceRangeApi(initiator, id),
+    enabled,
+  });
 }
 
 export function getProductFilters(
@@ -49,35 +42,17 @@ export function getProductFilters(
   id?: ComputedRef<string | string[]> | Ref<string | undefined>,
   enabled?: Ref<boolean>
 ) {
-  async function fn() {
-    if (!id?.value) return null;
-
-    const { data } = await api.get<IFilterData>(`${API_PRODUCT_FILTERS}`, { params: { initiator, _id: id.value } });
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_PRODUCT_FILTERS, id], queryFn: fn, enabled });
+  return useQuery({
+    queryKey: [API_PRODUCT_FILTERS, id],
+    queryFn: () => getProductFiltersApi(initiator, id),
+    enabled,
+  });
 }
 
 export function getProductsPopular() {
-  async function fn() {
-    const { data } = await api.get<IProduct[]>(API_PRODUCT_POPULAR);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_PRODUCT_POPULAR], queryFn: fn });
+  return useQuery({ queryKey: [API_PRODUCT_POPULAR], queryFn: getProductsPopularApi });
 }
 
 export function getProduct(id?: ComputedRef<string | string[]>) {
-  async function fn() {
-    if (!id?.value) return null;
-
-    const { data } = await api.get<{ data: IProduct }>(`${API_PRODUCT}/${id.value}`);
-
-    return data.data;
-  }
-
-  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: fn });
+  return useQuery({ queryKey: [API_PRODUCT, id], queryFn: () => getProductApi(id) });
 }

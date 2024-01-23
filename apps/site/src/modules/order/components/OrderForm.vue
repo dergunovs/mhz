@@ -35,12 +35,14 @@
       >
     </div>
 
-    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateUpdate('cancelled')">Confirm cancel order?</UiModal>
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateUpdate({ id: orderId, status: 'cancelled' })">
+      Confirm cancel order?
+    </UiModal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { formatDateTime, useQueryClient } from 'mhz-helpers';
@@ -64,15 +66,14 @@ const queryClient = useQueryClient();
 
 const isShowConfirm = ref(false);
 
-const { mutate: mutateUpdate, isPending } = updateOrder(
-  {
-    onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: [API_ORDER] });
-      toast.success('Order cancelled');
-    },
+const orderId = computed(() => props.order._id);
+
+const { mutate: mutateUpdate, isPending } = updateOrder(orderId, {
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_ORDER] });
+    toast.success('Order cancelled');
   },
-  props.order._id
-);
+});
 </script>
 
 <style module lang="scss">

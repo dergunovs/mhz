@@ -1,143 +1,71 @@
 import { Ref } from 'vue';
 
-import { api, useMutation, useQuery } from 'mhz-helpers';
+import { useMutation, useQuery } from 'mhz-helpers';
+import { API_CUSTOMER, API_CUSTOMER_CART, API_CUSTOMER_FAVOURITES, API_CUSTOMER_WATCHED } from 'mhz-contracts';
+
 import {
-  API_CUSTOMER,
-  API_CUSTOMER_CART,
-  API_CUSTOMER_CURRENT,
-  API_CUSTOMER_FAVOURITES,
-  API_CUSTOMER_WATCHED,
-  ICustomer,
-  IProduct,
-  ICartItem,
-  ISignUpData,
-  IBaseReply,
-} from 'mhz-contracts';
+  addToCartApi,
+  addToFavouritesApi,
+  deleteCustomerApi,
+  getCurrentCustomerApi,
+  getCustomerCartApi,
+  getCustomerFavouriteProductsApi,
+  getCustomerWatchedProductsApi,
+  postCustomerApi,
+  removeFromCartApi,
+  removeFromFavouritesApi,
+  updateCountCartApi,
+  updateCustomerApi,
+} from '@/customer/services/api';
 
 export function getCurrentCustomer(options?: object) {
-  async function fn() {
-    const { data } = await api.get<ICustomer>(API_CUSTOMER_CURRENT);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_CUSTOMER], queryFn: fn, ...options });
+  return useQuery({ queryKey: [API_CUSTOMER], queryFn: getCurrentCustomerApi, ...options });
 }
 
 export function getCustomerWatchedProducts() {
-  async function fn() {
-    const { data } = await api.get<IProduct[]>(API_CUSTOMER_WATCHED);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_CUSTOMER_WATCHED], queryFn: fn });
+  return useQuery({ queryKey: [API_CUSTOMER_WATCHED], queryFn: getCustomerWatchedProductsApi });
 }
 
 export function getCustomerFavouriteProducts(isEnabled: Ref<boolean>) {
-  async function fn() {
-    const { data } = await api.get<IProduct[]>(API_CUSTOMER_FAVOURITES);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_CUSTOMER_FAVOURITES], queryFn: fn, enabled: isEnabled });
+  return useQuery({
+    queryKey: [API_CUSTOMER_FAVOURITES],
+    queryFn: getCustomerFavouriteProductsApi,
+    enabled: isEnabled,
+  });
 }
 
 export function postCustomer(options: object) {
-  async function fn(formData: ISignUpData) {
-    const { data } = await api.post<IBaseReply>(API_CUSTOMER, formData);
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: postCustomerApi, ...options });
 }
 
 export function updateCustomer(options: object) {
-  async function fn(formData: Omit<ICustomer, 'password'>) {
-    const { data } = await api.patch<IBaseReply>(API_CUSTOMER, formData);
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: updateCustomerApi, ...options });
 }
 
 export function deleteCustomer(options: object) {
-  async function fn() {
-    const { data } = await api.delete<IBaseReply>(API_CUSTOMER);
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER], mutationFn: deleteCustomerApi, ...options });
 }
 
 export function addToFavourites(options: object) {
-  async function fn(_id?: string) {
-    if (!_id) return null;
-
-    const { data } = await api.post<IBaseReply>(API_CUSTOMER_FAVOURITES, { id: _id });
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER_FAVOURITES], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER_FAVOURITES], mutationFn: addToFavouritesApi, ...options });
 }
 
 export function removeFromFavourites(options: object) {
-  async function fn(_id?: string) {
-    if (!_id) return null;
-
-    const { data } = await api.delete<IBaseReply>(`${API_CUSTOMER_FAVOURITES}/${_id}`);
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER_FAVOURITES], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER_FAVOURITES], mutationFn: removeFromFavouritesApi, ...options });
 }
 
 export function getCustomerCart(isEnabled: Ref<boolean>) {
-  async function fn() {
-    const { data } = await api.get<ICartItem[]>(API_CUSTOMER_CART);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_CUSTOMER_CART], queryFn: fn, enabled: isEnabled });
+  return useQuery({ queryKey: [API_CUSTOMER_CART], queryFn: getCustomerCartApi, enabled: isEnabled });
 }
 
 export function addToCart(options: object) {
-  async function fn(_id?: string | (string | undefined)[]) {
-    if (!_id) return null;
-
-    const { data } = await api.post<IBaseReply>(API_CUSTOMER_CART, { _id });
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: addToCartApi, ...options });
 }
 
 export function removeFromCart(options: object) {
-  async function fn(_id?: string) {
-    if (!_id) return null;
-
-    const { data } = await api.delete<IBaseReply>(`${API_CUSTOMER_CART}/${_id}`);
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: removeFromCartApi, ...options });
 }
 
 export function updateCountCart(options: object) {
-  async function fn(product: { count: number; _id?: string }) {
-    const { data } = await api.patch<IBaseReply>(API_CUSTOMER_CART, product);
-
-    return data;
-  }
-
-  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: fn, ...options });
+  return useMutation({ mutationKey: [API_CUSTOMER_CART], mutationFn: updateCountCartApi, ...options });
 }

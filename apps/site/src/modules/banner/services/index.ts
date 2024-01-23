@@ -1,12 +1,8 @@
-import { api, useQuery } from 'mhz-helpers';
-import { API_BANNER_ACTIVE, IBanner } from 'mhz-contracts';
+import { useQuery } from 'mhz-helpers';
+import { API_BANNER_ACTIVE } from 'mhz-contracts';
+
+import { getBannersActiveApi } from '@/banner/services/api';
 
 export function getBannersActive() {
-  async function fn() {
-    const { data } = await api.get<IBanner[]>(API_BANNER_ACTIVE);
-
-    return data;
-  }
-
-  return useQuery({ queryKey: [API_BANNER_ACTIVE], queryFn: fn });
+  return useQuery({ queryKey: [API_BANNER_ACTIVE], queryFn: getBannersActiveApi });
 }

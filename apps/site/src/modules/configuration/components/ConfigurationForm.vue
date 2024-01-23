@@ -41,7 +41,9 @@
       @remove="removeProduct"
     />
 
-    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete">Confirm delete?</UiModal>
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete(props.configuration?._id)">
+      Confirm delete?
+    </UiModal>
   </form>
 </template>
 
@@ -125,17 +127,14 @@ const { mutate: mutateUpdate } = updateConfiguration({
   },
 });
 
-const { mutate: mutateDelete } = deleteConfiguration(
-  {
-    onSuccess: async () => {
-      queryClient.removeQueries({ queryKey: [API_CONFIGURATION] });
-      await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
-      toast.success('Configuration deleted');
-      router.push(URL_CUSTOMER_CONFIGURATIONS);
-    },
+const { mutate: mutateDelete } = deleteConfiguration({
+  onSuccess: async () => {
+    queryClient.removeQueries({ queryKey: [API_CONFIGURATION] });
+    await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
+    toast.success('Configuration deleted');
+    router.push(URL_CUSTOMER_CONFIGURATIONS);
   },
-  props.configuration?._id
-);
+});
 
 const { mutate: mutateAddToCart } = addToCart({
   onSuccess: async () => {

@@ -42,17 +42,14 @@ watch(
   () => payOrder()
 );
 
-const { mutate: mutateUpdate } = updateOrder(
-  {
-    onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: [API_ORDER] });
+const { mutate: mutateUpdate } = updateOrder(orderId, {
+  onSuccess: async () => {
+    await queryClient.refetchQueries({ queryKey: [API_ORDER] });
 
-      toast.success('Order was successfully paid');
-      router.push(URL_CUSTOMER_ORDERS);
-    },
+    toast.success('Order was successfully paid');
+    router.push(URL_CUSTOMER_ORDERS);
   },
-  orderId.value
-);
+});
 
 function payOrder() {
   if (order.value?._id) {
@@ -71,7 +68,7 @@ function handleBankAnswer(answer: string) {
   if (answer === 'cancel') {
     isShowConfirm.value = true;
   } else {
-    mutateUpdate('paid');
+    mutateUpdate({ id: orderId.value, status: 'paid' });
   }
 }
 
