@@ -4,7 +4,12 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
-import removeAttr from 'remove-attr';
+
+function removeDataTest(node) {
+  if (node.type === 1 /* NodeTypes.ELEMENT */) {
+    node.props = node.props.filter((prop) => (prop.type === 6 ? prop.name !== 'data-test' : true));
+  }
+}
 
 export default defineConfig({
   server: {
@@ -19,9 +24,12 @@ export default defineConfig({
   resolve: { alias: { '@': resolve(__dirname, './src/modules') } },
 
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: { nodeTransforms: process.env.NODE_ENV === 'production' ? [removeDataTest] : [] },
+      },
+    }),
     svgLoader(),
-    removeAttr({ extensions: ['vue'], attributes: ['data-test'] }),
     { name: 'vitest-setup', config: () => ({ test: { setupFiles: ['./vitest.setup.ts'] } }) },
   ],
 

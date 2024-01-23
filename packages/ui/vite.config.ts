@@ -7,7 +7,12 @@ import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
-import removeAttr from 'remove-attr';
+
+function removeDataTest(node) {
+  if (node.type === 1 /* NodeTypes.ELEMENT */) {
+    node.props = node.props.filter((prop) => (prop.type === 6 ? prop.name !== 'data-test' : true));
+  }
+}
 
 const files = fs.readdirSync('./src/components').filter((file) => file.includes('Ui'));
 
@@ -60,9 +65,12 @@ export default defineConfig({
   },
 
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: { nodeTransforms: process.env.NODE_ENV === 'production' ? [removeDataTest] : [] },
+      },
+    }),
     svgLoader(),
-    removeAttr({ extensions: ['vue'], attributes: ['data-test'] }),
     dts({
       entryRoot: './src/components',
       cleanVueFileName: true,

@@ -46,7 +46,6 @@
     "happy-dom": "13.2.1",
     "postcss-html": "1.6.0",
     "prettier": "3.2.4",
-    "remove-attr": "0.0.13",
     "sass": "1.70.0",
     "stylelint": "16.2.0",
     "stylelint-config-recess-order": "4.4.0",
