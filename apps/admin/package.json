@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "@types/node": "20.11.5",
-    "@typescript-eslint/eslint-plugin": "6.19.0",
-    "@typescript-eslint/parser": "6.19.0",
+    "@typescript-eslint/eslint-plugin": "6.19.1",
+    "@typescript-eslint/parser": "6.19.1",
     "@vitejs/plugin-vue": "5.0.3",
     "@vitest/coverage-v8": "1.2.1",
     "@vue/test-utils": "2.4.3",
@@ -46,6 +46,7 @@
     "happy-dom": "13.2.1",
     "postcss-html": "1.6.0",
     "prettier": "3.2.4",
+    "remove-attr": "0.0.13",
     "sass": "1.70.0",
     "stylelint": "16.2.0",
     "stylelint-config-recess-order": "4.4.0",

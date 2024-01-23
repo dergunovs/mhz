@@ -4,6 +4,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
+import removeAttr from 'remove-attr';
 
 export default defineConfig({
   server: {
@@ -20,6 +21,7 @@ export default defineConfig({
   plugins: [
     vue(),
     svgLoader(),
+    removeAttr({ extensions: ['vue'], attributes: ['data-test'] }),
     { name: 'vitest-setup', config: () => ({ test: { setupFiles: ['./vitest.setup.ts'] } }) },
   ],
 

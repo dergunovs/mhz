@@ -7,6 +7,7 @@ import dts from 'vite-plugin-dts';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
+import removeAttr from 'remove-attr';
 
 const files = fs.readdirSync('./src/components').filter((file) => file.includes('Ui'));
 
@@ -61,6 +62,7 @@ export default defineConfig({
   plugins: [
     vue(),
     svgLoader(),
+    removeAttr({ extensions: ['vue'], attributes: ['data-test'] }),
     dts({
       entryRoot: './src/components',
       cleanVueFileName: true,
