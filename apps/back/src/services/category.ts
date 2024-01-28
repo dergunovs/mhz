@@ -7,7 +7,7 @@ import { ICategoryService } from '../interface/index.js';
 
 export const categoryService: ICategoryService = {
   getMany: async <T>() => {
-    const categories: ICategory[] = await Category.find().select('-description -fields').sort('title').lean().exec();
+    const categories: ICategory[] = await Category.find().select('-description').sort('title').lean().exec();
 
     return { data: categories as T[] };
   },
