@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "9000 Mhz backend",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@fastify/autoload": "5.8.0",
-    "@fastify/cors": "8.5.0",
+    "@fastify/cors": "9.0.0",
     "@fastify/helmet": "11.1.1",
     "@fastify/jwt": "8.0.0",
     "@fastify/multipart": "8.1.0",
@@ -33,20 +33,20 @@
     "@fastify/swagger-ui": "2.1.0",
     "ajv": "8.12.0",
     "bcryptjs": "2.4.3",
-    "dotenv": "16.3.2",
+    "dotenv": "16.4.1",
     "fastify": "4.25.2",
     "fastify-plugin": "4.5.1",
     "mhz-contracts": "*",
-    "mongoose": "8.1.0",
+    "mongoose": "8.1.1",
     "qs": "6.11.2",
     "sharp": "0.33.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.6",
-    "@types/node": "20.11.5",
+    "@types/node": "20.11.9",
     "@typescript-eslint/eslint-plugin": "6.19.1",
     "@typescript-eslint/parser": "6.19.1",
-    "esbuild": "0.19.11",
+    "esbuild": "0.20.0",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-typescript": "3.6.1",
@@ -56,7 +56,7 @@
     "nodemon": "3.0.3",
     "prettier": "3.2.4",
     "typescript": "5.3.3",
-    "vitest": "1.2.1"
+    "vitest": "1.2.2"
   },
   "engines": {
     "npm": ">=10.2.3",
