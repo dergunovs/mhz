@@ -22,7 +22,7 @@
     "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/vue-query": "5.24.1",
+    "@tanstack/vue-query": "5.24.8",
     "@vueuse/core": "10.9.0",
     "@vueuse/integrations": "10.9.0",
     "async-validator": "4.2.5",
@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "@types/node": "20.11.24",
-    "@typescript-eslint/eslint-plugin": "7.1.0",
-    "@typescript-eslint/parser": "7.1.0",
+    "@typescript-eslint/eslint-plugin": "7.1.1",
+    "@typescript-eslint/parser": "7.1.1",
     "@vitejs/plugin-vue": "5.0.4",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
@@ -44,15 +44,15 @@
     "postcss-html": "1.6.0",
     "prettier": "3.2.5",
     "stylelint": "16.2.1",
-    "stylelint-config-recess-order": "4.6.0",
+    "stylelint-config-recess-order": "5.0.0",
     "stylelint-config-recommended-scss": "14.0.0",
     "stylelint-config-recommended-vue": "1.5.0",
     "stylelint-prettier": "5.0.0",
     "typescript": "5.3.3",
-    "vite": "5.1.4",
+    "vite": "5.1.5",
     "vite-plugin-dts": "3.7.3",
     "vue-linters-config": "0.1.13",
-    "vue-tsc": "2.0.2"
+    "vue-tsc": "2.0.4"
   },
   "peerDependencies": {
     "vue": "3.4.21",
