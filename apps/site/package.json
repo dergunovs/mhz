@@ -1,7 +1,7 @@
 {
   "name": "mhz-site",
   "description": "9000 Mhz client site",
-  "version": "1.0.44",
+  "version": "1.0.46",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -19,7 +19,7 @@
     "lint": "eslint **/*.{js,ts,vue} && stylelint **/*.{scss,vue}"
   },
   "dependencies": {
-    "@unhead/vue": "1.8.11",
+    "@unhead/vue": "1.8.12",
     "mhz-bank": "*",
     "mhz-contracts": "*",
     "mhz-helpers": "*",
@@ -28,7 +28,7 @@
     "vue-router": "4.3.0"
   },
   "devDependencies": {
-    "@types/node": "20.11.24",
+    "@types/node": "20.11.25",
     "@typescript-eslint/eslint-plugin": "7.1.1",
     "@typescript-eslint/parser": "7.1.1",
     "@vitejs/plugin-vue": "5.0.4",
@@ -51,7 +51,7 @@
     "vite-plugin-pwa": "0.19.2",
     "vite-svg-loader": "5.1.0",
     "vue-linters-config": "0.1.13",
-    "vue-tsc": "2.0.4"
+    "vue-tsc": "2.0.6"
   },
   "engines": {
     "npm": ">=10.2.3",
