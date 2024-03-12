@@ -4,7 +4,7 @@
 
     <h2>Add first manager</h2>
 
-    <form @submit.prevent="submit" :class="$style.form">
+    <form @submit.prevent="submit" :class="$style.form" data-test="setup-form">
       <UiField label="First name" isRequired :error="error('firstName')">
         <UiInput v-model="formData.firstName" isFocus data-test="setup-form-first-name" />
       </UiField>
@@ -21,7 +21,7 @@
         <UiInput v-model="formData.password" type="password" data-test="setup-form-password" />
       </UiField>
 
-      <UiButton type="submit" data-test="setup-form-button">Submit</UiButton>
+      <UiButton type="submit">Submit</UiButton>
     </form>
   </div>
 </template>

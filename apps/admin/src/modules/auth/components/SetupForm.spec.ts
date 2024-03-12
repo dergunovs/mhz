@@ -26,11 +26,11 @@ vi.spyOn(authServices, 'setup').mockImplementation((options: { onSuccess?: () =>
 const spyToastSuccess = vi.spyOn(toast, 'success');
 const spyRouterPush = vi.spyOn(router, 'push');
 
+const setupForm = '[data-test="setup-form"]';
 const setupFormFirstName = '[data-test="setup-form-first-name"]';
 const setupFormLastName = '[data-test="setup-form-last-name"]';
 const setupFormEmail = '[data-test="setup-form-email"]';
 const setupFormPassword = '[data-test="setup-form-password"]';
-const setupFormButton = '[data-test="setup-form-button"]';
 
 let wrapper: VueWrapper;
 
@@ -55,7 +55,7 @@ describe('SetupForm', async () => {
     await wrapper.findComponent(setupFormEmail).setValue(EMAIL);
     await wrapper.findComponent(setupFormPassword).setValue(PASSWORD);
 
-    await wrapper.find(setupFormButton).trigger('click');
+    await wrapper.find(setupForm).trigger('submit');
 
     expect(spyMutateSetup).toBeCalledTimes(1);
     expect(spyMutateSetup).toBeCalledWith({

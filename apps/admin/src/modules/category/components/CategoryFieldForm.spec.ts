@@ -71,7 +71,7 @@ describe('CategoryFieldForm', async () => {
   it('cancels work with field', async () => {
     await wrapper.findComponent(categoryFieldFormCancel).trigger('click');
 
-    expect(wrapper.emitted()['hide']).toHaveLength(2);
+    expect(wrapper.emitted()['hide']).toHaveLength(1);
   });
 
   it('updated field', async () => {
@@ -107,6 +107,6 @@ describe('CategoryFieldForm', async () => {
     expect(wrapperWithField.emitted()['delete']).toHaveLength(1);
     expect(wrapperWithField.emitted()['delete'][0]).toEqual([CATEGORY_FIELD?._id]);
 
-    expect(wrapperWithField.emitted()['hide']).toHaveLength(2);
+    expect(wrapperWithField.emitted()['hide']).toHaveLength(1);
   });
 });

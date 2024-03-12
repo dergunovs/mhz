@@ -4,7 +4,7 @@
 
     <h2>Login</h2>
 
-    <form @submit.prevent="submit" :class="$style.form">
+    <form @submit.prevent="submit" :class="$style.form" data-test="login-form">
       <UiField label="E-mail" isRequired :error="error('email')">
         <UiInput v-model="formData.email" isFocus data-test="login-form-email" />
       </UiField>
@@ -13,7 +13,7 @@
         <UiInput v-model="formData.password" type="password" data-test="login-form-password" />
       </UiField>
 
-      <UiButton type="submit" data-test="login-form-button">Submit</UiButton>
+      <UiButton type="submit">Submit</UiButton>
     </form>
   </div>
 </template>

@@ -24,8 +24,8 @@
     "@changesets/cli": "2.27.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.0.3",
-    "@commitlint/config-conventional": "19.0.3",
+    "@commitlint/cli": "19.1.0",
+    "@commitlint/config-conventional": "19.1.0",
     "@turbo/gen": "1.12.5",
     "husky": "9.0.11",
     "prettier": "3.2.5",
