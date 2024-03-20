@@ -19,7 +19,7 @@
     "lint": "eslint **/*.{js,ts,vue} && stylelint **/*.{scss,vue}"
   },
   "dependencies": {
-    "@unhead/vue": "1.8.13",
+    "@unhead/vue": "1.8.20",
     "mhz-bank": "*",
     "mhz-contracts": "*",
     "mhz-helpers": "*",
@@ -28,9 +28,9 @@
     "vue-router": "4.3.0"
   },
   "devDependencies": {
-    "@types/node": "20.11.26",
-    "@typescript-eslint/eslint-plugin": "7.2.0",
-    "@typescript-eslint/parser": "7.2.0",
+    "@types/node": "20.11.30",
+    "@typescript-eslint/eslint-plugin": "7.3.1",
+    "@typescript-eslint/parser": "7.3.1",
     "@vitejs/plugin-vue": "5.0.4",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
@@ -40,7 +40,7 @@
     "eslint-plugin-vue": "9.23.0",
     "postcss-html": "1.6.0",
     "prettier": "3.2.5",
-    "sass": "1.71.1",
+    "sass": "1.72.0",
     "stylelint": "16.2.1",
     "stylelint-config-recess-order": "5.0.0",
     "stylelint-config-recommended-scss": "14.0.0",
@@ -48,7 +48,7 @@
     "stylelint-prettier": "5.0.0",
     "typescript": "5.4.2",
     "vite": "5.1.6",
-    "vite-plugin-pwa": "0.19.2",
+    "vite-plugin-pwa": "0.19.5",
     "vite-svg-loader": "5.1.0",
     "vue-linters-config": "0.1.13",
     "vue-tsc": "2.0.6"
