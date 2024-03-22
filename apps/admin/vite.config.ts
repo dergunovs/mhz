@@ -47,6 +47,5 @@ export default defineConfig({
     include: ['**/*.spec.ts'],
     coverage: { provider: 'v8', reporter: ['text'], include: ['**/*.vue'], all: true },
     css: false,
-    dangerouslyIgnoreUnhandledErrors: true,
   },
 });
