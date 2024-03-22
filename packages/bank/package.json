@@ -24,8 +24,8 @@
   "devDependencies": {
     "@types/node": "20.11.30",
     "prettier": "3.2.5",
-    "typescript": "5.4.2",
-    "vite": "5.1.6",
+    "typescript": "5.4.3",
+    "vite": "5.2.2",
     "vite-plugin-dts": "3.7.3"
   },
   "engines": {

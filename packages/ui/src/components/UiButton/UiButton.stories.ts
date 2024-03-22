@@ -22,12 +22,10 @@ const argTypes = {
   layout: {
     control: 'select',
     options: ['primary', 'secondary', 'plain', 'accent', 'gradient'],
-    description: 'primary | secondary | plain | accent | gradient',
   },
   type: {
     control: 'select',
     options: ['submit', 'button'],
-    description: 'submit | button',
   },
 };
 

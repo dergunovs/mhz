@@ -27,7 +27,6 @@ const argTypes = {
   },
   error: {
     control: 'text',
-    description: 'string | boolean',
   },
 };
 

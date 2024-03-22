@@ -26,7 +26,6 @@ const argTypes = {
   color: {
     control: 'select',
     options: ['default', 'white'],
-    description: 'default | white',
   },
 };
 
