@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "9000 Mhz frontend helpers and composables",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -59,7 +59,7 @@
     "vue-router": "4.3.0"
   },
   "engines": {
-    "npm": ">=10.2.3",
-    "node": ">=20.10.0"
+    "npm": ">=10.5.0",
+    "node": ">=20.12.0"
   }
 }
