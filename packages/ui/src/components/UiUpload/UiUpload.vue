@@ -100,7 +100,7 @@ function emulateFileClickInput() {
   input?.value?.click?.();
 }
 
-async function remove(file: File) {
+async function remove(file?: File) {
   emit('remove', file);
   inputKey.value++;
 }

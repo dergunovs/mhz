@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "9000 Mhz frontend helpers and composables",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -22,7 +22,7 @@
     "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/vue-query": "5.28.9",
+    "@tanstack/vue-query": "5.29.0",
     "@vueuse/core": "10.9.0",
     "@vueuse/integrations": "10.9.0",
     "async-validator": "4.2.5",
@@ -31,7 +31,7 @@
     "vue-router": "4.3.0"
   },
   "devDependencies": {
-    "@types/node": "20.12.2",
+    "@types/node": "20.12.5",
     "@typescript-eslint/eslint-plugin": "7.5.0",
     "@typescript-eslint/parser": "7.5.0",
     "@vitejs/plugin-vue": "5.0.4",
@@ -48,11 +48,11 @@
     "stylelint-config-recommended-scss": "14.0.0",
     "stylelint-config-recommended-vue": "1.5.0",
     "stylelint-prettier": "5.0.0",
-    "typescript": "5.4.3",
-    "vite": "5.2.7",
+    "typescript": "5.4.4",
+    "vite": "5.2.8",
     "vite-plugin-dts": "3.8.1",
     "vue-linters-config": "0.1.13",
-    "vue-tsc": "2.0.7"
+    "vue-tsc": "2.0.10"
   },
   "peerDependencies": {
     "vue": "3.4.21",

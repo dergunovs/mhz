@@ -77,9 +77,9 @@ function checkTableSize(): void {
   }
 }
 
-function sort(value: string) {
+function sort(value?: string) {
   props.modelValue?.value === value
-    ? emit('update:modelValue', { value, isAsc: !props.modelValue.isAsc })
+    ? emit('update:modelValue', { value, isAsc: !props.modelValue?.isAsc })
     : emit('reset', value);
 }
 
