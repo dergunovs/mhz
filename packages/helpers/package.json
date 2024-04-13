@@ -50,8 +50,8 @@
     "stylelint-prettier": "5.0.0",
     "typescript": "5.4.5",
     "vite": "5.2.8",
-    "vite-plugin-dts": "3.8.1",
-    "vue-linters-config": "0.1.13",
+    "vite-plugin-dts": "3.8.2",
+    "vue-linters-config": "0.1.14",
     "vue-tsc": "2.0.13"
   },
   "peerDependencies": {
