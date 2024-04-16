@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { Model, Types } from 'mongoose';
+import { FilterQuery, Model, Types } from 'mongoose';
 
 import type { IFilterField, IFilterData, IQuery, IQueryPopulated } from 'mhz-contracts';
 
@@ -59,7 +59,13 @@ export async function paginate<T>(Entity: Model<T>, options?: IQueryPopulated) {
 
   const customerFilter = options?.customer ? { customer: options.customer } : {};
 
-  const filter = { ...categoryFilter, ...manufacturerFilter, ...priceFilter, ...fieldsFilters, ...customerFilter };
+  const filter = {
+    ...categoryFilter,
+    ...manufacturerFilter,
+    ...priceFilter,
+    ...fieldsFilters,
+    ...customerFilter,
+  } as FilterQuery<T>;
 
   const page = Number(options?.page) || 1;
   const sort = options?.sort === undefined ? '-dateCreated' : `${options.dir === 'desc' ? '-' : ''}${options.sort}`;
