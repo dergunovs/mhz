@@ -32,9 +32,9 @@
     "@vueuse/integrations": "10.9.0",
     "chart.js": "4.4.2",
     "perfect-debounce": "1.0.0",
-    "vue": "3.4.22",
+    "vue": "3.4.24",
     "vue-chartjs": "5.3.1",
-    "vue-router": "4.3.0"
+    "vue-router": "4.3.2"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "8.0.8",
@@ -46,8 +46,8 @@
     "@storybook/vue3": "8.0.8",
     "@storybook/vue3-vite": "8.0.8",
     "@types/node": "20.12.7",
-    "@typescript-eslint/eslint-plugin": "7.7.0",
-    "@typescript-eslint/parser": "7.7.0",
+    "@typescript-eslint/eslint-plugin": "7.7.1",
+    "@typescript-eslint/parser": "7.7.1",
     "@vitejs/plugin-vue": "5.0.4",
     "@vitest/coverage-v8": "1.5.0",
     "@vue/test-utils": "2.4.5",
@@ -69,17 +69,17 @@
     "stylelint-config-recommended-vue": "1.5.0",
     "stylelint-prettier": "5.0.0",
     "typescript": "5.4.5",
-    "vite": "5.2.8",
-    "vite-plugin-dts": "3.8.3",
-    "vite-plugin-static-copy": "1.0.2",
+    "vite": "5.2.10",
+    "vite-plugin-dts": "3.9.0",
+    "vite-plugin-static-copy": "1.0.3",
     "vite-svg-loader": "5.1.0",
     "vitest": "1.5.0",
     "vue-linters-config": "0.1.14",
-    "vue-tsc": "2.0.13"
+    "vue-tsc": "2.0.14"
   },
   "peerDependencies": {
-    "vue": "3.4.22",
-    "vue-router": "4.3.0"
+    "vue": "3.4.24",
+    "vue-router": "4.3.2"
   },
   "engines": {
     "npm": ">=10.5.0",

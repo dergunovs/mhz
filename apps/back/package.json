@@ -37,15 +37,15 @@
     "fastify": "4.26.2",
     "fastify-plugin": "4.5.1",
     "mhz-contracts": "*",
-    "mongoose": "8.3.1",
+    "mongoose": "8.3.2",
     "qs": "6.12.1",
     "sharp": "0.33.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.6",
     "@types/node": "20.12.7",
-    "@typescript-eslint/eslint-plugin": "7.7.0",
-    "@typescript-eslint/parser": "7.7.0",
+    "@typescript-eslint/eslint-plugin": "7.7.1",
+    "@typescript-eslint/parser": "7.7.1",
     "esbuild": "0.20.2",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
