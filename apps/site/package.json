@@ -1,7 +1,7 @@
 {
   "name": "mhz-site",
   "description": "9000 Mhz client site",
-  "version": "1.0.49",
+  "version": "1.0.50",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -19,18 +19,18 @@
     "lint": "eslint **/*.{js,ts,vue} && stylelint **/*.{scss,vue}"
   },
   "dependencies": {
-    "@unhead/vue": "1.9.7",
+    "@unhead/vue": "1.9.8",
     "mhz-bank": "*",
     "mhz-contracts": "*",
     "mhz-helpers": "*",
     "mhz-ui": "*",
-    "vue": "3.4.24",
+    "vue": "3.4.26",
     "vue-router": "4.3.2"
   },
   "devDependencies": {
-    "@types/node": "20.12.7",
-    "@typescript-eslint/eslint-plugin": "7.7.1",
-    "@typescript-eslint/parser": "7.7.1",
+    "@types/node": "20.12.8",
+    "@typescript-eslint/eslint-plugin": "7.8.0",
+    "@typescript-eslint/parser": "7.8.0",
     "@vitejs/plugin-vue": "5.0.4",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
@@ -40,18 +40,18 @@
     "eslint-plugin-vue": "9.25.0",
     "postcss-html": "1.6.0",
     "prettier": "3.2.5",
-    "sass": "1.75.0",
-    "stylelint": "16.3.1",
+    "sass": "1.76.0",
+    "stylelint": "16.5.0",
     "stylelint-config-recess-order": "5.0.1",
     "stylelint-config-recommended-scss": "14.0.0",
     "stylelint-config-recommended-vue": "1.5.0",
     "stylelint-prettier": "5.0.0",
     "typescript": "5.4.5",
     "vite": "5.2.10",
-    "vite-plugin-pwa": "0.19.8",
+    "vite-plugin-pwa": "0.20.0",
     "vite-svg-loader": "5.1.0",
     "vue-linters-config": "0.1.14",
-    "vue-tsc": "2.0.14"
+    "vue-tsc": "2.0.16"
   },
   "engines": {
     "npm": ">=10.5.0",
