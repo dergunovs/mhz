@@ -21,9 +21,7 @@ const meta = {
   },
 } satisfies Meta<typeof UiField>;
 
-const argTypes = {
-  error: { control: 'text' },
-};
+const argTypes = {};
 
 type Story = StoryObj<typeof UiField>;
 

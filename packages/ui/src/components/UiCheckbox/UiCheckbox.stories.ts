@@ -25,9 +25,6 @@ const argTypes = {
   initialValue: {
     description: 'boolean | string | number',
   },
-  error: {
-    control: 'text',
-  },
 };
 
 type Story = StoryObj<typeof UiCheckbox>;

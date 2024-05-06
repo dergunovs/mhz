@@ -27,11 +27,9 @@ const meta = {
 
 const argTypes = {
   layout: {
-    control: 'select',
     options: ['primary', 'secondary'],
   },
   files: { description: 'File[]' },
-  error: { control: 'text' },
 };
 
 type Story = StoryObj<typeof UiUpload>;

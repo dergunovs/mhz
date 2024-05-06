@@ -24,7 +24,6 @@ const argTypes = {
     description: '{ url: string; title: string }[]',
   },
   color: {
-    control: 'select',
     options: ['default', 'white'],
   },
 };
