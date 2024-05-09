@@ -29,7 +29,7 @@
         <div v-if="!products?.length && !isLoading">No such products. Please, change your filters</div>
 
         <ProductCatalogSort
-          v-show="products?.length"
+          v-else
           v-model="query.sort"
           :page="query.page"
           @reset="(value: string) => resetQuery(value)"

@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.page">
     <PageTitle :links="links">
-      {{ manufacturer?.title }} <span v-if="filters">({{ filters.category[0].count }} products)</span>
+      {{ manufacturer?.title }} <span v-if="filters">({{ filters.manufacturer[0].count }} products)</span>
     </PageTitle>
 
     <ManufacturerCard v-if="manufacturer" :manufacturer="manufacturer" />
@@ -23,7 +23,7 @@
         <div v-if="!products?.length && !isLoading">No such products. Please, change your filters.</div>
 
         <ProductCatalogSort
-          v-show="products?.length"
+          v-else
           v-model="query.sort"
           :page="query.page"
           @reset="(value: string) => resetQuery(value)"
