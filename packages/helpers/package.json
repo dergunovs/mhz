@@ -52,7 +52,7 @@
     "vite": "5.2.11",
     "vite-plugin-dts": "3.9.1",
     "vue-linters-config": "0.1.14",
-    "vue-tsc": "2.0.17"
+    "vue-tsc": "2.0.16"
   },
   "peerDependencies": {
     "vue": "3.4.27",

@@ -51,7 +51,7 @@
     "vite-plugin-pwa": "0.20.0",
     "vite-svg-loader": "5.1.0",
     "vue-linters-config": "0.1.14",
-    "vue-tsc": "2.0.17"
+    "vue-tsc": "2.0.16"
   },
   "engines": {
     "npm": ">=10.7.0",
