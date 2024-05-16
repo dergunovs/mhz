@@ -22,7 +22,7 @@
     "ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.12.11",
+    "@types/node": "20.12.12",
     "prettier": "3.2.5",
     "typescript": "5.4.5",
     "vite": "5.2.11",
