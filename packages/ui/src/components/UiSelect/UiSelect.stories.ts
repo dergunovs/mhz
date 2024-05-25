@@ -32,7 +32,7 @@ type Story = StoryObj<typeof UiSelect>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiSelect },
     setup: () => ({ args, argTypes, updateArgs }),
 
@@ -57,7 +57,7 @@ export const Primary: Story = {
 };
 
 export const Filter: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiSelect },
     setup: () => ({ args, argTypes, updateArgs }),
 

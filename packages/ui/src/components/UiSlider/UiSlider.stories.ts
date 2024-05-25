@@ -33,7 +33,7 @@ type Story = StoryObj<typeof UiSlider>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiSlider },
     setup: () => ({ args, argTypes }),
 

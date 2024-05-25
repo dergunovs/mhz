@@ -26,7 +26,7 @@ type Story = StoryObj<typeof UiInput>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiInput },
     setup: () => ({ args, argTypes }),
 

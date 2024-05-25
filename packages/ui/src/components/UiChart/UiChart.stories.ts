@@ -28,7 +28,7 @@ type Story = StoryObj<typeof UiChart>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiChart },
     setup: () => ({ args, argTypes }),
 

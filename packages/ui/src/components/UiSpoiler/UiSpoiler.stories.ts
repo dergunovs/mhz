@@ -28,7 +28,7 @@ type Story = StoryObj<typeof UiSpoiler>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiSpoiler },
     setup: () => ({ args, argTypes, updateArgs }),
 

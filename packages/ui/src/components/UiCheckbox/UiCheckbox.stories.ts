@@ -32,7 +32,7 @@ type Story = StoryObj<typeof UiCheckbox>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiCheckbox },
     setup: () => ({ args, argTypes }),
 

@@ -32,7 +32,7 @@ type Story = StoryObj<typeof UiSearch>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiSearch },
     setup: () => ({ args, argTypes, updateArgs }),
 

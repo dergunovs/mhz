@@ -26,7 +26,7 @@ type Story = StoryObj<typeof UiEditor>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiEditor },
     setup: () => ({ args, argTypes }),
 

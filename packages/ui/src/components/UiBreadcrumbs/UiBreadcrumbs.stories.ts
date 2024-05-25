@@ -33,7 +33,7 @@ type Story = StoryObj<typeof UiBreadcrumbs>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiBreadcrumbs },
     setup: () => ({ args, argTypes }),
 

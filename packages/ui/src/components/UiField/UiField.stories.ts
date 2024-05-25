@@ -28,7 +28,7 @@ type Story = StoryObj<typeof UiField>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiField, UiInput },
     setup: () => ({ args, argTypes }),
 

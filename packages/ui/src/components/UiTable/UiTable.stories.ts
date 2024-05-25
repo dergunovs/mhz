@@ -30,7 +30,7 @@ type Story = StoryObj<typeof UiTable>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiTable },
     setup: () => ({ args, argTypes, updateArgs, DEFAULT_SLOT }),
 

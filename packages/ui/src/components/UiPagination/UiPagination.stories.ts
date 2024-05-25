@@ -27,7 +27,7 @@ type Story = StoryObj<typeof UiPagination>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiPagination },
     setup: () => ({ args, argTypes }),
 

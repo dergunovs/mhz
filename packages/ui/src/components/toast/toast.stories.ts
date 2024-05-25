@@ -22,7 +22,7 @@ type Story = StoryObj<typeof ToastStory>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { ToastStory },
     setup: () => ({ args, argTypes }),
 

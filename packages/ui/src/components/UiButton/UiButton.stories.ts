@@ -32,7 +32,7 @@ type Story = StoryObj<typeof UiButton>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiButton },
     setup: () => ({ args, argTypes, DEFAULT_SLOT }),
 
@@ -42,7 +42,7 @@ export const Primary: Story = {
 };
 
 export const Icon: Story = {
-  render: (args, { argTypes }) => ({
+  render: (args) => ({
     components: { UiButton },
     setup: () => ({ args, argTypes, DEFAULT_SLOT, IconTest }),
 

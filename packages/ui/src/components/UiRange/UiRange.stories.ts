@@ -29,7 +29,7 @@ type Story = StoryObj<typeof UiRange>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiRange },
     setup: () => ({ args, argTypes, updateArgs }),
 

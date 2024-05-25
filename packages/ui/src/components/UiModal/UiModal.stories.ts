@@ -28,7 +28,7 @@ type Story = StoryObj<typeof UiModal>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiModal, UiButton },
     setup: () => ({ args, argTypes, updateArgs }),
 

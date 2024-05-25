@@ -7,7 +7,7 @@ import { html } from '@/utils';
 import { UiUpload } from '@/components';
 
 let files: File[] = [];
-let file;
+let file: File | undefined;
 
 const meta = {
   component: UiUpload,
@@ -37,7 +37,7 @@ type Story = StoryObj<typeof UiUpload>;
 export default meta;
 
 export const Primary: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiUpload },
     setup: () => ({ args, argTypes, updateArgs }),
 
@@ -45,15 +45,15 @@ export const Primary: Story = {
 
     methods: {
       remove(fileToRemove: File) {
-        const newFiles = files.filter((file: File) => file.name !== fileToRemove.name);
+        const newFiles = files.filter((fileExisting: File) => fileExisting.name !== fileToRemove.name);
 
         updateArgs({ files: [...newFiles] });
         files = [...newFiles];
       },
 
-      add(file: File) {
-        updateArgs({ files: [...files, file] });
-        files = [...files, file];
+      add(fileToAdd: File) {
+        updateArgs({ files: [...files, fileToAdd] });
+        files = [...files, fileToAdd];
       },
     },
   }),
@@ -68,8 +68,9 @@ export const Primary: Story = {
 
   argTypes,
 };
+
 export const SingleFile: Story = {
-  render: (args, { argTypes, updateArgs }) => ({
+  render: (args, { updateArgs }) => ({
     components: { UiUpload },
     setup: () => ({ args, argTypes, updateArgs }),
 
