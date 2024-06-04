@@ -28,7 +28,7 @@
     "@commitlint/config-conventional": "19.2.2",
     "@turbo/gen": "1.13.3",
     "husky": "9.0.11",
-    "prettier": "3.2.5",
+    "prettier": "3.3.0",
     "turbo": "1.13.3"
   },
   "packageManager": "npm@10.7.0",
