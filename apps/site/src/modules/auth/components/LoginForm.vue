@@ -4,13 +4,13 @@
 
     <h2>Login</h2>
 
-    <form @submit.prevent="submit" :class="$style.form">
+    <form @submit.prevent="submit" :class="$style.form" data-test="login-form">
       <UiField label="E-mail" isRequired :error="error('email')">
-        <UiInput v-model="formData.email" isFocus />
+        <UiInput v-model="formData.email" isFocus data-test="login-form-email" />
       </UiField>
 
       <UiField label="Password" isRequired :error="error('password')">
-        <UiInput v-model="formData.password" type="password" />
+        <UiInput v-model="formData.password" type="password" data-test="login-form-password" />
       </UiField>
 
       <UiButton type="submit">Submit</UiButton>
@@ -27,8 +27,8 @@ import { ILoginData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
 import { login } from '@/auth/services';
-import { URL_MAIN } from '@/common/constants';
 import { TOKEN_NAME } from '@/auth/constants';
+import { URL_MAIN } from '@/common/constants';
 
 const { auth } = useAuth();
 
