@@ -22,10 +22,10 @@
     "ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.14.2",
-    "prettier": "3.3.1",
-    "typescript": "5.4.5",
-    "vite": "5.2.13",
+    "@types/node": "20.14.9",
+    "prettier": "3.3.2",
+    "typescript": "5.5.3",
+    "vite": "5.3.3",
     "vite-plugin-dts": "3.9.1"
   },
   "engines": {
