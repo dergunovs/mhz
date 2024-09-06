@@ -1,7 +1,7 @@
 {
   "name": "mhz-countries",
   "description": "9000 Mhz countries list",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -17,7 +17,7 @@
     "directory": "packages/countries"
   },
   "engines": {
-    "npm": ">=10.7.0",
-    "node": ">=22.1.0"
+    "npm": ">=10.8.2",
+    "node": ">=22.8.0"
   }
 }

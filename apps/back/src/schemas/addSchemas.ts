@@ -1,21 +1,16 @@
 import type { FastifyInstance } from 'fastify';
 
-import { userRoleModel, userTokenModel, loginDataModel, signUpDataModel } from '../schemas/auth.js';
-import { categoryFieldModel, categoryModel } from '../schemas/category.js';
-import { configurationModel } from '../schemas/configuration.js';
-import { cartItemModel, productWatchedModel, customerModel } from '../schemas/customer.js';
-import { managerModel } from '../schemas/manager.js';
-import { manufacturerModel } from '../schemas/manufacturer.js';
-import { orderModel } from '../schemas/order.js';
-import { bannerModel } from '../schemas/banner.js';
-import {
-  productFilterBaseModel,
-  productFilterFieldModel,
-  productFilterModel,
-  productModel,
-} from '../schemas/product.js';
-import { searchResultModel, searchResultsModel } from '../schemas/search.js';
-import { statsCountModel } from '../schemas/stats.js';
+import { userRoleModel, userTokenModel, loginDataModel, signUpDataModel } from './auth.js';
+import { categoryFieldModel, categoryModel } from './category.js';
+import { configurationModel } from './configuration.js';
+import { cartItemModel, productWatchedModel, customerModel } from './customer.js';
+import { managerModel } from './manager.js';
+import { manufacturerModel } from './manufacturer.js';
+import { orderModel } from './order.js';
+import { bannerModel } from './banner.js';
+import { productFilterBaseModel, productFilterFieldModel, productFilterModel, productModel } from './product.js';
+import { searchResultModel, searchResultsModel } from './search.js';
+import { statsCountModel } from './stats.js';
 
 export function addSchemas(fastify: FastifyInstance) {
   fastify.addSchema(userRoleModel);

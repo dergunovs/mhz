@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "9000 Mhz backend",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -37,20 +37,20 @@
     "fastify": "4.28.1",
     "fastify-plugin": "4.5.1",
     "mhz-contracts": "*",
-    "mongoose": "8.5.3",
+    "mongoose": "8.6.1",
     "qs": "6.13.0",
     "sharp": "0.33.5"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.6",
-    "@types/node": "22.4.2",
+    "@types/node": "22.5.4",
     "@typescript-eslint/eslint-plugin": "7.15.0",
     "@typescript-eslint/parser": "7.15.0",
     "esbuild": "0.23.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-import-resolver-typescript": "3.6.1",
-    "eslint-plugin-import-x": "3.1.0",
+    "eslint-import-resolver-typescript": "3.6.3",
+    "eslint-plugin-import-x": "4.2.1",
     "eslint-plugin-prettier": "5.2.1",
     "fastify-linters-config": "0.0.10",
     "nodemon": "3.1.4",
@@ -59,7 +59,7 @@
     "vitest": "2.0.5"
   },
   "engines": {
-    "npm": ">=10.7.0",
-    "node": ">=22.1.0"
+    "npm": ">=10.8.2",
+    "node": ">=22.8.0"
   }
 }
