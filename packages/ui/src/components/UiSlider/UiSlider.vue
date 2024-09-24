@@ -54,8 +54,8 @@ const currentSlide = ref(0);
 
 .thumbs {
   display: flex;
-  flex-direction: column;
   flex-shrink: 0;
+  flex-direction: column;
   gap: 8px;
 }
 

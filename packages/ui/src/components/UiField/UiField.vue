@@ -26,8 +26,8 @@ const props = defineProps<IProps>();
 <style module lang="scss">
 .field {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  flex-direction: column;
   gap: 4px;
   width: 100%;
 }
