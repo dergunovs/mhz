@@ -208,8 +208,8 @@ onMounted(() => {
 
 .fields {
   display: flex;
-  flex-direction: column;
   flex-shrink: 0;
+  flex-direction: column;
   gap: 12px;
   width: 240px;
 }

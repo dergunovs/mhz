@@ -40,8 +40,8 @@ const { count, price } = useCart(cartComputed);
 <style module lang="scss">
 .summary {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  flex-direction: column;
   gap: 16px;
   max-width: 400px;
 }

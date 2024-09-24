@@ -1,1 +1,0 @@
-npm run lint --no-daemon && npm run ts --no-daemon && npm run test --no-daemon

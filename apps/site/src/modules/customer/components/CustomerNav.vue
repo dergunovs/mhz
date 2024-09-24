@@ -13,8 +13,8 @@ import { CUSTOMER_NAV } from '@/customer/constants';
 <style module lang="scss">
 .nav {
   display: flex;
-  flex-direction: column;
   flex-shrink: 0;
+  flex-direction: column;
   gap: 8px;
   width: 200px;
 }

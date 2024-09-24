@@ -97,8 +97,8 @@ useHead({
 
 .checkout {
   display: flex;
-  flex-direction: column;
   flex-shrink: 0;
+  flex-direction: column;
   gap: 16px;
 }
 

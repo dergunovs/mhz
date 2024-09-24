@@ -250,15 +250,15 @@ watch(
 
 .filters {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  flex-direction: column;
   gap: 16px;
 }
 
 .price {
   display: flex;
-  flex-direction: column;
   flex-shrink: 0;
+  flex-direction: column;
   gap: 4px;
   height: 64px;
 }
