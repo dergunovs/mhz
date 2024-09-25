@@ -214,21 +214,31 @@ export const customerService: ICustomerService = {
     const currentCart = currentCustomer?.cart || [];
 
     if (typeof _id === 'string') {
-      currentItems?.includes(_id)
-        ? await Customer.updateOne(filter, {
-            cart: currentCart.map((item) => {
-              return item.product._id?.toString() === _id ? { product: item.product, count: item.count + 1 } : item;
-            }),
-          })
-        : await Customer.updateOne(filter, {
-            $push: { cart: { product: _id, count: 1 } },
-          });
+      const isItemIncludes = currentItems?.includes(_id);
+
+      if (isItemIncludes) {
+        await Customer.updateOne(filter, {
+          cart: currentCart.map((item) => {
+            return item.product._id?.toString() === _id ? { product: item.product, count: item.count + 1 } : item;
+          }),
+        });
+      } else {
+        await Customer.updateOne(filter, {
+          $push: { cart: { product: _id, count: 1 } },
+        });
+      }
     } else {
       const productsToUpdateCount: string[] = [];
       const productsToAdd: string[] = [];
 
       for (const productId of _id) {
-        currentItems?.includes(productId) ? productsToUpdateCount.push(productId) : productsToAdd.push(productId);
+        const isProductIncludes = currentItems?.includes(productId);
+
+        if (isProductIncludes) {
+          productsToUpdateCount.push(productId);
+        } else {
+          productsToAdd.push(productId);
+        }
       }
 
       if (productsToUpdateCount.length) {

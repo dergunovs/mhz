@@ -2,6 +2,8 @@ import { StoryObj } from '@storybook/vue3';
 
 import '@/assets/styles/main.scss';
 
+window['IS_STORYBOOK'] = true;
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -20,5 +22,3 @@ export const decorators = [
       </div>`,
   }),
 ];
-
-window['IS_STORYBOOK'] = true;
