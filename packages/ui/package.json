@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "9000 Mhz ui kit",
-  "version": "1.0.55",
+  "version": "1.0.56",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -24,15 +24,15 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@tiptap/pm": "2.7.3",
-    "@tiptap/starter-kit": "2.7.3",
-    "@tiptap/vue-3": "2.7.3",
+    "@tiptap/pm": "2.7.4",
+    "@tiptap/starter-kit": "2.7.4",
+    "@tiptap/vue-3": "2.7.4",
     "@vueform/slider": "2.1.10",
     "@vueuse/core": "11.1.0",
     "@vueuse/integrations": "11.1.0",
     "chart.js": "4.4.4",
     "perfect-debounce": "1.0.0",
-    "vue": "3.5.8",
+    "vue": "3.5.9",
     "vue-chartjs": "5.3.1",
     "vue-router": "4.4.5"
   },
@@ -46,7 +46,7 @@
     "@storybook/preview-api": "8.3.3",
     "@storybook/vue3": "8.3.3",
     "@storybook/vue3-vite": "8.3.3",
-    "@types/node": "22.7.1",
+    "@types/node": "22.7.3",
     "@vitejs/plugin-vue": "5.1.4",
     "@vitest/coverage-v8": "2.1.1",
     "@vue/test-utils": "2.4.6",
@@ -80,7 +80,7 @@
     "vue-tsc": "2.1.6"
   },
   "peerDependencies": {
-    "vue": "3.5.8",
+    "vue": "3.5.9",
     "vue-router": "4.4.5"
   },
   "engines": {
