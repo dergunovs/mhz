@@ -4,7 +4,7 @@
       :modelValue="typeof props.modelValue === 'string' ? props.modelValue : props.modelValue?.title"
       @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
-      placeholder="Choose variant"
+      :placeholder="props.placeholder || 'Choose variant'"
       :appendIcon="isShowOptions ? IconOpened : IconClosed"
       data-test="ui-select-input"
     />
@@ -64,6 +64,7 @@ interface IProps {
   modelValue?: string | IOption;
   options?: string[] | IOption[];
   isFilter?: boolean;
+  placeholder?: string;
 }
 
 const props = defineProps<IProps>();

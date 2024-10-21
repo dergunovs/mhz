@@ -1,7 +1,7 @@
 {
   "name": "mhz-contracts",
   "description": "9000 Mhz contracts: api, types, interfaces",
-  "version": "1.0.57",
+  "version": "1.0.58",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
