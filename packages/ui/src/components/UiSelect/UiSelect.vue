@@ -1,7 +1,11 @@
 <template>
   <div :class="$style.container" ref="containerElement">
     <UiInput
-      :modelValue="typeof props.modelValue === 'string' ? props.modelValue : props.modelValue?.title"
+      :modelValue="
+        typeof props.modelValue === 'string' || typeof props.modelValue === 'number'
+          ? props.modelValue
+          : props.modelValue?.title
+      "
       @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
       :placeholder="props.placeholder || 'Choose variant'"
@@ -29,7 +33,7 @@
           tabindex="0"
           ref="optionElement"
           :data-current="
-            typeof props.modelValue === 'string'
+            typeof props.modelValue === 'string' || typeof props.modelValue === 'number'
               ? props.modelValue === option._id
               : props.modelValue?._id === option._id
           "
@@ -61,8 +65,8 @@ interface IOption {
 }
 
 interface IProps {
-  modelValue?: string | IOption;
-  options?: string[] | IOption[];
+  modelValue?: string | number | IOption;
+  options?: string[] | number[] | IOption[];
   isFilter?: boolean;
   placeholder?: string;
 }
