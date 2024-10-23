@@ -71,12 +71,7 @@ export default defineConfig({
       },
     }),
     svgLoader(),
-    dts({
-      entryRoot: './src/components',
-      cleanVueFileName: true,
-      include: ['./src/**/Ui*.vue', './src/components/toast/toast.ts'],
-      exclude: ['./src/utils'],
-    }),
+    dts({ cleanVueFileName: true, entryRoot: './src/components' }),
     viteStaticCopy({
       targets: [
         {
