@@ -22,10 +22,10 @@
       </div>
 
       <div v-if="props.isConfirm" :class="$style.buttons">
-        <UiButton @click="handleConfirm" data-test="ui-modal-confirm">Confirm</UiButton>
+        <UiButton @click="handleConfirm" data-test="ui-modal-confirm">{{ confirmText }}</UiButton>
 
         <UiButton layout="secondary" @click="emit('update:modelValue', false)" data-test="ui-modal-cancel">
-          Cancel
+          {{ cancelText }}
         </UiButton>
       </div>
     </div>
@@ -33,18 +33,22 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import { watch, computed } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
 
 interface IProps {
   modelValue: boolean;
   isConfirm?: boolean;
+  lang?: 'ru';
 }
 
 const props = defineProps<IProps>();
 
 const emit = defineEmits(['update:modelValue', 'confirm']);
+
+const cancelText = computed(() => (props.lang === 'ru' ? 'Отмена' : 'Cancel'));
+const confirmText = computed(() => (props.lang === 'ru' ? 'Подтвердить' : 'onfirm'));
 
 const body = document.querySelector('body');
 

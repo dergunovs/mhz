@@ -8,13 +8,13 @@
       "
       @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
-      :placeholder="props.placeholder || 'Choose variant'"
+      :placeholder="placeholderText"
       :appendIcon="isShowOptions ? IconOpened : IconClosed"
       data-test="ui-select-input"
     />
 
     <div v-if="props.isFilter && isShowOptions" :class="$style.filter">
-      <UiInput v-model="filterQuery" placeholder="Filter Variants" isFocus data-test="ui-select-input-filter" />
+      <UiInput v-model="filterQuery" :placeholder="filterText" isFocus data-test="ui-select-input-filter" />
     </div>
 
     <div v-if="isShowOptions" :class="$style.options" ref="optionsElement" data-test="ui-select-options">
@@ -44,7 +44,7 @@
       </div>
 
       <div v-else @click="hideOptions" :class="$style.option" tabindex="0" data-test="ui-select-no-results">
-        No results
+        {{ noResultsText }}
       </div>
     </div>
   </div>
@@ -68,13 +68,17 @@ interface IProps {
   modelValue?: string | number | IOption;
   options?: string[] | number[] | IOption[];
   isFilter?: boolean;
-  placeholder?: string;
+  lang?: 'ru';
 }
 
 const props = defineProps<IProps>();
 const emit = defineEmits(['update:modelValue', 'reachedBottom']);
 
 const filterQuery = ref('');
+
+const placeholderText = computed(() => (props.lang === 'ru' ? 'Выбрать' : 'Choose variant'));
+const filterText = computed(() => (props.lang === 'ru' ? 'Фильтровать' : 'Filter Variants'));
+const noResultsText = computed(() => (props.lang === 'ru' ? 'Нет результатов' : 'No results'));
 
 const isObject = computed(() => typeof props.options?.[0] === 'object');
 

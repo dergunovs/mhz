@@ -33,7 +33,7 @@ export default meta;
 
 export const Primary: Story = {
   args: {
-    modelValue: "1"
+    modelValue: '1',
   },
 
   render: (args, { updateArgs }) => ({
@@ -57,7 +57,7 @@ export const Primary: Story = {
     },
   ],
 
-  argTypes
+  argTypes,
 };
 
 export const Filter: Story = {

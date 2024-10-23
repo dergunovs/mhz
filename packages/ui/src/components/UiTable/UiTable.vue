@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.tableBlock" ref="tableBlock">
-    <div v-if="isScrollable" :class="$style.scrollMessage">Table is scrollable →</div>
+    <div v-if="isScrollable" :class="$style.scrollMessage">{{ scrollableText }}</div>
 
     <table :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
       <thead>
@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 
 interface IHeader {
   value?: string;
@@ -58,6 +58,7 @@ interface IProps {
   headers: IHeader[];
   modelValue?: { value?: string; isAsc: boolean };
   isLoading?: boolean;
+  lang?: 'ru';
 }
 
 const props = defineProps<IProps>();
@@ -67,6 +68,8 @@ const tableBlock = ref<HTMLElement>();
 const table = ref<HTMLElement>();
 
 const isScrollable = ref(false);
+
+const scrollableText = computed(() => (props.lang === 'ru' ? 'Таблицу можно скроллить →' : 'Table is scrollable →'));
 
 function checkTableSize(): void {
   if (tableBlock.value && table.value) {

@@ -72,6 +72,12 @@ const props = withDefaults(defineProps<IProps>(), {
     &:hover {
       background: var(--color-accent-dark);
     }
+
+    &:disabled {
+      color: var(--color-gray-dark-extra);
+      cursor: default;
+      background: var(--color-gray-light-extra);
+    }
   }
 
   &[data-layout='gradient'] {
@@ -96,6 +102,7 @@ const props = withDefaults(defineProps<IProps>(), {
 
     &:disabled {
       color: var(--color-gray-dark-extra);
+      cursor: default;
       background: var(--color-white);
       border-color: var(--color-gray-light-extra);
     }

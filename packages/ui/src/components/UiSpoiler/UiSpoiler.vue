@@ -33,8 +33,6 @@ const emit = defineEmits(['update:modelValue']);
 
 <style module lang="scss">
 .container {
-  position: relative;
-  z-index: 0;
   display: flex;
   flex-direction: column;
   width: 100%;

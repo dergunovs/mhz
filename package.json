@@ -25,9 +25,9 @@
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
-    "@turbo/gen": "2.2.1",
+    "@turbo/gen": "2.2.3",
     "prettier": "3.3.3",
-    "turbo": "2.2.1"
+    "turbo": "2.2.3"
   },
   "packageManager": "npm@10.8.2",
   "workspaces": [
