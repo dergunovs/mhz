@@ -2,6 +2,8 @@
   <button
     :class="$style.button"
     :data-layout="props.layout"
+    :data-narrow="props.isNarrow"
+    :data-tall="props.isTall"
     :disabled="props.isDisabled"
     :type="props.type"
     data-test="ui-button"
@@ -21,6 +23,8 @@ interface IProps {
   layout?: 'primary' | 'secondary' | 'plain' | 'accent' | 'gradient';
   type?: 'submit' | 'button';
   isDisabled?: boolean;
+  isNarrow?: boolean;
+  isTall?: boolean;
   icon?: FunctionalComponent;
 }
 
@@ -64,6 +68,16 @@ const props = withDefaults(defineProps<IProps>(), {
     color: var(--color-gray-dark-extra);
     cursor: default;
     background: var(--color-gray-light-extra);
+  }
+
+  &[data-narrow='true'] {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  &[data-tall='true'] {
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 
   &[data-layout='accent'] {

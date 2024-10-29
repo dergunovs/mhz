@@ -20,7 +20,9 @@
       &lt;
     </button>
 
-    <div :class="$style.text" data-test="ui-pagination">{{ page }} of {{ total }}</div>
+    <div :class="$style.text" data-test="ui-pagination">
+      {{ page }} {{ props.lang === 'ru' ? 'из' : 'of' }} {{ total }}
+    </div>
 
     <button
       @click="handleUpdate(props.page + 1)"
@@ -48,6 +50,7 @@
 interface IProps {
   page: number;
   total?: number;
+  lang?: 'ru';
 }
 
 const props = defineProps<IProps>();
