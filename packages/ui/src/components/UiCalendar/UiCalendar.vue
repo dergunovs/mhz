@@ -9,7 +9,7 @@
       locale="ru"
       :transitions="false"
       :events="props.events"
-      :onEventClick="(event: ICalendarEvent<object>) => emit('onEventClick', event)"
+      :onEventClick="props.onEventClick"
     />
   </div>
 </template>
@@ -30,11 +30,11 @@ interface ICalendarEvent<T> {
 
 interface IProps {
   height?: string;
-  events: ICalendarEvent<object>[];
+  events: ICalendarEvent<unknown>[];
+  onEventClick: (event: ICalendarEvent<never>) => void;
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['onEventClick']);
 
 const heightComputed = computed(() => (props.height ? `${props.height}px` : '500px'));
 </script>

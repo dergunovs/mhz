@@ -20,7 +20,7 @@ import { computed } from 'vue';
 import { DEFAULT_TAG, DEFAULT_ALIGN, DEFAULT_GAP, DEFAULT_JUSTIFY } from './constants';
 
 interface IProps {
-  tag: 'div' | 'span' | 'form';
+  tag?: 'div' | 'span' | 'form';
   column?: boolean;
   align?: 'normal' | 'stretch' | 'center' | 'flex-start' | 'flex-end';
   justify?:
