@@ -3,7 +3,7 @@ import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 
 import UiFlex from './UiFlex.vue';
 
-import { DEFAULT_ALIGN, DEFAULT_GAP, DEFAULT_JUSTIFY, FIRST_SLOT } from './constants';
+import { DEFAULT_ALIGN, DEFAULT_GAP, DEFAULT_JUSTIFY, DEFAULT_TAG, FIRST_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
@@ -13,7 +13,7 @@ let wrapper: VueWrapper;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiFlex, {
-    props: { align: DEFAULT_ALIGN, justify: DEFAULT_JUSTIFY, gap: DEFAULT_GAP },
+    props: { tag: DEFAULT_TAG, align: DEFAULT_ALIGN, justify: DEFAULT_JUSTIFY, gap: DEFAULT_GAP },
     slots: { default: FIRST_SLOT },
   });
 });

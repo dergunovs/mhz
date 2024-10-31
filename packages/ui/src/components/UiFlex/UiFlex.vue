@@ -1,5 +1,6 @@
 <template>
-  <div
+  <component
+    :is="props.tag"
     :class="$style.flex"
     :data-column="props.column"
     :data-align="props.align"
@@ -11,14 +12,15 @@
     data-test="ui-flex"
   >
     <slot></slot>
-  </div>
+  </component>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { DEFAULT_ALIGN, DEFAULT_GAP, DEFAULT_JUSTIFY } from './constants';
+import { DEFAULT_TAG, DEFAULT_ALIGN, DEFAULT_GAP, DEFAULT_JUSTIFY } from './constants';
 
 interface IProps {
+  tag: 'div' | 'span' | 'form';
   column?: boolean;
   align?: 'normal' | 'stretch' | 'center' | 'flex-start' | 'flex-end';
   justify?:
@@ -37,6 +39,7 @@ interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
+  tag: DEFAULT_TAG,
   align: DEFAULT_ALIGN,
   justify: DEFAULT_JUSTIFY,
   gap: DEFAULT_GAP,

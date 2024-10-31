@@ -1,3 +1,4 @@
+export const DEFAULT_TAG = 'div';
 export const DEFAULT_ALIGN = 'normal';
 export const DEFAULT_JUSTIFY = 'normal';
 export const DEFAULT_GAP = '8';
