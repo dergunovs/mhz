@@ -10,6 +10,7 @@
       :transitions="false"
       :events="props.events"
       :onEventClick="props.onEventClick"
+      @ready="(event: ICalendarUpdate) => emit('ready', event)"
       @viewChange="(event: ICalendarUpdate) => emit('update', event)"
     />
   </div>
@@ -30,18 +31,18 @@ interface ICalendarEvent<T> {
 }
 
 interface ICalendarUpdate {
-  startDate: string;
-  endDate: string;
+  firstCellDate: string;
+  lastCellDate: string;
 }
 
 interface IProps {
   height?: string;
-  events: ICalendarEvent<unknown>[];
+  events?: ICalendarEvent<unknown>[];
   onEventClick: (event: ICalendarEvent<never>) => void;
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update']);
+const emit = defineEmits(['ready', 'update']);
 
 const heightComputed = computed(() => (props.height ? `${props.height}px` : '500px'));
 </script>
