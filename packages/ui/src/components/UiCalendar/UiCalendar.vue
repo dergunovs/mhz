@@ -10,6 +10,7 @@
       :transitions="false"
       :events="props.events"
       :onEventClick="props.onEventClick"
+      @viewChange="(event: ICalendarUpdate) => emit('update', event)"
     />
   </div>
 </template>
@@ -28,6 +29,11 @@ interface ICalendarEvent<T> {
   content: T[];
 }
 
+interface ICalendarUpdate {
+  startDate: string;
+  endDate: string;
+}
+
 interface IProps {
   height?: string;
   events: ICalendarEvent<unknown>[];
@@ -35,6 +41,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
+const emit = defineEmits(['update']);
 
 const heightComputed = computed(() => (props.height ? `${props.height}px` : '500px'));
 </script>

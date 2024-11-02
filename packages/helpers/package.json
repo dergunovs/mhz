@@ -53,7 +53,7 @@
     "vite": "5.4.10",
     "vite-plugin-dts": "4.3.0",
     "vue-eslint-parser": "9.4.3",
-    "vue-linters-config": "0.3.8",
+    "vue-linters-config": "0.3.9",
     "vue-tsc": "2.1.10"
   },
   "peerDependencies": {
