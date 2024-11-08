@@ -53,6 +53,14 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   height: v-bind(heightComputed);
 }
 
+:global(.vuecal) {
+  border-radius: 8px;
+}
+
+:global(.vuecal__body) {
+  border-radius: 8px;
+}
+
 :global(.vuecal__cell-events) {
   display: flex;
   flex-wrap: wrap;
@@ -74,5 +82,14 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   line-height: 1.3;
   color: var(--color-white);
   text-align: center;
+}
+
+:global(.vuecal__title-bar) {
+  min-height: 41px;
+  font-size: 1.25rem;
+  background-color: var(--color-gray-light-extra);
+  border: 1px solid var(--color-gray);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 </style>
