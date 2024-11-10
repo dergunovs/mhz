@@ -7,7 +7,6 @@ import * as helpers from 'mhz-helpers';
 import LoginForm from './LoginForm.vue';
 
 import { TOKEN_NAME } from '@/auth/constants';
-import { URL_MAIN } from '@/common/constants';
 
 import { wrapperFactory, mockMutationReply } from '@/common/test';
 import * as authServices from '@/auth/services';
@@ -68,7 +67,7 @@ describe('LoginForm', async () => {
     onSuccessLogin({ _id: ID, email: EMAIL, role: ROLE, token: TOKEN });
 
     expect(spyAuth).toBeCalledTimes(1);
-    expect(spyAuth).toBeCalledWith(TOKEN, URL_MAIN, spySetAuthHeaders, TOKEN_NAME);
+    expect(spyAuth).toBeCalledWith(TOKEN, spySetAuthHeaders, TOKEN_NAME);
 
     expect(spyToastSuccess).toBeCalledTimes(1);
   });
