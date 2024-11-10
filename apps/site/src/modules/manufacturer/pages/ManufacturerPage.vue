@@ -35,7 +35,7 @@
           v-show="products?.length"
           :page="query.page"
           :total="total"
-          @update="(value: number) => setQueryPage(setPage(value, query.page))"
+          @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
         />
       </div>
     </div>
@@ -72,7 +72,7 @@ const { data: manufacturer } = getManufacturer(manufacturerId);
 
 const { data, isLoading } = getProducts(query, 'manufacturer');
 
-const { data: products, setPage, total } = usePagination(data);
+const { data: products, setPaginationPage, total } = usePagination(data);
 
 const { data: priceRange } = getProductPriceRange('manufacturer', manufacturerId);
 const { data: filters } = getProductFilters('manufacturer', manufacturerId);

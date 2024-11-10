@@ -32,12 +32,10 @@ export function deleteCookieToken(tokenName: string) {
 export function useAuth() {
   const router = useRouter();
 
-  function auth(token: string, url: string, setAuthHeader: (token: string) => void, tokenName: string) {
+  function auth(token: string, setAuthHeader: (token: string) => void, tokenName: string) {
     setCookieToken(token, tokenName);
     setAuthHeader(token);
     setAuth(true);
-
-    router.push(url);
   }
 
   function redirectIfAuth(url: string) {

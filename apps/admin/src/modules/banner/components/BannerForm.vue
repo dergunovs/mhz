@@ -162,7 +162,7 @@ const {
 } = useInfiniteScroll<IProduct>();
 
 const { data: productsData, isLoading: isLoadingProducts } = getProducts(productsPage);
-const { data: products, setPage: setProductsPage } = usePagination(productsData);
+const { data: products, setPaginationPage: setProductsPage } = usePagination(productsData);
 
 watch(
   () => products.value,

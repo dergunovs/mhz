@@ -16,7 +16,7 @@
         v-show="banners?.length"
         :page="query.page"
         :total="total"
-        @update="(value: number) => setQueryPage(setPage(value, query.page))"
+        @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
       />
     </div>
   </div>
@@ -39,7 +39,7 @@ const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getBanners(query);
 
-const { data: banners, total, setPage } = usePagination(data);
+const { data: banners, total, setPaginationPage } = usePagination(data);
 
 const title = 'Banners';
 

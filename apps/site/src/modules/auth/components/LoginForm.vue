@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
 import { useValidator, required, email, useAuth, setAuthHeader } from 'mhz-helpers';
@@ -29,6 +30,8 @@ import ImageLogo from '@/layout/icons/logo.svg';
 import { login } from '@/auth/services';
 import { TOKEN_NAME } from '@/auth/constants';
 import { URL_MAIN } from '@/common/constants';
+
+const router = useRouter();
 
 const { auth } = useAuth();
 
@@ -40,8 +43,10 @@ const formData = ref<ILoginData>({
 
 const { mutate: mutateLogin } = login({
   onSuccess: (user: { token: string }) => {
-    auth(user.token, URL_MAIN, setAuthHeader, TOKEN_NAME);
+    auth(user.token, setAuthHeader, TOKEN_NAME);
     toast.success('Welcome!');
+
+    router.push(URL_MAIN);
   },
 });
 

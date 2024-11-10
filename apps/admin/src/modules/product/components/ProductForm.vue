@@ -172,7 +172,7 @@ const {
 } = useInfiniteScroll<IManufacturer>();
 
 const { data: manufacturersData, isLoading: isLoadingManufacturers } = getManufacturers(manufacturersPage);
-const { data: manufacturers, setPage: setManufacturerPage } = usePagination(manufacturersData);
+const { data: manufacturers, setPaginationPage: setManufacturerPage } = usePagination(manufacturersData);
 
 watch(
   () => manufacturers.value,

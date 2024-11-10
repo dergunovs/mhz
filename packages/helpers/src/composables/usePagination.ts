@@ -4,12 +4,12 @@ export function usePagination<T>(dataRaw: Ref<{ data: T[]; total: number } | und
   const data = computed(() => dataRaw.value?.data);
   const total = computed(() => dataRaw.value?.total);
 
-  function setPage(pageToSet: number, page: number) {
+  function setPaginationPage(pageToSet: number, page: number) {
     if (!total.value) return page;
     if (pageToSet === 0 || pageToSet === total.value + 1) return page;
 
     return pageToSet;
   }
 
-  return { data, total, setPage };
+  return { data, total, setPaginationPage };
 }

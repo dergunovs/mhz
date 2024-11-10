@@ -6,7 +6,7 @@
       v-show="orders?.length"
       :page="query.page"
       :total="total"
-      @update="(value: number) => setQueryPage(setPage(value, query.page))"
+      @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
     />
   </div>
 </template>
@@ -23,7 +23,7 @@ const { query, setQueryPage } = usePage();
 
 const { data } = getOrders(query);
 
-const { data: orders, total, setPage } = usePagination(data);
+const { data: orders, total, setPaginationPage } = usePagination(data);
 </script>
 
 <style module lang="scss">

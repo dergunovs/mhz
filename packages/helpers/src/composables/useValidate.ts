@@ -28,3 +28,11 @@ export function useValidator<T>(formData: Ref<T>, rules: ComputedRef<object>) {
     isValid,
   };
 }
+
+export function required(lang?: 'ru' | 'en') {
+  return { required: true, message: lang === 'ru' ? 'Это поле обязательное' : 'This field is required' };
+}
+
+export function email(lang?: 'ru' | 'en') {
+  return { type: 'email', message: lang === 'ru' ? 'Введите корретную почту' : 'This is not correct email' };
+}

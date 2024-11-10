@@ -10,7 +10,7 @@
       v-show="configurations?.length"
       :page="query.page"
       :total="total"
-      @update="(value: number) => setQueryPage(setPage(value, query.page))"
+      @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
     />
   </div>
 </template>
@@ -32,7 +32,7 @@ const { query, setQueryPage } = usePage();
 
 const { data } = getConfigurations(query);
 
-const { data: configurations, total, setPage } = usePagination(data);
+const { data: configurations, total, setPaginationPage } = usePagination(data);
 </script>
 
 <style module lang="scss">

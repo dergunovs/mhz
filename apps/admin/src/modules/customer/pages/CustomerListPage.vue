@@ -14,7 +14,7 @@
         v-show="customers?.length"
         :page="query.page"
         :total="total"
-        @update="(value: number) => setQueryPage(setPage(value, query.page))"
+        @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
       />
     </div>
   </div>
@@ -37,7 +37,7 @@ const { query, resetQuery, setQueryPage } = usePage();
 
 const { data } = getCustomers(query);
 
-const { data: customers, total, setPage } = usePagination(data);
+const { data: customers, total, setPaginationPage } = usePagination(data);
 
 const title = 'Customers';
 
