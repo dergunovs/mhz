@@ -52,8 +52,8 @@ const { mutate: mutateLogin } = login({
 
 const rules = computed(() => {
   return {
-    email: [required, email],
-    password: required,
+    email: [required(), email()],
+    password: required(),
   };
 });
 

@@ -81,9 +81,9 @@ watch(
 
 const rules = computed(() => {
   return {
-    title: required,
-    fieldType: required,
-    fieldUnits: formData.value.fieldType === 'number' && required,
+    title: required(),
+    fieldType: required(),
+    fieldUnits: formData.value.fieldType === 'number' && required(),
   };
 });
 

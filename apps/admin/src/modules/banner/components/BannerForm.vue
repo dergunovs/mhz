@@ -115,10 +115,10 @@ const { mutate: mutateDelete } = deleteBanner({
 
 const rules = computed(() => {
   return {
-    text: required,
-    isActive: required,
-    imageUrl: required,
-    color: required,
+    text: required(),
+    isActive: required(),
+    imageUrl: required(),
+    color: required(),
   };
 });
 

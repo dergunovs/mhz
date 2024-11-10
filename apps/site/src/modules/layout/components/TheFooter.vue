@@ -53,7 +53,7 @@ const formData = ref({
 
 const rules = computed(() => {
   return {
-    email: [required, email],
+    email: [required(), email()],
   };
 });
 

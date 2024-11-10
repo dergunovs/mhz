@@ -58,10 +58,10 @@ const { mutate: mutatePostCustomer } = postCustomer({
 
 const rules = computed(() => {
   return {
-    firstName: required,
-    lastName: required,
-    email: [required, email],
-    password: required,
+    firstName: required(),
+    lastName: required(),
+    email: [required(), email()],
+    password: required(),
   };
 });
 

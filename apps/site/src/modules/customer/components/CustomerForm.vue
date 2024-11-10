@@ -65,9 +65,9 @@ const { mutate: mutateDelete } = deleteCustomer({
 
 const rules = computed(() => {
   return {
-    firstName: required,
-    lastName: required,
-    email: [required, email],
+    firstName: required(),
+    lastName: required(),
+    email: [required(), email()],
   };
 });
 

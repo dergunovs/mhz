@@ -81,10 +81,10 @@ const { mutate: mutateDelete } = deleteManager({
 
 const rules = computed(() => {
   return {
-    firstName: required,
-    lastName: required,
-    email: [required, email],
-    password: !props.manager?._id && required,
+    firstName: required(),
+    lastName: required(),
+    email: [required(), email()],
+    password: !props.manager?._id && required(),
   };
 });
 

@@ -211,10 +211,10 @@ function updateFields(fields: ICategoryField[]) {
 
 const rules = computed(() => {
   return {
-    title: required,
-    description: required,
-    price: required,
-    isInStock: required,
+    title: required(),
+    description: required(),
+    price: required(),
+    isInStock: required(),
   };
 });
 

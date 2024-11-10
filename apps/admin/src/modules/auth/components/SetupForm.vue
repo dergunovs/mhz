@@ -56,10 +56,10 @@ const { mutate: mutateSetup } = setup({
 
 const rules = computed(() => {
   return {
-    firstName: required,
-    lastName: required,
-    email: [required, email],
-    password: required,
+    firstName: required(),
+    lastName: required(),
+    email: [required(), email()],
+    password: required(),
   };
 });
 

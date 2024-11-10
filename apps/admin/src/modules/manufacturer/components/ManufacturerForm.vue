@@ -104,10 +104,10 @@ const { mutate: mutateDelete } = deleteManufacturer({
 
 const rules = computed(() => {
   return {
-    title: required,
-    description: required,
-    logoUrl: required,
-    country: required,
+    title: required(),
+    description: required(),
+    logoUrl: required(),
+    country: required(),
   };
 });
 

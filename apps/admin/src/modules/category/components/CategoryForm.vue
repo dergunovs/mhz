@@ -128,9 +128,9 @@ const { mutate: mutateDelete } = deleteCategory({
 
 const rules = computed(() => {
   return {
-    title: required,
-    description: required,
-    iconUrl: required,
+    title: required(),
+    description: required(),
+    iconUrl: required(),
   };
 });
 

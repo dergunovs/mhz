@@ -108,7 +108,7 @@ const price = computed(() => {
 
 const rules = computed(() => {
   return {
-    title: required,
+    title: required(),
   };
 });
 
