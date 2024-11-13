@@ -50,6 +50,7 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 
 <style module lang="scss">
 .container {
+  width: 100%;
   height: v-bind(heightComputed);
 }
 
@@ -86,10 +87,20 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 
 :global(.vuecal__title-bar) {
   min-height: 41px;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-gray-dark-extra);
   background-color: var(--color-gray-light-extra);
   border: 1px solid var(--color-gray);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+}
+
+:global(.vuecal__arrow) {
+  color: var(--color-gray-dark-extra);
+}
+
+:global(.vuecal__title span:nth-child(2)) {
+  display: none;
 }
 </style>
