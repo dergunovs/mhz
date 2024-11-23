@@ -15,27 +15,40 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { Bar, Pie } from 'vue-chartjs';
-import { Chart, Title, Tooltip, BarElement, CategoryScale, LinearScale, Colors, ArcElement } from 'chart.js';
+import { Bar, Pie, Line } from 'vue-chartjs';
+import {
+  Chart,
+  Title,
+  Tooltip,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Colors,
+  ArcElement,
+  LineElement,
+  PointElement,
+} from 'chart.js';
 
 interface IProps {
   labels: string[];
   data: number[];
   title?: string;
-  type?: 'Bar' | 'Pie';
+  type?: 'Bar' | 'Pie' | 'Line';
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   type: 'Bar',
+  title: '',
 });
 
 const chartComponent = computed(() => {
   if (props.type === 'Pie') return Pie;
+  if (props.type === 'Line') return Line;
 
   return Bar;
 });
 
-Chart.register(Title, Tooltip, BarElement, CategoryScale, LinearScale, Colors, ArcElement);
+Chart.register(Title, Tooltip, BarElement, CategoryScale, LinearScale, Colors, ArcElement, LineElement, PointElement);
 
 const chartData = {
   labels: props.labels,
@@ -45,6 +58,7 @@ const chartData = {
 const chartOptions = {
   responsive: true,
   aspectRatio: 2,
+  ticks: { precision: 0 },
 };
 </script>
 
