@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.chart">
-    <div :class="$style.title" data-test="ui-chart-title">{{ props.title }}</div>
+    <div v-if="props.title" :class="$style.title" data-test="ui-chart-title">{{ props.title }}</div>
 
     <component
       :is="chartComponent"
@@ -21,7 +21,7 @@ import { Chart, Title, Tooltip, BarElement, CategoryScale, LinearScale, Colors, 
 interface IProps {
   labels: string[];
   data: number[];
-  title: string;
+  title?: string;
   type?: 'Bar' | 'Pie';
 }
 
