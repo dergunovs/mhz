@@ -20,7 +20,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@unhead/vue": "1.11.11",
+    "@unhead/vue": "1.11.13",
     "mhz-bank": "*",
     "mhz-contracts": "*",
     "mhz-helpers": "*",
