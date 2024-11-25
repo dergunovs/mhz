@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "9000 Mhz frontend helpers and composables",
-  "version": "1.0.70",
+  "version": "1.0.71",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -28,7 +28,7 @@
     "async-validator": "4.2.5",
     "axios": "1.7.7",
     "vue": "3.5.13",
-    "vue-router": "4.4.5"
+    "vue-router": "4.5.0"
   },
   "devDependencies": {
     "@eslint/js": "9.15.0",
@@ -58,7 +58,7 @@
   },
   "peerDependencies": {
     "vue": "3.5.13",
-    "vue-router": "4.4.5"
+    "vue-router": "4.5.0"
   },
   "engines": {
     "npm": ">=10.9.0",
