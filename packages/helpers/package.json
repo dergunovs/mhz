@@ -22,7 +22,7 @@
     "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/vue-query": "5.60.6",
+    "@tanstack/vue-query": "5.61.3",
     "@vueuse/core": "11.3.0",
     "@vueuse/integrations": "11.3.0",
     "async-validator": "4.2.5",

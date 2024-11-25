@@ -59,6 +59,7 @@ const chartOptions = {
   responsive: true,
   aspectRatio: 2,
   ticks: { precision: 0 },
+  scales: { x: { ticks: { font: { size: 10 } } } },
 };
 </script>
 
