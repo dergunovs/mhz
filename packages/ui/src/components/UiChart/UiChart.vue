@@ -27,13 +27,20 @@ import {
   ArcElement,
   LineElement,
   PointElement,
+  Legend,
 } from 'chart.js';
+
+interface IDataset {
+  data: number[];
+  label?: string;
+}
 
 interface IProps {
   labels: string[];
-  data: number[];
+  datasets: IDataset[];
   title?: string;
   type?: 'Bar' | 'Pie' | 'Line';
+  isShowLegend?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -48,11 +55,24 @@ const chartComponent = computed(() => {
   return Bar;
 });
 
-Chart.register(Title, Tooltip, BarElement, CategoryScale, LinearScale, Colors, ArcElement, LineElement, PointElement);
+const isShowLegendComputed = computed(() => props.isShowLegend);
+
+Chart.register(
+  Title,
+  Tooltip,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Colors,
+  ArcElement,
+  LineElement,
+  PointElement,
+  Legend
+);
 
 const chartData = {
-  labels: props.labels,
-  datasets: [{ data: props.data }],
+  labels: [...props.labels],
+  datasets: [...props.datasets],
 };
 
 const chartOptions = {
@@ -62,6 +82,9 @@ const chartOptions = {
   scales: {
     x: { ticks: { maxRotation: 0, minRotation: 0 } },
     y: { beginAtZero: true },
+  },
+  plugins: {
+    legend: { display: isShowLegendComputed.value, position: 'bottom' as const, align: 'start' as const },
   },
 };
 </script>

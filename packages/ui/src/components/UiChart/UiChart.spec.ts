@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 
-import { LABELS, DATA, TITLE } from './constants';
+import { LABELS, DATASETS, TITLE } from './constants';
 import UiChart from './UiChart.vue';
 
 import { wrapperFactory } from '@/test';
@@ -15,7 +15,7 @@ beforeEach(() => {
   wrapper = wrapperFactory(UiChart, {
     props: {
       labels: LABELS,
-      data: DATA,
+      datasets: DATASETS,
       title: TITLE,
     },
   });

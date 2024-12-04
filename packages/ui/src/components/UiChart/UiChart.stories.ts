@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 
-import { LABELS, DATA, TITLE } from './constants';
+import { LABELS, DATASETS, TITLE } from './constants';
 
 import { html } from '@/utils';
 import { UiChart } from '@/components';
@@ -9,7 +9,7 @@ const meta = {
   component: UiChart,
   args: {
     labels: LABELS,
-    data: DATA,
+    datasets: DATASETS,
     title: TITLE,
   },
   parameters: {

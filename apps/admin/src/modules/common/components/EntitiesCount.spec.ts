@@ -37,8 +37,8 @@ describe('EntitiesCount', async () => {
       COUNT.base.labels
     );
 
-    expect(wrapper.findComponent<DefineComponent<IEntitiesCount>>(entitiesCountBase).vm.$props.data).toEqual(
-      COUNT.base.data
+    expect(wrapper.findComponent<DefineComponent<IEntitiesCount>>(entitiesCountBase).vm.$props.datasets).toEqual(
+      COUNT.base.datasets
     );
 
     expect(
@@ -46,15 +46,15 @@ describe('EntitiesCount', async () => {
     ).toEqual(COUNT.categories.labels);
 
     expect(
-      wrapper.findComponent<DefineComponent<IEntitiesCount>>(entitiesCountProductCategories).vm.$props.data
-    ).toEqual(COUNT.categories.data);
+      wrapper.findComponent<DefineComponent<IEntitiesCount>>(entitiesCountProductCategories).vm.$props.datasets
+    ).toEqual(COUNT.categories.datasets);
 
     expect(
       wrapper.findComponent<DefineComponent<IEntitiesCount>>(entitiesCountProductManufacturers).vm.$props.labels
     ).toEqual(COUNT.manufacturers.labels);
 
     expect(
-      wrapper.findComponent<DefineComponent<IEntitiesCount>>(entitiesCountProductManufacturers).vm.$props.data
-    ).toEqual(COUNT.manufacturers.data);
+      wrapper.findComponent<DefineComponent<IEntitiesCount>>(entitiesCountProductManufacturers).vm.$props.datasets
+    ).toEqual(COUNT.manufacturers.datasets);
   });
 });

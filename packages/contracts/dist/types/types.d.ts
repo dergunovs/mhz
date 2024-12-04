@@ -151,9 +151,14 @@ export interface ISearchResults {
   orders?: ISearchResult[];
 }
 
+export interface IEntitiesCountDataset {
+  label?: string;
+  data: number[];
+}
+
 export interface IEntitiesCount {
   labels: string[];
-  data: number[];
+  datasets: IEntitiesCountDataset[];
 }
 
 export interface IEntitiesReply {

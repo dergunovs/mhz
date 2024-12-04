@@ -14,7 +14,7 @@ Fake PC hardware store monorepo.
 
 ## Installation
 
-1. Install Node.js 22
+1. Install Node.js 23
 2. Install MongoDB 7
 3. `npm install` - install deps from root folder
 4. Create .env files in `/apps` subfolders - examples included

@@ -13,9 +13,9 @@ import { IStatsService } from '../interface/index.js';
 export const countService: IStatsService = {
   count: async () => {
     const count: IEntitiesReply = {
-      base: { labels: ['Categories', 'Manufacturers', 'Managers', 'Customers', 'Orders'], data: [] },
-      categories: { labels: [], data: [] },
-      manufacturers: { labels: [], data: [] },
+      base: { labels: ['Categories', 'Manufacturers', 'Managers', 'Customers', 'Orders'], datasets: [{ data: [] }] },
+      categories: { labels: [], datasets: [{ data: [] }] },
+      manufacturers: { labels: [], datasets: [{ data: [] }] },
     };
 
     await Promise.all([
@@ -25,7 +25,7 @@ export const countService: IStatsService = {
       await Customer.estimatedDocumentCount(),
       await Order.estimatedDocumentCount(),
     ]).then(([categories, manufacturers, managers, customers, orders]) => {
-      count.base.data.push(categories, manufacturers, managers, customers, orders);
+      count.base.datasets[0].data.push(categories, manufacturers, managers, customers, orders);
     });
 
     const categories = await Product.aggregate([
@@ -38,7 +38,7 @@ export const countService: IStatsService = {
 
     categories.forEach((category) => {
       count.categories.labels.push(category.label);
-      count.categories.data.push(category.count);
+      count.categories.datasets[0].data.push(category.count);
     });
 
     const manufacturers = await Product.aggregate([
@@ -51,7 +51,7 @@ export const countService: IStatsService = {
 
     manufacturers.forEach((manufacturer) => {
       count.manufacturers.labels.push(manufacturer.label);
-      count.manufacturers.data.push(manufacturer.count);
+      count.manufacturers.datasets[0].data.push(manufacturer.count);
     });
 
     return count;

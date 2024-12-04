@@ -3,7 +3,7 @@ import { IEntitiesReply } from 'mhz-contracts';
 export const COUNT: IEntitiesReply = {
   base: {
     labels: ['Categories', 'Manufacturers', 'Managers', 'Customers', 'Orders'],
-    data: [12, 20, 1, 1, 12],
+    datasets: [{ data: [12, 20, 1, 1, 12] }],
   },
   categories: {
     labels: [
@@ -20,7 +20,7 @@ export const COUNT: IEntitiesReply = {
       'SSD',
       'RAM',
     ],
-    data: [13, 20, 15, 16, 15, 12, 16, 13, 20, 20, 20, 20],
+    datasets: [{ data: [13, 20, 15, 16, 15, 12, 16, 13, 20, 20, 20, 20] }],
   },
   manufacturers: {
     labels: [
@@ -45,6 +45,6 @@ export const COUNT: IEntitiesReply = {
       'Western Digital',
       'Apacer',
     ],
-    data: [18, 4, 6, 7, 12, 3, 2, 7, 7, 11, 13, 13, 24, 27, 8, 12, 9, 5, 4, 8],
+    datasets: [{ data: [18, 4, 6, 7, 12, 3, 2, 7, 7, 11, 13, 13, 24, 27, 8, 12, 9, 5, 4, 8] }],
   },
 };

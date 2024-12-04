@@ -10,7 +10,7 @@ import { orderModel } from './order.js';
 import { bannerModel } from './banner.js';
 import { productFilterBaseModel, productFilterFieldModel, productFilterModel, productModel } from './product.js';
 import { searchResultModel, searchResultsModel } from './search.js';
-import { statsCountModel } from './stats.js';
+import { statsCountModel, datasetModel } from './stats.js';
 
 export function addSchemas(fastify: FastifyInstance) {
   fastify.addSchema(userRoleModel);
@@ -43,5 +43,6 @@ export function addSchemas(fastify: FastifyInstance) {
   fastify.addSchema(searchResultModel);
   fastify.addSchema(searchResultsModel);
 
+  fastify.addSchema(datasetModel);
   fastify.addSchema(statsCountModel);
 }
