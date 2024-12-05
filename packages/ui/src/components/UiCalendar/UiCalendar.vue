@@ -70,26 +70,28 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 }
 
 :global(.vuecal__event) {
-  width: 24px;
-  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   background-color: var(--color-accent);
   border-radius: 50%;
 }
 
 :global(.vuecal--short-events .vuecal__event-title) {
-  font-size: 1rem;
+  padding: 0;
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 1.3;
   color: var(--color-white);
-  text-align: center;
 }
 
 :global(.vuecal__title-bar) {
   min-height: 41px;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-gray-dark-extra);
+  color: var(--color-black);
   background-color: var(--color-gray-light-extra);
   border: 1px solid var(--color-gray);
   border-top-left-radius: 8px;
@@ -97,10 +99,19 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 }
 
 :global(.vuecal__arrow) {
-  color: var(--color-gray-dark-extra);
+  color: var(--color-black);
 }
 
 :global(.vuecal__title span:nth-child(2)) {
   display: none;
+}
+
+:global(.vuecal__cell--out-of-scope) {
+  color: var(--color-gray-dark);
+}
+
+:global(.vuecal__cell--selected),
+:global(.vuecal__cell--today) {
+  background-color: var(--color-primary-light-extra);
 }
 </style>

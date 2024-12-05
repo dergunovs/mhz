@@ -102,11 +102,12 @@ function handleConfirm() {
 
 .close {
   display: flex;
+  flex-grow: 0;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  font-size: 2rem;
+  font-size: 1.25rem;
   color: var(--color-white);
   cursor: pointer;
   background-color: var(--color-gray-dark);

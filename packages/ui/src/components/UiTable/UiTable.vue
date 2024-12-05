@@ -147,21 +147,13 @@ onBeforeUnmount(() => {
   width: fit-content;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-gray-dark-extra);
+  color: var(--color-black);
   text-wrap: nowrap;
   cursor: pointer;
   user-select: none;
 
   &[data-loading='true'] {
     color: var(--color-transparent);
-  }
-
-  &:hover:not(&[data-loading='true']) {
-    color: var(--color-black);
-
-    .sort {
-      color: var(--color-black);
-    }
   }
 }
 
@@ -174,7 +166,7 @@ onBeforeUnmount(() => {
 }
 
 .arrow {
-  color: var(--color-gray-dark-extra);
+  color: var(--color-black);
 
   &[data-loading='true'] {
     color: var(--color-transparent);

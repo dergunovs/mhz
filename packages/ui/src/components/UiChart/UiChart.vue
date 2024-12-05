@@ -56,6 +56,7 @@ const chartComponent = computed(() => {
 });
 
 const isShowLegendComputed = computed(() => props.isShowLegend);
+const tickAlign = computed(() => (props.type === 'Line' ? ('inner' as const) : ('center' as const)));
 
 Chart.register(
   Title,
@@ -80,7 +81,7 @@ const chartOptions = {
   aspectRatio: 2,
   ticks: { precision: 0 },
   scales: {
-    x: { ticks: { maxRotation: 0, minRotation: 0 } },
+    x: { ticks: { maxRotation: 0, minRotation: 0, align: tickAlign.value } },
     y: { beginAtZero: true },
   },
   plugins: {

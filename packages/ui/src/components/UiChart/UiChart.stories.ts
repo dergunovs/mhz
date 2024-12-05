@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 
-import { LABELS, DATASETS, TITLE } from './constants';
+import { LABELS, DATASETS, TITLE, TYPE } from './constants';
 
 import { html } from '@/utils';
 import { UiChart } from '@/components';
@@ -11,6 +11,7 @@ const meta = {
     labels: LABELS,
     datasets: DATASETS,
     title: TITLE,
+    type: TYPE,
   },
   parameters: {
     docs: {
