@@ -24,11 +24,13 @@ export function addZero(value: number) {
   return value.toString().length > 1 ? `${value}` : `0${value}`;
 }
 
-export function formatDuration(duration: number) {
+export function formatDuration(duration?: number) {
+  if (!duration) return '-';
+
   const minutes = Math.floor(duration / 60);
   const seconds = duration - minutes * 60;
 
-  return `${minutes} мин. ${addZero(seconds)} сек.`;
+  return `${minutes ? `${minutes} мин. ` : ``}${addZero(seconds)} сек.`;
 }
 
 export function subtractDates(
