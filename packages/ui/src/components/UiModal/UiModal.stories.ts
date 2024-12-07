@@ -28,25 +28,7 @@ type Story = StoryObj<typeof UiModal>;
 export default meta;
 
 export const Primary: Story = {
-  args: {
-    modelValue: {
-      bubbles: true,
-      cancelBubble: false,
-      cancelable: true,
-      composed: true,
-      currentTarget: null,
-      defaultPrevented: false,
-      eventPhase: 0,
-      isTrusted: true,
-      returnValue: true,
-      srcElement: {},
-      target: {},
-      timeStamp: 3161.5,
-      type: 'click',
-    },
-
-    width: '200',
-  },
+  args: {},
 
   render: (args, { updateArgs }) => ({
     components: { UiModal, UiButton },
