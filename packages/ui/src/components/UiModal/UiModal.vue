@@ -40,6 +40,7 @@ import UiButton from '../UiButton/UiButton.vue';
 interface IProps {
   modelValue: boolean;
   isConfirm?: boolean;
+  width?: string;
   lang?: 'ru';
 }
 
@@ -49,6 +50,9 @@ const emit = defineEmits(['update:modelValue', 'confirm']);
 
 const cancelText = computed(() => (props.lang === 'ru' ? 'Отмена' : 'Cancel'));
 const confirmText = computed(() => (props.lang === 'ru' ? 'Подтвердить' : 'onfirm'));
+
+const widthComputed = computed(() => (props.width ? `${props.width}px` : 'auto'));
+const minWidthComputed = computed(() => (props.width ? `${props.width}px` : '50%'));
 
 const body = document.querySelector('body');
 
@@ -85,7 +89,8 @@ function handleConfirm() {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-width: 50%;
+  width: v-bind(widthComputed);
+  min-width: v-bind(minWidthComputed);
   max-width: calc(100% - 32px);
   height: auto;
   padding: 32px;

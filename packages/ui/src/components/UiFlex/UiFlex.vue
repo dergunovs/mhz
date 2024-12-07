@@ -70,6 +70,6 @@ const growComputed = computed(() => (props.grow ? '1' : '0'));
   gap: v-bind(gapComputed);
   align-items: v-bind(alignItemsComputed);
   justify-content: v-bind(justifyContentComputed);
-  width: 100%;
+  width: auto;
 }
 </style>
