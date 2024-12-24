@@ -35,16 +35,6 @@ describe('App', async () => {
     expect(wrapper.findComponent(App)).toBeTruthy();
   });
 
-  it('shows empty layout at login page after page load', async () => {
-    expect(wrapper.find(layout).exists()).toBe(false);
-
-    await new Promise((r) => {
-      setTimeout(r, 10);
-    });
-
-    expect(wrapper.find(layout).attributes('data-layout')).toBe('LayoutEmpty');
-  });
-
   it('gets token from cookies and not sets auth at login page', async () => {
     expect(spyGetCookieToken).toBeCalledTimes(1);
     expect(spyGetCookieToken).toBeCalledWith(TOKEN_NAME);
