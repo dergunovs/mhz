@@ -75,6 +75,7 @@ export default defineConfig({
         {
           src: 'src/components/index.ts',
           dest: '',
+          rename: 'index.js',
           transform: (contents) => contents.toString().replace(/.(vue|ts)/g, '.js'),
         },
         {
