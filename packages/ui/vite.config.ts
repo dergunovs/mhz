@@ -76,7 +76,11 @@ export default defineConfig({
           src: 'src/components/index.ts',
           dest: '',
           rename: 'index.js',
-          transform: (contents) => contents.toString().replace(/.(vue|ts)/g, '.js'),
+          transform: (contents) =>
+            contents
+              .toString()
+              .replace(/.(vue|ts)/g, '.js')
+              .replace('./toast/toast', './toast/toast.js'),
         },
         {
           src: 'src/components/index.ts',
