@@ -25,8 +25,8 @@ import 'vue-cal/dist/vuecal.css';
 
 interface ICalendarEvent<T> {
   id?: string;
-  start: Date;
-  end: Date;
+  start: Date | null;
+  end: Date | null;
   title: string;
   content: T[];
 }
