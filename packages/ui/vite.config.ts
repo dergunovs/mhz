@@ -23,6 +23,7 @@ const components = files.reduce<{ [key: string]: string }>((obj, component) => {
 }, {});
 
 components['toast'] = `src/components/toast/toast.ts`;
+components['stubs'] = `src/components/stubs/stubs.ts`;
 
 export default defineConfig({
   build: {
@@ -80,7 +81,8 @@ export default defineConfig({
             contents
               .toString()
               .replace(/.(vue|ts)/g, '.js')
-              .replace('./toast/toast', './toast/toast.js'),
+              .replace('./toast/toast', './toast/toast.js')
+              .replace('./stubs/stubs', './stubs/stubs.js'),
         },
         {
           src: 'src/components/index.ts',

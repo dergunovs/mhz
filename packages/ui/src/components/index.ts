@@ -18,3 +18,4 @@ export { default as UiChip } from './UiChip/UiChip.vue';
 export { default as UiFlex } from './UiFlex/UiFlex.vue';
 export { default as UiCalendar } from './UiCalendar/UiCalendar.vue';
 export { default as toast } from './toast/toast';
+export { uiStubs } from './stubs/stubs';
