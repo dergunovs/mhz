@@ -31,7 +31,11 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['ready', 'update', 'eventClick']);
+const emit = defineEmits<{
+  ready: [value: ICalendarUpdate];
+  update: [value: ICalendarUpdate];
+  eventClick: [value: ICalendarEvent<unknown>];
+}>();
 
 const heightComputed = computed(() => (props.height ? `${props.height}px` : '500px'));
 </script>

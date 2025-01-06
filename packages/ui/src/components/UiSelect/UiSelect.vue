@@ -130,7 +130,7 @@ function showOptions() {
 }
 
 function setOption(option: IOption) {
-  if (!option._id) return;
+  if (option._id === undefined) return;
 
   emit('update:modelValue', isObject.value ? option : option._id);
 
