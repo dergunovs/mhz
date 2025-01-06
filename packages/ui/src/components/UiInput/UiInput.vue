@@ -54,7 +54,7 @@ const props = withDefaults(defineProps<IProps>(), {
   appendIcon: undefined,
 });
 
-const emit = defineEmits(['update:modelValue', 'toggle']);
+const emit = defineEmits<{ 'update:modelValue': [value: string | number]; toggle: [] }>();
 
 function handleInput(target: EventTarget | null) {
   emit('update:modelValue', (target as HTMLInputElement).value);

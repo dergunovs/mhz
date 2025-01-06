@@ -72,7 +72,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue', 'reachedBottom']);
+const emit = defineEmits<{ 'update:modelValue': [value: string | number | IOption]; reachedBottom: [] }>();
 
 const filterQuery = ref('');
 
@@ -130,7 +130,10 @@ function showOptions() {
 }
 
 function setOption(option: IOption) {
+  if (!option._id) return;
+
   emit('update:modelValue', isObject.value ? option : option._id);
+
   hideOptions();
 }
 

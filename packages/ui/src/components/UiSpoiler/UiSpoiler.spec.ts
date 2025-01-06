@@ -1,21 +1,20 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiSpoiler from './UiSpoiler.vue';
 import { TITLE, MODEL_VALUE } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const spoiler = '[data-test="ui-spoiler"]';
-const spoilerButton = '[data-test="ui-spoiler-button"]';
-const spoilerButtonTitle = '[data-test="ui-spoiler-button-title"]';
+const spoiler = dataTest('ui-spoiler');
+const spoilerButton = dataTest('ui-spoiler-button');
+const spoilerButtonTitle = dataTest('ui-spoiler-button-title');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiSpoiler>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiSpoiler, {
-    props: { title: TITLE, modelValue: MODEL_VALUE },
-  });
+  wrapper = wrapperFactory(UiSpoiler, { title: TITLE, modelValue: MODEL_VALUE });
 });
 
 enableAutoUnmount(afterEach);

@@ -2,7 +2,7 @@
   <div :class="$style.container" ref="containerElement">
     <UiInput
       :modelValue="props.modelValue"
-      @update:modelValue="updateValue"
+      @update:modelValue="async (value) => await debounced(value.toString())"
       @click="showResults"
       @keyup.esc="hideResults"
       :appendIcon="IconSearch"
@@ -70,18 +70,13 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
 
 const isShowResults = ref(false);
 
 const debounced = debounce(async (value: string) => {
   emit('update:modelValue', value);
 }, DEBOUNCE_TIME);
-
-async function updateValue(value: string) {
-  await debounced(value);
-}
 
 function showResults() {
   isShowResults.value = true;

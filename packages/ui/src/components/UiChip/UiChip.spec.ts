@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiChip from './UiChip.vue';
 
@@ -7,15 +8,12 @@ import { DEFAULT_TYPE, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const chip = '[data-test="ui-chip"]';
+const chip = dataTest('ui-chip');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiChip>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiChip, {
-    props: { type: DEFAULT_TYPE },
-    slots: { default: DEFAULT_SLOT },
-  });
+  wrapper = wrapperFactory(UiChip, { type: DEFAULT_TYPE }, { default: DEFAULT_SLOT });
 });
 
 enableAutoUnmount(afterEach);

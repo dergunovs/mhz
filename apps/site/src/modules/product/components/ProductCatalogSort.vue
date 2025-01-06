@@ -2,18 +2,22 @@
   <div>
     <div :class="$style.select">
       <div>Sort:</div>
-      <UiSelect :modelValue="sort" @update:modelValue="updateSort" :options="SORT_OPTIONS" />
+      <UiSelect
+        :modelValue="sort"
+        @update:modelValue="(value) => updateSort(value as IProductSortOption)"
+        :options="SORT_OPTIONS"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-
-import { UiSelect } from 'mhz-ui';
 import { ISortOption } from 'mhz-helpers';
+import { UiSelect } from 'mhz-ui';
 
 import { SORT_OPTIONS } from '@/product/constants';
+import { IProductSortOption } from '@/product/interface';
 
 interface IProps {
   modelValue: ISortOption;
@@ -27,7 +31,7 @@ const sort = computed(() =>
   SORT_OPTIONS.find((option) => option.value === props.modelValue.value && option.isAsc === props.modelValue.isAsc)
 );
 
-function updateSort(value: { value: string; isAsc: boolean }) {
+function updateSort(value: IProductSortOption) {
   if (props.page > 1) {
     emit('reset', { value: value.value, isAsc: value.isAsc });
   } else {

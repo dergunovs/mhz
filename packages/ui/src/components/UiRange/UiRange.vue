@@ -2,7 +2,7 @@
   <div :class="$style.range">
     <Slider
       :modelValue="props.modelValue"
-      @update:modelValue="(value: number) => emit('update:modelValue', value)"
+      @update:modelValue="(value: [number, number]) => emit('update:modelValue', value)"
       :min="props.min"
       :max="props.max"
       tooltipPosition="bottom"
@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [value: [number, number]] }>();
 </script>
 
 <style src="@vueform/slider/themes/default.css"></style>

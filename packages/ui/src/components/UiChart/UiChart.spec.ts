@@ -1,23 +1,22 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import { LABELS, DATASETS, TITLE } from './constants';
 import UiChart from './UiChart.vue';
 
 import { wrapperFactory } from '@/test';
 
-const chart = '[data-test="ui-chart"]';
-const chartTitle = '[data-test="ui-chart-title"]';
+const chart = dataTest('ui-chart');
+const chartTitle = dataTest('ui-chart-title');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiChart>>;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiChart, {
-    props: {
-      labels: LABELS,
-      datasets: DATASETS,
-      title: TITLE,
-    },
+    labels: LABELS,
+    datasets: DATASETS,
+    title: TITLE,
   });
 });
 

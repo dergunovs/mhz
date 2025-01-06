@@ -44,11 +44,11 @@
 import { ref } from 'vue';
 import { DEFAULT_LABEL, DEFAULT_MODEL_VALUE } from './constants';
 
-type InitialValue = boolean | string | number;
+type TInitialValue = boolean | string | number;
 
 interface IProps {
-  initialValue?: InitialValue;
-  modelValue?: InitialValue;
+  initialValue?: TInitialValue;
+  modelValue?: TInitialValue;
   label?: string;
   labelSub?: string;
   labelSwitcher?: string;
@@ -67,7 +67,7 @@ const props = withDefaults(defineProps<IProps>(), {
   error: false,
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [value: TInitialValue] }>();
 
 const checkbox = ref<HTMLInputElement>();
 

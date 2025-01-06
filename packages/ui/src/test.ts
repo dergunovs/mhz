@@ -1,22 +1,21 @@
+import { Component, ComponentPublicInstance } from 'vue';
 import { shallowMount } from '@vue/test-utils';
-import { Component } from 'vue';
+import { debounce } from 'perfect-debounce';
 
-document.body.innerHTML = '<div id="app"></div>';
-
-export function wrapperFactory(
-  component: Component,
-  { mocks, props, slots, stubs }: { mocks?: object; props?: object; slots?: object; stubs?: object }
+export function wrapperFactory<T>(
+  component: Component<T>,
+  props?: Partial<ComponentPublicInstance<T>['$props']>,
+  slots?: { default: string }
 ) {
+  document.body.innerHTML = '<div id="app"></div>';
+
   return shallowMount(component, {
     global: {
-      stubs: {
-        RouterLink: { template: '<a><slot></slot></a>' },
-        ...stubs,
-      },
-      mocks,
+      stubs: { RouterLink: { template: '<a><slot></slot></a>' } },
     },
-    props,
-    slots,
+    props: props as ComponentPublicInstance<T>['$props'],
+    slots: slots as undefined,
+    mocks: { debounce },
     attachTo: document.getElementById('app') as HTMLElement,
   });
 }

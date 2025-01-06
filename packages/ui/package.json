@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "9000 Mhz ui kit",
-  "version": "1.0.107",
+  "version": "1.0.108",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -31,6 +31,7 @@
     "@vueuse/core": "12.3.0",
     "@vueuse/integrations": "12.3.0",
     "chart.js": "4.4.7",
+    "mhz-helpers": "*",
     "perfect-debounce": "1.0.0",
     "vue": "3.5.13",
     "vue-cal": "4.10.0",

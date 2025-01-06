@@ -1,29 +1,28 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiUpload from './UiUpload.vue';
 import { LABEL, FILE, FILES } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const upload = '[data-test="ui-upload"]';
-const uploadLabel = '[data-test="ui-upload-label"]';
-const uploadRequired = '[data-test="ui-upload-required"]';
-const uploadText = '[data-test="ui-upload-text"]';
-const uploadAdd = '[data-test="ui-upload-add"]';
-const uploadFile = '[data-test="ui-upload-file"]';
-const uploadFileSingle = '[data-test="ui-upload-file-single"]';
-const uploadFileName = '[data-test="ui-upload-file-name"]';
-const uploadFileNameSingle = '[data-test="ui-upload-file-name-single"]';
-const uploadFileRemove = '[data-test="ui-upload-file-remove"]';
-const uploadFileRemoveSingle = '[data-test="ui-upload-file-remove-single"]';
+const upload = dataTest('ui-upload');
+const uploadLabel = dataTest('ui-upload-label');
+const uploadRequired = dataTest('ui-upload-required');
+const uploadText = dataTest('ui-upload-text');
+const uploadAdd = dataTest('ui-upload-add');
+const uploadFile = dataTest('ui-upload-file');
+const uploadFileSingle = dataTest('ui-upload-file-single');
+const uploadFileName = dataTest('ui-upload-file-name');
+const uploadFileNameSingle = dataTest('ui-upload-file-name-single');
+const uploadFileRemove = dataTest('ui-upload-file-remove');
+const uploadFileRemoveSingle = dataTest('ui-upload-file-remove-single');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiUpload>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiUpload, {
-    props: { label: LABEL, file: FILE, isSingle: true },
-  });
+  wrapper = wrapperFactory(UiUpload, { label: LABEL, file: FILE, isSingle: true });
 });
 
 enableAutoUnmount(afterEach);

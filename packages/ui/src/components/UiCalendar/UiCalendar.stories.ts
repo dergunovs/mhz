@@ -1,12 +1,14 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 
+import { EVENTS } from './constants';
+import { ICalendarEvent } from './interface';
 import { html } from '@/utils';
 import { UiCalendar } from '@/components';
 
 const meta = {
   component: UiCalendar,
   args: {
-    events: [{ start: new Date(), end: new Date(), title: '+', content: [{ id: 1, text: 'Text' }] }],
+    events: EVENTS,
   },
   parameters: {
     docs: {
@@ -28,7 +30,13 @@ export const Primary: Story = {
     components: { UiCalendar },
     setup: () => ({ args, argTypes }),
 
-    template: html` <UiCalendar v-bind="args" />`,
+    template: html` <UiCalendar v-bind="args" @eventClick="handleEvent" />`,
+
+    methods: {
+      handleEvent(event: ICalendarEvent<object>) {
+        alert(event.id);
+      },
+    },
   }),
 
   argTypes,

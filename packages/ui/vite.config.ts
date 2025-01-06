@@ -49,7 +49,7 @@ export default defineConfig({
 
   css: {
     preprocessorOptions: {
-      scss: { additionalData: `@import "@/assets/styles/breakpoints.scss";`, api: 'modern-compiler' },
+      scss: { additionalData: `@use "@/assets/styles/breakpoints" as *;`, api: 'modern-compiler' },
     },
   },
 

@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiSlider from './UiSlider.vue';
 
@@ -16,15 +17,13 @@ import { wrapperFactory } from '@/test';
 const slides = [slide1, slide2, slide3];
 const thumbs = [thumb1, thumb2, thumb3];
 
-const sliderThumb = '[data-test="ui-slider-thumb"]';
-const sliderSlide = '[data-test="ui-slider-slide"]';
+const sliderThumb = dataTest('ui-slider-thumb');
+const sliderSlide = dataTest('ui-slider-slide');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiSlider>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiSlider, {
-    props: { slides, thumbs },
-  });
+  wrapper = wrapperFactory(UiSlider, { slides, thumbs });
 });
 
 enableAutoUnmount(afterEach);

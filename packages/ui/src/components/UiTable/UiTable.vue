@@ -54,15 +54,20 @@ interface IHeader {
   title: string;
 }
 
+interface IModelValue {
+  value?: string;
+  isAsc: boolean;
+}
+
 interface IProps {
   headers: IHeader[];
-  modelValue?: { value?: string; isAsc: boolean };
+  modelValue?: IModelValue;
   isLoading?: boolean;
   lang?: 'ru';
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue', 'reset']);
+const emit = defineEmits<{ 'update:modelValue': [value: IModelValue]; reset: [value: string] }>();
 
 const tableBlock = ref<HTMLElement>();
 const table = ref<HTMLElement>();
@@ -80,10 +85,14 @@ function checkTableSize(): void {
   }
 }
 
-function sort(value?: string) {
+function sort(value: string) {
   const isValueEqual = props.modelValue?.value === value;
 
-  emit(isValueEqual ? 'update:modelValue' : 'reset', isValueEqual ? { value, isAsc: !props.modelValue?.isAsc } : value);
+  if (isValueEqual) {
+    emit('update:modelValue', { value, isAsc: !props.modelValue?.isAsc });
+  } else {
+    emit('reset', value);
+  }
 }
 
 onMounted(() => {

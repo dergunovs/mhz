@@ -1,23 +1,22 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiPagination from './UiPagination.vue';
 import { PAGE, TOTAL } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const pagination = '[data-test="ui-pagination"]';
-const paginationFirst = '[data-test="ui-pagination-first"]';
-const paginationPrev = '[data-test="ui-pagination-prev"]';
-const paginationNext = '[data-test="ui-pagination-next"]';
-const paginationLast = '[data-test="ui-pagination-last"]';
+const pagination = dataTest('ui-pagination');
+const paginationFirst = dataTest('ui-pagination-first');
+const paginationPrev = dataTest('ui-pagination-prev');
+const paginationNext = dataTest('ui-pagination-next');
+const paginationLast = dataTest('ui-pagination-last');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiPagination>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiPagination, {
-    props: { page: PAGE, total: TOTAL },
-  });
+  wrapper = wrapperFactory(UiPagination, { page: PAGE, total: TOTAL });
 });
 
 enableAutoUnmount(afterEach);

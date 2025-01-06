@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiBreadcrumbs from './UiBreadcrumbs.vue';
 
@@ -7,18 +8,16 @@ import { DEFAULT_COLOR, LINKS } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const breadcrumb = '[data-test="ui-breadcrumb"]';
-const breadcrumbLink = '[data-test="ui-breadcrumb-link"]';
-const breadcrumbTitle = '[data-test="ui-breadcrumb-title"]';
-const breadcrumbSlash = '[data-test="ui-breadcrumb-slash"]';
-const breadcrumbPosition = '[data-test="ui-breadcrumb-position"]';
+const breadcrumb = dataTest('ui-breadcrumb');
+const breadcrumbLink = dataTest('ui-breadcrumb-link');
+const breadcrumbTitle = dataTest('ui-breadcrumb-title');
+const breadcrumbSlash = dataTest('ui-breadcrumb-slash');
+const breadcrumbPosition = dataTest('ui-breadcrumb-position');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiBreadcrumbs>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiBreadcrumbs, {
-    props: { color: DEFAULT_COLOR, links: LINKS },
-  });
+  wrapper = wrapperFactory(UiBreadcrumbs, { color: DEFAULT_COLOR, links: LINKS });
 });
 
 enableAutoUnmount(afterEach);

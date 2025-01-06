@@ -1,23 +1,22 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiSelect from './UiSelect.vue';
 import { MODEL_VALUE, OPTIONS, IS_FILTER, OPTIONS_OBJECTS } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const selectInput = '[data-test="ui-select-input"]';
-const selectInputFilter = '[data-test="ui-select-input-filter"]';
-const selectOptions = '[data-test="ui-select-options"]';
-const selectOption = '[data-test="ui-select-option"]';
-const selectNoResults = '[data-test="ui-select-no-results"]';
+const selectInput = dataTest('ui-select-input');
+const selectInputFilter = dataTest('ui-select-input-filter');
+const selectOptions = dataTest('ui-select-options');
+const selectOption = dataTest('ui-select-option');
+const selectNoResults = dataTest('ui-select-no-results');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiSelect>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiSelect, {
-    props: { modelValue: MODEL_VALUE, options: OPTIONS, isFilter: IS_FILTER },
-  });
+  wrapper = wrapperFactory(UiSelect, { modelValue: MODEL_VALUE, options: OPTIONS, isFilter: IS_FILTER });
 });
 
 enableAutoUnmount(afterEach);

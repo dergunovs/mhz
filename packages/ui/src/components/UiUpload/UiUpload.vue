@@ -89,7 +89,7 @@ const props = withDefaults(defineProps<IProps>(), {
   extensions: () => ['jpg', 'png'],
 });
 
-const emit = defineEmits(['add', 'remove', 'upload']);
+const emit = defineEmits<{ add: [file: File]; remove: [file: File]; upload: [] }>();
 
 const input = ref<HTMLElement>();
 const inputKey = ref(0);
@@ -101,6 +101,8 @@ function emulateFileClickInput() {
 }
 
 async function remove(file?: File) {
+  if (!file) return;
+
   emit('remove', file);
   inputKey.value++;
 }

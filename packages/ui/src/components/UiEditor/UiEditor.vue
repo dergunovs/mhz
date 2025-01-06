@@ -28,7 +28,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [value?: string] }>();
 
 const content = computed(() => props.modelValue);
 

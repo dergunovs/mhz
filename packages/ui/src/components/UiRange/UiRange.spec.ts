@@ -1,19 +1,18 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiRange from './UiRange.vue';
 import { MIN, MAX, MODEL_VALUE } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const range = '[data-test="ui-range"]';
+const range = dataTest('ui-range');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiRange>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiRange, {
-    props: { modelValue: MODEL_VALUE, min: MIN, max: MAX },
-  });
+  wrapper = wrapperFactory(UiRange, { modelValue: MODEL_VALUE, min: MIN, max: MAX });
 });
 
 enableAutoUnmount(afterEach);

@@ -27,8 +27,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>();
 </script>
 
 <style module lang="scss">

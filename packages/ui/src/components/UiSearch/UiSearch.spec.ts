@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
-
-import { debounce } from 'perfect-debounce';
+import { dataTest } from 'mhz-helpers';
 
 import UiSearch from './UiSearch.vue';
 import {
@@ -17,24 +16,21 @@ import {
 
 import { wrapperFactory } from '@/test';
 
-const search = '[data-test="ui-search"]';
-const searchResults = '[data-test="ui-search-results"]';
-const searchResult = '[data-test="ui-search-result"]';
-const searchResultType = '[data-test="ui-search-result-type"]';
-const searchResultLink = '[data-test="ui-search-result-link"]';
-const searchResultLabel = '[data-test="ui-search-result-label"]';
+const search = dataTest('ui-search');
+const searchResults = dataTest('ui-search-results');
+const searchResult = dataTest('ui-search-result');
+const searchResultType = dataTest('ui-search-result-type');
+const searchResultLink = dataTest('ui-search-result-link');
+const searchResultLabel = dataTest('ui-search-result-label');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiSearch>>;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiSearch, {
-    props: {
-      modelValue: MODEL_VALUE,
-      isSuccess: IS_SUCCESS,
-      results: RESULTS,
-      searchScheme: SEARCH_SCHEME,
-    },
-    mocks: { debounce },
+    modelValue: MODEL_VALUE,
+    isSuccess: IS_SUCCESS,
+    results: RESULTS,
+    searchScheme: SEARCH_SCHEME,
   });
 });
 

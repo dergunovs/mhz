@@ -22,7 +22,7 @@
             v-for="category in filters.category"
             :key="category._id"
             :modelValue="choosenCategories.some((choosen) => choosen._id === category._id)"
-            @update:modelValue="updateCategories(category, $event)"
+            @update:modelValue="updateCategories(category, !!$event)"
             :label="`${category.title}`"
             :labelSub="` (${category.count})`"
             :isDisabled="category.count === 0"
@@ -39,7 +39,7 @@
               v-for="manufacturer in filters.manufacturer"
               :key="manufacturer._id"
               :modelValue="choosenManufacturers.some((choosen) => choosen._id === manufacturer._id)"
-              @update:modelValue="updateManufacturers(manufacturer, $event)"
+              @update:modelValue="updateManufacturers(manufacturer, !!$event)"
               :label="`${manufacturer.title}`"
               :labelSub="` (${manufacturer.count})`"
               :isDisabled="manufacturer.count === 0"
@@ -58,7 +58,7 @@
                     (field) => field.title === key.toString() && field.values.includes(value.value.toString())
                   )
                 "
-                @update:modelValue="updateFields(key.toString(), value.value.toString(), $event)"
+                @update:modelValue="updateFields(key.toString(), value.value.toString(), !!$event)"
                 :label="convertBooleanValue(value.value)"
                 :labelSub="` (${value.count})`"
                 :isDisabled="value.count === 0"

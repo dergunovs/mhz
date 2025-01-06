@@ -53,7 +53,7 @@ export default defineConfig({
 
   css: {
     preprocessorOptions: {
-      scss: { additionalData: `@import "mhz-ui/dist/breakpoints";`, api: 'modern-compiler' },
+      scss: { additionalData: `@use "mhz-ui/dist/breakpoints" as *;`, api: 'modern-compiler' },
     },
   },
 

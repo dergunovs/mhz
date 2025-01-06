@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiInput from './UiInput.vue';
 import { MODEL_VALUE } from './constants';
@@ -10,20 +11,16 @@ import { wrapperFactory } from '@/test';
 
 const writeText = vi.fn();
 
-Object.defineProperty(navigator, 'clipboard', {
-  value: { writeText },
-});
+Object.defineProperty(navigator, 'clipboard', { value: { writeText } });
 
-const input = '[data-test="ui-input"]';
-const inputBlock = '[data-test="ui-input-block"]';
-const inputIcon = '[data-test="ui-input-icon"]';
+const input = dataTest('ui-input');
+const inputBlock = dataTest('ui-input-block');
+const inputIcon = dataTest('ui-input-icon');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiInput>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiInput, {
-    props: { modelValue: MODEL_VALUE },
-  });
+  wrapper = wrapperFactory(UiInput, { modelValue: MODEL_VALUE });
 });
 
 enableAutoUnmount(afterEach);

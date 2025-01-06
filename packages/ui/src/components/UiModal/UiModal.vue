@@ -46,7 +46,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const emit = defineEmits(['update:modelValue', 'confirm']);
+const emit = defineEmits<{ 'update:modelValue': [value: boolean]; confirm: [] }>();
 
 const cancelText = computed(() => (props.lang === 'ru' ? 'Отмена' : 'Cancel'));
 const confirmText = computed(() => (props.lang === 'ru' ? 'Подтвердить' : 'onfirm'));

@@ -12,13 +12,14 @@ import { wrapperFactory } from '@/test';
 const button = '[data-test="ui-button"]';
 const buttonIcon = '[data-test="ui-button-icon"]';
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiButton>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiButton, {
-    props: { layout: DEFAULT_LAYOUT, type: DEFAULT_TYPE, icon: DEFAULT_ICON },
-    slots: { default: DEFAULT_SLOT },
-  });
+  wrapper = wrapperFactory(
+    UiButton,
+    { layout: DEFAULT_LAYOUT, type: DEFAULT_TYPE, icon: DEFAULT_ICON },
+    { default: DEFAULT_SLOT }
+  );
 });
 
 enableAutoUnmount(afterEach);

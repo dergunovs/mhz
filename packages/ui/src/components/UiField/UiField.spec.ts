@@ -1,23 +1,21 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiField from './UiField.vue';
 import { LABEL, ERROR, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const field = '[data-test="ui-field"]';
-const fieldLabel = '[data-test="ui-field-label"]';
-const fieldRequired = '[data-test="ui-field-required"]';
-const fieldError = '[data-test="ui-field-error"]';
+const field = dataTest('ui-field');
+const fieldLabel = dataTest('ui-field-label');
+const fieldRequired = dataTest('ui-field-required');
+const fieldError = dataTest('ui-field-error');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiField>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiField, {
-    props: { label: LABEL },
-    slots: { default: DEFAULT_SLOT },
-  });
+  wrapper = wrapperFactory(UiField, { label: LABEL }, { default: DEFAULT_SLOT });
 });
 
 enableAutoUnmount(afterEach);

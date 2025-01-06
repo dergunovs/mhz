@@ -9,9 +9,10 @@
       locale="ru"
       :transitions="false"
       :events="props.events"
-      :onEventClick="props.onEventClick"
       @ready="(event: ICalendarUpdate) => emit('ready', event)"
       @viewChange="(event: ICalendarUpdate) => emit('update', event)"
+      @eventClick="(event: ICalendarEvent<unknown>) => emit('eventClick', event)"
+      data-test="ui-calendar"
     />
   </div>
 </template>
@@ -22,28 +23,15 @@ import { computed } from 'vue';
 import VueCal from 'vue-cal';
 
 import 'vue-cal/dist/vuecal.css';
-
-interface ICalendarEvent<T> {
-  id?: string;
-  start: Date | null;
-  end: Date | null;
-  title: string;
-  content: T[];
-}
-
-interface ICalendarUpdate {
-  firstCellDate: string;
-  lastCellDate: string;
-}
+import { ICalendarEvent, ICalendarUpdate } from './interface';
 
 interface IProps {
   height?: string;
   events?: ICalendarEvent<unknown>[];
-  onEventClick: (event: ICalendarEvent<never>) => void;
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['ready', 'update']);
+const emit = defineEmits(['ready', 'update', 'eventClick']);
 
 const heightComputed = computed(() => (props.height ? `${props.height}px` : '500px'));
 </script>

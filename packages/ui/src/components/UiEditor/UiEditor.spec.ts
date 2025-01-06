@@ -1,20 +1,19 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiEditor from './UiEditor.vue';
 import { MODEL_VALUE } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const editor = '[data-test="ui-editor"]';
-const editorButton = '[data-test="ui-editor-button"]';
+const editor = dataTest('ui-editor');
+const editorButton = dataTest('ui-editor-button');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiEditor>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiEditor, {
-    props: { modelValue: MODEL_VALUE },
-  });
+  wrapper = wrapperFactory(UiEditor, { modelValue: MODEL_VALUE });
 });
 
 enableAutoUnmount(afterEach);

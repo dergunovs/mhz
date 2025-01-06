@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiFlex from './UiFlex.vue';
 
@@ -7,15 +8,16 @@ import { DEFAULT_ALIGN, DEFAULT_GAP, DEFAULT_JUSTIFY, DEFAULT_TAG, FIRST_SLOT } 
 
 import { wrapperFactory } from '@/test';
 
-const flex = '[data-test="ui-flex"]';
+const flex = dataTest('ui-flex');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiFlex>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiFlex, {
-    props: { tag: DEFAULT_TAG, align: DEFAULT_ALIGN, justify: DEFAULT_JUSTIFY, gap: DEFAULT_GAP },
-    slots: { default: FIRST_SLOT },
-  });
+  wrapper = wrapperFactory(
+    UiFlex,
+    { tag: DEFAULT_TAG, align: DEFAULT_ALIGN, justify: DEFAULT_JUSTIFY, gap: DEFAULT_GAP },
+    { default: FIRST_SLOT }
+  );
 });
 
 enableAutoUnmount(afterEach);

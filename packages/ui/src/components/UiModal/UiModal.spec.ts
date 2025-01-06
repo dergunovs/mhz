@@ -1,25 +1,23 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiModal from './UiModal.vue';
 import { MODEL_VALUE, IS_CONFIRM, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const modal = '[data-test="ui-modal"]';
-const modalContainer = '[data-test="ui-modal-container"]';
-const modalClose = '[data-test="ui-modal-close"]';
-const modalSlot = '[data-test="ui-modal-slot"]';
-const modalConfirm = '[data-test="ui-modal-confirm"]';
-const modalCancel = '[data-test="ui-modal-cancel"]';
+const modal = dataTest('ui-modal');
+const modalContainer = dataTest('ui-modal-container');
+const modalClose = dataTest('ui-modal-close');
+const modalSlot = dataTest('ui-modal-slot');
+const modalConfirm = dataTest('ui-modal-confirm');
+const modalCancel = dataTest('ui-modal-cancel');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiModal>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiModal, {
-    props: { modelValue: MODEL_VALUE, isConfirm: IS_CONFIRM },
-    slots: { default: DEFAULT_SLOT },
-  });
+  wrapper = wrapperFactory(UiModal, { modelValue: MODEL_VALUE, isConfirm: IS_CONFIRM }, { default: DEFAULT_SLOT });
 });
 
 enableAutoUnmount(afterEach);

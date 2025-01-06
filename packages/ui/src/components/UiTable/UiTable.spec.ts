@@ -1,24 +1,22 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiTable from './UiTable.vue';
 import { HEADERS, MODEL_VALUE, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const tableHeader = '[data-test="ui-table-header"]';
-const tableHeaderTitle = '[data-test="ui-table-header-title"]';
-const tableHeaderSort = '[data-test="ui-table-header-sort"]';
-const tableHeaderSortAsc = '[data-test="ui-table-header-sort-asc"]';
-const tableHeaderSortDesc = '[data-test="ui-table-header-sort-desc"]';
+const tableHeader = dataTest('ui-table-header');
+const tableHeaderTitle = dataTest('ui-table-header-title');
+const tableHeaderSort = dataTest('ui-table-header-sort');
+const tableHeaderSortAsc = dataTest('ui-table-header-sort-asc');
+const tableHeaderSortDesc = dataTest('ui-table-header-sort-desc');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiTable>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiTable, {
-    props: { modelValue: MODEL_VALUE, headers: HEADERS },
-    slots: { default: DEFAULT_SLOT },
-  });
+  wrapper = wrapperFactory(UiTable, { modelValue: MODEL_VALUE, headers: HEADERS }, { default: DEFAULT_SLOT });
 });
 
 enableAutoUnmount(afterEach);

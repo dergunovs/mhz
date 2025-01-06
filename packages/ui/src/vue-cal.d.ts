@@ -33,17 +33,17 @@ declare module 'vue-cal' {
 
   export interface Event {
     _eid?: string;
-    start: string | Date; // '2018-11-19 12:00', // Required.
-    end: string | Date; // '2018-11-19 14:00', // Required.
-    title?: string; // Optional.
-    content?: string; // Optional.
-    contentFull?: string; // opens in a  d ialog
-    class?: string; // Optional - space-separated css classes.
-    background?: boolean; // Optional. (Event type not CSS property)
-    split?: number | string; // Optional.
-    allDay?: boolean; // Optional.
-    deletable?: boolean; // optional - force undeletable when events are editable.
-    resizable?: boolean; // optional - force unresizable when events are editable.
+    start: string | Date;
+    end: string | Date;
+    title?: string;
+    content?: string;
+    contentFull?: string;
+    class?: string;
+    background?: boolean;
+    split?: number | string;
+    allDay?: boolean;
+    deletable?: boolean;
+    resizable?: boolean;
     startTimeMinutes?: number;
     endTimeMinutes?: number;
   }
@@ -59,13 +59,13 @@ declare module 'vue-cal' {
 
   export interface EventReadyChanged {
     view: string;
-    startDate: Date; // View start - JS native Date object.
-    endDate: Date; // View end - JS native Date object.
-    firstCellDate: Date; // Month view only, in case cell is out of current month - JS native Date object.
-    lastCellDate: Date; // Month view only, in case cell is out of current month - JS native Date object.
-    outOfScopeEvents: Array<Event>; // Month view only, all the events that are out of the current month.
-    events: Array<Event>; // All the events in the current view.
-    week: number; // Week number. Only returned if view is 'week'.
+    startDate: Date;
+    endDate: Date;
+    firstCellDate: Date;
+    lastCellDate: Date;
+    outOfScopeEvents: Array<Event>;
+    events: Array<Event>;
+    week: number;
   }
 
   export interface EventChange {
@@ -133,57 +133,57 @@ declare module 'vue-cal' {
   }
 
   export interface Props {
-    activeView?: View; //default?: 'week'
-    allDayBarHeight?: string | number; //default?: '25px'
-    cellClickHold?: boolean; //default?: true
-    cellContextmenu?: boolean; //default?: false
-    clickToNavigate?: boolean; //default?: false
-    dblclickToNavigate?: boolean; //default?: true
-    disableDatePrototypes?: boolean; //default?: false
-    disableDays?: Array<FormattedDate>; //default?: []
-    disableViews?: Array<View>; //default?: []
-    dragToCreateEvent?: boolean; //default?: true
-    dragToCreateThreshold?: number; //default?: 15
-    editableEvents?: boolean | EditableEvents; //default?: false
-    events?: Array<Event>; //default?: [
-    eventsCountOnYearView?: boolean; //default?: false
-    eventsOnMonthView?: boolean | string; //default?: false
-    hideBody?: boolean; //default?: false
-    hideTitleBar?: boolean; //default?: false
-    hideViewSelector?: boolean; //default?: false
-    hideWeekdays?: Array<WeekDays>; //default?: []
-    hideWeekends?: boolean; //default?: false
-    locale?: string; //default?: 'en'
-    maxDate?: string | Date; //efault?: ''
-    minCellWidth?: number; //default?: 0 // In pixels.
-    minDate?: string | Date; //efault?: ''
-    minEventWidth?: number; //default?: 0 // In percent.
-    minSplitWidth?: number; //default?: 0 // In pixels.
-    onEventClick?: Function; //default?: null
-    onEventCreate?: Function; //default?: null
-    onEventDblclick?: Function; //default?: null
-    overlapsPerTimeStep?: boolean; //default?: false
-    resizeX?: boolean; //default?: false
-    selectedDate?: string | Date; //default?: ''
-    showAllDayEvents?: boolean | 'short'; //default?: false
-    showWeekNumbers?: boolean | string; //default?: false
-    small?: boolean; //default?: false
-    snapToTime?: number; //default?: null
-    specialHours?: object; //default?: {}
-    splitDays?: Array<any>; //default?: [
-    startWeekOnSunday?: boolean; //default?: false
-    stickySplitLabels?: boolean; //default?: false
-    time?: boolean; //default?: true
-    timeCellHeight?: number; //default?: 40 // In pixels.
-    timeFormat?: string; //default?: ''
-    timeFrom?: number; //default?: 0 // In minutes.
-    timeStep?: number; //default?: 30 // In minutes.
-    timeTo?: number; //default?: 24 * 60 // In minutes.
-    todayButton?: boolean; //default?: false
-    transitions?: boolean; //default?: true
-    twelveHour?: boolean; //default?: false
-    xsmall?: boolean; //default?: false
-    watchRealTime?: boolean; //default: false
+    activeView?: View;
+    allDayBarHeight?: string | number;
+    cellClickHold?: boolean;
+    cellContextmenu?: boolean;
+    clickToNavigate?: boolean;
+    dblclickToNavigate?: boolean;
+    disableDatePrototypes?: boolean;
+    disableDays?: Array<FormattedDate>;
+    disableViews?: Array<View>;
+    dragToCreateEvent?: boolean;
+    dragToCreateThreshold?: number;
+    editableEvents?: boolean | EditableEvents;
+    events?: Array<Event>;
+    eventsCountOnYearView?: boolean;
+    eventsOnMonthView?: boolean | string;
+    hideBody?: boolean;
+    hideTitleBar?: boolean;
+    hideViewSelector?: boolean;
+    hideWeekdays?: Array<WeekDays>;
+    hideWeekends?: boolean;
+    locale?: string;
+    maxDate?: string | Date;
+    minCellWidth?: number;
+    minDate?: string | Date;
+    minEventWidth?: number;
+    minSplitWidth?: number;
+    onEventClick?: Function;
+    onEventCreate?: Function;
+    onEventDblclick?: Function;
+    overlapsPerTimeStep?: boolean;
+    resizeX?: boolean;
+    selectedDate?: string | Date;
+    showAllDayEvents?: boolean | 'short';
+    showWeekNumbers?: boolean | string;
+    small?: boolean;
+    snapToTime?: number;
+    specialHours?: object;
+    splitDays?: Array<any>;
+    startWeekOnSunday?: boolean;
+    stickySplitLabels?: boolean;
+    time?: boolean;
+    timeCellHeight?: number;
+    timeFormat?: string;
+    timeFrom?: number;
+    timeStep?: number;
+    timeTo?: number;
+    todayButton?: boolean;
+    transitions?: boolean;
+    twelveHour?: boolean;
+    xsmall?: boolean;
+    watchRealTime?: boolean;
   }
 
   export namespace slots {
@@ -202,7 +202,7 @@ declare module 'vue-cal' {
       return super.$on(event, callback);
     }
 
-    ready: boolean; // Is vue-cal ready.
+    ready: boolean;
     texts: any;
     utils: {
       date: any;
@@ -214,7 +214,7 @@ declare module 'vue-cal' {
     minutesAtCursor(e: MouseEvent);
 
     view: VueCalView;
-    eventIdIncrement: number; // Internal unique id.
+    eventIdIncrement: number;
     now: Date;
     timeTickerIds: [any, any];
     mutableEvents: any;
@@ -303,15 +303,15 @@ declare module 'vue-cal' {
       | 'am'; // (usually with surrounding `{ }`) am or pm (also localized if any)
 
     interface Date {
-      addDays(days: number): this; // adds days to a Date object and returns it. The original Date stays untouched as a copy is made.
-      subtractDays(days: number): this; // Subtracts days to a Date object and returns it. The original Date stays untouched as a copy is made.
-      addHours(hours: number): this; //Adds hours to a Date object and returns it. The original Date stays untouched as a copy is made. `hours` is an integer.
-      subtractHours(hours: number): this; // Subtracts hours to a Date object and returns it. The original Date stays untouched as a copy is made. `hours` is an integer.
-      addMinutes(minutes: number): this; // Adds minutes to a Date object and returns it. The original Date stays untouched as a copy is made. `minutes` is an integer.
-      subtractMinutes(minutes: number): this; //Subtracts minutes to a Date object and returns it. The original Date stays untouched as a copy is made. `minutes` is an integer.
-      getWeek(): number; // Returns the week number (1 to 53) of a date.
-      isToday(): boolean; // Returns true if the date is Today.
-      isLeapYear(): boolean; //Returns true if the date is in a leap year.
+      addDays(days: number): this;
+      subtractDays(days: number): this;
+      addHours(hours: number): this;
+      subtractHours(hours: number): this;
+      addMinutes(minutes: number): this;
+      subtractMinutes(minutes: number): this;
+      getWeek(): number;
+      isToday(): boolean;
+      isLeapYear(): boolean;
       format(format: VueCalDateTimeFormat): string;
       formatTime(format: VueCalTimeFormat): string;
     }

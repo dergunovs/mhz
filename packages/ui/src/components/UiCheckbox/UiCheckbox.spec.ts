@@ -1,32 +1,31 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import { DEFAULT_LABEL, DEFAULT_MODEL_VALUE } from './constants';
 import UiCheckbox from './UiCheckbox.vue';
 
 import { wrapperFactory } from '@/test';
 
-const checkbox = '[data-test="ui-checkbox"]';
-const checkboxInput = '[data-test="ui-checkbox-input"]';
-const checkboxFake = '[data-test="ui-checkbox-fake"]';
-const checkboxLine = '[data-test="ui-checkbox-line"]';
-const checkboxError = '[data-test="ui-checkbox-error"]';
-const checkboxLabel = '[data-test="ui-checkbox-label"]';
-const checkboxLabelSub = '[data-test="ui-checkbox-label-sub"]';
-const checkboxLabelSwitcher = '[data-test="ui-checkbox-label-switcher"]';
-const checkboxRequired = '[data-test="ui-checkbox-required"]';
-const checkboxRequiredSwitcher = '[data-test="ui-checkbox-required-switcher"]';
+const checkbox = dataTest('ui-checkbox');
+const checkboxInput = dataTest('ui-checkbox-input');
+const checkboxFake = dataTest('ui-checkbox-fake');
+const checkboxLine = dataTest('ui-checkbox-line');
+const checkboxError = dataTest('ui-checkbox-error');
+const checkboxLabel = dataTest('ui-checkbox-label');
+const checkboxLabelSub = dataTest('ui-checkbox-label-sub');
+const checkboxLabelSwitcher = dataTest('ui-checkbox-label-switcher');
+const checkboxRequired = dataTest('ui-checkbox-required');
+const checkboxRequiredSwitcher = dataTest('ui-checkbox-required-switcher');
 
-let wrapper: VueWrapper;
+let wrapper: VueWrapper<InstanceType<typeof UiCheckbox>>;
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiCheckbox, {
-    props: {
-      modelValue: DEFAULT_MODEL_VALUE,
-      label: DEFAULT_LABEL,
-      labelSub: DEFAULT_LABEL,
-      labelSwither: DEFAULT_LABEL,
-    },
+    modelValue: DEFAULT_MODEL_VALUE,
+    label: DEFAULT_LABEL,
+    labelSub: DEFAULT_LABEL,
+    labelSwitcher: DEFAULT_LABEL,
   });
 });
 

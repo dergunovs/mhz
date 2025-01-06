@@ -54,9 +54,11 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update']);
+const emit = defineEmits<{ update: [value: number] }>();
 
 function handleUpdate(value?: number) {
+  if (!value) return;
+
   emit('update', value);
   document.querySelector('main')?.scrollTo(0, 0);
 }
