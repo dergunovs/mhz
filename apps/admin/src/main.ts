@@ -4,9 +4,9 @@ import { createHead } from '@unhead/vue';
 import { VueQueryPlugin, vueQueryOptions, setBaseURL } from 'mhz-helpers';
 import { toast } from 'mhz-ui';
 
-import App from './App.vue';
+import App from '@/common/components/App.vue';
 
-import router from '@/common/router';
+import { router } from '@/common/router';
 import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';
 
 import '@/common/styles/main.scss';

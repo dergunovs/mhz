@@ -45,7 +45,7 @@ import { RouterLink } from 'vue-router';
 import { IProduct } from 'mhz-contracts';
 import { UiButton } from 'mhz-ui';
 
-import ProductActionButtons from './ProductActionButtons.vue';
+import ProductActionButtons from '@/product/components/ProductActionButtons.vue';
 import ProductAddToCartButton from '@/product/components/ProductAddToCartButton.vue';
 
 import { CURRENCY, PATH_UPLOAD } from '@/common/constants';
