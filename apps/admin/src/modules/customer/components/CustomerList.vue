@@ -3,8 +3,8 @@
     :headers="tableHeaders"
     :isLoading="!props.customers?.length"
     :modelValue="props.modelValue"
-    @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
-    @reset="(value: string) => emit('reset', value)"
+    @update:modelValue="(value) => emit('update:modelValue', value)"
+    @reset="(value) => emit('reset', value)"
   >
     <template v-if="props.customers?.length">
       <tr v-for="customer in props.customers" :key="customer._id" data-test="customer-list-row">
@@ -38,7 +38,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue', 'reset']);
+const emit = defineEmits<{ 'update:modelValue': [value: ISortOption]; reset: [value: string] }>();
 
 const tableHeaders = [
   { value: 'email', title: 'Email' },

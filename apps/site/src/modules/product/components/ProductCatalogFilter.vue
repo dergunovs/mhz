@@ -90,7 +90,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update', 'hide']);
+const emit = defineEmits<{ update: [filter: object]; hide: [] }>();
 
 const fieldSpoilers = ref([]);
 

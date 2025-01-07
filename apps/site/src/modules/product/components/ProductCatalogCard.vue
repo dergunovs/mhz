@@ -57,7 +57,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['choice']);
+const emit = defineEmits<{ choice: [product: IProduct] }>();
 </script>
 
 <style module lang="scss">

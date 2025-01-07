@@ -8,7 +8,7 @@
       <ManufacturerList
         :manufacturers="manufacturers"
         v-model="query.sort"
-        @reset="(value: ISortOption) => resetQuery(value)"
+        @reset="(value) => resetQuery(value)"
         data-test="manufacturer-list-page-list"
       />
 
@@ -16,7 +16,7 @@
         v-show="manufacturers?.length"
         :page="query.page"
         :total="total"
-        @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
+        @update="(value) => setQueryPage(setPaginationPage(value, query.page))"
       />
     </div>
   </div>
@@ -26,7 +26,7 @@
 import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
-import { usePagination, usePage, ISortOption } from 'mhz-helpers';
+import { usePagination, usePage } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import ManufacturerList from '@/manufacturer/components/ManufacturerList.vue';

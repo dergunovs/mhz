@@ -38,7 +38,7 @@
       :errors="validation.errors"
       :errorMessages="validation.messages"
       @update="(id) => emit('update', id)"
-      @remove="removeProduct"
+      @remove="(title) => removeProduct(title)"
     />
 
     <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete(props.configuration?._id)">
@@ -80,7 +80,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update']);
+const emit = defineEmits<{ update: [id: string] }>();
 
 const isEnableGetCustomer = computed(() => props.isAuthor || false);
 

@@ -57,7 +57,13 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['add', 'update', 'delete', 'hide']);
+
+const emit = defineEmits<{
+  add: [field: ICategoryField];
+  update: [field: ICategoryField];
+  delete: [id: string];
+  hide: [];
+}>();
 
 const formData = ref<ICategoryField>({
   title: '',
@@ -106,7 +112,7 @@ function update() {
 }
 
 function remove() {
-  if (isValid()) {
+  if (isValid() && categoryFieldId.value) {
     emit('delete', categoryFieldId.value);
     emit('hide');
   }

@@ -4,8 +4,8 @@
       :headers="tableHeaders"
       :isLoading="!props.banners?.length"
       :modelValue="props.modelValue"
-      @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
-      @reset="(value: string) => emit('reset', value)"
+      @update:modelValue="(value) => emit('update:modelValue', value)"
+      @reset="(value) => emit('reset', value)"
       data-test="banner-list-table"
     >
       <template v-if="props.banners?.length">
@@ -41,7 +41,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue', 'reset']);
+const emit = defineEmits<{ 'update:modelValue': [value: ISortOption]; reset: [value: string] }>();
 
 const tableHeaders = [
   { value: 'product', title: 'Product' },

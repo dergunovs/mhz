@@ -43,7 +43,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update', 'remove']);
+const emit = defineEmits<{ update: [id: string]; remove: [title: keyof IConfigurationParts] }>();
 
 const sortedCategories = computed(() => {
   return clone(props.categories).sort(

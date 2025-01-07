@@ -2,6 +2,7 @@
   <div>
     <div :class="$style.select">
       <div>Sort:</div>
+
       <UiSelect
         :modelValue="sort"
         @update:modelValue="(value) => updateSort(value as IProductSortOption)"
@@ -25,7 +26,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue', 'reset']);
+const emit = defineEmits<{ 'update:modelValue': [value: ISortOption]; reset: [value: ISortOption] }>();
 
 const sort = computed(() =>
   SORT_OPTIONS.find((option) => option.value === props.modelValue.value && option.isAsc === props.modelValue.isAsc)

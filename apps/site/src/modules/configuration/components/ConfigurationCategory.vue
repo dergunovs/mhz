@@ -34,7 +34,7 @@
 
           <button
             v-if="props.isAuthor"
-            @click="emit('remove', props.category.title)"
+            @click="emit('remove', props.category.title as keyof IConfigurationParts)"
             type="button"
             :class="$style.remove"
           >
@@ -70,7 +70,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update', 'remove']);
+const emit = defineEmits<{ update: [id: string]; remove: [title: keyof IConfigurationParts] }>();
 
 function updateCategory(id?: string) {
   if (props.isAuthor && id) emit('update', id);

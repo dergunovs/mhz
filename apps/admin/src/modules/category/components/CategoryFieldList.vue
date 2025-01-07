@@ -44,7 +44,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['edit']);
+const emit = defineEmits<{ edit: [field: ICategoryField] }>();
 </script>
 
 <style module lang="scss">

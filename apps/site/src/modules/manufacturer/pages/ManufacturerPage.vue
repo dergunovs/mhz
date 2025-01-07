@@ -22,12 +22,7 @@
       <div :class="$style.container">
         <div v-if="!products?.length && !isLoading">No such products. Please, change your filters.</div>
 
-        <ProductCatalogSort
-          v-else
-          v-model="query.sort"
-          :page="query.page"
-          @reset="(value: string) => resetQuery(value)"
-        />
+        <ProductCatalogSort v-else v-model="query.sort" :page="query.page" @reset="(value) => resetQuery(value)" />
 
         <ProductCatalogList v-if="products?.length" :products="products" />
 
@@ -35,7 +30,7 @@
           v-show="products?.length"
           :page="query.page"
           :total="total"
-          @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
+          @update="(value) => setQueryPage(setPaginationPage(value, query.page))"
         />
       </div>
     </div>

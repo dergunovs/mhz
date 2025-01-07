@@ -6,7 +6,7 @@
       <OrderList
         :orders="orders"
         v-model="query.sort"
-        @reset="(value: ISortOption) => resetQuery(value)"
+        @reset="(value) => resetQuery(value)"
         data-test="order-list-page-list"
       />
 
@@ -14,7 +14,7 @@
         v-show="orders?.length"
         :page="query.page"
         :total="total"
-        @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
+        @update="(value) => setQueryPage(setPaginationPage(value, query.page))"
       />
     </div>
   </div>
@@ -24,7 +24,7 @@
 import { useHead } from '@unhead/vue';
 
 import { UiPagination } from 'mhz-ui';
-import { usePagination, usePage, ISortOption } from 'mhz-helpers';
+import { usePagination, usePage } from 'mhz-helpers';
 
 import PageTitle from '@/layout/components/PageTitle.vue';
 import OrderList from '@/order/components/OrderList.vue';

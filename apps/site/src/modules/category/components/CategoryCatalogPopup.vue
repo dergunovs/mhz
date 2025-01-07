@@ -16,7 +16,7 @@ import CategoryCatalogList from '@/category/components/CategoryCatalogList.vue';
 
 import { getCategories } from '@/category/services';
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [isShowPopup: boolean] }>();
 
 const { data: categories } = getCategories();
 </script>

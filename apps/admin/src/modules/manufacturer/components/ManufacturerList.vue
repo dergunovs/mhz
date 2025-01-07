@@ -3,8 +3,8 @@
     :headers="tableHeaders"
     :isLoading="!props.manufacturers?.length"
     :modelValue="props.modelValue"
-    @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
-    @reset="(value: string) => emit('reset', value)"
+    @update:modelValue="(value) => emit('update:modelValue', value)"
+    @reset="(value) => emit('reset', value)"
   >
     <template v-if="props.manufacturers?.length">
       <tr v-for="manufacturer in props.manufacturers" :key="manufacturer._id" data-test="manufacturer-list-row">
@@ -43,7 +43,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue', 'reset']);
+const emit = defineEmits<{ 'update:modelValue': [value: ISortOption]; reset: [value: string] }>();
 
 const tableHeaders = [
   { value: 'title', title: 'Manufacturer' },

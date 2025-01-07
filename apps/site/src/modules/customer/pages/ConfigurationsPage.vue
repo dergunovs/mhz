@@ -10,7 +10,7 @@
       v-show="configurations?.length"
       :page="query.page"
       :total="total"
-      @update="(value: number) => setQueryPage(setPaginationPage(value, query.page))"
+      @update="(value) => setQueryPage(setPaginationPage(value, query.page))"
     />
   </div>
 </template>

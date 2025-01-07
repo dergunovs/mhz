@@ -3,8 +3,8 @@
     :headers="tableHeaders"
     :isLoading="!props.orders?.length"
     :modelValue="props.modelValue"
-    @update:modelValue="(value: ISortOption) => emit('update:modelValue', value)"
-    @reset="(value: string) => emit('reset', value)"
+    @update:modelValue="(value) => emit('update:modelValue', value)"
+    @reset="(value) => emit('reset', value)"
   >
     <template v-if="props.orders?.length">
       <tr v-for="order in props.orders" :key="order._id" data-test="order-list-row">
@@ -41,7 +41,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update:modelValue', 'reset']);
+const emit = defineEmits<{ 'update:modelValue': [value: ISortOption]; reset: [value: string] }>();
 
 const tableHeaders = [
   { value: '_id', title: 'ID' },

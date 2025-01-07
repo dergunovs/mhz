@@ -21,6 +21,7 @@
     </UiButton>
 
     <UiModal
+      v-if="props.id"
       v-model="isShowConfirm"
       isConfirm
       @confirm="emit('delete', props.id)"
@@ -44,7 +45,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const emit = defineEmits(['delete']);
+const emit = defineEmits<{ delete: [id: string] }>();
 
 const isShowConfirm = ref(false);
 

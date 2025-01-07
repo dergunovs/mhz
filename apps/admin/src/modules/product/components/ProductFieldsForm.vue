@@ -30,7 +30,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['update']);
+const emit = defineEmits<{ update: [formData: ICategoryField[]] }>();
 
 const formData = ref<ICategoryField[]>([]);
 

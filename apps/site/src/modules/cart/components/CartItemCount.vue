@@ -22,7 +22,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const emit = defineEmits(['update']);
+const emit = defineEmits<{ update: [count: number] }>();
 </script>
 
 <style module lang="scss">

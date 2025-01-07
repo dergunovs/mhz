@@ -38,7 +38,7 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits(['delete', 'update']);
+const emit = defineEmits<{ update: [urls: string[]]; delete: [url: string, isThumb: boolean] }>();
 
 const urlsSortable = ref<string[]>([]);
 
