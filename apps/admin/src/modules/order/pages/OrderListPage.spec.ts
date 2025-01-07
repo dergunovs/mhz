@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IOrder } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import OrderListPage from './OrderListPage.vue';
 
@@ -11,7 +12,7 @@ import { ORDERS } from '@/order/fixtures';
 
 const spyGetOrders = vi.spyOn(orderServices, 'getOrders').mockReturnValue(mockQueryReply(ORDERS));
 
-const orderList = '[data-test="order-list-page-list"]';
+const orderList = dataTest('order-list-page-list');
 
 let wrapper: VueWrapper;
 

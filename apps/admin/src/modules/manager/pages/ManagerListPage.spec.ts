@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IManager } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import ManagerListPage from './ManagerListPage.vue';
 
@@ -11,7 +12,7 @@ import { MANAGERS } from '@/manager/fixtures';
 
 const spyGetManagers = vi.spyOn(managerServices, 'getManagers').mockReturnValue(mockQueryReply(MANAGERS));
 
-const managerList = '[data-test="manager-list-page-list"]';
+const managerList = dataTest('manager-list-page-list');
 
 let wrapper: VueWrapper;
 

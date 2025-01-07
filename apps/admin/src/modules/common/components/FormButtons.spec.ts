@@ -1,6 +1,7 @@
 import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import FormButtons from './FormButtons.vue';
 
@@ -10,10 +11,10 @@ const spyRouterGo = vi.spyOn(router, 'go');
 
 const ID = '2534534534534';
 
-const formButtonsSubmit = '[data-test="form-buttons-submit"]';
-const formButtonsBack = '[data-test="form-buttons-back"]';
-const formButtonsDelete = '[data-test="form-buttons-delete"]';
-const formButtonsConfitmModal = '[data-test="form-buttons-confirm-modal"]';
+const formButtonsSubmit = dataTest('form-buttons-submit');
+const formButtonsBack = dataTest('form-buttons-back');
+const formButtonsDelete = dataTest('form-buttons-delete');
+const formButtonsConfitmModal = dataTest('form-buttons-confirm-modal');
 
 let wrapper: VueWrapper;
 

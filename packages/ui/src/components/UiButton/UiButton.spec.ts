@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import UiButton from './UiButton.vue';
 
@@ -9,8 +10,8 @@ import IconTest from './icons/test.svg?component';
 
 import { wrapperFactory } from '@/test';
 
-const button = '[data-test="ui-button"]';
-const buttonIcon = '[data-test="ui-button-icon"]';
+const button = dataTest('ui-button');
+const buttonIcon = dataTest('ui-button-icon');
 
 let wrapper: VueWrapper<InstanceType<typeof UiButton>>;
 

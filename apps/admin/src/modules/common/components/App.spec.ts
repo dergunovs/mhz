@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi, beforeAll } from 'vite
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IBaseReply } from 'mhz-contracts';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import App from './App.vue';
 
@@ -15,7 +16,7 @@ const spyGetCookieToken = vi.spyOn(helpers, 'getCookieToken').mockImplementation
 const spySetAuthHeader = vi.spyOn(helpers, 'setAuthHeader');
 const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockReturnValue(mockQueryReply<IBaseReply>({ message: 'ok' }));
 
-const layout = '[data-test="app-layout"]';
+const layout = dataTest('app-layout');
 
 let wrapper: VueWrapper;
 

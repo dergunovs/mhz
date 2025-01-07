@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import CategoryFieldForm from './CategoryFieldForm.vue';
 
@@ -13,10 +14,10 @@ const TEMP_ID = '123';
 
 vi.spyOn(helpers, 'createTempId').mockReturnValue(TEMP_ID);
 
-const categoryFieldFormType = '[data-test="category-field-form-type"]';
-const categoryFieldFormUnits = '[data-test="category-field-form-units"]';
-const categoryFieldFormCancel = '[data-test="category-field-form-cancel"]';
-const categoryFieldFormDelete = '[data-test="category-field-form-delete"]';
+const categoryFieldFormType = dataTest('category-field-form-type');
+const categoryFieldFormUnits = dataTest('category-field-form-units');
+const categoryFieldFormCancel = dataTest('category-field-form-cancel');
+const categoryFieldFormDelete = dataTest('category-field-form-delete');
 
 let wrapper: VueWrapper;
 

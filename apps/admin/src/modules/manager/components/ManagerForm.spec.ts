@@ -4,6 +4,7 @@ import { VueWrapper, enableAutoUnmount, flushPromises } from '@vue/test-utils';
 import { API_MANAGER, IManager, IBaseReply } from 'mhz-contracts';
 import { toast } from 'mhz-ui';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import ManagerForm from './ManagerForm.vue';
 
@@ -53,12 +54,12 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 const MANAGER = MANAGERS.data[0];
 const QUERY_KEY = { queryKey: [API_MANAGER] };
 
-const managerForm = '[data-test="manager-form"]';
-const managerFormFirstName = '[data-test="manager-form-first-name"]';
-const managerFormLastName = '[data-test="manager-form-last-name"]';
-const managerFormEmail = '[data-test="manager-form-email"]';
-const managerFormPassword = '[data-test="manager-form-password"]';
-const managerFormButtons = '[data-test="manager-form-buttons"]';
+const managerForm = dataTest('manager-form');
+const managerFormFirstName = dataTest('manager-form-first-name');
+const managerFormLastName = dataTest('manager-form-last-name');
+const managerFormEmail = dataTest('manager-form-email');
+const managerFormPassword = dataTest('manager-form-password');
+const managerFormButtons = dataTest('manager-form-buttons');
 
 let wrapper: VueWrapper;
 

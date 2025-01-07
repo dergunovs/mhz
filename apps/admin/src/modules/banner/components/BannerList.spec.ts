@@ -1,6 +1,7 @@
 import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import BannerList from './BannerList.vue';
 
@@ -10,9 +11,9 @@ import { BANNERS } from '@/banner/fixtures';
 
 const MODELVALUE = { value: '_id', isAsc: true };
 
-const bannerListTable = '[data-test="banner-list-table"]';
-const bannerListRow = '[data-test="banner-list-row"]';
-const bannerListLink = '[data-test="banner-list-link"]';
+const bannerListTable = dataTest('banner-list-table');
+const bannerListRow = dataTest('banner-list-row');
+const bannerListLink = dataTest('banner-list-link');
 
 let wrapper: VueWrapper;
 

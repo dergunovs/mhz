@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { ICustomer } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import CustomerPage from './CustomerPage.vue';
 
@@ -13,7 +14,7 @@ const CUSTOMER = CUSTOMERS.data[0];
 
 const spyGetCustomer = vi.spyOn(customerServices, 'getCustomer').mockReturnValue(mockQueryReply(CUSTOMER));
 
-const customerInfo = '[data-test="customer-page-info"]';
+const customerInfo = dataTest('customer-page-info');
 
 let wrapper: VueWrapper;
 

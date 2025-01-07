@@ -3,6 +3,7 @@ import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { ILoginData, IUserToken } from 'mhz-contracts';
 import { toast } from 'mhz-ui';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import LoginForm from './LoginForm.vue';
 
@@ -34,9 +35,9 @@ const spySetAuthHeaders = vi.spyOn(helpers, 'setAuthHeader');
 
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
-const loginForm = '[data-test="login-form"]';
-const loginFormEmail = '[data-test="login-form-email"]';
-const loginFormPassword = '[data-test="login-form-password"]';
+const loginForm = dataTest('login-form');
+const loginFormEmail = dataTest('login-form-email');
+const loginFormPassword = dataTest('login-form-password');
 
 let wrapper: VueWrapper;
 

@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import NavItem from './NavItem.vue';
 
@@ -13,9 +14,9 @@ const NAV_ITEM = {
   icon: NavMainIcon,
 };
 
-const navItem = '[data-test="nav-item"]';
-const navItemIcon = '[data-test="nav-item-icon"]';
-const navItemTitle = '[data-test="nav-item-title"]';
+const navItem = dataTest('nav-item');
+const navItemIcon = dataTest('nav-item-icon');
+const navItemTitle = dataTest('nav-item-title');
 
 let wrapper: VueWrapper;
 

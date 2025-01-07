@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IProduct } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import ProductListPage from './ProductListPage.vue';
 
@@ -11,7 +12,7 @@ import { PRODUCTS } from '@/product/fixtures';
 
 const spyGetProducts = vi.spyOn(productServices, 'getProducts').mockReturnValue(mockQueryReply(PRODUCTS));
 
-const productList = '[data-test="product-list-page-list"]';
+const productList = dataTest('product-list-page-list');
 
 let wrapper: VueWrapper;
 

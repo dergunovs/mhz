@@ -1,12 +1,13 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import NavList from './NavList.vue';
 
 import { wrapperFactory } from '@/common/test';
 import { NAV_ITEMS } from '@/layout/constants';
 
-const navListItem = '[data-test="nav-list-item"]';
+const navListItem = dataTest('nav-list-item');
 
 let wrapper: VueWrapper;
 

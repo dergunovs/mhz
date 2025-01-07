@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IManufacturer } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import ManufacturerListPage from './ManufacturerListPage.vue';
 
@@ -13,7 +14,7 @@ const spyGetManufacturers = vi
   .spyOn(manufacturerServices, 'getManufacturers')
   .mockReturnValue(mockQueryReply(MANUFACTURERS));
 
-const manufacturerList = '[data-test="manufacturer-list-page-list"]';
+const manufacturerList = dataTest('manufacturer-list-page-list');
 
 let wrapper: VueWrapper;
 

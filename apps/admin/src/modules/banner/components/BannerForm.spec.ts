@@ -4,6 +4,7 @@ import { VueWrapper, enableAutoUnmount, flushPromises } from '@vue/test-utils';
 import { API_BANNER, IBanner, IBaseReply } from 'mhz-contracts';
 import { toast } from 'mhz-ui';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import BannerForm from './BannerForm.vue';
 
@@ -57,13 +58,13 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 const BANNER = BANNERS.data[0];
 const QUERY_KEY = { queryKey: [API_BANNER] };
 
-const bannerForm = '[data-test="banner-form"]';
-const bannerFormText = '[data-test="banner-form-text"]';
-const bannerFormColor = '[data-test="banner-form-color"]';
-const bannerFormProduct = '[data-test="banner-form-product"]';
-const bannerFormIsActive = '[data-test="banner-form-is-active"]';
-const bannerFormImagePreview = '[data-test="banner-form-image-preview"]';
-const bannerFormButtons = '[data-test="banner-form-buttons"]';
+const bannerForm = dataTest('banner-form');
+const bannerFormText = dataTest('banner-form-text');
+const bannerFormColor = dataTest('banner-form-color');
+const bannerFormProduct = dataTest('banner-form-product');
+const bannerFormIsActive = dataTest('banner-form-is-active');
+const bannerFormImagePreview = dataTest('banner-form-image-preview');
+const bannerFormButtons = dataTest('banner-form-buttons');
 
 let wrapper: VueWrapper;
 

@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import OrderList from './OrderList.vue';
 
@@ -7,8 +8,8 @@ import { wrapperFactory } from '@/common/test';
 import { URL_ORDER } from '@/order/constants';
 import { ORDERS } from '@/order/fixtures';
 
-const orderListRow = '[data-test="order-list-row"]';
-const orderListLink = '[data-test="order-list-link"]';
+const orderListRow = dataTest('order-list-row');
+const orderListLink = dataTest('order-list-link');
 
 let wrapper: VueWrapper;
 

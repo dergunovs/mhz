@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import ManagerList from './ManagerList.vue';
 
@@ -7,8 +8,8 @@ import { wrapperFactory } from '@/common/test';
 import { URL_MANAGER_EDIT } from '@/manager/constants';
 import { MANAGERS } from '@/manager/fixtures';
 
-const managerListRow = '[data-test="manager-list-row"]';
-const managerListLink = '[data-test="manager-list-link"]';
+const managerListRow = dataTest('manager-list-row');
+const managerListLink = dataTest('manager-list-link');
 
 let wrapper: VueWrapper;
 

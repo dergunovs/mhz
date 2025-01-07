@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IBaseReply, ISignUpData } from 'mhz-contracts';
 import { toast } from 'mhz-ui';
+import { dataTest } from 'mhz-helpers';
 
 import SignUpForm from './SignUpForm.vue';
 
@@ -26,11 +27,11 @@ vi.spyOn(customerServices, 'postCustomer').mockImplementation((options: { onSucc
 const spyToastSuccess = vi.spyOn(toast, 'success');
 const spyRouterPush = vi.spyOn(router, 'push');
 
-const signupForm = '[data-test="signup-form"]';
-const signupFormFirstName = '[data-test="signup-form-first-name"]';
-const signupFormLastName = '[data-test="signup-form-last-name"]';
-const signupFormEmail = '[data-test="signup-form-email"]';
-const signupFormPassword = '[data-test="signup-form-password"]';
+const signupForm = dataTest('signup-form');
+const signupFormFirstName = dataTest('signup-form-first-name');
+const signupFormLastName = dataTest('signup-form-last-name');
+const signupFormEmail = dataTest('signup-form-email');
+const signupFormPassword = dataTest('signup-form-password');
 
 let wrapper: VueWrapper;
 

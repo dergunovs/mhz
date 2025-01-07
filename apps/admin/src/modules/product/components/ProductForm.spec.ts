@@ -4,6 +4,7 @@ import { VueWrapper, enableAutoUnmount, flushPromises } from '@vue/test-utils';
 import { API_PRODUCT, IBaseReply, ICategoryField, IProduct } from 'mhz-contracts';
 import * as helpers from 'mhz-helpers';
 import { toast } from 'mhz-ui';
+import { dataTest } from 'mhz-helpers';
 
 import ProductForm from './ProductForm.vue';
 
@@ -60,16 +61,16 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 const PRODUCT = PRODUCTS.data[0];
 const QUERY_KEY = { queryKey: [API_PRODUCT] };
 
-const productForm = '[data-test="product-form"]';
-const productFormTitle = '[data-test="product-form-title"]';
-const productFormPrice = '[data-test="product-form-price"]';
-const productFormManufacturer = '[data-test="product-form-manufacturer"]';
-const productFormCategory = '[data-test="product-form-category"]';
-const productFormStock = '[data-test="product-form-stock"]';
-const productFormDescription = '[data-test="product-form-description"]';
-const productFormFields = '[data-test="product-form-fields"]';
-const productFormImages = '[data-test="product-form-images"]';
-const productFormButtons = '[data-test="product-form-buttons"]';
+const productForm = dataTest('product-form');
+const productFormTitle = dataTest('product-form-title');
+const productFormPrice = dataTest('product-form-price');
+const productFormManufacturer = dataTest('product-form-manufacturer');
+const productFormCategory = dataTest('product-form-category');
+const productFormStock = dataTest('product-form-stock');
+const productFormDescription = dataTest('product-form-description');
+const productFormFields = dataTest('product-form-fields');
+const productFormImages = dataTest('product-form-images');
+const productFormButtons = dataTest('product-form-buttons');
 
 let wrapper: VueWrapper;
 

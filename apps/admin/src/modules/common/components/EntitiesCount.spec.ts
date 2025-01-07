@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IEntitiesCount } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import EntitiesCount from './EntitiesCount.vue';
 
@@ -11,9 +12,9 @@ import * as commonServices from '@/common/services';
 
 const spyGetCount = vi.spyOn(commonServices, 'getEntitiesCount').mockReturnValue(mockQueryReply(COUNT));
 
-const entitiesCountBase = '[data-test="entities-count-base"]';
-const entitiesCountProductCategories = '[data-test="entities-count-product-categories"]';
-const entitiesCountProductManufacturers = '[data-test="entities-count-product-manufacturers"]';
+const entitiesCountBase = dataTest('entities-count-base');
+const entitiesCountProductCategories = dataTest('entities-count-product-categories');
+const entitiesCountProductManufacturers = dataTest('entities-count-product-manufacturers');
 
 let wrapper: VueWrapper;
 

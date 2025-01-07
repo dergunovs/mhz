@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IBanner } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import BannerEditPage from './BannerEditPage.vue';
 
@@ -13,7 +14,7 @@ const BANNER = BANNERS.data[0];
 
 const spyGetBanner = vi.spyOn(bannerServices, 'getBanner').mockReturnValue(mockQueryReply(BANNER));
 
-const bannerEditPageForm = '[data-test="banner-edit-page-form"]';
+const bannerEditPageForm = dataTest('banner-edit-page-form');
 
 let wrapper: VueWrapper;
 

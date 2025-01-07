@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IManufacturer } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import ManufacturerEditPage from './ManufacturerEditPage.vue';
 
@@ -15,7 +16,7 @@ const spyGetManufacturer = vi
   .spyOn(manufacturerServices, 'getManufacturer')
   .mockReturnValue(mockQueryReply(MANUFACTURER));
 
-const manufacturerEditPageForm = '[data-test="manufacturer-edit-page-form"]';
+const manufacturerEditPageForm = dataTest('manufacturer-edit-page-form');
 
 let wrapper: VueWrapper;
 

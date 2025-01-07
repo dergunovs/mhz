@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import TheSearch from './TheSearch.vue';
 
@@ -20,7 +21,7 @@ vi.spyOn(commonServices, 'search').mockImplementation(() => {
   return mockQueryReply<{ [key: string]: { _id: string }[] }>(SEARCH_RESULTS, refetch);
 });
 
-const search = '[data-test="search"]';
+const search = dataTest('search');
 
 let wrapper: VueWrapper;
 

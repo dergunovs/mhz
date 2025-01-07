@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IProduct } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import ProductEditPage from './ProductEditPage.vue';
 
@@ -13,7 +14,7 @@ const PRODUCT = PRODUCTS.data[0];
 
 const spyGetProduct = vi.spyOn(productServices, 'getProduct').mockReturnValue(mockQueryReply(PRODUCT));
 
-const productEditPageForm = '[data-test="product-edit-page-form"]';
+const productEditPageForm = dataTest('product-edit-page-form');
 
 let wrapper: VueWrapper;
 

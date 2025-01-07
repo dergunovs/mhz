@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { formatDateTime } from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import CustomerInfo from './CustomerInfo.vue';
 
@@ -10,21 +11,21 @@ import { URL_PRODUCT_EDIT } from '@/product/constants';
 
 const CUSTOMER = CUSTOMERS.data[0];
 
-const customerName = '[data-test="customer-info-name"]';
-const customerEmail = '[data-test="customer-info-email"]';
-const customerCreated = '[data-test="customer-info-created"]';
-const customerLogin = '[data-test="customer-info-login"]';
-const customerCart = '[data-test="customer-info-cart"]';
-const customerCartItem = '[data-test="customer-info-cart-item"]';
-const customerCartItemCount = '[data-test="customer-info-cart-item-count"]';
-const customerCartItemTitle = '[data-test="customer-info-cart-item-title"]';
-const customerFavourites = '[data-test="customer-info-favourites"]';
-const customerFavouritesItem = '[data-test="customer-info-favourites-item"]';
-const customerFavouritesTitle = '[data-test="customer-info-favourites-title"]';
-const customerWatchedProducts = '[data-test="customer-info-watched-products"]';
-const customerWatchedProductsItem = '[data-test="customer-info-watched-products-item"]';
-const customerWatchedProductsDate = '[data-test="customer-info-watched-products-date"]';
-const customerWatchedProductsTitle = '[data-test="customer-info-watched-products-title"]';
+const customerName = dataTest('customer-info-name');
+const customerEmail = dataTest('customer-info-email');
+const customerCreated = dataTest('customer-info-created');
+const customerLogin = dataTest('customer-info-login');
+const customerCart = dataTest('customer-info-cart');
+const customerCartItem = dataTest('customer-info-cart-item');
+const customerCartItemCount = dataTest('customer-info-cart-item-count');
+const customerCartItemTitle = dataTest('customer-info-cart-item-title');
+const customerFavourites = dataTest('customer-info-favourites');
+const customerFavouritesItem = dataTest('customer-info-favourites-item');
+const customerFavouritesTitle = dataTest('customer-info-favourites-title');
+const customerWatchedProducts = dataTest('customer-info-watched-products');
+const customerWatchedProductsItem = dataTest('customer-info-watched-products-item');
+const customerWatchedProductsDate = dataTest('customer-info-watched-products-date');
+const customerWatchedProductsTitle = dataTest('customer-info-watched-products-title');
 
 let wrapper: VueWrapper;
 

@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import ProductFieldsForm from './ProductFieldsForm.vue';
 
@@ -11,9 +12,9 @@ const spyDeleteId = vi.spyOn(helpers, 'deleteId');
 
 const FIELDS = PRODUCTS.data[0].fields;
 
-const productFieldsFormField = '[data-test="product-fields-form-field"]';
-const productFieldsFormBoolean = '[data-test="product-fields-form-boolean"]';
-const productFieldsFormValue = '[data-test="product-fields-form-value"]';
+const productFieldsFormField = dataTest('product-fields-form-field');
+const productFieldsFormBoolean = dataTest('product-fields-form-boolean');
+const productFieldsFormValue = dataTest('product-fields-form-value');
 
 let wrapper: VueWrapper;
 

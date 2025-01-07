@@ -4,6 +4,7 @@ import { VueWrapper, enableAutoUnmount, flushPromises } from '@vue/test-utils';
 import { IManufacturer, IBaseReply, API_MANUFACTURER } from 'mhz-contracts';
 import { toast } from 'mhz-ui';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import ManufacturerForm from './ManufacturerForm.vue';
 
@@ -54,12 +55,12 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 
 const QUERY_KEY = { queryKey: [API_MANUFACTURER] };
 
-const manufacturerForm = '[data-test="manufacturer-form"]';
-const manufacturerFormTitle = '[data-test="manufacturer-form-title"]';
-const manufacturerFormDescription = '[data-test="manufacturer-form-description"]';
-const manufacturerFormCountry = '[data-test="manufacturer-form-country"]';
-const manufacturerFormLogo = '[data-test="manufacturer-form-logo"]';
-const manufacturerFormButtons = '[data-test="manufacturer-form-buttons"]';
+const manufacturerForm = dataTest('manufacturer-form');
+const manufacturerFormTitle = dataTest('manufacturer-form-title');
+const manufacturerFormDescription = dataTest('manufacturer-form-description');
+const manufacturerFormCountry = dataTest('manufacturer-form-country');
+const manufacturerFormLogo = dataTest('manufacturer-form-logo');
+const manufacturerFormButtons = dataTest('manufacturer-form-buttons');
 
 let wrapper: VueWrapper;
 

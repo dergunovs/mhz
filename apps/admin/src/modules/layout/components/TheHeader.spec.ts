@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import TheHeader from './TheHeader.vue';
 
@@ -10,7 +11,7 @@ import { TOKEN_NAME, URL_LOGIN } from '@/auth/constants';
 const spyLogout = vi.spyOn(helpers, 'logout');
 const deleteAuthHeader = vi.spyOn(helpers, 'deleteAuthHeader');
 
-const headerLogout = '[data-test="header-logout"]';
+const headerLogout = dataTest('header-logout');
 
 let wrapper: VueWrapper;
 

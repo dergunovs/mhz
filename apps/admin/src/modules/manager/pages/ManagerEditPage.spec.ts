@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IManager } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import ManagerEditPage from './ManagerEditPage.vue';
 
@@ -13,7 +14,7 @@ const MANAGER = MANAGERS.data[0];
 
 const spyGetManager = vi.spyOn(managerServices, 'getManager').mockReturnValue(mockQueryReply(MANAGER));
 
-const managerEditPageForm = '[data-test="manager-edit-page-form"]';
+const managerEditPageForm = dataTest('manager-edit-page-form');
 
 let wrapper: VueWrapper;
 

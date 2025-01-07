@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IBaseReply } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import ImagePreview from './ImagePreview.vue';
 
@@ -16,8 +17,8 @@ vi.spyOn(commonServices, 'deleteFile').mockImplementation(() => {
   return mockMutationReply<IBaseReply, { url: string; isThumb: boolean }>(spyMutateDelete);
 });
 
-const imagePreviewSortable = '[data-test="image-preview-sortable"]';
-const imagePreviewDelete = '[data-test="image-preview-delete"]';
+const imagePreviewSortable = dataTest('image-preview-sortable');
+const imagePreviewDelete = dataTest('image-preview-delete');
 
 let wrapper: VueWrapper;
 

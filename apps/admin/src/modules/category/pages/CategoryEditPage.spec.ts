@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { ICategory } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import CategoryEditPage from './CategoryEditPage.vue';
 
@@ -13,7 +14,7 @@ const CATEGORY = CATEGORIES.data[0];
 
 const spyGetCategory = vi.spyOn(categoryServices, 'getCategory').mockReturnValue(mockQueryReply(CATEGORY));
 
-const categoryEditPageForm = '[data-test="category-edit-page-form"]';
+const categoryEditPageForm = dataTest('category-edit-page-form');
 
 let wrapper: VueWrapper;
 

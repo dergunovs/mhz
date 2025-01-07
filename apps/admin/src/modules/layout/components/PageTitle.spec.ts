@@ -1,6 +1,7 @@
 import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import PageTitle from './PageTitle.vue';
 
@@ -14,8 +15,8 @@ const LINKS = [
 
 const TITLE = 'Title';
 
-const pageTitleBreadcrumbs = '[data-test="page-title-breadcrumbs"]';
-const pageTitleHeader = '[data-test="page-title-header"]';
+const pageTitleBreadcrumbs = dataTest('page-title-breadcrumbs');
+const pageTitleHeader = dataTest('page-title-header');
 
 let wrapper: VueWrapper;
 

@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { ICategory } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import CategoryListPage from './CategoryListPage.vue';
 
@@ -11,7 +12,7 @@ import { CATEGORIES } from '@/category/fixtures';
 
 const spyGetCategories = vi.spyOn(categoryServices, 'getCategories').mockReturnValue(mockQueryReply(CATEGORIES.data));
 
-const categoryList = '[data-test="category-list-page-list"]';
+const categoryList = dataTest('category-list-page-list');
 
 let wrapper: VueWrapper;
 

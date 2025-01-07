@@ -4,6 +4,7 @@ import { VueWrapper, enableAutoUnmount, flushPromises } from '@vue/test-utils';
 import { ICategory, ICategoryField, IBaseReply, API_CATEGORY } from 'mhz-contracts';
 import { toast } from 'mhz-ui';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import CategoryForm from './CategoryForm.vue';
 
@@ -52,14 +53,14 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 
 const QUERY_KEY = { queryKey: [API_CATEGORY] };
 
-const categoryForm = '[data-test="category-form"]';
-const categoryFormTitle = '[data-test="category-form-title"]';
-const categoryFormDescription = '[data-test="category-form-description"]';
-const categoryFormFieldList = '[data-test="category-form-field-list"]';
-const categoryFormAddCategory = '[data-test="category-form-add-category"]';
-const categoryFormFieldForm = '[data-test="category-form-field-form"]';
-const categoryFormIcon = '[data-test="category-form-icon"]';
-const categoryFormButtons = '[data-test="category-form-buttons"]';
+const categoryForm = dataTest('category-form');
+const categoryFormTitle = dataTest('category-form-title');
+const categoryFormDescription = dataTest('category-form-description');
+const categoryFormFieldList = dataTest('category-form-field-list');
+const categoryFormAddCategory = dataTest('category-form-add-category');
+const categoryFormFieldForm = dataTest('category-form-field-form');
+const categoryFormIcon = dataTest('category-form-icon');
+const categoryFormButtons = dataTest('category-form-buttons');
 
 let wrapper: VueWrapper;
 

@@ -2,6 +2,7 @@ import { DefineComponent } from 'vue';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { IBanner } from 'mhz-contracts';
+import { dataTest } from 'mhz-helpers';
 
 import BannerListPage from './BannerListPage.vue';
 
@@ -11,7 +12,7 @@ import { BANNERS } from '@/banner/fixtures';
 
 const spyGetBanners = vi.spyOn(bannerServices, 'getBanners').mockReturnValue(mockQueryReply(BANNERS));
 
-const bannerList = '[data-test="banner-list-page-list"]';
+const bannerList = dataTest('banner-list-page-list');
 
 let wrapper: VueWrapper;
 

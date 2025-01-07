@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import CategoryList from './CategoryList.vue';
 
@@ -7,8 +8,8 @@ import { wrapperFactory } from '@/common/test';
 import { URL_CATEGORY_EDIT } from '@/category/constants';
 import { CATEGORIES } from '@/category/fixtures';
 
-const categoryListRow = '[data-test="category-list-row"]';
-const categoryListLink = '[data-test="category-list-link"]';
+const categoryListRow = dataTest('category-list-row');
+const categoryListLink = dataTest('category-list-link');
 
 let wrapper: VueWrapper;
 

@@ -4,6 +4,7 @@ import { VueWrapper, enableAutoUnmount, flushPromises } from '@vue/test-utils';
 import { IBaseReply, API_ORDER, TOrderStatus } from 'mhz-contracts';
 import { toast } from 'mhz-ui';
 import * as helpers from 'mhz-helpers';
+import { dataTest } from 'mhz-helpers';
 
 import OrderForm from './OrderForm.vue';
 
@@ -51,20 +52,20 @@ const spyToastSuccess = vi.spyOn(toast, 'success');
 
 const QUERY_KEY = { queryKey: [API_ORDER] };
 
-const orderFormCustomer = '[data-test="order-form-customer"]';
-const orderFormStatus = '[data-test="order-form-status"]';
-const orderFormProducts = '[data-test="order-form-products"]';
-const orderFormProductsCount = '[data-test="order-form-products-count"]';
-const orderFormProductsTitle = '[data-test="order-form-products-title"]';
-const orderFormPrice = '[data-test="order-form-price"]';
-const orderFormCreated = '[data-test="order-form-created"]';
-const orderFormUpdated = '[data-test="order-form-updated"]';
-const orderFormComplete = '[data-test="order-form-complete"]';
-const orderFormBack = '[data-test="order-form-back"]';
-const orderFormCancel = '[data-test="order-form-cancel"]';
-const orderFormCancelConfirm = '[data-test="order-form-cancel-confirm"]';
-const orderFormDelete = '[data-test="order-form-delete"]';
-const orderFormDeleteConfirm = '[data-test="order-form-delete-confirm"]';
+const orderFormCustomer = dataTest('order-form-customer');
+const orderFormStatus = dataTest('order-form-status');
+const orderFormProducts = dataTest('order-form-products');
+const orderFormProductsCount = dataTest('order-form-products-count');
+const orderFormProductsTitle = dataTest('order-form-products-title');
+const orderFormPrice = dataTest('order-form-price');
+const orderFormCreated = dataTest('order-form-created');
+const orderFormUpdated = dataTest('order-form-updated');
+const orderFormComplete = dataTest('order-form-complete');
+const orderFormBack = dataTest('order-form-back');
+const orderFormCancel = dataTest('order-form-cancel');
+const orderFormCancelConfirm = dataTest('order-form-cancel-confirm');
+const orderFormDelete = dataTest('order-form-delete');
+const orderFormDeleteConfirm = dataTest('order-form-delete-confirm');
 
 let wrapper: VueWrapper;
 

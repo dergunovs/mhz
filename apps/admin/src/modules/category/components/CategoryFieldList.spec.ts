@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import CategoryFieldList from './CategoryFieldList.vue';
 
@@ -8,11 +9,11 @@ import { CATEGORY } from '@/category/fixtures';
 
 const FIELDS = CATEGORY.data.fields;
 
-const categoryField = '[data-test="category-field-list-field"]';
-const categoryFieldTitle = '[data-test="category-field-list-field-title"]';
-const categoryFieldType = '[data-test="category-field-list-field-type"]';
-const categoryFieldUnits = '[data-test="category-field-list-field-units"]';
-const categoryFieldEdit = '[data-test="category-field-list-field-edit"]';
+const categoryField = dataTest('category-field-list-field');
+const categoryFieldTitle = dataTest('category-field-list-field-title');
+const categoryFieldType = dataTest('category-field-list-field-type');
+const categoryFieldUnits = dataTest('category-field-list-field-units');
+const categoryFieldEdit = dataTest('category-field-list-field-edit');
 
 let wrapper: VueWrapper;
 

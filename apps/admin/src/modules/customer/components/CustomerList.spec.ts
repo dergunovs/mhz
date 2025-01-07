@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { dataTest } from 'mhz-helpers';
 
 import CustomerList from './CustomerList.vue';
 
@@ -7,8 +8,8 @@ import { wrapperFactory } from '@/common/test';
 import { URL_CUSTOMER } from '@/customer/constants';
 import { CUSTOMERS } from '@/customer/fixtures';
 
-const customerListRow = '[data-test="customer-list-row"]';
-const customerListLink = '[data-test="customer-list-link"]';
+const customerListRow = dataTest('customer-list-row');
+const customerListLink = dataTest('customer-list-link');
 
 let wrapper: VueWrapper;
 
