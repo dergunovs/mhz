@@ -1,7 +1,7 @@
 {
   "name": "9000mhz",
   "description": "Fake PC hardware store monorepo",
-  "version": "1.0.70",
+  "version": "1.0.71",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://9000mhz.ru",
@@ -29,14 +29,14 @@
     "prettier": "3.4.2",
     "turbo": "2.3.3"
   },
-  "packageManager": "npm@10.9.0",
+  "packageManager": "npm@11.0.0",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "engines": {
-    "npm": ">=10.9.0",
-    "node": ">=23.2.0"
+    "npm": ">=11.0.0",
+    "node": ">=22.9.0"
   },
   "keywords": [
     "monorepo",
