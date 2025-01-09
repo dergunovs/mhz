@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "9000 Mhz frontend helpers and composables",
-  "version": "1.0.83",
+  "version": "1.0.84",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -22,7 +22,7 @@
     "ts": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/vue-query": "5.62.12",
+    "@tanstack/vue-query": "5.62.16",
     "@vueuse/core": "12.3.0",
     "@vueuse/integrations": "12.3.0",
     "async-validator": "4.2.5",
@@ -48,8 +48,8 @@
     "stylelint-config-recommended-scss": "14.1.0",
     "stylelint-config-recommended-vue": "1.5.0",
     "stylelint-prettier": "5.0.2",
-    "typescript": "5.7.2",
-    "typescript-eslint": "8.19.0",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.19.1",
     "vite": "6.0.7",
     "vite-plugin-dts": "4.4.0",
     "vue-eslint-parser": "9.4.3",

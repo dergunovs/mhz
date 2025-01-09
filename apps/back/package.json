@@ -34,7 +34,7 @@
     "ajv": "8.17.1",
     "bcryptjs": "2.4.3",
     "dotenv": "16.4.7",
-    "fastify": "5.2.0",
+    "fastify": "5.2.1",
     "fastify-plugin": "5.0.1",
     "mhz-contracts": "*",
     "mongoose": "8.9.3",
@@ -56,9 +56,9 @@
     "fastify-linters-config": "0.1.0",
     "nodemon": "3.1.9",
     "prettier": "3.4.2",
-    "typescript": "5.7.2",
-    "typescript-eslint": "8.19.0",
-    "vitest": "3.0.0-beta.3"
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.19.1",
+    "vitest": "3.0.0-beta.4"
   },
   "engines": {
     "npm": ">=10.9.0",
