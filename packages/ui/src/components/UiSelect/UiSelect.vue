@@ -7,7 +7,7 @@
           : props.modelValue?.title
       "
       :disabled="props.isDisabled"
-      @toggle="isShowOptions ? hideOptions : showOptions"
+      @toggle="isShowOptions ? hideOptions() : showOptions()"
       mode="select"
       :placeholder="placeholderText"
       :appendIcon="isShowOptions ? IconOpened : IconClosed"
