@@ -6,7 +6,8 @@
           ? props.modelValue
           : props.modelValue?.title
       "
-      @toggle="isShowOptions ? hideOptions() : showOptions()"
+      :disabled="props.isDisabled"
+      @toggle="isShowOptions ? hideOptions : showOptions"
       mode="select"
       :placeholder="placeholderText"
       :appendIcon="isShowOptions ? IconOpened : IconClosed"
@@ -14,7 +15,13 @@
     />
 
     <div v-if="props.isFilter && isShowOptions" :class="$style.filter">
-      <UiInput v-model="filterQuery" :placeholder="filterText" isFocus data-test="ui-select-input-filter" />
+      <UiInput
+        v-model="filterQuery"
+        :disabled="props.isDisabled"
+        :placeholder="filterText"
+        isFocus
+        data-test="ui-select-input-filter"
+      />
     </div>
 
     <div v-if="isShowOptions" :class="$style.options" ref="optionsElement" data-test="ui-select-options">
@@ -68,6 +75,7 @@ interface IProps {
   modelValue?: string | number | IOption;
   options?: string[] | number[] | IOption[];
   isFilter?: boolean;
+  isDisabled?: boolean;
   lang?: 'ru';
 }
 
@@ -117,6 +125,8 @@ function hideOptions() {
 }
 
 function showOptions() {
+  if (props.isDisabled) return;
+
   isShowOptions.value = true;
 
   if (!props.isFilter) {
@@ -159,6 +169,12 @@ onClickOutside(containerElement, () => {
 <style module lang="scss">
 .container {
   position: relative;
+
+  &:disabled {
+    color: var(--color-gray-dark-extra);
+    background: var(--color-gray-light-extra);
+    border-color: var(--color-transparent);
+  }
 }
 
 .filter {
