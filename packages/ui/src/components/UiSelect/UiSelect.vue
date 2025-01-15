@@ -77,10 +77,11 @@ interface IProps {
   isFilter?: boolean;
   isDisabled?: boolean;
   lang?: 'ru';
+  isAllowUndefined?: boolean;
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits<{ 'update:modelValue': [value: string | number | IOption]; reachedBottom: [] }>();
+const emit = defineEmits<{ 'update:modelValue': [value: string | number | IOption | undefined]; reachedBottom: [] }>();
 
 const filterQuery = ref('');
 
@@ -101,9 +102,13 @@ const optionsComputed = computed(() => {
     });
   }
 
-  return props.isFilter
+  const filteredOptions = props.isFilter
     ? optionsObject.filter((option) => option.title.toLowerCase().includes(filterQuery.value.toLowerCase()))
     : optionsObject;
+
+  return props.isAllowUndefined
+    ? [{ _id: undefined, title: props.lang === 'ru' ? 'Убрать' : 'Remove' }, ...filteredOptions]
+    : filteredOptions;
 });
 
 const isShowOptions = ref(false);
@@ -140,8 +145,6 @@ function showOptions() {
 }
 
 function setOption(option: IOption) {
-  if (option._id === undefined) return;
-
   emit('update:modelValue', isObject.value ? option : option._id);
 
   hideOptions();
