@@ -1,27 +1,38 @@
 <template>
   <div :class="$style.container" ref="containerElement">
-    <UiInput
-      :modelValue="
-        typeof props.modelValue === 'string' || typeof props.modelValue === 'number'
-          ? props.modelValue
-          : props.modelValue?.title
-      "
-      :disabled="props.isDisabled"
-      @toggle="isShowOptions ? hideOptions() : showOptions()"
-      mode="select"
-      :placeholder="placeholderText"
-      :appendIcon="isShowOptions ? IconOpened : IconClosed"
-      data-test="ui-select-input"
-    />
-
-    <div v-if="props.isFilter && isShowOptions" :class="$style.filter">
+    <div :class="$style.input">
       <UiInput
-        v-model="filterQuery"
+        :modelValue="
+          typeof props.modelValue === 'string' || typeof props.modelValue === 'number'
+            ? props.modelValue
+            : props.modelValue?.title
+        "
         :disabled="props.isDisabled"
-        :placeholder="filterText"
-        isFocus
-        data-test="ui-select-input-filter"
+        @toggle="isShowOptions ? hideOptions() : showOptions()"
+        mode="select"
+        :placeholder="placeholderText"
+        :appendIcon="isShowOptions ? IconOpened : IconClosed"
+        data-test="ui-select-input"
       />
+
+      <div v-if="props.isFilter && isShowOptions" :class="$style.filter">
+        <UiInput
+          v-model="filterQuery"
+          :disabled="props.isDisabled"
+          :placeholder="filterText"
+          isFocus
+          data-test="ui-select-input-filter"
+        />
+      </div>
+
+      <button
+        v-if="props.isClearable"
+        @click="emit('update:modelValue', undefined)"
+        type="button"
+        :class="$style.clear"
+      >
+        ×
+      </button>
     </div>
 
     <div v-if="isShowOptions" :class="$style.options" ref="optionsElement" data-test="ui-select-options">
@@ -77,7 +88,7 @@ interface IProps {
   isFilter?: boolean;
   isDisabled?: boolean;
   lang?: 'ru';
-  isAllowUndefined?: boolean;
+  isClearable?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -102,13 +113,9 @@ const optionsComputed = computed(() => {
     });
   }
 
-  const filteredOptions = props.isFilter
+  return props.isFilter
     ? optionsObject.filter((option) => option.title.toLowerCase().includes(filterQuery.value.toLowerCase()))
     : optionsObject;
-
-  return props.isAllowUndefined
-    ? [{ _id: undefined, title: props.lang === 'ru' ? 'Убрать' : 'Remove' }, ...filteredOptions]
-    : filteredOptions;
 });
 
 const isShowOptions = ref(false);
@@ -177,6 +184,28 @@ onClickOutside(containerElement, () => {
     color: var(--color-gray-dark-extra);
     background: var(--color-gray-light-extra);
     border-color: var(--color-transparent);
+  }
+}
+
+.input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.clear {
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  cursor: pointer;
+  background-color: var(--color-gray-dark);
+  border: none;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: var(--color-gray-dark-extra);
   }
 }
 
