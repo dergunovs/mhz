@@ -49,8 +49,8 @@ const props = withDefaults(defineProps<IProps>(), {
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--color-white);
-  text-decoration: none;
   white-space: nowrap;
+  text-decoration: none;
   user-select: none;
   background: var(--color-primary);
   border: 2px solid var(--color-transparent);

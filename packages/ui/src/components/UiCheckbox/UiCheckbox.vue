@@ -175,9 +175,9 @@ function handleChange() {
   height: 20px;
   margin-top: 2px;
   cursor: pointer;
+  outline: none;
   border: 1px solid var(--color-gray-dark);
   border-radius: 4px;
-  outline: none;
 
   &:focus {
     width: 20px;

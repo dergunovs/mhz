@@ -3,7 +3,7 @@ export function addZero(value: number) {
 }
 
 export function formatDuration(duration?: number) {
-  if (!duration) return '-';
+  if (!duration) return '0';
 
   const minutes = Math.floor(duration / 60);
   const seconds = duration - minutes * 60;

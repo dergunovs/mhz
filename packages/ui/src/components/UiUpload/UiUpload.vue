@@ -159,8 +159,8 @@ function handleFileChange(target: EventTarget | null) {
   flex: 1;
   max-width: 136px;
   overflow: hidden;
-  font-size: 0.875rem;
   text-overflow: ellipsis;
+  font-size: 0.875rem;
 }
 
 .file {

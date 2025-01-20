@@ -70,8 +70,8 @@ const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>();
 .titleText {
   display: -webkit-box;
   overflow: hidden;
-  line-height: 1.2;
   -webkit-line-clamp: 2;
+  line-height: 1.2;
   -webkit-box-orient: vertical;
 }
 

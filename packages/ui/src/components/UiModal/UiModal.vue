@@ -94,9 +94,9 @@ function handleConfirm() {
   max-width: calc(100% - 32px);
   height: auto;
   padding: 32px;
+  outline: none;
   background-color: var(--color-white);
   border-radius: 16px;
-  outline: none;
   box-shadow: 0 0 16px 0 var(--color-gray-transparent);
 }
 

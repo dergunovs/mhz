@@ -97,9 +97,9 @@ onMounted(async () => {
   height: 40px;
   padding: 0 16px;
   font-size: 1rem;
+  outline: none;
   border: 1px solid var(--color-gray);
   border-radius: 16px;
-  outline: none;
 
   &:hover {
     border: 1px solid var(--color-gray-dark-extra);

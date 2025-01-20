@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
-import { formatDateTime } from 'mhz-helpers';
-import { dataTest } from 'mhz-helpers';
+import { formatDateTime, dataTest } from 'mhz-helpers';
 
 import CustomerInfo from './CustomerInfo.vue';
 
