@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
-import { dataTest } from 'mhz-helpers';
+import { dataTest, wait } from 'mhz-helpers';
 
 import UiModal from './UiModal.vue';
 import { MODEL_VALUE, IS_CONFIRM, DEFAULT_SLOT } from './constants';
@@ -40,6 +40,8 @@ describe('UiModal', async () => {
   it('hides modal by close button click', async () => {
     await wrapper.setProps({ modelValue: true });
 
+    await wait(100);
+
     expect(wrapper.find(modal).exists()).toBe(true);
 
     await wrapper.find(modalClose).trigger('click');
@@ -50,6 +52,8 @@ describe('UiModal', async () => {
 
   it('hides modal by container background click except modal background click', async () => {
     await wrapper.setProps({ modelValue: true });
+
+    await wait(100);
 
     expect(wrapper.find(modal).exists()).toBe(true);
 
@@ -87,6 +91,8 @@ describe('UiModal', async () => {
   it('hides by cancel button click in confirm mode', async () => {
     await wrapper.setProps({ modelValue: true, isConfirm: true });
 
+    await wait(100);
+
     await wrapper.find(modalCancel).trigger('click');
 
     expect(wrapper.emitted()).not.toHaveProperty('confirm');
@@ -96,6 +102,8 @@ describe('UiModal', async () => {
 
   it('emit confirm and hides by confirm button click in confirm mode', async () => {
     await wrapper.setProps({ modelValue: true, isConfirm: true });
+
+    await wait(100);
 
     await wrapper.find(modalConfirm).trigger('click');
 

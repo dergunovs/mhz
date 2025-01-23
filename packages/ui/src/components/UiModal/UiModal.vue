@@ -1,20 +1,8 @@
 <template>
-  <div
-    v-if="props.modelValue"
-    @mousedown="emit('update:modelValue', false)"
-    :class="$style.container"
-    data-test="ui-modal-container"
-  >
+  <div v-if="props.modelValue" @mousedown="debouncedHide" :class="$style.container" data-test="ui-modal-container">
     <div @mousedown.stop :class="$style.modal" data-test="ui-modal">
       <div :class="$style.header">
-        <button
-          @click="emit('update:modelValue', false)"
-          :class="$style.close"
-          type="button"
-          data-test="ui-modal-close"
-        >
-          ×
-        </button>
+        <button @click="debouncedHide" :class="$style.close" type="button" data-test="ui-modal-close">×</button>
       </div>
 
       <div data-test="ui-modal-slot">
@@ -24,7 +12,7 @@
       <div v-if="props.isConfirm" :class="$style.buttons">
         <UiButton @click="handleConfirm" data-test="ui-modal-confirm">{{ confirmText }}</UiButton>
 
-        <UiButton layout="secondary" @click="emit('update:modelValue', false)" data-test="ui-modal-cancel">
+        <UiButton layout="secondary" @click="debouncedHide" data-test="ui-modal-cancel">
           {{ cancelText }}
         </UiButton>
       </div>
@@ -33,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, computed } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
 
@@ -56,18 +44,34 @@ const minWidthComputed = computed(() => (props.width ? `${props.width}px` : '50%
 
 const body = document.querySelector('body');
 
+const debounce = ref(false);
+
 watch(
   () => props.modelValue,
   () => {
     const overflow = props.modelValue ? 'hidden' : 'auto';
 
     if (body) body.style.overflow = overflow;
+
+    if (props.modelValue) {
+      debounce.value = true;
+
+      setTimeout(() => {
+        debounce.value = false;
+      }, 100);
+    }
   }
 );
 
 function handleConfirm() {
   emit('confirm');
   emit('update:modelValue', false);
+}
+
+function debouncedHide() {
+  if (!debounce.value) emit('update:modelValue', false);
+
+  debounce.value = false;
 }
 </script>
 
