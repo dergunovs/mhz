@@ -24,6 +24,7 @@ const props = withDefaults(defineProps<IProps>(), {
   padding: 2px 8px;
   font-size: 0.875rem;
   background-color: var(--color-gray-light);
+  border-bottom: 1px solid var(--color-gray-dark);
   border-radius: 8px;
 
   &[data-type='success'] {

@@ -83,6 +83,7 @@ const props = withDefaults(defineProps<IProps>(), {
   }
 
   &[data-wrap='true'] {
+    text-align: left;
     white-space: normal;
   }
 
