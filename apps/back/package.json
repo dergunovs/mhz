@@ -26,7 +26,7 @@
     "@fastify/cors": "10.0.2",
     "@fastify/helmet": "13.0.1",
     "@fastify/jwt": "9.0.3",
-    "@fastify/multipart": "9.0.2",
+    "@fastify/multipart": "9.0.3",
     "@fastify/rate-limit": "10.2.2",
     "@fastify/static": "8.0.4",
     "@fastify/swagger": "9.4.2",
@@ -44,7 +44,7 @@
   "devDependencies": {
     "@eslint/js": "9.18.0",
     "@types/bcryptjs": "2.4.6",
-    "@types/node": "22.10.9",
+    "@types/node": "22.10.10",
     "@types/qs": "6.9.18",
     "esbuild": "0.24.2",
     "eslint": "9.18.0",
@@ -58,7 +58,7 @@
     "prettier": "3.4.2",
     "typescript": "5.7.3",
     "typescript-eslint": "8.21.0",
-    "vitest": "3.0.3"
+    "vitest": "3.0.4"
   },
   "engines": {
     "npm": ">=11.0.0",

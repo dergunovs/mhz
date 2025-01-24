@@ -4,6 +4,7 @@
     :data-layout="props.layout"
     :data-narrow="props.isNarrow"
     :data-tall="props.isTall"
+    :data-wrap="props.isWrap"
     :disabled="props.isDisabled"
     :type="props.type"
     data-test="ui-button"
@@ -25,6 +26,7 @@ interface IProps {
   isDisabled?: boolean;
   isNarrow?: boolean;
   isTall?: boolean;
+  isWrap?: boolean;
   icon?: FunctionalComponent;
 }
 
@@ -78,6 +80,10 @@ const props = withDefaults(defineProps<IProps>(), {
   &[data-tall='true'] {
     padding-top: 24px;
     padding-bottom: 24px;
+  }
+
+  &[data-wrap='true'] {
+    white-space: normal;
   }
 
   &[data-layout='accent'] {
