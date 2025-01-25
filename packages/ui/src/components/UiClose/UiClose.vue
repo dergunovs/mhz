@@ -1,5 +1,5 @@
 <template>
-  <button :class="$style.close" type="button" :data-small="props.isSmall">
+  <button :class="$style.close" type="button" :data-small="props.isSmall" :data-delete="props.isDelete">
     <div :class="$style.line"></div>
     <div :class="$style.line"></div>
   </button>
@@ -8,6 +8,7 @@
 <script setup lang="ts">
 interface IProps {
   isSmall?: boolean;
+  isDelete?: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -24,12 +25,20 @@ const props = defineProps<IProps>();
   border: none;
   border-radius: 50%;
 
+  &[data-delete='true'] {
+    background-color: var(--color-error);
+
+    &:hover {
+      background-color: var(--color-error-dark);
+    }
+  }
+
   &[data-small='true'] {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
 
     .line {
-      left: 5px;
+      left: 6px;
       width: 10px;
       height: 1px;
       border-radius: 2px;
