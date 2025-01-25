@@ -20,7 +20,7 @@
     "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --excludeCollection=configurations --out=apps/back/dump"
   },
   "dependencies": {
-    "@changesets/cli": "2.27.11"
+    "@changesets/cli": "2.27.12"
   },
   "devDependencies": {
     "@commitlint/cli": "19.6.1",

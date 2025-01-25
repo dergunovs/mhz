@@ -30,7 +30,7 @@ const { data: categories } = getCategories();
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--color-white-transparent);
 }
 

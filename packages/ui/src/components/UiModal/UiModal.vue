@@ -2,7 +2,7 @@
   <div v-if="props.modelValue" @mousedown="debouncedHide" :class="$style.container" data-test="ui-modal-container">
     <div @mousedown.stop :class="$style.modal" data-test="ui-modal">
       <div :class="$style.header">
-        <button @click="debouncedHide" :class="$style.close" type="button" data-test="ui-modal-close">×</button>
+        <UiClose @click="debouncedHide" data-test="ui-modal-close" />
       </div>
 
       <div data-test="ui-modal-slot">
@@ -24,6 +24,7 @@
 import { ref, watch, computed } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
+import UiClose from '../UiClose/UiClose.vue';
 
 interface IProps {
   modelValue: boolean;
@@ -84,7 +85,7 @@ function debouncedHide() {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--color-gray-transparent);
 }
 
@@ -92,12 +93,12 @@ function debouncedHide() {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   width: v-bind(widthComputed);
   min-width: v-bind(minWidthComputed);
   max-width: calc(100% - 32px);
   height: auto;
-  padding: 32px;
+  padding: 24px;
   outline: none;
   background-color: var(--color-white);
   border-radius: 16px;
@@ -107,25 +108,6 @@ function debouncedHide() {
 .header {
   display: flex;
   justify-content: flex-end;
-}
-
-.close {
-  display: flex;
-  flex-grow: 0;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  font-size: 1.25rem;
-  color: var(--color-white);
-  cursor: pointer;
-  background-color: var(--color-gray-dark);
-  border: none;
-  border-radius: 50%;
-
-  &:hover {
-    background-color: var(--color-gray-dark-extra);
-  }
 }
 
 .buttons {

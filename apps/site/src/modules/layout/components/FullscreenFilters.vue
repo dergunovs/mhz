@@ -41,7 +41,7 @@ function toggleFilters() {
       z-index: 999;
       display: flex;
       width: 100%;
-      height: 100vh;
+      height: 100dvh;
       padding: 32px 16px 104px 16px;
       overflow-y: hidden;
       background: var(--color-white);
