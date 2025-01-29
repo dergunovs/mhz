@@ -65,19 +65,19 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   background-color: var(--color-accent);
   border-radius: 50%;
 }
 
 :global(.vuecal--short-events .vuecal__event-title) {
-  height: 32px;
-  padding: 0;
+  width: 100%;
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-white);
+  text-align: center;
 }
 
 :global(.vuecal__title-bar) {
