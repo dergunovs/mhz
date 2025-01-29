@@ -73,8 +73,8 @@ const props = withDefaults(defineProps<IProps>(), {
   }
 
   &[data-narrow='true'] {
-    padding-right: 16px;
-    padding-left: 16px;
+    padding-right: 12px;
+    padding-left: 12px;
   }
 
   &[data-tall='true'] {

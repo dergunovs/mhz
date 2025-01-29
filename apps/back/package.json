@@ -44,7 +44,7 @@
   "devDependencies": {
     "@eslint/js": "9.19.0",
     "@types/bcryptjs": "2.4.6",
-    "@types/node": "22.10.10",
+    "@types/node": "22.12.0",
     "@types/qs": "6.9.18",
     "esbuild": "0.24.2",
     "eslint": "9.19.0",
@@ -57,7 +57,7 @@
     "nodemon": "3.1.9",
     "prettier": "3.4.2",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.21.0",
+    "typescript-eslint": "8.22.0",
     "vitest": "3.0.4"
   },
   "engines": {
