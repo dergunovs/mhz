@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "9000 Mhz ui kit",
-  "version": "1.0.129",
+  "version": "1.0.131",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -78,7 +78,7 @@
     "vite-svg-loader": "5.1.0",
     "vitest": "3.0.4",
     "vue-eslint-parser": "9.4.3",
-    "vue-linters-config": "0.3.10",
+    "vue-linters-config": "0.3.11",
     "vue-tsc": "2.2.0"
   },
   "peerDependencies": {
@@ -87,6 +87,6 @@
   },
   "engines": {
     "npm": ">=11.0.0",
-    "node": ">=22.9.0"
+    "node": ">=23.6.0"
   }
 }

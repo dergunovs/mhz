@@ -36,7 +36,7 @@
   ],
   "engines": {
     "npm": ">=11.0.0",
-    "node": ">=22.9.0"
+    "node": ">=23.6.0"
   },
   "keywords": [
     "monorepo",

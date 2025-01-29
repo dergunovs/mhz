@@ -19,7 +19,7 @@ export default defineConfig({
     },
   },
 
-  build: { target: 'esnext' },
+  build: { target: 'es2022' },
 
   resolve: { alias: { '@': resolve(__dirname, './src/modules') } },
 

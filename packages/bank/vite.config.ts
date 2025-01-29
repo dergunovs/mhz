@@ -7,7 +7,7 @@ export default defineConfig({
   },
 
   build: {
-    target: "esnext",
+    target: "es2022",
     copyPublicDir: false,
     lib: {
       name: "mhz-bank",

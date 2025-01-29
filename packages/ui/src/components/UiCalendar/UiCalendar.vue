@@ -74,6 +74,7 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 
 :global(.vuecal--short-events .vuecal__event-title) {
   width: 100%;
+  font-family: none;
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-white);

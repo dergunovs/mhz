@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "useDefineForClassFields": true,
-    "module": "ESNext",
+    "module": "ES2022",
     "moduleResolution": "Node",
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ES2022", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
     "baseUrl": "./",
     "paths": { "@/*": ["src/modules/*"] },
-    "types": ["vite/client", "vite-svg-loader"],
+    "types": ["vite/client", "vite-svg-loader"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
