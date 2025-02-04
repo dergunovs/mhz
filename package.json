@@ -23,11 +23,11 @@
     "@changesets/cli": "2.27.12"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.6.1",
-    "@commitlint/config-conventional": "19.6.0",
-    "@turbo/gen": "2.3.4",
+    "@commitlint/cli": "19.7.1",
+    "@commitlint/config-conventional": "19.7.1",
+    "@turbo/gen": "2.4.0",
     "prettier": "3.4.2",
-    "turbo": "2.3.4"
+    "turbo": "2.4.0"
   },
   "packageManager": "npm@11.0.0",
   "workspaces": [

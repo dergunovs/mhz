@@ -5,3 +5,4 @@ export * from './api';
 export * from './query';
 export * from './test';
 export * from './numbers';
+export * from './link';

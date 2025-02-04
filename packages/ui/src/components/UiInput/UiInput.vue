@@ -14,17 +14,18 @@
       :class="$style.input"
       ref="input"
       v-bind="$attrs"
+      :type="isShowPassword ? 'password' : props.type"
       :data-mode="props.mode"
       :data-center="props.isCenter"
-      :data-append-icon="!!props.appendIcon || props.isCopy"
+      :data-append-icon="!!props.appendIcon || props.isCopy || props.isPassword"
       :tabindex="props.mode === 'default' ? '0' : '-1'"
       data-test="ui-input"
       aria-label="input"
     />
 
     <component
-      v-if="props.appendIcon || props.isCopy"
-      :is="props.isCopy ? IconCopy : props.appendIcon"
+      v-if="props.appendIcon || props.isCopy || props.isPassword"
+      :is="icon"
       @click="handleIconClick"
       :class="$style.icon"
       :data-copy="props.isCopy"
@@ -34,36 +35,52 @@
 </template>
 
 <script setup lang="ts">
-import { FunctionalComponent, onMounted, nextTick, ref } from 'vue';
+import { FunctionalComponent, onMounted, nextTick, ref, computed } from 'vue';
 
 import IconCopy from './icons/copy.svg?component';
+import IconPasswordHide from './icons/password-hide.svg?component';
+import IconPasswordShow from './icons/password-show.svg?component';
 
 interface IProps {
   modelValue?: string | number | boolean | null;
+  type?: 'text' | 'number' | 'email' | 'password' | 'tel' | 'url';
   isDisabled?: boolean;
   mode?: 'default' | 'select';
   appendIcon?: FunctionalComponent;
   isFocus?: boolean;
   isCenter?: boolean;
   isCopy?: boolean;
+  isPassword?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   modelValue: '',
+  type: 'text',
   mode: 'default',
   appendIcon: undefined,
 });
 
 const emit = defineEmits<{ 'update:modelValue': [value: string | number]; toggle: [] }>();
 
+const input = ref<HTMLElement>();
+
+const isShowPassword = ref(false);
+
+const icon = computed(() => {
+  if (props.isCopy) return IconCopy;
+  if (props.isPassword && isShowPassword.value) return IconPasswordHide;
+  if (props.isPassword && !isShowPassword.value) return IconPasswordShow;
+
+  return props.appendIcon;
+});
+
 function handleInput(target: EventTarget | null) {
   emit('update:modelValue', (target as HTMLInputElement).value);
 }
 
-const input = ref<HTMLElement>();
-
 function handleIconClick() {
   if (props.isCopy && props.modelValue) navigator.clipboard.writeText(props.modelValue.toString());
+  if (props.isPassword) isShowPassword.value = !isShowPassword.value;
 }
 
 onMounted(async () => {
@@ -135,7 +152,7 @@ onMounted(async () => {
 .icon {
   position: absolute;
   top: calc(50% - 8px);
-  right: 16px;
+  right: 12px;
   cursor: pointer;
 }
 </style>
