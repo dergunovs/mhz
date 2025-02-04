@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "9000 Mhz frontend helpers and composables",
-  "version": "1.0.95",
+  "version": "1.0.96",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
