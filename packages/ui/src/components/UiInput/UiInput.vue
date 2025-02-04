@@ -14,7 +14,7 @@
       :class="$style.input"
       ref="input"
       v-bind="$attrs"
-      :type="isShowPassword ? props.type : 'password'"
+      :type="props.isPassword && !isShowPassword ? 'password' : props.type"
       :data-mode="props.mode"
       :data-center="props.isCenter"
       :data-append-icon="!!props.appendIcon || props.isCopy || props.isPassword"
