@@ -29,6 +29,7 @@
       @click="handleIconClick"
       :class="$style.icon"
       :data-copy="props.isCopy"
+      :data-password="props.isPassword"
       data-test="ui-input-icon"
     />
   </div>
@@ -154,5 +155,11 @@ onMounted(async () => {
   top: calc(50% - 8px);
   right: 12px;
   cursor: pointer;
+
+  &[data-password='true'] {
+    top: calc(50% - 12px);
+    width: 24px;
+    height: 24px;
+  }
 }
 </style>
