@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
@@ -102,16 +102,12 @@ const { mutate: mutateDelete } = deleteManufacturer({
   },
 });
 
-const rules = computed(() => {
-  return {
-    title: required(),
-    description: required(),
-    logoUrl: required(),
-    country: required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  title: [required('en')],
+  description: [required('en')],
+  logoUrl: [required('en')],
+  country: [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutatePost(formData.value);

@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiButton, UiUpload, toast, UiEditor } from 'mhz-ui';
@@ -126,15 +126,11 @@ const { mutate: mutateDelete } = deleteCategory({
   },
 });
 
-const rules = computed(() => {
-  return {
-    title: required(),
-    description: required(),
-    iconUrl: required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  title: [required('en')],
+  description: [required('en')],
+  iconUrl: [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function showCategoryField() {
   editableCategoryField.value = undefined;

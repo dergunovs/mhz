@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, toast } from 'mhz-ui';
@@ -79,16 +79,12 @@ const { mutate: mutateDelete } = deleteManager({
   },
 });
 
-const rules = computed(() => {
-  return {
-    firstName: required(),
-    lastName: required(),
-    email: [required(), email()],
-    password: !props.manager?._id && required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  firstName: [required('en')],
+  lastName: [required('en')],
+  email: [required('en'), email('en')],
+  password: !props.manager?._id && [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutatePost(formData.value);

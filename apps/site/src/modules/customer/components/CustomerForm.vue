@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiModal, toast } from 'mhz-ui';
 import { clone, useValidator, required, email, logout, deleteAuthHeader, useQueryClient } from 'mhz-helpers';
@@ -63,15 +63,11 @@ const { mutate: mutateDelete } = deleteCustomer({
   },
 });
 
-const rules = computed(() => {
-  return {
-    firstName: required(),
-    lastName: required(),
-    email: [required(), email()],
-  };
+const { error, isValid } = useValidator(formData, {
+  firstName: [required('en')],
+  lastName: [required('en')],
+  email: [required('en'), email('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutateUpdate(formData.value);

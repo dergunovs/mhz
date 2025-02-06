@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
@@ -50,14 +50,10 @@ const { mutate: mutateLogin } = login({
   },
 });
 
-const rules = computed(() => {
-  return {
-    email: [required(), email()],
-    password: required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  email: [required('en'), email('en')],
+  password: [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutateLogin(formData.value);

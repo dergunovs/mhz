@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiUpload, UiSelect, UiCheckbox, toast } from 'mhz-ui';
@@ -113,16 +113,12 @@ const { mutate: mutateDelete } = deleteBanner({
   },
 });
 
-const rules = computed(() => {
-  return {
-    text: required(),
-    isActive: required(),
-    imageUrl: required(),
-    color: required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  text: [required('en')],
+  isActive: [required('en')],
+  imageUrl: [required('en')],
+  color: [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutatePost(formData.value);

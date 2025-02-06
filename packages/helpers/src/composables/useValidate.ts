@@ -1,10 +1,12 @@
-import { ref, computed, Ref, ComputedRef } from 'vue';
+import { ref, computed, Ref } from 'vue';
 
 import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator';
-import { Rules } from 'async-validator';
+import { RuleItem, Rules } from 'async-validator';
 
-export function useValidator<T>(formData: Ref<T>, rules: ComputedRef<object>) {
-  const { errorFields, isFinished, pass } = useAsyncValidator(formData, rules as ComputedRef<Rules>, {
+export function useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: RuleItem[] | false }>) {
+  const computedRules = computed(() => rules as Rules);
+
+  const { errorFields, isFinished, pass } = useAsyncValidator(formData, computedRules, {
     validateOption: { suppressWarning: true },
   });
 
@@ -29,37 +31,40 @@ export function useValidator<T>(formData: Ref<T>, rules: ComputedRef<object>) {
   };
 }
 
-export function required(lang?: 'ru' | 'en') {
+export function required(lang?: 'ru' | 'en'): RuleItem {
   return {
     required: true,
     whitespace: true,
-    message: lang === 'ru' ? 'Это поле обязательное' : 'This field is required',
+    message: lang === 'en' ? 'This field is required' : 'Это поле обязательное',
   };
 }
 
-export function email(lang?: 'ru' | 'en') {
-  return { type: 'email', message: lang === 'ru' ? 'Введите корретную почту' : 'This is not correct email' };
+export function email(lang?: 'ru' | 'en'): RuleItem {
+  return {
+    type: 'email',
+    message: lang === 'en' ? 'This is not correct email' : 'Введите корретную почту',
+  };
 }
 
-export function letters(lang?: 'ru' | 'en') {
+export function letters(lang?: 'ru' | 'en'): RuleItem {
   return {
     validator: (rule: object, value: string) =>
       /^[a-zA-zа-яА-ЯёЁ-]+([\s][a-zA-Zа-яА-ЯёЁ-]+)*$/.test(value) || !value.length,
-    message: lang === 'ru' ? 'Допустимы только буквы' : 'Only letters',
     type: 'string',
+    message: lang === 'en' ? 'Only letters' : 'Допустимы только буквы',
   };
 }
 
-export function min(value: number, lang?: 'ru' | 'en') {
+export function min(value: number, lang?: 'ru' | 'en'): RuleItem {
   return {
     min: value,
-    message: lang === 'ru' ? `Минимальное количество символов: ${value}` : `Minimum symbols: ${value}`,
+    message: lang === 'en' ? `Minimum symbols: ${value}` : `Минимальное количество символов: ${value}`,
   };
 }
 
-export function max(value: number, lang?: 'ru' | 'en') {
+export function max(value: number, lang?: 'ru' | 'en'): RuleItem {
   return {
     min: value,
-    message: lang === 'ru' ? `Максимальное количество символов: ${value}` : `Maximum symbols: ${value}`,
+    message: lang === 'en' ? `Maximum symbols: ${value}` : `Максимальное количество символов: ${value}`,
   };
 }

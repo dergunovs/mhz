@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
@@ -56,16 +56,12 @@ const { mutate: mutatePostCustomer } = postCustomer({
   },
 });
 
-const rules = computed(() => {
-  return {
-    firstName: required(),
-    lastName: required(),
-    email: [required(), email()],
-    password: required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  firstName: [required('en')],
+  lastName: [required('en')],
+  email: [required('en'), email('en')],
+  password: [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutatePostCustomer(formData.value);

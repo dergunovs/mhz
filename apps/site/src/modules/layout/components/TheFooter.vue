@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 import { UiButton, UiField, UiInput, UiModal } from 'mhz-ui';
 import { email, required, useValidator } from 'mhz-helpers';
@@ -51,13 +51,9 @@ const formData = ref({
   email: '',
 });
 
-const rules = computed(() => {
-  return {
-    email: [required(), email()],
-  };
+const { error, isValid } = useValidator(formData, {
+  email: [required('en'), email('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) isShowModal.value = true;

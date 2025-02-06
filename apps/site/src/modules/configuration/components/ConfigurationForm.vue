@@ -106,12 +106,6 @@ const price = computed(() => {
     : 0;
 });
 
-const rules = computed(() => {
-  return {
-    title: required(),
-  };
-});
-
 const { mutate: mutatePost, isPending } = postConfiguration({
   onSuccess: async () => {
     await queryClient.refetchQueries({ queryKey: [API_CONFIGURATION] });
@@ -156,7 +150,9 @@ function removeProduct(categoryTitle: keyof IConfigurationParts) {
   delete formData.value.parts?.[categoryTitle];
 }
 
-const { error, isValid } = useValidator(formData, rules);
+const { error, isValid } = useValidator(formData, {
+  title: [required('en')],
+});
 
 const { validation } = useConfigurationCheck(formData);
 

@@ -85,15 +85,11 @@ watch(
   }
 );
 
-const rules = computed(() => {
-  return {
-    title: required(),
-    fieldType: required(),
-    fieldUnits: formData.value.fieldType === 'number' && required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  title: [required('en')],
+  fieldType: [required('en')],
+  fieldUnits: formData.value.fieldType === 'number' && [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) {

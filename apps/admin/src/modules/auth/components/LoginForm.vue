@@ -19,11 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
-import { useValidator, required, email, useAuth, setAuthHeader } from 'mhz-helpers';
+import { useValidator, useAuth, setAuthHeader, email, required } from 'mhz-helpers';
 import { ILoginData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
@@ -50,14 +50,10 @@ const { mutate: mutateLogin } = login({
   },
 });
 
-const rules = computed(() => {
-  return {
-    email: [required(), email()],
-    password: required(),
-  };
+const { error, isValid } = useValidator(formData, {
+  email: [required('en'), email('en')],
+  password: [required('en')],
 });
-
-const { error, isValid } = useValidator(formData, rules);
 
 function submit() {
   if (isValid()) mutateLogin(formData.value);
