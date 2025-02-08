@@ -1,7 +1,7 @@
 {
   "name": "mhz-back",
   "description": "9000 Mhz backend",
-  "version": "1.0.71",
+  "version": "1.1.0",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -42,12 +42,12 @@
     "sharp": "0.33.5"
   },
   "devDependencies": {
-    "@eslint/js": "9.19.0",
+    "@eslint/js": "9.20.0",
     "@types/bcryptjs": "2.4.6",
     "@types/node": "22.13.1",
     "@types/qs": "6.9.18",
-    "esbuild": "0.24.2",
-    "eslint": "9.19.0",
+    "esbuild": "0.25.0",
+    "eslint": "9.20.0",
     "eslint-config-prettier": "10.0.1",
     "eslint-import-resolver-typescript": "3.7.0",
     "eslint-plugin-import-x": "4.6.1",

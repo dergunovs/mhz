@@ -1,7 +1,7 @@
 {
   "name": "9000mhz",
   "description": "Fake PC hardware store monorepo",
-  "version": "1.0.71",
+  "version": "1.1.0",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://9000mhz.ru",
@@ -11,20 +11,18 @@
     "url": "git+https://github.com/dergunovs/mhz"
   },
   "scripts": {
-    "lint": "turbo run lint --no-daemon",
-    "ts": "turbo run ts --no-daemon",
-    "test": "turbo run test --concurrency=1 --no-daemon",
-    "dev": "turbo run dev --no-daemon",
-    "build": "turbo run build --no-daemon",
-    "pub": "turbo run build --no-daemon --filter=mhz-ui --filter=mhz-countries --filter=mhz-helpers --filter=mhz-bank && changeset version && changeset publish",
+    "lint": "turbo run lint",
+    "ts": "turbo run ts",
+    "test": "turbo run test --concurrency=1",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "pub": "turbo run build --filter=mhz-countries --filter=mhz-bank && changeset version && changeset publish",
     "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --excludeCollection=configurations --out=apps/back/dump"
   },
   "dependencies": {
     "@changesets/cli": "2.27.12"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.7.1",
-    "@commitlint/config-conventional": "19.7.1",
     "@turbo/gen": "2.4.0",
     "prettier": "3.4.2",
     "turbo": "2.4.0"

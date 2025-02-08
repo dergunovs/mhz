@@ -75,14 +75,6 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           source: "apps/back/build,apps/back/package.json,apps/back/.env,apps/back/public,apps/back/dump"
           target: ${{ secrets.SSH_PATH }}
-      - name: Deploy Storybook
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          source: "packages/ui/storybook-static"
-          target: ${{ secrets.SSH_PATH }}
       - name: Install Backend deps and Reload PM2
         uses: appleboy/ssh-action@master
         with:
