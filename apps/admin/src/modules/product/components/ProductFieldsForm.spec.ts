@@ -8,7 +8,7 @@ import ProductFieldsForm from './ProductFieldsForm.vue';
 import { wrapperFactory } from '@/common/test';
 import { PRODUCTS } from '@/product/fixtures';
 
-const spyDeleteId = vi.spyOn(helpers, 'deleteId');
+const spyDeleteTempId = vi.spyOn(helpers, 'deleteTempId');
 
 const FIELDS = PRODUCTS.data[0].fields;
 
@@ -56,11 +56,11 @@ describe('ProductFieldsForm', async () => {
   });
 
   it('deletes ids of fields', async () => {
-    expect(spyDeleteId).toBeCalledTimes(1);
-    expect(spyDeleteId).toBeCalledWith(FIELDS);
+    expect(spyDeleteTempId).toBeCalledTimes(1);
+    expect(spyDeleteTempId).toBeCalledWith(FIELDS, true);
 
     await wrapper.setProps({ updates: 1 });
 
-    expect(spyDeleteId).toBeCalledTimes(2);
+    expect(spyDeleteTempId).toBeCalledTimes(2);
   });
 });

@@ -22,7 +22,7 @@ import { onMounted, ref, watch } from 'vue';
 
 import { UiCheckbox, UiField, UiInput } from 'mhz-ui';
 import { ICategoryField } from 'mhz-contracts';
-import { deleteId } from 'mhz-helpers';
+import { deleteTempId } from 'mhz-helpers';
 
 interface IProps {
   fields: ICategoryField[];
@@ -50,7 +50,7 @@ watch(
 );
 
 function getFields() {
-  formData.value = deleteId(props.fields);
+  formData.value = deleteTempId(props.fields, true);
 }
 
 onMounted(() => {

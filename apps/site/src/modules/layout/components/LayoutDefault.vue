@@ -28,7 +28,7 @@ import TheFooter from '@/layout/components/TheFooter.vue';
 
 .container {
   display: flex;
-  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
   margin-top: 64px;
   overflow-y: auto;
 }

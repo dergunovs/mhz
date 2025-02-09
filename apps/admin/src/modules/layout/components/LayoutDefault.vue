@@ -28,20 +28,20 @@ defineOptions({ name: 'LayoutDefault' });
 
 .container {
   display: flex;
-  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
   margin-top: 64px;
   overflow-y: auto;
 }
 
 .main {
   flex: 1;
-  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
   overflow-y: auto;
   background-color: var(--color-gray-light);
 }
 
 .content {
-  min-height: calc(100vh - 128px);
+  min-height: calc(100dvh - 128px);
   padding: 32px;
   margin: 32px;
   overflow: hidden;

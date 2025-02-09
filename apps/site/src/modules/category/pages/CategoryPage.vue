@@ -100,7 +100,7 @@ useHead({
   display: flex;
   flex-direction: column;
   gap: 32px;
-  min-height: calc(100vh - 128px);
+  min-height: calc(100dvh - 128px);
 }
 
 .container {
