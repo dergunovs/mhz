@@ -79,6 +79,10 @@ describe('ManufacturerForm', async () => {
     expect(wrapper.findComponent(manufacturerForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows manufacturer content in fields if props is passed', async () => {
     expect(wrapper.findComponent(manufacturerFormTitle).attributes('modelvalue')).toBe(MANUFACTURER.title);
     expect(wrapper.findComponent(manufacturerFormDescription).attributes('modelvalue')).toBe(MANUFACTURER.description);

@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`OrderList > matches snapshot 1`] = `
+"<table headers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isloading="false">
+  <tbody>
+    <tr data-test="order-list-row">
+      <td data-grow=""><a to="/orders/65940c82cc2989495f96d911" data-test="order-list-link">65940c82cc2989495f96d911</a></td>
+      <td data-no-wrap="">352000 ₽</td>
+      <td data-no-wrap="">Alexandr Dergunov</td>
+      <td>new</td>
+      <td data-no-wrap="">Jan 2, 2024</td>
+      <td data-no-wrap="">Jan 2, 2024</td>
+    </tr>
+    <tr data-test="order-list-row">
+      <td data-grow=""><a to="/orders/6587ec081614096a5773abdb" data-test="order-list-link">6587ec081614096a5773abdb</a></td>
+      <td data-no-wrap="">29900 ₽</td>
+      <td data-no-wrap="">Alexandr Dergunov</td>
+      <td>completed</td>
+      <td data-no-wrap="">Dec 24, 2023</td>
+      <td data-no-wrap="">Dec 30, 2023</td>
+    </tr>
+  </tbody>
+</table>"
+`;

@@ -17,4 +17,8 @@ describe('MainPage', async () => {
   it('exists', async () => {
     expect(wrapper.findComponent(MainPage)).toBeTruthy();
   });
+
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LayoutEmpty > matches snapshot 1`] = `
+"<div class="_layout_9db54c">
+  <router-view-stub name="default"></router-view-stub>
+</div>"
+`;

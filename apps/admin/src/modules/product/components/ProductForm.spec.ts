@@ -89,6 +89,10 @@ describe('ProductForm', async () => {
     expect(wrapper.findComponent(ProductForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows product content in fields if props is passed', async () => {
     expect(wrapper.findComponent(productFormTitle).attributes('modelvalue')).toEqual(PRODUCT.title);
     expect(wrapper.findComponent(productFormPrice).attributes('modelvalue')).toEqual(PRODUCT.price.toString());

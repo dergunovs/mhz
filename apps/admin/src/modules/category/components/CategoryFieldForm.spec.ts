@@ -32,6 +32,10 @@ describe('CategoryFieldForm', async () => {
     expect(wrapper.findComponent(CategoryFieldForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows field units input if type is number', async () => {
     expect(wrapper.find(categoryFieldFormUnits).exists()).toEqual(false);
 

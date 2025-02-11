@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BannerListPage > matches snapshot 1`] = `
+"<div>
+  <page-title-stub links="[object Object],[object Object]"></page-title-stub>
+  <div class="_page_0944cf"><a to="/banners/create">Add banner</a>
+    <banner-list-stub banners="[object Object],[object Object],[object Object]" modelvalue="[object Object]" data-test="banner-list-page-list"></banner-list-stub>
+    <ui-pagination-stub page="1" total="1"></ui-pagination-stub>
+  </div>
+</div>"
+`;

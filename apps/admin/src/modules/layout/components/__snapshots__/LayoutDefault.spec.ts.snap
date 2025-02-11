@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LayoutDefault > matches snapshot 1`] = `
+"<div class="_layout_2efe34">
+  <the-header-stub></the-header-stub>
+  <div class="_container_2efe34">
+    <nav-list-stub></nav-list-stub>
+    <main class="_main_2efe34">
+      <router-view-stub name="default" class="_content_2efe34"></router-view-stub>
+    </main>
+  </div>
+</div>"
+`;

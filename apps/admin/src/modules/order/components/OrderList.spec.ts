@@ -28,6 +28,10 @@ describe('OrderList', async () => {
     expect(wrapper.findComponent(OrderList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows rows if orders props', async () => {
     expect(wrapper.findAll(orderListRow).length).toEqual(ORDERS.data.length);
 

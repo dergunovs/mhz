@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CategoryFieldForm > matches snapshot 1`] = `
+"<form class="_form_8a2f60" data-test="category-field-form">
+  <div class="_fields_8a2f60">
+    <fieldset label="Field title" isrequired=""><input type="text" modelvalue="" isfocus="" data-test="category-field-form-title"></fieldset>
+    <fieldset label="Field type" isrequired=""><input type="text" modelvalue="string" options="string,number,boolean" data-test="category-field-form-type"></fieldset>
+    <!--v-if-->
+  </div>
+  <div class="_buttons_8a2f60">
+    <div class="_buttonsInner_8a2f60"><button type="submit">Submit Field</button><button layout="secondary" data-test="category-field-form-cancel">Cancel</button></div>
+    <!--v-if-->
+  </div>
+</form>"
+`;

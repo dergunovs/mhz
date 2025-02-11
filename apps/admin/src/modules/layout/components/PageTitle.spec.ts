@@ -34,6 +34,10 @@ describe('PageTitle', async () => {
     expect(wrapper.findComponent(PageTitle)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('passes props to breadcrumbs', async () => {
     expect(
       wrapper.findComponent<DefineComponent<{ links: IPageTitleLink[] }>>(pageTitleBreadcrumbs).vm.$props.links

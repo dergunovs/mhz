@@ -29,6 +29,10 @@ describe('ProductEditPage', async () => {
     expect(wrapper.findComponent(ProductEditPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets product and passes it to form props', async () => {
     expect(spyGetProduct).toBeCalledTimes(1);
 

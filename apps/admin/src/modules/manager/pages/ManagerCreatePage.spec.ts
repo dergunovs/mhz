@@ -17,4 +17,8 @@ describe('ManagerCreatePage', async () => {
   it('exists', async () => {
     expect(wrapper.findComponent(ManagerCreatePage)).toBeTruthy();
   });
+
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

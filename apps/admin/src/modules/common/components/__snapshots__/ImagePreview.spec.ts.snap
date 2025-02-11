@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ImagePreview > matches snapshot 1`] = `
+"<div class="_container_8b61a5">
+  <div> Images <i>(sortable)</i></div>
+  <div list="1.jpg,2.jpg" itemkey="(item) => item" tag="div" class="_images_8b61a5" data-test="image-preview-sortable">
+    <div class="_image_8b61a5"><img src="http://localhost:5000/upload/item" width="200" alt="Image" crossorigin="anonymous"><button layout="plain" data-test="image-preview-delete">Delete</button></div>
+  </div>
+</div>"
+`;

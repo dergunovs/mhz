@@ -46,6 +46,10 @@ describe('SetupForm', async () => {
     expect(wrapper.findComponent(SetupForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('handles setup by form submit', async () => {
     expect(spyMutateSetup).toBeCalledTimes(0);
     expect(spyToastSuccess).toBeCalledTimes(0);

@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ManagerListPage > matches snapshot 1`] = `
+"<div>
+  <page-title-stub links="[object Object],[object Object]"></page-title-stub>
+  <div class="_page_d687f3"><a to="/managers/create">Add manager</a>
+    <manager-list-stub managers="[object Object],[object Object]" modelvalue="[object Object]" data-test="manager-list-page-list"></manager-list-stub>
+    <ui-pagination-stub page="1" total="1"></ui-pagination-stub>
+  </div>
+</div>"
+`;

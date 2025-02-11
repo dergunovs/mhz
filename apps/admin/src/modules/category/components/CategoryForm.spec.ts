@@ -79,6 +79,10 @@ describe('CategoryForm', async () => {
     expect(wrapper.findComponent(categoryForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows category content in fields if props is passed', async () => {
     expect(wrapper.findComponent(categoryFormTitle).attributes('modelvalue')).toBe(CATEGORY.data.title);
     expect(wrapper.findComponent(categoryFormDescription).attributes('modelvalue')).toBe(CATEGORY.data.description);

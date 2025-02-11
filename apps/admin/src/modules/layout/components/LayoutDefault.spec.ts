@@ -17,4 +17,8 @@ describe('LayoutDefault', async () => {
   it('exists', async () => {
     expect(wrapper.findComponent(LayoutDefault)).toBeTruthy();
   });
+
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

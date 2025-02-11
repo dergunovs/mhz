@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CustomerListPage > matches snapshot 1`] = `
+"<div>
+  <page-title-stub links="[object Object],[object Object]"></page-title-stub>
+  <div class="_page_98c3f0">
+    <customer-list-stub customers="[object Object],[object Object]" modelvalue="[object Object]" data-test="customer-list-page-list"></customer-list-stub>
+    <ui-pagination-stub page="1" total="1"></ui-pagination-stub>
+  </div>
+</div>"
+`;

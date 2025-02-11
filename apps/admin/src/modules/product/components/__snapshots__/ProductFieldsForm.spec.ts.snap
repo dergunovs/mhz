@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductFieldsForm > matches snapshot 1`] = `
+"<div class="_container_11d7eb">
+  <h3>Specs</h3>
+  <div data-test="product-fields-form-field"><input type="checkbox" modelvalue="false" label="Onboard graphics" data-test="product-fields-form-boolean"></div>
+  <div data-test="product-fields-form-field">
+    <fieldset label="Size, Gb"><input type="text" modelvalue="32" data-test="product-fields-form-value"></fieldset>
+  </div>
+  <div data-test="product-fields-form-field">
+    <fieldset label="Modules, pcs"><input type="text" modelvalue="2" data-test="product-fields-form-value"></fieldset>
+  </div>
+  <div data-test="product-fields-form-field">
+    <fieldset label="Clock, MHz"><input type="text" modelvalue="6000" data-test="product-fields-form-value"></fieldset>
+  </div>
+  <div data-test="product-fields-form-field">
+    <fieldset label="Type"><input type="text" modelvalue="DDR5" data-test="product-fields-form-value"></fieldset>
+  </div>
+</div>"
+`;

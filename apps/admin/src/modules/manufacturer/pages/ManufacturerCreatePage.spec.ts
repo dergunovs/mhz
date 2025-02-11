@@ -17,4 +17,8 @@ describe('ManufacturerCreatePage', async () => {
   it('exists', async () => {
     expect(wrapper.findComponent(ManufacturerCreatePage)).toBeTruthy();
   });
+
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

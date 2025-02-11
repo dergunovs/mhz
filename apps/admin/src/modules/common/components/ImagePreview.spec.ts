@@ -38,6 +38,10 @@ describe('ImagePreview', async () => {
     expect(wrapper.findComponent(ImagePreview)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('passes props to child sortable component', async () => {
     expect(wrapper.findComponent<DefineComponent>(imagePreviewSortable).vm.$attrs.list).toEqual(URLS);
   });

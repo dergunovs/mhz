@@ -28,6 +28,10 @@ describe('ManufacturerList', async () => {
     expect(wrapper.findComponent(ManufacturerList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows rows if manufacturers props', async () => {
     expect(wrapper.findAll(manufacturerListRow).length).toEqual(MANUFACTURERS.data.length);
 

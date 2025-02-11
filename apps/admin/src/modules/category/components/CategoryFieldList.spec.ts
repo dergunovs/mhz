@@ -33,6 +33,10 @@ describe('CategoryFieldList', async () => {
     expect(wrapper.findComponent(CategoryFieldList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows fields', async () => {
     expect(wrapper.findAll(categoryField).length).toEqual(FIELDS?.length);
   });

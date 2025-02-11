@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginForm > matches snapshot 1`] = `
+"<div>
+  <anonymous-stub></anonymous-stub>
+  <h2>Login</h2>
+  <form class="_form_4ffbd5" data-test="login-form">
+    <fieldset label="E-mail" isrequired=""><input type="text" modelvalue="" isfocus="" data-test="login-form-email"></fieldset>
+    <fieldset label="Password" isrequired=""><input type="password" modelvalue="" data-test="login-form-password"></fieldset><button type="submit">Submit</button>
+  </form>
+</div>"
+`;

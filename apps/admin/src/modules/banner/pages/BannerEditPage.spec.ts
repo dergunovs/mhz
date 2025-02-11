@@ -29,6 +29,10 @@ describe('BannerEditPage', async () => {
     expect(wrapper.findComponent(BannerEditPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets banner and passes it to form props', async () => {
     expect(spyGetBanner).toBeCalledTimes(1);
 

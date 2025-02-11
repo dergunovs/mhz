@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EntitiesCount > matches snapshot 1`] = `
+"<div class="_stats_3f4722">
+  <div class="_top_3f4722">
+    <ui-chart-stub labels="Categories,Manufacturers,Managers,Customers,Orders" datasets="[object Object]" title="Base stats" type="Bar" isshowlegend="false" data-test="entities-count-base"></ui-chart-stub>
+    <ui-chart-stub labels="Mousepad,Monitor,CPU,Keyboard,PSU,Cooler,Case,Mouse,Motherboard,GPU,SSD,RAM" datasets="[object Object]" title="Products by categories" type="Pie" isshowlegend="true" data-test="entities-count-product-categories"></ui-chart-stub>
+  </div>
+  <ui-chart-stub labels="MSI,ASRock,be quiet!,HyperX,Samsung,Fractal Design,Lian Li,Zalman,G.Skill,AMD,Thermaltake,Logitech,ASUS,GIGABYTE,Intel,Deepcool,Razer,Palit,Western Digital,Apacer" datasets="[object Object]" title="Products by manufacturers" type="Bar" isshowlegend="false" data-test="entities-count-product-manufacturers"></ui-chart-stub>
+</div>"
+`;

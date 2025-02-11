@@ -27,6 +27,10 @@ describe('ProductListPage', async () => {
     expect(wrapper.findComponent(ProductListPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets products and passes them to list props', async () => {
     expect(spyGetProducts).toBeCalledTimes(1);
 

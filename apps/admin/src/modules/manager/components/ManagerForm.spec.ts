@@ -78,6 +78,10 @@ describe('ManagerForm', async () => {
     expect(wrapper.findComponent(ManagerForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows manager content in fields if props is passed', async () => {
     expect(wrapper.findComponent(managerFormFirstName).attributes('modelvalue')).toBe(MANAGER.firstName);
     expect(wrapper.findComponent(managerFormLastName).attributes('modelvalue')).toBe(MANAGER.lastName);

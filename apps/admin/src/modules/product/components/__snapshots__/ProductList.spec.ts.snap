@@ -1,0 +1,128 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductList > matches snapshot 1`] = `
+"<table headers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isloading="false">
+  <tbody>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df8a7d7ac901ef3e273343" data-test="product-list-link">G.Skill Trident Z5 Neo RGB 2x32 GB DDR5 6000</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">G.Skill</td>
+      <td data-no-wrap="">31200 ₽</td>
+      <td>Yes</td>
+      <td>24</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">Dec 21, 2023</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df89e67ac901ef3e2732d8" data-test="product-list-link">G.Skill Flare X5 2x16 GB DDR5 5600</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">G.Skill</td>
+      <td data-no-wrap="">12200 ₽</td>
+      <td>Yes</td>
+      <td>3</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df89a87ac901ef3e273298" data-test="product-list-link">G.Skill TRIDENT Z5 2x16 GB DDR5 5600</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">G.Skill</td>
+      <td data-no-wrap="">11700 ₽</td>
+      <td>Yes</td>
+      <td>2</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df89747ac901ef3e27327a" data-test="product-list-link">AMD Radeon R9 Gamer Series 1x8 GB DDR4 3200</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">AMD</td>
+      <td data-no-wrap="">1700 ₽</td>
+      <td>Yes</td>
+      <td>4</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">-</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df893f7ac901ef3e27325c" data-test="product-list-link">AMD Radeon R9 Gamer Series 1x16 GB DDR4 3200</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">AMD</td>
+      <td data-no-wrap="">3300 ₽</td>
+      <td>Yes</td>
+      <td>3</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">-</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df88e97ac901ef3e273209" data-test="product-list-link">AMD Radeon R9 Gamer Series 2x8 GB DDR4 3600</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">AMD</td>
+      <td data-no-wrap="">3800 ₽</td>
+      <td>Yes</td>
+      <td>9</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df88a07ac901ef3e2731dd" data-test="product-list-link">AMD Radeon R9 Gamer Series 2x16 GB DDR4 3200</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">AMD</td>
+      <td data-no-wrap="">6600 ₽</td>
+      <td>Yes</td>
+      <td></td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">-</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df883a7ac901ef3e2731d0" data-test="product-list-link">Samsung M378A4G43AB2 1x32 GB DDR4 3200</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">Samsung</td>
+      <td data-no-wrap="">7200 ₽</td>
+      <td>Yes</td>
+      <td>3</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df87f77ac901ef3e2731ba" data-test="product-list-link">Samsung M378A2K43EB1 1x16 GB DDR4 3200</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">Samsung</td>
+      <td data-no-wrap="">3800 ₽</td>
+      <td>Yes</td>
+      <td></td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df87c27ac901ef3e2731b2" data-test="product-list-link">Samsung M378A1G44AB0 1x8 GB DDR4 3200</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">Samsung</td>
+      <td data-no-wrap="">2650 ₽</td>
+      <td>Yes</td>
+      <td>3</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">-</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df86477ac901ef3e2731a6" data-test="product-list-link">Thermaltake H-ONE 2x8 GB DDR4 3200</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">Thermaltake</td>
+      <td data-no-wrap="">4400 ₽</td>
+      <td>Yes</td>
+      <td>6</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">-</td>
+    </tr>
+    <tr data-test="product-list-row">
+      <td data-grow=""><a to="/products/edit/64df860a7ac901ef3e27319c" data-test="product-list-link">Thermaltake TOUGHRAM 2x8 GB DDR4 4400</a></td>
+      <td>RAM</td>
+      <td data-no-wrap="">Thermaltake</td>
+      <td data-no-wrap="">7700 ₽</td>
+      <td>Yes</td>
+      <td>7</td>
+      <td data-no-wrap="">Aug 18, 2023</td>
+      <td data-no-wrap="">-</td>
+    </tr>
+  </tbody>
+</table>"
+`;

@@ -26,6 +26,10 @@ describe('TheHeader', async () => {
     expect(wrapper.findComponent(TheHeader)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('handles logout by button click', async () => {
     expect(spyLogout).toBeCalledTimes(0);
 

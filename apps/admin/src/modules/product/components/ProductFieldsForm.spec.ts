@@ -34,6 +34,10 @@ describe('ProductFieldsForm', async () => {
     expect(wrapper.findComponent(ProductFieldsForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows fields with specific components', async () => {
     expect(wrapper.findAll(productFieldsFormField).length).toEqual(FIELDS?.length);
 

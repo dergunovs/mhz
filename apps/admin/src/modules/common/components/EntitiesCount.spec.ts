@@ -29,6 +29,10 @@ describe('EntitiesCount', async () => {
     expect(wrapper.findComponent(EntitiesCount)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets entities count', async () => {
     expect(spyGetCount).toBeCalledTimes(1);
   });

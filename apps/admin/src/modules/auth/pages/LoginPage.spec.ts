@@ -23,6 +23,10 @@ describe('LoginPage', async () => {
     expect(wrapper.findComponent(LoginPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('redirects to main page if authorized', async () => {
     expect(spyAuth).toBeCalledTimes(1);
     expect(spyRedirectIfAuth).toBeCalledTimes(1);

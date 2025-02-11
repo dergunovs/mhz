@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TheHeader > matches snapshot 1`] = `
+"<header class="_header_e46623">
+  <div class="_logoAndSearch_e46623"><a to="/main" aria-label="Logo">
+      <anonymous-stub class="_logo_e46623"></anonymous-stub>
+    </a>
+    <the-search-stub></the-search-stub>
+  </div><button layout="plain" data-test="header-logout"> Logout </button>
+</header>"
+`;

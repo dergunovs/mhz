@@ -36,6 +36,10 @@ describe('TheSearch', async () => {
     expect(wrapper.findComponent(TheSearch)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('searches by watching input', async () => {
     expect(refetch).toBeCalledTimes(0);
 

@@ -29,6 +29,10 @@ describe('ManagerEditPage', async () => {
     expect(wrapper.findComponent(ManagerEditPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets manager and passes it to form props', async () => {
     expect(spyGetManager).toBeCalledTimes(1);
 

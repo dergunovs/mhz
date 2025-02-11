@@ -27,6 +27,10 @@ describe('BannerListPage', async () => {
     expect(wrapper.findComponent(BannerListPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets banners and passes them to list props', async () => {
     expect(spyGetBanners).toBeCalledTimes(1);
 

@@ -52,6 +52,10 @@ describe('LoginForm', async () => {
     expect(wrapper.findComponent(LoginForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('handles login by form submit', async () => {
     expect(spyMutateLogin).toBeCalledTimes(0);
     expect(spyAuth).toBeCalledTimes(0);

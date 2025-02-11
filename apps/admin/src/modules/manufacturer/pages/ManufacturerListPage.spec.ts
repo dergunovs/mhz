@@ -29,6 +29,10 @@ describe('ManufacturerListPage', async () => {
     expect(wrapper.findComponent(ManufacturerListPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets manufacturers and passes them to list props', async () => {
     expect(spyGetManufacturers).toBeCalledTimes(1);
 

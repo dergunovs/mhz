@@ -28,6 +28,10 @@ describe('ProductList', async () => {
     expect(wrapper.findComponent(ProductList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows rows if products props', async () => {
     expect(wrapper.findAll(productListRow).length).toEqual(PRODUCTS.data.length);
 

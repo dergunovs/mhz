@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CustomerList > matches snapshot 1`] = `
+"<table headers="[object Object],[object Object],[object Object],[object Object]" isloading="false">
+  <tbody>
+    <tr data-test="customer-list-row">
+      <td data-grow=""><a to="/customers/64fdd1910e0355e88d03bdb1" data-test="customer-list-link">a@b.ru</a></td>
+      <td data-no-wrap="">Alexandr Ivanot</td>
+      <td data-no-wrap="">Sep 10, 2023</td>
+      <td data-no-wrap="">Sep 11, 2023</td>
+    </tr>
+    <tr data-test="customer-list-row">
+      <td data-grow=""><a to="/customers/64fdd1910e0355e88d03bdb7" data-test="customer-list-link">test@mail.ru</a></td>
+      <td data-no-wrap="">Alex Petrov</td>
+      <td data-no-wrap="">Feb 11, 2023</td>
+      <td data-no-wrap="">Feb 12, 2023</td>
+    </tr>
+  </tbody>
+</table>"
+`;

@@ -1,0 +1,46 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CategoryFieldList > matches snapshot 1`] = `
+"<div class="_container_87637a">
+  <div>Fields</div>
+  <div class="_fields_87637a" data-disabled="true" data-test="category-field-list-field">
+    <div class="_field_87637a">
+      <div><span><span data-test="category-field-list-field-title">Base clock</span> , type: <span data-test="category-field-list-field-type">number</span></span><span> , units: <span data-test="category-field-list-field-units">GHz</span></span></div><button isdisabled="true" layout="plain" data-test="category-field-list-field-edit">Edit</button>
+    </div>
+  </div>
+  <div class="_fields_87637a" data-disabled="true" data-test="category-field-list-field">
+    <div class="_field_87637a">
+      <div><span><span data-test="category-field-list-field-title">Cores</span> , type: <span data-test="category-field-list-field-type">number</span></span><span> , units: <span data-test="category-field-list-field-units">pcs</span></span></div><button isdisabled="true" layout="plain" data-test="category-field-list-field-edit">Edit</button>
+    </div>
+  </div>
+  <div class="_fields_87637a" data-disabled="true" data-test="category-field-list-field">
+    <div class="_field_87637a">
+      <div><span><span data-test="category-field-list-field-title">Threads</span> , type: <span data-test="category-field-list-field-type">number</span></span><span> , units: <span data-test="category-field-list-field-units">pcs</span></span></div><button isdisabled="true" layout="plain" data-test="category-field-list-field-edit">Edit</button>
+    </div>
+  </div>
+  <div class="_fields_87637a" data-disabled="true" data-test="category-field-list-field">
+    <div class="_field_87637a">
+      <div><span><span data-test="category-field-list-field-title">TDP</span> , type: <span data-test="category-field-list-field-type">number</span></span><span> , units: <span data-test="category-field-list-field-units">W</span></span></div><button isdisabled="true" layout="plain" data-test="category-field-list-field-edit">Edit</button>
+    </div>
+  </div>
+  <div class="_fields_87637a" data-disabled="true" data-test="category-field-list-field">
+    <div class="_field_87637a">
+      <div><span><span data-test="category-field-list-field-title">Socket</span> , type: <span data-test="category-field-list-field-type">string</span></span>
+        <!--v-if-->
+      </div><button isdisabled="true" layout="plain" data-test="category-field-list-field-edit">Edit</button>
+    </div>
+  </div>
+  <div class="_fields_87637a" data-disabled="true" data-test="category-field-list-field">
+    <div class="_field_87637a">
+      <div><span><span data-test="category-field-list-field-title">Onboard graphics</span> , type: <span data-test="category-field-list-field-type">boolean</span></span>
+        <!--v-if-->
+      </div><button isdisabled="true" layout="plain" data-test="category-field-list-field-edit">Edit</button>
+    </div>
+  </div>
+  <div class="_fields_87637a" data-disabled="true" data-test="category-field-list-field">
+    <div class="_field_87637a">
+      <div><span><span data-test="category-field-list-field-title">Technology</span> , type: <span data-test="category-field-list-field-type">number</span></span><span> , units: <span data-test="category-field-list-field-units">nm</span></span></div><button isdisabled="true" layout="plain" data-test="category-field-list-field-edit">Edit</button>
+    </div>
+  </div>
+</div>"
+`;

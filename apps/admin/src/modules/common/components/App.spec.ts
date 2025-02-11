@@ -36,6 +36,10 @@ describe('App', async () => {
     expect(wrapper.findComponent(App)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets token from cookies and not sets auth at login page', async () => {
     expect(spyGetCookieToken).toBeCalledTimes(1);
     expect(spyGetCookieToken).toBeCalledWith(TOKEN_NAME);

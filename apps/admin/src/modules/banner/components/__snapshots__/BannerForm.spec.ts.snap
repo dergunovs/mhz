@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BannerForm > matches snapshot 1`] = `
+"<form class="_form_4451e6" data-test="banner-form">
+  <fieldset label="Text" isrequired=""><input type="text" modelvalue="Too fast! It will exceed your expectations!" isfocus="" data-test="banner-form-text"></fieldset>
+  <fieldset label="Color" isrequired=""><input type="text" modelvalue="#FFEFDB" data-test="banner-form-color"></fieldset>
+  <fieldset label="Product" isrequired=""><input type="text" modelvalue="[object Object]" options="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" data-test="banner-form-product" data-product-id="64de340eb9d96f9e20bef523"></fieldset><input type="checkbox" label="Is active" modelvalue="true" isrequired="" data-test="banner-form-is-active"><input type="file" label="Upload image" issingle="" isrequired="" isdisabled="true" extensions="png">
+  <image-preview-stub urls="1696053502949-980.png" isthumb="false" data-test="banner-form-image-preview"></image-preview-stub>
+  <form-buttons-stub id="6517b90000009354ff5e5a2a" data-test="banner-form-buttons"></form-buttons-stub>
+</form>"
+`;

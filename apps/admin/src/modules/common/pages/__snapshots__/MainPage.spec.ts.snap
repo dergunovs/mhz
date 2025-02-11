@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MainPage > matches snapshot 1`] = `
+"<div>
+  <page-title-stub links="[object Object]"></page-title-stub>
+  <entities-count-stub></entities-count-stub>
+</div>"
+`;

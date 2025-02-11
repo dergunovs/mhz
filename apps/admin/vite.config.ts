@@ -48,5 +48,6 @@ export default defineConfig({
     coverage: { provider: 'istanbul', reporter: ['text'], include: ['**/*.vue'], all: true },
     css: false,
     deps: { inline: true },
+    env: { TZ: 'UTC' },
   },
 });

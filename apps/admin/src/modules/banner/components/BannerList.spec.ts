@@ -33,6 +33,10 @@ describe('BannerList', async () => {
     expect(wrapper.findComponent(BannerList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows rows if banner props', async () => {
     expect(wrapper.findAll(bannerListRow).length).toEqual(BANNERS.data.length);
 

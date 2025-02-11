@@ -31,6 +31,10 @@ describe('ManufacturerEditPage', async () => {
     expect(wrapper.findComponent(ManufacturerEditPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets manufacturer and passes it to form props', async () => {
     expect(spyGetManufacturer).toBeCalledTimes(1);
 

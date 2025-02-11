@@ -17,4 +17,8 @@ describe('ProductCreatePage', async () => {
   it('exists', async () => {
     expect(wrapper.findComponent(ProductCreatePage)).toBeTruthy();
   });
+
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

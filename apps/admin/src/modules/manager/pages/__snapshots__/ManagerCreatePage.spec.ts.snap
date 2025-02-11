@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ManagerCreatePage > matches snapshot 1`] = `
+"<div>
+  <page-title-stub links="[object Object],[object Object],[object Object]"></page-title-stub>
+  <manager-form-stub></manager-form-stub>
+</div>"
+`;

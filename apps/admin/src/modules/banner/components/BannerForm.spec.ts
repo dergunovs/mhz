@@ -83,6 +83,10 @@ describe('BannerForm', async () => {
     expect(wrapper.findComponent(BannerForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows banner content in fields if props is passed', async () => {
     expect(wrapper.findComponent(bannerFormText).attributes('modelvalue')).toBe(BANNER.text);
     expect(wrapper.findComponent(bannerFormColor).attributes('modelvalue')).toBe(BANNER.color);

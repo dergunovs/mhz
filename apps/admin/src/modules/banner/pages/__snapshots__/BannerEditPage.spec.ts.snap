@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BannerEditPage > matches snapshot 1`] = `
+"<div>
+  <page-title-stub links="[object Object],[object Object],[object Object]"></page-title-stub>
+  <banner-form-stub banner="[object Object]" data-test="banner-edit-page-form"></banner-form-stub>
+</div>"
+`;

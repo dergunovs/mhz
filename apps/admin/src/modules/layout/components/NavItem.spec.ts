@@ -35,6 +35,10 @@ describe('NavItem', async () => {
     expect(wrapper.findComponent(NavItem)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows icon and title', async () => {
     expect(wrapper.findComponent(navItemIcon).exists()).toEqual(true);
     expect(wrapper.find(navItemTitle).text()).toEqual(NAV_ITEM.title);

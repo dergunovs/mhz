@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SetupPage > matches snapshot 1`] = `
+"<div>
+  <setup-form-stub></setup-form-stub>
+</div>"
+`;

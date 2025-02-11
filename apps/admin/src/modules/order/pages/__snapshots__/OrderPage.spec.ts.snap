@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`OrderPage > matches snapshot 1`] = `
+"<div>
+  <page-title-stub links="[object Object],[object Object],[object Object]"></page-title-stub>
+  <order-form-stub order="[object Object]" data-test="order-page-form"></order-form-stub>
+</div>"
+`;

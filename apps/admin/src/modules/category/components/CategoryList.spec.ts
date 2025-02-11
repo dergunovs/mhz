@@ -28,6 +28,10 @@ describe('CategoryList', async () => {
     expect(wrapper.findComponent(CategoryList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows rows if categories props', async () => {
     expect(wrapper.findAll(categoryListRow).length).toEqual(CATEGORIES.data.length);
 

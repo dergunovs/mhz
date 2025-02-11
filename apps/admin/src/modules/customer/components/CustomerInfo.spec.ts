@@ -43,6 +43,10 @@ describe('CustomerInfo', async () => {
     expect(wrapper.findComponent(CustomerInfo)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows customer name', async () => {
     expect(wrapper.find(customerName).text()).toEqual(`${CUSTOMER.firstName} ${CUSTOMER.lastName}`);
   });

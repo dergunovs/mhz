@@ -84,6 +84,10 @@ describe('OrderForm', async () => {
     expect(wrapper.findComponent(OrderForm)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows order content in fields if props is passed', async () => {
     expect(wrapper.find(orderFormCustomer).text()).toEqual(`${ORDER.customer.firstName} ${ORDER.customer.lastName}`);
     expect(wrapper.find(orderFormCustomer).attributes('to')).toEqual(`${URL_CUSTOMER}/${ORDER.customer._id}`);

@@ -28,6 +28,10 @@ describe('ManagerList', async () => {
     expect(wrapper.findComponent(ManagerList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows rows if managers props', async () => {
     expect(wrapper.findAll(managerListRow).length).toEqual(MANAGERS.data.length);
 

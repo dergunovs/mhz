@@ -27,6 +27,10 @@ describe('ManagerListPage', async () => {
     expect(wrapper.findComponent(ManagerListPage)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('gets managers and passes them to list props', async () => {
     expect(spyGetManagers).toBeCalledTimes(1);
 

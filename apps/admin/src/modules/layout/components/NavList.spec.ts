@@ -22,6 +22,10 @@ describe('NavList', async () => {
     expect(wrapper.findComponent(NavList)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows nav list items', async () => {
     expect(wrapper.findAllComponents(navListItem).length).toEqual(NAV_ITEMS.length);
   });
