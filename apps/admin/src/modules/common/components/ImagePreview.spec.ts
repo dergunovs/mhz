@@ -17,6 +17,8 @@ vi.spyOn(commonServices, 'deleteFile').mockImplementation(() => {
   return mockMutationReply<IBaseReply, { url: string; isThumb: boolean }>(spyMutateDelete);
 });
 
+vi.mock('@/common/constants', () => ({ URL_MAIN: '/main', URL_ERROR: '/404', PATH_UPLOAD: 'site.ru', CURRENCY: '₽' }));
+
 const imagePreviewSortable = dataTest('image-preview-sortable');
 const imagePreviewDelete = dataTest('image-preview-delete');
 
