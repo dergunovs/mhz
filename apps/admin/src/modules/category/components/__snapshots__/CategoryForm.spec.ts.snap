@@ -5,7 +5,7 @@ exports[`CategoryForm > matches snapshot 1`] = `
   <fieldset label="Title" isrequired=""><input type="text" modelvalue="CPU" isfocus="" data-test="category-form-title"></fieldset>
   <fieldset label="Description" isrequired=""><input type="text" modelvalue="<p>A <strong>central processing unit</strong> (<strong>CPU</strong>)—also called a <strong>central processor</strong> or <strong>main processor</strong>—is the most important processor in a given computer. Its electronic circuitry executes instructions of a computer program, such as arithmetic, logic, controlling, and input/output (I/O) operations. This role contrasts with that of external components, such as main memory and I/O circuitry, and specialized coprocessors such as graphics processing units (GPUs).</p>" data-test="category-form-description"></fieldset>
   <category-field-list-stub fields="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isshowcategoryfieldform="false" data-test="category-form-field-list"></category-field-list-stub><button layout="secondary" data-test="category-form-add-category"> Add Category Field </button>
-  <!--v-if--><input type="file" label="Upload icon" issingle="" isrequired="" isdisabled="true" extensions="svg">
+  <!--v-if--><input type="file" label="Upload icon" issingle="" isrequired="" isdisabled="true" extensions="svg" lang="en">
   <image-preview-stub urls="1695198204460-cpu.svg" isthumb="false" data-test="category-form-icon"></image-preview-stub>
   <form-buttons-stub id="64d4dc15f93f056da17ceff8" data-test="category-form-buttons"></form-buttons-stub>
 </form>"

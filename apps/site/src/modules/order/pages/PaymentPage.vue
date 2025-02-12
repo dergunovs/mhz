@@ -4,7 +4,7 @@
 
     <div id="bank"></div>
 
-    <UiModal v-model="isShowConfirm" isConfirm @confirm="router.push(URL_CUSTOMER_ORDERS)">
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="router.push(URL_CUSTOMER_ORDERS)" lang="en">
       Confirm cancel payment?
     </UiModal>
   </div>

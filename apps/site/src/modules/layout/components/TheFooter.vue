@@ -27,7 +27,7 @@
       </form>
     </div>
 
-    <UiModal v-model="isShowModal">
+    <UiModal v-model="isShowModal" lang="en">
       <div>Thanks for subscribing. We remind you that this is not a real online store.</div>
     </UiModal>
   </footer>

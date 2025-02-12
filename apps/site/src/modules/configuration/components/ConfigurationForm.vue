@@ -41,7 +41,7 @@
       @remove="(title) => removeProduct(title)"
     />
 
-    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete(props.configuration?._id)">
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete(props.configuration?._id)" lang="en">
       Confirm delete?
     </UiModal>
   </form>

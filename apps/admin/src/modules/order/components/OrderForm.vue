@@ -77,6 +77,7 @@
       v-model="isShowConfirmCancel"
       isConfirm
       @confirm="mutateUpdate({ status: ORDER_CANCELLED, id: orderId })"
+      lang="en"
       data-test="order-form-cancel-confirm"
     >
       Confirm cancel order?
@@ -86,6 +87,7 @@
       v-model="isShowConfirmDelete"
       isConfirm
       @confirm="mutateDelete(orderId)"
+      lang="en"
       data-test="order-form-delete-confirm"
       >Confirm delete?</UiModal
     >

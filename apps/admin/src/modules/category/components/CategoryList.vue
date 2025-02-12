@@ -1,5 +1,5 @@
 <template>
-  <UiTable :headers="tableHeaders" :isLoading="!props.categories?.length">
+  <UiTable :headers="tableHeaders" :isLoading="!props.categories?.length" lang="en">
     <template v-if="props.categories?.length">
       <tr v-for="category in props.categories" :key="category._id" data-test="category-list-row">
         <td data-grow>

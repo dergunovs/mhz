@@ -4,7 +4,7 @@ exports[`CategoryFieldForm > matches snapshot 1`] = `
 "<form class="_form_8a2f60" data-test="category-field-form">
   <div class="_fields_8a2f60">
     <fieldset label="Field title" isrequired=""><input type="text" modelvalue="" isfocus="" data-test="category-field-form-title"></fieldset>
-    <fieldset label="Field type" isrequired=""><input type="text" modelvalue="string" options="string,number,boolean" data-test="category-field-form-type"></fieldset>
+    <fieldset label="Field type" isrequired=""><input type="text" modelvalue="string" options="string,number,boolean" lang="en" data-test="category-field-form-type"></fieldset>
     <!--v-if-->
   </div>
   <div class="_buttons_8a2f60">

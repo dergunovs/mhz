@@ -5,6 +5,7 @@
     :modelValue="props.modelValue"
     @update:modelValue="(value) => emit('update:modelValue', value)"
     @reset="(value) => emit('reset', value)"
+    lang="en"
   >
     <template v-if="props.manufacturers?.length">
       <tr v-for="manufacturer in props.manufacturers" :key="manufacturer._id" data-test="manufacturer-list-row">

@@ -25,6 +25,7 @@
       v-model="isShowConfirm"
       isConfirm
       @confirm="emit('delete', props.id)"
+      lang="en"
       data-test="form-buttons-confirm-modal"
     >
       Confirm delete?

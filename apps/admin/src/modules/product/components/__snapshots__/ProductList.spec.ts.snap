@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ProductList > matches snapshot 1`] = `
-"<table headers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isloading="false">
+"<table headers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isloading="false" lang="en">
   <tbody>
     <tr data-test="product-list-row">
       <td data-grow=""><a to="/products/edit/64df8a7d7ac901ef3e273343" data-test="product-list-link">G.Skill Trident Z5 Neo RGB 2x32 GB DDR5 6000</a></td>

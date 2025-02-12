@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style.search, !props.isMobileVisible && $style.hidden]">
-    <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" />
+    <UiSearch v-model="searchQuery" :searchScheme="SEARCH_SCHEME" :results="results" :isSuccess="isSuccess" lang="en" />
   </div>
 </template>
 

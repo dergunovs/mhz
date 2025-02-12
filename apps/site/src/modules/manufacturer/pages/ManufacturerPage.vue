@@ -31,6 +31,7 @@
           :page="query.page"
           :total="total"
           @update="(value) => setQueryPage(setPaginationPage(value, query.page))"
+          lang="en"
         />
       </div>
     </div>

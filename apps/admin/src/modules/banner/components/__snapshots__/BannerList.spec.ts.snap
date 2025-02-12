@@ -2,7 +2,7 @@
 
 exports[`BannerList > matches snapshot 1`] = `
 "<div>
-  <table headers="[object Object],[object Object],[object Object],[object Object]" isloading="false" modelvalue="[object Object]" data-test="banner-list-table">
+  <table headers="[object Object],[object Object],[object Object],[object Object]" isloading="false" modelvalue="[object Object]" lang="en" data-test="banner-list-table">
     <tbody>
       <tr data-test="banner-list-row">
         <td data-grow=""><a to="/banners/edit/6517b90000009354ff5e5a2a" data-test="banner-list-link">Samsung 500 GB 980 PRO</a></td>

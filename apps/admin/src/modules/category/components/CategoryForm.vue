@@ -46,6 +46,7 @@
       @add="addIconFile"
       @remove="removeIconFile"
       @upload="mutateUploadFile(iconFile)"
+      lang="en"
     />
 
     <ImagePreview

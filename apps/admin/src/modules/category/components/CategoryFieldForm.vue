@@ -13,6 +13,7 @@
         <UiSelect
           v-model="formData.fieldType"
           :options="CATEGORY_FIELD_TYPE_OPTIONS"
+          lang="en"
           data-test="category-field-form-type"
         />
       </UiField>

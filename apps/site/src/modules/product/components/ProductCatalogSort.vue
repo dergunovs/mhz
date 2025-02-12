@@ -7,6 +7,7 @@
         :modelValue="sort"
         @update:modelValue="(value) => updateSort(value as IProductSortOption)"
         :options="SORT_OPTIONS"
+        lang="en"
       />
     </div>
   </div>

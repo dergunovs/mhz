@@ -5,6 +5,7 @@
     :modelValue="props.modelValue"
     @update:modelValue="(value) => emit('update:modelValue', value)"
     @reset="(value) => emit('reset', value)"
+    lang="en"
   >
     <template v-if="props.customers?.length">
       <tr v-for="customer in props.customers" :key="customer._id" data-test="customer-list-row">

@@ -1,3 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TheSearch > matches snapshot 1`] = `"<div><input type="text" modelvalue="" searchscheme="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" results="[object Object]" issuccess="true" data-test="search"></div>"`;
+exports[`TheSearch > matches snapshot 1`] = `"<div><input type="text" modelvalue="" searchscheme="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" results="[object Object]" issuccess="true" lang="en" data-test="search"></div>"`;

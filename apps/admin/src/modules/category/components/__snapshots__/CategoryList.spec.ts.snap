@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`CategoryList > matches snapshot 1`] = `
-"<table headers="[object Object],[object Object],[object Object],[object Object]" isloading="false">
+"<table headers="[object Object],[object Object],[object Object],[object Object]" isloading="false" lang="en">
   <tbody>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d4dc15f93f056da17ceff8" data-test="category-list-link">CPU</a></td>

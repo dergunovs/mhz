@@ -13,7 +13,13 @@
     </UiField>
 
     <UiField label="Country" isRequired :error="error('country')">
-      <UiSelect v-model="formData.country" :options="countries" isFilter data-test="manufacturer-form-country" />
+      <UiSelect
+        v-model="formData.country"
+        :options="countries"
+        isFilter
+        lang="en"
+        data-test="manufacturer-form-country"
+      />
     </UiField>
 
     <UiUpload
@@ -27,6 +33,7 @@
       @add="addLogoFile"
       @remove="removeLogoFile"
       @upload="mutateUploadFile(logoFile)"
+      lang="en"
     />
 
     <ImagePreview

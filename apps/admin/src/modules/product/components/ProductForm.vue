@@ -18,12 +18,13 @@
           @reachedBottom="
             scrollManufacturers(isLoadingManufacturers, setManufacturerPage(manufacturersPage + 1, manufacturersPage))
           "
+          lang="en"
           data-test="product-form-manufacturer"
         />
       </UiField>
 
       <UiField label="Category" isRequired :error="error('category')">
-        <UiSelect v-model="formData.category" :options="categories" data-test="product-form-category" />
+        <UiSelect v-model="formData.category" :options="categories" lang="en" data-test="product-form-category" />
       </UiField>
     </div>
 
@@ -56,6 +57,7 @@
       @add="addImage"
       @remove="removeImage"
       @upload="mutateUploadFiles({ files: images, width: '1200', isThumb: true })"
+      lang="en"
     />
 
     <ImagePreview

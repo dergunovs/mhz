@@ -6,6 +6,7 @@
       :modelValue="props.modelValue"
       @update:modelValue="(value) => emit('update:modelValue', value)"
       @reset="(value) => emit('reset', value)"
+      lang="en"
       data-test="banner-list-table"
     >
       <template v-if="props.banners?.length">

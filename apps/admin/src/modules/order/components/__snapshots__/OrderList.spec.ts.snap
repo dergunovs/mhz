@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`OrderList > matches snapshot 1`] = `
-"<table headers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isloading="false">
+"<table headers="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isloading="false" lang="en">
   <tbody>
     <tr data-test="order-list-row">
       <td data-grow=""><a to="/orders/65940c82cc2989495f96d911" data-test="order-list-link">65940c82cc2989495f96d911</a></td>

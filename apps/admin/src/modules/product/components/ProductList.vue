@@ -5,6 +5,7 @@
     :modelValue="props.modelValue"
     @update:modelValue="(value) => emit('update:modelValue', value)"
     @reset="(value) => emit('reset', value)"
+    lang="en"
   >
     <template v-if="props.products?.length">
       <tr v-for="product in props.products" :key="product._id" data-test="product-list-row">

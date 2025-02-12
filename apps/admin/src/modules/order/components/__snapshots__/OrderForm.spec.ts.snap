@@ -17,7 +17,7 @@ exports[`OrderForm > matches snapshot 1`] = `
     <div class="_buttonsInner_74860f"><button isdisabled="true" data-test="order-form-complete"> Mark completed </button><button layout="secondary" data-test="order-form-back">Back</button></div>
     <div class="_buttonsInner_74860f"><button layout="secondary" data-test="order-form-cancel">Cancel order</button><button layout="secondary" data-test="order-form-delete">Delete</button></div>
   </div>
-  <div modelvalue="false" isconfirm="" data-test="order-form-cancel-confirm"> Confirm cancel order? </div>
-  <div modelvalue="false" isconfirm="" data-test="order-form-delete-confirm">Confirm delete?</div>
+  <div modelvalue="false" isconfirm="" lang="en" data-test="order-form-cancel-confirm"> Confirm cancel order? </div>
+  <div modelvalue="false" isconfirm="" lang="en" data-test="order-form-delete-confirm">Confirm delete?</div>
 </div>"
 `;

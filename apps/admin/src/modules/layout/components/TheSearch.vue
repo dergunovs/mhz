@@ -5,6 +5,7 @@
       :searchScheme="SEARCH_SCHEME"
       :results="results"
       :isSuccess="isSuccess"
+      lang="en"
       data-test="search"
     />
   </div>

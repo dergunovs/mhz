@@ -35,7 +35,7 @@
       >
     </div>
 
-    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateUpdate({ id: orderId, status: 'cancelled' })">
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateUpdate({ id: orderId, status: 'cancelled' })" lang="en">
       Confirm cancel order?
     </UiModal>
   </div>

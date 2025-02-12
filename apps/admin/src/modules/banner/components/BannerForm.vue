@@ -14,6 +14,7 @@
         :options="allProducts"
         @reachedBottom="scrollProducts(isLoadingProducts, setProductsPage(productsPage + 1, productsPage))"
         :data-product-id="formData.product._id"
+        lang="en"
         data-test="banner-form-product"
       />
     </UiField>
@@ -37,6 +38,7 @@
       @add="addImageFile"
       @remove="removeImageFile"
       @upload="mutateUploadFile(imageFile)"
+      lang="en"
     />
 
     <ImagePreview

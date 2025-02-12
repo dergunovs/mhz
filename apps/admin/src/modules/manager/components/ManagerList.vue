@@ -5,6 +5,7 @@
     :modelValue="props.modelValue"
     @update:modelValue="(value) => emit('update:modelValue', value)"
     @reset="(value) => emit('reset', value)"
+    lang="en"
   >
     <template v-if="props.managers?.length">
       <tr v-for="manager in props.managers" :key="manager._id" data-test="manager-list-row">

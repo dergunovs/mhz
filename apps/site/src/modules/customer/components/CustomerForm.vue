@@ -19,7 +19,7 @@
       <UiButton @click="isShowConfirm = true" layout="secondary" :isDisabled="isPending">Delete</UiButton>
     </div>
 
-    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete">Confirm delete?</UiModal>
+    <UiModal v-model="isShowConfirm" isConfirm @confirm="mutateDelete" lang="en">Confirm delete?</UiModal>
   </form>
 </template>
 
