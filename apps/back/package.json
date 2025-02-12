@@ -47,7 +47,7 @@
     "@types/node": "22.13.1",
     "@types/qs": "6.9.18",
     "esbuild": "0.25.0",
-    "eslint": "9.20.0",
+    "eslint": "9.20.1",
     "eslint-config-prettier": "10.0.1",
     "eslint-import-resolver-typescript": "3.7.0",
     "eslint-plugin-import-x": "4.6.1",
