@@ -22,8 +22,8 @@
     "ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "22.13.1",
-    "prettier": "3.5.0",
+    "@types/node": "22.13.4",
+    "prettier": "3.5.1",
     "typescript": "5.7.3",
     "vite": "6.1.0",
     "vite-plugin-dts": "4.5.0"
