@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { createHead } from '@unhead/vue';
+import { createHead } from '@unhead/vue/client';
 
 import { VueQueryPlugin, vueQueryOptions, setBaseURL } from 'mhz-helpers';
 import { toast } from 'mhz-ui';
