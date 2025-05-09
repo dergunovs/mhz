@@ -45,7 +45,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const background = computed(() => props.banner.color);
+const canvas = computed(() => props.banner.color);
 </script>
 
 <style module lang="scss">
@@ -54,7 +54,7 @@ const background = computed(() => props.banner.color);
   gap: 32px;
   justify-content: space-between;
   padding: 48px;
-  background-color: v-bind(background);
+  background-color: v-bind(canvas);
   border-radius: 8px;
 
   &[data-visible='true'] {
