@@ -1,10 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`OrderForm > matches snapshot 1`] = `
-"<div class="_container_74860f">
-  <div class="_order_74860f">
+"<div class="_container_1d98bf">
+  <div class="_order_1d98bf">
     <div><b>Customer: </b><a to="/customers/64fdd1910e0355e88d03bdb6" data-test="order-form-customer">Alexandr Dergunov</a></div>
-    <div><b>Status: </b><span class="_status_74860f" data-status="new" data-test="order-form-status">new</span></div>
+    <div><b>Status: </b><span class="_status_1d98bf" data-status="new" data-test="order-form-status">new</span></div>
     <div><b>Products: </b>
       <div data-test="order-form-products"><span data-test="order-form-products-count">11</span> x <a to="/products/edit/64dddadbeb94d9f7131a40d0" data-test="order-form-products-title">ASUS ROG Azoth</a></div>
       <div data-test="order-form-products"><span data-test="order-form-products-count">3</span> x <a to="/products/edit/64df860a7ac901ef3e27319c" data-test="order-form-products-title">Thermaltake TOUGHRAM 2x8 GB DDR4 4400</a></div>
@@ -13,9 +13,9 @@ exports[`OrderForm > matches snapshot 1`] = `
     <div><b>Created: </b><span data-test="order-form-created">Jan 2, 2024, 1:15 PM</span></div>
     <div><b>Updated: </b><span data-test="order-form-updated">Jan 2, 2024, 1:17 PM</span></div>
   </div>
-  <div class="_buttons_74860f">
-    <div class="_buttonsInner_74860f"><button isdisabled="true" data-test="order-form-complete"> Mark completed </button><button layout="secondary" data-test="order-form-back">Back</button></div>
-    <div class="_buttonsInner_74860f"><button layout="secondary" data-test="order-form-cancel">Cancel order</button><button layout="secondary" data-test="order-form-delete">Delete</button></div>
+  <div class="_buttons_1d98bf">
+    <div class="_buttonsInner_1d98bf"><button isdisabled="true" data-test="order-form-complete"> Mark completed </button><button layout="secondary" data-test="order-form-back">Back</button></div>
+    <div class="_buttonsInner_1d98bf"><button layout="secondary" data-test="order-form-cancel">Cancel order</button><button layout="secondary" data-test="order-form-delete">Delete</button></div>
   </div>
   <div modelvalue="false" isconfirm="" lang="en" data-test="order-form-cancel-confirm"> Confirm cancel order? </div>
   <div modelvalue="false" isconfirm="" lang="en" data-test="order-form-delete-confirm">Confirm delete?</div>

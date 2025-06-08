@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`CustomerInfo > matches snapshot 1`] = `
-"<div class="_customer_3ff1cb">
+"<div class="_customer_2e0069">
   <div><b>Customer: </b><span data-test="customer-info-name">Alexandr Ivanot</span><a href="mailto:a@b.ru" data-test="customer-info-email">a@b.ru</a></div>
   <div><b>Created: </b><span data-test="customer-info-created">Sep 10, 2023, 2:24 PM</span></div>
   <div><b>Login date: </b><span data-test="customer-info-login">-</span></div>

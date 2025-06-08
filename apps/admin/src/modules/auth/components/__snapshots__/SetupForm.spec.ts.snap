@@ -4,7 +4,7 @@ exports[`SetupForm > matches snapshot 1`] = `
 "<div>
   <anonymous-stub></anonymous-stub>
   <h2>Add first manager</h2>
-  <form class="_form_33223f" data-test="setup-form">
+  <form class="_form_87c99b" data-test="setup-form">
     <fieldset label="First name" isrequired=""><input type="text" modelvalue="" isfocus="" data-test="setup-form-first-name"></fieldset>
     <fieldset label="Last name" isrequired=""><input type="text" modelvalue="" data-test="setup-form-last-name"></fieldset>
     <fieldset label="E-mail" isrequired=""><input type="text" modelvalue="" data-test="setup-form-email"></fieldset>

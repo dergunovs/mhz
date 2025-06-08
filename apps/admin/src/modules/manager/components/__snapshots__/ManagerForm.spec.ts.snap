@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ManagerForm > matches snapshot 1`] = `
-"<form class="_form_72252e" data-test="manager-form">
+"<form class="_form_b9e7d5" data-test="manager-form">
   <fieldset label="First name" isrequired=""><input type="text" modelvalue="Alexandr" isfocus="" data-test="manager-form-first-name"></fieldset>
   <fieldset label="Last name" isrequired=""><input type="text" modelvalue="Petrov" data-test="manager-form-last-name"></fieldset>
   <fieldset label="Email" isrequired=""><input type="text" modelvalue="a@mail.ru" data-test="manager-form-email"></fieldset>

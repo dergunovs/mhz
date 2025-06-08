@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ProductFieldsForm > matches snapshot 1`] = `
-"<div class="_container_11d7eb">
+"<div class="_container_c98b24">
   <h3>Specs</h3>
   <div data-test="product-fields-form-field"><input type="checkbox" modelvalue="false" label="Onboard graphics" data-test="product-fields-form-boolean"></div>
   <div data-test="product-fields-form-field">

@@ -1,12 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ProductForm > matches snapshot 1`] = `
-"<form class="_form_ba9112" data-test="product-form">
-  <div class="_row_ba9112">
+"<form class="_form_212562" data-test="product-form">
+  <div class="_row_212562">
     <fieldset label="Title" isrequired=""><input type="text" modelvalue="G.Skill Trident Z5 Neo RGB 2x32 GB DDR5 6000" isfocus="" data-test="product-form-title"></fieldset>
     <fieldset label="Price" isrequired=""><input type="number" modelvalue="31200" data-test="product-form-price"></fieldset>
   </div>
-  <div class="_row_ba9112">
+  <div class="_row_212562">
     <fieldset label="Manufacturer" isrequired=""><input type="text" modelvalue="[object Object]" options="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" lang="en" data-test="product-form-manufacturer"></fieldset>
     <fieldset label="Category" isrequired=""><input type="text" modelvalue="[object Object]" options="[object Object]" lang="en" data-test="product-form-category"></fieldset>
   </div><input type="checkbox" label="In stock" modelvalue="true" isrequired="" data-test="product-form-stock">

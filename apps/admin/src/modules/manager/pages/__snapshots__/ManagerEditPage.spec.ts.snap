@@ -3,7 +3,7 @@
 exports[`ManagerEditPage > matches snapshot 1`] = `
 "<div>
   <page-title-stub links="[object Object],[object Object],[object Object]"></page-title-stub>
-  <div class="_login_d4be90"><b>Login date:</b> Jan 18, 2024, 2:32 PM</div>
+  <div class="_login_787d7f"><b>Login date:</b> Jan 18, 2024, 2:32 PM</div>
   <manager-form-stub manager="[object Object]" data-test="manager-edit-page-form"></manager-form-stub>
 </div>"
 `;

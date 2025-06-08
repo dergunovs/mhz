@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FormButtons > matches snapshot 1`] = `
-"<div class="_buttons_986978">
-  <div class="_buttonsInner_986978"><button type="submit" isdisabled="false" data-test="form-buttons-submit">Update</button><button layout="secondary" isdisabled="false" data-test="form-buttons-back"> Back </button></div><button layout="secondary" isdisabled="false" data-test="form-buttons-delete"> Delete </button>
+"<div class="_buttons_d3e3c8">
+  <div class="_buttonsInner_d3e3c8"><button type="submit" isdisabled="false" data-test="form-buttons-submit">Update</button><button layout="secondary" isdisabled="false" data-test="form-buttons-back"> Back </button></div><button layout="secondary" isdisabled="false" data-test="form-buttons-delete"> Delete </button>
   <div modelvalue="false" isconfirm="" lang="en" data-test="form-buttons-confirm-modal"> Confirm delete? </div>
 </div>"
 `;

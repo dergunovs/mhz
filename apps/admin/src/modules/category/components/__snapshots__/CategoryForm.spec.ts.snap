@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`CategoryForm > matches snapshot 1`] = `
-"<form class="_form_93b7a2" data-test="category-form">
+"<form class="_form_5b426d" data-test="category-form">
   <fieldset label="Title" isrequired=""><input type="text" modelvalue="CPU" isfocus="" data-test="category-form-title"></fieldset>
   <fieldset label="Description" isrequired=""><input type="text" modelvalue="<p>A <strong>central processing unit</strong> (<strong>CPU</strong>)—also called a <strong>central processor</strong> or <strong>main processor</strong>—is the most important processor in a given computer. Its electronic circuitry executes instructions of a computer program, such as arithmetic, logic, controlling, and input/output (I/O) operations. This role contrasts with that of external components, such as main memory and I/O circuitry, and specialized coprocessors such as graphics processing units (GPUs).</p>" data-test="category-form-description"></fieldset>
   <category-field-list-stub fields="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" isshowcategoryfieldform="false" data-test="category-form-field-list"></category-field-list-stub><button layout="secondary" data-test="category-form-add-category"> Add Category Field </button>
