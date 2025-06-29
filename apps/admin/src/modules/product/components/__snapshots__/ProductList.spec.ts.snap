@@ -41,7 +41,7 @@ exports[`ProductList > matches snapshot 1`] = `
       <td>Yes</td>
       <td>4</td>
       <td data-no-wrap="">Aug 18, 2023</td>
-      <td data-no-wrap="">-</td>
+      <td data-no-wrap="">0</td>
     </tr>
     <tr data-test="product-list-row">
       <td data-grow=""><a to="/products/edit/64df893f7ac901ef3e27325c" data-test="product-list-link">AMD Radeon R9 Gamer Series 1x16 GB DDR4 3200</a></td>
@@ -51,7 +51,7 @@ exports[`ProductList > matches snapshot 1`] = `
       <td>Yes</td>
       <td>3</td>
       <td data-no-wrap="">Aug 18, 2023</td>
-      <td data-no-wrap="">-</td>
+      <td data-no-wrap="">0</td>
     </tr>
     <tr data-test="product-list-row">
       <td data-grow=""><a to="/products/edit/64df88e97ac901ef3e273209" data-test="product-list-link">AMD Radeon R9 Gamer Series 2x8 GB DDR4 3600</a></td>
@@ -71,7 +71,7 @@ exports[`ProductList > matches snapshot 1`] = `
       <td>Yes</td>
       <td></td>
       <td data-no-wrap="">Aug 18, 2023</td>
-      <td data-no-wrap="">-</td>
+      <td data-no-wrap="">0</td>
     </tr>
     <tr data-test="product-list-row">
       <td data-grow=""><a to="/products/edit/64df883a7ac901ef3e2731d0" data-test="product-list-link">Samsung M378A4G43AB2 1x32 GB DDR4 3200</a></td>
@@ -101,7 +101,7 @@ exports[`ProductList > matches snapshot 1`] = `
       <td>Yes</td>
       <td>3</td>
       <td data-no-wrap="">Aug 18, 2023</td>
-      <td data-no-wrap="">-</td>
+      <td data-no-wrap="">0</td>
     </tr>
     <tr data-test="product-list-row">
       <td data-grow=""><a to="/products/edit/64df86477ac901ef3e2731a6" data-test="product-list-link">Thermaltake H-ONE 2x8 GB DDR4 3200</a></td>
@@ -111,7 +111,7 @@ exports[`ProductList > matches snapshot 1`] = `
       <td>Yes</td>
       <td>6</td>
       <td data-no-wrap="">Aug 18, 2023</td>
-      <td data-no-wrap="">-</td>
+      <td data-no-wrap="">0</td>
     </tr>
     <tr data-test="product-list-row">
       <td data-grow=""><a to="/products/edit/64df860a7ac901ef3e27319c" data-test="product-list-link">Thermaltake TOUGHRAM 2x8 GB DDR4 4400</a></td>
@@ -121,7 +121,7 @@ exports[`ProductList > matches snapshot 1`] = `
       <td>Yes</td>
       <td>7</td>
       <td data-no-wrap="">Aug 18, 2023</td>
-      <td data-no-wrap="">-</td>
+      <td data-no-wrap="">0</td>
     </tr>
   </tbody>
 </table>"
