@@ -1,11 +1,9 @@
 import dotenv from 'dotenv';
 import { buildApp, AppOptions } from './app.js';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
-const options: AppOptions = {
-  logger: true,
-};
+const options: AppOptions = { logger: true };
 
 const start = async () => {
   const app = await buildApp(options);

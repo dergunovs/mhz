@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 import { addSchemas } from './schemas/addSchemas.js';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
