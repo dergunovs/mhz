@@ -23,11 +23,15 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.get<{ Reply: { 200: IBanner[] } }>(API_BANNER_ACTIVE, bannerGetActiveSchema, async function (request, reply) {
-    const data = await bannerService.getActive<IBanner>();
+  fastify.get<{ Reply: { 200: IBanner[] } }>(
+    API_BANNER_ACTIVE,
+    bannerGetActiveSchema,
+    async function (_request, reply) {
+      const data = await bannerService.getActive<IBanner>();
 
-    reply.code(200).send(data);
-  });
+      reply.code(200).send(data);
+    }
+  );
 
   fastify.get<{ Params: IBaseParams; Reply: { 200: { data: IBanner | null } } }>(
     `${API_BANNER}/:id`,

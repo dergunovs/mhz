@@ -43,7 +43,7 @@ export const orderService: IBaseService = {
   },
 
   update: async <T>(
-    itemToUpdate?: T,
+    _itemToUpdate?: T,
     _id?: string,
     decode?: (token: string) => IUserToken | null,
     token?: string,
@@ -66,7 +66,7 @@ export const orderService: IBaseService = {
     return isPayError || isOrderNotBelongToCustomer;
   },
 
-  create: async <T>(itemToCreate?: T, decode?: (token: string) => IUserToken | null, token?: string) => {
+  create: async <T>(_itemToCreate?: T, decode?: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
 
     const customer = await Customer.findOne({ _id: user?._id })

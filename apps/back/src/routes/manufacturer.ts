@@ -26,7 +26,7 @@ export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Reply: { 200: IManufacturer[] } }>(
     API_MANUFACTURER_POPULAR,
     manufacturerGetPopularSchema,
-    async function (request, reply) {
+    async function (_request, reply) {
       const data = await manufacturerService.getPopular<IManufacturer>();
 
       reply.code(200).send(data);

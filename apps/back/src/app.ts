@@ -22,7 +22,7 @@ async function buildApp(options: AppOptions = {}) {
   fastify.register(autoload, { dir: path.join(dirname, 'plugins'), options: { ...options } });
   fastify.register(autoload, { dir: path.join(dirname, 'routes'), options: { ...options, prefix: '/api' } });
 
-  fastify.setErrorHandler(function (error, request, reply) {
+  fastify.setErrorHandler(function (error, _request, reply) {
     reply.status(500).send({ message: error.message || 'Server error' });
   });
 

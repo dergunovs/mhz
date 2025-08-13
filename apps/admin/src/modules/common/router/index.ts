@@ -8,12 +8,12 @@ import { TOKEN_NAME, URL_LOGIN, URL_SETUP } from '@/auth/constants';
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(_to, _from, savedPosition) {
     return savedPosition ? savedPosition : { top: 0 };
   },
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   if (![URL_LOGIN, URL_SETUP].includes(to.path) && !getCookieToken(TOKEN_NAME)) {
     logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME);
   } else {

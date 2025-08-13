@@ -22,7 +22,7 @@ let onSuccessUpdate: () => void;
 const spyMutateUpdate = vi.fn();
 
 vi.spyOn(orderServices, 'updateOrder').mockImplementation(
-  (id: ComputedRef<string | undefined>, options: { onSuccess?: () => void }) => {
+  (_id: ComputedRef<string | undefined>, options: { onSuccess?: () => void }) => {
     if (options.onSuccess) onSuccessUpdate = options.onSuccess;
 
     return mockMutationReply<IBaseReply, { status: TOrderStatus }>(spyMutateUpdate);

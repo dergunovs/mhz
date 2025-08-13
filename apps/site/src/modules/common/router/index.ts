@@ -14,7 +14,7 @@ const router = createRouter({
   },
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   if (AUTH_URLS.includes(to.path) && !getCookieToken(TOKEN_NAME)) {
     logout(URL_MAIN, deleteAuthHeader, TOKEN_NAME);
   } else {

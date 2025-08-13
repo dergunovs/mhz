@@ -48,7 +48,7 @@ export default async function (fastify: IFastifyInstance) {
   fastify.get<{ Reply: { 200: IProduct[] } }>(
     API_PRODUCT_POPULAR,
     productGetPopularSchema,
-    async function (request, reply) {
+    async function (_request, reply) {
       const data = await productService.getPopular<IProduct>();
 
       reply.code(200).send(data);
