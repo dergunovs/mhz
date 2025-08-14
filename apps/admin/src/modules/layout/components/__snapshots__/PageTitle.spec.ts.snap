@@ -2,7 +2,7 @@
 
 exports[`PageTitle > matches snapshot 1`] = `
 "<div class="_container_a60bab">
-  <ui-breadcrumbs-stub links="[object Object],[object Object]" color="white" data-test="page-title-breadcrumbs"></ui-breadcrumbs-stub>
+  <ui-breadcrumbs-stub links="[object Object],[object Object]" color="white" arialabel="Breadcrumb" data-test="page-title-breadcrumbs"></ui-breadcrumbs-stub>
   <h1 data-test="page-title-header">Title</h1>
 </div>"
 `;
