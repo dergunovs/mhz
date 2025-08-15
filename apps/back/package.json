@@ -44,7 +44,7 @@
   "devDependencies": {
     "@eslint/js": "9.33.0",
     "@types/bcryptjs": "2.4.6",
-    "@types/node": "24.2.1",
+    "@types/node": "24.3.0",
     "@types/qs": "6.14.0",
     "esbuild": "0.25.9",
     "eslint": "9.33.0",
@@ -61,7 +61,7 @@
     "vitest": "3.2.4"
   },
   "engines": {
-    "npm": ">=11.3.0",
-    "node": ">=24.2.0"
+    "npm": ">=11.5.1",
+    "node": ">=24.6.0"
   }
 }
