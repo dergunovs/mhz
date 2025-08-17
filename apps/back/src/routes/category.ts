@@ -1,5 +1,11 @@
-import { API_CATEGORY, API_CATEGORY_POPULAR } from 'mhz-contracts';
-import type { IQuery, IBaseReply, ICategory, IBaseParams } from 'mhz-contracts';
+import {
+  API_CATEGORY,
+  API_CATEGORY_POPULAR,
+  type IQuery,
+  type IBaseReply,
+  type ICategory,
+  type IBaseParams,
+} from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { categoryService } from '../services/category.js';

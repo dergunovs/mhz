@@ -97,7 +97,7 @@ const canvas = computed(() => props.banner.color);
 
 .price {
   width: 214px;
-  padding: 32px 40px 32px 40px;
+  padding: 32px 40px;
   font-size: 2rem;
   font-weight: 700;
   color: var(--color-white);
@@ -135,7 +135,7 @@ const canvas = computed(() => props.banner.color);
   .slide {
     flex-direction: column;
     align-items: center;
-    padding: 32px 16px 48px 16px;
+    padding: 32px 16px 48px;
   }
 
   .inner {

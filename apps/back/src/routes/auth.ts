@@ -1,5 +1,12 @@
-import { API_AUTH_CHECK, API_AUTH_LOGIN, API_AUTH_SETUP } from 'mhz-contracts';
-import type { ILoginData, IUserToken, IBaseReply, ISignUpData } from 'mhz-contracts';
+import {
+  API_AUTH_CHECK,
+  API_AUTH_LOGIN,
+  API_AUTH_SETUP,
+  type ILoginData,
+  type IUserToken,
+  type IBaseReply,
+  type ISignUpData,
+} from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { authService } from '../services/auth.js';

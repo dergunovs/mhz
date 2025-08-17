@@ -108,7 +108,7 @@ function submit() {
 
 @media (max-width: $mobile) {
   .footer {
-    padding: 48px 16px 64px 16px;
+    padding: 48px 16px 64px;
   }
 
   .innerBlock {

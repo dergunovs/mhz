@@ -1,5 +1,15 @@
-import { API_PRODUCT, API_PRODUCT_FILTERS, API_PRODUCT_PRICE_RANGE, API_PRODUCT_POPULAR } from 'mhz-contracts';
-import type { IQuery, TInitiator, IBaseReply, IFilterData, IProduct, IBaseParams } from 'mhz-contracts';
+import {
+  API_PRODUCT,
+  API_PRODUCT_FILTERS,
+  API_PRODUCT_PRICE_RANGE,
+  API_PRODUCT_POPULAR,
+  IQuery,
+  type TInitiator,
+  type IBaseReply,
+  type IFilterData,
+  type IProduct,
+  type IBaseParams,
+} from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { productService } from '../services/product.js';

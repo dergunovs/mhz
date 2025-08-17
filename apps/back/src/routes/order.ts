@@ -1,5 +1,11 @@
-import { API_ORDER } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IOrder, TOrderStatus, IBaseParams } from 'mhz-contracts';
+import {
+  API_ORDER,
+  type IQuery,
+  type IBaseReply,
+  type IOrder,
+  type TOrderStatus,
+  type IBaseParams,
+} from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { orderService } from '../services/order.js';

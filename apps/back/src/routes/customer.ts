@@ -4,8 +4,14 @@ import {
   API_CUSTOMER_CART,
   API_CUSTOMER_FAVOURITES,
   API_CUSTOMER_WATCHED,
+  type IQuery,
+  type IBaseReply,
+  type ICartItem,
+  type ICustomer,
+  type IProduct,
+  type ISignUpData,
+  type IBaseParams,
 } from 'mhz-contracts';
-import type { IQuery, IBaseReply, ICartItem, ICustomer, IProduct, ISignUpData, IBaseParams } from 'mhz-contracts';
 
 import { customerService } from '../services/customer.js';
 import { IFastifyInstance } from '../interface/index.js';

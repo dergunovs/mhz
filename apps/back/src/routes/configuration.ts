@@ -1,5 +1,4 @@
-import { API_CONFIGURATION } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IConfiguration, IBaseParams } from 'mhz-contracts';
+import { API_CONFIGURATION, type IQuery, type IBaseReply, type IConfiguration, type IBaseParams } from 'mhz-contracts';
 
 import { configurationService } from '../services/configuration.js';
 import { IFastifyInstance } from '../interface/index.js';

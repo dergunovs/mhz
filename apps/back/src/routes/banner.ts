@@ -1,5 +1,12 @@
-import { API_BANNER_ACTIVE, API_BANNER } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IFilterData, IBanner, IBaseParams } from 'mhz-contracts';
+import {
+  API_BANNER_ACTIVE,
+  API_BANNER,
+  type IQuery,
+  type IBaseReply,
+  type IFilterData,
+  type IBanner,
+  type IBaseParams,
+} from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { bannerService } from '../services/banner.js';

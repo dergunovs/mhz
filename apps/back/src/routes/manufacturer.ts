@@ -1,5 +1,11 @@
-import { API_MANUFACTURER, API_MANUFACTURER_POPULAR } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IManufacturer, IBaseParams } from 'mhz-contracts';
+import {
+  API_MANUFACTURER,
+  API_MANUFACTURER_POPULAR,
+  type IQuery,
+  type IBaseReply,
+  type IManufacturer,
+  type IBaseParams,
+} from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { manufacturerService } from '../services/manufacturer.js';

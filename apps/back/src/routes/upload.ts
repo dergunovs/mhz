@@ -1,5 +1,11 @@
-import { API_UPLOAD, API_UPLOAD_MULTIPLE, API_UPLOAD_SINGLE } from 'mhz-contracts';
-import type { IBaseReply, IBaseParams, IUploadQuery } from 'mhz-contracts';
+import {
+  API_UPLOAD,
+  API_UPLOAD_MULTIPLE,
+  API_UPLOAD_SINGLE,
+  type IBaseReply,
+  type IBaseParams,
+  type IUploadQuery,
+} from 'mhz-contracts';
 
 import { uploadService } from '../services/upload.js';
 import { IFastifyInstance } from '../interface/index.js';

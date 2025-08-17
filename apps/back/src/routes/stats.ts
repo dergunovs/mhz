@@ -1,5 +1,4 @@
-import { API_STATS_COUNT } from 'mhz-contracts';
-import type { IEntitiesReply } from 'mhz-contracts';
+import { API_STATS_COUNT, type IEntitiesReply } from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { countService } from '../services/stats.js';

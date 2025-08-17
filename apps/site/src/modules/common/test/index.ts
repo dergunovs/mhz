@@ -3,8 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { shallowMount } from '@vue/test-utils';
 import { createHead } from '@unhead/vue/client';
 
-import { VueQueryPlugin } from 'mhz-helpers';
-import type { UseQueryReturnType, UseMutationReturnType } from 'mhz-helpers';
+import { VueQueryPlugin, type UseQueryReturnType, type UseMutationReturnType } from 'mhz-helpers';
 
 import { routes } from '@/common/router/routes';
 

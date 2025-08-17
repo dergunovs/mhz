@@ -1,5 +1,11 @@
-import { API_MANAGER } from 'mhz-contracts';
-import type { IQuery, IBaseReply, IManager, IBaseParams, ISignUpData } from 'mhz-contracts';
+import {
+  API_MANAGER,
+  type IQuery,
+  type IBaseReply,
+  type IManager,
+  type IBaseParams,
+  type ISignUpData,
+} from 'mhz-contracts';
 
 import { IFastifyInstance } from '../interface/index.js';
 import { managerService } from '../services/manager.js';
