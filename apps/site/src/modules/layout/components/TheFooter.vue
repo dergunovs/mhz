@@ -51,9 +51,7 @@ const formData = ref({
   email: '',
 });
 
-const { error, isValid } = useValidator(formData, {
-  email: [required('en'), email('en')],
-});
+const { error, isValid } = useValidator(formData, { email: [required, email] }, 'en');
 
 function submit() {
   if (isValid()) isShowModal.value = true;

@@ -109,12 +109,11 @@ const { mutate: mutateDelete } = deleteManufacturer({
   },
 });
 
-const { error, isValid } = useValidator(formData, {
-  title: [required('en')],
-  description: [required('en')],
-  logoUrl: [required('en')],
-  country: [required('en')],
-});
+const { error, isValid } = useValidator(
+  formData,
+  { title: [required], description: [required], logoUrl: [required], country: [required] },
+  'en'
+);
 
 function submit() {
   if (isValid()) mutatePost(formData.value);

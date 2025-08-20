@@ -50,10 +50,7 @@ const { mutate: mutateLogin } = login({
   },
 });
 
-const { error, isValid } = useValidator(formData, {
-  email: [required('en'), email('en')],
-  password: [required('en')],
-});
+const { error, isValid } = useValidator(formData, { email: [required, email], password: [required] }, 'en');
 
 function submit() {
   if (isValid()) mutateLogin(formData.value);

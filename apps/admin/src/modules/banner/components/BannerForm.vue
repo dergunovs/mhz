@@ -115,12 +115,11 @@ const { mutate: mutateDelete } = deleteBanner({
   },
 });
 
-const { error, isValid } = useValidator(formData, {
-  text: [required('en')],
-  isActive: [required('en')],
-  imageUrl: [required('en')],
-  color: [required('en')],
-});
+const { error, isValid } = useValidator(
+  formData,
+  { text: [required], isActive: [required], imageUrl: [required], color: [required] },
+  'en'
+);
 
 function submit() {
   if (isValid()) mutatePost(formData.value);

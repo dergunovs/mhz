@@ -150,9 +150,7 @@ function removeProduct(categoryTitle: keyof IConfigurationParts) {
   delete formData.value.parts?.[categoryTitle];
 }
 
-const { error, isValid } = useValidator(formData, {
-  title: [required('en')],
-});
+const { error, isValid } = useValidator(formData, { title: [required] }, 'en');
 
 const { validation } = useConfigurationCheck(formData);
 

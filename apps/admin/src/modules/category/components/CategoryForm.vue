@@ -127,11 +127,11 @@ const { mutate: mutateDelete } = deleteCategory({
   },
 });
 
-const { error, isValid } = useValidator(formData, {
-  title: [required('en')],
-  description: [required('en')],
-  iconUrl: [required('en')],
-});
+const { error, isValid } = useValidator(
+  formData,
+  { title: [required], description: [required], iconUrl: [required] },
+  'en'
+);
 
 function showCategoryField() {
   editableCategoryField.value = undefined;

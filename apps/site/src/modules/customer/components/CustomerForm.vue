@@ -63,11 +63,11 @@ const { mutate: mutateDelete } = deleteCustomer({
   },
 });
 
-const { error, isValid } = useValidator(formData, {
-  firstName: [required('en')],
-  lastName: [required('en')],
-  email: [required('en'), email('en')],
-});
+const { error, isValid } = useValidator(
+  formData,
+  { firstName: [required], lastName: [required], email: [required, email] },
+  'en'
+);
 
 function submit() {
   if (isValid()) mutateUpdate(formData.value);

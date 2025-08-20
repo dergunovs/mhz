@@ -79,12 +79,16 @@ const { mutate: mutateDelete } = deleteManager({
   },
 });
 
-const { error, isValid } = useValidator(formData, {
-  firstName: [required('en')],
-  lastName: [required('en')],
-  email: [required('en'), email('en')],
-  password: !props.manager?._id && [required('en')],
-});
+const { error, isValid } = useValidator(
+  formData,
+  {
+    firstName: [required],
+    lastName: [required],
+    email: [required, email],
+    password: props.manager?._id ? [] : [required],
+  },
+  'en'
+);
 
 function submit() {
   if (isValid()) mutatePost(formData.value);

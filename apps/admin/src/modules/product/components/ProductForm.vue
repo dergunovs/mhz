@@ -211,12 +211,11 @@ function updateFields(fields: ICategoryField[]) {
   formData.value.fields = [...fields];
 }
 
-const { error, isValid } = useValidator(formData, {
-  title: [required('en')],
-  description: [required('en')],
-  price: [required('en')],
-  isInStock: [required('en')],
-});
+const { error, isValid } = useValidator(
+  formData,
+  { title: [required], description: [required], price: [required], isInStock: [required] },
+  'en'
+);
 
 function submit() {
   if (isValid()) mutatePost(formData.value);

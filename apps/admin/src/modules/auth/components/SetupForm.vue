@@ -54,12 +54,11 @@ const { mutate: mutateSetup } = setup({
   },
 });
 
-const { error, isValid } = useValidator(formData, {
-  firstName: [required('en')],
-  lastName: [required('en')],
-  email: [required('en'), email('en')],
-  password: [required('en')],
-});
+const { error, isValid } = useValidator(
+  formData,
+  { firstName: [required], lastName: [required], email: [required, email], password: [required] },
+  'en'
+);
 
 function submit() {
   if (isValid()) mutateSetup(formData.value);
