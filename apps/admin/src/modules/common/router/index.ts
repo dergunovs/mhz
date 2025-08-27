@@ -9,7 +9,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(_to, _from, savedPosition) {
-    return savedPosition ? savedPosition : { top: 0 };
+    return savedPosition || { top: 0 };
   },
 });
 

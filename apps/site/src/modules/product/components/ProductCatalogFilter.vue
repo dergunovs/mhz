@@ -170,7 +170,7 @@ function findNewCount(
     found.push(parentValue.find((value) => parent === parentKey && title === value.title)?.count);
   });
 
-  return found.filter(Boolean)[0] || 0;
+  return found.find(Boolean) || 0;
 }
 
 function findNewFieldCount(newFilters: IFilterField, title: string, values?: IFilterFieldValue[]) {
@@ -206,7 +206,7 @@ function cloneFilterFields(filter: IFilterData) {
 watch(
   () => props.filtersBase,
   () => {
-    if (props.filtersInitial && props.filtersBase && Object.keys(props.filtersBase.fields).length) {
+    if (props.filtersInitial && props.filtersBase && Object.keys(props.filtersBase.fields).length > 0) {
       const newCategoriesAndManufacturers = cloneFilter(props.filtersBase);
       const newFields = cloneFilterFields(props.filtersBase);
 

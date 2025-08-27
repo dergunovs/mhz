@@ -4,6 +4,8 @@ import pluginVue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
 import eslintPluginImportX from 'eslint-plugin-import-x';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintPluginSonar from 'eslint-plugin-sonarjs';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import { parser, options, ignores, settings, rules } from 'vue-linters-config';
 
@@ -12,6 +14,8 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/strongly-recommended'],
   eslintPluginImportX.flatConfigs.recommended,
+  eslintPluginSonar.configs.recommended,
+  eslintPluginUnicorn.configs.recommended,
   eslintPluginImportX.flatConfigs.typescript,
 
   ignores,

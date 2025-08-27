@@ -110,7 +110,7 @@ describe('ProductForm', async () => {
       wrapper.findComponent<DefineComponent<{ fields: ICategoryField[] }>>(productFormFields).vm.$props.fields
     ).toEqual(PRODUCT.fields);
 
-    expect(wrapper.findComponent(productFormImages).attributes('urls')).toBe(PRODUCT.imageUrls?.join());
+    expect(wrapper.findComponent(productFormImages).attributes('urls')).toBe(PRODUCT.imageUrls?.join(','));
   });
 
   it('shows image preview if product has image', async () => {

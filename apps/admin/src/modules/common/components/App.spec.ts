@@ -51,7 +51,7 @@ describe('App', async () => {
   it('shows default layout and sets auth if token exists and page is not login', async () => {
     wrapper.unmount();
 
-    Object.defineProperty(window, 'location', {
+    Object.defineProperty(globalThis, 'location', {
       value: new URL(`http://localhost:3000${URL_CATEGORY}`),
       writable: true,
     });

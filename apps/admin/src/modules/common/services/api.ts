@@ -25,7 +25,7 @@ export async function getEntitiesCountApi() {
 }
 
 export async function uploadFileApi(file?: File) {
-  if (!file) throw new Error();
+  if (!file) throw new Error('Error uploading file');
 
   const formData = new FormData();
 

@@ -41,7 +41,7 @@ export function wrapperFactory(
     },
     props,
     slots,
-    attachTo: document.getElementById('app') as HTMLElement,
+    attachTo: document.querySelector('#app') as HTMLElement,
   });
 }
 

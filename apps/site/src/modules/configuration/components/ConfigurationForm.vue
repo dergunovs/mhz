@@ -98,7 +98,7 @@ const formData = ref<IConfiguration>({
 
 const isShowConfirm = ref(false);
 
-const link = computed(() => window.location.href.split('?')[0]);
+const link = computed(() => globalThis.location.href.split('?')[0]);
 
 const price = computed(() => {
   return formData.value.parts
@@ -155,13 +155,13 @@ const { error, isValid } = useValidator(formData, { title: [required] }, 'en');
 const { validation } = useConfigurationCheck(formData);
 
 function handleSubmit() {
-  if (formData.value.parts && !Object.keys(formData.value.parts).length) {
+  if (formData.value.parts && Object.keys(formData.value.parts).length === 0) {
     toast.error('Choose at least one PC part');
 
     return;
   }
 
-  if (validation.value.errors.length) {
+  if (validation.value.errors.length > 0) {
     toast.error('Please correct compability errors');
 
     return;

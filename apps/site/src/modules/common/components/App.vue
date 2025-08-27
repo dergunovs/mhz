@@ -28,7 +28,7 @@ const isLoaded = ref(false);
 
 const layoutComponent = computed(() => (route.meta.layout === 'empty' ? LayoutEmpty : LayoutDefault));
 
-const isAuthPages = AUTH_URLS.includes(window.location.pathname);
+const isAuthPages = AUTH_URLS.includes(globalThis.location.pathname);
 
 const token = getCookieToken(TOKEN_NAME);
 

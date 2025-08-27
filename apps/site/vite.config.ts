@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import { resolve } from 'path';
+import path from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
@@ -22,7 +22,7 @@ export default defineConfig({
 
   build: { target: 'es2022' },
 
-  resolve: { alias: { '@': resolve(__dirname, './src/modules') } },
+  resolve: { alias: { '@': path.resolve(import.meta.dirname, './src/modules') } },
 
   plugins: [
     vue({
@@ -53,12 +53,12 @@ export default defineConfig({
 
   css: {
     preprocessorOptions: {
-      scss: { additionalData: `@use "mhz-ui/dist/breakpoints" as *;`, api: 'modern-compiler' },
+      scss: { additionalData: `@use "mhz-ui/dist/breakpoints" as *;` },
     },
   },
 
   test: {
-    alias: { '@': resolve(__dirname, './src/modules') },
+    alias: { '@': path.resolve(import.meta.dirname, './src/modules') },
     cache: false,
     clearMocks: true,
     environment: 'happy-dom',
