@@ -11,8 +11,8 @@ const start = async () => {
 
   try {
     await app.listen({ port, host: 'localhost' });
-  } catch (err) {
-    app.log.error(err);
+  } catch (error) {
+    app.log.error(error);
     process.exit(1);
   }
 };

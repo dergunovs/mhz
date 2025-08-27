@@ -19,11 +19,11 @@ export const countService: IStatsService = {
     };
 
     await Promise.all([
-      await Category.estimatedDocumentCount(),
-      await Manufacturer.estimatedDocumentCount(),
-      await Manager.estimatedDocumentCount(),
-      await Customer.estimatedDocumentCount(),
-      await Order.estimatedDocumentCount(),
+      Category.estimatedDocumentCount(),
+      Manufacturer.estimatedDocumentCount(),
+      Manager.estimatedDocumentCount(),
+      Customer.estimatedDocumentCount(),
+      Order.estimatedDocumentCount(),
     ]).then(([categories, manufacturers, managers, customers, orders]) => {
       count.base.datasets[0].data.push(categories, manufacturers, managers, customers, orders);
     });

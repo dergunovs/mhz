@@ -1,13 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import util from 'util';
-import { pipeline } from 'stream';
+import fs from 'node:fs';
+import path from 'node:path';
+import { promisify } from 'node:util';
+import { pipeline } from 'node:stream';
 import type { IFileToUpload } from 'mhz-contracts';
 
 import { createThumb, deleteFile, resizeFile } from '../helpers/index.js';
 import { IUploadService } from '../interface/index.js';
 
-const pump = util.promisify(pipeline);
+const pump = promisify(pipeline);
 
 export const uploadService: IUploadService = {
   uploadMultiple: async (files: AsyncIterableIterator<IFileToUpload>, width?: string, thumb?: string) => {

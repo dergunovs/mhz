@@ -17,8 +17,7 @@ export default fp(async function (fastify) {
       const user: IUserToken = await request.jwtVerify();
 
       if (user.role !== 'manager') reply.code(403).send({ message: 'Authentication error' });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
+    } catch {
       reply.code(403).send({ message: 'Authentication error' });
     }
   });
@@ -28,8 +27,7 @@ export default fp(async function (fastify) {
       const user: IUserToken = await request.jwtVerify();
 
       if (user.role !== 'customer') reply.code(403).send({ message: 'Authentication error' });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
+    } catch {
       reply.code(403).send({ message: 'Authentication error' });
     }
   });
@@ -37,8 +35,7 @@ export default fp(async function (fastify) {
   fastify.decorate('onlyLoggedIn', async function (request: FastifyRequest, reply: FastifyReply) {
     try {
       await request.jwtVerify();
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
+    } catch {
       reply.code(403).send({ message: 'Authentication error' });
     }
   });

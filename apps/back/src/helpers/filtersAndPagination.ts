@@ -16,15 +16,13 @@ function createFilterFields(options?: IQuery) {
 
   const fieldsFiltersRaw = Object.fromEntries(Object.entries(options).filter(([key]) => key.includes('fields[')));
 
-  if (!Object.keys(fieldsFiltersRaw).length) return {};
+  if (Object.keys(fieldsFiltersRaw).length === 0) return {};
 
   const params = new URLSearchParams();
 
   Object.entries(fieldsFiltersRaw).forEach(([key, value]) => params.append(key, value));
 
-  const fieldsFiltersArray: { [key: string]: string[] }[] = JSON.parse(
-    JSON.stringify(qs.parse(params.toString()))
-  ).fields;
+  const fieldsFiltersArray = structuredClone(qs.parse(params.toString())).fields as { [key: string]: string[] }[];
 
   if (!fieldsFiltersArray?.length) return {};
 
@@ -68,7 +66,8 @@ export async function paginate<T>(Entity: Model<T>, options?: IQueryPopulated) {
   } as FilterQuery<T>;
 
   const page = Number(options?.page) || 1;
-  const sort = options?.sort === undefined ? '-dateCreated' : `${options.dir === 'desc' ? '-' : ''}${options.sort}`;
+  const sortDir = options?.dir === 'desc' ? '-' : '';
+  const sort = options?.sort === undefined ? '-dateCreated' : `${sortDir}${options.sort}`;
 
   const limit = 12;
 

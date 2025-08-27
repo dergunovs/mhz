@@ -216,17 +216,15 @@ export const customerService: ICustomerService = {
     if (typeof _id === 'string') {
       const isItemIncludes = currentItems?.includes(_id);
 
-      if (isItemIncludes) {
-        await Customer.updateOne(filter, {
-          cart: currentCart.map((item) => {
-            return item.product._id?.toString() === _id ? { product: item.product, count: item.count + 1 } : item;
-          }),
-        });
-      } else {
-        await Customer.updateOne(filter, {
-          $push: { cart: { product: _id, count: 1 } },
-        });
-      }
+      await (isItemIncludes
+        ? Customer.updateOne(filter, {
+            cart: currentCart.map((item) => {
+              return item.product._id?.toString() === _id ? { product: item.product, count: item.count + 1 } : item;
+            }),
+          })
+        : Customer.updateOne(filter, {
+            $push: { cart: { product: _id, count: 1 } },
+          }));
     } else {
       const productsToUpdateCount: string[] = [];
       const productsToAdd: string[] = [];
@@ -241,17 +239,17 @@ export const customerService: ICustomerService = {
         }
       }
 
-      if (productsToUpdateCount.length) {
+      if (productsToUpdateCount.length > 0) {
         await Customer.updateOne(filter, {
           cart: currentCart.map((item) => {
-            const isExists = productsToUpdateCount.some((productId) => item.product._id?.toString() === productId);
+            const isExists = productsToUpdateCount.includes(`${item.product._id}`);
 
             return isExists ? { product: item.product, count: item.count + 1 } : item;
           }),
         });
       }
 
-      if (productsToAdd.length) {
+      if (productsToAdd.length > 0) {
         for (const productId of productsToAdd) {
           await Customer.updateOne(filter, {
             $push: { cart: { product: productId, count: 1 } },

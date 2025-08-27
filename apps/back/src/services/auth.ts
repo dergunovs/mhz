@@ -46,7 +46,7 @@ export const authService: IAuthService = {
   setup: async (managerToCreate: ISignUpData) => {
     const managers = await Manager.find().lean().exec();
 
-    if (managers.length) return true;
+    if (managers.length > 0) return true;
 
     const manager = new Manager(managerToCreate);
 
