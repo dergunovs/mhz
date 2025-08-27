@@ -47,6 +47,7 @@
     "postcss-html": "1.8.0",
     "prettier": "3.6.2",
     "sass-embedded": "1.91.0",
+    "sass-embedded-linux-x64": "1.91.0",
     "stylelint": "16.23.1",
     "stylelint-config-recess-order": "7.2.0",
     "stylelint-config-recommended-scss": "16.0.0",
