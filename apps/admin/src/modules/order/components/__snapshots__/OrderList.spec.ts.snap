@@ -8,16 +8,16 @@ exports[`OrderList > matches snapshot 1`] = `
       <td data-no-wrap="">352000 ₽</td>
       <td data-no-wrap="">Alexandr Dergunov</td>
       <td>new</td>
-      <td data-no-wrap="">Jan 2, 2024</td>
-      <td data-no-wrap="">Jan 2, 2024</td>
+      <td data-no-wrap="">2 янв. 2024 г.</td>
+      <td data-no-wrap="">2 янв. 2024 г.</td>
     </tr>
     <tr data-test="order-list-row">
       <td data-grow=""><a to="/orders/6587ec081614096a5773abdb" data-test="order-list-link">6587ec081614096a5773abdb</a></td>
       <td data-no-wrap="">29900 ₽</td>
       <td data-no-wrap="">Alexandr Dergunov</td>
       <td>completed</td>
-      <td data-no-wrap="">Dec 24, 2023</td>
-      <td data-no-wrap="">Dec 30, 2023</td>
+      <td data-no-wrap="">24 дек. 2023 г.</td>
+      <td data-no-wrap="">30 дек. 2023 г.</td>
     </tr>
   </tbody>
 </table>"

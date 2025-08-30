@@ -7,21 +7,21 @@ exports[`ManufacturerList > matches snapshot 1`] = `
       <td data-grow=""><a to="/manufacturers/edit/64dd1a67f8fd2bdaa35cc735" data-test="manufacturer-list-link">Apacer</a></td>
       <td data-no-wrap="">China</td>
       <td>15</td>
-      <td data-no-wrap="">Aug 16, 2023</td>
-      <td data-no-wrap="">Sep 11, 2023</td>
+      <td data-no-wrap="">16 авг. 2023 г.</td>
+      <td data-no-wrap="">11 сент. 2023 г.</td>
     </tr>
     <tr data-test="manufacturer-list-row">
       <td data-grow=""><a to="/manufacturers/edit/64dd1999f8fd2bdaa35cc723" data-test="manufacturer-list-link">Palit</a></td>
       <td data-no-wrap="">China</td>
       <td>2</td>
-      <td data-no-wrap="">Aug 16, 2023</td>
+      <td data-no-wrap="">16 авг. 2023 г.</td>
       <td data-no-wrap="">0</td>
     </tr>
     <tr data-test="manufacturer-list-row">
       <td data-grow=""><a to="/manufacturers/edit/64dd1907f8fd2bdaa35cc711" data-test="manufacturer-list-link">Samsung</a></td>
       <td data-no-wrap="">Korea</td>
       <td>1</td>
-      <td data-no-wrap="">Aug 16, 2023</td>
+      <td data-no-wrap="">16 авг. 2023 г.</td>
       <td data-no-wrap="">0</td>
     </tr>
   </tbody>

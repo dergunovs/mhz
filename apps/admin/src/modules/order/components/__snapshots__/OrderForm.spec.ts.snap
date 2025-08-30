@@ -10,8 +10,8 @@ exports[`OrderForm > matches snapshot 1`] = `
       <div data-test="order-form-products"><span data-test="order-form-products-count">3</span> x <a to="/products/edit/64df860a7ac901ef3e27319c" data-test="order-form-products-title">Thermaltake TOUGHRAM 2x8 GB DDR4 4400</a></div>
     </div>
     <div><b>Price: </b><span data-test="order-form-price">352000 ₽</span></div>
-    <div><b>Created: </b><span data-test="order-form-created">Jan 2, 2024, 1:15 PM</span></div>
-    <div><b>Updated: </b><span data-test="order-form-updated">Jan 2, 2024, 1:17 PM</span></div>
+    <div><b>Created: </b><span data-test="order-form-created">2 янв. 2024 г., 13:15</span></div>
+    <div><b>Updated: </b><span data-test="order-form-updated">2 янв. 2024 г., 13:17</span></div>
   </div>
   <div class="_buttons_1d98bf">
     <div class="_buttonsInner_1d98bf"><button isdisabled="true" data-test="order-form-complete"> Mark completed </button><button layout="secondary" data-test="order-form-back">Back</button></div>

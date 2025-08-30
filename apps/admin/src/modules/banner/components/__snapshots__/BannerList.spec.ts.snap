@@ -7,19 +7,19 @@ exports[`BannerList > matches snapshot 1`] = `
       <tr data-test="banner-list-row">
         <td data-grow=""><a to="/banners/edit/6517b90000009354ff5e5a2a" data-test="banner-list-link">Samsung 500 GB 980 PRO</a></td>
         <td data-no-wrap="">true</td>
-        <td data-no-wrap="">Sep 30, 2023</td>
+        <td data-no-wrap="">30 сент. 2023 г.</td>
         <td data-no-wrap="">0</td>
       </tr>
       <tr data-test="banner-list-row">
         <td data-grow=""><a to="/banners/edit/6517b8b800009354ff5e5a16" data-test="banner-list-link">MSI MPG SEKIRA 500X</a></td>
         <td data-no-wrap="">true</td>
-        <td data-no-wrap="">Sep 30, 2023</td>
-        <td data-no-wrap="">Sep 30, 2023</td>
+        <td data-no-wrap="">30 сент. 2023 г.</td>
+        <td data-no-wrap="">30 сент. 2023 г.</td>
       </tr>
       <tr data-test="banner-list-row">
         <td data-grow=""><a to="/banners/edit/6517b77c00009354ff5e5997" data-test="banner-list-link">GIGABYTE M32U</a></td>
         <td data-no-wrap="">true</td>
-        <td data-no-wrap="">Sep 30, 2023</td>
+        <td data-no-wrap="">30 сент. 2023 г.</td>
         <td data-no-wrap="">0</td>
       </tr>
     </tbody>

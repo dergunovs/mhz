@@ -166,7 +166,7 @@ export async function getProductFilters(options?: IQuery, isInitial?: boolean): 
   });
 
   const orderedFields = Object.keys(groupedFields)
-    .sort()
+    .sort((a, b) => a.localeCompare(b))
     .reduce((obj: IFilterField, key) => {
       obj[key] = groupedFields[key];
 

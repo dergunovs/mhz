@@ -6,14 +6,14 @@ exports[`ManagerList > matches snapshot 1`] = `
     <tr data-test="manager-list-row">
       <td data-grow=""><a to="/managers/edit/64f19fc5677cb758200ab511" data-test="manager-list-link">a@mail.ru</a></td>
       <td data-no-wrap="">Alexandr Petrov</td>
-      <td data-no-wrap="">Sep 1, 2023</td>
-      <td data-no-wrap="">Sep 19, 2023</td>
+      <td data-no-wrap="">1 сент. 2023 г.</td>
+      <td data-no-wrap="">19 сент. 2023 г.</td>
     </tr>
     <tr data-test="manager-list-row">
       <td data-grow=""><a to="/managers/edit/64f19fc5677cb758200ab511" data-test="manager-list-link">a@b.ru</a></td>
       <td data-no-wrap="">Ivan Sidorov</td>
-      <td data-no-wrap="">Sep 1, 2023</td>
-      <td data-no-wrap="">Sep 19, 2023</td>
+      <td data-no-wrap="">1 сент. 2023 г.</td>
+      <td data-no-wrap="">19 сент. 2023 г.</td>
     </tr>
   </tbody>
 </table>"

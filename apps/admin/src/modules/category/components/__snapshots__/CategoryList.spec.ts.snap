@@ -6,74 +6,74 @@ exports[`CategoryList > matches snapshot 1`] = `
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d4dc15f93f056da17ceff8" data-test="category-list-link">CPU</a></td>
       <td>327</td>
-      <td data-no-wrap="">Aug 10, 2023</td>
-      <td data-no-wrap="">Dec 21, 2023</td>
+      <td data-no-wrap="">10 авг. 2023 г.</td>
+      <td data-no-wrap="">21 дек. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d62fa7a635811931410ebd" data-test="category-list-link">Case</a></td>
       <td>28</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d62da6a635811931410ea4" data-test="category-list-link">Cooler</a></td>
       <td>15</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d62f06a635811931410eb3" data-test="category-list-link">GPU</a></td>
       <td>10</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d63066a635811931410ec7" data-test="category-list-link">Keyboard</a></td>
       <td>22</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d63016a635811931410ec2" data-test="category-list-link">Monitor</a></td>
       <td>5</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d626e88cde96b53dd37ff2" data-test="category-list-link">Motherboard</a></td>
       <td>19</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d630cea635811931410ecc" data-test="category-list-link">Mouse</a></td>
       <td>9</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d63106a635811931410ed1" data-test="category-list-link">Mousepad</a></td>
       <td>5</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d62f6ca635811931410eb8" data-test="category-list-link">PSU</a></td>
       <td>6</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d62e42a635811931410ea9" data-test="category-list-link">RAM</a></td>
       <td>4</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
     <tr data-test="category-list-row">
       <td data-grow=""><a to="/categories/edit/64d62ea8a635811931410eae" data-test="category-list-link">SSD</a></td>
       <td>8</td>
-      <td data-no-wrap="">Aug 11, 2023</td>
-      <td data-no-wrap="">Sep 20, 2023</td>
+      <td data-no-wrap="">11 авг. 2023 г.</td>
+      <td data-no-wrap="">20 сент. 2023 г.</td>
     </tr>
   </tbody>
 </table>"
