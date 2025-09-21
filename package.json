@@ -20,7 +20,7 @@
     "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --excludeCollection=configurations --out=apps/back/dump"
   },
   "dependencies": {
-    "@changesets/cli": "2.29.6"
+    "@changesets/cli": "2.29.7"
   },
   "devDependencies": {
     "@turbo/gen": "2.5.6",
