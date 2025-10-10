@@ -58,7 +58,7 @@ import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiUpload, toast, UiSelect, UiEditor } from 'mhz-ui';
 import { countries } from 'mhz-countries';
-import { clone, useValidator, required, useQueryClient } from 'mhz-helpers';
+import { clone, useValidate, required, useQueryClient } from 'mhz-helpers';
 import { API_MANUFACTURER, IManufacturer } from 'mhz-contracts';
 
 import ImagePreview from '@/common/components/ImagePreview.vue';
@@ -109,7 +109,7 @@ const { mutate: mutateDelete } = deleteManufacturer({
   },
 });
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   { title: [required], description: [required], logoUrl: [required], country: [required] },
   'en'

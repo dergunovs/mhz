@@ -52,7 +52,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiCheckbox, UiField, UiInput, UiModal, toast } from 'mhz-ui';
-import { clone, required, useValidator, useQueryClient } from 'mhz-helpers';
+import { clone, required, useValidate, useQueryClient } from 'mhz-helpers';
 import {
   API_CUSTOMER_CART,
   API_CONFIGURATION,
@@ -150,7 +150,7 @@ function removeProduct(categoryTitle: keyof IConfigurationParts) {
   delete formData.value.parts?.[categoryTitle];
 }
 
-const { error, isValid } = useValidator(formData, { title: [required] }, 'en');
+const { error, isValid } = useValidate(formData, { title: [required] }, 'en');
 
 const { validation } = useConfigurationCheck(formData);
 

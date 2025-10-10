@@ -27,7 +27,7 @@
 import { ref, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiModal, toast } from 'mhz-ui';
-import { clone, useValidator, required, email, logout, deleteAuthHeader, useQueryClient } from 'mhz-helpers';
+import { clone, useValidate, required, email, logout, deleteAuthHeader, useQueryClient } from 'mhz-helpers';
 import { API_CUSTOMER, ICustomer } from 'mhz-contracts';
 
 import { updateCustomer, deleteCustomer } from '@/customer/services';
@@ -63,7 +63,7 @@ const { mutate: mutateDelete } = deleteCustomer({
   },
 });
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   { firstName: [required], lastName: [required], email: [required, email] },
   'en'

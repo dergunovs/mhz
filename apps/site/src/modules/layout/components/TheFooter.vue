@@ -37,7 +37,7 @@
 import { ref } from 'vue';
 
 import { UiButton, UiField, UiInput, UiModal } from 'mhz-ui';
-import { email, required, useValidator } from 'mhz-helpers';
+import { email, required, useValidate } from 'mhz-helpers';
 
 import IconLogoWhite from '@/layout/icons/logo-text-white.svg?url';
 
@@ -51,7 +51,7 @@ const formData = ref({
   email: '',
 });
 
-const { error, isValid } = useValidator(formData, { email: [required, email] }, 'en');
+const { error, isValid } = useValidate(formData, { email: [required, email] }, 'en');
 
 function submit() {
   if (isValid()) isShowModal.value = true;

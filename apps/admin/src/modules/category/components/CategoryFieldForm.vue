@@ -49,7 +49,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 
 import { UiField, UiInput, UiButton, UiSelect } from 'mhz-ui';
 import { ICategoryField } from 'mhz-contracts';
-import { clone, createTempId, useValidator, required } from 'mhz-helpers';
+import { clone, createTempId, useValidate, required } from 'mhz-helpers';
 
 import { CATEGORY_FIELD_TYPE_OPTIONS } from '@/category/constants';
 
@@ -86,7 +86,7 @@ watch(
   }
 );
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   { title: [required], fieldType: [required], fieldUnits: formData.value.fieldType === 'number' ? [required] : [] },
   'en'

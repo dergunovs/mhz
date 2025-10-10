@@ -70,7 +70,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiButton, UiUpload, toast, UiEditor } from 'mhz-ui';
-import { clone, deleteTempId, useValidator, required, useQueryClient } from 'mhz-helpers';
+import { clone, deleteTempId, useValidate, required, useQueryClient } from 'mhz-helpers';
 import { API_CATEGORY, ICategory, ICategoryField } from 'mhz-contracts';
 
 import CategoryFieldForm from '@/category/components/CategoryFieldForm.vue';
@@ -127,7 +127,7 @@ const { mutate: mutateDelete } = deleteCategory({
   },
 });
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   { title: [required], description: [required], iconUrl: [required] },
   'en'

@@ -33,7 +33,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
-import { useValidator, required, email } from 'mhz-helpers';
+import { useValidate, required, email } from 'mhz-helpers';
 import { ISignUpData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
@@ -56,7 +56,7 @@ const { mutate: mutatePostCustomer } = postCustomer({
   },
 });
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   { firstName: [required], lastName: [required], email: [required, email], password: [required] },
   'en'

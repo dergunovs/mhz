@@ -4,7 +4,7 @@ import * as helpers from 'mhz-helpers';
 import { UseQueryReturnType, UseMutationReturnType } from 'mhz-helpers';
 
 beforeAll(() => {
-  vi.spyOn(helpers, 'useValidator').mockImplementation(() => {
+  vi.spyOn(helpers, 'useValidate').mockImplementation(() => {
     return {
       error: () => undefined,
       isValid: () => true,

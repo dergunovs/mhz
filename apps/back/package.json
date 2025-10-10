@@ -24,30 +24,30 @@
   "dependencies": {
     "@fastify/autoload": "6.3.1",
     "@fastify/cors": "11.1.0",
-    "@fastify/helmet": "13.0.1",
+    "@fastify/helmet": "13.0.2",
     "@fastify/jwt": "10.0.0",
     "@fastify/multipart": "9.2.1",
     "@fastify/rate-limit": "10.3.0",
     "@fastify/static": "8.2.0",
-    "@fastify/swagger": "9.5.1",
+    "@fastify/swagger": "9.5.2",
     "@fastify/swagger-ui": "5.2.3",
     "ajv": "8.17.1",
     "bcryptjs": "3.0.2",
-    "dotenv": "17.2.2",
-    "fastify": "5.6.0",
-    "fastify-plugin": "5.0.1",
+    "dotenv": "17.2.3",
+    "fastify": "5.6.1",
+    "fastify-plugin": "5.1.0",
     "mhz-contracts": "*",
-    "mongoose": "8.18.1",
+    "mongoose": "8.19.1",
     "qs": "6.14.0",
     "sharp": "0.34.4"
   },
   "devDependencies": {
-    "@eslint/js": "9.36.0",
+    "@eslint/js": "9.37.0",
     "@types/bcryptjs": "2.4.6",
-    "@types/node": "24.5.2",
+    "@types/node": "24.7.1",
     "@types/qs": "6.14.0",
     "esbuild": "0.25.10",
-    "eslint": "9.36.0",
+    "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-import-x": "4.16.1",
@@ -58,12 +58,12 @@
     "fastify-linters-config": "0.3.1",
     "nodemon": "3.1.10",
     "prettier": "3.6.2",
-    "typescript": "5.9.2",
-    "typescript-eslint": "8.44.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.0",
     "vitest": "3.2.4"
   },
   "engines": {
-    "npm": ">=11.5.1",
-    "node": ">=24.6.0"
+    "npm": ">=11.6.1",
+    "node": ">=24.10.0"
   }
 }

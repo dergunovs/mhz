@@ -62,7 +62,7 @@ import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiUpload, UiSelect, UiCheckbox, toast } from 'mhz-ui';
-import { clone, useValidator, required, useQueryClient, useInfiniteScroll, usePagination } from 'mhz-helpers';
+import { clone, useValidate, required, useQueryClient, useInfiniteScroll, usePagination } from 'mhz-helpers';
 import { API_BANNER, IBanner, IProduct } from 'mhz-contracts';
 
 import ImagePreview from '@/common/components/ImagePreview.vue';
@@ -115,7 +115,7 @@ const { mutate: mutateDelete } = deleteBanner({
   },
 });
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   { text: [required], isActive: [required], imageUrl: [required], color: [required] },
   'en'

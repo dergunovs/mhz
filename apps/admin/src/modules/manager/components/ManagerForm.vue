@@ -30,7 +30,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, toast } from 'mhz-ui';
-import { clone, useValidator, required, useQueryClient, email } from 'mhz-helpers';
+import { clone, useValidate, required, useQueryClient, email } from 'mhz-helpers';
 import { API_MANAGER, IManager } from 'mhz-contracts';
 
 import FormButtons from '@/common/components/FormButtons.vue';
@@ -79,7 +79,7 @@ const { mutate: mutateDelete } = deleteManager({
   },
 });
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   {
     firstName: [required],

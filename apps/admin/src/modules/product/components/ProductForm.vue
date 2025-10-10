@@ -83,7 +83,7 @@ import { ref, computed, onMounted, watch, toRaw } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiField, UiInput, UiCheckbox, toast, UiEditor, UiSelect, UiUpload } from 'mhz-ui';
-import { clone, usePagination, useInfiniteScroll, useValidator, required, useQueryClient } from 'mhz-helpers';
+import { clone, usePagination, useInfiniteScroll, useValidate, required, useQueryClient } from 'mhz-helpers';
 import { API_PRODUCT, ICategory, IProduct, IManufacturer, ICategoryField } from 'mhz-contracts';
 
 import ProductFieldsForm from '@/product/components/ProductFieldsForm.vue';
@@ -211,7 +211,7 @@ function updateFields(fields: ICategoryField[]) {
   formData.value.fields = [...fields];
 }
 
-const { error, isValid } = useValidator(
+const { error, isValid } = useValidate(
   formData,
   { title: [required], description: [required], price: [required], isInStock: [required] },
   'en'

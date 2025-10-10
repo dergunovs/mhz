@@ -23,7 +23,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { UiButton, UiField, UiInput, toast } from 'mhz-ui';
-import { useValidator, required, email, useAuth, setAuthHeader } from 'mhz-helpers';
+import { useValidate, required, email, useAuth, setAuthHeader } from 'mhz-helpers';
 import { ILoginData } from 'mhz-contracts';
 
 import ImageLogo from '@/layout/icons/logo.svg';
@@ -50,7 +50,7 @@ const { mutate: mutateLogin } = login({
   },
 });
 
-const { error, isValid } = useValidator(formData, { email: [required, email], password: [required] }, 'en');
+const { error, isValid } = useValidate(formData, { email: [required, email], password: [required] }, 'en');
 
 function submit() {
   if (isValid()) mutateLogin(formData.value);
