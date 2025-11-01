@@ -1,15 +1,10 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
-
-function removeDataTest(node) {
-  if (node.type === 1 /* NodeTypes.ELEMENT */) {
-    node.props = node.props.filter((prop) => (prop.type === 6 ? prop.name !== 'data-test' : true));
-  }
-}
+import { removeDataTest } from 'mhz-helpers';
 
 export default defineConfig({
   server: {
@@ -45,9 +40,11 @@ export default defineConfig({
     clearMocks: true,
     environment: 'happy-dom',
     include: ['**/*.spec.ts'],
-    coverage: { provider: 'istanbul', reporter: ['text'], include: ['**/*.vue'], all: true },
+    coverage: { provider: 'v8', reporter: ['text'], include: ['**/*.vue'] },
     css: false,
-    deps: { inline: true },
+    server: {
+      deps: { inline: [/^(?!.*vitest).*$/] },
+    },
     env: { TZ: 'UTC' },
   },
 });
