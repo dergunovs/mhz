@@ -7,15 +7,7 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue';
 
-import { useAuth } from 'mhz-helpers';
-
 import SignUpForm from '@/auth/components/SignUpForm.vue';
-
-import { URL_MAIN } from '@/common/constants';
-
-const { redirectIfAuth } = useAuth();
-
-redirectIfAuth(URL_MAIN);
 
 useHead({
   title: 'Sign up',

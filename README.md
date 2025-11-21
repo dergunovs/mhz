@@ -14,7 +14,7 @@ Fake PC hardware store monorepo.
 
 ## Installation
 
-1. Install Node.js 24 and MongoDB 7
+1. Install Node.js 25 and MongoDB 8.2
 2. `npm install` - install deps from root folder
 3. Create .env files in `/apps` subfolders - examples included
 4. `npm run build` - build all apps and packages

@@ -29,7 +29,7 @@ vi.spyOn(authServices, 'login').mockImplementation((options: { onSuccess?: (data
 
 const spyAuth = vi.fn();
 
-vi.spyOn(helpers, 'useAuth').mockReturnValue({ auth: spyAuth, redirectIfAuth: () => undefined });
+vi.spyOn(helpers, 'useAuth').mockReturnValue({ auth: spyAuth });
 
 const spySetAuthHeaders = vi.spyOn(helpers, 'setAuthHeader');
 
