@@ -20,12 +20,12 @@
     "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --excludeCollection=configurations --out=apps/back/dump"
   },
   "dependencies": {
-    "@changesets/cli": "2.29.7"
+    "@changesets/cli": "2.29.8"
   },
   "devDependencies": {
-    "@turbo/gen": "2.6.1",
-    "prettier": "3.6.2",
-    "turbo": "2.6.1"
+    "@turbo/gen": "2.6.3",
+    "prettier": "3.7.4",
+    "turbo": "2.6.3"
   },
   "packageManager": "npm@11.6.2",
   "workspaces": [

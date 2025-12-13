@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@fastify/autoload": "6.3.1",
-    "@fastify/cors": "11.1.0",
+    "@fastify/cors": "11.2.0",
     "@fastify/helmet": "13.0.2",
     "@fastify/jwt": "10.0.0",
     "@fastify/multipart": "9.3.0",
@@ -37,17 +37,17 @@
     "fastify": "5.6.2",
     "fastify-plugin": "5.1.0",
     "mhz-contracts": "*",
-    "mongoose": "8.20.1",
+    "mongoose": "9.0.1",
     "qs": "6.14.0",
     "sharp": "0.34.5"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.1",
+    "@eslint/js": "9.39.2",
     "@types/bcryptjs": "2.4.6",
-    "@types/node": "24.10.1",
+    "@types/node": "25.0.1",
     "@types/qs": "6.14.0",
-    "esbuild": "0.27.0",
-    "eslint": "9.39.1",
+    "esbuild": "0.27.1",
+    "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-import-x": "4.16.1",
@@ -57,10 +57,10 @@
     "globals": "16.5.0",
     "fastify-linters-config": "0.3.1",
     "nodemon": "3.1.11",
-    "prettier": "3.6.2",
+    "prettier": "3.7.4",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.47.0",
-    "vitest": "4.0.12"
+    "typescript-eslint": "8.49.0",
+    "vitest": "4.0.15"
   },
   "engines": {
     "npm": ">=11.6.2",

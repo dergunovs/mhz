@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { FilterQuery, Model, Types } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 import type { IFilterField, IFilterData, IQuery, IQueryPopulated } from 'mhz-contracts';
 
@@ -63,7 +63,7 @@ export async function paginate<T>(Entity: Model<T>, options?: IQueryPopulated) {
     ...priceFilter,
     ...fieldsFilters,
     ...customerFilter,
-  } as FilterQuery<T>;
+  };
 
   const page = Number(options?.page) || 1;
   const sortDir = options?.dir === 'desc' ? '-' : '';

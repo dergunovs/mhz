@@ -73,7 +73,7 @@ export const customerService: ICustomerService = {
 
     const productIds = customer?.cart?.map((item) => item.product._id);
 
-    const products: IProduct[] = await Product.find({ _id: { $in: productIds } })
+    const products: IProduct[] = await Product.find({ _id: { $in: productIds } as unknown as string[] })
       .select('thumbUrls title price category')
       .populate({ path: 'category', select: 'title' })
       .lean()
@@ -130,7 +130,9 @@ export const customerService: ICustomerService = {
 
     const customer = await Customer.findOne({ _id: user?._id }).lean().exec();
 
-    const products: IProduct[] = await Product.find({ _id: { $in: customer?.favouriteProducts } })
+    const products: IProduct[] = await Product.find({
+      _id: { $in: customer?.favouriteProducts } as unknown as string[],
+    })
       .select('thumbUrls title price category')
       .populate({ path: 'category', select: 'title' })
       .lean()
