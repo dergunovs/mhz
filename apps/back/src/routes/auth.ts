@@ -25,7 +25,7 @@ export default async function (fastify: IFastifyInstance) {
     async function (request, reply) {
       const { user, isUserNotFound, isWrongPassword } = await authService.login(request.body, fastify.jwt.sign);
 
-      if (isUserNotFound) {
+      if (isUserNotFound || !user) {
         reply.code(404).send({ message: 'User not found' });
       } else if (isWrongPassword) {
         reply.code(401).send({ message: 'Wrong password' });

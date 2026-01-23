@@ -45,13 +45,17 @@ export default async function (fastify: IFastifyInstance) {
     }
   );
 
-  fastify.get<{ Querystring: { _id: string; initiator: TInitiator }; Reply: { 200: IFilterData } }>(
+  fastify.get<{ Querystring: { _id: string; initiator: TInitiator }; Reply: { 200: IFilterData; '4xx': IBaseReply } }>(
     API_PRODUCT_FILTERS,
     productFiltersSchema,
     async function (request, reply) {
       const filters = await productService.getFilters(request.query._id, request.query.initiator);
 
-      reply.code(200).send(filters);
+      if (filters) {
+        reply.code(200).send(filters);
+      } else {
+        reply.code(404).send({ message: 'No filters' });
+      }
     }
   );
 
