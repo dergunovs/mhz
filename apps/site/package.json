@@ -23,8 +23,8 @@
     "@unhead/vue": "2.1.2",
     "mhz-bank": "*",
     "mhz-contracts": "*",
-    "mhz-helpers": "1.3.24",
-    "mhz-ui": "1.3.24",
+    "mhz-helpers": "1.3.25",
+    "mhz-ui": "1.3.25",
     "vue": "3.6.0-beta.4",
     "vue-router": "4.6.4"
   },
@@ -56,7 +56,7 @@
     "stylelint-prettier": "5.0.3",
     "typescript": "5.9.3",
     "typescript-eslint": "8.53.1",
-    "vite": "8.0.0-beta.9",
+    "vite": "7.3.1",
     "vite-plugin-pwa": "1.2.0",
     "vite-svg-loader": "5.1.0",
     "vitest": "4.1.0-beta.2",
@@ -65,7 +65,7 @@
     "vue-tsc": "3.2.3"
   },
   "engines": {
-    "npm": ">=11.6.2",
-    "node": ">=25.2.1"
+    "npm": ">=11.7.0",
+    "node": ">=25.4.0"
   }
 }
