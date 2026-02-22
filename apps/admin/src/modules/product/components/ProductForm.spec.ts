@@ -122,8 +122,8 @@ describe('ProductForm', async () => {
   });
 
   it('gets manufacturers and categories to fill the select options', async () => {
-    expect(spyGetManufacturers).toBeCalledTimes(1);
-    expect(spyGetCategories).toBeCalledTimes(1);
+    expect(spyGetManufacturers).toHaveBeenCalledTimes(1);
+    expect(spyGetCategories).toHaveBeenCalledTimes(1);
   });
 
   it('updates fields by child component emit', async () => {
@@ -147,9 +147,9 @@ describe('ProductForm', async () => {
   });
 
   it('updates product', async () => {
-    expect(spyMutateUpdate).toBeCalledTimes(0);
-    expect(spyRefetchQueries).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
+    expect(spyMutateUpdate).toHaveBeenCalledTimes(0);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
 
     const NEW_PRODUCT_TITLE = 'yo';
 
@@ -157,54 +157,54 @@ describe('ProductForm', async () => {
 
     await wrapper.find(productForm).trigger('submit');
 
-    expect(spyMutateUpdate).toBeCalledTimes(1);
-    expect(spyMutateUpdate).toBeCalledWith({ ...PRODUCT, title: NEW_PRODUCT_TITLE });
+    expect(spyMutateUpdate).toHaveBeenCalledTimes(1);
+    expect(spyMutateUpdate).toHaveBeenCalledWith({ ...PRODUCT, title: NEW_PRODUCT_TITLE });
 
     onSuccessUpdate();
 
-    expect(spyRefetchQueries).toBeCalledTimes(1);
-    expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(1);
+    expect(spyRefetchQueries).toHaveBeenCalledWith(QUERY_KEY);
 
     await flushPromises();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
   });
 
   it('deletes product', async () => {
-    expect(spyMutateDelete).toBeCalledTimes(0);
-    expect(spyRemoveQueries).toBeCalledTimes(0);
-    expect(spyRefetchQueries).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
-    expect(spyRouterPush).toBeCalledTimes(0);
+    expect(spyMutateDelete).toHaveBeenCalledTimes(0);
+    expect(spyRemoveQueries).toHaveBeenCalledTimes(0);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
+    expect(spyRouterPush).toHaveBeenCalledTimes(0);
 
     wrapper.findComponent<DefineComponent>(productFormButtons).vm.$emit('delete', PRODUCT._id);
 
-    expect(spyMutateDelete).toBeCalledTimes(1);
-    expect(spyMutateDelete).toBeCalledWith(PRODUCT._id);
+    expect(spyMutateDelete).toHaveBeenCalledTimes(1);
+    expect(spyMutateDelete).toHaveBeenCalledWith(PRODUCT._id);
 
     onSuccessDelete();
 
-    expect(spyRemoveQueries).toBeCalledTimes(1);
-    expect(spyRemoveQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRemoveQueries).toHaveBeenCalledTimes(1);
+    expect(spyRemoveQueries).toHaveBeenCalledWith(QUERY_KEY);
 
-    expect(spyRefetchQueries).toBeCalledTimes(1);
-    expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(1);
+    expect(spyRefetchQueries).toHaveBeenCalledWith(QUERY_KEY);
 
     await flushPromises();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
 
-    expect(spyRouterPush).toBeCalledTimes(1);
-    expect(spyRouterPush).toBeCalledWith(URL_PRODUCT);
+    expect(spyRouterPush).toHaveBeenCalledTimes(1);
+    expect(spyRouterPush).toHaveBeenCalledWith(URL_PRODUCT);
   });
 
   it('creates product', async () => {
     wrapper.unmount();
 
-    expect(spyMutatePost).toBeCalledTimes(0);
-    expect(spyRefetchQueries).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
-    expect(spyRouterPush).toBeCalledTimes(0);
+    expect(spyMutatePost).toHaveBeenCalledTimes(0);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
+    expect(spyRouterPush).toHaveBeenCalledTimes(0);
 
     const wrapperWithoutProduct = wrapperFactory(ProductForm, {});
 
@@ -232,19 +232,19 @@ describe('ProductForm', async () => {
 
     await wrapperWithoutProduct.find(productForm).trigger('submit');
 
-    expect(spyMutatePost).toBeCalledTimes(1);
-    expect(spyMutatePost).toBeCalledWith(NEW_PRODUCT);
+    expect(spyMutatePost).toHaveBeenCalledTimes(1);
+    expect(spyMutatePost).toHaveBeenCalledWith(NEW_PRODUCT);
 
     onSuccessPost();
 
-    expect(spyRefetchQueries).toBeCalledTimes(1);
-    expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(1);
+    expect(spyRefetchQueries).toHaveBeenCalledWith(QUERY_KEY);
 
     await flushPromises();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
 
-    expect(spyRouterPush).toBeCalledTimes(1);
-    expect(spyRouterPush).toBeCalledWith(URL_PRODUCT);
+    expect(spyRouterPush).toHaveBeenCalledTimes(1);
+    expect(spyRouterPush).toHaveBeenCalledWith(URL_PRODUCT);
   });
 });

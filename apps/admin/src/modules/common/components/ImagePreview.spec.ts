@@ -61,11 +61,11 @@ describe('ImagePreview', async () => {
   });
 
   it('deletes image by delete button click', async () => {
-    expect(spyMutateDelete).toBeCalledTimes(0);
+    expect(spyMutateDelete).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(imagePreviewDelete).trigger('click');
 
-    expect(spyMutateDelete).toBeCalledTimes(1);
+    expect(spyMutateDelete).toHaveBeenCalledTimes(1);
     expect(wrapper.emitted()['delete']).toHaveLength(1);
   });
 });

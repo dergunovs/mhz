@@ -34,7 +34,7 @@ describe('BannerEditPage', async () => {
   });
 
   it('gets banner and passes it to form props', async () => {
-    expect(spyGetBanner).toBeCalledTimes(1);
+    expect(spyGetBanner).toHaveBeenCalledTimes(1);
 
     expect(wrapper.findComponent<DefineComponent<{ banner: IBanner }>>(bannerEditPageForm).vm.$props.banner).toEqual(
       BANNER

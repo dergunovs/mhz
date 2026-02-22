@@ -19,17 +19,17 @@ describe('resizeFile', () => {
 
     const resizedFilename = await resizeFile(filename, width);
 
-    expect(sharp).toBeCalledTimes(1);
-    expect(sharp).toBeCalledWith(`./public/upload/${filename}`);
+    expect(sharp).toHaveBeenCalledTimes(1);
+    expect(sharp).toHaveBeenCalledWith(`./public/upload/${filename}`);
 
-    expect(resize).toBeCalledTimes(1);
-    expect(resize).toBeCalledWith(Number(width));
+    expect(resize).toHaveBeenCalledTimes(1);
+    expect(resize).toHaveBeenCalledWith(Number(width));
 
-    expect(toFile).toBeCalledTimes(1);
-    expect(toFile).toBeCalledWith(`./public/upload/resized-${filename}`);
+    expect(toFile).toHaveBeenCalledTimes(1);
+    expect(toFile).toHaveBeenCalledWith(`./public/upload/resized-${filename}`);
 
-    expect(spyDeleteFile).toBeCalledTimes(1);
-    expect(spyDeleteFile).toBeCalledWith(filename);
+    expect(spyDeleteFile).toHaveBeenCalledTimes(1);
+    expect(spyDeleteFile).toHaveBeenCalledWith(filename);
 
     expect(resizedFilename).toEqual(`resized-${filename}`);
   });

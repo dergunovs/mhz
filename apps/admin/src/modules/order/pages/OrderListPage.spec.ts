@@ -32,7 +32,7 @@ describe('OrderListPage', async () => {
   });
 
   it('gets orders and passes them to list props', async () => {
-    expect(spyGetOrders).toBeCalledTimes(1);
+    expect(spyGetOrders).toHaveBeenCalledTimes(1);
 
     expect(wrapper.findComponent<DefineComponent<{ orders: IOrder[] }>>(orderList).vm.$props.orders).toEqual(
       ORDERS.data

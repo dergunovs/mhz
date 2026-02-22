@@ -41,14 +41,14 @@ describe('TheSearch', async () => {
   });
 
   it('searches by watching input', async () => {
-    expect(refetch).toBeCalledTimes(0);
+    expect(refetch).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(search).setValue(SMALL_QUERY);
 
-    expect(refetch).toBeCalledTimes(0);
+    expect(refetch).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(search).setValue(QUERY);
 
-    expect(refetch).toBeCalledTimes(1);
+    expect(refetch).toHaveBeenCalledTimes(1);
   });
 });

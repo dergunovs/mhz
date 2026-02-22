@@ -34,7 +34,7 @@ describe('CustomerPage', async () => {
   });
 
   it('gets customer and passes him to info props', async () => {
-    expect(spyGetCustomer).toBeCalledTimes(1);
+    expect(spyGetCustomer).toHaveBeenCalledTimes(1);
 
     expect(wrapper.findComponent<DefineComponent<{ customer: ICustomer }>>(customerInfo).vm.$props.customer).toEqual(
       CUSTOMER

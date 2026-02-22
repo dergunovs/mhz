@@ -34,7 +34,7 @@ describe('ManagerEditPage', async () => {
   });
 
   it('gets manager and passes it to form props', async () => {
-    expect(spyGetManager).toBeCalledTimes(1);
+    expect(spyGetManager).toHaveBeenCalledTimes(1);
 
     expect(
       wrapper.findComponent<DefineComponent<{ manager: IManager }>>(managerEditPageForm).vm.$props.manager

@@ -31,11 +31,11 @@ describe('TheHeader', async () => {
   });
 
   it('handles logout by button click', async () => {
-    expect(spyLogout).toBeCalledTimes(0);
+    expect(spyLogout).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(headerLogout).trigger('click');
 
-    expect(spyLogout).toBeCalledTimes(1);
-    expect(spyLogout).toBeCalledWith(URL_LOGIN, deleteAuthHeader, TOKEN_NAME);
+    expect(spyLogout).toHaveBeenCalledTimes(1);
+    expect(spyLogout).toHaveBeenCalledWith(URL_LOGIN, deleteAuthHeader, TOKEN_NAME);
   });
 });

@@ -41,11 +41,11 @@ describe('App', async () => {
   });
 
   it('gets token from cookies and not sets auth at login page', async () => {
-    expect(spyGetCookieToken).toBeCalledTimes(1);
-    expect(spyGetCookieToken).toBeCalledWith(TOKEN_NAME);
+    expect(spyGetCookieToken).toHaveBeenCalledTimes(1);
+    expect(spyGetCookieToken).toHaveBeenCalledWith(TOKEN_NAME);
 
-    expect(spySetAuthHeader).toBeCalledTimes(0);
-    expect(spyCheckAuth).toBeCalledTimes(0);
+    expect(spySetAuthHeader).toHaveBeenCalledTimes(0);
+    expect(spyCheckAuth).toHaveBeenCalledTimes(0);
   });
 
   it('shows default layout and sets auth if token exists and page is not login', async () => {
@@ -65,10 +65,10 @@ describe('App', async () => {
       setTimeout(r, 10);
     });
 
-    expect(spySetAuthHeader).toBeCalledTimes(1);
-    expect(spySetAuthHeader).toBeCalledWith(TOKEN_NAME);
+    expect(spySetAuthHeader).toHaveBeenCalledTimes(1);
+    expect(spySetAuthHeader).toHaveBeenCalledWith(TOKEN_NAME);
 
-    expect(spyCheckAuth).toBeCalledTimes(1);
+    expect(spyCheckAuth).toHaveBeenCalledTimes(1);
 
     expect(wrapperNotLogin.find(layout).attributes('data-layout')).toBe('LayoutDefault');
   });

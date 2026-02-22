@@ -34,7 +34,7 @@ describe('ManufacturerListPage', async () => {
   });
 
   it('gets manufacturers and passes them to list props', async () => {
-    expect(spyGetManufacturers).toBeCalledTimes(1);
+    expect(spyGetManufacturers).toHaveBeenCalledTimes(1);
 
     expect(
       wrapper.findComponent<DefineComponent<{ manufacturers: IManufacturer[] }>>(manufacturerList).vm.$props

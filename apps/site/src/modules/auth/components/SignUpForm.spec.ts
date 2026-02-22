@@ -47,9 +47,9 @@ describe('SignUpForm', async () => {
   });
 
   it('handles signup by form submit', async () => {
-    expect(spyMutateSignUp).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
-    expect(spyRouterPush).toBeCalledTimes(0);
+    expect(spyMutateSignUp).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
+    expect(spyRouterPush).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(signupFormFirstName).setValue(FIRST_NAME);
     await wrapper.findComponent(signupFormLastName).setValue(LAST_NAME);
@@ -58,8 +58,8 @@ describe('SignUpForm', async () => {
 
     await wrapper.find(signupForm).trigger('submit');
 
-    expect(spyMutateSignUp).toBeCalledTimes(1);
-    expect(spyMutateSignUp).toBeCalledWith({
+    expect(spyMutateSignUp).toHaveBeenCalledTimes(1);
+    expect(spyMutateSignUp).toHaveBeenCalledWith({
       firstName: FIRST_NAME,
       lastName: LAST_NAME,
       email: EMAIL,
@@ -68,9 +68,9 @@ describe('SignUpForm', async () => {
 
     onSuccessSignUp();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
 
-    expect(spyRouterPush).toBeCalledTimes(1);
-    expect(spyRouterPush).toBeCalledWith(URL_LOGIN);
+    expect(spyRouterPush).toHaveBeenCalledTimes(1);
+    expect(spyRouterPush).toHaveBeenCalledWith(URL_LOGIN);
   });
 });

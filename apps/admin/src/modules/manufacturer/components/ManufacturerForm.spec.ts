@@ -99,9 +99,9 @@ describe('ManufacturerForm', async () => {
   });
 
   it('updates manufacturer', async () => {
-    expect(spyMutateUpdate).toBeCalledTimes(0);
-    expect(spyRefetchQueries).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
+    expect(spyMutateUpdate).toHaveBeenCalledTimes(0);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
 
     const NEW_MANUFACTURER_TITLE = 'yo';
 
@@ -109,54 +109,54 @@ describe('ManufacturerForm', async () => {
 
     await wrapper.find(manufacturerForm).trigger('submit');
 
-    expect(spyMutateUpdate).toBeCalledTimes(1);
-    expect(spyMutateUpdate).toBeCalledWith({ ...MANUFACTURER, title: NEW_MANUFACTURER_TITLE });
+    expect(spyMutateUpdate).toHaveBeenCalledTimes(1);
+    expect(spyMutateUpdate).toHaveBeenCalledWith({ ...MANUFACTURER, title: NEW_MANUFACTURER_TITLE });
 
     onSuccessUpdate();
 
-    expect(spyRefetchQueries).toBeCalledTimes(1);
-    expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(1);
+    expect(spyRefetchQueries).toHaveBeenCalledWith(QUERY_KEY);
 
     await flushPromises();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
   });
 
   it('deletes manufacturer', async () => {
-    expect(spyMutateDelete).toBeCalledTimes(0);
-    expect(spyRemoveQueries).toBeCalledTimes(0);
-    expect(spyRefetchQueries).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
-    expect(spyRouterPush).toBeCalledTimes(0);
+    expect(spyMutateDelete).toHaveBeenCalledTimes(0);
+    expect(spyRemoveQueries).toHaveBeenCalledTimes(0);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
+    expect(spyRouterPush).toHaveBeenCalledTimes(0);
 
     wrapper.findComponent<DefineComponent>(manufacturerFormButtons).vm.$emit('delete', MANUFACTURER._id);
 
-    expect(spyMutateDelete).toBeCalledTimes(1);
-    expect(spyMutateDelete).toBeCalledWith(MANUFACTURER._id);
+    expect(spyMutateDelete).toHaveBeenCalledTimes(1);
+    expect(spyMutateDelete).toHaveBeenCalledWith(MANUFACTURER._id);
 
     onSuccessDelete();
 
-    expect(spyRemoveQueries).toBeCalledTimes(1);
-    expect(spyRemoveQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRemoveQueries).toHaveBeenCalledTimes(1);
+    expect(spyRemoveQueries).toHaveBeenCalledWith(QUERY_KEY);
 
-    expect(spyRefetchQueries).toBeCalledTimes(1);
-    expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(1);
+    expect(spyRefetchQueries).toHaveBeenCalledWith(QUERY_KEY);
 
     await flushPromises();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
 
-    expect(spyRouterPush).toBeCalledTimes(1);
-    expect(spyRouterPush).toBeCalledWith(URL_MANUFACTURER);
+    expect(spyRouterPush).toHaveBeenCalledTimes(1);
+    expect(spyRouterPush).toHaveBeenCalledWith(URL_MANUFACTURER);
   });
 
   it('creates manufacturer', async () => {
     wrapper.unmount();
 
-    expect(spyMutatePost).toBeCalledTimes(0);
-    expect(spyRefetchQueries).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
-    expect(spyRouterPush).toBeCalledTimes(0);
+    expect(spyMutatePost).toHaveBeenCalledTimes(0);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
+    expect(spyRouterPush).toHaveBeenCalledTimes(0);
 
     const wrapperWithoutManufacturer = wrapperFactory(ManufacturerForm, {});
 
@@ -175,19 +175,19 @@ describe('ManufacturerForm', async () => {
 
     await wrapperWithoutManufacturer.find(manufacturerForm).trigger('submit');
 
-    expect(spyMutatePost).toBeCalledTimes(1);
-    expect(spyMutatePost).toBeCalledWith(NEW_MANUFACTURER);
+    expect(spyMutatePost).toHaveBeenCalledTimes(1);
+    expect(spyMutatePost).toHaveBeenCalledWith(NEW_MANUFACTURER);
 
     onSuccessPost();
 
-    expect(spyRefetchQueries).toBeCalledTimes(1);
-    expect(spyRefetchQueries).toBeCalledWith(QUERY_KEY);
+    expect(spyRefetchQueries).toHaveBeenCalledTimes(1);
+    expect(spyRefetchQueries).toHaveBeenCalledWith(QUERY_KEY);
 
     await flushPromises();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
 
-    expect(spyRouterPush).toBeCalledTimes(1);
-    expect(spyRouterPush).toBeCalledWith(URL_MANUFACTURER);
+    expect(spyRouterPush).toHaveBeenCalledTimes(1);
+    expect(spyRouterPush).toHaveBeenCalledWith(URL_MANUFACTURER);
   });
 });

@@ -51,9 +51,9 @@ describe('SetupForm', async () => {
   });
 
   it('handles setup by form submit', async () => {
-    expect(spyMutateSetup).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
-    expect(spyRouterPush).toBeCalledTimes(0);
+    expect(spyMutateSetup).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
+    expect(spyRouterPush).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(setupFormFirstName).setValue(FIRST_NAME);
     await wrapper.findComponent(setupFormLastName).setValue(LAST_NAME);
@@ -62,8 +62,8 @@ describe('SetupForm', async () => {
 
     await wrapper.find(setupForm).trigger('submit');
 
-    expect(spyMutateSetup).toBeCalledTimes(1);
-    expect(spyMutateSetup).toBeCalledWith({
+    expect(spyMutateSetup).toHaveBeenCalledTimes(1);
+    expect(spyMutateSetup).toHaveBeenCalledWith({
       firstName: FIRST_NAME,
       lastName: LAST_NAME,
       email: EMAIL,
@@ -72,9 +72,9 @@ describe('SetupForm', async () => {
 
     onSuccessSetup();
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
 
-    expect(spyRouterPush).toBeCalledTimes(1);
-    expect(spyRouterPush).toBeCalledWith(URL_LOGIN);
+    expect(spyRouterPush).toHaveBeenCalledTimes(1);
+    expect(spyRouterPush).toHaveBeenCalledWith(URL_LOGIN);
   });
 });

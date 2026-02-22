@@ -60,11 +60,11 @@ describe('ProductFieldsForm', async () => {
   });
 
   it('deletes ids of fields', async () => {
-    expect(spyDeleteTempId).toBeCalledTimes(1);
-    expect(spyDeleteTempId).toBeCalledWith(FIELDS, true);
+    expect(spyDeleteTempId).toHaveBeenCalledTimes(1);
+    expect(spyDeleteTempId).toHaveBeenCalledWith(FIELDS, true);
 
     await wrapper.setProps({ updates: 1 });
 
-    expect(spyDeleteTempId).toBeCalledTimes(2);
+    expect(spyDeleteTempId).toHaveBeenCalledTimes(2);
   });
 });

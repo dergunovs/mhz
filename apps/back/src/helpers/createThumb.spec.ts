@@ -16,17 +16,17 @@ describe('createThumb', () => {
 
     const resizedFilename = await createThumb(filename);
 
-    expect(sharp).toBeCalledTimes(1);
-    expect(sharp).toBeCalledWith(`./public/upload/${filename}`);
+    expect(sharp).toHaveBeenCalledTimes(1);
+    expect(sharp).toHaveBeenCalledWith(`./public/upload/${filename}`);
 
-    expect(resize).toBeCalledTimes(1);
-    expect(resize).toBeCalledWith(480);
+    expect(resize).toHaveBeenCalledTimes(1);
+    expect(resize).toHaveBeenCalledWith(480);
 
-    expect(webp).toBeCalledTimes(1);
-    expect(webp).toBeCalledWith({ quality: 64 });
+    expect(webp).toHaveBeenCalledTimes(1);
+    expect(webp).toHaveBeenCalledWith({ quality: 64 });
 
-    expect(toFile).toBeCalledTimes(1);
-    expect(toFile).toBeCalledWith(`./public/upload/thumb-${filename}.webp`);
+    expect(toFile).toHaveBeenCalledTimes(1);
+    expect(toFile).toHaveBeenCalledWith(`./public/upload/thumb-${filename}.webp`);
 
     expect(resizedFilename).toEqual(`thumb-${filename}.webp`);
   });

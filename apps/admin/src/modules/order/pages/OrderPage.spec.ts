@@ -34,7 +34,7 @@ describe('OrderPage', async () => {
   });
 
   it('gets order and passes it to form props', async () => {
-    expect(spyGetOrder).toBeCalledTimes(1);
+    expect(spyGetOrder).toHaveBeenCalledTimes(1);
 
     expect(wrapper.findComponent<DefineComponent<{ order: IOrder }>>(orderPageForm).vm.$props.order).toEqual(ORDER);
   });

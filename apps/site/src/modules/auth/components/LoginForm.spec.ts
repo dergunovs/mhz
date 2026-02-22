@@ -53,23 +53,23 @@ describe('LoginForm', async () => {
   });
 
   it('handles login by form submit', async () => {
-    expect(spyMutateLogin).toBeCalledTimes(0);
-    expect(spyAuth).toBeCalledTimes(0);
-    expect(spyToastSuccess).toBeCalledTimes(0);
+    expect(spyMutateLogin).toHaveBeenCalledTimes(0);
+    expect(spyAuth).toHaveBeenCalledTimes(0);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(loginFormEmail).setValue(EMAIL);
     await wrapper.findComponent(loginFormPassword).setValue(PASSWORD);
 
     await wrapper.find(loginForm).trigger('submit');
 
-    expect(spyMutateLogin).toBeCalledTimes(1);
-    expect(spyMutateLogin).toBeCalledWith({ email: EMAIL, password: PASSWORD, role: ROLE });
+    expect(spyMutateLogin).toHaveBeenCalledTimes(1);
+    expect(spyMutateLogin).toHaveBeenCalledWith({ email: EMAIL, password: PASSWORD, role: ROLE });
 
     onSuccessLogin({ _id: ID, email: EMAIL, role: ROLE, token: TOKEN });
 
-    expect(spyAuth).toBeCalledTimes(1);
-    expect(spyAuth).toBeCalledWith(TOKEN, spySetAuthHeaders, TOKEN_NAME);
+    expect(spyAuth).toHaveBeenCalledTimes(1);
+    expect(spyAuth).toHaveBeenCalledWith(TOKEN, spySetAuthHeaders, TOKEN_NAME);
 
-    expect(spyToastSuccess).toBeCalledTimes(1);
+    expect(spyToastSuccess).toHaveBeenCalledTimes(1);
   });
 });

@@ -34,7 +34,7 @@ describe('EntitiesCount', async () => {
   });
 
   it('gets entities count', async () => {
-    expect(spyGetCount).toBeCalledTimes(1);
+    expect(spyGetCount).toHaveBeenCalledTimes(1);
   });
 
   it('passes props to child chart components', async () => {

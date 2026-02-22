@@ -34,7 +34,7 @@ describe('ProductEditPage', async () => {
   });
 
   it('gets product and passes it to form props', async () => {
-    expect(spyGetProduct).toBeCalledTimes(1);
+    expect(spyGetProduct).toHaveBeenCalledTimes(1);
 
     expect(
       wrapper.findComponent<DefineComponent<{ product: IProduct }>>(productEditPageForm).vm.$props.product

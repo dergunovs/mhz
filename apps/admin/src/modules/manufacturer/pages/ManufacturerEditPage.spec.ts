@@ -36,7 +36,7 @@ describe('ManufacturerEditPage', async () => {
   });
 
   it('gets manufacturer and passes it to form props', async () => {
-    expect(spyGetManufacturer).toBeCalledTimes(1);
+    expect(spyGetManufacturer).toHaveBeenCalledTimes(1);
 
     expect(
       wrapper.findComponent<DefineComponent<{ manufacturer: IManufacturer }>>(manufacturerEditPageForm).vm.$props

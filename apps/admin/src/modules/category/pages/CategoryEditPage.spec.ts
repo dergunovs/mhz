@@ -30,7 +30,7 @@ describe('CategoryEditPage', async () => {
   });
 
   it('gets category and passes it to form props', async () => {
-    expect(spyGetCategory).toBeCalledTimes(1);
+    expect(spyGetCategory).toHaveBeenCalledTimes(1);
 
     expect(
       wrapper.findComponent<DefineComponent<{ category: ICategory }>>(categoryEditPageForm).vm.$props.category

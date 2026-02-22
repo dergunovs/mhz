@@ -32,7 +32,7 @@ describe('ManagerListPage', async () => {
   });
 
   it('gets managers and passes them to list props', async () => {
-    expect(spyGetManagers).toBeCalledTimes(1);
+    expect(spyGetManagers).toHaveBeenCalledTimes(1);
 
     expect(wrapper.findComponent<DefineComponent<{ managers: IManager[] }>>(managerList).vm.$props.managers).toEqual(
       MANAGERS.data

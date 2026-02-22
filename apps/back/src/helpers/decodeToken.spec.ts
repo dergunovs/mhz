@@ -10,8 +10,8 @@ describe('decodeToken', () => {
 
     const decodedToken = decodeToken(decode, token);
 
-    expect(decode).toBeCalledTimes(1);
-    expect(decode).toBeCalledWith(tokenWithoutBearer);
+    expect(decode).toHaveBeenCalledTimes(1);
+    expect(decode).toHaveBeenCalledWith(tokenWithoutBearer);
 
     expect(decodedToken).toEqual(tokenWithoutBearer);
   });

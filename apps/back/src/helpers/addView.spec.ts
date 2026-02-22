@@ -16,7 +16,7 @@ describe('addView', () => {
 
     addView(entity);
 
-    expect(spySave).toBeCalledTimes(1);
+    expect(spySave).toHaveBeenCalledTimes(1);
     expect(entity?.views).toEqual(views + 1);
   });
 });

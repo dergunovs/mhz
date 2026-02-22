@@ -28,7 +28,7 @@ describe('CategoryListPage', async () => {
   });
 
   it('gets categories and passes them to list props', async () => {
-    expect(spyGetCategories).toBeCalledTimes(1);
+    expect(spyGetCategories).toHaveBeenCalledTimes(1);
 
     expect(
       wrapper.findComponent<DefineComponent<{ categories: ICategory[] }>>(categoryList).vm.$props.categories

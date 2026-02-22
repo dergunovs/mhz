@@ -32,7 +32,7 @@ describe('CustomerListPage', async () => {
   });
 
   it('gets customers and passes them to list props', async () => {
-    expect(spyGetCustomers).toBeCalledTimes(1);
+    expect(spyGetCustomers).toHaveBeenCalledTimes(1);
 
     expect(
       wrapper.findComponent<DefineComponent<{ customers: ICustomer[] }>>(customerList).vm.$props.customers

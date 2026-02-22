@@ -64,12 +64,12 @@ describe('FormButtons', async () => {
   });
 
   it('pushed to previous page by back button click', async () => {
-    expect(spyRouterGo).toBeCalledTimes(0);
+    expect(spyRouterGo).toHaveBeenCalledTimes(0);
 
     await wrapper.findComponent(formButtonsBack).trigger('click');
 
-    expect(spyRouterGo).toBeCalledTimes(1);
-    expect(spyRouterGo).toBeCalledWith(-1);
+    expect(spyRouterGo).toHaveBeenCalledTimes(1);
+    expect(spyRouterGo).toHaveBeenCalledWith(-1);
   });
 
   it('emits delete by delete button click with confirm', async () => {

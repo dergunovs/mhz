@@ -32,7 +32,7 @@ describe('BannerListPage', async () => {
   });
 
   it('gets banners and passes them to list props', async () => {
-    expect(spyGetBanners).toBeCalledTimes(1);
+    expect(spyGetBanners).toHaveBeenCalledTimes(1);
 
     expect(wrapper.findComponent<DefineComponent<{ banners: IBanner[] }>>(bannerList).vm.$props.banners).toEqual(
       BANNERS.data

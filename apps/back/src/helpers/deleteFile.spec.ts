@@ -18,7 +18,7 @@ describe('deleteFile', () => {
 
     deleteFile(filename);
 
-    expect(spyUnlink).toBeCalledTimes(1);
-    expect(spyUnlink).toBeCalledWith(path.resolve(`./public/upload/${filename}`));
+    expect(spyUnlink).toHaveBeenCalledTimes(1);
+    expect(spyUnlink).toHaveBeenCalledWith(path.resolve(`./public/upload/${filename}`));
   });
 });

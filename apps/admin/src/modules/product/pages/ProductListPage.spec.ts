@@ -32,7 +32,7 @@ describe('ProductListPage', async () => {
   });
 
   it('gets products and passes them to list props', async () => {
-    expect(spyGetProducts).toBeCalledTimes(1);
+    expect(spyGetProducts).toHaveBeenCalledTimes(1);
 
     expect(wrapper.findComponent<DefineComponent<{ products: IProduct[] }>>(productList).vm.$props.products).toEqual(
       PRODUCTS.data
