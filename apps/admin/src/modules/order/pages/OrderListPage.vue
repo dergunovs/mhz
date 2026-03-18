@@ -14,7 +14,7 @@
         v-show="orders?.length"
         :page="query.page"
         :total="total"
-        @update="(value) => setQueryPage(setPaginationPage(value, query.page))"
+        @update="(value) => setQueryPage(setPaginationPage(value))"
         lang="en"
       />
     </div>

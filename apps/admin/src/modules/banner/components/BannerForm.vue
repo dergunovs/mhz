@@ -12,7 +12,7 @@
       <UiSelect
         v-model="formData.product"
         :options="allProducts"
-        @reachedBottom="scrollProducts(isLoadingProducts, setProductsPage(productsPage + 1, productsPage))"
+        @reachedBottom="scrollProducts(isLoadingProducts, setProductsPage(productsPage + 1))"
         :data-product-id="formData.product._id"
         lang="en"
         data-test="banner-form-product"

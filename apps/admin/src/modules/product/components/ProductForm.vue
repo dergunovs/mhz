@@ -15,9 +15,7 @@
         <UiSelect
           v-model="formData.manufacturer"
           :options="allManufacturers"
-          @reachedBottom="
-            scrollManufacturers(isLoadingManufacturers, setManufacturerPage(manufacturersPage + 1, manufacturersPage))
-          "
+          @reachedBottom="scrollManufacturers(isLoadingManufacturers, setManufacturerPage(manufacturersPage + 1))"
           lang="en"
           data-test="product-form-manufacturer"
         />
