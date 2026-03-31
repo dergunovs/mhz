@@ -17,7 +17,6 @@
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "baseUrl": "./",
     "rootDir": "src",
     "outDir": "build"
   },
