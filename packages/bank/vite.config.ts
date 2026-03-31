@@ -21,5 +21,5 @@ export default defineConfig({
     },
   },
 
-  plugins: [dts({ entryRoot: "./src" })],
+  plugins: [dts({ entryRoot: "./src", compilerOptions: { rootDir: "./src" } })],
 });
