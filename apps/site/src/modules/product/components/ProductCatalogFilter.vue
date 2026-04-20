@@ -260,13 +260,12 @@ watch(
   flex-shrink: 0;
   flex-direction: column;
   gap: 4px;
-  height: 64px;
+  height: 80px;
 }
 
 .range {
   position: relative;
   z-index: 0;
-  padding: 0 12px;
 }
 
 .title {

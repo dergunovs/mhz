@@ -1,12 +1,10 @@
 import { Schema } from 'mongoose';
+import { IUserToken } from 'mhz-contracts';
 
 import Customer from '../models/customer.js';
 
-export async function addProductToWatched(
-  userId: string | Schema.Types.ObjectId,
-  productId: string | Schema.Types.ObjectId
-) {
-  const filter = { _id: userId };
+export async function addProductToWatched(user: IUserToken, productId: string | Schema.Types.ObjectId) {
+  const filter = { _id: user._id };
   const limit = 8;
 
   const currentCustomer = await Customer.findOne(filter).exec();

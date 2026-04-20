@@ -56,7 +56,7 @@ export const productService: IProductService = {
       .exec();
 
     if (user?._id && user?.role === 'customer' && product?._id) {
-      addProductToWatched(user._id, product._id);
+      addProductToWatched(user, product._id);
     }
 
     addView(product);
