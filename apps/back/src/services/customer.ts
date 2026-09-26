@@ -81,7 +81,7 @@ export const customerService: ICustomerService = {
 
     const cart: ICartItem[] = products.map((product) => {
       return {
-        _id: `${product._id}`,
+        _id: String(product._id),
         product,
         count: customer?.cart?.find((item) => item.product._id?.toString() === product._id?.toString())?.count || 0,
       };
@@ -167,9 +167,9 @@ export const customerService: ICustomerService = {
       await currentCustomer?.save();
 
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   },
 
   create: async <T>(customerToCreate: T) => {
@@ -195,14 +195,14 @@ export const customerService: ICustomerService = {
 
     if (currentFavourites.length === limit) {
       return { isReachedLimit: true, isAlreadyExists: false };
-    } else if (currentFavourites.includes(_id)) {
-      return { isReachedLimit: false, isAlreadyExists: true };
-    } else {
-      await Customer.updateOne(filter, { $push: { favouriteProducts: _id } });
-      await currentCustomer?.save();
-
-      return { isReachedLimit: false, isAlreadyExists: false };
     }
+    if (currentFavourites.includes(_id)) {
+      return { isReachedLimit: false, isAlreadyExists: true };
+    }
+    await Customer.updateOne(filter, { $push: { favouriteProducts: _id } });
+    await currentCustomer?.save();
+
+    return { isReachedLimit: false, isAlreadyExists: false };
   },
 
   addToCart: async (_id: string | string[], decode: (token: string) => IUserToken | null, token?: string) => {
@@ -244,19 +244,17 @@ export const customerService: ICustomerService = {
       if (productsToUpdateCount.length > 0) {
         await Customer.updateOne(filter, {
           cart: currentCart.map((item) => {
-            const isExists = productsToUpdateCount.includes(`${item.product._id}`);
+            const isExists = productsToUpdateCount.includes(item.product._id?.toString() || '');
 
             return isExists ? { product: item.product, count: item.count + 1 } : item;
           }),
         });
       }
 
-      if (productsToAdd.length > 0) {
-        for (const productId of productsToAdd) {
-          await Customer.updateOne(filter, {
-            $push: { cart: { product: productId, count: 1 } },
-          });
-        }
+      for (const productId of productsToAdd) {
+        await Customer.updateOne(filter, {
+          $push: { cart: { product: productId, count: 1 } },
+        });
       }
     }
 
@@ -287,9 +285,9 @@ export const customerService: ICustomerService = {
       await currentCustomer?.save();
 
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   },
 
   deleteFavourite: async (_id: string, decode: (token: string) => IUserToken | null, token?: string) => {
@@ -309,8 +307,8 @@ export const customerService: ICustomerService = {
       await currentCustomer.save();
 
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   },
 };

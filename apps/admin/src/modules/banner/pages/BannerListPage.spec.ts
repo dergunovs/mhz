@@ -14,15 +14,15 @@ const spyGetBanners = vi.spyOn(bannerServices, 'getBanners').mockReturnValue(moc
 
 const bannerList = dataTest('banner-list-page-list');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(BannerListPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('BannerListPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(BannerListPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(BannerListPage)).toBeTruthy();
   });

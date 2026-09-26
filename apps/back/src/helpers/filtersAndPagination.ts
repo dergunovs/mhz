@@ -5,6 +5,9 @@ import type { IFilterField, IFilterData, IQuery, IQueryPopulated } from 'mhz-con
 
 import Product from '../models/product.js';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TEntityModel = Model<any, any, any, any, any, any, any>;
+
 function createFilterBase(filter: string | string[], filterName: string) {
   return typeof filter === 'string'
     ? { [filterName]: { $in: [new Types.ObjectId(filter)] } }
@@ -20,7 +23,7 @@ function createFilterFields(options?: IQuery) {
 
   const params = new URLSearchParams();
 
-  Object.entries(fieldsFiltersRaw).forEach(([key, value]) => params.append(key, value));
+  for (const [key, value] of Object.entries(fieldsFiltersRaw)) params.append(key, value);
 
   const fieldsFiltersArray = structuredClone(qs.parse(params.toString())).fields as { [key: string]: string[] }[];
 
@@ -33,11 +36,7 @@ function createFilterFields(options?: IQuery) {
           $elemMatch: {
             title: Object.keys(filter)[0],
             fieldValue: {
-              $in: Object.values(filter)[0].map((val) => {
-                if (['true', 'false'].includes(val)) return JSON.parse(val);
-
-                return val;
-              }),
+              $in: Object.values(filter)[0].map((val) => (['true', 'false'].includes(val) ? JSON.parse(val) : val)),
             },
           },
         },
@@ -46,7 +45,7 @@ function createFilterFields(options?: IQuery) {
   };
 }
 
-export async function paginate<T>(Entity: Model<T>, options?: IQueryPopulated) {
+export async function paginate<T>(Entity: TEntityModel, options?: IQueryPopulated) {
   const categoryFilter = options?.category ? createFilterBase(options?.category, 'category') : {};
   const manufacturerFilter = options?.manufacturer ? createFilterBase(options?.manufacturer, 'manufacturer') : {};
   const fieldsFilters = createFilterFields(options);
@@ -145,25 +144,25 @@ export async function getProductFilters(options?: IQuery, isInitial?: boolean): 
 
   const groupedFields: IFilterField = {};
 
-  titles.forEach((title) => {
+  for (const title of titles) {
     groupedFields[title] = {
       fieldUnits: '',
       fieldValues: [],
     };
 
-    filterByFields.forEach((item) => {
-      if (item.title === title) {
-        (groupedFields[title] as IFilterField).fieldUnits = item.fieldUnits;
-        groupedFields[title]?.fieldValues?.push({ value: item.fieldValue, count: item.count });
+    const itemsForTitle = filterByFields.filter((item) => item.title === title);
 
-        groupedFields[title]?.fieldValues?.sort((a, b) =>
-          item.fieldType === 'number'
-            ? Number(a.value) - Number(b.value)
-            : a.value.toString().localeCompare(b.value.toString())
-        );
-      }
-    });
-  });
+    for (const item of itemsForTitle) {
+      (groupedFields[title] as IFilterField).fieldUnits = item.fieldUnits;
+      groupedFields[title]?.fieldValues?.push({ value: item.fieldValue, count: item.count });
+
+      groupedFields[title]?.fieldValues?.sort((a, b) =>
+        item.fieldType === 'number'
+          ? Number(a.value) - Number(b.value)
+          : a.value.toString().localeCompare(b.value.toString())
+      );
+    }
+  }
 
   const orderedFields = Object.keys(groupedFields)
     .sort((a, b) => a.localeCompare(b))

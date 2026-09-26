@@ -13,41 +13,11 @@ import { CATEGORY } from '@/category/fixtures';
 import { URL_CATEGORY } from '@/category/constants';
 import * as categoryServices from '@/category/services';
 
-let onSuccessPost: () => void;
-const spyMutatePost = vi.fn();
-
-vi.spyOn(categoryServices, 'postCategory').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessPost = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, ICategory>(spyMutatePost);
-});
-
-let onSuccessUpdate: () => void;
-const spyMutateUpdate = vi.fn();
-
-vi.spyOn(categoryServices, 'updateCategory').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessUpdate = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, ICategory>(spyMutateUpdate);
-});
-
-let onSuccessDelete: () => void;
-const spyMutateDelete = vi.fn();
-
-vi.spyOn(categoryServices, 'deleteCategory').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessDelete = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
-});
-
 const spyRefetchQueries = vi.fn();
 const spyRemoveQueries = vi.fn();
-
-vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
-  refetchQueries: spyRefetchQueries,
-  removeQueries: spyRemoveQueries,
-} as unknown as helpers.QueryClient);
-
+const spyMutatePost = vi.fn();
+const spyMutateUpdate = vi.fn();
+const spyMutateDelete = vi.fn();
 const spyRouterPush = vi.spyOn(router, 'push');
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
@@ -62,19 +32,45 @@ const categoryFormFieldForm = dataTest('category-form-field-form');
 const categoryFormIcon = dataTest('category-form-icon');
 const categoryFormButtons = dataTest('category-form-buttons');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CategoryForm, {
-    props: {
-      category: CATEGORY.data,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
+vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
+  refetchQueries: spyRefetchQueries,
+  removeQueries: spyRemoveQueries,
+} as unknown as helpers.QueryClient);
 
 describe('CategoryForm', async () => {
+  let wrapper: VueWrapper;
+  let onSuccessPost: () => void;
+  let onSuccessUpdate: () => void;
+  let onSuccessDelete: () => void;
+
+  vi.spyOn(categoryServices, 'postCategory').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessPost = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, ICategory>(spyMutatePost);
+  });
+
+  vi.spyOn(categoryServices, 'updateCategory').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessUpdate = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, ICategory>(spyMutateUpdate);
+  });
+
+  vi.spyOn(categoryServices, 'deleteCategory').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessDelete = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CategoryForm, {
+      props: {
+        category: CATEGORY.data,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(categoryForm)).toBeTruthy();
   });

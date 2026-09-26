@@ -30,7 +30,7 @@ const layoutComponent = computed(() => {
   return route.meta.layout === 'empty' ? LayoutEmpty : LayoutDefault;
 });
 
-const isLoginPage = globalThis.location.pathname === URL_LOGIN;
+const isLoginPage = location.pathname === URL_LOGIN;
 
 const token = getCookieToken(TOKEN_NAME);
 

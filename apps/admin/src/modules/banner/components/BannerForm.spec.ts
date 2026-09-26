@@ -17,41 +17,11 @@ import * as bannerServices from '@/banner/services';
 
 const spyGetProducts = vi.spyOn(productServices, 'getProducts').mockReturnValue(mockQueryReply(PRODUCTS));
 
-let onSuccessPost: () => void;
-const spyMutatePost = vi.fn();
-
-vi.spyOn(bannerServices, 'postBanner').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessPost = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IBanner>(spyMutatePost);
-});
-
-let onSuccessUpdate: () => void;
-const spyMutateUpdate = vi.fn();
-
-vi.spyOn(bannerServices, 'updateBanner').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessUpdate = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IBanner>(spyMutateUpdate);
-});
-
-let onSuccessDelete: () => void;
-const spyMutateDelete = vi.fn();
-
-vi.spyOn(bannerServices, 'deleteBanner').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessDelete = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
-});
-
 const spyRefetchQueries = vi.fn();
 const spyRemoveQueries = vi.fn();
-
-vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
-  refetchQueries: spyRefetchQueries,
-  removeQueries: spyRemoveQueries,
-} as unknown as helpers.QueryClient);
-
+const spyMutatePost = vi.fn();
+const spyMutateUpdate = vi.fn();
+const spyMutateDelete = vi.fn();
 const spyRouterPush = vi.spyOn(router, 'push');
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
@@ -66,19 +36,45 @@ const bannerFormIsActive = dataTest('banner-form-is-active');
 const bannerFormImagePreview = dataTest('banner-form-image-preview');
 const bannerFormButtons = dataTest('banner-form-buttons');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(BannerForm, {
-    props: {
-      banner: BANNER,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
+vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
+  refetchQueries: spyRefetchQueries,
+  removeQueries: spyRemoveQueries,
+} as unknown as helpers.QueryClient);
 
 describe('BannerForm', async () => {
+  let wrapper: VueWrapper;
+  let onSuccessPost: () => void;
+  let onSuccessUpdate: () => void;
+  let onSuccessDelete: () => void;
+
+  vi.spyOn(bannerServices, 'postBanner').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessPost = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IBanner>(spyMutatePost);
+  });
+
+  vi.spyOn(bannerServices, 'updateBanner').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessUpdate = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IBanner>(spyMutateUpdate);
+  });
+
+  vi.spyOn(bannerServices, 'deleteBanner').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessDelete = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(BannerForm, {
+      props: {
+        banner: BANNER,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(BannerForm)).toBeTruthy();
   });

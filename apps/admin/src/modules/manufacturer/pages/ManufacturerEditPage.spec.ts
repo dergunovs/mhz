@@ -18,15 +18,15 @@ const spyGetManufacturer = vi
 
 const manufacturerEditPageForm = dataTest('manufacturer-edit-page-form');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManufacturerEditPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ManufacturerEditPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManufacturerEditPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ManufacturerEditPage)).toBeTruthy();
   });

@@ -2,7 +2,7 @@ import { URL_CATEGORY } from '@/category/constants';
 
 export const categoryRoutes = [
   {
-    path: `${URL_CATEGORY}`,
+    path: URL_CATEGORY,
     name: 'CategoryList',
     component: () => import('@/category/pages/CategoryListPage.vue'),
   },

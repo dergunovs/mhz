@@ -23,15 +23,15 @@ vi.spyOn(commonServices, 'search').mockImplementation(() => {
 
 const search = dataTest('search');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(TheSearch, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('TheSearch', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(TheSearch, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(TheSearch)).toBeTruthy();
   });

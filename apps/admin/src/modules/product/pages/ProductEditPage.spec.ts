@@ -16,15 +16,15 @@ const spyGetProduct = vi.spyOn(productServices, 'getProduct').mockReturnValue(mo
 
 const productEditPageForm = dataTest('product-edit-page-form');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ProductEditPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ProductEditPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ProductEditPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ProductEditPage)).toBeTruthy();
   });

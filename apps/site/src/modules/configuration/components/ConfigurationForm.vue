@@ -82,7 +82,7 @@ interface IProps {
 const props = defineProps<IProps>();
 const emit = defineEmits<{ update: [id: string] }>();
 
-const isEnableGetCustomer = computed(() => props.isAuthor || false);
+const isEnableGetCustomer = computed(() => !!props.isAuthor);
 
 const router = useRouter();
 
@@ -98,7 +98,7 @@ const formData = ref<IConfiguration>({
 
 const isShowConfirm = ref(false);
 
-const link = computed(() => globalThis.location.href.split('?')[0]);
+const link = computed(() => location.href.split('?', 1)[0]);
 
 const price = computed(() => {
   return formData.value.parts
@@ -180,11 +180,11 @@ function handleSubmit() {
 watch(
   () => props.choosenProduct,
   () => {
-    if (props.choosenProduct && formData.value.parts) {
-      const key = props.choosenProduct.category.title as keyof IConfigurationParts;
+    if (!props.choosenProduct || !formData.value.parts) return;
 
-      formData.value.parts[key] = props.choosenProduct;
-    }
+    const key = props.choosenProduct.category.title as keyof IConfigurationParts;
+
+    formData.value.parts[key] = props.choosenProduct;
   }
 );
 

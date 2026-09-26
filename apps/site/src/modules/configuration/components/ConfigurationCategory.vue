@@ -73,7 +73,7 @@ const props = defineProps<IProps>();
 const emit = defineEmits<{ update: [id: string]; remove: [title: keyof IConfigurationParts] }>();
 
 function updateCategory(id?: string) {
-  if (props.isAuthor && id) emit('update', id);
+  if (id && props.isAuthor) emit('update', id);
 }
 
 function currentProduct(category: ICategory) {

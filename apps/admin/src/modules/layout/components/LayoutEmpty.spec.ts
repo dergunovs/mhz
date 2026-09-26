@@ -5,15 +5,15 @@ import LayoutEmpty from './LayoutEmpty.vue';
 
 import { wrapperFactory } from '@/common/test';
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(LayoutEmpty, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('LayoutEmpty', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(LayoutEmpty, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(LayoutEmpty)).toBeTruthy();
   });

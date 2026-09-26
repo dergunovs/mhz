@@ -19,15 +19,15 @@ const categoryFieldFormUnits = dataTest('category-field-form-units');
 const categoryFieldFormCancel = dataTest('category-field-form-cancel');
 const categoryFieldFormDelete = dataTest('category-field-form-delete');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CategoryFieldForm, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CategoryFieldForm', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CategoryFieldForm, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CategoryFieldForm)).toBeTruthy();
   });

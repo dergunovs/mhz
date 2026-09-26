@@ -11,8 +11,7 @@ describe('addView', () => {
     const views = 1;
 
     const entity = { _id: '1', title: 'text', save: spySave, views } as unknown as
-      | (Document<unknown, object, ICategory | IProduct | IManufacturer> & (ICategory | IProduct | IManufacturer))
-      | null;
+      (Document<unknown, object, ICategory | IProduct | IManufacturer> & (ICategory | IProduct | IManufacturer)) | null;
 
     addView(entity);
 

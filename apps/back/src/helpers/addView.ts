@@ -4,8 +4,7 @@ import type { ICategory, IProduct, IManufacturer } from 'mhz-contracts';
 
 export async function addView(
   entity:
-    | (Document<unknown, object, IProduct | ICategory | IManufacturer> & (IProduct | ICategory | IManufacturer))
-    | null
+    (Document<unknown, object, IProduct | ICategory | IManufacturer> & (IProduct | ICategory | IManufacturer)) | null
 ) {
   if (!entity) return;
 

@@ -14,15 +14,15 @@ const spyGetManagers = vi.spyOn(managerServices, 'getManagers').mockReturnValue(
 
 const managerList = dataTest('manager-list-page-list');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManagerListPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ManagerListPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManagerListPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ManagerListPage)).toBeTruthy();
   });

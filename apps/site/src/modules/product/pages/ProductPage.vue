@@ -32,7 +32,7 @@ const { data: product } = getProduct(productId);
 
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
-  { url: `${URL_CATEGORY}`, title: 'Categories' },
+  { url: URL_CATEGORY, title: 'Categories' },
   { url: `${URL_CATEGORY}/${product.value?.category._id}`, title: product.value?.category.title },
   { url: `${URL_PRODUCT}/${product.value?._id}`, title: product.value?.title },
 ]);

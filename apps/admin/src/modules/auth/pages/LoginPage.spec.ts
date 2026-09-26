@@ -5,15 +5,15 @@ import LoginPage from './LoginPage.vue';
 
 import { wrapperFactory } from '@/common/test';
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(LoginPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('LoginPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(LoginPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(LoginPage)).toBeTruthy();
   });

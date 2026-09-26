@@ -158,17 +158,17 @@ function deleteCategoryField(fieldId: string) {
 }
 
 function submit() {
-  if (isValid()) {
-    if (formData.value.fields) formData.value.fields = deleteTempId(formData.value.fields);
-    mutatePost(formData.value);
-  }
+  if (!isValid()) return;
+
+  if (formData.value.fields) formData.value.fields = deleteTempId(formData.value.fields);
+  mutatePost(formData.value);
 }
 
 function update() {
-  if (isValid()) {
-    if (formData.value.fields) formData.value.fields = deleteTempId(formData.value.fields);
-    mutateUpdate(formData.value);
-  }
+  if (!isValid()) return;
+
+  if (formData.value.fields) formData.value.fields = deleteTempId(formData.value.fields);
+  mutateUpdate(formData.value);
 }
 
 function handleDelete(id: string) {

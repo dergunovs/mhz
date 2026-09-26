@@ -83,7 +83,7 @@ export const orderService: IBaseService = {
 
     const newOrder = await order.save();
 
-    const id = newOrder._id.toString();
+    const id = newOrder._id;
 
     customer.cart = [];
     customer.orders?.push(order);

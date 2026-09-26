@@ -78,9 +78,17 @@ const categoryFieldId = computed(() => props.categoryField?._id);
 watch(
   () => formData.value.fieldType,
   () => {
-    if (formData.value.fieldType === 'string') formData.value.fieldValue = '';
-    if (formData.value.fieldType === 'number') formData.value.fieldValue = '';
-    if (formData.value.fieldType === 'boolean') formData.value.fieldValue = false;
+    switch (formData.value.fieldType) {
+      case 'string':
+      case 'number': {
+        formData.value.fieldValue = '';
+        break;
+      }
+      case 'boolean': {
+        formData.value.fieldValue = false;
+        break;
+      }
+    }
 
     if (formData.value.fieldType !== 'number') formData.value.fieldUnits = undefined;
   }
@@ -93,26 +101,26 @@ const { error, isValid } = useValidate(
 );
 
 function submit() {
-  if (isValid()) {
-    if (!props.categoryField?._id) formData.value._id = createTempId();
-    emit('add', formData.value);
-    emit('hide');
-  }
+  if (!isValid()) return;
+
+  if (!props.categoryField?._id) formData.value._id = createTempId();
+  emit('add', formData.value);
+  emit('hide');
 }
 
 function update() {
-  if (isValid()) {
-    if (!props.categoryField?._id) formData.value._id = createTempId();
-    emit('update', formData.value);
-    emit('hide');
-  }
+  if (!isValid()) return;
+
+  if (!props.categoryField?._id) formData.value._id = createTempId();
+  emit('update', formData.value);
+  emit('hide');
 }
 
 function remove() {
-  if (isValid() && categoryFieldId.value) {
-    emit('delete', categoryFieldId.value);
-    emit('hide');
-  }
+  if (!isValid() || !categoryFieldId.value) return;
+
+  emit('delete', categoryFieldId.value);
+  emit('hide');
 }
 
 onMounted(() => {

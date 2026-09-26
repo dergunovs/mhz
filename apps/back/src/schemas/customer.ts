@@ -141,7 +141,7 @@ export const updateCartBody: JSONSchemaType<{ _id: string; count: string }> = {
   additionalProperties: false,
 };
 
-export const addToCartBody: JSONSchemaType<{ _id: string | string[] }> = {
+export const cartAdditionRequest: JSONSchemaType<{ _id: string | string[] }> = {
   $id: 'UpdateCartBody',
   type: 'object',
   properties: {
@@ -195,7 +195,13 @@ export const customerCreateSchema: ISchema = {
 };
 
 export const customerAddToCartSchema: ISchema = {
-  schema: { tags, response: { 201: baseReply }, body: addToCartBody, security: [{ token: [] }], summary: 'customer' },
+  schema: {
+    tags,
+    response: { 201: baseReply },
+    body: cartAdditionRequest,
+    security: [{ token: [] }],
+    summary: 'customer',
+  },
 };
 
 export const customerCreteFavouriteSchema: ISchema = {

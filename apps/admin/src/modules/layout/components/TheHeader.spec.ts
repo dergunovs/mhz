@@ -13,15 +13,15 @@ const deleteAuthHeader = vi.spyOn(helpers, 'deleteAuthHeader');
 
 const headerLogout = dataTest('header-logout');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(TheHeader, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('TheHeader', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(TheHeader, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(TheHeader)).toBeTruthy();
   });

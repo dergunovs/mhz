@@ -20,41 +20,11 @@ import { MANUFACTURERS } from '@/manufacturer/fixtures';
 const spyGetManufacturers = vi.spyOn(manufacturerServies, 'getManufacturers').mockReturnValue(mockQueryReply(PRODUCTS));
 const spyGetCategories = vi.spyOn(categoryServies, 'getCategories').mockReturnValue(mockQueryReply(CATEGORIES));
 
-let onSuccessPost: () => void;
-const spyMutatePost = vi.fn();
-
-vi.spyOn(productServices, 'postProduct').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessPost = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IProduct>(spyMutatePost);
-});
-
-let onSuccessUpdate: () => void;
-const spyMutateUpdate = vi.fn();
-
-vi.spyOn(productServices, 'updateProduct').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessUpdate = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IProduct>(spyMutateUpdate);
-});
-
-let onSuccessDelete: () => void;
-const spyMutateDelete = vi.fn();
-
-vi.spyOn(productServices, 'deleteProduct').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessDelete = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
-});
-
 const spyRefetchQueries = vi.fn();
 const spyRemoveQueries = vi.fn();
-
-vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
-  refetchQueries: spyRefetchQueries,
-  removeQueries: spyRemoveQueries,
-} as unknown as helpers.QueryClient);
-
+const spyMutatePost = vi.fn();
+const spyMutateUpdate = vi.fn();
+const spyMutateDelete = vi.fn();
 const spyRouterPush = vi.spyOn(router, 'push');
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
@@ -72,19 +42,45 @@ const productFormFields = dataTest('product-form-fields');
 const productFormImages = dataTest('product-form-images');
 const productFormButtons = dataTest('product-form-buttons');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ProductForm, {
-    props: {
-      product: PRODUCT,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
+vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
+  refetchQueries: spyRefetchQueries,
+  removeQueries: spyRemoveQueries,
+} as unknown as helpers.QueryClient);
 
 describe('ProductForm', async () => {
+  let wrapper: VueWrapper;
+  let onSuccessPost: () => void;
+  let onSuccessUpdate: () => void;
+  let onSuccessDelete: () => void;
+
+  vi.spyOn(productServices, 'postProduct').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessPost = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IProduct>(spyMutatePost);
+  });
+
+  vi.spyOn(productServices, 'updateProduct').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessUpdate = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IProduct>(spyMutateUpdate);
+  });
+
+  vi.spyOn(productServices, 'deleteProduct').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessDelete = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ProductForm, {
+      props: {
+        product: PRODUCT,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ProductForm)).toBeTruthy();
   });

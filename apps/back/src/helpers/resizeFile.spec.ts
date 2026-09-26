@@ -1,4 +1,4 @@
-import sharp from 'sharp';
+import sharpLib from 'sharp';
 
 import { describe, expect, test, vi } from 'vitest';
 
@@ -19,8 +19,8 @@ describe('resizeFile', () => {
 
     const resizedFilename = await resizeFile(filename, width);
 
-    expect(sharp).toHaveBeenCalledTimes(1);
-    expect(sharp).toHaveBeenCalledWith(`./public/upload/${filename}`);
+    expect(sharpLib).toHaveBeenCalledTimes(1);
+    expect(sharpLib).toHaveBeenCalledWith(`./public/upload/${filename}`);
 
     expect(resize).toHaveBeenCalledTimes(1);
     expect(resize).toHaveBeenCalledWith(Number(width));

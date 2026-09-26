@@ -104,7 +104,7 @@ const filters = ref<IFilterData>(props.filtersInitial);
 function convertBooleanValue(value: string | boolean) {
   if (typeof value === 'string') return value;
 
-  return value === true ? 'Yes' : 'No';
+  return value ? 'Yes' : 'No';
 }
 
 function updatePrice(value: [number, number]) {
@@ -166,9 +166,9 @@ function findNewCount(
 ) {
   const found: (number | undefined)[] = [];
 
-  Object.entries(newFilters).forEach(([parentKey, parentValue]) => {
+  for (const [parentKey, parentValue] of Object.entries(newFilters)) {
     found.push(parentValue.find((value) => parent === parentKey && title === value.title)?.count);
-  });
+  }
 
   return found.find(Boolean) || 0;
 }
@@ -176,23 +176,34 @@ function findNewCount(
 function findNewFieldCount(newFilters: IFilterField, title: string, values?: IFilterFieldValue[]) {
   const found: IFilterFieldValue[] = [];
 
-  Object.entries(newFilters).forEach(([newTitle, newValues]) => {
-    if (title === newTitle) {
-      values?.forEach((oldValue) => {
-        let value = { value: oldValue.value, count: 0 };
+  for (const [newTitle, newValues] of Object.entries(newFilters)) {
+    if (title !== newTitle) continue;
 
-        newValues?.fieldValues?.forEach((newValue) => {
-          if (oldValue.value === newValue.value) {
-            value = newValue;
-          }
-        });
+    const oldValues = values ?? [];
 
-        found.push(value);
-      });
+    for (const oldValue of oldValues) {
+      const value = findMatchingFieldValue(oldValue, newValues?.fieldValues);
+
+      found.push(value);
     }
-  });
+  }
 
   return found;
+}
+
+function findMatchingFieldValue(
+  oldValue: IFilterFieldValue,
+  newFieldValues: IFilterFieldValue[] = []
+): IFilterFieldValue {
+  const value = { value: oldValue.value, count: 0 };
+
+  for (const newValue of newFieldValues) {
+    if (oldValue.value === newValue.value) {
+      return newValue;
+    }
+  }
+
+  return value;
 }
 
 function cloneFilter(filter: IFilterData) {
@@ -206,35 +217,35 @@ function cloneFilterFields(filter: IFilterData) {
 watch(
   () => props.filtersBase,
   () => {
-    if (props.filtersInitial && props.filtersBase && Object.keys(props.filtersBase.fields).length > 0) {
-      const newCategoriesAndManufacturers = cloneFilter(props.filtersBase);
-      const newFields = cloneFilterFields(props.filtersBase);
+    if (!props.filtersInitial || !props.filtersBase || Object.keys(props.filtersBase.fields).length === 0) return;
 
-      const oldCategoriesAndManufacturers = cloneFilter(filters.value);
-      const oldFields = cloneFilterFields(filters.value);
+    const newCategoriesAndManufacturers = cloneFilter(props.filtersBase);
+    const newFields = cloneFilterFields(props.filtersBase);
 
-      const updatedCategoriesAndManufacturers = Object.fromEntries(
-        Object.entries(oldCategoriesAndManufacturers).map(([parentKey, parentValue]) => {
-          return [
-            parentKey,
-            parentValue.map((value) => {
-              return { ...value, count: findNewCount(newCategoriesAndManufacturers, parentKey, value.title) };
-            }),
-          ];
-        })
-      );
+    const oldCategoriesAndManufacturers = cloneFilter(filters.value);
+    const oldFields = cloneFilterFields(filters.value);
 
-      const updatedFields = Object.fromEntries(
-        Object.entries(oldFields).map(([title, values]) => {
-          return [
-            title,
-            { fieldUnits: values?.fieldUnits, fieldValues: findNewFieldCount(newFields, title, values?.fieldValues) },
-          ];
-        })
-      );
+    const updatedCategoriesAndManufacturers = Object.fromEntries(
+      Object.entries(oldCategoriesAndManufacturers).map(([parentKey, parentValue]) => {
+        return [
+          parentKey,
+          parentValue.map((value) => {
+            return { ...value, count: findNewCount(newCategoriesAndManufacturers, parentKey, value.title) };
+          }),
+        ];
+      })
+    );
 
-      filters.value = { ...updatedCategoriesAndManufacturers, fields: updatedFields } as IFilterData;
-    }
+    const updatedFields = Object.fromEntries(
+      Object.entries(oldFields).map(([title, values]) => {
+        return [
+          title,
+          { fieldUnits: values?.fieldUnits, fieldValues: findNewFieldCount(newFields, title, values?.fieldValues) },
+        ];
+      })
+    );
+
+    filters.value = { ...updatedCategoriesAndManufacturers, fields: updatedFields } as IFilterData;
   }
 );
 </script>

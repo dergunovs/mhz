@@ -14,15 +14,15 @@ const spyGetCategories = vi.spyOn(categoryServices, 'getCategories').mockReturnV
 
 const categoryList = dataTest('category-list-page-list');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CategoryListPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CategoryListPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CategoryListPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CategoryListPage)).toBeTruthy();
   });

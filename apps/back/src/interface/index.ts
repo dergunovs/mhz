@@ -92,6 +92,8 @@ export interface ICustomerService extends IBaseService {
 
 export interface ICategoryService extends IBaseService {
   getPopular: <T>() => Promise<T[]>;
+
+  create: <T>(item?: T) => Promise<boolean>;
 }
 
 export interface IManufacturerService extends IBaseService {

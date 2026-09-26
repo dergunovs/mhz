@@ -2,7 +2,7 @@ import { URL_MANUFACTURER } from '@/manufacturer/constants';
 
 export const manufacturerRoutes = [
   {
-    path: `${URL_MANUFACTURER}`,
+    path: URL_MANUFACTURER,
     name: 'ManufacturerList',
     component: () => import('@/manufacturer/pages/ManufacturerListPage.vue'),
   },

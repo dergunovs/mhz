@@ -92,14 +92,17 @@ export const productService: IProductService = {
 
   delete: async (_id?: string) => {
     const product = await Product.findOne({ _id });
+    const imageUrls = product?.imageUrls || [];
 
-    product?.imageUrls?.forEach((image) => {
+    for (const image of imageUrls) {
       deleteFile(image);
-    });
+    }
 
-    product?.thumbUrls?.forEach((thumb) => {
+    const thumbUrls = product?.thumbUrls || [];
+
+    for (const thumb of thumbUrls) {
       deleteFile(thumb);
-    });
+    }
 
     await product?.deleteOne();
   },

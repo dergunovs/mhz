@@ -11,19 +11,19 @@ import { MANAGERS } from '@/manager/fixtures';
 const managerListRow = dataTest('manager-list-row');
 const managerListLink = dataTest('manager-list-link');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManagerList, {
-    props: {
-      managers: MANAGERS.data,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ManagerList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManagerList, {
+      props: {
+        managers: MANAGERS.data,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ManagerList)).toBeTruthy();
   });
@@ -33,7 +33,7 @@ describe('ManagerList', async () => {
   });
 
   it('shows rows if managers props', async () => {
-    expect(wrapper.findAll(managerListRow).length).toEqual(MANAGERS.data.length);
+    expect(wrapper.findAll(managerListRow)).toHaveLength(MANAGERS.data.length);
 
     await wrapper.setProps({ managers: [] });
 

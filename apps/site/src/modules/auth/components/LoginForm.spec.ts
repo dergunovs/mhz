@@ -18,37 +18,34 @@ const ROLE = 'customer';
 const TOKEN = 'b87dfnyte97bhrevber9vu9e';
 const ID = '97fdb9eubhe';
 
-let onSuccessLogin: (data: IUserToken) => void;
 const spyMutateLogin = vi.fn();
-
-vi.spyOn(authServices, 'login').mockImplementation((options: { onSuccess?: (data: IUserToken) => void }) => {
-  if (options.onSuccess) onSuccessLogin = options.onSuccess;
-
-  return mockMutationReply<IUserToken, ILoginData>(spyMutateLogin);
-});
-
 const spyAuth = vi.fn();
-
-vi.spyOn(helpers, 'useAuth').mockReturnValue({ auth: spyAuth });
-
 const spySetAuthHeaders = vi.spyOn(helpers, 'setAuthHeader');
-
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
 const loginForm = dataTest('login-form');
 const loginFormEmail = dataTest('login-form-email');
 const loginFormPassword = dataTest('login-form-password');
 
-let wrapper: VueWrapper;
+vi.spyOn(helpers, 'useAuth').mockReturnValue({ auth: spyAuth });
 
-beforeEach(() => {
-  wrapper = wrapperFactory(LoginForm, {});
-});
+describe('LoginForm', () => {
+  let wrapper: VueWrapper;
+  let onSuccessLogin: (data: IUserToken) => void;
 
-enableAutoUnmount(afterEach);
+  vi.spyOn(authServices, 'login').mockImplementation((options: { onSuccess?: (data: IUserToken) => void }) => {
+    if (options.onSuccess) onSuccessLogin = options.onSuccess;
 
-describe('LoginForm', async () => {
-  it('exists', async () => {
+    return mockMutationReply<IUserToken, ILoginData>(spyMutateLogin);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(LoginForm, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
+  it('exists', () => {
     expect(wrapper.findComponent(LoginForm)).toBeTruthy();
   });
 

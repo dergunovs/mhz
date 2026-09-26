@@ -16,15 +16,15 @@ const entitiesCountBase = dataTest('entities-count-base');
 const entitiesCountProductCategories = dataTest('entities-count-product-categories');
 const entitiesCountProductManufacturers = dataTest('entities-count-product-manufacturers');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(EntitiesCount, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('EntitiesCount', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(EntitiesCount, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(EntitiesCount)).toBeTruthy();
   });

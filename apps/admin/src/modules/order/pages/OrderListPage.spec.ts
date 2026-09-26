@@ -14,15 +14,15 @@ const spyGetOrders = vi.spyOn(orderServices, 'getOrders').mockReturnValue(mockQu
 
 const orderList = dataTest('order-list-page-list');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(OrderListPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('OrderListPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(OrderListPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(OrderListPage)).toBeTruthy();
   });

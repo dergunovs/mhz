@@ -26,5 +26,7 @@ export default defineConfig(
 
   { ...options(globals), ...settings, ...rules },
 
-  pluginPrettierRecommended
+  pluginPrettierRecommended,
+
+  { rules: { 'unicorn/prefer-https': 'off' } }
 );

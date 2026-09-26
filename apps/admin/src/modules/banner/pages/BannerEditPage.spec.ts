@@ -16,15 +16,15 @@ const spyGetBanner = vi.spyOn(bannerServices, 'getBanner').mockReturnValue(mockQ
 
 const bannerEditPageForm = dataTest('banner-edit-page-form');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(BannerEditPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('BannerEditPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(BannerEditPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(BannerEditPage)).toBeTruthy();
   });

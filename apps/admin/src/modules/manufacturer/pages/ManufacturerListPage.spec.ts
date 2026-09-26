@@ -16,15 +16,15 @@ const spyGetManufacturers = vi
 
 const manufacturerList = dataTest('manufacturer-list-page-list');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManufacturerListPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ManufacturerListPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManufacturerListPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ManufacturerListPage)).toBeTruthy();
   });

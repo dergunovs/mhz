@@ -7,16 +7,16 @@ import dotenv from 'dotenv';
 
 import { addSchemas } from './schemas/addSchemas.js';
 
-dotenv.config({ quiet: true });
-
 const dirname = path.dirname(fileURLToPath(import.meta.url));
-
-Schema.Types.Boolean.convertToFalse.add('');
-connect(`mongodb://127.0.0.1/${process.env.DATABASE}`);
 
 type AppOptions = Partial<FastifyServerOptions>;
 
 async function buildApp(options: AppOptions = {}) {
+  dotenv.config({ quiet: true });
+
+  Schema.Types.Boolean.convertToFalse.add('');
+  await connect(`mongodb://127.0.0.1/${process.env.DATABASE}`);
+
   const fastify = Fastify(options);
 
   fastify.register(autoload, { dir: path.join(dirname, 'plugins'), options: { ...options } });

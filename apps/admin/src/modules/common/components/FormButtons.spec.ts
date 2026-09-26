@@ -16,17 +16,17 @@ const formButtonsBack = dataTest('form-buttons-back');
 const formButtonsDelete = dataTest('form-buttons-delete');
 const formButtonsConfitmModal = dataTest('form-buttons-confirm-modal');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(FormButtons, {
-    props: { id: ID, isLoading: false },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('FormButtons', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(FormButtons, {
+      props: { id: ID, isLoading: false },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(FormButtons)).toBeTruthy();
   });

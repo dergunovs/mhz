@@ -18,19 +18,19 @@ const navItem = dataTest('nav-item');
 const navItemIcon = dataTest('nav-item-icon');
 const navItemTitle = dataTest('nav-item-title');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(NavItem, {
-    props: {
-      navItem: NAV_ITEM,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('NavItem', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(NavItem, {
+      props: {
+        navItem: NAV_ITEM,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(NavItem)).toBeTruthy();
   });

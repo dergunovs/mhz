@@ -5,15 +5,15 @@ import BannerCreatePage from './BannerCreatePage.vue';
 
 import { wrapperFactory } from '@/common/test';
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(BannerCreatePage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('BannerCreatePage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(BannerCreatePage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(BannerCreatePage)).toBeTruthy();
   });

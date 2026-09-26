@@ -20,12 +20,12 @@
     "dump": "mongodump --db=mhz --excludeCollection=managers --excludeCollection=customers --excludeCollection=orders --excludeCollection=configurations --out=apps/back/dump"
   },
   "dependencies": {
-    "@changesets/cli": "2.31.0"
+    "@changesets/cli": "3.0.3"
   },
   "devDependencies": {
-    "@turbo/gen": "2.9.6",
-    "prettier": "3.8.3",
-    "turbo": "2.9.6"
+    "prettier": "3.9.9",
+    "turbo": "2.11.4",
+    "esbuild": "0.28.2"
   },
   "packageManager": "npm@11.7.0",
   "workspaces": [
@@ -34,7 +34,7 @@
   ],
   "engines": {
     "npm": ">=11.7.0",
-    "node": ">=25.4.0"
+    "node": ">=26.5.0"
   },
   "keywords": [
     "monorepo",
@@ -45,5 +45,11 @@
     "fastify",
     "mongoose",
     "mongodb"
-  ]
+  ],
+  "allowScripts": {
+    "esbuild": true,
+    "sharp": true,
+    "unrs-resolver": true,
+    "vue-demi": true
+  }
 }

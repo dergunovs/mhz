@@ -11,19 +11,19 @@ import { CUSTOMERS } from '@/customer/fixtures';
 const customerListRow = dataTest('customer-list-row');
 const customerListLink = dataTest('customer-list-link');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CustomerList, {
-    props: {
-      customers: CUSTOMERS.data,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CustomerList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CustomerList, {
+      props: {
+        customers: CUSTOMERS.data,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CustomerList)).toBeTruthy();
   });
@@ -33,7 +33,7 @@ describe('CustomerList', async () => {
   });
 
   it('shows rows if customers props', async () => {
-    expect(wrapper.findAll(customerListRow).length).toEqual(CUSTOMERS.data.length);
+    expect(wrapper.findAll(customerListRow)).toHaveLength(CUSTOMERS.data.length);
 
     await wrapper.setProps({ customers: [] });
 

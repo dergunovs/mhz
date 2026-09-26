@@ -26,11 +26,13 @@ const { data: order } = getOrder(orderId);
 
 const title = 'Order';
 
-const links = computed(() => [
-  { url: URL_MAIN, title: 'Main' },
-  { url: URL_ORDER, title: 'Orders' },
-  { url: route.path, title: order.value ? `${order.value._id}` : '' },
-]);
+const links = computed(() => {
+  return [
+    { url: URL_MAIN, title: 'Main' },
+    { url: URL_ORDER, title: 'Orders' },
+    { url: route.path, title: order.value ? order.value._id : '' },
+  ];
+});
 
 useHead({
   title,

@@ -16,15 +16,15 @@ const spyGetCategory = vi.spyOn(categoryServices, 'getCategory').mockReturnValue
 
 const categoryEditPageForm = dataTest('category-edit-page-form');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CategoryEditPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CategoryEditPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CategoryEditPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CategoryEditPage)).toBeTruthy();
   });

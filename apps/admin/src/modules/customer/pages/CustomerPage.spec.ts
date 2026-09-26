@@ -16,15 +16,15 @@ const spyGetCustomer = vi.spyOn(customerServices, 'getCustomer').mockReturnValue
 
 const customerInfo = dataTest('customer-page-info');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CustomerPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CustomerPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CustomerPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CustomerPage)).toBeTruthy();
   });

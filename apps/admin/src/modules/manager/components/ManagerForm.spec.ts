@@ -13,41 +13,11 @@ import { MANAGERS } from '@/manager/fixtures';
 import { URL_MANAGER } from '@/manager/constants';
 import * as managerServices from '@/manager/services';
 
-let onSuccessPost: () => void;
-const spyMutatePost = vi.fn();
-
-vi.spyOn(managerServices, 'postManager').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessPost = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IManager>(spyMutatePost);
-});
-
-let onSuccessUpdate: () => void;
-const spyMutateUpdate = vi.fn();
-
-vi.spyOn(managerServices, 'updateManager').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessUpdate = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IManager>(spyMutateUpdate);
-});
-
-let onSuccessDelete: () => void;
-const spyMutateDelete = vi.fn();
-
-vi.spyOn(managerServices, 'deleteManager').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessDelete = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
-});
-
 const spyRefetchQueries = vi.fn();
 const spyRemoveQueries = vi.fn();
-
-vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
-  refetchQueries: spyRefetchQueries,
-  removeQueries: spyRemoveQueries,
-} as unknown as helpers.QueryClient);
-
+const spyMutatePost = vi.fn();
+const spyMutateUpdate = vi.fn();
+const spyMutateDelete = vi.fn();
 const spyRouterPush = vi.spyOn(router, 'push');
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
@@ -61,19 +31,45 @@ const managerFormEmail = dataTest('manager-form-email');
 const managerFormPassword = dataTest('manager-form-password');
 const managerFormButtons = dataTest('manager-form-buttons');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManagerForm, {
-    props: {
-      manager: MANAGER,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
+vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
+  refetchQueries: spyRefetchQueries,
+  removeQueries: spyRemoveQueries,
+} as unknown as helpers.QueryClient);
 
 describe('ManagerForm', async () => {
+  let wrapper: VueWrapper;
+  let onSuccessPost: () => void;
+  let onSuccessUpdate: () => void;
+  let onSuccessDelete: () => void;
+
+  vi.spyOn(managerServices, 'postManager').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessPost = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IManager>(spyMutatePost);
+  });
+
+  vi.spyOn(managerServices, 'updateManager').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessUpdate = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IManager>(spyMutateUpdate);
+  });
+
+  vi.spyOn(managerServices, 'deleteManager').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessDelete = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManagerForm, {
+      props: {
+        manager: MANAGER,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ManagerForm)).toBeTruthy();
   });

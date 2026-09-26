@@ -39,7 +39,9 @@ export async function uploadFileApi(file?: File) {
 export async function uploadFilesApi(files: { files: File[]; width?: string; isThumb?: boolean }) {
   const formData = new FormData();
 
-  files.files.forEach((file) => formData.append('files', file));
+  for (const file of files.files) {
+    formData.append('files', file);
+  }
 
   const { data } = await api.post<string[]>(API_UPLOAD_MULTIPLE, formData, {
     params: { width: files.width, thumb: files.isThumb },

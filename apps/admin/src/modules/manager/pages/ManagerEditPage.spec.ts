@@ -16,15 +16,15 @@ const spyGetManager = vi.spyOn(managerServices, 'getManager').mockReturnValue(mo
 
 const managerEditPageForm = dataTest('manager-edit-page-form');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManagerEditPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ManagerEditPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManagerEditPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ManagerEditPage)).toBeTruthy();
   });

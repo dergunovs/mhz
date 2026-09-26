@@ -15,15 +15,7 @@ const LAST_NAME = 'Doe';
 const EMAIL = 'a@b.ru';
 const PASSWORD = 'qwerty';
 
-let onSuccessSetup: () => void;
 const spyMutateSetup = vi.fn();
-
-vi.spyOn(authServices, 'setup').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessSetup = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, ISignUpData>(spyMutateSetup);
-});
-
 const spyToastSuccess = vi.spyOn(toast, 'success');
 const spyRouterPush = vi.spyOn(router, 'push');
 
@@ -33,15 +25,22 @@ const setupFormLastName = dataTest('setup-form-last-name');
 const setupFormEmail = dataTest('setup-form-email');
 const setupFormPassword = dataTest('setup-form-password');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(SetupForm, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('SetupForm', async () => {
+  let wrapper: VueWrapper;
+  let onSuccessSetup: () => void;
+
+  vi.spyOn(authServices, 'setup').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessSetup = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, ISignUpData>(spyMutateSetup);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(SetupForm, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(SetupForm)).toBeTruthy();
   });

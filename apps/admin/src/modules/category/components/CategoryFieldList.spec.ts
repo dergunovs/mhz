@@ -15,20 +15,20 @@ const categoryFieldType = dataTest('category-field-list-field-type');
 const categoryFieldUnits = dataTest('category-field-list-field-units');
 const categoryFieldEdit = dataTest('category-field-list-field-edit');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CategoryFieldList, {
-    props: {
-      fields: FIELDS,
-      isShowCategoryFieldForm: true,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CategoryFieldList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CategoryFieldList, {
+      props: {
+        fields: FIELDS,
+        isShowCategoryFieldForm: true,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CategoryFieldList)).toBeTruthy();
   });
@@ -38,7 +38,7 @@ describe('CategoryFieldList', async () => {
   });
 
   it('shows fields', async () => {
-    expect(wrapper.findAll(categoryField).length).toEqual(FIELDS?.length);
+    expect(wrapper.findAll(categoryField)).toHaveLength(FIELDS?.length ?? 0);
   });
 
   it('shows field data', async () => {

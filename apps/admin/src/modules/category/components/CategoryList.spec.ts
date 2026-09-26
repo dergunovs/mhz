@@ -11,19 +11,19 @@ import { CATEGORIES } from '@/category/fixtures';
 const categoryListRow = dataTest('category-list-row');
 const categoryListLink = dataTest('category-list-link');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CategoryList, {
-    props: {
-      categories: CATEGORIES.data,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CategoryList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CategoryList, {
+      props: {
+        categories: CATEGORIES.data,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CategoryList)).toBeTruthy();
   });
@@ -33,7 +33,7 @@ describe('CategoryList', async () => {
   });
 
   it('shows rows if categories props', async () => {
-    expect(wrapper.findAll(categoryListRow).length).toEqual(CATEGORIES.data.length);
+    expect(wrapper.findAll(categoryListRow)).toHaveLength(CATEGORIES.data.length);
 
     await wrapper.setProps({ categories: [] });
 

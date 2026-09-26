@@ -11,19 +11,19 @@ import { PRODUCTS } from '@/product/fixtures';
 const productListRow = dataTest('product-list-row');
 const productListLink = dataTest('product-list-link');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ProductList, {
-    props: {
-      products: PRODUCTS.data,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ProductList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ProductList, {
+      props: {
+        products: PRODUCTS.data,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ProductList)).toBeTruthy();
   });
@@ -33,7 +33,7 @@ describe('ProductList', async () => {
   });
 
   it('shows rows if products props', async () => {
-    expect(wrapper.findAll(productListRow).length).toEqual(PRODUCTS.data.length);
+    expect(wrapper.findAll(productListRow)).toHaveLength(PRODUCTS.data.length);
 
     await wrapper.setProps({ products: [] });
 

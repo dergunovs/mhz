@@ -18,34 +18,10 @@ import { URL_CUSTOMER } from '@/customer/constants';
 
 const ORDER = ORDERS.data[0];
 
-let onSuccessUpdate: () => void;
-const spyMutateUpdate = vi.fn();
-
-vi.spyOn(orderServices, 'updateOrder').mockImplementation(
-  (_id: ComputedRef<string | undefined>, options: { onSuccess?: () => void }) => {
-    if (options.onSuccess) onSuccessUpdate = options.onSuccess;
-
-    return mockMutationReply<IBaseReply, { status: TOrderStatus }>(spyMutateUpdate);
-  }
-);
-
-let onSuccessDelete: () => void;
-const spyMutateDelete = vi.fn();
-
-vi.spyOn(orderServices, 'deleteOrder').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessDelete = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
-});
-
 const spyRefetchQueries = vi.fn();
 const spyRemoveQueries = vi.fn();
-
-vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
-  refetchQueries: spyRefetchQueries,
-  removeQueries: spyRemoveQueries,
-} as unknown as helpers.QueryClient);
-
+const spyMutateUpdate = vi.fn();
+const spyMutateDelete = vi.fn();
 const spyRouterPush = vi.spyOn(router, 'push');
 const spyRouterGo = vi.spyOn(router, 'go');
 const spyToastSuccess = vi.spyOn(toast, 'success');
@@ -67,19 +43,40 @@ const orderFormCancelConfirm = dataTest('order-form-cancel-confirm');
 const orderFormDelete = dataTest('order-form-delete');
 const orderFormDeleteConfirm = dataTest('order-form-delete-confirm');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(OrderForm, {
-    props: {
-      order: ORDER,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
+vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
+  refetchQueries: spyRefetchQueries,
+  removeQueries: spyRemoveQueries,
+} as unknown as helpers.QueryClient);
 
 describe('OrderForm', async () => {
+  let wrapper: VueWrapper;
+  let onSuccessUpdate: () => void;
+  let onSuccessDelete: () => void;
+
+  vi.spyOn(orderServices, 'updateOrder').mockImplementation(
+    (_id: ComputedRef<string | undefined>, options: { onSuccess?: () => void }) => {
+      if (options.onSuccess) onSuccessUpdate = options.onSuccess;
+
+      return mockMutationReply<IBaseReply, { status: TOrderStatus }>(spyMutateUpdate);
+    }
+  );
+
+  vi.spyOn(orderServices, 'deleteOrder').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessDelete = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(OrderForm, {
+      props: {
+        order: ORDER,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(OrderForm)).toBeTruthy();
   });
@@ -93,7 +90,7 @@ describe('OrderForm', async () => {
     expect(wrapper.find(orderFormCustomer).attributes('to')).toEqual(`${URL_CUSTOMER}/${ORDER.customer._id}`);
 
     expect(wrapper.find(orderFormStatus).text()).toEqual(ORDER.status);
-    expect(wrapper.findAll(orderFormProducts).length).toEqual(ORDER.products?.length);
+    expect(wrapper.findAll(orderFormProducts)).toHaveLength(ORDER.products?.length ?? 0);
     expect(wrapper.find(orderFormProductsCount).text()).toEqual(ORDER.products?.[0].count.toString());
 
     expect(wrapper.find(orderFormProductsTitle).text()).toEqual(ORDER.products?.[0].product.title);

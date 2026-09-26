@@ -1,4 +1,4 @@
-import type { ISearchResult, ISearchResults, IUserToken } from 'mhz-contracts';
+import type { ISearchResult, IUserToken } from 'mhz-contracts';
 
 import Product from '../models/product.js';
 import Category from '../models/category.js';
@@ -13,15 +13,6 @@ import { ISearchService } from '../interface/index.js';
 export const searchService: ISearchService = {
   search: async (search: string, decode: (token: string) => IUserToken | null, token?: string) => {
     const user = decodeToken(decode, token);
-
-    let results: ISearchResults = {
-      products: [],
-      categories: [],
-      manufacturers: [],
-      managers: [],
-      customers: [],
-      orders: [],
-    };
 
     const regex = new RegExp(search, 'i');
 
@@ -75,14 +66,12 @@ export const searchService: ISearchService = {
       return orders;
     }
 
-    await Promise.all(
+    const [products, categories, manufacturers, managers, customers, orders] = await Promise.all(
       user?.role === 'manager'
         ? [findProducts(), findCategories(), findManufacturers(), findManagers(), findCustomers(), findOrders()]
         : [findProducts(), findCategories(), findManufacturers()]
-    ).then(([products, categories, manufacturers, managers, customers, orders]) => {
-      results = { products, categories, manufacturers, managers, customers, orders };
-    });
+    );
 
-    return results;
+    return { products, categories, manufacturers, managers, customers, orders };
   },
 };

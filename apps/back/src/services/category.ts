@@ -42,13 +42,13 @@ export const categoryService: ICategoryService = {
 
     if (count === limit) {
       return true;
-    } else {
-      const category = new Category(categoryToCreate);
-
-      await category.save();
-
-      return false;
     }
+
+    const category = new Category(categoryToCreate);
+
+    await category.save();
+
+    return false;
   },
 
   delete: async (_id?: string) => {

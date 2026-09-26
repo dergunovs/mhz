@@ -22,20 +22,20 @@ vi.mock('@/common/constants', () => ({ URL_MAIN: '/main', URL_ERROR: '/404', PAT
 const imagePreviewSortable = dataTest('image-preview-sortable');
 const imagePreviewDelete = dataTest('image-preview-delete');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ImagePreview, {
-    props: {
-      urls: URLS,
-      isThumb: false,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ImagePreview', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ImagePreview, {
+      props: {
+        urls: URLS,
+        isThumb: false,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ImagePreview)).toBeTruthy();
   });

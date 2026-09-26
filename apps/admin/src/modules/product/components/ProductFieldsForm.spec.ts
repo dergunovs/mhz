@@ -16,20 +16,20 @@ const productFieldsFormField = dataTest('product-fields-form-field');
 const productFieldsFormBoolean = dataTest('product-fields-form-boolean');
 const productFieldsFormValue = dataTest('product-fields-form-value');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ProductFieldsForm, {
-    props: {
-      fields: FIELDS,
-      updates: 0,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ProductFieldsForm', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ProductFieldsForm, {
+      props: {
+        fields: FIELDS,
+        updates: 0,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ProductFieldsForm)).toBeTruthy();
   });
@@ -39,15 +39,16 @@ describe('ProductFieldsForm', async () => {
   });
 
   it('shows fields with specific components', async () => {
-    expect(wrapper.findAll(productFieldsFormField).length).toEqual(FIELDS?.length);
+    expect(wrapper.findAll(productFieldsFormField)).toHaveLength(FIELDS?.length ?? 0);
 
-    const booleanFieds = FIELDS?.filter((field) => field.fieldType === 'boolean').length;
+    const booleanFieds = FIELDS?.filter((field) => field.fieldType === 'boolean').length ?? 0;
 
-    expect(wrapper.findAll(productFieldsFormBoolean).length).toEqual(booleanFieds);
+    expect(wrapper.findAll(productFieldsFormBoolean)).toHaveLength(booleanFieds);
 
-    const valueFields = FIELDS?.filter((field) => field.fieldType === 'number' || field.fieldType === 'string').length;
+    const valueFields =
+      FIELDS?.filter((field) => field.fieldType === 'number' || field.fieldType === 'string').length ?? 0;
 
-    expect(wrapper.findAll(productFieldsFormValue).length).toEqual(valueFields);
+    expect(wrapper.findAll(productFieldsFormValue)).toHaveLength(valueFields);
   });
 
   it('emits updated form data by values update', async () => {

@@ -28,7 +28,7 @@ export async function getProductPriceRangeApi(
 ) {
   if (!id?.value) return null;
 
-  const { data } = await api.get<[number, number]>(`${API_PRODUCT_PRICE_RANGE}`, {
+  const { data } = await api.get<[number, number]>(API_PRODUCT_PRICE_RANGE, {
     params: { initiator, _id: id.value },
   });
 
@@ -41,7 +41,7 @@ export async function getProductFiltersApi(
 ) {
   if (!id?.value) return null;
 
-  const { data } = await api.get<IFilterData>(`${API_PRODUCT_FILTERS}`, { params: { initiator, _id: id.value } });
+  const { data } = await api.get<IFilterData>(API_PRODUCT_FILTERS, { params: { initiator, _id: id.value } });
 
   return data;
 }

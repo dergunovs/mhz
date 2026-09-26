@@ -11,19 +11,19 @@ import { ORDERS } from '@/order/fixtures';
 const orderListRow = dataTest('order-list-row');
 const orderListLink = dataTest('order-list-link');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(OrderList, {
-    props: {
-      orders: ORDERS.data,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('OrderList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(OrderList, {
+      props: {
+        orders: ORDERS.data,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(OrderList)).toBeTruthy();
   });
@@ -33,7 +33,7 @@ describe('OrderList', async () => {
   });
 
   it('shows rows if orders props', async () => {
-    expect(wrapper.findAll(orderListRow).length).toEqual(ORDERS.data.length);
+    expect(wrapper.findAll(orderListRow)).toHaveLength(ORDERS.data.length);
 
     await wrapper.setProps({ orders: [] });
 

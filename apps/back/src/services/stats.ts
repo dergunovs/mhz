@@ -18,15 +18,15 @@ export const countService: IStatsService = {
       manufacturers: { labels: [], datasets: [{ data: [] }] },
     };
 
-    await Promise.all([
+    const [categoriesCount, manufacturersCount, managersCount, customersCount, ordersCount] = await Promise.all([
       Category.estimatedDocumentCount(),
       Manufacturer.estimatedDocumentCount(),
       Manager.estimatedDocumentCount(),
       Customer.estimatedDocumentCount(),
       Order.estimatedDocumentCount(),
-    ]).then(([categories, manufacturers, managers, customers, orders]) => {
-      count.base.datasets[0].data.push(categories, manufacturers, managers, customers, orders);
-    });
+    ]);
+
+    count.base.datasets[0].data.push(categoriesCount, manufacturersCount, managersCount, customersCount, ordersCount);
 
     const categories = await Product.aggregate([
       { $group: { _id: '$category', count: { $sum: 1 } } },
@@ -36,12 +36,12 @@ export const countService: IStatsService = {
       { $project: { _id: '$category._id', label: '$category.title', count: 1 } },
     ]);
 
-    categories.forEach((category) => {
+    for (const category of categories) {
       count.categories.labels.push(category.label);
       count.categories.datasets[0].data.push(category.count);
-    });
+    }
 
-    const manufacturers = await Product.aggregate([
+    const manufacturersAgg = await Product.aggregate([
       { $group: { _id: '$manufacturer', count: { $sum: 1 } } },
       { $lookup: { from: 'manufacturers', localField: '_id', foreignField: '_id', as: 'manufacturer' } },
       { $unwind: '$manufacturer' },
@@ -49,10 +49,10 @@ export const countService: IStatsService = {
       { $project: { _id: '$manufacturer._id', label: '$manufacturer.title', count: 1 } },
     ]);
 
-    manufacturers.forEach((manufacturer) => {
+    for (const manufacturer of manufacturersAgg) {
       count.manufacturers.labels.push(manufacturer.label);
       count.manufacturers.datasets[0].data.push(manufacturer.count);
-    });
+    }
 
     return count;
   },

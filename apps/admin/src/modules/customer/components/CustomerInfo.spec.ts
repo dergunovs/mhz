@@ -26,19 +26,19 @@ const customerWatchedProductsItem = dataTest('customer-info-watched-products-ite
 const customerWatchedProductsDate = dataTest('customer-info-watched-products-date');
 const customerWatchedProductsTitle = dataTest('customer-info-watched-products-title');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(CustomerInfo, {
-    props: {
-      customer: CUSTOMER,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('CustomerInfo', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(CustomerInfo, {
+      props: {
+        customer: CUSTOMER,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(CustomerInfo)).toBeTruthy();
   });
@@ -74,7 +74,7 @@ describe('CustomerInfo', async () => {
 
   it('shows cart items', async () => {
     expect(wrapper.find(customerCart).exists()).toEqual(true);
-    expect(wrapper.findAll(customerCartItem).length).toEqual(CUSTOMER.cart?.length);
+    expect(wrapper.findAll(customerCartItem)).toHaveLength(CUSTOMER.cart?.length ?? 0);
 
     await wrapper.setProps({ customer: CUSTOMERS.data[1] });
 
@@ -92,7 +92,7 @@ describe('CustomerInfo', async () => {
 
   it('shows favourites', async () => {
     expect(wrapper.find(customerFavourites).exists()).toEqual(true);
-    expect(wrapper.findAll(customerFavouritesItem).length).toEqual(CUSTOMER.favouriteProducts?.length);
+    expect(wrapper.findAll(customerFavouritesItem)).toHaveLength(CUSTOMER.favouriteProducts?.length ?? 0);
 
     await wrapper.setProps({ customer: CUSTOMERS.data[1] });
 
@@ -109,7 +109,7 @@ describe('CustomerInfo', async () => {
 
   it('shows watched products', async () => {
     expect(wrapper.find(customerWatchedProducts).exists()).toEqual(true);
-    expect(wrapper.findAll(customerWatchedProductsItem).length).toEqual(CUSTOMER.watchedProducts?.length);
+    expect(wrapper.findAll(customerWatchedProductsItem)).toHaveLength(CUSTOMER.watchedProducts?.length ?? 0);
 
     await wrapper.setProps({ customer: CUSTOMERS.data[1] });
 

@@ -87,7 +87,7 @@ watch(
 
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
-  { url: `${URL_CATEGORY}`, title: 'Categories' },
+  { url: URL_CATEGORY, title: 'Categories' },
   { url: `${URL_CATEGORY}/${category.value?._id}`, title: category.value?.title },
 ]);
 

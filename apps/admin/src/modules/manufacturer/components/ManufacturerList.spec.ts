@@ -11,19 +11,19 @@ import { MANUFACTURERS } from '@/manufacturer/fixtures';
 const manufacturerListRow = dataTest('manufacturer-list-row');
 const manufacturerListLink = dataTest('manufacturer-list-link');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManufacturerList, {
-    props: {
-      manufacturers: MANUFACTURERS.data,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ManufacturerList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManufacturerList, {
+      props: {
+        manufacturers: MANUFACTURERS.data,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ManufacturerList)).toBeTruthy();
   });
@@ -33,7 +33,7 @@ describe('ManufacturerList', async () => {
   });
 
   it('shows rows if manufacturers props', async () => {
-    expect(wrapper.findAll(manufacturerListRow).length).toEqual(MANUFACTURERS.data.length);
+    expect(wrapper.findAll(manufacturerListRow)).toHaveLength(MANUFACTURERS.data.length);
 
     await wrapper.setProps({ manufacturers: [] });
 

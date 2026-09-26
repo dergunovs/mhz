@@ -6,7 +6,7 @@ describe('decodeToken', () => {
   test('decodes token', async () => {
     const decode = vi.fn().mockImplementation((token: string) => token);
     const token = 'Bearer 123';
-    const tokenWithoutBearer = token.split('Bearer ')[1];
+    const tokenWithoutBearer = token.split('Bearer ', 2)[1];
 
     const decodedToken = decodeToken(decode, token);
 
@@ -19,6 +19,6 @@ describe('decodeToken', () => {
   test('returns null without args', async () => {
     const decodedToken = decodeToken();
 
-    expect(decodedToken).toEqual(null);
+    expect(decodedToken).toBeNull();
   });
 });

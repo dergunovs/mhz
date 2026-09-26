@@ -118,11 +118,11 @@ const formData = ref<IProduct>({
 
 const categoryUpdates = ref(0);
 
-const currentFields = computed(() => {
-  return props.product?._id && !categoryUpdates.value
-    ? toRaw(formData.value.fields)
-    : toRaw(formData.value.category.fields);
-});
+const isCategoryFields = computed(() => !props.product?._id || categoryUpdates.value > 0);
+
+const currentFields = computed(() =>
+  toRaw(isCategoryFields.value ? formData.value.category.fields : formData.value.fields)
+);
 
 const images = ref<File[]>([]);
 
@@ -137,11 +137,11 @@ function removeImage(fileToRemove: File) {
 function deleteImage(imageToDelete: string, isThumb: boolean) {
   formData.value.imageUrls = formData.value.imageUrls?.filter((image) => image !== imageToDelete);
 
-  if (isThumb) {
-    const thumbToDelete = `thumb-${imageToDelete}.webp`;
+  if (!isThumb) return;
 
-    formData.value.thumbUrls = formData.value.thumbUrls.filter((image) => image !== thumbToDelete);
-  }
+  const thumbToDelete = `thumb-${imageToDelete}.webp`;
+
+  formData.value.thumbUrls = formData.value.thumbUrls.filter((image) => image !== thumbToDelete);
 }
 
 function updateImages(urls: string[]) {

@@ -18,20 +18,20 @@ const spyCheckAuth = vi.spyOn(authServices, 'checkAuth').mockReturnValue(mockQue
 
 const layout = dataTest('app-layout');
 
-let wrapper: VueWrapper;
-
-beforeAll(async () => {
-  router.push('/');
-  await router.isReady();
-});
-
-beforeEach(() => {
-  wrapper = wrapperFactory(App, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('App', async () => {
+  let wrapper: VueWrapper;
+
+  beforeAll(async () => {
+    router.push('/');
+    await router.isReady();
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(App, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(App)).toBeTruthy();
   });

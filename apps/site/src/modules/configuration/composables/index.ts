@@ -135,15 +135,17 @@ export function useConfigurationCheck(configuration: Ref<IConfiguration>) {
       checkPower(gpuPower.value, psuPower.value),
     ];
 
-    results.forEach((result) => {
-      if (result) {
-        result.error.forEach((error) => {
-          errors.push(error);
-        });
-
-        messages.push(result.message);
+    for (const result of results) {
+      if (!result) {
+        continue;
       }
-    });
+
+      for (const error of result.error) {
+        errors.push(error);
+      }
+
+      messages.push(result.message);
+    }
 
     return { errors, messages };
   });

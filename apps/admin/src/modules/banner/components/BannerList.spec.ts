@@ -15,20 +15,20 @@ const bannerListTable = dataTest('banner-list-table');
 const bannerListRow = dataTest('banner-list-row');
 const bannerListLink = dataTest('banner-list-link');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(BannerList, {
-    props: {
-      banners: BANNERS.data,
-      modelValue: MODELVALUE,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('BannerList', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(BannerList, {
+      props: {
+        banners: BANNERS.data,
+        modelValue: MODELVALUE,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(BannerList)).toBeTruthy();
   });
@@ -38,7 +38,7 @@ describe('BannerList', async () => {
   });
 
   it('shows rows if banner props', async () => {
-    expect(wrapper.findAll(bannerListRow).length).toEqual(BANNERS.data.length);
+    expect(wrapper.findAll(bannerListRow)).toHaveLength(BANNERS.data.length);
 
     await wrapper.setProps({ banners: [] });
 

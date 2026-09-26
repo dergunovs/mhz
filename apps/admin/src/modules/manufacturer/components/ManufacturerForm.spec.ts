@@ -15,41 +15,11 @@ import * as manufacturerServices from '@/manufacturer/services';
 
 const MANUFACTURER = MANUFACTURERS.data[0];
 
-let onSuccessPost: () => void;
-const spyMutatePost = vi.fn();
-
-vi.spyOn(manufacturerServices, 'postManufacturer').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessPost = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IManufacturer>(spyMutatePost);
-});
-
-let onSuccessUpdate: () => void;
-const spyMutateUpdate = vi.fn();
-
-vi.spyOn(manufacturerServices, 'updateManufacturer').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessUpdate = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, IManufacturer>(spyMutateUpdate);
-});
-
-let onSuccessDelete: () => void;
-const spyMutateDelete = vi.fn();
-
-vi.spyOn(manufacturerServices, 'deleteManufacturer').mockImplementation((options: { onSuccess?: () => void }) => {
-  if (options.onSuccess) onSuccessDelete = options.onSuccess;
-
-  return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
-});
-
 const spyRefetchQueries = vi.fn();
 const spyRemoveQueries = vi.fn();
-
-vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
-  refetchQueries: spyRefetchQueries,
-  removeQueries: spyRemoveQueries,
-} as unknown as helpers.QueryClient);
-
+const spyMutatePost = vi.fn();
+const spyMutateUpdate = vi.fn();
+const spyMutateDelete = vi.fn();
 const spyRouterPush = vi.spyOn(router, 'push');
 const spyToastSuccess = vi.spyOn(toast, 'success');
 
@@ -62,19 +32,45 @@ const manufacturerFormCountry = dataTest('manufacturer-form-country');
 const manufacturerFormLogo = dataTest('manufacturer-form-logo');
 const manufacturerFormButtons = dataTest('manufacturer-form-buttons');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ManufacturerForm, {
-    props: {
-      manufacturer: MANUFACTURER,
-    },
-  });
-});
-
-enableAutoUnmount(afterEach);
+vi.spyOn(helpers, 'useQueryClient').mockReturnValue({
+  refetchQueries: spyRefetchQueries,
+  removeQueries: spyRemoveQueries,
+} as unknown as helpers.QueryClient);
 
 describe('ManufacturerForm', async () => {
+  let wrapper: VueWrapper;
+  let onSuccessPost: () => void;
+  let onSuccessUpdate: () => void;
+  let onSuccessDelete: () => void;
+
+  vi.spyOn(manufacturerServices, 'postManufacturer').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessPost = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IManufacturer>(spyMutatePost);
+  });
+
+  vi.spyOn(manufacturerServices, 'updateManufacturer').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessUpdate = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, IManufacturer>(spyMutateUpdate);
+  });
+
+  vi.spyOn(manufacturerServices, 'deleteManufacturer').mockImplementation((options: { onSuccess?: () => void }) => {
+    if (options.onSuccess) onSuccessDelete = options.onSuccess;
+
+    return mockMutationReply<IBaseReply, string | undefined>(spyMutateDelete);
+  });
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ManufacturerForm, {
+      props: {
+        manufacturer: MANUFACTURER,
+      },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(manufacturerForm)).toBeTruthy();
   });

@@ -14,15 +14,15 @@ const spyGetProducts = vi.spyOn(productServices, 'getProducts').mockReturnValue(
 
 const productList = dataTest('product-list-page-list');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(ProductListPage, {});
-});
-
-enableAutoUnmount(afterEach);
-
 describe('ProductListPage', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(ProductListPage, {});
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(ProductListPage)).toBeTruthy();
   });

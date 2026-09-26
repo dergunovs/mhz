@@ -18,18 +18,18 @@ const TITLE = 'Title';
 const pageTitleBreadcrumbs = dataTest('page-title-breadcrumbs');
 const pageTitleHeader = dataTest('page-title-header');
 
-let wrapper: VueWrapper;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(PageTitle, {
-    props: { links: LINKS },
-    slots: { default: TITLE },
-  });
-});
-
-enableAutoUnmount(afterEach);
-
 describe('PageTitle', async () => {
+  let wrapper: VueWrapper;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(PageTitle, {
+      props: { links: LINKS },
+      slots: { default: TITLE },
+    });
+  });
+
+  enableAutoUnmount(afterEach);
+
   it('exists', async () => {
     expect(wrapper.findComponent(PageTitle)).toBeTruthy();
   });

@@ -86,7 +86,7 @@ watch(
 
 const links = computed(() => [
   { url: URL_MAIN, title: 'Main' },
-  { url: `${URL_MANUFACTURER}`, title: 'Manufacturers' },
+  { url: URL_MANUFACTURER, title: 'Manufacturers' },
   { url: `${URL_MANUFACTURER}/${manufacturer.value?._id}`, title: manufacturer.value?.title },
 ]);
 
