@@ -21,9 +21,7 @@ function createFilterFields(options?: IQuery) {
 
   if (Object.keys(fieldsFiltersRaw).length === 0) return {};
 
-  const params = new URLSearchParams();
-
-  for (const [key, value] of Object.entries(fieldsFiltersRaw)) params.append(key, value);
+  const params = new URLSearchParams(fieldsFiltersRaw);
 
   const fieldsFiltersArray = structuredClone(qs.parse(params.toString())).fields as { [key: string]: string[] }[];
 

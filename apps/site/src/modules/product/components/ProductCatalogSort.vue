@@ -34,6 +34,7 @@ const sort = computed(() =>
 );
 
 function updateSort(value: IProductSortOption) {
+  // eslint-disable-next-line unicorn/prefer-ternary
   if (props.page > 1) {
     emit('reset', { value: value.value, isAsc: value.isAsc });
   } else {

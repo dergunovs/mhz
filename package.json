@@ -23,18 +23,18 @@
     "@changesets/cli": "3.0.3"
   },
   "devDependencies": {
-    "prettier": "3.9.9",
-    "turbo": "2.11.4",
+    "prettier": "3.9.10",
+    "turbo": "2.11.10",
     "esbuild": "0.28.2"
   },
-  "packageManager": "npm@11.7.0",
+  "packageManager": "npm@11.20.0",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "engines": {
-    "npm": ">=11.7.0",
-    "node": ">=26.5.0"
+    "npm": ">=11.20.0",
+    "node": ">=26.12.1"
   },
   "keywords": [
     "monorepo",

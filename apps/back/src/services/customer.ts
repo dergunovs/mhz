@@ -218,15 +218,18 @@ export const customerService: ICustomerService = {
     if (typeof _id === 'string') {
       const isItemIncludes = currentItems?.includes(_id);
 
-      await (isItemIncludes
-        ? Customer.updateOne(filter, {
-            cart: currentCart.map((item) => {
-              return item.product._id?.toString() === _id ? { product: item.product, count: item.count + 1 } : item;
-            }),
-          })
-        : Customer.updateOne(filter, {
-            $push: { cart: { product: _id, count: 1 } },
-          }));
+      await Customer.updateOne(
+        filter,
+        isItemIncludes
+          ? {
+              cart: currentCart.map((item) => {
+                return item.product._id?.toString() === _id ? { product: item.product, count: item.count + 1 } : item;
+              }),
+            }
+          : {
+              $push: { cart: { product: _id, count: 1 } },
+            }
+      );
     } else {
       const productsToUpdateCount: string[] = [];
       const productsToAdd: string[] = [];

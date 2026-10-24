@@ -15,10 +15,10 @@ function createConfiguredRouter() {
   });
 
   router.beforeEach((to, _from, next) => {
-    if (![URL_LOGIN, URL_SETUP].includes(to.path) && !getCookieToken(TOKEN_NAME)) {
-      logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME);
-    } else {
+    if ([URL_LOGIN, URL_SETUP].includes(to.path) || getCookieToken(TOKEN_NAME)) {
       next();
+    } else {
+      logout(URL_LOGIN, deleteAuthHeader, TOKEN_NAME);
     }
   });
 
